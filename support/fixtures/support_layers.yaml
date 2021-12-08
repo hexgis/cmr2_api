@@ -1,0 +1,592 @@
+- model: support.layer
+  pk: 1
+  fields:
+    name: Prodes - Mapa de Calor
+    order: 13
+    layer_type: heatmap
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 2
+  fields:
+    name: Deter B - Mapa de Calor
+    order: 13
+    layer_type: heatmap
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 3
+  fields:
+    name: Prodes - Consulta
+    order: 15
+    layer_type: wms
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 4
+  fields:
+    name: Deter B - Consulta
+    order: 16
+    layer_type: wms
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 5
+  fields:
+    name: Grade Sentinel-2
+    order: 1
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 6
+  fields:
+    name: Grade Landsat
+    order: 2
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 7
+  fields:
+    name: Deter B
+    order: 17
+    layer_type: wms
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 8
+  fields:
+    name: Terras Indígenas
+    order: 3
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 9
+  fields:
+    name: Deter B - Agregados
+    order: 18
+    layer_type: wms
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 10
+  fields:
+    name: Unidades Federativas
+    order: 4
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 12
+  fields:
+    name: Municípios
+    order: 5
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 14
+  fields:
+    name: Unidades de Conservação - Federal
+    order: 6
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 15
+  fields:
+    name: Assentamentos Rurais
+    order: 7
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 16
+  fields:
+    name: Imóveis Certificados Privados
+    order: 8
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 17
+  fields:
+    name: Focos de Calor
+    order: 13
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 19
+  fields:
+    name: Imóveis Certificados Públicos
+    order: 9
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 20
+  fields:
+    name: Trechos Rodoviários
+    order: 10
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 21
+  fields:
+    name: Prodes 2018/2019 - Consulta
+    order: 14
+    layer_type: wms
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 22
+  fields:
+    name: Trechos de Drenagem
+    order: 12
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 34
+  fields:
+    name: Pontos
+    order: 23
+    layer_type: wms
+    #layers_group: 6
+    active_on_init: false
+- model: support.layer
+  pk: 35
+  fields:
+    name: Pontos de apoio
+    order: 24
+    layer_type: wms
+    #layers_group: 6
+    active_on_init: false
+- model: support.layer
+  pk: 36
+  fields:
+    name: Área alterada
+    order: 25
+    layer_type: wms
+    #layers_group: 6
+    active_on_init: false
+- model: support.layer
+  pk: 49
+  fields:
+    name: Mosaico - Sentinel2 - DF
+    order: 3
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 50
+  fields:
+    name: Mosaico - Sentinel2 - BA
+    order: 4
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 51
+  fields:
+    name: Mosaico - Sentinel2 - PB
+    order: 1
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 52
+  fields:
+    name: Mosaico - Sentinel2 - PR
+    order: 2
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 53
+  fields:
+    name: Mosaico - Sentinel2 - PE
+    order: 3
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 54
+  fields:
+    name: Mosaico - Sentinel2 - PI
+    order: 4
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 55
+  fields:
+    name: Mosaico - Sentinel2 - RJ
+    order: 5
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 56
+  fields:
+    name: Mosaico - Sentinel2 - RN
+    order: 6
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 57
+  fields:
+    name: Mosaico - Sentinel2 - RS
+    order: 7
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 58
+  fields:
+    name: Mosaico - Sentinel2 - RO
+    order: 8
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 59
+  fields:
+    name: Mosaico - Sentinel2 - RR
+    order: 9
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 60
+  fields:
+    name: Mosaico - Sentinel2 - SC
+    order: 10
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 61
+  fields:
+    name: Mosaico - Sentinel2 - SP
+    order: 11
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 62
+  fields:
+    name: Mosaico - Sentinel2 - SE
+    order: 12
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 63
+  fields:
+    name: Mosaico - Sentinel2 - TO
+    order: 13
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 64
+  fields:
+    name: Mosaico - Sentinel2 - AC
+    order: 14
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 65
+  fields:
+    name: Mosaico - Sentinel2 - AL
+    order: 15
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 66
+  fields:
+    name: Mosaico - Sentinel2 - AP
+    order: 16
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 67
+  fields:
+    name: Mosaico - Sentinel2 - AM
+    order: 17
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 68
+  fields:
+    name: Mosaico - Sentinel2 - CE
+    order: 18
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 69
+  fields:
+    name: Mosaico - Sentinel2 - ES
+    order: 19
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 70
+  fields:
+    name: Mosaico - Sentinel2 - GO
+    order: 20
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 71
+  fields:
+    name: Mosaico - Sentinel2 - MA
+    order: 21
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 72
+  fields:
+    name: Mosaico - Sentinel2 - MT
+    order: 22
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 73
+  fields:
+    name: Mosaico - Sentinel2 - MS
+    order: 23
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 74
+  fields:
+    name: Mosaico - Sentinel2 - MG
+    order: 24
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 75
+  fields:
+    name: Mosaico - Sentinel2 - PA
+    order: 25
+    layer_type: wms
+    #layers_group: 10
+    active_on_init: false
+- model: support.layer
+  pk: 76
+  fields:
+    name: Amazônia 2019
+    order: 1
+    layer_type: wms
+    #layers_group: 11
+    active_on_init: false
+- model: support.layer
+  pk: 82
+  fields:
+    name: Risco de fogo - Hoje
+    order: 50
+    layer_type: wms
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 140
+  fields:
+    name: Gado Confinado (12170)
+    order: 2
+    layer_type: wms
+    #layers_group: 27
+    active_on_init: false
+- model: support.layer
+  pk: 141
+  fields:
+    name: AOI - Gado Confinado
+    order: 1
+    layer_type: wms
+    #layers_group: 27
+    active_on_init: false
+- model: support.layer
+  pk: 152
+  fields:
+    name: Sentinel-1 2019
+    order: 1
+    layer_type: wms
+    #layers_group: 18
+    active_on_init: false
+- model: support.layer
+  pk: 153
+  fields:
+    name: Sentinel-1 2020
+    order: 2
+    layer_type: wms
+    #layers_group: 18
+    active_on_init: false
+- model: support.layer
+  pk: 154
+  fields:
+    name: Placas Tectônicas
+    order: 0
+    layer_type: tms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 165
+  fields:
+    name: Precipitation Rate
+    order: 0
+    layer_type: tms
+    #layers_group: 21
+    active_on_init: false
+- model: support.layer
+  pk: 166
+  fields:
+    name: Cloud Cover
+    order: 1
+    layer_type: tms
+    #layers_group: 21
+    active_on_init: false
+- model: support.layer
+  pk: 168
+  fields:
+    name: Fire Alerts - VIIRS 375m / NOAA-20
+    order: 4
+    layer_type: wms
+    #layers_group: 21
+    active_on_init: false
+- model: support.layer
+  pk: 169
+  fields:
+    name: Fire Alerts - VIIRS 375m / Suomi NPP
+    order: 5
+    layer_type: wms
+    #layers_group: 21
+    active_on_init: false
+- model: support.layer
+  pk: 170
+  fields:
+    name: Fire Alerts - Modis / Aqua
+    order: 2
+    layer_type: wms
+    #layers_group: 21
+    active_on_init: false
+- model: support.layer
+  pk: 171
+  fields:
+    name: Fire Alerts - Modis / Terra
+    order: 3
+    layer_type: wms
+    #layers_group: 21
+    active_on_init: false
+- model: support.layer
+  pk: 181
+  fields:
+    name: Basemap - SRTM30 TOPO - Mundialis
+    order: 0
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 188
+  fields:
+    name: ANM - AOI
+    order: 0
+    layer_type: wms
+    #layers_group: 6
+    active_on_init: false
+- model: support.layer
+  pk: 189
+  fields:
+    name: ANM - PHR - Airbus Change Detection
+    order: 1
+    layer_type: wms
+    #layers_group: 6
+    active_on_init: false
+- model: support.layer
+  pk: 190
+  fields:
+    name: ANM - SPOT - Airbus Change Detection
+    order: 2
+    layer_type: wms
+    #layers_group: 6
+    active_on_init: false
+- model: support.layer
+  pk: 191
+  fields:
+    name: ANM - Hex Change Detection
+    order: 3
+    layer_type: wms
+    #layers_group: 6
+    active_on_init: false
+- model: support.layer
+  pk: 195
+  fields:
+    name: Embargos (57153)
+    order: 10
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false
+- model: support.layer
+  pk: 197
+  fields:
+    name: Risco de fogo - 1 Dia
+    order: 49
+    layer_type: wms
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 198
+  fields:
+    name: Risco de fogo - 2 Dias
+    order: 48
+    layer_type: wms
+    #layers_group: 4
+    active_on_init: false
+- model: support.layer
+  pk: 200
+  fields:
+    name: Áreas urbanizadas > 300 mil (10050)
+    order: 21
+    layer_type: wms
+    #layers_group: 5
+    active_on_init: false
+- model: support.layer
+  pk: 201
+  fields:
+    name: Áreas urbanizadas - 100 - 300 mil (6329)
+    order: 22
+    layer_type: wms
+    #layers_group: 5
+    active_on_init: false
+- model: support.layer
+  pk: 202
+  fields:
+    name: Aglomerados Subnormais (6329)
+    order: 19
+    layer_type: wms
+    #layers_group: 5
+    active_on_init: false
+- model: support.layer
+  pk: 212
+  fields:
+    name: Aldeias Indígenas
+    order: 3
+    layer_type: wms
+    #layers_group: 2
+    active_on_init: false

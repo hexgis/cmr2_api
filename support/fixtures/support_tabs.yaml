@@ -1,0 +1,54 @@
+- model: support.layersgroup
+  pk: 2
+  fields:
+    name: Support Layers
+    order: 1
+    icon: layers
+- model: support.layersgroup
+  pk: 4
+  fields:
+    name: INPE
+    order: 2
+    icon: layers
+- model: support.layersgroup
+  pk: 5
+  fields:
+    name: IBGE
+    order: 6
+    icon: layers
+- model: support.layersgroup
+  pk: 6
+  fields:
+    name: Mining
+    order: 7
+    icon: layers
+- model: support.layersgroup
+  pk: 10
+  fields:
+    name: Basemap 2020
+    order: 21
+    icon: layers
+- model: support.layersgroup
+  pk: 11
+  fields:
+    name: Uso e Ocupação do Solo
+    order: 18
+    icon: layers
+- model: support.layersgroup
+  pk: 18
+  fields:
+    name: Basemap SAR
+    order: 20
+    icon: layers
+- model: support.layersgroup
+  pk: 21
+  fields:
+    name: Weather
+    order: 24
+    icon: layers
+- model: support.layersgroup
+  pk: 27
+  fields:
+    name: Agribusiness - Gado Confinado
+    order: 5
+    icon: layers

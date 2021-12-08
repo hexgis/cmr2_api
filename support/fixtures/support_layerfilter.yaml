@@ -1,0 +1,29 @@
+- model: support.layerfilter
+  pk: 1
+  fields:
+    default: '2020-01-01'
+    filter_type: start_date
+    label: Data Inicial
+    layers:
+    - 4
+    - 3
+    - 1
+    - 2
+- model: support.layerfilter
+  pk: 2
+  fields:
+    default: '2020-08-31'
+    filter_type: end_date
+    label: Data Final
+    layers:
+    - 4
+    - 3
+    - 1
+    - 2
+- model: support.layerfilter
+  pk: 4
+  fields:
+    default: CPF/CNPJ
+    filter_type: cpf_cnpj
+    label: cpf_cnpj
+    layers: []
