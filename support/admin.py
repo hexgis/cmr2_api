@@ -4,9 +4,9 @@ from .models import (
     Geoserver,
     LayersGroup,
     Layer,
-    # WmsLayer,
-    # TmsLayer,
-    # HeatmapLayer,
+    WmsLayer,
+    TmsLayer,
+    HeatmapLayer
     # LayerFilter
 )
 
@@ -40,13 +40,13 @@ class LayerAdmin(admin.ModelAdmin):
         'order',
         'layer_type',
         'active_on_init',
-        # 'layers_group',
+        'layers_group',
     )
 
     fields = list_display
     search_fields = (
         'name',
-        # 'layers_group__name',
+        'layers_group__name',
     )
 
     list_filter = (
@@ -54,77 +54,76 @@ class LayerAdmin(admin.ModelAdmin):
     )
 
 
-# class WmsLayerAdmin(admin.ModelAdmin):
+class WmsLayerAdmin(admin.ModelAdmin):
 
-#     list_display = (
-#         'layer',
-#         'geoserver_layer_name',
-#         'geoserver_layer_namespace',
-#         'geoserver',
-#         'has_preview',
-#         'has_detail',
-#         'detail_width',
-#     )
+    list_display = (
+        'layer',
+        'geoserver_layer_name',
+        'geoserver_layer_namespace',
+        'geoserver',
+        'has_preview',
+        'has_detail',
+        'detail_width',
+    )
 
-#     fields = (
-#         'layer',
-#         'geoserver_layer_name',
-#         'geoserver_layer_namespace',
-#         'geoserver',
-#         'geoserver_layer_options',
-#         'has_preview',
-#         'has_detail',
-#         'detail_width',
-#         'has_opacity',
-#         'queryable',
-#         'default_opacity',
+    fields = (
+        'layer',
+        'geoserver_layer_name',
+        'geoserver_layer_namespace',
+        'geoserver',
+        'geoserver_layer_options',
+        'has_preview',
+        'has_detail',
+        'detail_width',
+        'has_opacity',
+        'queryable',
+        'default_opacity',
+    )
+    search_fields = (
+        'geoserver_layer_name',
+        'geoserver_layer_namespace',
+    )
 
-#     )
-#     search_fields = (
-#         'geoserver_layer_name',
-#         'geoserver_layer_namespace',
-#     )
-
-#     list_filter = (
-#         'geoserver',
-#         'has_preview',
-#         'has_detail',
-#         'geoserver_layer_namespace',
-#     )
-
-
-# class TmsLayerAdmin(admin.ModelAdmin):
-
-#     list_display = (
-#         'layer',
-#         'url_tms',
-#         'date',
-#         'max_native_zoom',
-#     )
-
-#     fields = list_display
-
-#     search_field = (
-#         'date',
-#     )
-
-#     list_filter = (
-#         'max_native_zoom',
-#     )
+    list_filter = (
+        'geoserver',
+        'has_preview',
+        'has_detail',
+        'geoserver_layer_namespace',
+    )
 
 
-# class HeatmapLayerAdmin(admin.ModelAdmin):
+class TmsLayerAdmin(admin.ModelAdmin):
 
-#     list_display = (
-#         'layer',
-#         'heatmap_type'
-#     )
+    list_display = (
+        'layer',
+        'url_tms',
+        'date',
+        'max_native_zoom',
+    )
 
-#     fields = list_display
+    fields = list_display
 
-#     list_filter = (
-#         'heatmap_type',
-#     )
+    search_field = (
+        'date',
+    )
+
+    list_filter = (
+        'max_native_zoom',
+    )
+
+
+class HeatmapLayerAdmin(admin.ModelAdmin):
+
+    list_display = (
+        'layer',
+        'heatmap_type',
+    )
+
+    fields = list_display
+
+    list_filter = (
+        'heatmap_type',
+    )
 
 
 # class LayerFilterAdmin(admin.ModelAdmin):
@@ -150,7 +149,7 @@ class LayerAdmin(admin.ModelAdmin):
 admin.site.register(Geoserver, GeoserverAdmin)
 admin.site.register(LayersGroup, LayersGroupAdmin)
 admin.site.register(Layer, LayerAdmin)
-# admin.site.register(WmsLayer, WmsLayerAdmin)
-# admin.site.register(TmsLayer, TmsLayerAdmin)
+admin.site.register(WmsLayer, WmsLayerAdmin)
+admin.site.register(TmsLayer, TmsLayerAdmin)
 # admin.site.register(HeatmapLayer, HeatmapLayerAdmin)
 # admin.site.register(LayerFilter, LayerFilterAdmin)

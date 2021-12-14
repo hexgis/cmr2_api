@@ -6,9 +6,9 @@ from .models import (
     LayersGroup,
     Layer,
     Geoserver,
-    # WmsLayer,
-    # TmsLayer,
-    # HeatmapLayer,
+    WmsLayer,
+    TmsLayer,
+    HeatmapLayer
     # LayerFilter
 )
 
@@ -29,54 +29,54 @@ class GeoserverSerializer(ModelSerializer):
 #         )
 
 
-# class WmsSerializer(ModelSerializer):
-#     geoserver = GeoserverSerializer()
+class WmsSerializer(ModelSerializer):
+    geoserver = GeoserverSerializer()
 
-#     class Meta:
-#         model = WmsLayer
-#         fields = (
-#             'geoserver',
-#             'has_preview',
-#             'has_detail',
-#             'detail_width',
-#             'geoserver_layer_name',
-#             'geoserver_layer_namespace',
-#             'geoserver_layer_options',
-#             'has_opacity',
-#             'queryable',
-#             'default_opacity',
-#         )
-
-
-# class TmsSerializer(ModelSerializer):
-#     class Meta:
-#         model = TmsLayer
-#         fields = (
-#             'url_tms', 'date', 'max_native_zoom',
-#         )
+    class Meta:
+        model = WmsLayer
+        fields = (
+            'geoserver',
+            'has_preview',
+            'has_detail',
+            'detail_width',
+            'geoserver_layer_name',
+            'geoserver_layer_namespace',
+            'geoserver_layer_options',
+            'has_opacity',
+            'queryable',
+            'default_opacity',
+        )
 
 
-# # class HeatmapSerializer(ModelSerializer):
-# #     heatmap_type = MonitoringTypeSerializer()
+class TmsSerializer(ModelSerializer):
+    class Meta:
+        model = TmsLayer
+        fields = (
+            'url_tms', 'date', 'max_native_zoom',
+        )
 
-# #     class Meta:
-# #         model = HeatmapLayer
-# #         fields = ('heatmap_type', )
+
+class HeatmapSerializer(ModelSerializer):
+    # heatmap_type = MonitoringTypeSerializer()
+
+    class Meta:
+        model = HeatmapLayer
+        fields = ('heatmap_type', )
 
 
 class LayerSerializer(ModelSerializer):
-    # tms = TmsSerializer()
-    #heatmap = HeatmapSerializer()
-    # wms = WmsSerializer()
+    tms = TmsSerializer()
+    heatmap = HeatmapSerializer()
+    wms = WmsSerializer()
     # layer_filters = LayerFilterSerializer(many=True)
 
     class Meta:
         model = Layer
         fields = (
             'id',
-            # 'tms',
-            # 'wms',
-            #'heatmap',
+            'tms',
+            'wms',
+            'heatmap',
             # 'layer_filters',
             'name',
             'order',

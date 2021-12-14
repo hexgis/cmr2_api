@@ -96,11 +96,13 @@ class Layer(models.Model):
         max_length=40
     )
 
-    # layers_group = models.ForeignKey(
-    #     'support.LayersGroup',
-    #     on_delete=models.DO_NOTHING,
-    #     related_name='layers'
-    # )
+    layers_group = models.ForeignKey(
+        'support.LayersGroup',
+        on_delete=models.DO_NOTHING,
+        related_name='layers',
+        null=True,
+        blank=True
+    )
 
     active_on_init = models.BooleanField(
         _("Active on Init"),
@@ -117,159 +119,159 @@ class Layer(models.Model):
         return self.name
 
 
-# class WmsLayer(models.Model):
-#     """
-#     Model for WMSLayer Data
-#         * Association:
-#             * Inherits from :model:`models.Model`
-#             * Has one :model:`support.Geoserver`
-#             * Has one :model:`support.Layer`
-#     """
+class WmsLayer(models.Model):
+    """
+    Model for WMSLayer Data
+        * Association:
+            * Inherits from :model:`models.Model`
+            * Has one :model:`support.Geoserver`
+            * Has one :model:`support.Layer`
+    """
 
-#     has_preview = models.BooleanField(
-#         default=True
-#     )
+    has_preview = models.BooleanField(
+        default=True
+    )
 
-#     has_detail = models.BooleanField(
-#         default=False
-#     )
+    has_detail = models.BooleanField(
+        default=False
+    )
 
-#     detail_width = models.IntegerField(
-#         blank=True,
-#         null=True
-#     )
+    detail_width = models.IntegerField(
+        blank=True,
+        null=True
+    )
 
-#     geoserver = models.ForeignKey(
-#         'support.Geoserver',
-#         on_delete=models.DO_NOTHING,
-#         related_name='layers',
-#         blank=True,
-#         null=True
-#     )
+    geoserver = models.ForeignKey(
+        'support.Geoserver',
+        on_delete=models.DO_NOTHING,
+        related_name='layers',
+        blank=True,
+        null=True
+    )
 
-#     geoserver_layer_name = models.CharField(
-#         _("Geoserver Layer Name"),
-#         max_length=255,
-#         blank=True,
-#         null=True
-#     )
+    geoserver_layer_name = models.CharField(
+        _("Geoserver Layer Name"),
+        max_length=255,
+        blank=True,
+        null=True
+    )
 
-#     geoserver_layer_namespace = models.CharField(
-#         _("Geoserver Layer Namespace"),
-#         max_length=40,
-#         blank=True,
-#         null=True)
+    geoserver_layer_namespace = models.CharField(
+        _("Geoserver Layer Namespace"),
+        max_length=40,
+        blank=True,
+        null=True)
 
-#     layer = models.OneToOneField(
-#         Layer,
-#         on_delete=models.DO_NOTHING,
-#         primary_key=True,
-#         related_name='wms'
-#     )
+    layer = models.OneToOneField(
+        Layer,
+        on_delete=models.DO_NOTHING,
+        primary_key=True,
+        related_name='wms'
+    )
 
-#     geoserver_layer_options = models.JSONField(
-#         ("Geoserver Layer Options"),
-#         blank=True,
-#         null=True
-#     )
+    geoserver_layer_options = models.JSONField(
+        ("Geoserver Layer Options"),
+        blank=True,
+        null=True
+    )
 
-#     queryable = models.BooleanField(
-#         default=True
-#     )
+    queryable = models.BooleanField(
+        default=True
+    )
 
-#     has_opacity = models.BooleanField(
-#         default=True
-#     )
+    has_opacity = models.BooleanField(
+        default=True
+    )
 
-#     default_opacity = models.IntegerField(
-#         blank=True,
-#         null=True
-#     )
+    default_opacity = models.IntegerField(
+        blank=True,
+        null=True
+    )
 
-#     class Meta:
-#         app_label = 'support'
-#         verbose_name = 'WmsLayer'
-#         verbose_name_plural = 'WmsLayers'
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'WmsLayer'
+        verbose_name_plural = 'WmsLayers'
 
-#     def __str__(self):
-#         return "{}:{}".format(
-#             self.geoserver_layer_namespace,
-#             self.geoserver_layer_name
-#         )
-
-
-# class TmsLayer(models.Model):
-#     """
-#     Model for TMSLayer Data
-#         * Association:
-#             * Inherits from :model:`models.Model`
-#             * Has one :model:`support.Layer`
-#     """
-
-#     url_tms = models.CharField(
-#         max_length=500,
-#         blank=True,
-#         null=True
-#     )
-
-#     date = models.DateField(
-#         _("Date"),
-#         blank=True,
-#         null=True
-#     )
-
-#     max_native_zoom = models.IntegerField(
-#         _("Max Native Zoom"),
-#         blank=True,
-#         null=True
-#     )
-
-#     layer = models.OneToOneField(
-#         Layer,
-#         on_delete=models.DO_NOTHING,
-#         primary_key=True,
-#         related_name='tms'
-#     )
-
-#     class Meta:
-#         app_label = 'support'
-#         verbose_name = 'TmsLayer'
-#         verbose_name_plural = 'TmsLayers'
-
-#     def __str__(self):
-#         return self.url_tms
+    def __str__(self):
+        return "{}:{}".format(
+            self.geoserver_layer_namespace,
+            self.geoserver_layer_name
+        )
 
 
-# class HeatmapLayer(models.Model):
-#     """
-#     Model for HeatmapLayer Data
-#         * Association:
-#             * Inherits from :model:`models.Model`
-#             * Has one :model:`support.Layer`
-#     """
+class TmsLayer(models.Model):
+    """
+    Model for TMSLayer Data
+        * Association:
+            * Inherits from :model:`models.Model`
+            * Has one :model:`support.Layer`
+    """
 
-#     heatmap_type = models.IntegerField(
-#         on_delete=models.CASCADE,
-#         null=True,
-#         blank=True,
-#     )
+    url_tms = models.CharField(
+        max_length=500,
+        blank=True,
+        null=True
+    )
 
-#     layer = models.OneToOneField(
-#         Layer,
-#         on_delete=models.DO_NOTHING,
-#         primary_key=True,
-#         related_name='heatmap'
-#     )
+    date = models.DateField(
+        _("Date"),
+        blank=True,
+        null=True
+    )
 
-#     class Meta:
-#         app_label = 'support'
-#         verbose_name = 'HeatmapLayer'
-#         verbose_name_plural = 'HeatmapLayers'
+    max_native_zoom = models.IntegerField(
+        _("Max Native Zoom"),
+        blank=True,
+        null=True
+    )
 
-#     def __str__(self):
-#         return "{}".format(
-#             self.heatmap_type.name or self.heatmap_type.identifier
-#         )
+    layer = models.OneToOneField(
+        Layer,
+        on_delete=models.DO_NOTHING,
+        primary_key=True,
+        related_name='tms'
+    )
+
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'TmsLayer'
+        verbose_name_plural = 'TmsLayers'
+
+    def __str__(self):
+        return self.url_tms
+
+
+class HeatmapLayer(models.Model):
+    """
+    Model for HeatmapLayer Data
+        * Association:
+            * Inherits from :model:`models.Model`
+            * Has one :model:`support.Layer`
+    """
+
+    # heatmap_type = models.IntegerField(
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True
+    # )
+
+    layer = models.OneToOneField(
+        Layer,
+        on_delete=models.DO_NOTHING,
+        primary_key=True,
+        related_name='heatmap'
+    )
+
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'HeatmapLayer'
+        verbose_name_plural = 'HeatmapLayers'
+
+    def __str__(self):
+        return "{}".format(
+            self.heatmap_type.name or self.heatmap_type.identifier
+        )
 
 
 # class LayerFilter(models.Model):

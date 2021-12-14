@@ -65,20 +65,24 @@ services:
       context: .
       dockerfile: ./compose/docker/Dockerfile-dev
     command: >
-      bash -c "export
+      bash -c "python manage.py makemigrations
       && python manage.py migrate
       && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/home/app/
     ports:
       - "8000:8000"
-    network_mode: "host"
+    # network_mode: "host"
     environment:
       #DJANGO_SETTINGS_MODULE: skyviewer_api.settings.local
-      DB_USER: postgres
-      DB_NAME: cmr2_desenv
-      DB_PASSWORD: 123456
-      DB_HOST: localhost
+      DB_USER: defaultuser
+      DB_NAME: testdb
+      DB_PASSWORD: testpassword
+      DB_HOST: db
+      #DB_USER: postgres
+      #DB_NAME: cmr2_desenv
+      #DB_PASSWORD: 123456
+      #DB_HOST: localhost
       DB_CATALOG_USER: defaultuser
       DB_CATALOG_NAME: skynetviz
       DB_CATALOG_PASSWORD: testpassword
@@ -87,3 +91,5 @@ services:
       SKYNETVIZ_URL: http://localhost:8001/process/catalog
       SKYNETVIZ_TOKEN: Token secret
       ELASTICSEARCH_URL: http://es:9200
+    depends_on:
+      - db

@@ -1,0 +1,33 @@
+- model: support.geoserver
+  pk: 1
+  fields:
+    name: Funai Geoserver
+    wms_url: http://cmr.funai.gov.br/geoserver/ows?
+    preview_url: http://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+- model: support.layersgroup
+  pk: 1
+  fields:
+    name: Camadas de Apoio
+    order: 50
+    icon: layers
+- model: support.layer
+  pk: 1
+  fields:
+    name: Terras Indígenas
+    order: 50
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.wmslayer
+  pk: 1
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_terra_indigena_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
