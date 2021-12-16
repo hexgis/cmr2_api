@@ -255,12 +255,23 @@ class HeatmapLayer(models.Model):
     #     null=True,
     #     blank=True
     # )
+    # heatmap_type = models.ForeignKey(
+    #     'monitoring.MonitoringType',
+    #     on_delete=models.CASCADE,
+    #     null=True,
+    #     blank=True,
+    # )
 
-    layer = models.OneToOneField(
-        Layer,
-        on_delete=models.DO_NOTHING,
-        primary_key=True,
-        related_name='heatmap'
+    # layer = models.OneToOneField(
+    #     Layer,
+    #     on_delete=models.DO_NOTHING,
+    #     primary_key=True,
+    #     related_name='heatmap'
+    heatmap_type = models.CharField(
+        _('Type_TEST'),
+        max_length=255,
+        blank=True,
+        null=True
     )
 
     class Meta:
@@ -268,10 +279,10 @@ class HeatmapLayer(models.Model):
         verbose_name = 'HeatmapLayer'
         verbose_name_plural = 'HeatmapLayers'
 
-    def __str__(self):
-        return "{}".format(
-            self.heatmap_type.name or self.heatmap_type.identifier
-        )
+    # def __str__(self):
+    #     return "{}".format(
+    #         self.heatmap_type.name or self.heatmap_type.identifier
+    #     )
 
 
 # class LayerFilter(models.Model):

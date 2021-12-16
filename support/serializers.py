@@ -61,7 +61,10 @@ class HeatmapSerializer(ModelSerializer):
 
     class Meta:
         model = HeatmapLayer
-        fields = ('heatmap_type', )
+        # fields = ('heatmap_type', )
+        fields = (
+            'heatmap_type',
+        )
 
 
 class LayerSerializer(ModelSerializer):

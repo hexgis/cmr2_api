@@ -115,7 +115,7 @@ class TmsLayerAdmin(admin.ModelAdmin):
 class HeatmapLayerAdmin(admin.ModelAdmin):
 
     list_display = (
-        'layer',
+        #'layer',
         'heatmap_type',
     )
 
@@ -151,5 +151,5 @@ admin.site.register(LayersGroup, LayersGroupAdmin)
 admin.site.register(Layer, LayerAdmin)
 admin.site.register(WmsLayer, WmsLayerAdmin)
 admin.site.register(TmsLayer, TmsLayerAdmin)
-# admin.site.register(HeatmapLayer, HeatmapLayerAdmin)
+admin.site.register(HeatmapLayer, HeatmapLayerAdmin)
 # admin.site.register(LayerFilter, LayerFilterAdmin)
