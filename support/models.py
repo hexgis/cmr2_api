@@ -242,47 +242,47 @@ class TmsLayer(models.Model):
         return self.url_tms
 
 
-class HeatmapLayer(models.Model):
-    """
-    Model for HeatmapLayer Data
-        * Association:
-            * Inherits from :model:`models.Model`
-            * Has one :model:`support.Layer`
-    """
+# class HeatmapLayer(models.Model):
+#     """
+#     Model for HeatmapLayer Data
+#         * Association:
+#             * Inherits from :model:`models.Model`
+#             * Has one :model:`support.Layer`
+#     """
 
-    # heatmap_type = models.IntegerField(
-    #     on_delete=models.CASCADE,
-    #     null=True,
-    #     blank=True
-    # )
-    # heatmap_type = models.ForeignKey(
-    #     'monitoring.MonitoringType',
-    #     on_delete=models.CASCADE,
-    #     null=True,
-    #     blank=True,
-    # )
+#     # heatmap_type = models.IntegerField(
+#     #     on_delete=models.CASCADE,
+#     #     null=True,
+#     #     blank=True
+#     # )
+#     # heatmap_type = models.ForeignKey(
+#     #     'monitoring.MonitoringType',
+#     #     on_delete=models.CASCADE,
+#     #     null=True,
+#     #     blank=True,
+#     # )
 
-    # layer = models.OneToOneField(
-    #     Layer,
-    #     on_delete=models.DO_NOTHING,
-    #     primary_key=True,
-    #     related_name='heatmap'
-    heatmap_type = models.CharField(
-        _('Type_TEST'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
+#     # layer = models.OneToOneField(
+#     #     Layer,
+#     #     on_delete=models.DO_NOTHING,
+#     #     primary_key=True,
+#     #     related_name='heatmap'
+#     heatmap_type = models.CharField(
+#         _('Type_TEST'),
+#         max_length=255,
+#         blank=True,
+#         null=True
+#     )
 
-    class Meta:
-        app_label = 'support'
-        verbose_name = 'HeatmapLayer'
-        verbose_name_plural = 'HeatmapLayers'
+#     class Meta:
+#         app_label = 'support'
+#         verbose_name = 'HeatmapLayer'
+#         verbose_name_plural = 'HeatmapLayers'
 
-    # def __str__(self):
-    #     return "{}".format(
-    #         self.heatmap_type.name or self.heatmap_type.identifier
-    #     )
+#     # def __str__(self):
+#     #     return "{}".format(
+#     #         self.heatmap_type.name or self.heatmap_type.identifier
+#     #     )
 
 
 # class LayerFilter(models.Model):

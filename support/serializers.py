@@ -8,7 +8,7 @@ from .models import (
     Geoserver,
     WmsLayer,
     TmsLayer,
-    HeatmapLayer
+    #HeatmapLayer
     # LayerFilter
 )
 
@@ -56,20 +56,20 @@ class TmsSerializer(ModelSerializer):
         )
 
 
-class HeatmapSerializer(ModelSerializer):
-    # heatmap_type = MonitoringTypeSerializer()
+# class HeatmapSerializer(ModelSerializer):
+#     # heatmap_type = MonitoringTypeSerializer()
 
-    class Meta:
-        model = HeatmapLayer
-        # fields = ('heatmap_type', )
-        fields = (
-            'heatmap_type',
-        )
+#     class Meta:
+#         model = HeatmapLayer
+#         # fields = ('heatmap_type', )
+#         fields = (
+#             'heatmap_type',
+#         )
 
 
 class LayerSerializer(ModelSerializer):
     tms = TmsSerializer()
-    heatmap = HeatmapSerializer()
+    #heatmap = HeatmapSerializer()
     wms = WmsSerializer()
     # layer_filters = LayerFilterSerializer(many=True)
 
@@ -79,7 +79,7 @@ class LayerSerializer(ModelSerializer):
             'id',
             'tms',
             'wms',
-            'heatmap',
+            #'heatmap',
             # 'layer_filters',
             'name',
             'order',

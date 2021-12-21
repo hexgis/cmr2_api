@@ -10,10 +10,6 @@
     name: Camadas de Apoio
     order: 50
     icon: layers
-- model: support.heatmaplayer
-  pk: 1
-  fields:
-    heatmap_type: testando_HeatmapLayer
 - model: support.layer
   pk: 1
   fields:

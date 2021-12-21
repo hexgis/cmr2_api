@@ -21,4 +21,10 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     path('support/', include(('support.urls', 'support'),
                              namespace='support')),
+    # path('priorities_monitoring/',
+    #     include(('priorities_monitoring.urls', 'priorities_monitoring'),
+    #             namespace= 'priorities_monitoring')),
+
+    path('xptoLSA/', include('priority_monitoring.urls')),
+
 ]

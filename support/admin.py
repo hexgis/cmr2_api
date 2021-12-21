@@ -5,8 +5,8 @@ from .models import (
     LayersGroup,
     Layer,
     WmsLayer,
-    TmsLayer,
-    HeatmapLayer
+    TmsLayer
+    #HeatmapLayer
     # LayerFilter
 )
 
@@ -90,7 +90,7 @@ class WmsLayerAdmin(admin.ModelAdmin):
         'has_detail',
         'geoserver_layer_namespace',
     )
-
+    list_per_page=25
 
 class TmsLayerAdmin(admin.ModelAdmin):
 
@@ -112,18 +112,18 @@ class TmsLayerAdmin(admin.ModelAdmin):
     )
 
 
-class HeatmapLayerAdmin(admin.ModelAdmin):
+# class HeatmapLayerAdmin(admin.ModelAdmin):
 
-    list_display = (
-        #'layer',
-        'heatmap_type',
-    )
+#     list_display = (
+#         #'layer',
+#         'heatmap_type',
+#     )
 
-    fields = list_display
+#     fields = list_display
 
-    list_filter = (
-        'heatmap_type',
-    )
+#     list_filter = (
+#         'heatmap_type',
+#     )
 
 
 # class LayerFilterAdmin(admin.ModelAdmin):
@@ -151,5 +151,5 @@ admin.site.register(LayersGroup, LayersGroupAdmin)
 admin.site.register(Layer, LayerAdmin)
 admin.site.register(WmsLayer, WmsLayerAdmin)
 admin.site.register(TmsLayer, TmsLayerAdmin)
-admin.site.register(HeatmapLayer, HeatmapLayerAdmin)
+# admin.site.register(HeatmapLayer, HeatmapLayerAdmin)
 # admin.site.register(LayerFilter, LayerFilterAdmin)
