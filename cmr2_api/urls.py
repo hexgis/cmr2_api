@@ -17,14 +17,15 @@ from django.conf.urls import url
 from django.urls import include, path
 from django.contrib import admin
 
-urlpatterns = [
-    url(r'^admin/', admin.site.urls),
-    path('support/', include(('support.urls', 'support'),
-                             namespace='support')),
-    # path('priorities_monitoring/',
-    #     include(('priorities_monitoring.urls', 'priorities_monitoring'),
-    #             namespace= 'priorities_monitoring')),
 
-    path('xptoLSA/', include('priority_monitoring.urls')),
+urlpatterns = [
+    url('admin/', admin.site.urls),
+    path('support/', include(
+        ('support.urls', 'support'), namespace='support')
+    ),
+    path('priority/', include(
+        ('priority_monitoring.urls', 'priority_monitoring'),
+        namespace='priority')
+    ),
 
 ]
