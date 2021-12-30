@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'support',
     'auth_jwt',
     'priority_monitoring',
+    'funai',
 ]
 
 MIDDLEWARE = [

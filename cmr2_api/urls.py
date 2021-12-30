@@ -27,5 +27,8 @@ urlpatterns = [
         ('priority_monitoring.urls', 'priority_monitoring'),
         namespace='priority')
     ),
-
+    path('funai/', include(
+        ('funai.urls', 'funai'),
+        namespace='funai')
+    ),
 ]
