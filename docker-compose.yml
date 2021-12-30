@@ -8,58 +8,6 @@ services:
       POSTGRES_DB: testdb
       POSTGRES_PASSWORD: testpassword
 
-  db_catalog:
-    image: circleci/postgres:10-postgis
-    environment:
-      POSTGRES_USER: defaultuser
-      POSTGRES_DB: skynetviz
-      POSTGRES_PASSWORD: testpassword
-
-  prod:
-    image: gcr.io/custom-plating-209314/skyviewer-api:latest
-    build:
-      context: .
-      dockerfile: ./compose/docker/Dockerfile
-    ports:
-      - "80:80"
-    env_file:
-      - ./compose/docker/envfile.env
-
-  test:
-    build:
-      context: .
-      dockerfile: ./compose/docker/Dockerfile-dev
-    command: bash -c "export
-      && python manage.py migrate
-      && python manage.py test --no-input"
-    volumes:
-      - .:/home/app/
-    environment:
-      DJANGO_SETTINGS_MODULE: skyviewer_api.settings.local
-      DB_USER: defaultuser
-      DB_NAME: testdb
-      DB_PASSWORD: testpassword
-      DB_HOST: db
-      ALLOWED_HOSTS: '["*"]'
-    depends_on:
-      - db
-
-  es:
-    image: docker.elastic.co/elasticsearch/elasticsearch:7.5.1
-    logging:
-      driver: none
-    environment:
-      - discovery.type=single-node
-      - "http.cors.allow-origin=*"
-      - "http.cors.enabled=true"
-      - "http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization"
-      - "http.cors.allow-credentials=true"
-    ports:
-      - "9200:9200"
-      - "9300:9300"
-    depends_on:
-      - db
-
   dev:
     build:
       context: .
@@ -69,7 +17,7 @@ services:
       && python manage.py migrate
       && python manage.py loaddata support/fixtures/*.yaml
       && python manage.py loaddata priority_monitoring/fixtures/priority_nonitoring_old.yaml
-      && python manage.py runserver 0.0.0.0:8000"
+      && python manage.py runserver 0.0.0.0:8000"''
     volumes:
       - .:/home/app/
     ports:
