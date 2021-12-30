@@ -1,14 +1,6 @@
 from django.contrib import admin
 
-from .models import (
-    Geoserver,
-    LayersGroup,
-    Layer,
-    WmsLayer,
-    TmsLayer
-    #HeatmapLayer
-    # LayerFilter
-)
+from support import models
 
 
 class GeoserverAdmin(admin.ModelAdmin):
@@ -146,10 +138,10 @@ class TmsLayerAdmin(admin.ModelAdmin):
 #     )
 
 
-admin.site.register(Geoserver, GeoserverAdmin)
-admin.site.register(LayersGroup, LayersGroupAdmin)
-admin.site.register(Layer, LayerAdmin)
-admin.site.register(WmsLayer, WmsLayerAdmin)
-admin.site.register(TmsLayer, TmsLayerAdmin)
-# admin.site.register(HeatmapLayer, HeatmapLayerAdmin)
-# admin.site.register(LayerFilter, LayerFilterAdmin)
+admin.site.register(models.Geoserver, GeoserverAdmin)
+admin.site.register(models.LayersGroup, LayersGroupAdmin)
+admin.site.register(models.Layer, LayerAdmin)
+admin.site.register(models.WmsLayer, WmsLayerAdmin)
+admin.site.register(models.TmsLayer, TmsLayerAdmin)
+# admin.site.register(models.HeatmapLayer, HeatmapLayerAdmin)
+# admin.site.register(models.LayerFilter, LayerFilterAdmin)

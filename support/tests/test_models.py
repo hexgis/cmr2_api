@@ -1,17 +1,12 @@
 from django.test import TestCase
 from django.db import transaction
 
-from support.models import (
-    Geoserver,
-    LayersGroup,
-    Layer,
-    WmsLayer,
-    TmsLayer,
-    HeatmapLayer
+from support import (
+    models,
+    recipes
 )
 
 from monitoring.models import MonitoringType
-from .recipes import Recipes
 
 
 class TestGeoserverModel(TestCase):
@@ -20,18 +15,18 @@ class TestGeoserverModel(TestCase):
     def setUp(self):
         """ Set up data for tests, created geoserver """
 
-        self.recipes = Recipes()
+        self.recipes = recipes.Recipes()
         self.recipes.geoserver_data.make()
 
     def test_geoserver_data_creation(self):
         """ Test correct creation of geoserver """
 
-        self.assertTrue(Geoserver.objects.count())
+        self.assertTrue(models.Geoserver.objects.count())
 
     def test_geoserver_post_save(self):
         """ Test get and access fields of geoserver model"""
 
-        data = Geoserver.objects.first()
+        data = models.Geoserver.objects.first()
         self.assertTrue(data.name)
         self.assertTrue(data.wms_url)
         self.assertTrue(data.preview_url)
@@ -43,21 +38,21 @@ class TestLayersGroupModel(TestCase):
     def setUp(self):
         """ Set up data for tests, created Layers Group """
 
-        self.recipes = Recipes()
+        self.recipes = recipes.Recipes()
         self.recipes.layers_group_data_1.make()
 
     def test_layers_group_data_creation(self):
         """ Test correct creation of layers groups with different orders """
 
-        self.assertTrue(LayersGroup.objects.count())
+        self.assertTrue(models.LayersGroup.objects.count())
         self.recipes.layers_group_data_2.make()
 
-        self.assertTrue(LayersGroup.objects.count() == 2)
+        self.assertTrue(models.LayersGroup.objects.count() == 2)
 
     def test_layers_group_post_save(self):
         """ Test get and access to field of Layers Group """
 
-        data = LayersGroup.objects.first()
+        data = models.LayersGroup.objects.first()
         self.assertTrue(data.name)
         self.assertTrue(data.icon)
         self.assertTrue(data.order)
@@ -80,13 +75,13 @@ class TestLayersGroupModel(TestCase):
                     name='Test LayersGroup 3'
                 )
 
-        self.assertTrue(LayersGroup.objects.count() == 2)
+        self.assertTrue(models.LayersGroup.objects.count() == 2)
 
         self.recipes.layers_group_data_2.make(
             name='Test LayersGroup 3',
             order='3'
         )
-        self.assertTrue(LayersGroup.objects.count() == 3)
+        self.assertTrue(models.LayersGroup.objects.count() == 3)
 
 
 class TestLayerModel(TestCase):
@@ -96,9 +91,9 @@ class TestLayerModel(TestCase):
         """ Set up data for tests, created layer and
         foreign keys models (layers_group) """
 
-        self.recipes = Recipes()
+        self.recipes = recipes.Recipes()
         self.recipes.layers_group_data_1.make()
-        self.layers_group = LayersGroup.objects.first()
+        self.layers_group = models.LayersGroup.objects.first()
 
         self.recipes.layer_data_1.make(
             layers_group_id=self.layers_group.id
@@ -107,7 +102,7 @@ class TestLayerModel(TestCase):
     def test_layer_data_creation(self):
         """ Test layer creation """
 
-        self.assertTrue(Layer.objects.count())
+        self.assertTrue(models.Layer.objects.count())
 
         self.recipes.layer_data_2.make(
             layers_group_id=self.layers_group.id
@@ -116,12 +111,12 @@ class TestLayerModel(TestCase):
             layers_group_id=self.layers_group.id
         )
 
-        self.assertTrue(Layer.objects.count() == 3)
+        self.assertTrue(models.Layer.objects.count() == 3)
 
     def test_layer_layers_group_relation(self):
         """ Test layer relation with layers_group and reverse access """
 
-        self.layer = Layer.objects.first()
+        self.layer = models.Layer.objects.first()
 
         self.assertTrue(self.layer.layers_group)
         self.assertTrue(self.layer.layers_group.layers.count() == 1)
@@ -134,30 +129,30 @@ class TestWmsLayerModel(TestCase):
         """ Set up data for tests, created wms layer and
         foreign keys models (layers_group, geoserver, layer) """
 
-        self.recipes = Recipes()
+        self.recipes = recipes.Recipes()
 
         self.recipes.geoserver_data.make()
-        self.geoserver = Geoserver.objects.first()
+        self.geoserver = models.Geoserver.objects.first()
 
         self.recipes.layers_group_data_1.make()
-        self.layers_group = LayersGroup.objects.first()
+        self.layers_group = models.LayersGroup.objects.first()
 
         self.recipes.layer_data_1.make(
             layers_group_id=self.layers_group.id
         )
-        self.layer = Layer.objects.first()
+        self.layer = models.Layer.objects.first()
 
     def test_wms_layer_data_creation(self):
         """ Test wms layer creation """
 
-        self.assertEqual(WmsLayer.objects.count(), 0)
+        self.assertEqual(models.WmsLayer.objects.count(), 0)
 
         self.recipes.wms_layer_data.make(
             layer_id=self.layer.id,
             geoserver_id=self.geoserver.id
         )
 
-        self.assertTrue(WmsLayer.objects.count() == 1)
+        self.assertTrue(models.WmsLayer.objects.count() == 1)
 
     def test_wms_layer_relation(self):
         """ Test wmslayer relation with layer and geoserver """
@@ -167,7 +162,7 @@ class TestWmsLayerModel(TestCase):
             geoserver_id=self.geoserver.id
         )
 
-        self.wms_layer = WmsLayer.objects.first()
+        self.wms_layer = models.WmsLayer.objects.first()
 
         self.assertTrue(self.wms_layer.layer)
         self.assertTrue(self.wms_layer.geoserver)
@@ -180,26 +175,26 @@ class TestTmsLayerModel(TestCase):
         """ Set up data for tests, created tmslayer and
         foreign keys models (layers_group, layer) """
 
-        self.recipes = Recipes()
+        self.recipes = recipes.Recipes()
 
         self.recipes.layers_group_data_1.make()
-        self.layers_group = LayersGroup.objects.first()
+        self.layers_group = models.LayersGroup.objects.first()
 
         self.recipes.layer_data_1.make(
             layers_group_id=self.layers_group.id
         )
-        self.layer = Layer.objects.first()
+        self.layer = models.Layer.objects.first()
 
     def test_tms_layer_data_creation(self):
         """ Test tmslayer creation """
 
-        self.assertEqual(TmsLayer.objects.count(), 0)
+        self.assertEqual(models.TmsLayer.objects.count(), 0)
 
         self.recipes.tms_layer_data.make(
             layer_id=self.layer.id,
         )
 
-        self.assertTrue(TmsLayer.objects.count() == 1)
+        self.assertTrue(models.TmsLayer.objects.count() == 1)
 
     def test_tms_layer_relation(self):
         """ Test tmslayer relation with layer """
@@ -208,7 +203,7 @@ class TestTmsLayerModel(TestCase):
             layer_id=self.layer.id,
         )
 
-        self.tms_layer = TmsLayer.objects.first()
+        self.tms_layer = models.TmsLayer.objects.first()
         self.assertTrue(self.tms_layer.layer)
 
 
@@ -219,15 +214,15 @@ class TestHeatmapLayerModel(TestCase):
         """ Set up data for tests, created heatmap layer and
         foreign keys models (monitoring types, layer) """
 
-        self.recipes = Recipes()
+        self.recipes = recipes.Recipes()
 
         self.recipes.layers_group_data_1.make()
-        self.layers_group = LayersGroup.objects.first()
+        self.layers_group = models.LayersGroup.objects.first()
 
         self.recipes.layer_data_1.make(
             layers_group_id=self.layers_group.id
         )
-        self.layer = Layer.objects.first()
+        self.layer = models.Layer.objects.first()
 
         self.recipes.monitoring_type_data.make()
         self.monitoring_type = MonitoringType.objects.first()

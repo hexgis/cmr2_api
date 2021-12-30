@@ -2,20 +2,12 @@ from rest_framework.serializers import ModelSerializer
 
 # from monitoring.serializers import MonitoringTypeSerializer
 
-from .models import (
-    LayersGroup,
-    Layer,
-    Geoserver,
-    WmsLayer,
-    TmsLayer,
-    #HeatmapLayer
-    # LayerFilter
-)
+from support import models
 
 
 class GeoserverSerializer(ModelSerializer):
     class Meta:
-        model = Geoserver
+        model = models.Geoserver
         fields = (
             'name', 'wms_url', 'preview_url',
         )
@@ -23,7 +15,7 @@ class GeoserverSerializer(ModelSerializer):
 
 # class LayerFilterSerializer(ModelSerializer):
 #     class Meta:
-#         model = LayerFilter
+#         model = models.LayerFilter
 #         fields = (
 #             'default', 'filter_type', 'label',
 #         )
@@ -33,7 +25,7 @@ class WmsSerializer(ModelSerializer):
     geoserver = GeoserverSerializer()
 
     class Meta:
-        model = WmsLayer
+        model = models.WmsLayer
         fields = (
             'geoserver',
             'has_preview',
@@ -50,7 +42,7 @@ class WmsSerializer(ModelSerializer):
 
 class TmsSerializer(ModelSerializer):
     class Meta:
-        model = TmsLayer
+        model = models.TmsLayer
         fields = (
             'url_tms', 'date', 'max_native_zoom',
         )
@@ -60,7 +52,7 @@ class TmsSerializer(ModelSerializer):
 #     # heatmap_type = MonitoringTypeSerializer()
 
 #     class Meta:
-#         model = HeatmapLayer
+#         model = models.HeatmapLayer
 #         # fields = ('heatmap_type', )
 #         fields = (
 #             'heatmap_type',
@@ -74,7 +66,7 @@ class LayerSerializer(ModelSerializer):
     # layer_filters = LayerFilterSerializer(many=True)
 
     class Meta:
-        model = Layer
+        model = models.Layer
         fields = (
             'id',
             'tms',
@@ -92,5 +84,5 @@ class LayersGroupSerializer(ModelSerializer):
     layers = LayerSerializer(many=True, read_only=True)
 
     class Meta:
-        model = LayersGroup
+        model = models.LayersGroup
         fields = '__all__'

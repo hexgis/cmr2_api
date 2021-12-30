@@ -1,10 +1,7 @@
 from django.db import transaction
 import json
 
-from .models import (
-    LayersGroup,
-    Layer
-)
+from support import models
 
 
 @transaction.atomic
@@ -42,13 +39,13 @@ def createLayersData(
     data_json = json.loads(json_data)
 
     if layers_group:
-        layers_group_object = LayersGroup.objects.get(id=layers_group)
+        layers_group_object = models.LayersGroup.objects.get(id=layers_group)
         if not layers_group_object:
             raise ValueError("layers group not exists")
     else:
-        last_order = LayersGroup.objects.order_by('-order').first().order
+        last_order = models.LayersGroup.objects.order_by('-order').first().order
         last_order += 1
-        layers_group_object = LayersGroup.objects.create(
+        layers_group_object = models.LayersGroup.objects.create(
             name="Nova Aba", order=last_order, icon="layers")
 
     for data in data_json:
@@ -56,7 +53,7 @@ def createLayersData(
             print(data)
 
         data['layers_group_id'] = layers_group_object.id
-        created = Layer.objects.get_or_create(**data)
+        created = models.Layer.objects.get_or_create(**data)
         if created:
             data_created.append(data)
 
