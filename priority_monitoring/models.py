@@ -15,35 +15,43 @@ class PriorityConsolidated(models.Model):
         #_("Estágio de Degradação"),
         max_length=255,
         blank=True,
-        null=True
+        null=True,
     )
     no_cr = models.CharField(
         max_length=255,
-        blank=False,
-        null=False
+        blank=True,
+        null=True,
     )
     no_ti = models.CharField(
         max_length=255,
-        blank=False,
-        null=False
+        blank=True,
+        null=True,
     )
     ranking = models.IntegerField(
-        null=True
+        null=True,
+        blank=True,
     )
     prioridade = models.CharField(
         max_length=1,
         choices=PRIORIDADE,
-        blank=False,
-        null=False,
-        default='B'
+        blank=True,
+        null=True,
+        default='B',
     )
     flag = BooleanField(
+        null=True,
+        blank=True,
+        default= False,
     )
     dt_t_um = models.DateField(
+        null=True,
+        blank=True,
     )
     geom = models.CharField(
         max_length=255,
-        default='000'
+        null=True,
+        blank=True,
+        default='000',
     )
 
     def __str__(self):
@@ -58,59 +66,101 @@ class PriorityConsolidated(models.Model):
 class PriorityConsolidatedTb(models.Model):
 
     tb_ciclo_monitoramento_id = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
     )
     no_estagio = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     no_imagem = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
     )
     dt_imagem = models.DateField(
+        null=True,
+        blank=True,
 	)
     nu_orbita = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     nu_ponto = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     dt_t_zero = models.DateField(
+        null=True,
+        blank=True,
     )
     dt_t_um = models.DateField(
+        null=True,
+        blank=True,
 	)
     nu_area_km2 = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     nu_area_ha = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     nu_latitude = models.CharField(
-        max_length=512
+        max_length=512,
+        null=True,
+        blank=True,
 	)
     nu_longitude = models.CharField(
-        max_length=512
+        max_length=512,
+        null=True,
+        blank=True,
 	)
     tempo = models.IntegerField(
+        null=True,
+        blank=True,
 	)
     contribuicao = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     velocidade = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     contiguidade = models.IntegerField(
+        null=True,
+        blank=True,
 	)
     ranking = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     prioridade = models.CharField(
-        max_length=255
+        max_length=255,
+        null=True,
+        blank=True,
 	)
     dt_cadastro = models.DateField(
+        null=True,
+        blank=True,
 	)
     co_uf = models.IntegerField(
+        null=True,
+        blank=True,
 	)
     co_municipio = models.IntegerField(
+        null=True,
+        blank=True,
 	)
     # geom = models.CharField(
     #     max_length=255

@@ -1,16 +1,15 @@
 from django.db import models
-from django.db.models import fields
 from rest_framework.serializers import ModelSerializer
 
-from priority_monitoring.models import PriorityConsolidated, PriorityConsolidatedTb
+from priority_monitoring import models
 
-class PriorityConsolidatedSerializer (ModelSerializer):
+class PriorityConsolidatedSerializer(ModelSerializer):
 
     class Meta:
-        model= PriorityConsolidated
+        model= models.PriorityConsolidated
         fields= '__all__'
 
-class PriorityConsolidatedTbSerializer (ModelSerializer):
+class PriorityConsolidatedTbSerializer(ModelSerializer):
     class Meta:
-        models:PriorityConsolidatedTb
+        models= models.PriorityConsolidatedTb
         fields= '__all__'

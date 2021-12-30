@@ -1,7 +1,7 @@
 #from django.db.models import fields
 import django_filters
 
-from priority_monitoring.models import PriorityConsolidated
+from priority_monitoring import models
 
 
 
@@ -32,7 +32,7 @@ class PriorityConsolidatedAbstractFilter (django_filters.rest_framework.FilterSe
 
 class PriorityConsolidatedFilter (PriorityConsolidatedAbstractFilter):
     class Meta:
-        model = PriorityConsolidated
+        model = models.PriorityConsolidated
         fields = [
             'no_cr',
             'no_ti',

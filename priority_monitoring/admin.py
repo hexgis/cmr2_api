@@ -1,11 +1,6 @@
 from django.contrib import admin
 
-from .models import(
-    PriorityConsolidated,
-    PriorityConsolidatedTb
-)
-from .filters import(
-    PriorityConsolidatedFilter
+from priority_monitoring import models
 )
 
 class PriorityConsolidatedAdmin(admin.ModelAdmin):
@@ -55,10 +50,12 @@ class PriorityConsolidatedTbAdmin(admin.ModelAdmin):
         'ranking',
         'prioridade',
         'dt_cadastro',
+        'co_uf',
+        'co_municipio',
         # 'geom',
 
     )
     fields = list_display
 
-admin.site.register(PriorityConsolidated, PriorityConsolidatedAdmin)
-admin.site.register(PriorityConsolidatedTb, PriorityConsolidatedTbAdmin)
+admin.site.register(models.PriorityConsolidated, PriorityConsolidatedAdmin)
+admin.site.register(models.PriorityConsolidatedTb, PriorityConsolidatedTbAdmin)

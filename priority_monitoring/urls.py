@@ -6,7 +6,7 @@ from priority_monitoring import views
 
 urlpatterns = [
     path('consolidated/',
-         views.PriorityConsolidatedView.as_view(),
-         name='priority-consolidated'
-    )
+        views.PriorityConsolidatedView.as_view(),
+        name='priority-consolidated'
+    ),
 ]
