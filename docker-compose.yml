@@ -16,30 +16,19 @@ services:
       bash -c "python manage.py makemigrations
       && python manage.py migrate
       && python manage.py loaddata support/fixtures/*.yaml
-      && python manage.py loaddata priority_monitoring/fixtures/priority_nonitoring_old.yaml
-      && python manage.py runserver 0.0.0.0:8000"''
+      && python manage.py loaddata priority_monitoring/fixtures/*.yaml
+      && python manage.py loaddata funai/fixtures/funai_cr_fixtures2.yaml
+      && python manage.py loaddata funai/fixtures/funai_ti_fixtures.yaml
+      && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/home/app/
     ports:
       - "8000:8000"
     # network_mode: "host"
     environment:
-      #DJANGO_SETTINGS_MODULE: skyviewer_api.settings.local
       DB_USER: defaultuser
       DB_NAME: testdb
       DB_PASSWORD: testpassword
       DB_HOST: db
-      #DB_USER: postgres
-      #DB_NAME: cmr2_desenv
-      #DB_PASSWORD: 123456
-      #DB_HOST: localhost
-      DB_CATALOG_USER: defaultuser
-      DB_CATALOG_NAME: skynetviz
-      DB_CATALOG_PASSWORD: testpassword
-      DB_CATALOG_HOST: db_catalog
-      ALLOWED_HOSTS: '["*"]'
-      SKYNETVIZ_URL: http://localhost:8001/process/catalog
-      SKYNETVIZ_TOKEN: Token secret
-      ELASTICSEARCH_URL: http://es:9200
     depends_on:
       - db
