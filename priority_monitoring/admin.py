@@ -1,9 +1,9 @@
 from django.contrib import admin
 
 from priority_monitoring import models
-)
 
-class PriorityConsolidatedAdmin(admin.ModelAdmin):
+
+class PriorityConsolidatedTempAdmin(admin.ModelAdmin):
     list_display = (
         'no_estagio',
         'no_cr',
@@ -29,16 +29,17 @@ class PriorityConsolidatedAdmin(admin.ModelAdmin):
         #'end_date',
         'ranking',
     )
-class PriorityConsolidatedTbAdmin(admin.ModelAdmin):
+class PriorityConsolidatedAdmin(admin.ModelAdmin):
     list_display = (
+        'id_tb',
         'tb_ciclo_monitoramento_id',
-    	'no_estagio',
-	    'no_imagem',
-        'dt_imagem',
+        'no_estagio',
+        'no_image',
+        'dt_image',
         'nu_orbita',
         'nu_ponto',
-        'dt_t_zero',
-        'dt_t_um',
+        'dt_t0',
+        'dt_t1',
         'nu_area_km2',
         'nu_area_ha',
         'nu_latitude',
@@ -50,12 +51,9 @@ class PriorityConsolidatedTbAdmin(admin.ModelAdmin):
         'ranking',
         'prioridade',
         'dt_cadastro',
-        'co_uf',
-        'co_municipio',
-        # 'geom',
-
+        'geom',
     )
     fields = list_display
 
 admin.site.register(models.PriorityConsolidated, PriorityConsolidatedAdmin)
-admin.site.register(models.PriorityConsolidatedTb, PriorityConsolidatedTbAdmin)
+admin.site.register(models.PriorityConsolidatedTemp, PriorityConsolidatedTempAdmin)

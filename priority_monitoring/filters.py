@@ -1,42 +1,49 @@
 #from django.db.models import fields
-import django_filters
+from django_filters import rest_framework
 
 from priority_monitoring import models
 
 
 
-class PriorityConsolidatedAbstractFilter (django_filters.rest_framework.FilterSet):
-    no_cr = django_filters.rest_framework.CharFilter(
-        field_name='no_cr',
+class PriorityConsolidatedAbstractFilter (rest_framework.FilterSet):
+    # Ainda necessário vincular as tabelas do APP funai CR e TI com o Priority_monitoring
+    # no_cr = rest_framework.CharFilter(
+    #     field_name='no_cr',
+    # )
+
+    # no_ti = rest_framework.CharFilter(
+    #     field_name='no_ti',
+    # )
+
+    nome_estagio = rest_framework.CharFilter(
+        field_name='no_estagio',
     )
 
-    no_ti = django_filters.rest_framework.CharFilter(
-        field_name='no_ti',
-    )
-
-    start_date = django_filters.rest_framework.DateFilter(
-        field_name='dt_t_um',
+    start_date = rest_framework.DateFilter(
+        field_name='dt_t0',
         lookup_expr='gte',
         #required=True
     )
 
-    end_date = django_filters.rest_framework.DateFilter(
-        field_name='dt_t_um',
+    end_date = rest_framework.DateFilter(
+        field_name='dt_t1',
         lookup_expr='lte',
         #required=True
     )
 
-    ranking = django_filters.rest_framework.CharFilter(
-        field_name='ranking',
+    prioridade = rest_framework.CharFilter(
+        field_name='prioridade',
     )
+
 
 class PriorityConsolidatedFilter (PriorityConsolidatedAbstractFilter):
     class Meta:
         model = models.PriorityConsolidated
         fields = [
-            'no_cr',
-            'no_ti',
+            #'no_cr',
+            #'no_ti',
+            'no_estagio',
             'start_date',
             'end_date',
-            'ranking'
+            'prioridade'
         ]
