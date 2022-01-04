@@ -4,8 +4,8 @@ from funai import models
 
 class CoordenacaoRegionalAdmin(admin.ModelAdmin):
     list_display = (
-        'id',
-        # 'co_cr',
+        # 'id',
+        'co_cr',
         'no_cr',
         'no_abreviado',
         'sg_cr',
@@ -20,14 +20,14 @@ class CoordenacaoRegionalAdmin(admin.ModelAdmin):
     )
     fields = list_display
     search_fields = (
-        # 'co_cr',
+        'co_cr',
         'no_cr',
         'no_regiao',
         'no_municipio',
         'no_uf',
     )
     list_fielter = (
-        # 'co_cr',
+        'co_cr',
         'no_cr',
         'no_regiao',
         'no_uf',

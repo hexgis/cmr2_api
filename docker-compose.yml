@@ -17,8 +17,7 @@ services:
       && python manage.py migrate
       && python manage.py loaddata support/fixtures/*.yaml
       && python manage.py loaddata priority_monitoring/fixtures/*.yaml
-      && python manage.py loaddata funai/fixtures/funai_cr_fixtures2.yaml
-      && python manage.py loaddata funai/fixtures/funai_ti_fixtures.yaml
+      && python manage.py loaddata funai/fixtures/*.yaml
       && python manage.py runserver 0.0.0.0:8000"
     volumes:
       - .:/home/app/
