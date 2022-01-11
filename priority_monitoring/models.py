@@ -1,6 +1,5 @@
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
-from django.db.models.fields import BooleanField
 
 
 class PriorityConsolidated(models.Model):
