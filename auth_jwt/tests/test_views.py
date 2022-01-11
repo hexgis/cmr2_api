@@ -1,4 +1,3 @@
-from datetime import datetime
 from django.test import TestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
@@ -79,13 +78,13 @@ class TestChangePasswordView(TestCase):
     def test_change_password_without_data(self):
         """Test change password without request data."""
         with self.assertRaises(Exception):
-            self.client.post(self.change_url, data={}, format='json')
+            self.client.put(self.change_url, data={}, format='json')
 
     def test_change_password_incorrect_password(self):
         """Test change password with incorrect passwor."""
 
         data = {'oldPassword': 'incorrect', 'newPassword1': 'top_secret'}
-        request = self.client.post(self.change_url, data, format='json')
+        request = self.client.put(self.change_url, data, format='json')
 
         self.assertTrue(status.is_client_error(request.status_code))
 
@@ -93,7 +92,7 @@ class TestChangePasswordView(TestCase):
         """Test change password with correct password and request data."""
 
         data = {'oldPassword': 'top_secret', 'newPassword1': 'new_top_secret'}
-        request = self.client.post(self.change_url, data, format='json')
+        request = self.client.put(self.change_url, data, format='json')
 
         self.assertTrue(status.is_success(request.status_code))
         self.assertTrue(request.data['access'])
@@ -105,6 +104,6 @@ class TestChangePasswordView(TestCase):
 
         client = APIClient()
         data = {'oldPassword': 'top_secret', 'newPassword1': 'new_top_secret'}
-        request = client.post(self.change_url, data, format='json')
+        request = client.put(self.change_url, data, format='json')
 
         self.assertEquals(request.status_code, status.HTTP_401_UNAUTHORIZED)

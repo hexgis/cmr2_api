@@ -1,16 +1,21 @@
-from rest_framework.generics import GenericAPIView
-from rest_framework import permissions
-from rest_framework.response import Response
+from django.utils.translation import ugettext_lazy as _
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
+from rest_framework import (
+    response,
+    permissions,
+    views,
+    status
+)
 
-class ChangePassword(GenericAPIView):
+
+class ChangePassword(views.APIView):
     """ChangePassword APIView."""
 
     permission_classes = (permissions.IsAuthenticated,)
 
-    def post(self, request):
+    def put(self, request):
         """Method to receive POST data from request.
 
         Args:
@@ -31,12 +36,14 @@ class ChangePassword(GenericAPIView):
 
             refresh = RefreshToken.for_user(user)
 
-            return Response({
+            return response.Response({
                 'refresh': str(refresh),
                 'access': str(refresh.access_token),
-            })
+            }, status=status.HTTP_200_OK)
         else:
-            message = 'Senha de usuário incorreta.'
+            message = _('Incorrect password.')
 
-        error_response = Response({'message': message}, status=400)
+        error_response = response.Response(
+            {'message': message}, status=status.HTTP_400_BAD_REQUEST
+        )
         return error_response
