@@ -2,9 +2,11 @@ from django.contrib import admin
 
 from funai import models
 
+
 class CoordenacaoRegionalAdmin(admin.ModelAdmin):
+    """CoordenacaoRegionalAdmin admin model data."""
+
     list_display = (
-        # 'id',
         'co_cr',
         'no_cr',
         'no_abreviado',
@@ -18,7 +20,7 @@ class CoordenacaoRegionalAdmin(admin.ModelAdmin):
         'ds_telefone',
         'dt_cadastro',
     )
-    fields = list_display
+
     search_fields = (
         'co_cr',
         'no_cr',
@@ -26,6 +28,7 @@ class CoordenacaoRegionalAdmin(admin.ModelAdmin):
         'no_municipio',
         'no_uf',
     )
+
     list_fielter = (
         'co_cr',
         'no_cr',
@@ -33,17 +36,25 @@ class CoordenacaoRegionalAdmin(admin.ModelAdmin):
         'no_uf',
     )
 
+    fields = list_display
+
+
 class LimiteTerraIndigenaAdmin(admin.ModelAdmin):
+    """LimiteTerraIndigenaAdmin model admin."""
+
     list_display = (
         'no_ti',
         'co_funai',
         'ds_fase_ti',
     )
+
     fields = list_display
+
     search_fields = (
         'no_ti',
         'co_funai',
     )
+
 
 admin.site.register(models.CoordenacaoRegional, CoordenacaoRegionalAdmin)
 admin.site.register(models.LimiteTerraIndigena, LimiteTerraIndigenaAdmin)

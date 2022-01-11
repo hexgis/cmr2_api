@@ -24,7 +24,25 @@ services:
       - .:/home/app/
     ports:
       - "8000:8000"
-    # network_mode: "host"
+    environment:
+      DB_USER: defaultuser
+      DB_NAME: testdb
+      DB_PASSWORD: testpassword
+      DB_HOST: db
+    depends_on:
+      - db
+
+  test:
+    build:
+      context: .
+      dockerfile: ./compose/docker/Dockerfile-dev
+    command: >
+      bash -c "python manage.py makemigrations --no-input
+      && python manage.py test"
+    volumes:
+      - .:/home/app/
+    ports:
+      - "8000:8000"
     environment:
       DB_USER: defaultuser
       DB_NAME: testdb

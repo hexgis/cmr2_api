@@ -1,21 +1,30 @@
-# from django.shortcuts import render
-from rest_framework import generics
-from django.db.models.query import QuerySet
+from rest_framework import generics, filters
+from django_filters.rest_framework import DjangoFilterBackend
 
 from funai import(
     serializers,
-    models
+    models,
+    filters as filters_funai
+
 )
 
 
-class CoordenacaoRegionalView (generics.ListAPIView):
+class CoordenacaoRegionalView(generics.ListAPIView):
+    """CoordenacaoRegionalView view for Regional Coordination data."""
+
     queryset = models.CoordenacaoRegional.objects.all()
     serializer_class = serializers.CoordenacaoRegionalSerializer
 
-class LimiteTerraIndigenaView (generics.ListAPIView):
+
+class LimiteTerraIndigenaView(generics.ListAPIView):
+    """LimiteTerraIndigenaView view for Indigenous Lands data.
+
+    Filters:
+        co_cr (int): code for Regional Coordination.
+    """
+
     queryset = models.LimiteTerraIndigena.objects.all()
     serializer_class = serializers.LimiteTerraIndigenaSerializer
-
-# class CrTiFunai (generics.ListAPIView):
-#     models.LimiteTerraIndigena
-#     models.CoordenacaoRegional
+    filterset_class = filters_funai.LimiteTerraIndigenaFilter
+    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
+    ordering_fields = ('no_cr',)

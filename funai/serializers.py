@@ -5,11 +5,20 @@ from funai import models
 
 
 class LimiteTerraIndigenaSerializer (ModelSerializer):
+    """LimiteTerraIndigenaSerializer data"""
+
     class Meta:
         model = models.LimiteTerraIndigena
-        fields = '__all__'
+        fields = (
+            'co_funai',
+            'no_ti'
+        )
+
 
 class CoordenacaoRegionalSerializer (ModelSerializer):
     class Meta:
         model = models.CoordenacaoRegional
-        fields = '__all__'
+        fields = (
+            'co_cr',
+            'no_cr'
+        )

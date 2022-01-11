@@ -3,32 +3,6 @@ from django.contrib import admin
 from priority_monitoring import models
 
 
-class PriorityConsolidatedTempAdmin(admin.ModelAdmin):
-    list_display = (
-        'no_estagio',
-        'no_cr',
-        'no_ti',
-        'ranking',
-        'prioridade',
-        'flag',
-        'dt_t_um',
-    )
-    fields = list_display
-    search_fields = (
-        'no_cr',
-        'no_ti',
-        'dt_t_um',
-        #'start_date',
-        #'end_date',
-        'ranking',
-    )
-    list_filter = (
-        'no_cr',
-        'no_ti',
-        #'start_date',
-        #'end_date',
-        'ranking',
-    )
 class PriorityConsolidatedAdmin(admin.ModelAdmin):
     list_display = (
         'id_tb',
@@ -53,7 +27,22 @@ class PriorityConsolidatedAdmin(admin.ModelAdmin):
         'dt_cadastro',
         'geom',
     )
+
     fields = list_display
 
-admin.site.register(models.PriorityConsolidated, PriorityConsolidatedAdmin)
-admin.site.register(models.PriorityConsolidatedTemp, PriorityConsolidatedTempAdmin)
+    search_fields = (
+        # 'no_cr',
+        # 'no_ti',
+        'dt_t_um',
+        'ranking',
+    )
+
+    list_filter = (
+        # 'no_cr',
+        # 'no_ti',
+        'ranking',
+    )
+
+
+admin.site.register(
+    models.PriorityConsolidated, PriorityConsolidatedAdmin)

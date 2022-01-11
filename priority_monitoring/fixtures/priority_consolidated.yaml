@@ -1,4 +1,4 @@
-- model: priority_monitoring.priorityconsolidatedTemp
+- model: priority_monitoring.priorityconsolidated
   pk: 1
   fields:
     no_estagio: Degradação
@@ -7,9 +7,9 @@
     ranking: 5
     prioridade: B
     flag: true
-    dt_t_um: 2021-12-01
-    geom: "000"
-- model: priority_monitoring.priorityconsolidatedTemp
+    dt_t1: 2021-12-01
+    geom: "MultiPolygon  (((-49.94545556 -4.4815375, -49.94521677 -4.4815375, -49.94521677 -4.48193481, -49.94519194 -4.48203414, -49.94566375 -4.48203414, -49.94572372 -4.48175426, -49.94548198 -4.48173124, -49.94545556 -4.4815375)))"
+- model: priority_monitoring.priorityconsolidated
   pk: 2
   fields:
     no_estagio: Mineração
@@ -18,9 +18,9 @@
     ranking: 10
     prioridade: A
     flag: true
-    dt_t_um: 2021-12-02
-    geom: "000"
-- model: priority_monitoring.priorityconsolidatedTemp
+    dt_t1: 2021-12-02
+    geom: "MultiPolygon  (((-49.94545556 -4.4815375, -49.94521677 -4.4815375, -49.94521677 -4.48193481, -49.94519194 -4.48203414, -49.94566375 -4.48203414, -49.94572372 -4.48175426, -49.94548198 -4.48173124, -49.94545556 -4.4815375)))"
+- model: priority_monitoring.priorityconsolidated
   pk: 3
   fields:
     no_estagio: Mineração
@@ -29,8 +29,8 @@
     ranking: 3
     prioridade: B
     flag: true
-    dt_t_um: 2021-12-03
-    geom: "000"
+    dt_t1: 2021-12-03
+    geom: "MultiPolygon  (((-49.94545556 -4.4815375, -49.94521677 -4.4815375, -49.94521677 -4.48193481, -49.94519194 -4.48203414, -49.94566375 -4.48203414, -49.94572372 -4.48175426, -49.94548198 -4.48173124, -49.94545556 -4.4815375)))"
 - model: priority_monitoring.PriorityConsolidated
   pk: 1
   fields:

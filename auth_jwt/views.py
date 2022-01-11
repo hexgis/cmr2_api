@@ -1,14 +1,25 @@
 from rest_framework.generics import GenericAPIView
-from rest_framework.permissions import IsAuthenticated
+from rest_framework import permissions
 from rest_framework.response import Response
 
 from rest_framework_simplejwt.tokens import RefreshToken
 
 
 class ChangePassword(GenericAPIView):
-    permission_classes = (IsAuthenticated,)
+    """ChangePassword APIView."""
 
-    def post(self, request, *args, **kwargs):
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def post(self, request):
+        """Method to receive POST data from request.
+
+        Args:
+            oldPassword (str): old password
+            newPassword (str): new password
+
+        Returns:
+            response: response data
+        """
 
         old_password = request.data['oldPassword']
         new_password1 = request.data['newPassword1']

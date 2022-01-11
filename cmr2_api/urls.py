@@ -13,13 +13,37 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+
 from django.urls import include, path
 from django.contrib import admin
 
+from drf_yasg import openapi
+from drf_yasg.views import get_schema_view
 
-urlpatterns = [
-    url('admin/', admin.site.urls),
+
+schema_view = get_schema_view(
+    openapi.Info(
+        title="CMR API",
+        default_version='v1',
+        description="CMR Api service",
+        terms_of_service="https://www.google.com/policies/terms/",
+        contact=openapi.Contact(email="cmr@funai.gov.br"),
+        license=openapi.License(name="BSD License"),
+    ),
+    public=True,
+    # permission_classes=(
+    #    permissions.IsAuthenticated, permissions.IsAdminUser
+    # ),
+)
+
+
+urlpatterns = (
+    path('api/', schema_view.with_ui('swagger', cache_timeout=0)),
+    path('api-docs/', schema_view.with_ui('redoc', cache_timeout=0)),
+    path('admin/', admin.site.urls),
+    path('auth/', include(
+        ('auth_jwt.urls', 'auth'), namespace='auth')
+    ),
     path('support/', include(
         ('support.urls', 'support'), namespace='support')
     ),
@@ -31,4 +55,5 @@ urlpatterns = [
         ('funai.urls', 'funai'),
         namespace='funai')
     ),
-]
+
+)

@@ -1,19 +1,4 @@
 - model: funai.coordenacaoregional
-  pk: 1
-  fields:
-    co_cr: 30202001857
-    no_cr: "XPTO"
-    no_abreviado: "C.R. XPTO"
-    sg_cr: "CR-XPTO"
-    st_situacao: "XPTO"
-    ds_email: "XPTO@funai.gov.br"
-    no_regiao: "XPTO"
-    no_municipio: "XPTO"
-    no_uf: "XPTO"
-    sg_uf: "XPTO"
-    ds_telefone: "XPTO"
-    dt_cadastro: 2021-12-12 18:30:49
-- model: funai.coordenacaoregional
   pk: 16420
   fields:
     co_cr: 30202001934

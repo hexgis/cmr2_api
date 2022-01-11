@@ -2,8 +2,6 @@ from model_mommy.recipe import Recipe
 
 from support import models
 
-from monitoring.models import MonitoringType
-
 
 class Recipes:
 
@@ -66,13 +64,3 @@ class Recipes:
             max_native_zoom=15,
             date='2020-01-01',
         )
-
-        # self.monitoring_type_data = Recipe(
-        #     MonitoringType,
-        #     name='Prodes',
-        #     identifier='Prodes',
-        # )
-
-        # self.heatmap_layer_data = Recipe(
-        #     HeatmapLayer,
-        # )
