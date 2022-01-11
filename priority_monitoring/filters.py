@@ -15,12 +15,12 @@ class PriorityConsolidatedAbstractFilter (rest_framework.FilterSet):
     #     field_name='no_ti',
     # )
 
-    nome_estagio = rest_framework.CharFilter(
+    no_estagio = rest_framework.CharFilter(
         field_name='no_estagio',
     )
 
     start_date = rest_framework.DateFilter(
-        field_name='dt_t0',
+        field_name='dt_t1',
         lookup_expr='gte',
         #required=True
     )
