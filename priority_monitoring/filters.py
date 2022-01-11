@@ -15,13 +15,13 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
     """
     # Ainda necessário vincular as tabelas do APP
     # funai CR e TI com o Priority_monitoring
-    # no_cr = rest_framework.CharFilter(
-    #     field_name='no_cr',
-    # )
+    co_cr = rest_framework.NumberFilter(
+        field_name='co_cr',
+    )
 
-    # no_ti = rest_framework.CharFilter(
-    #     field_name='no_ti',
-    # )
+    co_funai = rest_framework.NumberFilter(
+        field_name='co_funai',
+    )
 
     stage = rest_framework.CharFilter(
         field_name='no_estagio',
@@ -30,13 +30,13 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
     start_date = rest_framework.DateFilter(
         field_name='dt_t1',
         lookup_expr='gte',
-        # required=True
+        required=True
     )
 
     end_date = rest_framework.DateFilter(
         field_name='dt_t1',
         lookup_expr='lte',
-        # required=True
+        required=True
     )
 
     priority = rest_framework.CharFilter(
@@ -49,5 +49,7 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
             'no_estagio',
             'start_date',
             'end_date',
-            'prioridade'
+            'prioridade',
+            'co_cr',
+            'co_funai'
         )
