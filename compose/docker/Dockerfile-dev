@@ -1,7 +1,0 @@
-FROM hexgis/python-webgis:3.6.10
-
-COPY ./requirements/ /requirements/
-RUN pip install pip --upgrade
-RUN pip install -r /requirements/dev.txt
-
-WORKDIR /home/app/
