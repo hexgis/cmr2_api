@@ -37,7 +37,7 @@ schema_view = get_schema_view(
 )
 
 
-urlpatterns = (
+urlpatterns = [
     path('api/', schema_view.with_ui('swagger', cache_timeout=0)),
     path('api-docs/', schema_view.with_ui('redoc', cache_timeout=0)),
     path('admin/', admin.site.urls),
@@ -55,5 +55,4 @@ urlpatterns = (
         ('funai.urls', 'funai'),
         namespace='funai')
     ),
-
-)
+]
