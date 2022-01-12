@@ -11,7 +11,7 @@ services:
   dev:
     build:
       context: .
-      dockerfile: ./compose/docker/Dockerfile-dev
+      dockerfile: ./Dockerfile-dev
     command: >
       bash -c "python manage.py makemigrations --no-input
       && python manage.py migrate
@@ -19,34 +19,40 @@ services:
       && python manage.py loaddata priority_consolidated.yaml
       && python manage.py loaddata coordenacao_regional.yaml
       && python manage.py loaddata terras_indigenas.yaml
-      && python manage.py runserver 0.0.0.0:8000"
+      && python manage.py runserver 0.0.0.0:8080"
     volumes:
-      - .:/home/app/
+      - .:/app/
     ports:
-      - "8000:8000"
+      - "8080:8080"
     environment:
       DB_USER: defaultuser
       DB_NAME: testdb
       DB_PASSWORD: testpassword
       DB_HOST: db
+      PORT: 8080
     depends_on:
       - db
 
   test:
     build:
       context: .
-      dockerfile: ./compose/docker/Dockerfile-dev
+      dockerfile: ./Dockerfile-dev
     command: >
       bash -c "python manage.py makemigrations --no-input
       && python manage.py test"
     volumes:
-      - .:/home/app/
+      - .:/app/
     ports:
-      - "8000:8000"
+      - "8080:8080"
     environment:
       DB_USER: defaultuser
       DB_NAME: testdb
       DB_PASSWORD: testpassword
       DB_HOST: db
+      PORT: 8080
     depends_on:
       - db
+
+  prod:
+    image: us.gcr.io/custom-plating-209314/cmr2_api:latest
+    build: .
