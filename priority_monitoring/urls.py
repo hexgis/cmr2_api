@@ -14,4 +14,9 @@ urlpatterns = [
         views.PriorityConsolidatedDetailView.as_view(),
         name='priority-consolidated-detail'
     ),
+    path(
+        'consolidated/total/',
+        views.PriorityConsolidatedStatsView.as_view(),
+        name='priority-consolidated-stats'
+    ),
 ]
