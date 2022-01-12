@@ -14,7 +14,7 @@ class PriorityConsolidatedSerializer(
         geo_field = 'geom'
         id_field = False
         fields = (
-            'pk',
+            'id',
             'nu_area_km2',
             'prioridade',
         )
