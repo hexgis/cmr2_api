@@ -23,3 +23,11 @@ class PriorityConsolidatedView(generics.ListAPIView):
         DjangoFilterBackend,
         filters.OrderingFilter
     )
+
+
+class PriorityConsolidatedDetailView(generics.RetrieveAPIView):
+    """Returns consolidated data from PriorityConsolidated model data."""
+
+    queryset = models.PriorityConsolidated.objects.all()
+    serializer_class = serializers.PriorityConsolidatedDetailSerializer
+    lookup_field = 'pk'
