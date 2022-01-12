@@ -1,4 +1,6 @@
 from rest_framework import generics, filters
+from rest_framework_gis import filters as gis_filters
+
 from django_filters.rest_framework import DjangoFilterBackend
 
 from priority_monitoring import(
@@ -14,5 +16,10 @@ class PriorityConsolidatedView(generics.ListAPIView):
     queryset = models.PriorityConsolidated.objects.all()
     serializer_class = serializers.PriorityConsolidatedSerializer
     filterset_class = filters_priority.PriorityConsolidatedFilter
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
     ordering_fields = ('prioridade', 'nome_estagio')
+    bbox_filter_field = 'geom'
+    filter_backends = (
+        gis_filters.InBBoxFilter,
+        DjangoFilterBackend,
+        filters.OrderingFilter
+    )
