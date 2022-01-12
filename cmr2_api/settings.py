@@ -148,6 +148,7 @@ CORS_ORIGIN_ALLOW_ALL = True
 # https://www.django-rest-framework.org/api-guide/authentication/
 
 REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'rest_framework_gis.schema.GeoFeatureAutoSchema',
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
