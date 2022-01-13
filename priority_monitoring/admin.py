@@ -6,7 +6,6 @@ from priority_monitoring import models
 class PriorityConsolidatedAdmin(admin.ModelAdmin):
     list_display = (
         'id_tb',
-        'tb_ciclo_monitoramento_id',
         'no_estagio',
         'no_image',
         'dt_image',
@@ -25,22 +24,23 @@ class PriorityConsolidatedAdmin(admin.ModelAdmin):
         'ranking',
         'prioridade',
         'dt_cadastro',
-        'geom',
+        'no_cr',
+        'no_ti',
     )
 
     fields = list_display
 
     search_fields = (
-        # 'no_cr',
-        # 'no_ti',
+        'no_cr',
+        'no_ti',
         'dt_t_um',
-        'ranking',
+        'prioridade',
     )
 
     list_filter = (
-        # 'no_cr',
-        # 'no_ti',
-        'ranking',
+        'no_cr',
+        'no_ti',
+        'prioridade',
     )
 
 

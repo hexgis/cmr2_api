@@ -142,9 +142,9 @@ class PriorityConsolidated(models.Model):
         blank=True,
     )
 
-    geom = models.GeometryField(
-        _('Geometry Field'),
-        srid=4326,
+    co_cr = models.BigIntegerField(
+        _('Regional Coordenation code'),
+        default=1,
         blank=True,
         null=True,
     )
@@ -156,6 +156,13 @@ class PriorityConsolidated(models.Model):
         blank=True,
     )
 
+    co_funai = models.IntegerField(
+        _('Funai code - Indigenou Lands'),
+        default=1,
+        blank=True,
+        null=True,
+    )
+
     no_ti = models.CharField(
         _('Indigenou Lands name'),
         max_length=255,
@@ -163,9 +170,16 @@ class PriorityConsolidated(models.Model):
         blank=True,
     )
 
+    geom = models.GeometryField(
+        _('Geometry Field'),
+        srid=4326,
+        blank=True,
+        null=True,
+    )
+
     flag = models.BooleanField(
         _('Flag'),
-        default=False
+        default=False,
     )
 
     class Meta:

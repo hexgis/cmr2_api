@@ -44,4 +44,8 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
             'contiguidade',
             'ranking',
             'prioridade',
+            'co_cr',
+            'no_cr',
+            'co_funai',
+            'no_ti',
         )
