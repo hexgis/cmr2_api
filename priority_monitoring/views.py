@@ -16,18 +16,17 @@ from priority_monitoring import(
 
 class AuthModelMixIn:
     """Default Authentication for monitoring views."""
-    pass
     permission_classes = (permissions.AllowAny,)
 
 
 class PriorityConsolidatedView(AuthModelMixIn, generics.ListAPIView):
-    """Returns consolidated data for `models.PriorityConsolidated` model data.
+    """Returns list data for `priority_monitoring.PriorityConsolidated`.
 
     Filters:
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
         * co_cr (int): Regional Coordination code.
-        * co_funai (int): Indigenous Lands code.
+        * co_funai (list): Indigenous Lands code.
         * start_date (str): filter for start date.
         * end (str): filter for end date.
         * priority (str): priority data.
@@ -45,8 +44,11 @@ class PriorityConsolidatedView(AuthModelMixIn, generics.ListAPIView):
     )
 
 
-class PriorityConsolidatedDetailView(AuthModelMixIn, generics.RetrieveAPIView):
-    """Returns consolidated data from PriorityConsolidated model data."""
+class PriorityConsolidatedDetailView(
+    AuthModelMixIn,
+    generics.RetrieveAPIView
+):
+    """Detail data for `priority_monitoring.PriorityConsolidated`."""
 
     queryset = models.PriorityConsolidated.objects.all()
     serializer_class = serializers.PriorityConsolidatedDetailSerializer
@@ -54,7 +56,7 @@ class PriorityConsolidatedDetailView(AuthModelMixIn, generics.RetrieveAPIView):
 
 
 class PriorityConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
-    """API for listing `models.PriorityConsolidated` total data.
+    """Retrieves `priority_monitoring.PriorityConsolidated` stats data.
 
     Filters:
         * in_bbox (bbox): bounding box
@@ -88,3 +90,11 @@ class PriorityConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
             total=Count('id')
         )
         return response.Response(data, status=status.HTTP_200_OK)
+
+
+class PrioritiesDistinctedListView(AuthModelMixIn, generics.ListAPIView):
+    """Lists `priority` for `priority_monitoring.PriorityConsolidated`."""
+
+    queryset = models.PriorityConsolidated.objects\
+        .order_by('prioridade').distinct('prioridade')
+    serializer_class = serializers.PrioritiesDistinctedListSerializer

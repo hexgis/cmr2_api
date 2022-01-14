@@ -10,6 +10,11 @@ urlpatterns = [
         name='priority-consolidated'
     ),
     path(
+        'consolidated/priorities/',
+        views.PrioritiesDistinctedListView.as_view(),
+        name='priority-consolidated'
+    ),
+    path(
         'consolidated/detail/<int:pk>/',
         views.PriorityConsolidatedDetailView.as_view(),
         name='priority-consolidated-detail'
