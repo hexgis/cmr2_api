@@ -4,6 +4,11 @@ from django_filters import rest_framework
 from priority_monitoring import models
 
 
+class NumberInFilter(rest_framework.BaseInFilter, rest_framework.NumberFilter):
+    """Base class used for creating IN lookup filters to filter numbers."""
+    pass
+
+
 class PriorityConsolidatedFilter(rest_framework.FilterSet):
     """PriorityConsolidatedFilter data.
 
@@ -19,8 +24,9 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
         field_name='co_cr',
     )
 
-    co_funai = rest_framework.NumberFilter(
+    co_funai = NumberInFilter(
         field_name='co_funai',
+        lookup_expr='in',
     )
 
     stage = rest_framework.CharFilter(
