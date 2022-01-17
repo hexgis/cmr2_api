@@ -47,6 +47,7 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
 
     priority = rest_framework.CharFilter(
         field_name='prioridade',
+        lookup_expr='in',
     )
 
     class Meta:
@@ -55,7 +56,7 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
             'no_estagio',
             'start_date',
             'end_date',
-            'prioridade',
+            'priority',
             'co_cr',
             'co_funai'
         )
