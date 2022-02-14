@@ -19,6 +19,7 @@ services:
       && python manage.py loaddata priority_consolidated.yaml
       && python manage.py loaddata coordenacao_regional.yaml
       && python manage.py loaddata terras_indigenas.yaml
+      && python manage.py loaddata fixtures/user.yaml
       && python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/
