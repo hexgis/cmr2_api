@@ -27,6 +27,17 @@ class PriorityConsolidatedSerializer(
 class PrioritiesDistinctedListSerializer(serializers.ModelSerializer):
     """Serializer for `models.PriorityConsolidated.priority` attr data."""
 
+    def to_representation(self, instance) -> str:
+        """Representates model data instance as simple string.
+
+        Args:
+            instance (models.PriorityConsolidated.priority): model data.
+
+        Returns:
+            str: priority name.
+        """
+        return f'{instance.prioridade}'
+
     class Meta:
         """Meta class for `PrioritiesDistinctedListSerializer` serializer."""
         model = models.PriorityConsolidated
