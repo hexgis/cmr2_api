@@ -4,7 +4,15 @@ from django_filters import rest_framework
 from priority_monitoring import models
 
 
-class NumberInFilter(rest_framework.BaseInFilter, rest_framework.NumberFilter):
+class NumberInFilter(
+    rest_framework.BaseInFilter,
+    rest_framework.NumberFilter
+):
+    """Base class used for creating IN lookup filters to filter numbers."""
+    pass
+
+
+class CharInFilter(rest_framework.BaseInFilter, rest_framework.CharFilter):
     """Base class used for creating IN lookup filters to filter numbers."""
     pass
 
@@ -45,12 +53,13 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
         required=True
     )
 
-    priority = rest_framework.CharFilter(
+    priority = CharInFilter(
         field_name='prioridade',
         lookup_expr='in',
     )
 
     class Meta:
+        """Meta class for `PriorityConsolidatedFilter` filter."""
         model = models.PriorityConsolidated
         fields = (
             'no_estagio',
