@@ -87,15 +87,37 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+    'default': { # DEFAULT AMBIENTE DE DESENVOLVIMENTO
+        "ENGINE": 'django.contrib.gis.db.backends.postgis',
         "NAME": os.getenv("DB_NAME") or "cmr2_desenv",
         "USER": os.getenv("DB_USER") or "postgres",
         "PASSWORD": os.getenv("DB_PASSWORD") or "123456",
-        "HOST": os.getenv("DB_HOST") or "localhost",  # '192.168.100.50',
-        'PORT': '5432',
-    }
+        "HOST": os.getenv("DB_HOST") or "localhost",  # '192.168.100.xxx',
+        "PORT": 5432
+    },
+    # 'default': { # DEFAULT AMBIENTE DE HOMOLOGAÇÃO
+    #     "ENGINE": 'django.contrib.gis.db.backends.postgis',
+    #     "NAME": os.getenv("DB_NAME") or "cmr2_homolog",
+    #     "USER": os.getenv("DB_USER") or "postgres",
+    #     "PASSWORD": os.getenv("DB_PASSWORD") or "123456",
+    #     "HOST": os.getenv("DB_HOST") or "localhost",  # '192.168.100.xxx',
+    #     "PORT": 5432
+    # },
+    'ProirityRouter': {
+        "ENGINE": 'django.contrib.gis.db.backends.postgis',
+        "NAME": os.getenv("DB_NAME_PRIORITY") or "cmr2_desenv",
+        "USER": os.getenv("DB_USER_PRIORITY") or "postgres",
+        "PASSWORD": os.getenv("DB_PASSWORD_PRIORITY") or "123456",
+        "HOST": os.getenv("DB_HOST_PRIORITY") or "localhost",  # '192.168.100.xxx',
+        "PORT": 5433
+    },
 }
+
+DATABASE_ROUTERS = [
+    'database_routers.ProirityRouter', 
+    # 'database_routers.HomologRouter', 
+    'database_routers.DevRouter'
+]
 
 # Default auto field
 # https://docs.djangoproject.com/en/3.2/releases/3.2/#customizing-type-of-auto-created-primary-keys
