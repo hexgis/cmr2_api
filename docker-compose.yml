@@ -13,7 +13,7 @@ services:
     environment:
       POSTGRES_USER: user
       POSTGRES_DB: database
-      POSTGRES_PASSWORD: passoword
+      POSTGRES_PASSWORD: asdfsa
 
   dev:
     build:
@@ -37,37 +37,14 @@ services:
       DB_NAME: testdb
       DB_PASSWORD: testpassword
       DB_HOST: db
+      DB_USER_PRIORITY: user
+      DB_NAME_PRIORITY: database
+      DB_PASSWORD_PRIORITY: asdfsa
+      DB_HOST_PRIORITY: db_priority
       PORT: 8080
     depends_on:
       - db
-
-  homolog:
-    build:
-      context: .
-      dockerfile: ./Dockerfile-dev
-    command: >
-      bash -c "python manage.py makemigrations --no-input
-      && python manage.py migrate
-      && python manage.py loaddata support.yaml
-      && python manage.py loaddata priority_consolidated.yaml
-      && python manage.py loaddata coordenacao_regional.yaml
-      && python manage.py loaddata terras_indigenas.yaml
-      && python manage.py loaddata fixtures/user.yaml
-      && python manage.py runserver 0.0.0.0:8080"
-    volumes:
-      - .:/app/
-    ports:
-      - "8080:8080"
-    environment:
-      DB_USER: defaultuser
-      DB_NAME: testdb
-      DB_PASSWORD: testpassword
-      DB_HOST: # '192.168.100.xxx'
-      DB_USER_PRIORITY: user
-      DB_NAME_PRIORITY: cmr2_homolog
-      DB_PASSWORD_PRIORITY: passoword
-      DB_HOST_PRIORITY: # '192.168.100.xxx'
-      PORT: 8080
+      - db_priority
 
   test:
     build:

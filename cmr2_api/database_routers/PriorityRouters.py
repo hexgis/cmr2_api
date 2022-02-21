@@ -7,9 +7,6 @@ class PriorityRouters:
         return None
 
     def db_for_write(self, model, **hints):
-        # if model._meta.app_label in self.route_app_labels:
-        #     return 'ProirityRouter'
-        # return None
         return False
 
     def allow_relation(self, obj1, obj2, **hints):

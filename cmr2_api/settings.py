@@ -87,36 +87,26 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
 DATABASES = {
-    'default': { # DEFAULT AMBIENTE DE DESENVOLVIMENTO
+    'default': {
         "ENGINE": 'django.contrib.gis.db.backends.postgis',
-        "NAME": os.getenv("DB_NAME") or "cmr2_desenv",
-        "USER": os.getenv("DB_USER") or "postgres",
-        "PASSWORD": os.getenv("DB_PASSWORD") or "123456",
-        "HOST": os.getenv("DB_HOST") or "localhost",  # '192.168.100.xxx',
-        "PORT": 5432
+        "NAME": os.getenv("DB_NAME"),
+        "USER": os.getenv("DB_USER"),
+        "PASSWORD": os.getenv("DB_PASSWORD"),
+        "HOST": os.getenv("DB_HOST"),
+        "PORT": os.getenv("DB_PORT", 5432),
     },
-    # 'default': { # DEFAULT AMBIENTE DE HOMOLOGAÇÃO
-    #     "ENGINE": 'django.contrib.gis.db.backends.postgis',
-    #     "NAME": os.getenv("DB_NAME") or "cmr2_homolog",
-    #     "USER": os.getenv("DB_USER") or "postgres",
-    #     "PASSWORD": os.getenv("DB_PASSWORD") or "123456",
-    #     "HOST": os.getenv("DB_HOST") or "localhost",  # '192.168.100.xxx',
-    #     "PORT": 5432
-    # },
-    'ProirityRouter': {
+    'priority_database': {
         "ENGINE": 'django.contrib.gis.db.backends.postgis',
-        "NAME": os.getenv("DB_NAME_PRIORITY") or "cmr2_desenv",
-        "USER": os.getenv("DB_USER_PRIORITY") or "postgres",
-        "PASSWORD": os.getenv("DB_PASSWORD_PRIORITY") or "123456",
-        "HOST": os.getenv("DB_HOST_PRIORITY") or "localhost",  # '192.168.100.xxx',
-        "PORT": 5433
+        "NAME": os.getenv("DB_NAME_PRIORITY"),
+        "USER": os.getenv("DB_USER_PRIORITY"),
+        "PASSWORD": os.getenv("DB_PASSWORD_PRIORITY"),
+        "HOST": os.getenv("DB_HOST_PRIORITY"),
+        "PORT": os.getenv("DB_PORT_PRIORITY", 5432), 
     },
 }
 
 DATABASE_ROUTERS = [
-    'database_routers.ProirityRouter', 
-    # 'database_routers.HomologRouter', 
-    'database_routers.DevRouter'
+    'database_routers.PriorityRouter',
 ]
 
 # Default auto field
