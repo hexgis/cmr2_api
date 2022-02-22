@@ -19,14 +19,6 @@
     layers_group: 1
     active_on_init: false
 - model: support.layer
-  pk: 2
-  fields:
-    name: Teste
-    order: 101
-    layer_type: wms
-    layers_group: 1
-    active_on_init: false
-- model: support.layer
   pk: 3
   fields:
     name: Terra Indígena em Estudo

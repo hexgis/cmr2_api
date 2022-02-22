@@ -11,6 +11,7 @@ class PriorityConsolidatedSerializer(
     """Serializer for `models.PriorityConsolidated` data."""
 
     class Meta:
+        """Meta class for `PriorityConsolidatedSerializer` serializer."""
         model = models.PriorityConsolidated
         geo_field = 'geom'
         id_field = False
@@ -26,10 +27,19 @@ class PriorityConsolidatedSerializer(
 class PrioritiesDistinctedListSerializer(serializers.ModelSerializer):
     """Serializer for `models.PriorityConsolidated.priority` attr data."""
 
-    def to_representation(self, instance):
+    def to_representation(self, instance) -> str:
+        """Representates model data instance as simple string.
+
+        Args:
+            instance (models.PriorityConsolidated.priority): model data.
+
+        Returns:
+            str: priority name.
+        """
         return f'{instance.prioridade}'
 
     class Meta:
+        """Meta class for `PrioritiesDistinctedListSerializer` serializer."""
         model = models.PriorityConsolidated
         id_field = False
         fields = (
@@ -41,6 +51,7 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
     """Serializer for detailed `models.PriorityConsolidated` data."""
 
     class Meta:
+        """Meta class for `PriorityConsolidatedDetailSerializer` serializer."""
         model = models.PriorityConsolidated
         id_field = False
         fields = (

@@ -29,6 +29,7 @@ RUN apt install gdal-bin libgdal-dev python-dev -y
 
 # Install python pip requirements
 RUN python -m pip install --upgrade pip
+RUN pip install setuptools==58.0 # fixing use_2to3_fixers error
 RUN pip uninstall gdal -y
 RUN pip install numpy
 RUN pip install gdal==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal"

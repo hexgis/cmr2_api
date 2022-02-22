@@ -1,16 +1,14 @@
+from django.db.models import Sum, Count
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework_gis import filters as gis_filters
 from rest_framework import (
     generics, filters, response, permissions, status
 )
 
-from rest_framework_gis import filters as gis_filters
-
-from django.db.models import Sum, Count
-from django_filters.rest_framework import DjangoFilterBackend
-
 from priority_monitoring import(
     serializers,
     models,
-    filters as filters_priority
+    filters as priority_filters
 )
 
 
@@ -34,7 +32,7 @@ class PriorityConsolidatedView(AuthModelMixIn, generics.ListAPIView):
 
     queryset = models.PriorityConsolidated.objects.all()
     serializer_class = serializers.PriorityConsolidatedSerializer
-    filterset_class = filters_priority.PriorityConsolidatedFilter
+    filterset_class = priority_filters.PriorityConsolidatedFilter
     ordering_fields = ('prioridade', 'nome_estagio')
     bbox_filter_field = 'geom'
     filter_backends = (
@@ -69,7 +67,7 @@ class PriorityConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
     """
     queryset = models.PriorityConsolidated.objects.all()
     serializer_class = serializers.PriorityConsolidatedSerializer
-    filterset_class = filters_priority.PriorityConsolidatedFilter
+    filterset_class = priority_filters.PriorityConsolidatedFilter
     bbox_filter_field = 'geom'
     filter_backends = (
         gis_filters.InBBoxFilter,
@@ -94,7 +92,6 @@ class PriorityConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
 
 class PrioritiesDistinctedListView(AuthModelMixIn, generics.ListAPIView):
     """Lists `priority` for `priority_monitoring.PriorityConsolidated`."""
-
-    queryset = models.PriorityConsolidated.objects\
-        .order_by('prioridade').distinct('prioridade')
+    queryset = models.PriorityConsolidated.objects.order_by(
+        'prioridade').distinct('prioridade')
     serializer_class = serializers.PrioritiesDistinctedListSerializer

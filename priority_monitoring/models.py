@@ -183,15 +183,16 @@ class PriorityConsolidated(models.Model):
     )
 
     class Meta:
+        """Meta class for `priority_monitoring.PriorityConsolidated` model."""
         app_label = 'priority_monitoring'
-        verbose_name = 'PriorityConsolidated'
-        verbose_name_plural = 'PrioritysConsolidated'
-        ordering = ["-dt_t0", "ranking", "no_estagio"]
+        verbose_name = 'Priority Consolidated'
+        verbose_name_plural = 'Priority Consolidated'
+        ordering = ('-dt_t0', 'ranking', 'no_estagio')
 
     def __str__(self):
-        """Returns a string class based name.
+        """Returns `priority_monitoring.PriorityConsolidated` string data.
 
         Returns:
-            str: model data named.
+            str: model data name.
         """
         return f'{self.dt_t0} - {self.dt_t1}'
