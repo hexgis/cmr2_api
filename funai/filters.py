@@ -15,6 +15,7 @@ class LimiteTerraIndigenaFilter(rest_framework.FilterSet):
     )
 
     class Meta:
+        """Metaclass to `funai.LimiteTerraIndigenaFilter`."""
         model = models.LimiteTerraIndigena
         fields = (
             'co_cr',

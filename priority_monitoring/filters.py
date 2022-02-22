@@ -1,4 +1,3 @@
-#from django.db.models import fields
 from django_filters import rest_framework
 
 from priority_monitoring import models
@@ -55,7 +54,7 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
 
     priority = CharInFilter(
         field_name='prioridade',
-        #lookup_expr='in',
+        lookup_expr='in',
     )
 
     class Meta:

@@ -4,6 +4,8 @@ from priority_monitoring import models
 
 
 class PriorityConsolidatedAdmin(admin.ModelAdmin):
+    """PriorityConsolidatedAdmin model data."""
+
     list_display = (
         'id_tb',
         'no_estagio',

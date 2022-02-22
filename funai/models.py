@@ -89,6 +89,7 @@ class CoordenacaoRegional(models.Model):
     )
 
     class Meta:
+        """Metaclass to `funai.CoordenacaoRegional`."""
         app_label = 'funai'
         verbose_name = 'CoordenacaoRegional'
         verbose_name_plural = 'CoordenacoesRegionais'
@@ -183,6 +184,7 @@ class LimiteTerraIndigena(models.Model):
     )
 
     class Meta:
+        """Metaclass to `funai.LimiteTerraIndigena`."""
         app_label = 'funai'
         verbose_name = _('Indigenous Lands')
         verbose_name_plural = _('Indigenous Lands')
