@@ -1,0 +1,639 @@
+- model: support.geoserver
+  pk: 1
+  fields:
+    name: Funai Geoserver
+    wms_url: http://cmr.funai.gov.br/geoserver/ows?
+    preview_url: http://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+- model: support.layersgroup
+  pk: 1
+  fields:
+    name: Camadas de Apoio
+    order: 50
+    icon: layers
+- model: support.layersgroup
+  pk: 3
+  fields:
+    name: Alta Resolução
+    order: 2
+    icon: layers
+- model: support.layersgroup
+  pk: 4
+  fields:
+    name: Mosaicos
+    order: 3
+    icon: layers
+- model: support.layersgroup
+  pk: 5
+  fields:
+    name: Dados de Foco de Calor e Risco de Fogo
+    order: 4
+    icon: layers
+- model: support.layer
+  pk: 1
+  fields:
+    name: Terras Indígenas
+    order: 102
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 2
+  fields:
+    name: Teste
+    order: 101
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 3
+  fields:
+    name: Terra Indígena em Estudo
+    order: 100
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 4
+  fields:
+    name: Buffer de TI  (10 Km)
+    order: 99
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 5
+  fields:
+    name: Buffer de TI (6 Km)
+    order: 98
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 6
+  fields:
+    name: Aldeias Indígenas
+    order: 97
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 7
+  fields:
+    name: Coordenações Regionais
+    order: 96
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 8
+  fields:
+    name: Unidades Federativas
+    order: 95
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 9
+  fields:
+    name: Áreas Municipais
+    order: 94
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 10
+  fields:
+    name: Amazônia Legal
+    order: 93
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 11
+  fields:
+    name: Semiárido
+    order: 92
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 12
+  fields:
+    name: veg_biomas_a
+    order: 91
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 13
+  fields:
+    name: Unidades de Conservação Federal
+    order: 90
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 14
+  fields:
+    name: Áreas Quilombolas
+    order: 89
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 15
+  fields:
+    name: Assentamentos Rurais
+    order: 88
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 16
+  fields:
+    name: CAR
+    order: 87
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 17
+  fields:
+    name: Imóveis Certificados Privados (SNCI)
+    order: 86
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 18
+  fields:
+    name: Imóveis Certificados Públicos (SNCI)
+    order: 85
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 19
+  fields:
+    name: Imóveis Certificados Privados (SIGEF)
+    order: 84
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 20
+  fields:
+    name: Imóveis Certificados Públicos (SIGEF)
+    order: 83
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 21
+  fields:
+    name: Trechos Rodoviários
+    order: 82
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 22
+  fields:
+    name: Trechos de Drenagem
+    order: 81
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 23
+  fields:
+    name: Faixa de Fronteira
+    order: 80
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 24
+  fields:
+    name: Antenas VSAT
+    order: 79
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 25
+  fields:
+    name: Grade SENTINEL-2
+    order: 78
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 26
+  fields:
+    name: Grade LANDSAT
+    order: 77
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 27
+  fields:
+    name: Dados Sigmine
+    order: 76
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 28
+  fields:
+    name: Comitês de Bacias Hidrográficas Estaduais
+    order: 75
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 29
+  fields:
+    name: Unidades de Gestão de Recursos Hídricos
+    order: 74
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.wmslayer
+  pk: 1
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_terra_indigena_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: false
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 2
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: test_Name
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 3
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: loc_terra_indigena_estudo_p
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 4
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_buffer_10km_recorte_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 5
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_buffer_6km_recorte_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 6
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: loc_aldeia_indigena_p
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: false
+    default_opacity: null
+- model: support.wmslayer
+  pk: 7
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: loc_coordenacao_regional_p
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 8
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_unidade_federacao_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 9
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_municipio_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 10
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_amazonia_legal_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 11
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_semiarido_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 12
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: Biomas
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 13
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_unidade_conservacao_federal_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 14
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_quilombolas_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 15
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_assentamento_rural_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 16
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_imovel_car_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 17
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: vw_lim_imovel_certificado_privado_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 18
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: vw_lim_imovel_certificado_publico_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 19
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: vw_lim_imovel_certificado_sigef_privado_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 20
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: vw_lim_imovel_certificado_sigef_publico_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 21
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: tra_trecho_rodoviario_l
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 22
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: hid_trecho_drenagem_ti_l
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 23
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_faixa_de_fronteira_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 24
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: loc_antenas_vsat_p
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 25
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: img_grade_sentinel2_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 26
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: img_grade_landsat_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 27
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: lim_sigmine_ti_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 28
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: hid_comites_de_bacias_estaduais_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null
+- model: support.wmslayer
+  pk: 29
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: hid_ugrh_a
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: true
+    has_opacity: true
+    default_opacity: null

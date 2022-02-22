@@ -47,7 +47,7 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
 
     priority = rest_framework.CharFilter(
         field_name='prioridade',
-        lookup_expr='in',
+        #lookup_expr='in',
     )
 
     class Meta:
