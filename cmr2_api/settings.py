@@ -88,20 +88,20 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 
 DATABASES = {
     'default': {
-        "ENGINE": 'django.contrib.gis.db.backends.postgis',
-        "NAME": os.getenv("DB_NAME"),
-        "USER": os.getenv("DB_USER"),
-        "PASSWORD": os.getenv("DB_PASSWORD"),
-        "HOST": os.getenv("DB_HOST"),
-        "PORT": os.getenv("DB_PORT", 5432),
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', 5432)
     },
     'priority_database': {
-        "ENGINE": 'django.contrib.gis.db.backends.postgis',
-        "NAME": os.getenv("DB_NAME_PRIORITY"),
-        "USER": os.getenv("DB_USER_PRIORITY"),
-        "PASSWORD": os.getenv("DB_PASSWORD_PRIORITY"),
-        "HOST": os.getenv("DB_HOST_PRIORITY"),
-        "PORT": os.getenv("DB_PORT_PRIORITY", 5432), 
+        'ENGINE': 'django.contrib.gis.db.backends.postgis',
+        'NAME': os.getenv('DB_NAME_PRIORITY'),
+        'USER': os.getenv('DB_USER_PRIORITY'),
+        'PASSWORD': os.getenv('DB_PASSWORD_PRIORITY'),
+        'HOST': os.getenv('DB_HOST_PRIORITY'),
+        'PORT': os.getenv('DB_PORT_PRIORITY', 5432)
     },
 }
 
