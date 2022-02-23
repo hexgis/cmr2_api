@@ -106,7 +106,7 @@ DATABASES = {
 }
 
 DATABASE_ROUTERS = [
-    'database_routers.PriorityRouter',
+    'cmr2_api.database_routers.PriorityRouters.PriorityRouter'
 ]
 
 # Default auto field

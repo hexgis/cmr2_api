@@ -1,4 +1,4 @@
-class PriorityRouters:
+class PriorityRouter:
     route_app_labels = {'priority_monitoring'}
 
     def db_for_read(self, model, **hints):
