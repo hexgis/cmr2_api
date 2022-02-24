@@ -1,0 +1,8 @@
+steps:
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build', '--no-cache','-t',
+          'gcr.io/${PROJECT_ID}/cmr-api/application-cmr-api-v2:latest',
+          '.', '-f', './compose/docker/Dockerfile']
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['push',
+          'gcr.io/${PROJECT_ID}/cmr-api/application-cmr-api-v2:latest']
