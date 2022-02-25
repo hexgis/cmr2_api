@@ -1,4 +1,3 @@
-#from django.db.models import fields
 from django_filters import rest_framework
 
 from priority_monitoring import models
@@ -13,7 +12,7 @@ class NumberInFilter(
 
 
 class CharInFilter(rest_framework.BaseInFilter, rest_framework.CharFilter):
-    """Base class used for creating IN lookup filters to filter numbers."""
+    """Base class used for creating IN lookup filters to filter characters."""
     pass
 
 

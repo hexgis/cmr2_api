@@ -28,13 +28,12 @@ class ChangePassword(views.APIView):
 
         old_password = request.data['oldPassword']
         new_password1 = request.data['newPassword1']
-        user = request.user
 
-        if user.check_password(old_password):
-            user.set_password(new_password1)
-            user.save()
+        if request.user.check_password(old_password):
+            request.user.set_password(new_password1)
+            request.user.save()
 
-            refresh = RefreshToken.for_user(user)
+            refresh = RefreshToken.for_user(request.user)
 
             return response.Response({
                 'refresh': str(refresh),
@@ -43,7 +42,6 @@ class ChangePassword(views.APIView):
         else:
             message = _('Incorrect password.')
 
-        error_response = response.Response(
+        return response.Response(
             {'message': message}, status=status.HTTP_400_BAD_REQUEST
         )
-        return error_response

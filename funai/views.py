@@ -5,7 +5,6 @@ from funai import(
     serializers,
     models,
     filters as filters_funai
-
 )
 
 

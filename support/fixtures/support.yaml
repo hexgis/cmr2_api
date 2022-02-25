@@ -10,11 +10,37 @@
     name: Camadas de Apoio
     order: 50
     icon: layers
+- model: support.layersgroup
+  pk: 3
+  fields:
+    name: Alta Resolução
+    order: 2
+    icon: layers
+- model: support.layersgroup
+  pk: 4
+  fields:
+    name: Mosaicos
+    order: 3
+    icon: layers
+- model: support.layersgroup
+  pk: 5
+  fields:
+    name: Dados de Foco de Calor e Risco de Fogo
+    order: 4
+    icon: layers
 - model: support.layer
   pk: 1
   fields:
     name: Terras Indígenas
     order: 102
+    layer_type: wms
+    layers_group: 1
+    active_on_init: false
+- model: support.layer
+  pk: 2
+  fields:
+    name: Teste
+    order: 101
     layer_type: wms
     layers_group: 1
     active_on_init: false
@@ -244,7 +270,7 @@
     geoserver_layer_name: lim_terra_indigena_a
     geoserver_layer_namespace: CMR-PUBLICO
     geoserver_layer_options: null
-    queryable: true
+    queryable: false
     has_opacity: true
     default_opacity: null
 - model: support.wmslayer
@@ -310,7 +336,7 @@
     geoserver_layer_namespace: CMR-PUBLICO
     geoserver_layer_options: null
     queryable: true
-    has_opacity: true
+    has_opacity: false
     default_opacity: null
 - model: support.wmslayer
   pk: 7

@@ -4,10 +4,11 @@ from rest_framework.serializers import ModelSerializer
 from funai import models
 
 
-class LimiteTerraIndigenaSerializer (ModelSerializer):
-    """LimiteTerraIndigenaSerializer data"""
+class LimiteTerraIndigenaSerializer(ModelSerializer):
+    """LimiteTerraIndigenaSerializer data."""
 
     class Meta:
+        """Metaclass to `funai.LimiteTerraIndigenaSerializer`."""
         model = models.LimiteTerraIndigena
         fields = (
             'co_funai',
@@ -15,8 +16,10 @@ class LimiteTerraIndigenaSerializer (ModelSerializer):
         )
 
 
-class CoordenacaoRegionalSerializer (ModelSerializer):
+class CoordenacaoRegionalSerializer(ModelSerializer):
+    """CoordenacaoRegionalSerializer model data."""
     class Meta:
+        """Metaclass to `funai.CoordenacaoRegionalSerializer`."""
         model = models.CoordenacaoRegional
         fields = (
             'co_cr',
