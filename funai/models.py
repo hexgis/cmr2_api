@@ -12,7 +12,7 @@ class CoordenacaoRegional(models.Model):
         default=1
     )
 
-    no_cr = models.CharField(
+    ds_cr = models.CharField(
         _('Regional Coordenation name'),
         max_length=255,
         blank=True,
@@ -93,7 +93,7 @@ class CoordenacaoRegional(models.Model):
         app_label = 'funai'
         verbose_name = 'CoordenacaoRegional'
         verbose_name_plural = 'CoordenacoesRegionais'
-        ordering = ('no_cr', )
+        ordering = ('ds_cr', )
 
     def __str__(self) -> str:
         """Returns string for class based name.
@@ -101,7 +101,7 @@ class CoordenacaoRegional(models.Model):
         Returns:
             str: string for model data
         """
-        return f'{self.co_cr} - {self.no_cr}'
+        return f'{self.co_cr} - {self.ds_cr}'
 
 
 class LimiteTerraIndigena(models.Model):

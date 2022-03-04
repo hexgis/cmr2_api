@@ -2,7 +2,7 @@
   pk: 16420
   fields:
     co_cr: 30202001934
-    no_cr: "COORDENACAO REGIONAL DE CACOAL"
+    ds_cr: "COORDENACAO REGIONAL DE CACOAL"
     no_abreviado: "C.R. DE CACOAL"
     sg_cr: "CR-CAC"
     st_situacao: "Ativo"
@@ -17,7 +17,7 @@
   pk: 16421
   fields:
     co_cr: 30202001941
-    no_cr: "COORDENACAO REGIONAL DE GUAJARA MIRIM"
+    ds_cr: "COORDENACAO REGIONAL DE GUAJARA MIRIM"
     no_abreviado: "C.R. DE GUAJARA MIRIM"
     sg_cr: "CR-GJM"
     st_situacao: "Ativo"
@@ -32,7 +32,7 @@
   pk: 16422
   fields:
     co_cr: 30202001852
-    no_cr: "COORDENACAO REGIONAL DO JURUÁ"
+    ds_cr: "COORDENACAO REGIONAL DO JURUÁ"
     no_abreviado: "C.R. DO JURUÁ"
     sg_cr: "CR-JUR"
     st_situacao: "Ativo"
@@ -47,7 +47,7 @@
   pk: 16423
   fields:
     co_cr: 30202001845
-    no_cr: "COORDENACAO REGIONAL ALTO PURUS"
+    ds_cr: "COORDENACAO REGIONAL ALTO PURUS"
     no_abreviado: "C.R. ALTO PURUS"
     sg_cr: "CR-Apur"
     st_situacao: "Ativo"
@@ -62,7 +62,7 @@
   pk: 16424
   fields:
     co_cr: 30202002074
-    no_cr: "COORDENACAO REGIONAL LITORAL SUDESTE"
+    ds_cr: "COORDENACAO REGIONAL LITORAL SUDESTE"
     no_abreviado: "C.R. LITORAL SUDESTE"
     sg_cr: "CR-LISE"
     st_situacao: "Ativo"
@@ -77,7 +77,7 @@
   pk: 16425
   fields:
     co_cr: 30202001892
-    no_cr: "COORDENACAO REGIONAL DO VALE DO JAVARI"
+    ds_cr: "COORDENACAO REGIONAL DO VALE DO JAVARI"
     no_abreviado: "C.R. DO VALE DO JAVARI"
     sg_cr: "CR-VJ"
     st_situacao: "Ativo"
@@ -92,7 +92,7 @@
   pk: 16426
   fields:
     co_cr: 30202001871
-    no_cr: "COORDENACAO REGIONAL DE MANAUS"
+    ds_cr: "COORDENACAO REGIONAL DE MANAUS"
     no_abreviado: "C.R. DE MANAUS"
     sg_cr: "CR-MAO"
     st_situacao: "Ativo"
@@ -107,7 +107,7 @@
   pk: 16427
   fields:
     co_cr: 30202001864
-    no_cr: "COORDENACAO REGIONAL MADEIRA"
+    ds_cr: "COORDENACAO REGIONAL MADEIRA"
     no_abreviado: "C.R. MADEIRA"
     sg_cr: "CR-MAD"
     st_situacao: "Ativo"
@@ -122,7 +122,7 @@
   pk: 16428
   fields:
     co_cr: 30202001857
-    no_cr: "COORDENACAO REGIONAL DO ALTO SOLIMOES"
+    ds_cr: "COORDENACAO REGIONAL DO ALTO SOLIMOES"
     no_abreviado: "C.R. DO ALTO SOLIMOES"
     sg_cr: "CR-AS"
     st_situacao: "Ativo"
@@ -137,7 +137,7 @@
   pk: 16429
   fields:
     co_cr: 30202001955
-    no_cr: "COORDENACAO REGIONAL RORAIMA"
+    ds_cr: "COORDENACAO REGIONAL RORAIMA"
     no_abreviado: "C.R. RORAIMA"
     sg_cr: "CR-RR"
     st_situacao: "Ativo"
@@ -152,7 +152,7 @@
   pk: 16430
   fields:
     co_cr: 30202001913
-    no_cr: "COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ"
+    ds_cr: "COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ"
     no_abreviado: "C.R. CENTRO-LESTE DO PARÁ"
     sg_cr: "CR-CLPA"
     st_situacao: "Ativo"
@@ -167,7 +167,7 @@
   pk: 16431
   fields:
     co_cr: 30202001927
-    no_cr: "COORDENACAO REGIONAL DE TAPAJOS"
+    ds_cr: "COORDENACAO REGIONAL DE TAPAJOS"
     no_abreviado: "C.R. DE TAPAJOS"
     sg_cr: "CR-TPJ"
     st_situacao: "Ativo"
@@ -182,7 +182,7 @@
   pk: 16432
   fields:
     co_cr: 30202001962
-    no_cr: "COORDENACAO REGIONAL ARAGUAIA TOCANTINS"
+    ds_cr: "COORDENACAO REGIONAL ARAGUAIA TOCANTINS"
     no_abreviado: "C.R. ARAGUAIA TOCANTINS"
     sg_cr: "CR-ATO"
     st_situacao: "Ativo"
@@ -197,7 +197,7 @@
   pk: 16433
   fields:
     co_cr: 30202001997
-    no_cr: "COORDENACAO REGIONAL MARANHÃO"
+    ds_cr: "COORDENACAO REGIONAL MARANHÃO"
     no_abreviado: "C.R. MARANHÃO"
     sg_cr: "CR-MA"
     st_situacao: "Ativo"
@@ -212,7 +212,7 @@
   pk: 16434
   fields:
     co_cr: 30202002088
-    no_cr: "COORDENACAO REGIONAL INTERIOR SUL"
+    ds_cr: "COORDENACAO REGIONAL INTERIOR SUL"
     no_abreviado: "C.R. INTERIOR SUL"
     sg_cr: "CR-INTS"
     st_situacao: "Ativo"
@@ -227,7 +227,7 @@
   pk: 16435
   fields:
     co_cr: 30202002095
-    no_cr: "COORDENACAO REGIONAL LITORAL SUL"
+    ds_cr: "COORDENACAO REGIONAL LITORAL SUL"
     no_abreviado: "C.R. LITORAL SUL"
     sg_cr: "CR-LIS"
     st_situacao: "Ativo"
@@ -242,7 +242,7 @@
   pk: 16436
   fields:
     co_cr: 30202001976
-    no_cr: "COORDENACAO REGIONAL NORDESTE II"
+    ds_cr: "COORDENACAO REGIONAL NORDESTE II"
     no_abreviado: "C.R. NORDESTE II"
     sg_cr: "CR-NE-II"
     st_situacao: "Ativo"
@@ -257,7 +257,7 @@
   pk: 16437
   fields:
     co_cr: 30202002018
-    no_cr: "COORDENACAO REGIONAL DE PONTA PORA"
+    ds_cr: "COORDENACAO REGIONAL DE PONTA PORA"
     no_abreviado: "C.R. DE PONTA PORA"
     sg_cr: "CR-PP"
     st_situacao: "Ativo"
@@ -272,7 +272,7 @@
   pk: 16438
   fields:
     co_cr: 30202002053
-    no_cr: "COORDENACAO REGIONAL XAVANTE"
+    ds_cr: "COORDENACAO REGIONAL XAVANTE"
     no_abreviado: "C.R. XAVANTE"
     sg_cr: "CR-XAV"
     st_situacao: "Ativo"
@@ -287,7 +287,7 @@
   pk: 16439
   fields:
     co_cr: 30202002039
-    no_cr: "COORDENACAO REGIONAL NORTE DO MATO GROSSO"
+    ds_cr: "COORDENACAO REGIONAL NORTE DO MATO GROSSO"
     no_abreviado: "C.R. NORTE DO MATO GROSSO"
     sg_cr: "CR-NMT"
     st_situacao: "Ativo"
@@ -302,7 +302,7 @@
   pk: 16440
   fields:
     co_cr: 30202002025
-    no_cr: "COORDENACAO REGIONAL DE CUIABA"
+    ds_cr: "COORDENACAO REGIONAL DE CUIABA"
     no_abreviado: "C.R. DE CUIABA"
     sg_cr: "CR-CGB"
     st_situacao: "Ativo"
@@ -317,7 +317,7 @@
   pk: 16441
   fields:
     co_cr: 30202002032
-    no_cr: "COORDENACAO REGIONAL NOROESTE DO MATO GROSSO"
+    ds_cr: "COORDENACAO REGIONAL NOROESTE DO MATO GROSSO"
     no_abreviado: "C.R. NOROESTE DO MATO GROSSO"
     sg_cr: "CR-NOMT"
     st_situacao: "Ativo"
@@ -332,7 +332,7 @@
   pk: 16442
   fields:
     co_cr: 30202002046
-    no_cr: "COORDENACAO REGIONAL RIBEIRAO CASCALHEIRA"
+    ds_cr: "COORDENACAO REGIONAL RIBEIRAO CASCALHEIRA"
     no_abreviado: "C.R. RIBEIRAO CASCALHEIRA"
     sg_cr: "CR-RC"
     st_situacao: "Ativo"
@@ -347,7 +347,7 @@
   pk: 16443
   fields:
     co_cr: 30202001983
-    no_cr: "COORDENACAO REGIONAL BAIXO SÃO FRANCISCO"
+    ds_cr: "COORDENACAO REGIONAL BAIXO SÃO FRANCISCO"
     no_abreviado: "C.R. BAIXO SÃO FRANCISCO"
     sg_cr: "CR-BSF"
     st_situacao: "Ativo"
@@ -362,7 +362,7 @@
   pk: 16444
   fields:
     co_cr: 30202002067
-    no_cr: "COORDENACAO REGIONAL DE MINAS GERAIS E ESPIRITO SANTO"
+    ds_cr: "COORDENACAO REGIONAL DE MINAS GERAIS E ESPIRITO SANTO"
     no_abreviado: "C.R. DE MINAS GERAIS E ESPIRITO SANTO"
     sg_cr: "CR-MGES"
     st_situacao: "Ativo"
@@ -377,7 +377,7 @@
   pk: 16445
   fields:
     co_cr: 30202002408
-    no_cr: "COORDENACAO REGIONAL DE GUARAPUAVA"
+    ds_cr: "COORDENACAO REGIONAL DE GUARAPUAVA"
     no_abreviado: "C.R. DE GUARAPUAVA"
     sg_cr: "CR-GPV"
     st_situacao: "Ativo"
@@ -392,7 +392,7 @@
   pk: 16446
   fields:
     co_cr: 30202002081
-    no_cr: "COORDENACAO REGIONAL DE PASSO FUNDO"
+    ds_cr: "COORDENACAO REGIONAL DE PASSO FUNDO"
     no_abreviado: "C.R. DE PASSO FUNDO"
     sg_cr: "CR-PFD"
     st_situacao: "Ativo"
@@ -407,7 +407,7 @@
   pk: 16447
   fields:
     co_cr: 30202002004
-    no_cr: "COORDENACAO REGIONAL CAMPO GRANDE"
+    ds_cr: "COORDENACAO REGIONAL CAMPO GRANDE"
     no_abreviado: "C.R. CAMPO GRANDE"
     sg_cr: "CR-CGR"
     st_situacao: "Ativo"
@@ -422,7 +422,7 @@
   pk: 16448
   fields:
     co_cr: 30202002011
-    no_cr: "COORDENACAO REGIONAL DOURADOS"
+    ds_cr: "COORDENACAO REGIONAL DOURADOS"
     no_abreviado: "C.R. DOURADOS"
     sg_cr: "CR-DOU"
     st_situacao: "Ativo"
@@ -437,7 +437,7 @@
   pk: 16449
   fields:
     co_cr: 30202002060
-    no_cr: "COORDENACAO REGIONAL XINGU"
+    ds_cr: "COORDENACAO REGIONAL XINGU"
     no_abreviado: "C.R. XINGU"
     sg_cr: "CR-XIN"
     st_situacao: "Ativo"
@@ -452,7 +452,7 @@
   pk: 16450
   fields:
     co_cr: 30202001948
-    no_cr: "COORDENACAO REGIONAL DE JI PARANA"
+    ds_cr: "COORDENACAO REGIONAL DE JI PARANA"
     no_abreviado: "C.R. DE JI PARANA"
     sg_cr: "CR-JPR"
     st_situacao: "Ativo"
@@ -467,7 +467,7 @@
   pk: 16451
   fields:
     co_cr: 30202001878
-    no_cr: "COORDENACAO REGIONAL MÉDIO PURUS"
+    ds_cr: "COORDENACAO REGIONAL MÉDIO PURUS"
     no_abreviado: "C.R. MÉDIO PURUS"
     sg_cr: "CR-Mpur"
     st_situacao: "Ativo"
@@ -482,7 +482,7 @@
   pk: 16452
   fields:
     co_cr: 30202001885
-    no_cr: "COORDENACAO REGIONAL DO RIO NEGRO"
+    ds_cr: "COORDENACAO REGIONAL DO RIO NEGRO"
     no_abreviado: "C.R. DO RIO NEGRO"
     sg_cr: "CR-RNG"
     st_situacao: "Ativo"
@@ -497,7 +497,7 @@
   pk: 16453
   fields:
     co_cr: 30202001906
-    no_cr: "COORDENACAO REGIONAL DO BAIXO TOCANTINS"
+    ds_cr: "COORDENACAO REGIONAL DO BAIXO TOCANTINS"
     no_abreviado: "C.R. DO BAIXO TOCANTINS"
     sg_cr: "CR-BTO"
     st_situacao: "Ativo"
@@ -512,7 +512,7 @@
   pk: 16454
   fields:
     co_cr: 30202001920
-    no_cr: "COORDENACAO REGIONAL KAYAPÓ SUL DO PARÁ"
+    ds_cr: "COORDENACAO REGIONAL KAYAPÓ SUL DO PARÁ"
     no_abreviado: "C.R. KAYAPÓ SUL DO PARÁ"
     sg_cr: "CR-KSPA"
     st_situacao: "Ativo"
@@ -527,7 +527,7 @@
   pk: 16455
   fields:
     co_cr: 30202001899
-    no_cr: "COORDENACAO REGIONAL AMAPÁ E NORTE DO PARÁ"
+    ds_cr: "COORDENACAO REGIONAL AMAPÁ E NORTE DO PARÁ"
     no_abreviado: "C.R. AMAPÁ E NORTE DO PARÁ"
     sg_cr: "CR-ANP"
     st_situacao: "Ativo"
@@ -542,7 +542,7 @@
   pk: 16456
   fields:
     co_cr: 30202002287
-    no_cr: "COORDENACAO REGIONAL DE JOAO PESSOA"
+    ds_cr: "COORDENACAO REGIONAL DE JOAO PESSOA"
     no_abreviado: "C.R. DE JOAO PESSOA"
     sg_cr: "CR-JPA"
     st_situacao: "Ativo"
@@ -557,7 +557,7 @@
   pk: 16457
   fields:
     co_cr: 30202001969
-    no_cr: "COORDENACAO REGIONAL NORDESTE I"
+    ds_cr: "COORDENACAO REGIONAL NORDESTE I"
     no_abreviado: "C.R. NORDESTE I"
     sg_cr: "CR-NE-I"
     st_situacao: "Ativo"
@@ -572,7 +572,7 @@
   pk: 16458
   fields:
     co_cr: 30202001990
-    no_cr: "COORDENACAO REGIONAL SUL DA BAHIA"
+    ds_cr: "COORDENACAO REGIONAL SUL DA BAHIA"
     no_abreviado: "C.R. SUL DA BAHIA"
     sg_cr: "CR-SBA"
     st_situacao: "Ativo"

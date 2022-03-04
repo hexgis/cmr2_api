@@ -24,14 +24,14 @@ class PriorityConsolidated(models.Model):
         blank=True,
     )
 
-    no_image = models.CharField(
+    no_imagem = models.CharField(
         _('Image identifier'),
         max_length=255,
         null=True,
         blank=True,
     )
 
-    dt_image = models.DateField(
+    dt_imagem = models.DateField(
         _('Image date'),
         null=True,
         blank=True,
@@ -51,13 +51,13 @@ class PriorityConsolidated(models.Model):
         blank=True,
     )
 
-    dt_t0 = models.DateField(
+    dt_t_zero  = models.DateField(
         _('Date of first detected change'),
         null=True,
         blank=True,
     )
 
-    dt_t1 = models.DateField(
+    dt_t_um = models.DateField(
         _('Date of changes hadn"t began'),
         null=True,
         blank=True,
@@ -149,7 +149,7 @@ class PriorityConsolidated(models.Model):
         null=True,
     )
 
-    no_cr = models.CharField(
+    ds_cr = models.CharField(
         _('Regional Coordination name'),
         max_length=255,
         null=True,
@@ -177,17 +177,12 @@ class PriorityConsolidated(models.Model):
         null=True,
     )
 
-    flag = models.BooleanField(
-        _('Flag'),
-        default=False,
-    )
-
     class Meta:
         """Meta class for `priority_monitoring.PriorityConsolidated` model."""
         app_label = 'priority_monitoring'
         verbose_name = 'Priority Consolidated'
         verbose_name_plural = 'Priority Consolidated'
-        ordering = ('-dt_t0', 'ranking', 'no_estagio')
+        ordering = ('-dt_t_zero ', 'ranking', 'no_estagio')
         db_table = 'funaidados\".\"vwm_monitoramento_consolidado_priorizacao_a'
 
     def __str__(self):
@@ -196,4 +191,4 @@ class PriorityConsolidated(models.Model):
         Returns:
             str: model data name.
         """
-        return f'{self.dt_t0} - {self.dt_t1}'
+        return f'{self.dt_t_zero } - {self.dt_t_um}'

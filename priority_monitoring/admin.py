@@ -9,12 +9,12 @@ class PriorityConsolidatedAdmin(admin.ModelAdmin):
     list_display = (
         'id_tb',
         'no_estagio',
-        'no_image',
-        'dt_image',
+        'no_imagem',
+        'dt_imagem',
         'nu_orbita',
         'nu_ponto',
-        'dt_t0',
-        'dt_t1',
+        'dt_t_zero ',
+        'dt_t_um',
         'nu_area_km2',
         'nu_area_ha',
         'nu_latitude',
@@ -26,21 +26,21 @@ class PriorityConsolidatedAdmin(admin.ModelAdmin):
         'ranking',
         'prioridade',
         'dt_cadastro',
-        'no_cr',
+        'ds_cr',
         'no_ti',
     )
 
     fields = list_display
 
     search_fields = (
-        'no_cr',
+        'ds_cr',
         'no_ti',
         'dt_t_um',
         'prioridade',
     )
 
     list_filter = (
-        'no_cr',
+        'ds_cr',
         'no_ti',
         'prioridade',
     )

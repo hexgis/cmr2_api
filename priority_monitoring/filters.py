@@ -41,13 +41,13 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
     )
 
     start_date = rest_framework.DateFilter(
-        field_name='dt_t1',
+        field_name='dt_t_um',
         lookup_expr='gte',
         required=True
     )
 
     end_date = rest_framework.DateFilter(
-        field_name='dt_t1',
+        field_name='dt_t_um',
         lookup_expr='lte',
         required=True
     )
