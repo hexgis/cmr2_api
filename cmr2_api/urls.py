@@ -16,8 +16,7 @@ Including another URLconf
 
 from django.urls import include, path
 from django.contrib import admin
-
-from django.conf.urls.static import static
+from django.conf import settings, urls
 
 from drf_yasg import openapi
 from drf_yasg.views import get_schema_view
@@ -57,4 +56,4 @@ urlpatterns = [
         ('funai.urls', 'funai'),
         namespace='funai')
     ),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+] + urls.static.static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
