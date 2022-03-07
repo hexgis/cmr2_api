@@ -5,12 +5,6 @@ from django.utils.translation import ugettext_lazy as _
 class PriorityConsolidated(models.Model):
     """PriorityConsolidated model data for priority model."""
 
-    id_tb = models.IntegerField(
-        _('Table identifier'),
-        null=True,
-        blank=True,
-    )
-
     tb_ciclo_monitoramento_id = models.IntegerField(
         _('Monitoring cycle identifier'),
         null=True,
@@ -184,6 +178,7 @@ class PriorityConsolidated(models.Model):
         verbose_name_plural = 'Priority Consolidated'
         ordering = ('-dt_t_zero', 'ranking', 'no_estagio')
         db_table = 'funaidados\".\"vwm_monitoramento_consolidado_priorizacao_a'
+        # managed = False
 
     def __str__(self):
         """Returns `priority_monitoring.PriorityConsolidated` string data.

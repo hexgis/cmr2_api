@@ -1,7 +1,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 1
   fields:
-    id_tb: 512920
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224063_20211215_20211215_01_RT_r6g5b4
@@ -29,7 +28,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 2
   fields:
-    id_tb: 512845
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1TP_224065_20211215_20211215_01_RT_r6g5b4
@@ -57,7 +55,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 3
   fields:
-    id_tb: 512885
     tb_ciclo_monitoramento_id: 75
     no_estagio: DR
     no_imagem: LC08_L1TP_231069_20211216_20211216_01_RT_r6g5b4
@@ -85,7 +82,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 4
   fields:
-    id_tb: 512886
     tb_ciclo_monitoramento_id: 75
     no_estagio: DR
     no_imagem: LC08_L1TP_231069_20211216_20211216_01_RT_r6g5b4
@@ -113,7 +109,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 5
   fields:
-    id_tb: 512887
     tb_ciclo_monitoramento_id: 75
     no_estagio: DR
     no_imagem: LC08_L1TP_231069_20211216_20211216_01_RT_r6g5b4
@@ -141,7 +136,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 6
   fields:
-    id_tb: 512960
     tb_ciclo_monitoramento_id: 75
     no_estagio: DR
     no_imagem: LC08_L1GT_224063_20211215_20211215_01_RT_r6g5b4
@@ -169,7 +163,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 7
   fields:
-    id_tb: 512961
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224063_20211215_20211215_01_RT_r6g5b4
@@ -197,7 +190,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 8
   fields:
-    id_tb: 512962
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224063_20211215_20211215_01_RT_r6g5b4
@@ -225,7 +217,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 9
   fields:
-    id_tb: 512963
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224063_20211215_20211215_01_RT_r6g5b4
@@ -253,7 +244,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 10
   fields:
-    id_tb: 512964
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224063_20211215_20211215_01_RT_r6g5b4
@@ -281,7 +271,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 11
   fields:
-    id_tb: 512965
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224063_20211215_20211215_01_RT_r6g5b4
@@ -309,7 +298,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 12
   fields:
-    id_tb: 512966
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224063_20211215_20211215_01_RT_r6g5b4
@@ -337,7 +325,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 13
   fields:
-    id_tb: 512988
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224064_20211215_20211215_01_RT_r6g5b4
@@ -365,7 +352,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 14
   fields:
-    id_tb: 512984
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224064_20211215_20211215_01_RT_r6g5b4
@@ -393,7 +379,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 15
   fields:
-    id_tb: 512985
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224064_20211215_20211215_01_RT_r6g5b4
@@ -421,7 +406,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 16
   fields:
-    id_tb: 512986
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224064_20211215_20211215_01_RT_r6g5b4
@@ -449,7 +433,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 17
   fields:
-    id_tb: 512987
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224064_20211215_20211215_01_RT_r6g5b4
@@ -477,7 +460,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 18
   fields:
-    id_tb: 512989
     tb_ciclo_monitoramento_id: 75
     no_estagio: DG
     no_imagem: LC08_L1GT_224064_20211215_20211215_01_RT_r6g5b4
@@ -505,7 +487,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 19
   fields:
-    id_tb: 512990
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224064_20211215_20211215_01_RT_r6g5b4
@@ -533,7 +514,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 20
   fields:
-    id_tb: 512991
     tb_ciclo_monitoramento_id: 75
     no_estagio: DG
     no_imagem: LC08_L1GT_224064_20211215_20211215_01_RT_r6g5b4
@@ -561,7 +541,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 21
   fields:
-    id_tb: 512999
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -589,7 +568,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 22
   fields:
-    id_tb: 513000
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -617,7 +595,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 23
   fields:
-    id_tb: 513001
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -645,7 +622,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 24
   fields:
-    id_tb: 513002
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -673,7 +649,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 25
   fields:
-    id_tb: 513003
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -701,7 +676,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 26
   fields:
-    id_tb: 513004
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -729,7 +703,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 27
   fields:
-    id_tb: 513006
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -757,7 +730,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 28
   fields:
-    id_tb: 513007
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -785,7 +757,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 29
   fields:
-    id_tb: 513008
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -813,7 +784,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 30
   fields:
-    id_tb: 513009
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1GT_224066_20211215_20211215_01_RT_r6g5b4
@@ -841,7 +811,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 31
   fields:
-    id_tb: 513108
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1TP_231058_20211216_20211216_01_RT_r6g5b4
@@ -869,7 +838,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 32
   fields:
-    id_tb: 513124
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1TP_231058_20211216_20211216_01_RT_r6g5b4
@@ -897,7 +865,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 33
   fields:
-    id_tb: 513133
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1TP_231058_20211216_20211216_01_RT_r6g5b4
@@ -925,7 +892,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 34
   fields:
-    id_tb: 513134
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1TP_231058_20211216_20211216_01_RT_r6g5b4
@@ -953,7 +919,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 35
   fields:
-    id_tb: 513135
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1TP_231058_20211216_20211216_01_RT_r6g5b4
@@ -981,7 +946,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 36
   fields:
-    id_tb: 513136
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1TP_231058_20211216_20211216_01_RT_r6g5b4
@@ -1009,7 +973,6 @@
 - model: priority_monitoring.PriorityConsolidated
   pk: 37
   fields:
-    id_tb: 513137
     tb_ciclo_monitoramento_id: 75
     no_estagio: CR
     no_imagem: LC08_L1TP_231058_20211216_20211216_01_RT_r6g5b4
