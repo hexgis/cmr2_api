@@ -56,12 +56,12 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
         id_field = False
         fields = (
             'no_estagio',
-            'no_image',
-            'dt_image',
+            'no_imagem',
+            'dt_imagem',
             'nu_orbita',
             'nu_ponto',
-            'dt_t0',
-            'dt_t1',
+            'dt_t_zero',
+            'dt_t_um',
             'nu_area_km2',
             'nu_area_ha',
             'nu_latitude',
@@ -73,7 +73,7 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
             'ranking',
             'prioridade',
             'co_cr',
-            'no_cr',
+            'ds_cr',
             'co_funai',
             'no_ti',
         )

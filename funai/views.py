@@ -26,4 +26,4 @@ class LimiteTerraIndigenaView(generics.ListAPIView):
     serializer_class = serializers.LimiteTerraIndigenaSerializer
     filterset_class = filters_funai.LimiteTerraIndigenaFilter
     filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
-    ordering_fields = ('no_cr',)
+    ordering_fields = ('ds_cr',)

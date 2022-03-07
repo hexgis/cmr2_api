@@ -8,7 +8,7 @@ class CoordenacaoRegionalAdmin(admin.ModelAdmin):
 
     list_display = (
         'co_cr',
-        'no_cr',
+        'ds_cr',
         'no_abreviado',
         'sg_cr',
         'st_situacao',
@@ -23,7 +23,7 @@ class CoordenacaoRegionalAdmin(admin.ModelAdmin):
 
     search_fields = (
         'co_cr',
-        'no_cr',
+        'ds_cr',
         'no_regiao',
         'no_municipio',
         'no_uf',
@@ -31,7 +31,7 @@ class CoordenacaoRegionalAdmin(admin.ModelAdmin):
 
     list_fielter = (
         'co_cr',
-        'no_cr',
+        'ds_cr',
         'no_regiao',
         'no_uf',
     )

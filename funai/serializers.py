@@ -22,5 +22,5 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
         model = models.CoordenacaoRegional
         fields = (
             'co_cr',
-            'no_cr'
+            'ds_cr'
         )
