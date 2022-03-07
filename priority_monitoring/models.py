@@ -51,7 +51,7 @@ class PriorityConsolidated(models.Model):
         blank=True,
     )
 
-    dt_t_zero  = models.DateField(
+    dt_t_zero= models.DateField(
         _('Date of first detected change'),
         null=True,
         blank=True,
@@ -182,7 +182,7 @@ class PriorityConsolidated(models.Model):
         app_label = 'priority_monitoring'
         verbose_name = 'Priority Consolidated'
         verbose_name_plural = 'Priority Consolidated'
-        ordering = ('-dt_t_zero ', 'ranking', 'no_estagio')
+        ordering = ('-dt_t_zero', 'ranking', 'no_estagio')
         db_table = 'funaidados\".\"vwm_monitoramento_consolidado_priorizacao_a'
 
     def __str__(self):
@@ -191,4 +191,4 @@ class PriorityConsolidated(models.Model):
         Returns:
             str: model data name.
         """
-        return f'{self.dt_t_zero } - {self.dt_t_um}'
+        return f'{self.dt_t_zero} - {self.dt_t_um}'

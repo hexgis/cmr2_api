@@ -8,7 +8,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "063"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0024
     nu_area_ha: 0.2362
@@ -36,7 +36,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "065"
-    dt_t_zero : 2021-09-26
+    dt_t_zero: 2021-09-26
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0108
     nu_area_ha: 1.0808
@@ -64,7 +64,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "069"
-    dt_t_zero : 2021-09-11
+    dt_t_zero: 2021-09-11
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0091
     nu_area_ha: 0.9085
@@ -92,7 +92,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "069"
-    dt_t_zero : 2021-09-11
+    dt_t_zero: 2021-09-11
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0069
     nu_area_ha: 0.6904
@@ -120,7 +120,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "069"
-    dt_t_zero : 2021-11-14
+    dt_t_zero: 2021-11-14
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0105
     nu_area_ha: 1.0542
@@ -148,7 +148,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "063"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0062
     nu_area_ha: 0.6182
@@ -176,7 +176,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "063"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0147
     nu_area_ha: 1.4679
@@ -204,7 +204,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "063"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0063
     nu_area_ha: 0.6259
@@ -232,7 +232,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "063"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0038
     nu_area_ha: 0.3829
@@ -260,7 +260,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "063"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0061
     nu_area_ha: 0.6088
@@ -288,7 +288,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "063"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0127
     nu_area_ha: 1.2711
@@ -316,7 +316,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "063"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0066
     nu_area_ha: 0.6618
@@ -344,7 +344,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "064"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0031
     nu_area_ha: 0.3096
@@ -372,7 +372,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "064"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.009
     nu_area_ha: 0.8989
@@ -400,7 +400,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "064"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0068
     nu_area_ha: 0.6786
@@ -428,7 +428,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "064"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0075
     nu_area_ha: 0.7497
@@ -456,7 +456,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "064"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0065
     nu_area_ha: 0.6499
@@ -484,7 +484,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "064"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0247
     nu_area_ha: 2.4681
@@ -512,7 +512,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "064"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0049
     nu_area_ha: 0.4864
@@ -540,7 +540,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "064"
-    dt_t_zero : 2021-08-09
+    dt_t_zero: 2021-08-09
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0027
     nu_area_ha: 0.274
@@ -568,7 +568,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-28
+    dt_t_zero: 2021-10-28
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0204
     nu_area_ha: 2.0437
@@ -596,7 +596,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-28
+    dt_t_zero: 2021-10-28
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0195
     nu_area_ha: 1.9463
@@ -624,7 +624,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-28
+    dt_t_zero: 2021-10-28
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0095
     nu_area_ha: 0.946
@@ -652,7 +652,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-28
+    dt_t_zero: 2021-10-28
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0039
     nu_area_ha: 0.3918
@@ -680,7 +680,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-28
+    dt_t_zero: 2021-10-28
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0134
     nu_area_ha: 1.3361
@@ -708,7 +708,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-28
+    dt_t_zero: 2021-10-28
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0053
     nu_area_ha: 0.527
@@ -736,7 +736,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-28
+    dt_t_zero: 2021-10-28
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0046
     nu_area_ha: 0.4603
@@ -764,7 +764,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-12
+    dt_t_zero: 2021-10-12
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0056
     nu_area_ha: 0.5587
@@ -792,7 +792,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-12
+    dt_t_zero: 2021-10-12
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0054
     nu_area_ha: 0.5399
@@ -820,7 +820,7 @@
     dt_imagem: 2021-12-15
     nu_orbita: "224"
     nu_ponto: "066"
-    dt_t_zero : 2021-10-28
+    dt_t_zero: 2021-10-28
     dt_t_um: 2021-12-15
     nu_area_km2: 0.0156
     nu_area_ha: 1.5563
@@ -848,7 +848,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "058"
-    dt_t_zero : 2021-11-30
+    dt_t_zero: 2021-11-30
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0097
     nu_area_ha: 0.9749
@@ -876,7 +876,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "058"
-    dt_t_zero : 2021-10-29
+    dt_t_zero: 2021-10-29
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0226
     nu_area_ha: 2.2571
@@ -904,7 +904,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "058"
-    dt_t_zero : 2021-11-14
+    dt_t_zero: 2021-11-14
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0096
     nu_area_ha: 0.9628
@@ -932,7 +932,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "058"
-    dt_t_zero : 2021-10-29
+    dt_t_zero: 2021-10-29
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0108
     nu_area_ha: 1.0781
@@ -960,7 +960,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "058"
-    dt_t_zero : 2021-09-11
+    dt_t_zero: 2021-09-11
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0048
     nu_area_ha: 0.4783
@@ -988,7 +988,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "058"
-    dt_t_zero : 2021-11-30
+    dt_t_zero: 2021-11-30
     dt_t_um: 2021-12-16
     nu_area_km2: 0.0075
     nu_area_ha: 0.7462
@@ -1016,7 +1016,7 @@
     dt_imagem: 2021-12-16
     nu_orbita: "231"
     nu_ponto: "058"
-    dt_t_zero : 2021-11-30
+    dt_t_zero: 2021-11-30
     dt_t_um: 2021-12-16
     nu_area_km2: 0.008
     nu_area_ha: 0.8035

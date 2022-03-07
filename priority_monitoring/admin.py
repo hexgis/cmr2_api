@@ -13,7 +13,7 @@ class PriorityConsolidatedAdmin(admin.ModelAdmin):
         'dt_imagem',
         'nu_orbita',
         'nu_ponto',
-        'dt_t_zero ',
+        'dt_t_zero',
         'dt_t_um',
         'nu_area_km2',
         'nu_area_ha',
