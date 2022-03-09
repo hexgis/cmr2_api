@@ -2764,7 +2764,7 @@
     detail_width: null
     geoserver: 1
     geoserver_layer_name: basemap_oneatlas_2019
-    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_namespace: CMR-FUNAI
     geoserver_layer_options: null
     queryable: false
     has_opacity: false
@@ -2777,7 +2777,7 @@
     detail_width: null
     geoserver: 1
     geoserver_layer_name: metadata_oneatlas_2019
-    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_namespace: CMR-FUNAI
     geoserver_layer_options: null
     queryable: false
     has_opacity: false
@@ -3368,19 +3368,6 @@
     has_opacity: false
     default_opacity: null
 - model: support.wmslayer
-  pk: 104
-  fields:
-    has_preview: true
-    has_detail: false
-    detail_width: null
-    geoserver: 1
-    geoserver_layer_name: Mosaico_Landsat_8_2019_AM
-    geoserver_layer_namespace: CMR-PUBLICO
-    geoserver_layer_options: null
-    queryable: false
-    has_opacity: false
-    default_opacity: null
-- model: support.wmslayer
   pk: 105
   fields:
     has_preview: true
@@ -3388,6 +3375,19 @@
     detail_width: null
     geoserver: 1
     geoserver_layer_name: Mosaico_Landsat_8_2019_BA
+    geoserver_layer_namespace: CMR-PUBLICO
+    geoserver_layer_options: null
+    queryable: false
+    has_opacity: false
+    default_opacity: null
+- model: support.wmslayer
+  pk: 104
+  fields:
+    has_preview: true
+    has_detail: false
+    detail_width: null
+    geoserver: 1
+    geoserver_layer_name: Mosaico_Landsat_8_2019_AM
     geoserver_layer_namespace: CMR-PUBLICO
     geoserver_layer_options: null
     queryable: false
