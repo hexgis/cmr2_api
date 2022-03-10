@@ -2526,8 +2526,8 @@
   pk: 12
   fields:
     has_preview: true
-    has_detail: false
-    detail_width: null
+    has_detail: true
+    detail_width: 150
     geoserver: 1
     geoserver_layer_name: veg_biomas_a
     geoserver_layer_namespace: CMR-PUBLICO
@@ -2812,8 +2812,8 @@
   pk: 34
   fields:
     has_preview: true
-    has_detail: false
-    detail_width: null
+    has_detail: true
+    detail_width: 100
     geoserver: 1
     geoserver_layer_name: met_risco_fogo_previsao_1dia_a
     geoserver_layer_namespace: CMR-PUBLICO
@@ -2825,8 +2825,8 @@
   pk: 35
   fields:
     has_preview: true
-    has_detail: false
-    detail_width: null
+    has_detail: true
+    detail_width: 100
     geoserver: 1
     geoserver_layer_name: met_risco_fogo_previsao_2dias_a
     geoserver_layer_namespace: CMR-PUBLICO
