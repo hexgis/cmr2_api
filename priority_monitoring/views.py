@@ -97,7 +97,7 @@ class PrioritiesDistinctedListView(AuthModelMixIn, generics.ListAPIView):
     serializer_class = serializers.PrioritiesDistinctedListSerializer
 
 
-class PriorityConsolidatedTableView(generics.ListAPIView):
+class PriorityConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
     
     serializer_class = serializers.PriorityConsolidatedTable
     queryset = models.PriorityConsolidated.objects.all()
