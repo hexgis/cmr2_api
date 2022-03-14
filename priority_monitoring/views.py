@@ -95,3 +95,11 @@ class PrioritiesDistinctedListView(AuthModelMixIn, generics.ListAPIView):
     queryset = models.PriorityConsolidated.objects.order_by(
         'prioridade').distinct('prioridade')
     serializer_class = serializers.PrioritiesDistinctedListSerializer
+
+
+class PriorityConsolidatedTableView(generics.ListAPIView):
+    
+    serializer_class = serializers.PriorityConsolidatedTable
+    queryset = models.PriorityConsolidated.objects.all()
+    filterset_class = priority_filters.PriorityConsolidatedFilter
+    filter_backends = (DjangoFilterBackend,)    
