@@ -27,8 +27,9 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
     """
     # Ainda necessário vincular as tabelas do APP
     # funai CR e TI com o Priority_monitoring
-    co_cr = rest_framework.NumberFilter(
+    co_cr = NumberInFilter(
         field_name='co_cr',
+        lookup_expr='in',
     )
 
     co_funai = NumberInFilter(
