@@ -77,3 +77,34 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
             'co_funai',
             'no_ti',
         )
+
+class PriorityConsolidatedTable(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.PriorityConsolidated
+        id_field = False
+        fields = (
+            'co_funai',
+            'no_ti',
+            'co_cr',
+            'ds_cr',
+            'prioridade',
+            'no_estagio',
+            'no_imagem',
+            'dt_imagem',
+            'tempo',
+            'tb_ciclo_monitoramento_id',
+            'nu_orbita',
+            'nu_ponto',
+            'dt_t_zero',
+            'dt_t_um',
+            'dt_cadastro',
+            'nu_area_km2',
+            'nu_area_ha',
+            'contribuicao',
+            'velocidade',
+            'contiguidade',
+            'ranking',
+            'nu_latitude',
+            'nu_longitude',
+        )
