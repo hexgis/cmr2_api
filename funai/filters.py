@@ -15,7 +15,7 @@ class LimiteTerraIndigenaFilter(rest_framework.FilterSet):
     """LimiteTerraIndigenaFilter data.
 
     Filters:
-        co_cr (int): regional coordination code.
+        co_cr (list): regional coordination code.
     """
     co_cr = NumberInFilter(
         field_name='co_cr',
