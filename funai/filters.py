@@ -19,7 +19,7 @@ class LimiteTerraIndigenaFilter(rest_framework.FilterSet):
     """
     co_cr = NumberInFilter(
         field_name='co_cr',
-        lookup_expression='in',
+        lookup_expr='in',
         required=False
     )
 
