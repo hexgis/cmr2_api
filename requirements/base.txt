@@ -1,6 +1,7 @@
 Django==3.2.3
 django-admin-interface==0.16.3
 djangorestframework==3.12.4
+djangorestframework-csv==2.1.1
 djangorestframework-gis==0.17
 djangorestframework-simplejwt==4.5.0
 django-filter==2.3.0
