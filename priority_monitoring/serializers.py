@@ -55,6 +55,7 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
         model = models.PriorityConsolidated
         id_field = False
         fields = (
+            'id',
             'no_estagio',
             'no_imagem',
             'dt_imagem',
@@ -78,12 +79,13 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
             'no_ti',
         )
 
-class PriorityConsolidatedTable(serializers.ModelSerializer):
+class PriorityConsolidatedTableSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = models.PriorityConsolidated
         id_field = False
         fields = (
+            'id',
             'co_funai',
             'no_ti',
             'co_cr',

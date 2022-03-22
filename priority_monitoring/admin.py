@@ -7,6 +7,7 @@ class PriorityConsolidatedAdmin(admin.ModelAdmin):
     """PriorityConsolidatedAdmin model data."""
 
     list_display = (
+        'id',
         'no_estagio',
         'no_imagem',
         'dt_imagem',
