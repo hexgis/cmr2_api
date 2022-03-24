@@ -11,7 +11,7 @@ class Geoserver(models.Model):
     """
 
     name = models.CharField(
-        _("Name"),
+        _('Name'),
         max_length=255
     )
 
@@ -34,6 +34,38 @@ class Geoserver(models.Model):
         return self.name
 
 
+class CategoryLayersGroup(models.Model):
+
+    name = models.CharField(
+        unique=True,
+        max_length=25,
+        null=True
+    )
+
+    icon = models.CharField(
+        _('Icon'),
+        max_length=255,
+        default='layers',
+        blank=True,
+        null=True
+    )
+
+    description = models.CharField(
+        max_length=1024,
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'Category Groups Layers'
+        verbose_name_plural = 'Categorys Groups Layers'
+        ordering = ['name']
+
+    def __str__(self):
+        return self.name
+
+
 class LayersGroup(models.Model):
     """
     Model for Layers group Data
@@ -43,22 +75,22 @@ class LayersGroup(models.Model):
     """
 
     name = models.CharField(
-        _("Name"),
+        _('Name'),
         max_length=255,
         unique=True
     )
 
     order = models.IntegerField(
-        _("Order"),
+        _('Order'),
         unique=True
     )
 
-    icon = models.CharField(
-        _("Icon"),
-        max_length=255,
-        default="layers",
-        blank=True,
-        null=True
+    category_groups = models.ForeignKey(
+        # _('Categoys Group Layers')
+        'CategoryLayersGroup',
+        default=1,
+        related_name='CategoryGroupsLayers_LayerGroup',
+        on_delete=models.DO_NOTHING  # Ver com o Naldo
     )
 
     class Meta:
@@ -81,18 +113,18 @@ class Layer(models.Model):
     """
 
     name = models.CharField(
-        _("Name"),
+        _('Name'),
         max_length=255
     )
 
     order = models.IntegerField(
-        _("Order"),
+        _('Order'),
         blank=True,
         null=True
     )
 
     layer_type = models.CharField(
-        _("Layer Type"),
+        _('Layer Type'),
         max_length=40
     )
 
@@ -105,7 +137,7 @@ class Layer(models.Model):
     )
 
     active_on_init = models.BooleanField(
-        _("Active on Init"),
+        _('Active on Init'),
         default=False,
     )
 
@@ -150,14 +182,14 @@ class WmsLayer(models.Model):
     )
 
     geoserver_layer_name = models.CharField(
-        _("Geoserver Layer Name"),
+        _('Geoserver Layer Name'),
         max_length=255,
         blank=True,
         null=True
     )
 
     geoserver_layer_namespace = models.CharField(
-        _("Geoserver Layer Namespace"),
+        _('Geoserver Layer Namespace'),
         max_length=40,
         blank=True,
         null=True)
@@ -170,7 +202,7 @@ class WmsLayer(models.Model):
     )
 
     geoserver_layer_options = models.JSONField(
-        ("Geoserver Layer Options"),
+        ('Geoserver Layer Options'),
         blank=True,
         null=True
     )
@@ -215,13 +247,13 @@ class TmsLayer(models.Model):
     )
 
     date = models.DateField(
-        _("Date"),
+        _('Date'),
         blank=True,
         null=True
     )
 
     max_native_zoom = models.IntegerField(
-        _("Max Native Zoom"),
+        _('Max Native Zoom'),
         blank=True,
         null=True
     )
@@ -294,19 +326,19 @@ class TmsLayer(models.Model):
 #     """
 
 #     default = models.CharField(
-#         _("Default value for filters"),
+#         _('Default value for filters'),
 #         max_length=40,
 #         blank=True,
 #         null=True,
 #     )
 
 #     filter_type = models.CharField(
-#         _("Filter Type"),
+#         _('Filter Type'),
 #         max_length=40
 #     )
 
 #     label = models.CharField(
-#         _("Filter Label"),
+#         _('Filter Label'),
 #         max_length=40
 #     )
 

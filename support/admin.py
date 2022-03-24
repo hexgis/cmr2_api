@@ -14,12 +14,22 @@ class GeoserverAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
+class CategoryLayersGroupAdmin(admin.ModelAdmin):
+    list_display = (
+        'name',
+        'icon',
+        'description'
+    )
+    fileds = list_display
+    search_fields = list_display
+
+
 class LayersGroupAdmin(admin.ModelAdmin):
 
     list_display = (
         'name',
         'order',
-        'icon',
+        'category_groups'
     )
     fields = list_display
     search_fields = list_display
@@ -82,7 +92,8 @@ class WmsLayerAdmin(admin.ModelAdmin):
         'has_detail',
         'geoserver_layer_namespace',
     )
-    list_per_page=25
+    list_per_page = 25
+
 
 class TmsLayerAdmin(admin.ModelAdmin):
 
@@ -143,5 +154,6 @@ admin.site.register(models.LayersGroup, LayersGroupAdmin)
 admin.site.register(models.Layer, LayerAdmin)
 admin.site.register(models.WmsLayer, WmsLayerAdmin)
 admin.site.register(models.TmsLayer, TmsLayerAdmin)
+admin.site.register(models.CategoryLayersGroup, CategoryLayersGroupAdmin)
 # admin.site.register(models.HeatmapLayer, HeatmapLayerAdmin)
 # admin.site.register(models.LayerFilter, LayerFilterAdmin)

@@ -57,8 +57,6 @@ class TmsSerializer(ModelSerializer):
 #         fields = (
 #             'heatmap_type',
 #         )
-
-
 class LayerSerializer(ModelSerializer):
     tms = TmsSerializer()
     #heatmap = HeatmapSerializer()
@@ -71,7 +69,7 @@ class LayerSerializer(ModelSerializer):
             'id',
             'tms',
             'wms',
-            #'heatmap',
+            # 'heatmap',
             # 'layer_filters',
             'name',
             'order',
@@ -85,4 +83,10 @@ class LayersGroupSerializer(ModelSerializer):
 
     class Meta:
         model = models.LayersGroup
+        fields = '__all__'
+
+
+class CategoryLayersGroupSerializer(ModelSerializer):
+    class Meta:
+        model = models.CategoryLayersGroup
         fields = '__all__'

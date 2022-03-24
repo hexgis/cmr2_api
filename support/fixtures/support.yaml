@@ -4,90 +4,113 @@
       name: Funai Geoserver
       wms_url: https://cmr.funai.gov.br/geoserver/ows?authkey=5a3e4ff0-2dbc-47de-bf95-366cc70a5bd2
       preview_url: https://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=5a3e4ff0-2dbc-47de-bf95-366cc70a5bd2&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+- model: support.CategoryLayersGroup
+  pk: 1
+  fields:
+      name: CAMADAS_DE_APOIO
+      icon: layers
+      description: Grupo Layers destinado aos geoserviços vetoriais, utilizados como complemento as análises no CMR
+- model: support.CategoryLayersGroup
+  pk: 2
+  fields:
+      name: BARRA_LATERAL
+      icon: layers
+      description: Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo
+- model: support.CategoryLayersGroup
+  pk: 3
+  fields:
+      name: RASTERS
+      icon: layers
+      description: Grupo Layers destinado aos geoserviços rasters (fotos aéreas, mosáicos, imagens de satélites), utilizados como base maps ou complemento as análises no CMR
+- model: support.CategoryLayersGroup
+  pk: 4
+  fields:
+      name: FOCO_DE_CALOR
+      icon: layers
+      description: Dados e publicaçẽos que pertencem a temática Fogo.
 - model: support.layersgroup
   pk: 1
   fields:
       name: Camadas de Apoio
       order: 1
-      icon: layers
+      category_groups: 1
 - model: support.layersgroup
   pk: 3
   fields:
       name: Alta Resolução
       order: 2
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 6
   fields:
       name: Mosaico Landsat 2015
       order: 5
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 7
   fields:
       name: Mosaico Landsat 2018
       order: 6
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 8
   fields:
       name: Mosaico Landsat 2019
       order: 7
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 9
   fields:
       name: Mosaico Landsat 2020
       order: 8
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 10
   fields:
       name: Mosaico Sentinel-1 2018
       order: 9
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 11
   fields:
       name: Mosaico Sentinel-1 2019
       order: 10
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 12
   fields:
       name: Mosaico Sentinel-1 2020
       order: 11
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 13
   fields:
       name: Mosaico Sentinel-2 2018
       order: 12
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 14
   fields:
       name: Mosaico Sentinel-2 2019
       order: 13
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 16
   fields:
       name: Focos de Calor
       order: 16
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 17
   fields:
       name: Risco de Fogo
       order: 15
-      icon: layers
+      category_groups: 3
 - model: support.layersgroup
   pk: 18
   fields:
       name: Mosaico Sentinel-2 2020
       order: 14
-      icon: layers
 - model: support.layer
   pk: 1
   fields:

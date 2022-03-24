@@ -4,8 +4,8 @@ from rest_framework.authentication import (
     SessionAuthentication, BasicAuthentication
 )
 
-from .models import LayersGroup
-from .serializers import LayersGroupSerializer
+from .models import (LayersGroup, CategoryLayersGroup)
+from .serializers import (LayersGroupSerializer, CategoryLayersGroupSerializer)
 
 
 class AuthModelMixIn:
@@ -20,3 +20,10 @@ class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
 
     queryset = LayersGroup.objects.all()
     serializer_class = LayersGroupSerializer
+
+
+class CategoryLayersGroupView(generics.ListAPIView, AuthModelMixIn):
+    """_Category Layers Group data view """
+
+    queryset = CategoryLayersGroup.objects.all().order_by('name')
+    serializer_class = CategoryLayersGroupSerializer
