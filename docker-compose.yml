@@ -1,0 +1,71 @@
+version: "3"
+
+services:
+  db:
+    image: circleci/postgres:10-postgis
+    environment:
+      POSTGRES_USER: defaultuser
+      POSTGRES_DB: testdb
+      POSTGRES_PASSWORD: testpassword
+  
+  db_priority:
+    image: circleci/postgres:10-postgis
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_DB: database
+      POSTGRES_PASSWORD: asdfsa
+
+  dev:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-dev
+    command: >
+      bash -c "python manage.py makemigrations --no-input
+      && python manage.py migrate
+      && python manage.py loaddata support.yaml
+      && python manage.py loaddata priority_consolidated.yaml
+      && python manage.py loaddata coordenacao_regional.yaml
+      && python manage.py loaddata terras_indigenas.yaml
+      && python manage.py loaddata fixtures/user.yaml
+      && python manage.py runserver 0.0.0.0:8080"
+    volumes:
+      - .:/app/
+    ports:
+      - "8080:8080"
+    environment:
+      DB_USER: defaultuser
+      DB_NAME: testdb
+      DB_PASSWORD: testpassword
+      DB_HOST: db
+      DB_USER_PRIORITY: user
+      DB_NAME_PRIORITY: database
+      DB_PASSWORD_PRIORITY: asdfsa
+      DB_HOST_PRIORITY: db_priority
+      PORT: 8080
+    depends_on:
+      - db
+      - db_priority
+
+  test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-dev
+    command: >
+      bash -c "python manage.py makemigrations --no-input
+      && python manage.py test"
+    volumes:
+      - .:/app/
+    ports:
+      - "8080:8080"
+    environment:
+      DB_USER: defaultuser
+      DB_NAME: testdb
+      DB_PASSWORD: testpassword
+      DB_HOST: db
+      PORT: 8080
+    depends_on:
+      - db
+
+  prod:
+    image: us.gcr.io/custom-plating-209314/cmr2_api:latest
+    build: .

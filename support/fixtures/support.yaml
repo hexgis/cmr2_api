@@ -1,0 +1,6161 @@
+- model: support.geoserver
+  pk: 1
+  fields:
+      name: Funai Geoserver
+      wms_url: https://cmr.funai.gov.br/geoserver/ows?authkey=5a3e4ff0-2dbc-47de-bf95-366cc70a5bd2
+      preview_url: https://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=5a3e4ff0-2dbc-47de-bf95-366cc70a5bd2&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+- model: support.CategoryLayersGroup
+  pk: 1
+  fields:
+      name: CAMADAS_DE_APOIO
+      icon: layers
+      description: Grupo Layers destinado aos geoserviços vetoriais, utilizados como complemento as análises no CMR
+- model: support.CategoryLayersGroup
+  pk: 2
+  fields:
+      name: BARRA_LATERAL
+      icon: layers
+      description: Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo
+- model: support.CategoryLayersGroup
+  pk: 3
+  fields:
+      name: RASTERS
+      icon: layers
+      description: Grupo Layers destinado aos geoserviços rasters (fotos aéreas, mosáicos, imagens de satélites), utilizados como base maps ou complemento as análises no CMR
+- model: support.CategoryLayersGroup
+  pk: 4
+  fields:
+      name: FOCO_DE_CALOR
+      icon: layers
+      description: Dados e publicaçẽos que pertencem a temática Fogo.
+- model: support.layersgroup
+  pk: 1
+  fields:
+      name: Camadas de Apoio
+      order: 1
+      category_groups: 1
+- model: support.layersgroup
+  pk: 3
+  fields:
+      name: Alta Resolução
+      order: 2
+      category_groups: 3
+- model: support.layersgroup
+  pk: 6
+  fields:
+      name: Mosaico Landsat 2015
+      order: 5
+      category_groups: 3
+- model: support.layersgroup
+  pk: 7
+  fields:
+      name: Mosaico Landsat 2018
+      order: 6
+      category_groups: 3
+- model: support.layersgroup
+  pk: 8
+  fields:
+      name: Mosaico Landsat 2019
+      order: 7
+      category_groups: 3
+- model: support.layersgroup
+  pk: 9
+  fields:
+      name: Mosaico Landsat 2020
+      order: 8
+      category_groups: 3
+- model: support.layersgroup
+  pk: 10
+  fields:
+      name: Mosaico Sentinel-1 2018
+      order: 9
+      category_groups: 3
+- model: support.layersgroup
+  pk: 11
+  fields:
+      name: Mosaico Sentinel-1 2019
+      order: 10
+      category_groups: 3
+- model: support.layersgroup
+  pk: 12
+  fields:
+      name: Mosaico Sentinel-1 2020
+      order: 11
+      category_groups: 3
+- model: support.layersgroup
+  pk: 13
+  fields:
+      name: Mosaico Sentinel-2 2018
+      order: 12
+      category_groups: 3
+- model: support.layersgroup
+  pk: 14
+  fields:
+      name: Mosaico Sentinel-2 2019
+      order: 13
+      category_groups: 3
+- model: support.layersgroup
+  pk: 16
+  fields:
+      name: Focos de Calor
+      order: 16
+      category_groups: 3
+- model: support.layersgroup
+  pk: 17
+  fields:
+      name: Risco de Fogo
+      order: 15
+      category_groups: 3
+- model: support.layersgroup
+  pk: 18
+  fields:
+      name: Mosaico Sentinel-2 2020
+      order: 14
+- model: support.layer
+  pk: 1
+  fields:
+      name: Terras Indígenas
+      order: 350
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 3
+  fields:
+      name: Terra Indígena em Estudo
+      order: 348
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 4
+  fields:
+      name: Buffer de TI  (10 Km)
+      order: 347
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 5
+  fields:
+      name: Buffer de TI (6 Km)
+      order: 345
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 6
+  fields:
+      name: Aldeias Indígenas
+      order: 346
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 7
+  fields:
+      name: Coordenações Regionais
+      order: 344
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 8
+  fields:
+      name: Unidades Federativas
+      order: 343
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 9
+  fields:
+      name: Áreas Municipais
+      order: 342
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 10
+  fields:
+      name: Amazônia Legal
+      order: 341
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 11
+  fields:
+      name: Semiárido
+      order: 340
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 12
+  fields:
+      name: Biomas
+      order: 339
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 13
+  fields:
+      name: Unidades de Conservação Federal
+      order: 338
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 14
+  fields:
+      name: Áreas Quilombolas
+      order: 337
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 15
+  fields:
+      name: Assentamentos Rurais
+      order: 336
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 16
+  fields:
+      name: CAR
+      order: 335
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 17
+  fields:
+      name: Imóveis Certificados Privados (SNCI)
+      order: 334
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 18
+  fields:
+      name: Imóveis Certificados Públicos (SNCI)
+      order: 333
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 19
+  fields:
+      name: Imóveis Certificados Privados (SIGEF)
+      order: 332
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 20
+  fields:
+      name: Imóveis Certificados Públicos (SIGEF)
+      order: 331
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 21
+  fields:
+      name: Trechos Rodoviários
+      order: 330
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 22
+  fields:
+      name: Trechos de Drenagem
+      order: 329
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 23
+  fields:
+      name: Faixa de Fronteira
+      order: 328
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 24
+  fields:
+      name: Antenas VSAT
+      order: 327
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 25
+  fields:
+      name: Grade SENTINEL-2
+      order: 326
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 26
+  fields:
+      name: Grade LANDSAT
+      order: 325
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 27
+  fields:
+      name: Dados Sigmine
+      order: 324
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 28
+  fields:
+      name: Comitês de Bacias Hidrográficas Estaduais
+      order: 323
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 29
+  fields:
+      name: Unidades de Gestão de Recursos Hídricos
+      order: 322
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 30
+  fields:
+      name: Imagens Alta resolução - Atualizadas
+      order: 321
+      layer_type: wms
+      layers_group: 3
+      active_on_init: false
+- model: support.layer
+  pk: 31
+  fields:
+      name: Grade de imagens - Atualizadas
+      order: 320
+      layer_type: wms
+      layers_group: 3
+      active_on_init: false
+- model: support.layer
+  pk: 32
+  fields:
+      name: AQUA M-M
+      order: 319
+      layer_type: wms
+      layers_group: 16
+      active_on_init: false
+- model: support.layer
+  pk: 33
+  fields:
+      name: AQUA M-T
+      order: 318
+      layer_type: wms
+      layers_group: 16
+      active_on_init: false
+- model: support.layer
+  pk: 34
+  fields:
+      name: Risco de Fogo - Previsão 1 dia
+      order: 317
+      layer_type: wms
+      layers_group: 17
+      active_on_init: false
+- model: support.layer
+  pk: 35
+  fields:
+      name: Risco de Fogo - Previsão 2 dias
+      order: 316
+      layer_type: wms
+      layers_group: 17
+      active_on_init: false
+- model: support.layer
+  pk: 36
+  fields:
+      name: L8 Acre (2015)
+      order: 315
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 37
+  fields:
+      name: L8 Amapá (2015)
+      order: 314
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 38
+  fields:
+      name: L8 Amazonas (2015)
+      order: 313
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 39
+  fields:
+      name: L8 Amazônia Legal (2015)
+      order: 312
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 40
+  fields:
+      name: L8 Brasil (2015)
+      order: 311
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 41
+  fields:
+      name: L8 Mato Grosso (2015)
+      order: 310
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 42
+  fields:
+      name: L8 Pará (2015)
+      order: 309
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 43
+  fields:
+      name: L8 Rondônia (2015)
+      order: 308
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 44
+  fields:
+      name: L8 Roraima (2015)
+      order: 307
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 45
+  fields:
+      name: L8 Tocantins (2015)
+      order: 306
+      layer_type: wms
+      layers_group: 6
+      active_on_init: false
+- model: support.layer
+  pk: 46
+  fields:
+      name: L8 Acre (2018)
+      order: 305
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 47
+  fields:
+      name: L8 Alagoas (2018)
+      order: 304
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 48
+  fields:
+      name: L8 Amapá (2018)
+      order: 303
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 49
+  fields:
+      name: L8 Amazonas (2018)
+      order: 302
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 50
+  fields:
+      name: L8 Bahia (2018)
+      order: 301
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 51
+  fields:
+      name: L8 Brasil (2018)
+      order: 300
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 52
+  fields:
+      name: L8 Ceará (2018)
+      order: 299
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 53
+  fields:
+      name: L8 Distrito Federal (2018)
+      order: 298
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 54
+  fields:
+      name: L8 Espírito Santo (2018)
+      order: 297
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 55
+  fields:
+      name: L8 Goiás (2018)
+      order: 296
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 56
+  fields:
+      name: L8 Maranhão (2018)
+      order: 295
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 57
+  fields:
+      name: L8 Mato Grosso (2018)
+      order: 294
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 58
+  fields:
+      name: L8 Mato Grosso do Sul (2018)
+      order: 293
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 59
+  fields:
+      name: L8 Minas Gerais (2018)
+      order: 292
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 60
+  fields:
+      name: L8 Pará (2018)
+      order: 291
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 61
+  fields:
+      name: L8 Paraíba (2018)
+      order: 290
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 62
+  fields:
+      name: L8 Paraná (2018)
+      order: 289
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 63
+  fields:
+      name: L8 Pernambuco (2018)
+      order: 288
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 64
+  fields:
+      name: L8 Piauí (2018)
+      order: 287
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 65
+  fields:
+      name: L8 Rio de Janeiro (2018)
+      order: 286
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 66
+  fields:
+      name: L8 Rio Grande do Norte (2018)
+      order: 285
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 67
+  fields:
+      name: L8 Rio Grande do Sul (2018)
+      order: 284
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 68
+  fields:
+      name: L8 Rondônia (2018)
+      order: 283
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 69
+  fields:
+      name: L8 Roraima (2018)
+      order: 282
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 70
+  fields:
+      name: L8 Santa Catarina (2018)
+      order: 281
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 71
+  fields:
+      name: L8 São Paulo (2018)
+      order: 280
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 72
+  fields:
+      name: L8 Sergipe (2018)
+      order: 279
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 73
+  fields:
+      name: L8 Tocantins (2018)
+      order: 278
+      layer_type: wms
+      layers_group: 7
+      active_on_init: false
+- model: support.layer
+  pk: 101
+  fields:
+      name: L8 Acre (2019)
+      order: 277
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 102
+  fields:
+      name: L8 Alagoas (2019)
+      order: 276
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 103
+  fields:
+      name: L8 Amapá (2019)
+      order: 275
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 104
+  fields:
+      name: L8 Amazonas (2019)
+      order: 274
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 105
+  fields:
+      name: L8 Bahia (2019)
+      order: 274
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 106
+  fields:
+      name: L8 Ceará (2019)
+      order: 273
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 107
+  fields:
+      name: L8 Distrito Federal (2019)
+      order: 272
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 108
+  fields:
+      name: L8 Espírito Santo (2019)
+      order: 271
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 109
+  fields:
+      name: L8 Goiás (2019)
+      order: 270
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 110
+  fields:
+      name: L8 Maranhão (2019)
+      order: 269
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 111
+  fields:
+      name: L8 Mato Grosso (2019)
+      order: 267
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 112
+  fields:
+      name: L8 Mato Grosso do Sul (2019)
+      order: 268
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 113
+  fields:
+      name: L8 Minas Gerais (2019)
+      order: 265
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 114
+  fields:
+      name: L8 Pará (2019)
+      order: 266
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 115
+  fields:
+      name: L8 Paraíba (2019)
+      order: 263
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 116
+  fields:
+      name: L8 Paraná (2019)
+      order: 264
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 117
+  fields:
+      name: L8 Pernambuco (2019)
+      order: 262
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 118
+  fields:
+      name: L8 Piauí (2019)
+      order: 261
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 119
+  fields:
+      name: L8 Rio de Janeiro (2019)
+      order: 260
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 120
+  fields:
+      name: L8 Rio Grande do Norte (2019)
+      order: 259
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 121
+  fields:
+      name: L8 Rio Grande do Sul (2019)
+      order: 254
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 122
+  fields:
+      name: L8 Rondônia (2019)
+      order: 258
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 123
+  fields:
+      name: L8 Roraima (2019)
+      order: 257
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 124
+  fields:
+      name: L8 Santa Catarina (2019)
+      order: 256
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 125
+  fields:
+      name: L8 São Paulo (2019)
+      order: 252
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 126
+  fields:
+      name: L8 Sergipe (2019)
+      order: 255
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 127
+  fields:
+      name: L8 Tocantins (2019)
+      order: 253
+      layer_type: wms
+      layers_group: 8
+      active_on_init: false
+- model: support.layer
+  pk: 128
+  fields:
+      name: L8 Acre (2020)
+      order: 251
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 129
+  fields:
+      name: L8 Alagoas (2020)
+      order: 250
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 130
+  fields:
+      name: L8 Amapá (2020)
+      order: 249
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 131
+  fields:
+      name: L8 Amazonas (2020)
+      order: 248
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 132
+  fields:
+      name: L8 Bahia (2020)
+      order: 247
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 133
+  fields:
+      name: L8 Ceará (2020)
+      order: 246
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 134
+  fields:
+      name: L8 Distrito Federal (2020)
+      order: 245
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 135
+  fields:
+      name: L8 Espírito Santo (2020)
+      order: 244
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 136
+  fields:
+      name: L8 Goiás (2020)
+      order: 243
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 137
+  fields:
+      name: L8 Maranhão (2020)
+      order: 242
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 138
+  fields:
+      name: L8 Mato Grosso (2020)
+      order: 241
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 139
+  fields:
+      name: L8 Mato Grosso do Sul
+      order: 240
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 140
+  fields:
+      name: L8 Minas Gerais (2020)
+      order: 239
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 141
+  fields:
+      name: L8 Pará (2020)
+      order: 238
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 142
+  fields:
+      name: L8 Paraíba (2020)
+      order: 237
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 143
+  fields:
+      name: L8 Paraná (2020)
+      order: 236
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 144
+  fields:
+      name: L8 Pernambuco (2020)
+      order: 235
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 145
+  fields:
+      name: L8 Piauí (2020)
+      order: 234
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 146
+  fields:
+      name: L8 Rio de Janeiro (2020)
+      order: 233
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 147
+  fields:
+      name: L8 Rio Grande do Norte (2020)
+      order: 232
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 148
+  fields:
+      name: L8 Rio Grande do Sul (2020)
+      order: 231
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 149
+  fields:
+      name: L8 Rondônia (2020)
+      order: 230
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 150
+  fields:
+      name: L8 Roraima (2020)
+      order: 229
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 151
+  fields:
+      name: L8 Santa Catarina (2020)
+      order: 228
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 152
+  fields:
+      name: L8 São Paulo (2020)
+      order: 227
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 153
+  fields:
+      name: L8 Sergipe (2020)
+      order: 226
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 154
+  fields:
+      name: L8 Tocantins (2020)
+      order: 225
+      layer_type: wms
+      layers_group: 9
+      active_on_init: false
+- model: support.layer
+  pk: 155
+  fields:
+      name: Sentinel-1 Acre (2018)
+      order: 224
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 156
+  fields:
+      name: Sentinel-1 Alagoas (2018)
+      order: 223
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 157
+  fields:
+      name: Sentinel-1 Amapá (2018)
+      order: 222
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 158
+  fields:
+      name: Sentinel-1 Amazonas (2018)
+      order: 221
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 159
+  fields:
+      name: Sentinel-1 Bahia (2018)
+      order: 220
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 160
+  fields:
+      name: Sentinel-1 Ceará (2018)
+      order: 219
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 161
+  fields:
+      name: Sentinel-1 Distrito Federal (2018)
+      order: 218
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 162
+  fields:
+      name: Sentinel-1 Espírito Santo (2018)
+      order: 217
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 163
+  fields:
+      name: Sentinel-1 Goiás (2018)
+      order: 216
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 164
+  fields:
+      name: Sentinel-1 Maranhão (2018)
+      order: 215
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 165
+  fields:
+      name: Sentinel-1 Mato Grosso (2018)
+      order: 214
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 166
+  fields:
+      name: Sentinel-1 Mato Grosso do Sul (2018)
+      order: 213
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 167
+  fields:
+      name: Sentinel-1 Minas Gerais (2018)
+      order: 212
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 168
+  fields:
+      name: Sentinel-1 Pará (2018)
+      order: 211
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 169
+  fields:
+      name: Sentinel-1 Paraíba (2018)
+      order: 210
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 170
+  fields:
+      name: Sentinel-1 Paraná (2018)
+      order: 209
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 171
+  fields:
+      name: Sentinel-1 Pernambuco (2018)
+      order: 208
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 172
+  fields:
+      name: Sentinel-1 Piauí (2018)
+      order: 207
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 173
+  fields:
+      name: Sentinel-1 Rio de Janeiro (2018)
+      order: 206
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 174
+  fields:
+      name: Sentinel-1 Rio Grande do Norte (2018)
+      order: 205
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 175
+  fields:
+      name: Sentinel-1 Rio Grande do Sul (2018)
+      order: 204
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 176
+  fields:
+      name: Sentinel-1 Rondônia (2018)
+      order: 203
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 177
+  fields:
+      name: Sentinel-1 Roraima (2018)
+      order: 202
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 178
+  fields:
+      name: Sentinel-1 Santa Catarina (2018)
+      order: 201
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 179
+  fields:
+      name: Sentinel-1 São Paulo (2018)
+      order: 200
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 180
+  fields:
+      name: Sentinel-1 Sergipe (2018)
+      order: 200
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 181
+  fields:
+      name: Sentinel-1 Tocantins (2018)
+      order: 199
+      layer_type: wms
+      layers_group: 10
+      active_on_init: false
+- model: support.layer
+  pk: 182
+  fields:
+      name: Sentinel-1 Acre (2019)
+      order: 198
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 183
+  fields:
+      name: Sentinel-1 Alagoas (2019)
+      order: 197
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 184
+  fields:
+      name: Sentinel-1 Amapá (2019)
+      order: 196
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 185
+  fields:
+      name: Sentinel-1 Amazonas (2019)
+      order: 195
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 186
+  fields:
+      name: Sentinel-1 Bahia (2019)
+      order: 194
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 187
+  fields:
+      name: Sentinel-1 Ceará (2019)
+      order: 193
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 188
+  fields:
+      name: Sentinel-1 Distrito Federal (2019)
+      order: 192
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 189
+  fields:
+      name: Sentinel-1 Espírito Santo (2019)
+      order: 191
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 190
+  fields:
+      name: Sentinel-1 Goiás (2019)
+      order: 190
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 191
+  fields:
+      name: Sentinel-1 Maranhão (2019)
+      order: 189
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 192
+  fields:
+      name: Sentinel-1 Mato Grosso (2019)
+      order: 188
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 193
+  fields:
+      name: Sentinel-1 Mato Grosso do Sul (2019)
+      order: 187
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 194
+  fields:
+      name: Sentinel-1 Minas Gerais (2019)
+      order: 186
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 195
+  fields:
+      name: Sentinel-1 Pará (2019)
+      order: 185
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 196
+  fields:
+      name: Sentinel-1 Paraíba (2019)
+      order: 184
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 197
+  fields:
+      name: Sentinel-1 Paraná (2019)
+      order: 183
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 198
+  fields:
+      name: Sentinel-1 Pernambuco (2019)
+      order: 182
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 199
+  fields:
+      name: Sentinel-1 Piauí (2019)
+      order: 181
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 200
+  fields:
+      name: Sentinel-1 Rio de Janeiro (2019)
+      order: 180
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 201
+  fields:
+      name: Sentinel-1 Rio Grande do Norte (2019)
+      order: 179
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 202
+  fields:
+      name: Sentinel-1 Rio Grande do Sul (2019)
+      order: 178
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 203
+  fields:
+      name: Sentinel-1 Rondônia (2019)
+      order: 177
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 204
+  fields:
+      name: Sentinel-1 Roraima (2019)
+      order: 176
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 205
+  fields:
+      name: Sentinel-1 Santa Catarina (2019)
+      order: 175
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 206
+  fields:
+      name: Sentinel-1 São paulo (2019)
+      order: 174
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 207
+  fields:
+      name: Sentinel-1 Sergipe (2019)
+      order: 173
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 208
+  fields:
+      name: Sentinel-1 Tocantins (2019)
+      order: 173
+      layer_type: wms
+      layers_group: 11
+      active_on_init: false
+- model: support.layer
+  pk: 209
+  fields:
+      name: Sentinel-1 Acre (2020)
+      order: 172
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 210
+  fields:
+      name: Sentinel-1 Alagoas (2020)
+      order: 171
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 211
+  fields:
+      name: Sentinel-1 Amapá (2020)
+      order: 170
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 212
+  fields:
+      name: Sentinel-1 Amazonas (2020)
+      order: 169
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 213
+  fields:
+      name: Sentinel-1 Bahia (2020)
+      order: 168
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 214
+  fields:
+      name: Sentinel-1 Ceará (2020)
+      order: 167
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 215
+  fields:
+      name: Sentinel-1 Distrito Federal (2020)
+      order: 166
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 216
+  fields:
+      name: Sentinel-1 Espírito Santo (2020)
+      order: 165
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 217
+  fields:
+      name: Sentinel-1 Goiás (2020)
+      order: 164
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 218
+  fields:
+      name: Sentinel-1 Maranhão (2020)
+      order: 163
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 219
+  fields:
+      name: Sentinel-1 Mato Grosso (2020)
+      order: 162
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 220
+  fields:
+      name: Sentinel-1 Mato Grosso do Sul (2020)
+      order: 161
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 221
+  fields:
+      name: Sentinel-1 Minas Gerais (2020)
+      order: 160
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 222
+  fields:
+      name: Sentinel-1 Pará (2020)
+      order: 159
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 223
+  fields:
+      name: Sentinel-1 Paraíba (2020)
+      order: 158
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 224
+  fields:
+      name: Sentinel-1 Paraná (2020)
+      order: 157
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 225
+  fields:
+      name: Sentinel-1 Pernambuco (2020)
+      order: 156
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 226
+  fields:
+      name: Sentinel-1 Piauí (2020)
+      order: 155
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 227
+  fields:
+      name: Sentinel-1 Rio de Janeiro (2020)
+      order: 154
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 228
+  fields:
+      name: Sentinel-1 Rio Grande do Norte (2020)
+      order: 153
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 229
+  fields:
+      name: Sentinel-1 Rio Grande do Sul (2020)
+      order: 152
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 230
+  fields:
+      name: Sentinel-1 Rondônia (2020)
+      order: 151
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 231
+  fields:
+      name: Sentinel-1 Roraima (2020)
+      order: 150
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 232
+  fields:
+      name: Sentinel-1 Santa Catarina (2020)
+      order: 149
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 233
+  fields:
+      name: Sentinel-1 São paulo (2020)
+      order: 148
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 234
+  fields:
+      name: Sentinel-1 Sergipe (2020)
+      order: 147
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 235
+  fields:
+      name: Sentinel-1 Tocantins (2020)
+      order: 146
+      layer_type: wms
+      layers_group: 12
+      active_on_init: false
+- model: support.layer
+  pk: 236
+  fields:
+      name: Sentinel-2 Acre (2018)
+      order: 145
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 237
+  fields:
+      name: Sentinel-2 Alagoas (2018)
+      order: 144
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 238
+  fields:
+      name: Sentinel-2 Amapá (2018)
+      order: 143
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 239
+  fields:
+      name: Sentinel-2 Amazonas (2018)
+      order: 142
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 240
+  fields:
+      name: Sentinel-2 Bahia (2018)
+      order: 141
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 242
+  fields:
+      name: Sentinel-2 Ceará (2018)
+      order: 140
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 243
+  fields:
+      name: Sentinel-2 Distrito Federal (2018)
+      order: 139
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 244
+  fields:
+      name: Sentinel-2 Espírito Santo (2018)
+      order: 138
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 245
+  fields:
+      name: Sentinel-2 Goiás (2018)
+      order: 137
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 246
+  fields:
+      name: Sentinel-2 Maranhão (2018)
+      order: 136
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 247
+  fields:
+      name: Sentinel-2 Mato Grosso (2018)
+      order: 135
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 248
+  fields:
+      name: Sentinel-2 Mato Grosso do Sul (2018)
+      order: 134
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 249
+  fields:
+      name: Sentinel-2 Minas Gerais (2018)
+      order: 133
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 250
+  fields:
+      name: Sentinel-2 Pará (2018)
+      order: 132
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 251
+  fields:
+      name: Sentinel-2 Paraíba (2018)
+      order: 131
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 252
+  fields:
+      name: Sentinel-2 Paraná (2018)
+      order: 130
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 253
+  fields:
+      name: Sentinel-2 Pernambuco (2018)
+      order: 129
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 254
+  fields:
+      name: Sentinel-2 Piauí (2018)
+      order: 128
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 255
+  fields:
+      name: Sentinel-2 Rio de Janeiro (2018)
+      order: 127
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 256
+  fields:
+      name: Sentinel-2 Rio Grande do Norte (2018)
+      order: 126
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 257
+  fields:
+      name: Sentinel-2 Rio Grande do Sul (2018)
+      order: 125
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 258
+  fields:
+      name: Sentinel-2 Rondônia (2018)
+      order: 124
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 259
+  fields:
+      name: Sentinel-2 Roraima (2018)
+      order: 123
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 260
+  fields:
+      name: Sentinel-2 Santa Catarina (2018)
+      order: 122
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 261
+  fields:
+      name: Sentinel-2 São Paulo (2018)
+      order: 121
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 262
+  fields:
+      name: Sentinel-2 Sergipe (2018)
+      order: 120
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 263
+  fields:
+      name: Sentinel-2 Tocantins (2018)
+      order: 119
+      layer_type: wms
+      layers_group: 13
+      active_on_init: false
+- model: support.layer
+  pk: 264
+  fields:
+      name: Sentinel-2 Acre (2019)
+      order: 118
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 266
+  fields:
+      name: Sentinel-2 Alagoas (2019)
+      order: 117
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 267
+  fields:
+      name: Sentinel-2 Amapá (2019)
+      order: 116
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 268
+  fields:
+      name: Sentinel-2 Amazonas (2019)
+      order: 115
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 269
+  fields:
+      name: Sentinel-2 Bahia (2019)
+      order: 114
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 270
+  fields:
+      name: Sentinel-2 Ceará (2019)
+      order: 113
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 271
+  fields:
+      name: Sentinel-2 Distrito Federal (2019)
+      order: 112
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 272
+  fields:
+      name: Sentinel-2 Espírito Santo (2019)
+      order: 111
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 273
+  fields:
+      name: Sentinel-2 Goiás (2019)
+      order: 110
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 274
+  fields:
+      name: Sentinel-2 Maranhão (2019)
+      order: 109
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 275
+  fields:
+      name: Sentinel-2 Mato Grosso (2019)
+      order: 108
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 276
+  fields:
+      name: Sentinel-2 Mato Grosso do Sul (2019)
+      order: 107
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 277
+  fields:
+      name: Sentinel-2 Minas Gerais (2019)
+      order: 106
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 278
+  fields:
+      name: Sentinel-2 Pará (2019)
+      order: 105
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 279
+  fields:
+      name: Sentinel-2 Paraíba (2019)
+      order: 104
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 280
+  fields:
+      name: Sentinel-2 Paraná (2019)
+      order: 103
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 281
+  fields:
+      name: Sentinel-2 Pernambuco (2019)
+      order: 101
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 282
+  fields:
+      name: Sentinel-2 Piauí (2019)
+      order: 102
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 283
+  fields:
+      name: Sentinel-2 Rio de Janeiro (2019)
+      order: 100
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 284
+  fields:
+      name: Sentinel-2 Rio Grande do Norte (2019)
+      order: 99
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 285
+  fields:
+      name: Sentinel-2 Rio Grande do Sul (2019)
+      order: 98
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 286
+  fields:
+      name: Sentinel-2 Rondônia (2019)
+      order: 94
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 287
+  fields:
+      name: Sentinel-2 Roraima (2019)
+      order: 97
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 288
+  fields:
+      name: Sentinel-2 Santa Catarina (2019)
+      order: 96
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 289
+  fields:
+      name: Sentinel-2 São Paulo (2019)
+      order: 95
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 290
+  fields:
+      name: Sentinel-2 Sergipe (2019)
+      order: 93
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 291
+  fields:
+      name: Sentinel-2 Tocantins (2019)
+      order: 92
+      layer_type: wms
+      layers_group: 14
+      active_on_init: false
+- model: support.layer
+  pk: 292
+  fields:
+      name: Sentinel-2 Acre (2020)
+      order: 91
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 293
+  fields:
+      name: Sentinel-2 Alagoas (2020)
+      order: 90
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 294
+  fields:
+      name: Sentinel-2 Amapá (2020)
+      order: 89
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 295
+  fields:
+      name: Sentinel-2 Amazonas (2020)
+      order: 88
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 296
+  fields:
+      name: Sentinel-2 Bahia (2020)
+      order: 86
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 297
+  fields:
+      name: Sentinel-2 Ceará (2020)
+      order: 87
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 298
+  fields:
+      name: Sentinel-2 Distrito Federal (2020)
+      order: 85
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 299
+  fields:
+      name: Sentinel-2 Espírito Santo (2020)
+      order: 84
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 300
+  fields:
+      name: Sentinel-2 Goiás (2020)
+      order: 83
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 301
+  fields:
+      name: Sentinel-2 Maranhão (2020)
+      order: 82
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 302
+  fields:
+      name: Sentinel-2 Mato Grosso (2020)
+      order: 81
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 303
+  fields:
+      name: Sentinel-2 Mato Grosso do Sul (2020)
+      order: 80
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 304
+  fields:
+      name: Sentinel-2 Minas Gerais (2020)
+      order: 79
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 305
+  fields:
+      name: Sentinel-2 Pará (2020)
+      order: 78
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 306
+  fields:
+      name: Sentinel-2 Paraíba (2020)
+      order: 77
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 307
+  fields:
+      name: Sentinel-2 Paraná (2020)
+      order: 76
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 308
+  fields:
+      name: Sentinel-2 Pernambuco (2020)
+      order: 75
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 309
+  fields:
+      name: Sentinel-2 Piauí (2020)
+      order: 74
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 310
+  fields:
+      name: Sentinel-2 Rio de Janeiro (2020)
+      order: 73
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 311
+  fields:
+      name: Sentinel-2 Rio Grande do Norte (2020)
+      order: 72
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 312
+  fields:
+      name: Sentinel-2 Rio Grande do Sul (2020)
+      order: 71
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 313
+  fields:
+      name: Sentinel-2 Rondônia (2020)
+      order: 70
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 314
+  fields:
+      name: Sentinel-2 Roraima (2020)
+      order: 69
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 315
+  fields:
+      name: Sentinel-2 Santa Catarina (2020)
+      order: 68
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 316
+  fields:
+      name: Sentinel-2 São Paulo (2020)
+      order: 67
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 317
+  fields:
+      name: Sentinel-2 Sergipe (2020)
+      order: 66
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.layer
+  pk: 318
+  fields:
+      name: Sentinel-2 Tocantins (2020)
+      order: 65
+      layer_type: wms
+      layers_group: 18
+      active_on_init: false
+- model: support.wmslayer
+  pk: 1
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_terra_indigena_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 3
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_terra_indigena_estudo_p
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 4
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_buffer_10km_recorte_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 6
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_aldeia_indigena_p
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 5
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_buffer_6km_recorte_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 7
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_coordenacao_regional_p
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 8
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_unidade_federacao_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 9
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_municipio_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 10
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_amazonia_legal_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 11
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_semiarido_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 12
+  fields:
+      has_preview: true
+      has_detail: true
+      detail_width: 150
+      geoserver: 1
+      geoserver_layer_name: veg_biomas_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 13
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_unidade_conservacao_federal_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 14
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_quilombolas_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 15
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_assentamento_rural_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 16
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_imovel_car_a
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 17
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_lim_imovel_certificado_privado_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 18
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_lim_imovel_certificado_publico_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 19
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_lim_imovel_certificado_sigef_privado_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 20
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_lim_imovel_certificado_sigef_publico_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 21
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: tra_trecho_rodoviario_l
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 22
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: hid_trecho_drenagem_ti_l
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 23
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_faixa_de_fronteira_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 24
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_antenas_vsat_p
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 25
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: img_grade_sentinel2_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 26
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: img_grade_landsat_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 27
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: lim_sigmine_ti_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 28
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: hid_comites_de_bacias_estaduais_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 29
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: hid_ugrh_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 30
+  fields:
+      has_preview: false
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: basemap_oneatlas_2019
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 31
+  fields:
+      has_preview: false
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: metadata_oneatlas_2019
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 32
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_satelite_aqua_m_m_loc_focos_de_calor_p
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 33
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_satelite_aqua_m_t_loc_focos_de_calor_p
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 34
+  fields:
+      has_preview: true
+      has_detail: true
+      detail_width: 100
+      geoserver: 1
+      geoserver_layer_name: met_risco_fogo_previsao_1dia_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 35
+  fields:
+      has_preview: true
+      has_detail: true
+      detail_width: 100
+      geoserver: 1
+      geoserver_layer_name: met_risco_fogo_previsao_2dias_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 36
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-acre-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 37
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-amapa-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 38
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-amazonas-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 39
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-amazonia_legal
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 40
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-brasil-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 41
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-mato_grosso-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 42
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-para-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 43
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-rondonia-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 44
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-roraima-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 45
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-tocantins-group
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 46
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-acre-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 47
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-alagoas-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 48
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-amapa-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 49
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-amazonas-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 50
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-bahia-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 51
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: group-landsat8-brasil-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 52
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-ceara-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 53
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-distrito-federal-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 54
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-espirito-santo-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 55
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-goias-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 56
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-maranhao-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 57
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-mato-grosso-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 58
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-mato-grosso-do-sul-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 59
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-minas-gerais-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 60
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-para-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 61
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-paraiba-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 62
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-parana-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 63
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-pernambuco-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 64
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-piaui-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 65
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-rio-de-janeiro-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 66
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-rio-grande-do-norte-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 67
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-rio-grande-do-sul-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 68
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-rondonia-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 69
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-roraima-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 70
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-santa-catarina-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 71
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-sao-paulo-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 72
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-sergipe-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 73
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: landsat8-tocantins-2018
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 101
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_AC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 102
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_AL
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 103
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_AP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 105
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_BA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 104
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_AM
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 106
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_CE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 107
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_DF
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 108
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_ES
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 109
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_GO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 110
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_MA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 112
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_MS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 111
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_MT
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 114
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_PA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 113
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_MG
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 116
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_PR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 115
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_PB
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 117
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_PE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 118
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_PI
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 119
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 120
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_RN
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 122
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_RO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 123
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_RR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 124
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_SC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 126
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_SE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 121
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_RS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 127
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_TO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 125
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2019_SP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 128
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_AC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 129
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_AL
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 130
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_AP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 131
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_AM
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 132
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_BA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 133
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_CE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 134
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_DF
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 135
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_ES
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 136
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_GO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 137
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_MA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 138
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_MT
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 139
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_MS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 140
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_MG
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 141
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_PA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 142
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_PB
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 143
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_PR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 144
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_PE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 145
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_PI
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 146
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 147
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_RN
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 148
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_RS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 149
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_RO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 150
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_RR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 151
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_SC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 152
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_SP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 153
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_SE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 154
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Landsat_8_2020_TO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 155
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_AC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 156
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_AL
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 157
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_AP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 158
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_AM
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 159
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_BA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 160
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_CE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 161
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_DF
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 162
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_ES
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 163
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_GO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 164
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_MA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 165
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_MT
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 166
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_MS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 167
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_MG
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 168
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_PA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 169
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_PB
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 170
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_PR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 171
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_PE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 172
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_PI
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 173
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 174
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_RN
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 175
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_RS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 176
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_RO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 177
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_RR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 178
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_SC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 179
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_SP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 180
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_SE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 181
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2018_TO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 182
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_AC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 183
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_AL
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 184
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_AP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 185
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_AM
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 186
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_BA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 187
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_CE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 188
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_DF
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 189
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_ES
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 190
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_GO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 191
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_MA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 192
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_MT
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 193
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_MS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 194
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_MG
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 195
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_PA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 196
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_PB
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 197
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_PR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 198
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_PE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 199
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_PI
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 200
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 201
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_RN
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 202
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_RS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 203
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_RO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 204
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_RR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 205
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_SC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 206
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_SP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 207
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_SE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 208
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2019_TO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 209
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_AC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 210
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_AL
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 211
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_AP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 212
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_AM
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 213
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_BA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 214
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_CE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 215
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_DF
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 216
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_ES
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 217
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_GO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 218
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_MA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 219
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_MT
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 220
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_MS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 221
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_MG
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 222
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_PA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 223
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_PB
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 224
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_PR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 225
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_PE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 226
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_PI
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 227
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 228
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 229
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_RS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 230
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_RO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 231
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_RR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 232
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_SC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 233
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_SP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 234
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_SE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 235
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_1_2020_TO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 236
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_AC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 237
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_AL_P1
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 238
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_AP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 239
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_AM
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 240
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_BA_P1
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 242
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_CE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 243
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_DF
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 244
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_ES
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 245
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_GO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 246
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_MA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 247
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_MT
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 248
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_MS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 249
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_MG_P1
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 250
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_PA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 251
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_PB
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 252
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_PR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 253
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_PE_P1
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 254
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_PI
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 255
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 256
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_RN
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 257
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_RS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 258
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_RO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 259
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_RR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 260
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_SC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 261
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_SP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 262
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_SE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 263
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2018_TO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 264
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_AC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 266
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_AL
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 267
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_AP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 268
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_AM
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 269
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_BA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 270
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_CE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 271
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_DF
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 272
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_ES
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 273
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_GO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 274
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_MA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 275
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_MT
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 276
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_MS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 277
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_MG
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 278
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_PA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 279
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_PB
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 280
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_PR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 282
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_PI
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 281
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_PE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 283
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 284
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_RN
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 285
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_RS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 287
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_RR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 288
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_SC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 289
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_SP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 286
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_RO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 290
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_SE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 291
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2019_TO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 292
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_AC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 293
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_AL
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 294
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_AP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 295
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_AM
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 297
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_CE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 296
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_BA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 298
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_DF
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 299
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_ES
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 300
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_GO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 301
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_MA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 302
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_MT
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 303
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_MS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 304
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_MG
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 305
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_PA
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 306
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_PB
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 307
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_PR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 308
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_PE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 309
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_PI
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 310
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_RJ
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 311
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_RN
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 312
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_RS
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 313
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_RO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 314
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_RR
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 315
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_SC
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 316
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_SP
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 317
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_SE
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 318
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: Mosaico_Sentinel_2_2020_TO
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
