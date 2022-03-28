@@ -86,11 +86,10 @@ class LayersGroup(models.Model):
     )
 
     category_groups = models.ForeignKey(
-        # _('Categoys Group Layers')
-        'CategoryLayersGroup',
+        CategoryLayersGroup,
         default=1,
-        related_name='CategoryGroupsLayers_LayerGroup',
-        on_delete=models.DO_NOTHING  # Ver com o Naldo
+        related_name='category',
+        on_delete=models.DO_NOTHING
     )
 
     class Meta:
