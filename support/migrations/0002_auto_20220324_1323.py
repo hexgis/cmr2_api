@@ -4,8 +4,6 @@ from unicodedata import category
 from django.db import migrations, models
 import django.db.models.deletion
 
-from support.models import LayersGroup
-
 
 class Migration(migrations.Migration):
 
