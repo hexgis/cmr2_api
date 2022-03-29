@@ -1,1 +1,1 @@
-# cmr2_api
+# CMR API
