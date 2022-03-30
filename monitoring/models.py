@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class MonitoringConsolidated(models.Model):
+    """MonitoringConsolidated model data for monitoring model."""
 
     id = models.IntegerField(
         _('Polygon identifier and primary key'),
@@ -108,10 +109,16 @@ class MonitoringConsolidated(models.Model):
     )
 
     class Meta:
+        """Meta class for `monitoring.MonitoringConsolidated` model."""
         app_label = 'monitoring'
-        verbose_name = 'Monitoramento Consolidado'
-        verbose_name_plural = 'Monitoramentos Consolidado'
+        verbose_name = 'Monitoring Consolidated'
+        verbose_name_plural = 'Monitorings Consolidated'
         ordering = ('-dt_t_um',)
 
-    def __str__(self):
+    def __str__(self) -> str:
+        """Returns `monitoring.Monitoring.Consolidated` string data.
+
+        Returns:
+            str: model data name.
+        """
         return f'{self.no_ti} - {self.dt_t_um} - {self.no_estagio}'

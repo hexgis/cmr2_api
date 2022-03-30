@@ -3,6 +3,7 @@ from monitoring import models
 
 
 class MonitoringConsolidatedAdmin(admin.ModelAdmin):
+    """MonitoringConsolidatedAdmin model data."""
 
     list_display = (
         'id',
@@ -14,7 +15,9 @@ class MonitoringConsolidatedAdmin(admin.ModelAdmin):
         'co_funai',
         'no_ti',
     )
+
     fields = list_display
+
     search_fields = list_display
 
 

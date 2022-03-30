@@ -7,8 +7,9 @@ from monitoring import models
 
 
 class MonitoringConsolidatedSerializer(gis_serializers.GeoFeatureModelSerializer):
-
+    """Serializer for `models.MonitoringConsolidated` data."""
     class Meta:
+        """Meta class for `MonitoringConsolidatedSerializer` serializer."""
         model = models.MonitoringConsolidated
         geo_field = 'geom'
         id_field = False
@@ -32,8 +33,9 @@ class MonitoringConsolidatedSerializer(gis_serializers.GeoFeatureModelSerializer
 
 
 class MonitoringConsolidatedDetailSerializer(serializers.ModelSerializer):
-
+    """Serializer for detailed `models.MonitoringConsolidated` data."""
     class Meta:
+        """Meta class for `MonitoringConsolidatedDetailSerializer` serializer."""
         model = models.MonitoringConsolidated
         id_field = False
         fields = (
@@ -55,19 +57,28 @@ class MonitoringConsolidatedDetailSerializer(serializers.ModelSerializer):
 
 
 class MonitoringConsolidatedClassesSerializer(serializers.ModelSerializer):
+    """Serializer for stages 'MonitoringConsolidatedClassesSerializer' data."""
 
     def to_representation(self, instance) -> str:
+        """Representates model data instance as simple string.
+
+        Returns:
+            str: abbreviation of types stages
+        """
         return f'{instance.no_estagio}'
 
     class Meta:
+        """Meta class for `MonitoringConsolidatedClassesSerializer` serializer."""
         model = models.MonitoringConsolidated
         id_field = False
         fields = ('no_estagio',)
 
 
 class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
+    """Serializer for table 'MonitoringConsolidatedClassesSerializer' data."""
 
     class Meta:
+        """Meta class for `MonitoringConsolidatedTableSerializer` serializer."""
         model = models.MonitoringConsolidated
         id_field = False
         fields = (
