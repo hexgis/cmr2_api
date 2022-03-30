@@ -57,4 +57,8 @@ urlpatterns = [
         ('funai.urls', 'funai'),
         namespace='funai')
     ),
+    path('monitoring/', include(
+        ('monitoring.urls', 'monitoring'),
+        namespace='monitoring')
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
