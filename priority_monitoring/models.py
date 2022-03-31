@@ -183,8 +183,8 @@ class PriorityConsolidated(models.Model):
         verbose_name = 'Priority Consolidated'
         verbose_name_plural = 'Prioritys Consolidated'
         ordering = ('-dt_t_zero', 'ranking', 'no_estagio')
-        # db_table = 'funaidados\".\"vwm_monitoramento_consolidado_priorizacao_a'
-        # managed = False
+        db_table = 'funaidados\".\"vwm_monitoramento_consolidado_priorizacao_a'
+        managed = False
 
     def __str__(self):
         """Returns `priority_monitoring.PriorityConsolidated` string data.
