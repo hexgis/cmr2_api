@@ -1,15 +1,15 @@
-"""Database routers."""
+"""Database routers monitoring app."""
 
 
-class PriorityRouter:
-    """Priority database router."""
+class MonitoringRouter:
+    """Monitoring tables, database router funaidados."""
 
-    route_app_labels = {'priority_monitoring'}
+    route_app_labels = {'monitoring'}
 
     def db_for_read(self, model, **hints):
         """Database for read method."""
         if model._meta.app_label in self.route_app_labels:
-            return 'priority_database'
+            return 'database_for_reading'
         return None
 
     def db_for_write(self, model, **hints):
@@ -26,5 +26,5 @@ class PriorityRouter:
     def allow_migrate(self, db, app_label, model_name=None, **hints):
         """Allow database migration."""
         if app_label in self.route_app_labels:
-            return db == 'priority_database'
+            return db == 'database_for_reading'
         return None

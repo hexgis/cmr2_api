@@ -6,7 +6,12 @@
     no_imagem: LC82250692016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: FF
-    dt_cadastro: 2016-11-11 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-11 00:00:00.000
     dt_t_um: 2016-09-19
     co_funai: 33801
     nu_area_km2: 225.315216
@@ -24,7 +29,12 @@
     no_imagem: LC08_L1TP_223070_20180927_20180927_01_RT_r6g5b4
     dt_imagem: 2018-09-27
     no_estagio: FF
-    dt_cadastro: 2018-10-24 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2018-10-24 00:00:00.000
     dt_t_um: 2018-09-27
     co_funai: 73601
     nu_area_km2: 151.861462
@@ -42,7 +52,12 @@
     no_imagem: LC08_L1TP_225069_20200914_20200914_01_RT_r6g5b4
     dt_imagem: 2020-09-14
     no_estagio: FF
-    dt_cadastro: 2020-09-18 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2020-09-18 00:00:00.000
     dt_t_um: 2020-09-14
     co_funai: 33801
     nu_area_km2: 151.539594
@@ -60,7 +75,12 @@
     no_imagem: LC82250682016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: FF
-    dt_cadastro: 2018-03-10 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2018-03-10 00:00:00.000
     dt_t_um: 2016-11-06
     co_funai: 33801
     nu_area_km2: 108.461576
@@ -78,7 +98,12 @@
     no_imagem: LC82250692016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: FF
-    dt_cadastro: 2016-11-11 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-11 00:00:00.000
     dt_t_um: 2016-11-06
     co_funai: 33801
     nu_area_km2: 103.981928
@@ -96,7 +121,12 @@
     no_imagem: LC08_L1TP_225068_20171024_20171025_01_RT_r6g5b4
     dt_imagem: 2017-10-24
     no_estagio: FF
-    dt_cadastro: 2018-01-30 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2018-01-30 00:00:00.000
     dt_t_um: 2017-10-24
     co_funai: 33801
     nu_area_km2: 93.91361
@@ -115,7 +145,12 @@
     no_imagem: LC08_L1TP_225069_20200914_20200914_01_RT_r6g5b4
     dt_imagem: 2020-09-14
     no_estagio: FF
-    dt_cadastro: 2020-09-18 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2020-09-18 00:00:00.000
     dt_t_um: 2020-09-14
     co_funai: 33801
     nu_area_km2: 51.335567
@@ -133,7 +168,12 @@
     no_imagem: LC08_L1TP_225069_20170922_20170922_01_RT_r6g5b4
     dt_imagem: 2017-09-22
     no_estagio: FF
-    dt_cadastro: 2017-11-23 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2017-11-23 00:00:00.000
     dt_t_um: 2017-09-22
     co_funai: 33801
     nu_area_km2: 51.067404
@@ -151,7 +191,12 @@
     no_imagem: LC82250692016279LGN00_r6g5b4
     dt_imagem: 2016-10-05
     no_estagio: FF
-    dt_cadastro: 2016-10-11 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-10-11 00:00:00.000
     dt_t_um: 2016-09-19
     co_funai: 33801
     nu_area_km2: 50.764478
@@ -169,7 +214,12 @@
     no_imagem: LC82250692016247LGN00_r6g5b4
     dt_imagem: 2016-09-03
     no_estagio: FF
-    dt_cadastro: 2016-09-09 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-09-09 00:00:00.000
     dt_t_um: 2016-08-18
     co_funai: 33801
     nu_area_km2: 50.489335
@@ -187,7 +237,12 @@
     no_imagem: LC82250682016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: DG
-    dt_cadastro: 2016-11-11 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-11 00:00:00.000
     dt_t_um: 2016-09-19
     co_funai: 33801
     nu_area_km2: 50.025477
@@ -205,7 +260,12 @@
     no_imagem: LC08_L1TP_225069_20200930_20200930_01_RT_r6g5b4
     dt_imagem: 2020-09-30
     no_estagio: DG
-    dt_cadastro: 2020-10-19 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2020-10-19 00:00:00.000
     dt_t_um: 2020-09-30
     co_funai: 33801
     nu_area_km2: 48.434806
@@ -223,7 +283,12 @@
     no_imagem: LC08_L1TP_225068_20200914_20200914_01_RT_r6g5b4
     dt_imagem: 2020-09-14
     no_estagio: FF
-    dt_cadastro: 2020-09-17 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2020-09-17 00:00:00.000
     dt_t_um: 2020-09-14
     co_funai: 33801
     nu_area_km2: 48.224181
@@ -241,7 +306,12 @@
     no_imagem: LC82250692016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: FF
-    dt_cadastro: 2016-11-11 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-11 00:00:00.000
     dt_t_um: 2016-11-06
     co_funai: 33801
     nu_area_km2: 47.210746
@@ -259,7 +329,12 @@
     no_imagem: LC82240712016288LGN00_r6g5b4
     dt_imagem: 2016-10-14
     no_estagio: DG
-    dt_cadastro: 2016-10-25 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-10-25 00:00:00.000
     dt_t_um: 2016-09-28
     co_funai: 58101
     nu_area_km2: 46.494048
@@ -277,7 +352,12 @@
     no_imagem: LC80010672016294LGN00_r6g5b4
     dt_imagem: 2016-10-20
     no_estagio: FF
-    dt_cadastro: 2018-03-10 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2018-03-10 00:00:00.000
     dt_t_um: 2016-09-18
     co_funai: 22001
     nu_area_km2: 3.991393
@@ -295,7 +375,12 @@
     no_imagem: LC08_L1TP_001067_20170921_20170921_01_RT_r6g5b4
     dt_imagem: 2017-09-21
     no_estagio: FF
-    dt_cadastro: 2018-01-29 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2018-01-29 00:00:00.000
     dt_t_um: 2017-07-03
     co_funai: 2901
     nu_area_km2: 3.404481
@@ -313,7 +398,12 @@
     no_imagem: LC08_L1TP_003067_20190909_20190909_01_RT_r6g5b4
     dt_imagem: 2019-09-09
     no_estagio: FF
-    dt_cadastro: 2019-10-02 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2019-10-02 00:00:00.000
     dt_t_um: 2019-08-24
     co_funai: 7301
     nu_area_km2: 2.007029
@@ -331,7 +421,12 @@
     no_imagem: LC80010672016294LGN00_r6g5b4
     dt_imagem: 2016-10-20
     no_estagio: FF
-    dt_cadastro: 2016-11-08 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-08 00:00:00.000
     dt_t_um: 2016-09-18
     co_funai: 22001
     nu_area_km2: 1.660924
@@ -349,7 +444,12 @@
     no_imagem: LC80020662016317LGN00_r6g5b4
     dt_imagem: 2016-11-12
     no_estagio: FF
-    dt_cadastro: 2016-11-21 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-21 00:00:00.000
     dt_t_um: 2016-11-12
     co_funai: 8501
     nu_area_km2: 1.303835
@@ -367,7 +467,12 @@
     no_imagem: LC80010672016262LGN00_r6g5b4
     dt_imagem: 2016-09-18
     no_estagio: DG
-    dt_cadastro: 2016-10-10 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-10-10 00:00:00.000
     dt_t_um: 2016-09-18
     co_funai: 22001
     nu_area_km2: 1.185217
@@ -385,7 +490,12 @@
     no_imagem: LC80020662016253LGN00_r6g5b4
     dt_imagem: 2016-09-09
     no_estagio: FF
-    dt_cadastro: 2022-02-21 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2022-02-21 00:00:00.000
     dt_t_um: 2016-09-09
     co_funai: 2901
     nu_area_km2: 1.016125
@@ -403,7 +513,12 @@
     no_imagem: LC80030662016292LGN00_r6g5b4
     dt_imagem: 2016-10-18
     no_estagio: DG
-    dt_cadastro: 2016-11-08 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-08 00:00:00.000
     dt_t_um: 2016-10-18
     co_funai: 1201
     nu_area_km2: 1.002485
@@ -421,7 +536,12 @@
     no_imagem: LC80020662016253LGN00_r6g5b4
     dt_imagem: 2016-09-09
     no_estagio: FF
-    dt_cadastro: 2016-09-23 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-09-23 00:00:00.000
     dt_t_um: 2016-09-09
     co_funai: 2901
     nu_area_km2: 0.976882
@@ -439,7 +559,12 @@
     no_imagem: LC80010672016294LGN00_r6g5b4
     dt_imagem: 2016-10-20
     no_estagio: FF
-    dt_cadastro: 2016-11-08 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-08 00:00:00.000
     dt_t_um: 2016-09-02
     co_funai: 22001
     nu_area_km2: 0.975843
@@ -457,7 +582,12 @@
     no_imagem: LC08_L1TP_001067_20170921_20170921_01_RT_r6g5b4
     dt_imagem: 2017-09-21
     no_estagio: FF
-    dt_cadastro: 2018-01-29 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2018-01-29 00:00:00.000
     dt_t_um: 2017-07-03
     co_funai: 2901
     nu_area_km2: 0.906895
@@ -475,7 +605,12 @@
     no_imagem: LC80010672016230LGN00_r6g5b4
     dt_imagem: 2016-08-17
     no_estagio: FF
-    dt_cadastro: 2016-09-08 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-09-08 00:00:00.000
     dt_t_um: 2016-08-17
     co_funai: 2901
     nu_area_km2: 0.830028
@@ -493,7 +628,12 @@
     no_imagem: LC80010672016294LGN00_r6g5b4
     dt_imagem: 2016-10-20
     no_estagio: FF
-    dt_cadastro: 2016-11-08 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2016-11-08 00:00:00.000
     dt_t_um: 2016-09-18
     co_funai: 22001
     nu_area_km2: 0.786556
@@ -511,7 +651,12 @@
     no_imagem: LC08_L1TP_001067_20191013_20191013_01_RT_r6g5b4
     dt_imagem: 2019-10-13
     no_estagio: CR
-    dt_cadastro: 2019-11-26 00:00:00.000
+    nu_orbita: 253
+    no_ciclo: 38
+    nu_ponto: 123
+    nu_latitude: 99
+    nu_longitude: 99
+    dt_t_zero: 2019-11-26 00:00:00.000
     dt_t_um: 2019-09-27
     co_funai: 22001
     nu_area_km2: 0.77381

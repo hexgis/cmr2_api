@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: testdb
       POSTGRES_PASSWORD: testpassword
   
-  db_priority:
+  db_FOR_READING:
     image: circleci/postgres:10-postgis
     environment:
       POSTGRES_USER: user
@@ -25,7 +25,6 @@ services:
       && python manage.py loaddata coordenacao_regional.yaml
       && python manage.py loaddata terras_indigenas.yaml
       && python manage.py loaddata support.yaml
-      && python manage.py loaddata priority_consolidated.yaml
       && python manage.py loaddata fixtures/user.yaml
       && python manage.py runserver 0.0.0.0:8080"
 
@@ -38,10 +37,10 @@ services:
       DB_NAME: testdb
       DB_PASSWORD: testpassword
       DB_HOST: db
-      DB_USER_PRIORITY: user
-      DB_NAME_PRIORITY: database
-      DB_PASSWORD_PRIORITY: asdfsa
-      DB_HOST_PRIORITY: db_priority
+      DB_USER_FOR_READING: user
+      DB_NAME_FOR_READING: database
+      DB_PASSWORD_FOR_READING: asdfsa
+      DB_HOST_FOR_READING: db_priority
       PORT: 8080
     depends_on:
       - db

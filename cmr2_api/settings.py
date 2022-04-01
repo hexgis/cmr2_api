@@ -96,18 +96,19 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', 5432)
     },
-    'priority_database': {
+    'database_for_reading': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME_PRIORITY'),
-        'USER': os.getenv('DB_USER_PRIORITY'),
-        'PASSWORD': os.getenv('DB_PASSWORD_PRIORITY'),
-        'HOST': os.getenv('DB_HOST_PRIORITY'),
-        'PORT': os.getenv('DB_PORT_PRIORITY', 5432)
+        'NAME': os.getenv('DB_NAME_FUNAI_DADOS'),
+        'USER': os.getenv('DB_USER_FUNAI_DADOS'),
+        'PASSWORD': os.getenv('DB_PASSWORD_FUNAI_DADOS'),
+        'HOST': os.getenv('DB_HOST_FUNAI_DADOS'),
+        'PORT': os.getenv('DB_PORT_FUNAI_DADOS', 5432)
     },
 }
 
 DATABASE_ROUTERS = [
-    'cmr2_api.database_routers.PriorityRouters.PriorityRouter'
+    'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter'
+    'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter'
 ]
 
 # Default auto field
