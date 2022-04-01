@@ -9,7 +9,7 @@ class MonitoringRouter:
     def db_for_read(self, model, **hints):
         """Database for read method."""
         if model._meta.app_label in self.route_app_labels:
-            return 'database_for_reading'
+            return 'db_for_read'
         return None
 
     def db_for_write(self, model, **hints):
@@ -26,5 +26,5 @@ class MonitoringRouter:
     def allow_migrate(self, db, app_label, model_name=None, **hints):
         """Allow database migration."""
         if app_label in self.route_app_labels:
-            return db == 'database_for_reading'
+            return db == 'db_for_read'
         return None

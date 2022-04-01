@@ -96,13 +96,13 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', 5432)
     },
-    'database_for_reading': {
+    'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME_FUNAI_DADOS'),
-        'USER': os.getenv('DB_USER_FUNAI_DADOS'),
-        'PASSWORD': os.getenv('DB_PASSWORD_FUNAI_DADOS'),
-        'HOST': os.getenv('DB_HOST_FUNAI_DADOS'),
-        'PORT': os.getenv('DB_PORT_FUNAI_DADOS', 5432)
+        'NAME': os.getenv('DB_NAME_FOR_READ'),
+        'USER': os.getenv('DB_USER_FOR_READ'),
+        'PASSWORD': os.getenv('DB_PASSWORD_FOR_READ'),
+        'HOST': os.getenv('DB_HOST_FOR_READ'),
+        'PORT': os.getenv('DB_PORT_FOR_READ', 5432)
     },
 }
 

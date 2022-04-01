@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: testdb
       POSTGRES_PASSWORD: testpassword
   
-  db_FOR_READING:
+  db_for_read:
     image: circleci/postgres:10-postgis
     environment:
       POSTGRES_USER: user
@@ -37,14 +37,14 @@ services:
       DB_NAME: testdb
       DB_PASSWORD: testpassword
       DB_HOST: db
-      DB_USER_FOR_READING: user
-      DB_NAME_FOR_READING: database
-      DB_PASSWORD_FOR_READING: asdfsa
-      DB_HOST_FOR_READING: db_priority
+      DB_USER_FOR_READ: user
+      DB_NAME_FOR_READ: database
+      DB_PASSWORD_FOR_READ: asdfsa
+      DB_HOST_FOR_READ: db_priority
       PORT: 8080
     depends_on:
       - db
-      - db_priority
+      - db_for_read
 
   test:
     build:
