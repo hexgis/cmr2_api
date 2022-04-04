@@ -1,0 +1,120 @@
+- model: auth.user
+  pk: 1
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: true
+    username: root
+    first_name: ''
+    last_name: ''
+    email: root@hexgis.com
+    is_staff: true
+    is_active: true
+    date_joined: 2019-12-19 21:43:16.265931+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 3
+  fields:
+    password: pbkdf2_sha256$260000$DgLquvDm2e7lX0mwDt00wU$9CGn4V40kzZ7vI2nfSbTnLt3uQRuliNazNwfbpmuQ4I=
+    last_login: null
+    is_superuser: false
+    username: victor.dourado@hex360.com.br
+    first_name: Victor
+    last_name: Dourado
+    email: victor.dourado@hex360.com.br
+    is_staff: false
+    is_active: true
+    date_joined: 2022-04-04 20:35:00+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 4
+  fields:
+    password: pbkdf2_sha256$260000$rNDvUm9sV4hFXhjjBnwKSr$RM/uY108WiZwPR6t7uLvRuMtOELG3Te7OD1zmOVGb70=
+    last_login: null
+    is_superuser: false
+    username: gabriel.mariano@hex360.com.br
+    first_name: Gabriel
+    last_name: Mariano
+    email: gabriel.mariano@hex360.com.br
+    is_staff: false
+    is_active: true
+    date_joined: 2022-04-04 20:37:43+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 5
+  fields:
+    password: pbkdf2_sha256$260000$N2XZQ0XgKvLfdlMXq48XMP$XkcUcgLQteurgITrxMxburELMvCulcptA/6ESm/uG2c=
+    last_login: null
+    is_superuser: false
+    username: francielle.lima@hex360.com.br
+    first_name: Francielle
+    last_name: Lima
+    email: francielle.lima@hex360.com.br
+    is_staff: false
+    is_active: true
+    date_joined: 2022-04-04 20:40:23+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 6
+  fields:
+    password: pbkdf2_sha256$260000$j7gIUyAKibtJWVwrFIe5f6$PjYTl/Gl/iYdOzxk96gisG+q9c03Zp5gtk3aY6KHm3c=
+    last_login: null
+    is_superuser: false
+    username: laynara.oliveira@hex360.com.br
+    first_name: Laynara
+    last_name: Sá
+    email: laynara.oliveira@hex360.com.br
+    is_staff: false
+    is_active: true
+    date_joined: 2022-04-04 20:42:35+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 7
+  fields:
+    password: pbkdf2_sha256$260000$FgRAI0QdhEzhvobztwWm01$RsTJ6gg0Vvd3ImOgsHcav1Xdt5z0dDSqEMj9lllKiro=
+    last_login: null
+    is_superuser: false
+    username: cinthya.marinho@hex360.com.br
+    first_name: Cinthya
+    last_name: Marinho
+    email: cinthya.marinho@hex360.com.br
+    is_staff: false
+    is_active: true
+    date_joined: 2022-04-04 20:47:13+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 9
+  fields:
+    password: pbkdf2_sha256$260000$g9n2vwe7ghzFVBFZeXFThI$EgkL+5wj+6cEy8bCWr8JmtMUJQ7knvCOE62cdh4Cmks=
+    last_login: 2022-04-04 21:17:17.949223+00:00
+    is_superuser: true
+    username: lucas.alves@hex360.com.br
+    first_name: Lucas
+    last_name: Sena Alves
+    email: lucas.alves@hex360.com.br
+    is_staff: true
+    is_active: true
+    date_joined: 2022-04-04 21:02:15+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 11
+  fields:
+    password: pbkdf2_sha256$260000$RWDBenLjZk8llxULtMaIpu$KNQIf0jLDpIkVSX9arYILRvDthgzphicDPY1cgN7igA=
+    last_login: 2022-04-04 21:16:51.246627+00:00
+    is_superuser: true
+    username: admin
+    first_name: ''
+    last_name: ''
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2022-04-04 21:16:27.158290+00:00
+    groups: []
+    user_permissions: []
