@@ -2,7 +2,6 @@
   pk: 14
   fields:
     id: 207085930
-    tb_ciclo_monitoramento_id: 4
     no_imagem: LC82250692016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: FF
@@ -25,7 +24,6 @@
   pk: 20
   fields:
     id: 207292892
-    tb_ciclo_monitoramento_id: 28
     no_imagem: LC08_L1TP_223070_20180927_20180927_01_RT_r6g5b4
     dt_imagem: 2018-09-27
     no_estagio: FF
@@ -48,7 +46,6 @@
   pk: 21
   fields:
     id: 207085922
-    tb_ciclo_monitoramento_id: 50
     no_imagem: LC08_L1TP_225069_20200914_20200914_01_RT_r6g5b4
     dt_imagem: 2020-09-14
     no_estagio: FF
@@ -71,7 +68,6 @@
   pk: 22
   fields:
     id: 207088890
-    tb_ciclo_monitoramento_id: 5
     no_imagem: LC82250682016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: FF
@@ -94,7 +90,6 @@
   pk: 24
   fields:
     id: 207085380
-    tb_ciclo_monitoramento_id: 5
     no_imagem: LC82250692016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: FF
@@ -117,7 +112,6 @@
   pk: 26
   fields:
     id: 207086011
-    tb_ciclo_monitoramento_id: 16
     no_imagem: LC08_L1TP_225068_20171024_20171025_01_RT_r6g5b4
     dt_imagem: 2017-10-24
     no_estagio: FF
@@ -141,7 +135,6 @@
   pk: 31
   fields:
     id: 207084824
-    tb_ciclo_monitoramento_id: 50
     no_imagem: LC08_L1TP_225069_20200914_20200914_01_RT_r6g5b4
     dt_imagem: 2020-09-14
     no_estagio: FF
@@ -164,7 +157,6 @@
   pk: 32
   fields:
     id: 207086037
-    tb_ciclo_monitoramento_id: 15
     no_imagem: LC08_L1TP_225069_20170922_20170922_01_RT_r6g5b4
     dt_imagem: 2017-09-22
     no_estagio: FF
@@ -187,7 +179,6 @@
   pk: 34
   fields:
     id: 207083471
-    tb_ciclo_monitoramento_id: 4
     no_imagem: LC82250692016279LGN00_r6g5b4
     dt_imagem: 2016-10-05
     no_estagio: FF
@@ -210,7 +201,6 @@
   pk: 35
   fields:
     id: 207085920
-    tb_ciclo_monitoramento_id: 3
     no_imagem: LC82250692016247LGN00_r6g5b4
     dt_imagem: 2016-09-03
     no_estagio: FF
@@ -233,7 +223,6 @@
   pk: 36
   fields:
     id: 207086408
-    tb_ciclo_monitoramento_id: 4
     no_imagem: LC82250682016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: DG
@@ -256,7 +245,6 @@
   pk: 38
   fields:
     id: 207084869
-    tb_ciclo_monitoramento_id: 51
     no_imagem: LC08_L1TP_225069_20200930_20200930_01_RT_r6g5b4
     dt_imagem: 2020-09-30
     no_estagio: DG
@@ -279,7 +267,6 @@
   pk: 39
   fields:
     id: 207087713
-    tb_ciclo_monitoramento_id: 50
     no_imagem: LC08_L1TP_225068_20200914_20200914_01_RT_r6g5b4
     dt_imagem: 2020-09-14
     no_estagio: FF
@@ -302,7 +289,6 @@
   pk: 40
   fields:
     id: 207085173
-    tb_ciclo_monitoramento_id: 5
     no_imagem: LC82250692016311LGN00_r6g5b4
     dt_imagem: 2016-11-06
     no_estagio: FF
@@ -325,7 +311,6 @@
   pk: 43
   fields:
     id: 207258190
-    tb_ciclo_monitoramento_id: 4
     no_imagem: LC82240712016288LGN00_r6g5b4
     dt_imagem: 2016-10-14
     no_estagio: DG
@@ -348,7 +333,6 @@
   pk: 47
   fields:
     id: 206958306
-    tb_ciclo_monitoramento_id: 3
     no_imagem: LC80010672016294LGN00_r6g5b4
     dt_imagem: 2016-10-20
     no_estagio: FF
@@ -371,7 +355,6 @@
   pk: 48
   fields:
     id: 206855433
-    tb_ciclo_monitoramento_id: 12
     no_imagem: LC08_L1TP_001067_20170921_20170921_01_RT_r6g5b4
     dt_imagem: 2017-09-21
     no_estagio: FF
@@ -394,7 +377,6 @@
   pk: 49
   fields:
     id: 206891554
-    tb_ciclo_monitoramento_id: 38
     no_imagem: LC08_L1TP_003067_20190909_20190909_01_RT_r6g5b4
     dt_imagem: 2019-09-09
     no_estagio: FF
@@ -417,7 +399,6 @@
   pk: 50
   fields:
     id: 206957890
-    tb_ciclo_monitoramento_id: 3
     no_imagem: LC80010672016294LGN00_r6g5b4
     dt_imagem: 2016-10-20
     no_estagio: FF
@@ -440,7 +421,6 @@
   pk: 51
   fields:
     id: 206900363
-    tb_ciclo_monitoramento_id: 5
     no_imagem: LC80020662016317LGN00_r6g5b4
     dt_imagem: 2016-11-12
     no_estagio: FF
@@ -463,7 +443,6 @@
   pk: 52
   fields:
     id: 206957851
-    tb_ciclo_monitoramento_id: 3
     no_imagem: LC80010672016262LGN00_r6g5b4
     dt_imagem: 2016-09-18
     no_estagio: DG
@@ -486,7 +465,6 @@
   pk: 53
   fields:
     id: 206855616
-    tb_ciclo_monitoramento_id: 3
     no_imagem: LC80020662016253LGN00_r6g5b4
     dt_imagem: 2016-09-09
     no_estagio: FF
@@ -509,7 +487,6 @@
   pk: 54
   fields:
     id: 206835533
-    tb_ciclo_monitoramento_id: 4
     no_imagem: LC80030662016292LGN00_r6g5b4
     dt_imagem: 2016-10-18
     no_estagio: DG
@@ -532,7 +509,6 @@
   pk: 55
   fields:
     id: 206855335
-    tb_ciclo_monitoramento_id: 3
     no_imagem: LC80020662016253LGN00_r6g5b4
     dt_imagem: 2016-09-09
     no_estagio: FF
@@ -555,7 +531,6 @@
   pk: 56
   fields:
     id: 206958209
-    tb_ciclo_monitoramento_id: 3
     no_imagem: LC80010672016294LGN00_r6g5b4
     dt_imagem: 2016-10-20
     no_estagio: FF
@@ -578,7 +553,6 @@
   pk: 57
   fields:
     id: 206855773
-    tb_ciclo_monitoramento_id: 12
     no_imagem: LC08_L1TP_001067_20170921_20170921_01_RT_r6g5b4
     dt_imagem: 2017-09-21
     no_estagio: FF
@@ -601,7 +575,6 @@
   pk: 58
   fields:
     id: 206855767
-    tb_ciclo_monitoramento_id: 2
     no_imagem: LC80010672016230LGN00_r6g5b4
     dt_imagem: 2016-08-17
     no_estagio: FF
@@ -624,7 +597,6 @@
   pk: 59
   fields:
     id: 206958301
-    tb_ciclo_monitoramento_id: 3
     no_imagem: LC80010672016294LGN00_r6g5b4
     dt_imagem: 2016-10-20
     no_estagio: FF
@@ -647,7 +619,6 @@
   pk: 60
   fields:
     id: 206957926
-    tb_ciclo_monitoramento_id: 39
     no_imagem: LC08_L1TP_001067_20191013_20191013_01_RT_r6g5b4
     dt_imagem: 2019-10-13
     no_estagio: CR

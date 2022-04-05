@@ -15,7 +15,6 @@ class MonitoringConsolidatedSerializer(gis_serializers.GeoFeatureModelSerializer
         id_field = False
         fields = (
             'id',
-            'tb_ciclo_monitoramento_id',
             'no_imagem',
             'dt_imagem',
             'no_estagio',
@@ -45,7 +44,6 @@ class MonitoringConsolidatedDetailSerializer(serializers.ModelSerializer):
         id_field = False
         fields = (
             'id',
-            'tb_ciclo_monitoramento_id',
             'no_imagem',
             'dt_imagem',
             'no_estagio',
@@ -93,7 +91,6 @@ class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
         id_field = False
         fields = (
             'id',
-            'tb_ciclo_monitoramento_id',
             'no_imagem',
             'dt_imagem',
             'no_estagio',

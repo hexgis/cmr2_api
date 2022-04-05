@@ -107,7 +107,7 @@ DATABASES = {
 }
 
 DATABASE_ROUTERS = [
-    'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter'
+    'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter'
 ]
 
