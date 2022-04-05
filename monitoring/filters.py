@@ -60,7 +60,9 @@ class MonitoringConsolidatedFilter(rest_framework.FilterSet):
         """Meta class for `MonitoringConsolidatedFilter` filter."""
         model = models.MonitoringConsolidated
         fields = (
-            'dt_t_um',
             'co_cr',
             'co_funai',
+            'stage',
+            'start_date',
+            'end_date',
         )
