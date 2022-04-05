@@ -14,6 +14,21 @@
     groups: []
     user_permissions: []
 - model: auth.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$260000$r5hwhC82bc9FNmB5svK9uQ$WBKzh4TKaij3Z1kCkff/4MEu/Jscqp6tpNZKqHhJPwE=
+    last_login: 2022-04-05 14:24:50.921914+00:00
+    is_superuser: true
+    username: admin
+    first_name: ''
+    last_name: ''
+    email: ''
+    is_staff: true
+    is_active: true
+    date_joined: 2022-04-04 21:16:27.158290+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
   pk: 3
   fields:
     password: pbkdf2_sha256$260000$DgLquvDm2e7lX0mwDt00wU$9CGn4V40kzZ7vI2nfSbTnLt3uQRuliNazNwfbpmuQ4I=
@@ -89,7 +104,7 @@
     groups: []
     user_permissions: []
 - model: auth.user
-  pk: 9
+  pk: 8
   fields:
     password: pbkdf2_sha256$260000$g9n2vwe7ghzFVBFZeXFThI$EgkL+5wj+6cEy8bCWr8JmtMUJQ7knvCOE62cdh4Cmks=
     last_login: 2022-04-04 21:17:17.949223+00:00
@@ -104,17 +119,32 @@
     groups: []
     user_permissions: []
 - model: auth.user
-  pk: 11
+  pk: 9
   fields:
-    password: pbkdf2_sha256$260000$RWDBenLjZk8llxULtMaIpu$KNQIf0jLDpIkVSX9arYILRvDthgzphicDPY1cgN7igA=
-    last_login: 2022-04-04 21:16:51.246627+00:00
-    is_superuser: true
-    username: admin
-    first_name: ''
-    last_name: ''
-    email: ''
-    is_staff: true
+    password: pbkdf2_sha256$260000$60724CcehLiTB9rEiTcwZ1$pyLy7+R8oLLvJkpOID8VBc9tKfDkRrJMg0vDipRoDLw=
+    last_login: null
+    is_superuser: false
+    username: dione.silva@hex360.com.br
+    first_name: Dione
+    last_name: Paulo
+    email: dione.silva@hex360.com.br
+    is_staff: false
     is_active: true
-    date_joined: 2022-04-04 21:16:27.158290+00:00
+    date_joined: 2022-04-05 14:28:20+00:00
+    groups: []
+    user_permissions: []
+- model: auth.user
+  pk: 10
+  fields:
+    password: pbkdf2_sha256$260000$E3WnJNl8TnWlMIfQFo3KdJ$0dyObnRezHPAaM3avwNkgWyK28W2Z8GwMjfZgIjHit4=
+    last_login: null
+    is_superuser: false
+    username: guilherme.micas@hex360.com.br
+    first_name: Gulherme
+    last_name: Micas
+    email: guilherme.micas@hex360.com.br
+    is_staff: false
+    is_active: true
+    date_joined: 2022-04-05 14:47:27+00:00
     groups: []
     user_permissions: []
