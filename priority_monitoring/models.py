@@ -3,13 +3,14 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class PriorityConsolidated(models.Model):
-    """PriorityConsolidated model data for priority model."""
+    """PriorityConsolidated model data for priority_monitoring model."""
 
     id = models.IntegerField(
+        _('Identifier and primary key'),
         unique=True,
         primary_key=True,
     )
-    
+
     tb_ciclo_monitoramento_id = models.IntegerField(
         _('Monitoring cycle identifier'),
         null=True,
@@ -50,7 +51,7 @@ class PriorityConsolidated(models.Model):
         blank=True,
     )
 
-    dt_t_zero= models.DateField(
+    dt_t_zero = models.DateField(
         _('Date of first detected change'),
         null=True,
         blank=True,
@@ -180,7 +181,7 @@ class PriorityConsolidated(models.Model):
         """Meta class for `priority_monitoring.PriorityConsolidated` model."""
         app_label = 'priority_monitoring'
         verbose_name = 'Priority Consolidated'
-        verbose_name_plural = 'Priority Consolidated'
+        verbose_name_plural = 'Priorities Consolidated'
         ordering = ('-dt_t_zero', 'ranking', 'no_estagio')
         db_table = 'funaidados\".\"vwm_monitoramento_consolidado_priorizacao_a'
         managed = False
