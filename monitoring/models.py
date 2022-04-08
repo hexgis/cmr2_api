@@ -1,5 +1,3 @@
-# from funai.models import CoordenacaoRegional, LimiteTerraIndigena
-
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -94,14 +92,6 @@ class MonitoringConsolidated(models.Model):
         blank=True,
     )
 
-    # co_cr = models.ForeignKey(
-    #     CoordenacaoRegional,
-    #     blank=True,
-    #     null=True,
-    #     to_field='co_cr',
-    #     related_name='cr_monitoring',
-    #     on_delete=models.DO_NOTHING,
-    # )
     co_cr = models.IntegerField(
         _('Funai code'),
         blank=True,
@@ -115,14 +105,6 @@ class MonitoringConsolidated(models.Model):
         blank=True,
     )
 
-    # co_funai = models.ForeignKey(
-    #     LimiteTerraIndigena,
-    #     blank=True,
-    #     null=True,
-    #     to_field='co_funai',
-    #     related_name='ti_monitoring',
-    #     on_delete=models.DO_NOTHING,
-    # )
     co_funai = models.IntegerField(
         _('Funai code - Indigenou Lands'),
         blank=True,
