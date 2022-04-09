@@ -1,5 +1,3 @@
-from funai.models import CoordenacaoRegional, LimiteTerraIndigena
-
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -11,12 +9,6 @@ class MonitoringConsolidated(models.Model):
         _('Polygon identifier and primary key'),
         unique=True,
         primary_key=True,
-    )
-
-    tb_ciclo_monitoramento_id = models.IntegerField(
-        _('Monitoring cycle identifier'),
-        null=True,
-        blank=True,
     )
 
     no_imagem = models.CharField(
@@ -39,8 +31,8 @@ class MonitoringConsolidated(models.Model):
         blank=True,
     )
 
-    dt_cadastro = models.DateField(
-        _('Date of register polygon change'),
+    dt_t_zero = models.DateField(
+        _('Data before changes detects'),
         null=True,
         blank=True,
     )
@@ -63,13 +55,47 @@ class MonitoringConsolidated(models.Model):
         blank=True,
     )
 
-    co_cr = models.ForeignKey(
-        CoordenacaoRegional,
+    no_ciclo = models.CharField(
+        _('Cycle of monitoring Indigenous Lands in the Legal Amazon'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    nu_orbita = models.CharField(
+        _('Satellit Sentinel orbit'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    nu_ponto = models.CharField(
+        _('Orbit point'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    nu_latitude = models.DecimalField(
+        _('Latitude'),
+        max_digits=20,
+        decimal_places=15,
+        null=True,
+        blank=True,
+    )
+
+    nu_longitude = models.DecimalField(
+        _('Longitude'),
+        max_digits=20,
+        decimal_places=15,
+        null=True,
+        blank=True,
+    )
+
+    co_cr = models.IntegerField(
+        _('Funai code'),
         blank=True,
         null=True,
-        to_field='co_cr',
-        related_name='cr_monitoring',
-        on_delete=models.DO_NOTHING,
     )
 
     ds_cr = models.CharField(
@@ -79,13 +105,10 @@ class MonitoringConsolidated(models.Model):
         blank=True,
     )
 
-    co_funai = models.ForeignKey(
-        LimiteTerraIndigena,
+    co_funai = models.IntegerField(
+        _('Funai code - Indigenou Lands'),
         blank=True,
         null=True,
-        to_field='co_funai',
-        related_name='ti_monitoring',
-        on_delete=models.DO_NOTHING,
     )
 
     no_ti = models.CharField(
@@ -114,6 +137,8 @@ class MonitoringConsolidated(models.Model):
         verbose_name = 'Monitoring Consolidated'
         verbose_name_plural = 'Monitorings Consolidated'
         ordering = ('-dt_t_um',)
+        db_table = 'funaidados\".\"img_monitoramento_terra_indigena_cr_a'
+        managed = False
 
     def __str__(self) -> str:
         """Returns `monitoring.Monitoring.Consolidated` string data.
