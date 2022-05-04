@@ -79,6 +79,7 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
             'no_ti',
         )
 
+
 class PriorityConsolidatedTableSerializer(serializers.ModelSerializer):
 
     class Meta:
