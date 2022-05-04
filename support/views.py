@@ -1,4 +1,6 @@
 from rest_framework import generics
+from django_filters.rest_framework import DjangoFilterBackend
+
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import (
     SessionAuthentication, BasicAuthentication
@@ -6,28 +8,31 @@ from rest_framework.authentication import (
 
 from .models import (LayersGroup, CategoryLayersGroup)
 from .serializers import (LayersGroupSerializer, CategoryLayersGroupSerializer)
+from .filters import LayersGroupFilter
 
 
 class AuthModelMixIn:
-    """ AuthModelMixIn default class for `support.views` """
+    """AuthModelMixIn default class for `support.views`."""
 
     authentication_classes = (SessionAuthentication, BasicAuthentication)
     permission_classes = (IsAuthenticated, )
 
 
 class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
-    """ Layers Group data view """
+    """ Layers Group data view.
 
-    lookup_field = 'id'
+    Filters:
+        * category (int): catagoreis groups list
+    """
+
     serializer_class = LayersGroupSerializer
-
-    def get_queryset(self):
-        id = self.kwargs[self.lookup_field]
-        return LayersGroup.objects.filter(category_groups=id)
+    queryset = LayersGroup.objects.all()
+    filterset_class = LayersGroupFilter
+    filter_backends = (DjangoFilterBackend,)
 
 
 class CategoryLayersGroupView(generics.ListAPIView, AuthModelMixIn):
-    """_Category Layers Group data view """
+    """Category Layers Group data view."""
 
     queryset = CategoryLayersGroup.objects.all().order_by('name')
     serializer_class = CategoryLayersGroupSerializer
