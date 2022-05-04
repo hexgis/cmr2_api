@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'auth_jwt',
     'priority_monitoring',
     'funai',
+    'monitoring',
 ]
 
 MIDDLEWARE = [
@@ -95,18 +96,19 @@ DATABASES = {
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', 5432)
     },
-    'priority_database': {
+    'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME_PRIORITY'),
-        'USER': os.getenv('DB_USER_PRIORITY'),
-        'PASSWORD': os.getenv('DB_PASSWORD_PRIORITY'),
-        'HOST': os.getenv('DB_HOST_PRIORITY'),
-        'PORT': os.getenv('DB_PORT_PRIORITY', 5432)
+        'NAME': os.getenv('DB_NAME_FOR_READ'),
+        'USER': os.getenv('DB_USER_FOR_READ'),
+        'PASSWORD': os.getenv('DB_PASSWORD_FOR_READ'),
+        'HOST': os.getenv('DB_HOST_FOR_READ'),
+        'PORT': os.getenv('DB_PORT_FOR_READ', 5432)
     },
 }
 
 DATABASE_ROUTERS = [
-    'cmr2_api.database_routers.PriorityRouters.PriorityRouter'
+    'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter',
+    'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter'
 ]
 
 # Default auto field

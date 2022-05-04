@@ -8,7 +8,7 @@ services:
       POSTGRES_DB: testdb
       POSTGRES_PASSWORD: testpassword
   
-  db_priority:
+  db_for_read:
     image: circleci/postgres:10-postgis
     environment:
       POSTGRES_USER: user
@@ -22,12 +22,12 @@ services:
     command: >
       bash -c "python manage.py makemigrations --no-input
       && python manage.py migrate
-      && python manage.py loaddata support.yaml
-      && python manage.py loaddata priority_consolidated.yaml
       && python manage.py loaddata coordenacao_regional.yaml
       && python manage.py loaddata terras_indigenas.yaml
       && python manage.py loaddata user.yaml
+      && python manage.py loaddata support.yaml
       && python manage.py runserver 0.0.0.0:8080"
+
     volumes:
       - .:/app/
     ports:
@@ -37,14 +37,14 @@ services:
       DB_NAME: testdb
       DB_PASSWORD: testpassword
       DB_HOST: db
-      DB_USER_PRIORITY: user
-      DB_NAME_PRIORITY: database
-      DB_PASSWORD_PRIORITY: asdfsa
-      DB_HOST_PRIORITY: db_priority
+      DB_USER_FOR_READ: user
+      DB_NAME_FOR_READ: database
+      DB_PASSWORD_FOR_READ: asdfsa
+      DB_HOST_FOR_READ: db_for_read
       PORT: 8080
     depends_on:
       - db
-      - db_priority
+      - db_for_read
 
   test:
     build:
