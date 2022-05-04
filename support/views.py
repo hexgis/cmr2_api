@@ -18,8 +18,12 @@ class AuthModelMixIn:
 class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
     """ Layers Group data view """
 
-    queryset = LayersGroup.objects.all()
+    lookup_field = 'id'
     serializer_class = LayersGroupSerializer
+
+    def get_queryset(self):
+        id = self.kwargs[self.lookup_field]
+        return LayersGroup.objects.filter(category_groups=id)
 
 
 class CategoryLayersGroupView(generics.ListAPIView, AuthModelMixIn):
