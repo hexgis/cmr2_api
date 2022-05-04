@@ -3,12 +3,15 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import (
-    SessionAuthentication, BasicAuthentication
+    SessionAuthentication,
+    BasicAuthentication
 )
 
-from .models import (LayersGroup, CategoryLayersGroup)
-from .serializers import (LayersGroupSerializer, CategoryLayersGroupSerializer)
-from .filters import LayersGroupFilter
+from support import (
+    models,
+    serializers,
+    filters as support_filters
+)
 
 
 class AuthModelMixIn:
@@ -22,17 +25,17 @@ class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
     """ Layers Group data view.
 
     Filters:
-        * category (int): catagoreis groups list
+        * category (int): categoreis groups list
     """
 
-    serializer_class = LayersGroupSerializer
-    queryset = LayersGroup.objects.all()
-    filterset_class = LayersGroupFilter
+    serializer_class = serializers.LayersGroupSerializer
+    queryset = models.LayersGroup.objects.all()
+    filterset_class = support_filters.LayersGroupFilter
     filter_backends = (DjangoFilterBackend,)
 
 
 class CategoryLayersGroupView(generics.ListAPIView, AuthModelMixIn):
     """Category Layers Group data view."""
 
-    queryset = CategoryLayersGroup.objects.all().order_by('name')
-    serializer_class = CategoryLayersGroupSerializer
+    queryset = models.CategoryLayersGroup.objects.all().order_by('name')
+    serializer_class = serializers.CategoryLayersGroupSerializer
