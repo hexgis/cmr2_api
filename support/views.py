@@ -25,7 +25,7 @@ class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
     """ Layers Group data view.
 
     Filters:
-        * category (int): categoreis groups list
+        * category (int): category group type
     """
 
     serializer_class = serializers.LayersGroupSerializer
