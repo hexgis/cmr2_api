@@ -5,7 +5,7 @@ from django.db.models import Sum, Count
 from land_use import (
     models,
     serializers,
-    filters as land_use_mapping_filters
+    filters as land_use_filters
 )
 
 from rest_framework import(generics, permissions)

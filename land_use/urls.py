@@ -10,27 +10,27 @@ urlpatterns = [
         name=''
     ),
     path(
-        'consolidated/years/',
+        'years/',
         views.LandUseMappingYearsView.as_view(),
         name='mapped-years'
     ),
     path(
-        'consolidated/classes/',
+        'classes/',
         views.LandUseMappingClassesView.as_view(),
         name='mapped-classes'
     ),
     path(
-        'consolidated/detail/',
+        'detail/',
         views.LandUseMappingDetailView.as_view(),
         name='mapped-detail'
     ),
     path(
-        'consolidated/table/',
+        'table/',
         views.LandUseMappingTableView.as_view(),
         name='mapped-table'
     ),
     path(
-        'consolidated/states/',
+        'states/',
         views.LandUseMappingStatesView.as_view(),
         name='mapped-states'
     )

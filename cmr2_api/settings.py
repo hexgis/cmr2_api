@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'priority_monitoring',
     'funai',
     'monitoring',
-    'land_use_mapping',
+    'land_use',
 ]
 
 MIDDLEWARE = [
@@ -110,7 +110,7 @@ DATABASES = {
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
-    'cmr2_api.database_routers.LandUseMappingRouters.LandUseMappingRouter'
+    'cmr2_api.database_routers.LandUseRouters.LandUseRouter'
 ]
 
 # Default auto field

@@ -129,7 +129,7 @@ class LandUseMappingTI(models.Model):
     )
 
     class Meta:
-        app_label = 'land_use_mapping'
+        app_label = 'land_use'
         verbose_name = 'Land Use Mapping TI'
         verbose_name_plural = 'Land Use Mapping TIs'
         # db_table = 'funaidados\".\"img_analise_consolidado_oneatlas_dissolvido_por_ti_a'
@@ -226,7 +226,7 @@ class LandUseMappingClasses(models.Model):
     )
 
     class Meta:
-        app_label = 'land_use_mapping'
+        app_label = 'land_use'
         verbose_name = 'Land Use Mapping Class'
         verbose_name_plural = 'Land Use Mapping Classes'
         # db_table = 'funaidados\".\"img_analise_consolidado_oneatlas_dissolvido_por_estagio_a'
