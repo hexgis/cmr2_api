@@ -2,7 +2,7 @@ from django.contrib import admin
 from land_use import models
 
 
-class LandUseMappingClassesAdmin(admin.ModelAdmin):
+class LandUseClassesAdmin(admin.ModelAdmin):
     # list_display = '__all__'
 
     # fields = list_display
@@ -11,7 +11,7 @@ class LandUseMappingClassesAdmin(admin.ModelAdmin):
     pass
 
 
-class LandUseMappingTIAdmin(admin.ModelAdmin):
+class LandUseTIAdmin(admin.ModelAdmin):
     # list_display = '__all__'
 
     # fields = list_display
@@ -20,5 +20,5 @@ class LandUseMappingTIAdmin(admin.ModelAdmin):
     pass
 
 
-admin.site.register(models.LandUseMappingClasses, LandUseMappingClassesAdmin)
-admin.site.register(models.LandUseMappingTI, LandUseMappingTIAdmin)
+admin.site.register(models.LandUseClasses, LandUseClassesAdmin)
+admin.site.register(models.LandUseTI, LandUseTIAdmin)

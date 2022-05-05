@@ -5,14 +5,14 @@ from rest_framework_gis import serializers as gis_serializers
 from land_use import models
 
 
-class LandUseMappingGeomSerializer(gis_serializers.GeoFeatureModelSerializer):
+class LandUseGeomSerializer(gis_serializers.GeoFeatureModelSerializer):
     class Meta:
         geo_field = 'geom'
         field = '__all__'
-        model = models.LandUseMappingClasses
+        model = models.LandUseClasses
 
 
-class LandUseMappingSerializer(serializers.ModelSerializer):
+class LandUseSerializer(serializers.ModelSerializer):
     class Meta:
-        model = models.LandUseMappingTI
+        model = models.LandUseTI
         field = '__all__'

@@ -2,7 +2,7 @@ from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
-class LandUseMappingTI(models.Model):
+class LandUseTI(models.Model):
     id = models.IntegerField(
         _('primary key'),
         unique=True,
@@ -136,7 +136,7 @@ class LandUseMappingTI(models.Model):
         # managed = False
 
 
-class LandUseMappingClasses(models.Model):
+class LandUseClasses(models.Model):
     id = models.IntegerField(
         _('primary key'),
         unique=True,

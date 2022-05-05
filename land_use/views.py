@@ -18,26 +18,26 @@ class AuthModelMixIn:
     permission_classes = (permissions.AllowAny,)
 
 
-class LandUseMappingView(generics.ListAPIView):
-    queryset = models.LandUseMappingClasses
-    serializer_class = serializers.LandUseMappingSerializer
+class LandUseView(generics.ListAPIView):
+    queryset = models.LandUseClasses
+    serializer_class = serializers.LandUseSerializer
 
 
-class LandUseMappingYearsView(generics.ListAPIView):
-    queryset = models.LandUseMappingTI
+class LandUseYearsView(generics.ListAPIView):
+    queryset = models.LandUseTI
 
 
-class LandUseMappingClassesView(generics.ListAPIView):
-    queryset = models.LandUseMappingClasses
+class LandUseClassesView(generics.ListAPIView):
+    queryset = models.LandUseClasses
 
 
-class LandUseMappingDetailView(generics.ListAPIView):
-    queryset = models.LandUseMappingClasses
+class LandUseDetailView(generics.ListAPIView):
+    queryset = models.LandUseClasses
 
 
-class LandUseMappingTableView(generics.ListAPIView):
-    queryset = models.LandUseMappingClasses
+class LandUseTableView(generics.ListAPIView):
+    queryset = models.LandUseClasses
 
 
-class LandUseMappingStatesView(generics.ListAPIView):
-    queryset = models.LandUseMappingClasses
+class LandUseStatesView(generics.ListAPIView):
+    queryset = models.LandUseClasses

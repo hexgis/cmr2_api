@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class LandUseMappingConfig(AppConfig):
+class LandUseConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'land_use'
