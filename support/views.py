@@ -1,11 +1,9 @@
-from rest_framework import generics
-from django_filters import rest_framework
-
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.authentication import (
-    SessionAuthentication,
-    BasicAuthentication
+from rest_framework import (
+    generics,
+    permissions,
+    authentication
 )
+from django_filters import rest_framework
 
 from support import (
     models,
@@ -17,12 +15,14 @@ from support import (
 class AuthModelMixIn:
     """AuthModelMixIn default class for `support.views`."""
 
-    authentication_classes = (SessionAuthentication, BasicAuthentication)
-    permission_classes = (IsAuthenticated, )
+    authentication_classes = (
+        authentication.SessionAuthentication, authentication.BasicAuthentication
+    )
+    permission_classes = (permissions.IsAuthenticated, )
 
 
 class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
-    """ Layers Group data view.
+    """Layers Group data view.
 
     Filters:
         * category (int): category group type

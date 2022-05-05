@@ -7,7 +7,7 @@ class LayersGroupFilter (rest_framework.FilterSet):
     """LayersGroupFilter data.
 
     Filters:
-        category (int): catagoreis groups list
+        category (int): category group type
     """
     category = rest_framework.NumberFilter(
         field_name='category_groups',
