@@ -1,5 +1,5 @@
 from rest_framework import generics
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters import rest_framework
 
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authentication import (
@@ -31,7 +31,7 @@ class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
     serializer_class = serializers.LayersGroupSerializer
     queryset = models.LayersGroup.objects.all()
     filterset_class = support_filters.LayersGroupFilter
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
 class CategoryLayersGroupView(generics.ListAPIView, AuthModelMixIn):
