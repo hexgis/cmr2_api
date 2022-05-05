@@ -13,9 +13,9 @@
 - model: support.CategoryLayersGroup
   pk: 2
   fields:
-      name: BARRA_LATERAL
+      name: TEMATICA_FOGO
       icon: layers
-      description: Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo
+      description: Dados e publicaçẽos que pertencem a Temática Fogo.
 - model: support.CategoryLayersGroup
   pk: 3
   fields:
@@ -25,9 +25,9 @@
 - model: support.CategoryLayersGroup
   pk: 4
   fields:
-      name: FOCO_DE_CALOR
+      name: BARRA_LATERAL
       icon: layers
-      description: Dados e publicaçẽos que pertencem a temática Fogo.
+      description: Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo
 - model: support.layersgroup
   pk: 1
   fields:
@@ -99,18 +99,19 @@
   fields:
       name: Focos de Calor
       order: 16
-      category_groups: 3
+      category_groups: 2
 - model: support.layersgroup
   pk: 17
   fields:
       name: Risco de Fogo
       order: 15
-      category_groups: 3
+      category_groups: 2
 - model: support.layersgroup
   pk: 18
   fields:
       name: Mosaico Sentinel-2 2020
       order: 14
+      category_groups: 3
 - model: support.layer
   pk: 1
   fields:

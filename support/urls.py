@@ -7,6 +7,6 @@ urlpatterns = [
          name='layers-groups'),
 
     path('categorys-groups/', views.CategoryLayersGroupView.as_view(),
-        name='Category-layer-groups'
-    )
+         name='Category-layer-groups'
+         )
 ]
