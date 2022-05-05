@@ -16,7 +16,8 @@ class AuthModelMixIn:
     """AuthModelMixIn default class for `support.views`."""
 
     authentication_classes = (
-        authentication.SessionAuthentication, authentication.BasicAuthentication
+        authentication.SessionAuthentication,
+        authentication.BasicAuthentication
     )
     permission_classes = (permissions.IsAuthenticated, )
 
