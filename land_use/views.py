@@ -21,17 +21,17 @@ class AuthModelMixIn:
     permission_classes = (permissions.AllowAny,)
 
 
-class LandUseView(generics.ListAPIView):
-    queryset = models.LandUseClasses.objects.all()
-    serializer_class = serializers.LandUseSerializer
-    filterset_class = land_use_filters.LandUseClassesFilter
+class LandUseTableView(generics.ListAPIView):
+    queryset = models.LandUseTI.objects.all()
+    serializer_class = serializers.LandUseTableSerializer
+    filterset_class = land_use_filters.LandUseTIFilter
     filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
-class LandUseGeoView(generics.ListAPIView):
-    queryset = models.LandUseClasses.objects.all()
-    serializers_class = serializers.LandUseGeomSerializer
-    filterset_class = land_use_filters.LandUseClassesFilter
+class LandUseView(generics.ListAPIView):
+    queryset = models.LandUseTI.objects.all()
+    serializers_class = serializers.LandUseSerializer
+    filterset_class = land_use_filters.LandUseTIFilter
     filter_backends = (
         rest_framework.DjangoFilterBackend,
         gis_filters.InBBoxFilter,
@@ -39,26 +39,37 @@ class LandUseGeoView(generics.ListAPIView):
 
 
 class LandUseDetailView(generics.RetrieveAPIView):
-    queryset = models.LandUseClasses.objects.all()
+    queryset = models.LandUseTI.objects.all()
     serializers_class = serializers.LandUseDetailSerializer
     lookup_field = 'id'
     filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
 class LandUseYearsView(generics.ListAPIView):
-    queryset = models.LandUseClasses.objects.distinct('no_ano')
+    queryset = models.LandUseTI.objects.distinct('no_ano')
     serializers_class = serializers.LandUseYearsSerializer
-    fiterset_class = land_use_filters.LandUseClassesFilter
+    fiterset_class = land_use_filters.LandUseTIFilter
     filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
 class LandUseClassesView(generics.ListAPIView):
-    queryset = models.LandUseClasses
-
-
-class LandUseTableView(generics.ListAPIView):
-    queryset = models.LandUseClasses
+    queryset = models.LandUseClasses.objects.distinct('no_estagio')
+    serializers_class = serializers.LandUseClassesSerializer
 
 
 class LandUseStatesView(generics.ListAPIView):
-    queryset = models.LandUseClasses
+    queryset = models.LandUseTI.objects.all()
+    serializers_class = serializers.LandUseStatesserializer
+    filterset_class = land_use_filters.LandUseTIFilter
+    bbox_filter_field = 'geom'
+    filter_backends = (
+        rest_framework.DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
+
+    def get(self, request):
+        data = self.filter_queryset(self.queryset).aggregate(
+            area_ha=Sum('nu_area_ha'),
+            area_km2=Sum('nu_area_km2'),
+            total=Count('id')
+        )

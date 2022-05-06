@@ -12,11 +12,11 @@ class NumberInFilter(
     pass
 
 
-class LandUseClassesFilter(rest_framework.FilterSet):
-    co_cr = NumberInFilter(
-        field_name='co_cr',
-        lookup_expr='in'
-    )
+class LandUseTIFilter(rest_framework.FilterSet):
+    # co_cr = NumberInFilter(
+    #     field_name='co_cr',
+    #     lookup_expr='in'
+    # )
 
     co_funai = NumberInFilter(
         field_name='co_funai',
@@ -29,9 +29,9 @@ class LandUseClassesFilter(rest_framework.FilterSet):
     )
 
     class Meta:
-        model = models.LandUseClasses
+        model = models.LandUseTI
         fields = (
-            'co_cr',
+            # 'co_cr',
             'co_funai',
             'year_map',
         )

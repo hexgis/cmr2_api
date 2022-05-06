@@ -10,13 +10,13 @@ class LandUseTI(models.Model):
     )
     sg_uf = models.CharField(
         _(''),
-        max_length=2,
+        max_length=255,
         null=True,
         blank=True
     )
     no_ti = models.CharField(
         _(''),
-        max_length=100,
+        max_length=255,
         null=True,
         blank=True
     )
@@ -27,37 +27,42 @@ class LandUseTI(models.Model):
     )
     dt_homologada = models.CharField(
         _(''),
-        max_length=10,
+        max_length=255,
         null=True,
         blank=True
     )
     ds_cr = models.CharField(
         _(''),
-        max_length=100,
+        max_length=255,
         null=True,
         blank=True
     )
+    # co_cr = models.IntegerField(
+    #     _(''),
+    #     null=True,
+    #     blank=True
+    # )
     nu_ano = models.CharField(
         _(''),
-        max_length=4,
+        max_length=255,
         null=True,
         blank=True
     )
     no_satelites = models.CharField(
         _(''),
-        max_length=50,
+        max_length=255,
         null=True,
         blank=True
     )
     nu_resolucoes = models.CharField(
         _(''),
-        max_length=50,
+        max_length=255,
         null=True,
         blank=True
     )
     dt_imagens = models.CharField(
         _(''),
-        max_length=10,
+        max_length=255,
         null=True,
         blank=True
     )
@@ -144,13 +149,13 @@ class LandUseClasses(models.Model):
     ),
     sg_uf = models.CharField(
         _(''),
-        max_length=2,
+        max_length=255,
         null=True,
         blank=True
     )
     no_ti = models.CharField(
         _(''),
-        max_length=100,
+        max_length=255,
         null=True,
         blank=True
     )
@@ -161,47 +166,52 @@ class LandUseClasses(models.Model):
     )
     dt_homologada = models.CharField(
         _(''),
-        max_length=10,
+        max_length=255,
         null=True,
         blank=True
     )
     ds_cr = models.CharField(
         _(''),
-        max_length=100,
+        max_length=255,
         null=True,
         blank=True
     )
+    # co_cr = models.IntegerField(
+    #     _(''),
+    #     null=True,
+    #     blank=True
+    # )
     nu_ano = models.CharField(
         _(''),
-        max_length=4,
+        max_length=255,
         null=True,
         blank=True
     )
     no_estagio = models.CharField(
         _(''),
-        max_length=2,
+        max_length=255,
         null=True,
         blank=True
     )
     no_satelites = models.CharField(
         _(''),
-        max_length=50,
+        max_length=255,
         null=True,
         blank=True
     )
     nu_resolucoes = models.CharField(
         _(''),
-        max_length=50,
+        max_length=255,
         null=True,
         blank=True
     )
     dt_imagens = models.CharField(
         _(''),
-        max_length=10,
+        max_length=255,
         null=True,
         blank=True
     )
-    nu_area_ha = models.FloatField(
+    nu_area_km2 = models.FloatField(
         _(''),
         null=True,
         blank=True,

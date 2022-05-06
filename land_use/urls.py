@@ -10,12 +10,7 @@ urlpatterns = [
         name='consolidated'
     ),
     path(
-        'consolidated-geo/',
-        views.LandUseGeoView.as_view(),
-        name='consolidated-geo'
-    ),
-    path(
-        'detail/<int:id>',
+        'detail/<int:id>/',
         views.LandUseDetailView.as_view(),
         name='mapped-detail'
     ),
