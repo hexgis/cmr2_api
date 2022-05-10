@@ -5,9 +5,9 @@ from land_use import views
 
 urlpatterns = [
     path(
-        'consolidated/',
+        '',
         views.LandUseView.as_view(),
-        name='consolidated'
+        name='mapping'
     ),
     path(
         'detail/<int:id>/',
@@ -30,8 +30,8 @@ urlpatterns = [
         name='mapped-table'
     ),
     path(
-        'states/',
-        views.LandUseStatesView.as_view(),
-        name='mapped-states'
+        'stats/',
+        views.LandUseStatsView.as_view(),
+        name='mapped-stats'
     )
 ]

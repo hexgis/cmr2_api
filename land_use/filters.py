@@ -12,11 +12,18 @@ class NumberInFilter(
     pass
 
 
-class LandUseTIFilter(rest_framework.FilterSet):
-    # co_cr = NumberInFilter(
-    #     field_name='co_cr',
-    #     lookup_expr='in'
-    # )
+class LandUseClassesFilter(rest_framework.FilterSet):
+    """Django filter `models.LandUseClasses` data.
+
+    Filters:
+        * co_cr (list): filtering Regional Coordenation using code.
+        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * year_map (list): filtering years mapped in land use mapping.
+    """
+    co_cr = NumberInFilter(
+        field_name='co_cr',
+        lookup_expr='in'
+    )
 
     co_funai = NumberInFilter(
         field_name='co_funai',
@@ -29,9 +36,10 @@ class LandUseTIFilter(rest_framework.FilterSet):
     )
 
     class Meta:
-        model = models.LandUseTI
+        """Meta class for 'LandUseClassesFilter' filter."""
+        model = models.LandUseClasses
         fields = (
-            # 'co_cr',
+            'co_cr',
             'co_funai',
             'year_map',
         )

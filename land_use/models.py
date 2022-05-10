@@ -3,126 +3,127 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class LandUseTI(models.Model):
+    """LandUseTI model data for land_use model."""
     id = models.IntegerField(
         _('primary key'),
         unique=True,
         primary_key=True,
     )
     sg_uf = models.CharField(
-        _(''),
+        _('Brazilian states flag'),
         max_length=255,
         null=True,
         blank=True
     )
     no_ti = models.CharField(
-        _(''),
+        _('Name of Indigenous Lands'),
         max_length=255,
         null=True,
         blank=True
     )
     co_funai = models.IntegerField(
-        _(''),
+        _('Funai code for Indigenous Lands'),
         null=True,
         blank=True
     )
     dt_homologada = models.CharField(
-        _(''),
+        _('Funai code for Indigenous Land'),
         max_length=255,
         null=True,
         blank=True
     )
     ds_cr = models.CharField(
-        _(''),
+        _('Regional Coordination name'),
         max_length=255,
         null=True,
         blank=True
     )
-    # co_cr = models.IntegerField(
-    #     _(''),
-    #     null=True,
-    #     blank=True
-    # )
+    co_cr = models.BigIntegerField(
+        _('Regional Coordination code'),
+        null=True,
+        blank=True
+    )
     nu_ano = models.CharField(
-        _(''),
+        _('Reference mapping year'),
         max_length=255,
         null=True,
         blank=True
     )
     no_satelites = models.CharField(
-        _(''),
+        _('Satellites used in mapping'),
         max_length=255,
         null=True,
         blank=True
     )
     nu_resolucoes = models.CharField(
-        _(''),
+        _('Satellite spatial resolution'),
         max_length=255,
         null=True,
         blank=True
     )
     dt_imagens = models.CharField(
-        _(''),
+        _('Mapped image date'),
         max_length=255,
         null=True,
         blank=True
     )
     nu_area_ag_ha = models.FloatField(
-        _(''),
+        _('Area agricultural polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_cr_ha = models.FloatField(
-        _(''),
+        _('Area clear cut polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_dg_ha = models.FloatField(
-        _(''),
+        _('Area degradation polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_ma_ha = models.FloatField(
-        _(''),
+        _('Area body of water polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_no_ha = models.FloatField(
-        _(''),
+        _('Area not observed polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_rv_ha = models.FloatField(
-        _(''),
+        _('Area highway polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_sv_ha = models.FloatField(
-        _(''),
+        _('Area forestry polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_vi_ha = models.FloatField(
-        _(''),
+        _('Area village polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_vn_ha = models.FloatField(
-        _(''),
+        _('Area natural vegetation polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_mi_ha = models.FloatField(
-        _(''),
+        _('Area mining polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_ha = models.FloatField(
-        _(''),
+        _('Area polygon ha'),
         null=True,
         blank=True,
     )
     nu_area_km2 = models.FloatField(
-        _(''),
+        _('Area polygon km2'),
         null=True,
         blank=True,
     )
@@ -134,6 +135,7 @@ class LandUseTI(models.Model):
     )
 
     class Meta:
+        """Meta class for `models.LandUseTI` model."""
         app_label = 'land_use'
         verbose_name = 'Land Use Mapping TI'
         verbose_name_plural = 'Land Use Mapping TIs'
@@ -142,83 +144,84 @@ class LandUseTI(models.Model):
 
 
 class LandUseClasses(models.Model):
+    """LandUseClasses model data for land_use model."""
     id = models.IntegerField(
         _('primary key'),
         unique=True,
         primary_key=True,
     ),
     sg_uf = models.CharField(
-        _(''),
+        _('Brazilian states flag'),
         max_length=255,
         null=True,
         blank=True
     )
     no_ti = models.CharField(
-        _(''),
+        _('Name of Indigenous Lands'),
         max_length=255,
         null=True,
         blank=True
     )
     co_funai = models.IntegerField(
-        _(''),
+        _('Funai code for Indigenous Land'),
         null=True,
         blank=True
     )
     dt_homologada = models.CharField(
-        _(''),
+        _('Data of ratification of Indigenaous Lands'),
         max_length=255,
         null=True,
         blank=True
     )
     ds_cr = models.CharField(
-        _(''),
+        _('Regional Coordenation name'),
         max_length=255,
         null=True,
         blank=True
     )
-    # co_cr = models.IntegerField(
-    #     _(''),
-    #     null=True,
-    #     blank=True
-    # )
+    co_cr = models.BigIntegerField(
+        _('Regional Coordenation code'),
+        null=True,
+        blank=True
+    )
     nu_ano = models.CharField(
-        _(''),
+        _('Reference mapping year'),
         max_length=255,
         null=True,
         blank=True
     )
     no_estagio = models.CharField(
-        _(''),
+        _('Stage name land use mapping'),
         max_length=255,
         null=True,
         blank=True
     )
     no_satelites = models.CharField(
-        _(''),
+        _('Satellites used in mapping'),
         max_length=255,
         null=True,
         blank=True
     )
     nu_resolucoes = models.CharField(
-        _(''),
+        _('Satellite spatial resolution'),
         max_length=255,
         null=True,
         blank=True
     )
     dt_imagens = models.CharField(
-        _(''),
+        _('Mapped image date'),
         max_length=255,
         null=True,
         blank=True
     )
     nu_area_km2 = models.FloatField(
-        _(''),
+        _('Area polygon km2'),
         null=True,
         blank=True,
     )
     # Remover, esse não está no CMR1
     nu_area_ha = models.FloatField(
-        _(''),
+        _('Area polygon ha'),
         null=True,
         blank=True,
     )
@@ -236,6 +239,7 @@ class LandUseClasses(models.Model):
     )
 
     class Meta:
+        """Meta class for `models.LandUseClasses` model."""
         app_label = 'land_use'
         verbose_name = 'Land Use Mapping Class'
         verbose_name_plural = 'Land Use Mapping Classes'
