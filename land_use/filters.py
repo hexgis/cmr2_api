@@ -9,6 +9,7 @@ class NumberInFilter(
     rest_framework.NumberFilter,
     rest_framework.BaseInFilter
 ):
+    """Base class used for creating IN lookup filters to filter numbers."""
     pass
 
 

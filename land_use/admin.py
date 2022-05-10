@@ -26,7 +26,18 @@ class LandUseClassesAdmin(admin.ModelAdmin):
 
     fields = list_display
 
-    search_fields = list_display
+    search_fields = (
+        'id',
+        'sg_uf',
+        'no_ti',
+        'co_funai',
+        'ds_cr',
+        'co_cr',
+        'nu_ano',
+        'no_estagio',
+        'no_satelites',
+        'nu_resolucoes',
+    )
 
 
 class LandUseTIAdmin(admin.ModelAdmin):
@@ -60,7 +71,17 @@ class LandUseTIAdmin(admin.ModelAdmin):
     )
     fields = list_display
 
-    search_fields = list_display
+    search_fields = (
+        'id',
+        'sg_uf',
+        'no_ti',
+        'co_funai',
+        'ds_cr',
+        'co_cr',
+        'nu_ano',
+        'no_satelites',
+        'nu_resolucoes',
+    )
 
 
 admin.site.register(models.LandUseClasses, LandUseClassesAdmin)

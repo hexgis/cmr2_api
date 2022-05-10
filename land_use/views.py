@@ -28,8 +28,8 @@ class LandUseView(generics.ListAPIView):
     """Returns the list of `models.LandUseClasses` spatial data.
 
     Filters:
-        * co_cr (list): filtering Regional Coordenation using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * co_cr (list): filtering Regional Coordination using code.
+        * co_funai (list): filtering Indigenous Lands using Funai code.
         * year_map (list): filtering years mapped in land use mapping.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
@@ -70,8 +70,8 @@ class LandUseTableView(generics.ListAPIView):
     """Returns list data without geometry from 'models.LandUseClasses' data.
 
     Filters:
-        * co_cr (list): filtering Regional Coordenation using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * co_cr (list): filtering Regional Coordination using code.
+        * co_funai (list): filtering Indigenous Lands using Funai code.
         * year_map (list): filtering years mapped in land use mapping.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
@@ -88,8 +88,8 @@ class LandUseClassesView(generics.ListAPIView):
     `models.LandUseClasses` existing in the applied filters.
 
     Filters:
-        * co_cr (list): filtering Regional Coordenation using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * co_cr (list): filtering Regional Coordination using code.
+        * co_funai (list): filtering Indigenous Lands using Funai code.
         * year_map (list): filtering years mapped in land use mapping.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
@@ -105,8 +105,8 @@ class LandUseStatsView(generics.ListAPIView):
     """Retrives `models.LandUseClasses` stats data.
 
     Filters:
-        * co_cr (list): filtering Regional Coordenation using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * co_cr (list): filtering Regional Coordination using code.
+        * co_funai (list): filtering Indigenous Lands using Funai code.
         * year_map (list): filtering years mapped in land use mapping.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).

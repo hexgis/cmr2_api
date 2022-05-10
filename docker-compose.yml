@@ -25,8 +25,8 @@ services:
       && python manage.py loaddata coordenacao_regional.yaml
       && python manage.py loaddata terras_indigenas.yaml
       && python manage.py loaddata support.yaml
-      && python manage.py loaddata land_use/fixtures/fixLandUseTi.yaml
-      && python manage.py loaddata land_use/fixtures/fixLandUseClasses.yaml
+      && python manage.py loaddata land_use_ti.yaml
+      && python manage.py loaddata land_use_classes.yaml
       && python manage.py loaddata fixtures/user.yaml
       && python manage.py runserver 0.0.0.0:8080"
 
