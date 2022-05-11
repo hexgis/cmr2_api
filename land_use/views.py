@@ -30,7 +30,7 @@ class LandUseView(generics.ListAPIView):
     Filters:
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenous Lands using Funai code.
-        * year_map (list): filtering years mapped in land use mapping.
+        * map_year (list): filtering years mapped in land use mapping.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
     """
@@ -72,7 +72,7 @@ class LandUseTableView(generics.ListAPIView):
     Filters:
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenous Lands using Funai code.
-        * year_map (list): filtering years mapped in land use mapping.
+        * map_year (list): filtering years mapped in land use mapping.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
     """
@@ -90,7 +90,7 @@ class LandUseClassesView(generics.ListAPIView):
     Filters:
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenous Lands using Funai code.
-        * year_map (list): filtering years mapped in land use mapping.
+        * map_year (list): filtering years mapped in land use mapping.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
     """
@@ -107,7 +107,7 @@ class LandUseStatsView(generics.ListAPIView):
     Filters:
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenous Lands using Funai code.
-        * year_map (list): filtering years mapped in land use mapping.
+        * map_year (list): filtering years mapped in land use mapping.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
     """

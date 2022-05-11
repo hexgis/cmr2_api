@@ -17,7 +17,7 @@ class LandUseClassesFilter(rest_framework.FilterSet):
     """Django filter `models.LandUseClasses` data.
 
     Filters:
-        * co_cr (list): filtering Regional Coordenation using code.
+        * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenou Lands using Funai code.
         * year_map (list): filtering years mapped in land use mapping.
     """
@@ -31,7 +31,7 @@ class LandUseClassesFilter(rest_framework.FilterSet):
         lookup_expr='in'
     )
 
-    year_map = NumberInFilter(
+    map_year = NumberInFilter(
         field_name='nu_ano',
         lookup_expr='in'
     )
