@@ -16,7 +16,8 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
         geo_field = 'geom'
         fields = (
             'id',
-            'geom',
+            'nu_latitude',
+            'nu_longitude',
         )
 
 
@@ -59,7 +60,7 @@ class LandUseTableSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class for 'LandUseTableSerializer' serializer."""
         model = models.LandUseClasses
-        id_field = False  # perguntar para o Naldo
+        id_field = False
         fields = (
             'id',
             'sg_uf',

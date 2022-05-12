@@ -53,12 +53,19 @@ class LandUseDetailView(generics.RetrieveAPIView):
     queryset = models.LandUseClasses.objects.all()
     serializer_class = serializers.LandUseDetailSerializer
     lookup_field = 'id'
-    filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
 class LandUseYearsView(generics.ListAPIView):
     """Return list of years that have land use mapping for filters applied of 
-    `models.LandUseClasses` data."""
+    `models.LandUseClasses` data.
+
+    Filters:
+        * co_cr (list): filtering Regional Coordination using code.
+        * co_funai (list): filtering Indigenous Lands using Funai code.
+        * map_year (list): filtering years mapped in land use mapping.
+        * in_bbox (bbox): bounding box
+            (min lon, min lat, max lon, max lat).
+    """
     queryset = models.LandUseClasses.objects.distinct('nu_ano')
     serializer_class = serializers.LandUseYearsSerializer
     bbox_filter_field = 'geom'

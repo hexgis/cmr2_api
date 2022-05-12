@@ -1,5 +1,3 @@
-from inspect import CO_COROUTINE
-
 from django_filters import rest_framework
 
 from land_use import models
@@ -19,7 +17,7 @@ class LandUseClassesFilter(rest_framework.FilterSet):
     Filters:
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenou Lands using Funai code.
-        * year_map (list): filtering years mapped in land use mapping.
+        * map_year (list): filtering years mapped in land use mapping.
     """
     co_cr = NumberInFilter(
         field_name='co_cr',
@@ -42,5 +40,5 @@ class LandUseClassesFilter(rest_framework.FilterSet):
         fields = (
             'co_cr',
             'co_funai',
-            'year_map',
+            'map_year',
         )
