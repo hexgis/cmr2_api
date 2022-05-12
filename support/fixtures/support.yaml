@@ -2456,19 +2456,6 @@
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
-  pk: 6
-  fields:
-      has_preview: true
-      has_detail: false
-      detail_width: null
-      geoserver: 1
-      geoserver_layer_name: loc_aldeia_indigena_p
-      geoserver_layer_namespace: CMR-PUBLICO
-      geoserver_layer_options: null
-      queryable: true
-      has_opacity: false
-      default_opacity: null
-- model: support.wmslayer
   pk: 5
   fields:
       has_preview: true
@@ -2476,6 +2463,19 @@
       detail_width: null
       geoserver: 1
       geoserver_layer_name: lim_buffer_6km_recorte_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 6
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_aldeia_indigena_p
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: true
@@ -6160,3 +6160,52 @@
       queryable: false
       has_opacity: false
       default_opacity: null
+- model: support.layerfilter
+  pk: 1
+  fields:
+    default: '2020-01-01'
+    filter_type: start_date
+    label: Data Inicial
+    filter_alias: start_date
+    layers:
+    - 4
+    - 3
+    - 1
+    - 6
+- model: support.layerfilter
+  pk: 2
+  fields:
+    default: '2020-08-31'
+    filter_type: end_date
+    label: Data Final
+    filter_alias: end_date
+    layers:
+    - 4
+    - 3
+    - 1
+    - 6
+- model: support.layerfilter
+  pk: 3
+  fields:
+    default: 
+    filter_type: Coordenação Regional
+    label: co_cr
+    filter_alias: id_cr
+    layers:
+    - 4
+    - 3
+    - 1
+    - 6
+- model: support.layerfilter
+  pk: 4
+  fields:
+    default: 
+    filter_type: Terras Indígenas
+    label: co_funai
+    filter_alias: id_funai
+    layers: 
+     - 4
+     - 3
+     - 1
+     - 6
+    
