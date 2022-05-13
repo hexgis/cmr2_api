@@ -59,7 +59,7 @@ class CategoryLayersGroup(models.Model):
     class Meta:
         app_label = 'support'
         verbose_name = 'Category Groups Layers'
-        verbose_name_plural = 'Categorys Groups Layers'
+        verbose_name_plural = 'Categories Groups Layers'
         ordering = ['name']
 
     def __str__(self):
