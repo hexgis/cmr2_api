@@ -13,12 +13,12 @@ class GeoserverSerializer(ModelSerializer):
         )
 
 
-# class LayerFilterSerializer(ModelSerializer):
-#     class Meta:
-#         model = models.LayerFilter
-#         fields = (
-#             'default', 'filter_type', 'label',
-#         )
+class LayerFilterSerializer(ModelSerializer):
+    class Meta:
+        model = models.LayerFilter
+        fields = (
+            'default', 'filter_type', 'label', 'filter_alias',
+        )
 
 
 class WmsSerializer(ModelSerializer):
@@ -48,20 +48,10 @@ class TmsSerializer(ModelSerializer):
         )
 
 
-# class HeatmapSerializer(ModelSerializer):
-#     # heatmap_type = MonitoringTypeSerializer()
-
-#     class Meta:
-#         model = models.HeatmapLayer
-#         # fields = ('heatmap_type', )
-#         fields = (
-#             'heatmap_type',
-#         )
 class LayerSerializer(ModelSerializer):
     tms = TmsSerializer()
-    #heatmap = HeatmapSerializer()
     wms = WmsSerializer()
-    # layer_filters = LayerFilterSerializer(many=True)
+    layer_filters = LayerFilterSerializer(many=True)
 
     class Meta:
         model = models.Layer
@@ -69,8 +59,7 @@ class LayerSerializer(ModelSerializer):
             'id',
             'tms',
             'wms',
-            # 'heatmap',
-            # 'layer_filters',
+            'layer_filters',
             'name',
             'order',
             'layer_type',

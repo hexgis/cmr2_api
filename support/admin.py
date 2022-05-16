@@ -115,38 +115,27 @@ class TmsLayerAdmin(admin.ModelAdmin):
     )
 
 
-# class HeatmapLayerAdmin(admin.ModelAdmin):
+class LayerFilterAdmin(admin.ModelAdmin):
 
-#     list_display = (
-#         #'layer',
-#         'heatmap_type',
-#     )
+    list_display = (
+        'label',
+        'default',
+        'filter_type',
+        'filter_alias',
+    )
 
-#     fields = list_display
+    fields = (
+        'default',
+        'filter_type',
+        'label',
+        'layers',
+        'filter_alias',
+    )
 
-#     list_filter = (
-#         'heatmap_type',
-#     )
-
-
-# class LayerFilterAdmin(admin.ModelAdmin):
-
-#     list_display = (
-#         'label',
-#         'default',
-#         'filter_type',
-#     )
-
-#     fields = (
-#         'default',
-#         'filter_type',
-#         'label',
-#         'layers',
-#     )
-
-#     list_filter = (
-#         'filter_type',
-#     )
+    list_filter = (
+        'filter_alias',
+        'filter_type',
+    )
 
 
 admin.site.register(models.Geoserver, GeoserverAdmin)
@@ -155,5 +144,4 @@ admin.site.register(models.Layer, LayerAdmin)
 admin.site.register(models.WmsLayer, WmsLayerAdmin)
 admin.site.register(models.TmsLayer, TmsLayerAdmin)
 admin.site.register(models.CategoryLayersGroup, CategoryLayersGroupAdmin)
-# admin.site.register(models.HeatmapLayer, HeatmapLayerAdmin)
-# admin.site.register(models.LayerFilter, LayerFilterAdmin)
+admin.site.register(models.LayerFilter, LayerFilterAdmin)

@@ -2456,19 +2456,6 @@
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
-  pk: 6
-  fields:
-      has_preview: true
-      has_detail: false
-      detail_width: null
-      geoserver: 1
-      geoserver_layer_name: loc_aldeia_indigena_p
-      geoserver_layer_namespace: CMR-PUBLICO
-      geoserver_layer_options: null
-      queryable: true
-      has_opacity: false
-      default_opacity: null
-- model: support.wmslayer
   pk: 5
   fields:
       has_preview: true
@@ -2476,6 +2463,19 @@
       detail_width: null
       geoserver: 1
       geoserver_layer_name: lim_buffer_6km_recorte_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 6
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_aldeia_indigena_p
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: true
