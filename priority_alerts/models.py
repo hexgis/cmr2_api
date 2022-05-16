@@ -1,29 +1,145 @@
-from django.db import models
+from django.contrib.gis.db import models
 
-# Create your models here.
+from django.utils.translation import ugettext_lazy as _
 
 
 class UrgentAlerts(models.Model):
-    "id"
-    "no_ciclo"
-    "no_titulo"
-    "no_arquivo"
-    "nu_referencia"
-    "nu_mapa"
-    "no_estagio"
-    "no_estadio_nu_area_ha"
-    "no_imagem"
-    "nu_orbita_ponto"
-    "dt_t_zero"
-    "dt_t_um"
-    "nu_area_ha"
-    "nu_longitude_latitude"
-    "co_funai"
-    "no_ti"
-    "ds_cr"
-    "no_municipio"
-    "dt_t_um_dte"
-    "geom_as_wkt"
+
+    id = models.IntegerField(
+        _('Polygon identifier and primary key'),
+        unique=True,
+        primary_key=True,
+    )
+
+    no_ciclo = models.CharField(
+        _('Cycle of monitoring Indigenous Lands in the Legal Amazon'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    no_titulo = models.CharField(
+        _('Map title - header'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    no_arquivo = models.CharField(
+        _('Map title - generated in PDF'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    nu_referencia = models.IntegerField(
+        _('Alert sequential number'),
+        null=True,
+        blank=True,
+    )
+
+    nu_mapa = models.IntegerField(
+        _('Map number'),
+        null=True,
+        blank=True,
+    )
+
+    no_estagio = models.CharField(
+        _('Stage name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    no_estadio_nu_area_ha = models.CharField(
+        _('Stage name and area polygon ha'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    no_imagem = models.CharField(
+        _('Image identifier'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    nu_orbita_ponto = models.CharField(
+        _('Satellit Sentinel orbit and point'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    dt_t_zero = models.CharField(
+        _('Data before changes detects'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    dt_t_um = models.CharField(
+        _('Change start date'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    nu_area_ha = models.CharField(
+        _('Area polygon ha'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    nu_longitude_latitude = models.CharField(
+        _('Centroid latitude and longitude'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    co_funai = models.IntegerField(
+        _('Funai code - Indigenou Lands'),
+        null=True,
+        blank=True,
+    )
+
+    no_ti = models.CharField(
+        _('Indigenou Lands name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    ds_cr = models.CharField(
+        _('Regional Coordination name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    no_municipio = models.CharField(
+        _('City name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    dt_t_um_dte = models.DateField(
+        _('Change start date - American format'),
+        null=True,
+        blank=True,
+    )
+
+    geom = models.GeometryField(
+        _('Geometry Field'),
+        srid=4326,
+        null=True,
+        blank=True,
+    )
+
     class Meta:
         app_label = 'priority_alerts'
         verbose_name = 'Priority Alert'
