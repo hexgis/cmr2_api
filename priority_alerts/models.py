@@ -51,13 +51,6 @@ class UrgentAlerts(models.Model):
         blank=True,
     )
 
-    no_estadio_nu_area_ha = models.CharField(
-        _('Stage name and area polygon ha'),
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-
     no_imagem = models.CharField(
         _('Image identifier'),
         max_length=255,
@@ -72,23 +65,22 @@ class UrgentAlerts(models.Model):
         blank=True,
     )
 
-    dt_t_zero = models.CharField(
+    dt_t_zero = models.DateField(
         _('Data before changes detects'),
-        max_length=255,
         null=True,
         blank=True,
     )
 
-    dt_t_um = models.CharField(
+    dt_t_um = models.DateField(
         _('Change start date'),
-        max_length=255,
         null=True,
         blank=True,
     )
 
-    nu_area_ha = models.CharField(
+    nu_area_ha = models.DecimalField(
         _('Area polygon ha'),
-        max_length=255,
+        # max_digits= 10,
+        decimal_places=2,
         null=True,
         blank=True,
     )
@@ -113,6 +105,12 @@ class UrgentAlerts(models.Model):
         blank=True,
     )
 
+    co_cr = models.IntegerField(
+        _('Funai code'),
+        blank=True,
+        null=True,
+    )
+
     ds_cr = models.CharField(
         _('Regional Coordination name'),
         max_length=255,
@@ -127,8 +125,29 @@ class UrgentAlerts(models.Model):
         blank=True,
     )
 
+    sg_uf = models.CharField(
+        _('Abbreviation name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
     dt_t_um_dte = models.DateField(
         _('Change start date - American format'),
+        null=True,
+        blank=True,
+    )
+
+    nu_area_ha = models.CharField(
+        _('Area polygon ha'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    nu_longitude_latitude = models.CharField(
+        _('Centroid latitude and longitude'),
+        max_length=255,
         null=True,
         blank=True,
     )
