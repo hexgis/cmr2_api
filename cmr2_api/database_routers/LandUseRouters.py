@@ -4,7 +4,7 @@
 class LandUseRouter:
     """LandUse tables, database router."""
 
-    route_app_labels = {}  # {'land_use'}
+    route_app_labels = {'land_use'}
 
     def db_for_read(self, model, **hints):
         """Database for read method."""

@@ -4,24 +4,20 @@
     default: '2020-01-01'
     filter_type: start_date
     label: Data Inicial
-    filter_alias: start_date
+    filter_alias: dt_foco_calor
     layers:
-    - 4
-    - 3
-    - 1
-    - 6
+    - 32
+    - 33
 - model: support.layerfilter
   pk: 2
   fields:
     default: '2020-08-31'
     filter_type: end_date
     label: Data Final
-    filter_alias: end_date
+    filter_alias: dt_foco_calor
     layers:
-    - 4
-    - 3
-    - 1
-    - 6
+    - 32
+    - 33
 - model: support.layerfilter
   pk: 3
   fields:
@@ -30,10 +26,12 @@
     label: co_cr
     filter_alias: id_cr
     layers:
-    - 4
-    - 3
+    - 321
+    - 322
     - 1
     - 6
+    - 22
+    - 27
 - model: support.layerfilter
   pk: 4
   fields:
@@ -42,8 +40,15 @@
     label: co_funai
     filter_alias: id_funai
     layers: 
-     - 4
-     - 3
+     - 322
      - 1
      - 6
-    
+- model: support.layerfilter
+  pk: 5
+  fields:
+    default:
+    filter_type: nu_ano
+    label: Numero do Ano
+    filter_alias: nu_ano
+    layers:
+    - 321   

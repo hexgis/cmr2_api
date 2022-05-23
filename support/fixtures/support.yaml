@@ -25,75 +25,105 @@
 - model: support.CategoryLayersGroup
   pk: 4
   fields:
+      name: Dados PRODES (INPE)
+      icon: layers
+      description: "Dado preliminar de 2020 composto por 102 cenas prioritárias. As 102 cenas selecionadas como prioritárias atendem a três critérios: 1- cobrir a região onde foram registrados pelo menos 90% do desmatamento no período anterior do PRODES (agosto/2018 a julho/2019); 2) cobrir regiões onde foram registrados pelo menos 90% dos avisos de desmatamento do DETER 2019/2020; 3) cobrir os 43 municípios prioritários para fiscalização referidos no Decreto Federal 6.321/2007 e atualizado em 2018 e 2020 pelas Portarias No. 428 e 162 do Ministério do Meio Ambiente (MMA)."
+- model: support.CategoryLayersGroup
+  pk: 5
+  fields:
+      name: MONITORAMENTO DIÁRIO
+      icon: layers
+      description: Grupo Layers destinado as camadas envolvidas nas atividades do Monitoramento Diário das Terras Indígenas.
+- model: support.CategoryLayersGroup
+  pk: 10
+  fields:
       name: BARRA_LATERAL
       icon: layers
       description: Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo
 - model: support.layersgroup
   pk: 1
   fields:
-      name: Camadas de Apoio
+      name: Funai
       order: 1
       category_groups: 1
 - model: support.layersgroup
   pk: 3
   fields:
+      name: Cartografia Básica (CB)
+      order: 3
+      category_groups: 1
+- model: support.layersgroup
+  pk: 4
+  fields:
+      name: Gestão Fundiária
+      order: 4
+      category_groups: 1
+- model: support.layersgroup
+  pk: 5
+  fields:
       name: Alta Resolução
-      order: 2
+      order: 5
       category_groups: 3
 - model: support.layersgroup
   pk: 6
   fields:
       name: Mosaico Landsat 2015
-      order: 5
+      order: 6
       category_groups: 3
 - model: support.layersgroup
   pk: 7
   fields:
       name: Mosaico Landsat 2018
-      order: 6
+      order: 7
       category_groups: 3
 - model: support.layersgroup
   pk: 8
   fields:
       name: Mosaico Landsat 2019
-      order: 7
+      order: 8
       category_groups: 3
 - model: support.layersgroup
   pk: 9
   fields:
       name: Mosaico Landsat 2020
-      order: 8
+      order: 9
       category_groups: 3
 - model: support.layersgroup
   pk: 10
   fields:
       name: Mosaico Sentinel-1 2018
-      order: 9
+      order: 10
       category_groups: 3
 - model: support.layersgroup
   pk: 11
   fields:
       name: Mosaico Sentinel-1 2019
-      order: 10
+      order: 11
       category_groups: 3
 - model: support.layersgroup
   pk: 12
   fields:
       name: Mosaico Sentinel-1 2020
-      order: 11
+      order: 12
       category_groups: 3
 - model: support.layersgroup
   pk: 13
   fields:
       name: Mosaico Sentinel-2 2018
-      order: 12
+      order: 13
       category_groups: 3
 - model: support.layersgroup
   pk: 14
   fields:
       name: Mosaico Sentinel-2 2019
-      order: 13
+      order: 14
       category_groups: 3
+- model: support.layersgroup
+  pk: 15
+  fields:
+      name: PRODES
+      order: 15
+      category_groups: 4
 - model: support.layersgroup
   pk: 16
   fields:
@@ -104,14 +134,20 @@
   pk: 17
   fields:
       name: Risco de Fogo
-      order: 15
+      order: 17
       category_groups: 2
 - model: support.layersgroup
   pk: 18
   fields:
       name: Mosaico Sentinel-2 2020
-      order: 14
+      order: 18
       category_groups: 3
+- model: support.layersgroup
+  pk: 19
+  fields:
+      name: Monitoramento Diário
+      order: 19
+      category_groups: 5
 - model: support.layer
   pk: 1
   fields:
@@ -166,7 +202,7 @@
       name: Unidades Federativas
       order: 343
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 9
@@ -174,7 +210,7 @@
       name: Áreas Municipais
       order: 342
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 10
@@ -182,7 +218,7 @@
       name: Amazônia Legal
       order: 341
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 11
@@ -190,7 +226,7 @@
       name: Semiárido
       order: 340
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 12
@@ -198,7 +234,7 @@
       name: Biomas
       order: 339
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 13
@@ -206,7 +242,7 @@
       name: Unidades de Conservação Federal
       order: 338
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 14
@@ -222,7 +258,7 @@
       name: Assentamentos Rurais
       order: 336
       layer_type: wms
-      layers_group: 1
+      layers_group: 4
       active_on_init: false
 - model: support.layer
   pk: 16
@@ -230,7 +266,7 @@
       name: CAR
       order: 335
       layer_type: wms
-      layers_group: 1
+      layers_group: 4
       active_on_init: false
 - model: support.layer
   pk: 17
@@ -238,7 +274,7 @@
       name: Imóveis Certificados Privados (SNCI)
       order: 334
       layer_type: wms
-      layers_group: 1
+      layers_group: 4
       active_on_init: false
 - model: support.layer
   pk: 18
@@ -246,7 +282,7 @@
       name: Imóveis Certificados Públicos (SNCI)
       order: 333
       layer_type: wms
-      layers_group: 1
+      layers_group: 4
       active_on_init: false
 - model: support.layer
   pk: 19
@@ -254,7 +290,7 @@
       name: Imóveis Certificados Privados (SIGEF)
       order: 332
       layer_type: wms
-      layers_group: 1
+      layers_group: 4
       active_on_init: false
 - model: support.layer
   pk: 20
@@ -262,7 +298,7 @@
       name: Imóveis Certificados Públicos (SIGEF)
       order: 331
       layer_type: wms
-      layers_group: 1
+      layers_group: 4
       active_on_init: false
 - model: support.layer
   pk: 21
@@ -270,7 +306,7 @@
       name: Trechos Rodoviários
       order: 330
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 22
@@ -278,7 +314,7 @@
       name: Trechos de Drenagem
       order: 329
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 23
@@ -302,7 +338,7 @@
       name: Grade SENTINEL-2
       order: 326
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 26
@@ -310,7 +346,7 @@
       name: Grade LANDSAT
       order: 325
       layer_type: wms
-      layers_group: 1
+      layers_group: 3
       active_on_init: false
 - model: support.layer
   pk: 27
@@ -342,7 +378,7 @@
       name: Imagens Alta resolução - Atualizadas
       order: 321
       layer_type: wms
-      layers_group: 3
+      layers_group: 5
       active_on_init: false
 - model: support.layer
   pk: 31
@@ -350,7 +386,7 @@
       name: Grade de imagens - Atualizadas
       order: 320
       layer_type: wms
-      layers_group: 3
+      layers_group: 5
       active_on_init: false
 - model: support.layer
   pk: 32
@@ -2416,6 +2452,31 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+- model: support.layer
+  pk: 319
+  fields:
+      name: Antropismo Consolidado
+      order: 354
+      layer_type: wms
+      layers_group: 19
+      active_on_init: false
+
+- model: support.layer
+  pk: 320
+  fields:
+      name: Pista de pouso
+      order: 352
+      layer_type: wms
+      layers_group: 1
+      active_on_init: false
+- model: support.layer
+  pk: 321
+  fields:
+      name: PRODES (INPE)
+      order: 353
+      layer_type: wms
+      layers_group: 15
+      active_on_init: false
 - model: support.wmslayer
   pk: 1
   fields:
@@ -2426,7 +2487,7 @@
       geoserver_layer_name: lim_terra_indigena_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: false
+      queryable: true
       has_opacity: true
       default_opacity: null
 - model: support.wmslayer
@@ -2439,7 +2500,7 @@
       geoserver_layer_name: loc_terra_indigena_estudo_p
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2452,7 +2513,7 @@
       geoserver_layer_name: lim_buffer_10km_recorte_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2465,7 +2526,7 @@
       geoserver_layer_name: lim_buffer_6km_recorte_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2491,7 +2552,7 @@
       geoserver_layer_name: loc_coordenacao_regional_p
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2504,7 +2565,7 @@
       geoserver_layer_name: lim_unidade_federacao_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2517,7 +2578,7 @@
       geoserver_layer_name: lim_municipio_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2530,8 +2591,8 @@
       geoserver_layer_name: lim_amazonia_legal_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 11
@@ -2543,8 +2604,8 @@
       geoserver_layer_name: lim_semiarido_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 12
@@ -2556,8 +2617,8 @@
       geoserver_layer_name: veg_biomas_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 13
@@ -2569,8 +2630,8 @@
       geoserver_layer_name: lim_unidade_conservacao_federal_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 14
@@ -2582,8 +2643,8 @@
       geoserver_layer_name: lim_quilombolas_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 15
@@ -2595,7 +2656,7 @@
       geoserver_layer_name: lim_assentamento_rural_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2608,8 +2669,8 @@
       geoserver_layer_name: lim_imovel_car_a
       geoserver_layer_namespace: CMR-FUNAI
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 17
@@ -2621,7 +2682,7 @@
       geoserver_layer_name: vw_lim_imovel_certificado_privado_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2634,8 +2695,8 @@
       geoserver_layer_name: vw_lim_imovel_certificado_publico_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 19
@@ -2647,8 +2708,8 @@
       geoserver_layer_name: vw_lim_imovel_certificado_sigef_privado_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 20
@@ -2660,7 +2721,7 @@
       geoserver_layer_name: vw_lim_imovel_certificado_sigef_publico_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2673,7 +2734,7 @@
       geoserver_layer_name: tra_trecho_rodoviario_l
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2699,8 +2760,8 @@
       geoserver_layer_name: lim_faixa_de_fronteira_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 24
@@ -2712,7 +2773,7 @@
       geoserver_layer_name: loc_antenas_vsat_p
       geoserver_layer_namespace: CMR-FUNAI
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2725,7 +2786,7 @@
       geoserver_layer_name: img_grade_sentinel2_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2738,7 +2799,7 @@
       geoserver_layer_name: img_grade_landsat_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
+      queryable: false
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2752,7 +2813,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: true
-      has_opacity: false
+      has_opacity: true
       default_opacity: null
 - model: support.wmslayer
   pk: 28
@@ -2777,8 +2838,8 @@
       geoserver_layer_name: hid_ugrh_a
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: true
-      has_opacity: true
+      queryable: false
+      has_opacity: false
       default_opacity: null
 - model: support.wmslayer
   pk: 30
@@ -2816,7 +2877,7 @@
       geoserver_layer_name: vw_satelite_aqua_m_m_loc_focos_de_calor_p
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: false
+      queryable: true
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2829,7 +2890,7 @@
       geoserver_layer_name: vw_satelite_aqua_m_t_loc_focos_de_calor_p
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
-      queryable: false
+      queryable: true
       has_opacity: false
       default_opacity: null
 - model: support.wmslayer
@@ -2843,7 +2904,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: false
+      has_opacity: true
       default_opacity: null
 - model: support.wmslayer
   pk: 35
@@ -2856,7 +2917,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: false
+      has_opacity: true
       default_opacity: null
 - model: support.wmslayer
   pk: 36
@@ -6159,4 +6220,44 @@
       geoserver_layer_options: null
       queryable: false
       has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 319
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_terra_indigena_cr_mascara_antropismo_consolidado_a
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+
+- model: support.wmslayer
+  pk: 320
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_pistas_de_pouso_irregulares_p
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 321
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_prodes_com_terra_indigena_a
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
       default_opacity: null

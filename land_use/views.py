@@ -1,6 +1,3 @@
-from dataclasses import dataclass
-from django.shortcuts import render
-
 from django.db.models import Sum, Count
 
 from land_use import (
@@ -51,7 +48,7 @@ class LandUseDetailView(generics.RetrieveAPIView):
         * id (int): filtering request poligon identifier.
     """
     queryset = models.LandUseClasses.objects.all()
-    serializer_class = serializers.LandUseDetailSerializer
+    serializer_class = serializers.LandUseTableSerializer
     lookup_field = 'id'
 
 

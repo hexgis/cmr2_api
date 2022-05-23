@@ -19,31 +19,6 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
         )
 
 
-class LandUseDetailSerializer(serializers.ModelSerializer):
-    """Serializer for detailed `models.LandUseClasses` data."""
-    class Meta:
-        """Meta class for `LandUseDetailSerializer` serializer."""
-        model = models.LandUseClasses
-        id_field = False
-        fields = (
-            'id',
-            'sg_uf',
-            'no_ti',
-            'co_funai',
-            'dt_homologada',
-            'ds_cr',
-            'co_cr',
-            'nu_ano',
-            'no_estagio',
-            'no_satelites',
-            'nu_resolucoes',
-            'dt_imagens',
-            'nu_area_km2',
-            'nu_area_ha',
-            'dt_cadastro',
-        )
-
-
 class LandUseYearsSerializer(serializers.ModelSerializer):
     """Serializer to list years with land use mapping 'models.LandUseClasses' data."""
     class Meta:
@@ -58,7 +33,6 @@ class LandUseTableSerializer(serializers.ModelSerializer):
     class Meta:
         """Meta class for 'LandUseTableSerializer' serializer."""
         model = models.LandUseClasses
-        id_field = False
         fields = (
             'id',
             'sg_uf',
