@@ -26,6 +26,7 @@ services:
       && python manage.py loaddata terras_indigenas.yaml
       && python manage.py loaddata user.yaml
       && python manage.py loaddata support.yaml
+      && python manage.py loaddata urgent_alerts_fixtures.yaml
       && python manage.py runserver 0.0.0.0:8080"
 
     volumes:
