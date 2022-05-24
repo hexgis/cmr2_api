@@ -109,8 +109,8 @@ DATABASES = {
 
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter',
-    'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter'
-    'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityAlertsRouter',
+    'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
+    'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
 ]
 
 # Default auto field

@@ -3,30 +3,30 @@ from django.urls import path
 from priority_alerts import views
 
 
-urlpartterns = [
+urlpatterns = [
     path(
-        '/',
+        '',
         views.AlertsView.as_view(),
-        name=''
+        name='alerts'
     ),
     path(
         'table/',
         views.AlertsTableView.as_view(),
-        name=''
+        name='alerts-table'
     ),
     path(
         'detail/',
         views.AlertsDetailView.as_view(),
-        name=''
+        name='alerts-detail'
     ),
     path(
         'stats/',
         views.AlertsStatsView.as_view(),
-        name=''
+        name='alerts-stats'
     ),
     path(
         'classes/',
         views.AlertsClassesView.as_view(),
-        name=''
+        name='alerts-classes'
     ),
 ]

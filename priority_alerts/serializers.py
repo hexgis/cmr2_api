@@ -4,7 +4,7 @@ from rest_framework_gis import serializers as gis_serializers
 from priority_alerts import models
 
 
-class AlertsSerializers(gis_serializers.GeoFeaturesModelSerializer):
+class AlertsSerializers(gis_serializers.GeoFeatureModelSerializer):
     class Meta:
         model = models.UrgentAlerts
         id_field = False

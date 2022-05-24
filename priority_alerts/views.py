@@ -25,7 +25,7 @@ class AlertsView(generics.ListAPIView):
         gis_filters.InBBoxFilter,)
 
 
-class AlertsTableView():
+class AlertsTableView(generics.ListAPIView):
     queryset = models.UrgentAlerts
     serializers_class = serializers.AlertsTableSerializers
     filterset_class = alerts_filters.AlertsFilter
@@ -33,7 +33,7 @@ class AlertsTableView():
     filter_backend = (DjangoFilterBackend,)
 
 
-class AlertsDetailView():
+class AlertsDetailView(generics.RetrieveAPIView):
     queryset = models.UrgentAlerts
     serializers_class = serializers.AlertsDetailSerializers
     filterset_class = alerts_filters.AlertsFilter
@@ -41,7 +41,7 @@ class AlertsDetailView():
     filter_backend = (DjangoFilterBackend,)
 
 
-class AlertsStatsView():
+class AlertsStatsView(generics.ListAPIView):
     queryset = models.UrgentAlerts
     serializers_class = serializers.AlertsStatsSerializers
     filterset_class = alerts_filters.AlertsFilter
@@ -49,7 +49,7 @@ class AlertsStatsView():
     filter_backend = (DjangoFilterBackend,)
 
 
-class AlertsClassesView():
+class AlertsClassesView(generics.ListAPIView):
     queryset = models.UrgentAlerts
     serializers_class = serializers.AlertsClassesSerializers
     filterset_class = alerts_filters.AlertsFilter

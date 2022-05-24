@@ -62,7 +62,7 @@ urlpatterns = [
         namespace='monitoring')
     ),
     path('alerts/', include(
-        ('priority_alerts.urls', 'alerts')
+        ('priority_alerts.urls', 'alerts'),
         namespace='alerts')
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

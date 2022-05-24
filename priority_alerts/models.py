@@ -79,15 +79,8 @@ class UrgentAlerts(models.Model):
 
     nu_area_ha = models.DecimalField(
         _('Area polygon ha'),
-        # max_digits= 10,
+        max_digits=10,
         decimal_places=2,
-        null=True,
-        blank=True,
-    )
-
-    nu_longitude_latitude = models.CharField(
-        _('Centroid latitude and longitude'),
-        max_length=255,
         null=True,
         blank=True,
     )
@@ -105,7 +98,7 @@ class UrgentAlerts(models.Model):
         blank=True,
     )
 
-    co_cr = models.IntegerField(
+    co_cr = models.BigIntegerField(
         _('Funai code'),
         blank=True,
         null=True,
@@ -132,22 +125,18 @@ class UrgentAlerts(models.Model):
         blank=True,
     )
 
-    dt_t_um_dte = models.DateField(
-        _('Change start date - American format'),
+    nu_latitude = models.DecimalField(
+        _('Latitude'),
+        max_digits=20,
+        decimal_places=15,
         null=True,
         blank=True,
     )
 
-    nu_area_ha = models.CharField(
-        _('Area polygon ha'),
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-
-    nu_longitude_latitude = models.CharField(
-        _('Centroid latitude and longitude'),
-        max_length=255,
+    nu_longitude = models.DecimalField(
+        _('Longitude'),
+        max_digits=20,
+        decimal_places=15,
         null=True,
         blank=True,
     )
