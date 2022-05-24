@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'funai',
     'monitoring',
     'priority_alerts',
+    'land_use',
 ]
 
 MIDDLEWARE = [
@@ -95,15 +96,15 @@ DATABASES = {
         'USER': os.getenv('DB_USER'),
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT', 5432)
+        'PORT': os.getenv('DB_PORT', '5432')
     },
-    'db_for_read_funaidados': {
+    'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
         'NAME': os.getenv('DB_NAME_FOR_READ'),
         'USER': os.getenv('DB_USER_FOR_READ'),
         'PASSWORD': os.getenv('DB_PASSWORD_FOR_READ'),
         'HOST': os.getenv('DB_HOST_FOR_READ'),
-        'PORT': os.getenv('DB_PORT_FOR_READ', 5432)
+        'PORT': os.getenv('DB_PORT_FOR_READ', '5432')
     },
 }
 
@@ -111,6 +112,7 @@ DATABASE_ROUTERS = [
     'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
     'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
+    'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
 ]
 
 # Default auto field

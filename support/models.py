@@ -273,6 +273,50 @@ class TmsLayer(models.Model):
         return self.url_tms
 
 
+class LayerFilter(models.Model):
+    """
+    Model for LayerFilter Data
+        * Association:
+            * Inherits from :model:`models.Model`
+            * Has many :model:`support.Layer`
+    """
+
+    default = models.CharField(
+        _('Default value for filters'),
+        max_length=40,
+        blank=True,
+        null=True,
+    )
+
+    filter_type = models.CharField(
+        _('Filter Type'),
+        max_length=40
+    )
+
+    label = models.CharField(
+        _('Filter Label'),
+        max_length=40
+    )
+
+    filter_alias = models.CharField(
+        _('Filter WMS services'),
+        max_length=40
+    )
+
+    layers = models.ManyToManyField(
+        Layer,
+        related_name='layer_filters'
+    )
+
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'LayerFilter'
+        verbose_name_plural = 'LayerFilters'
+
+    def __str__(self):
+        return "{}: {}".format(self.label, self.filter_alias)
+
+
 # class HeatmapLayer(models.Model):
 #     """
 #     Model for HeatmapLayer Data
@@ -314,42 +358,3 @@ class TmsLayer(models.Model):
 #     #     return "{}".format(
 #     #         self.heatmap_type.name or self.heatmap_type.identifier
 #     #     )
-
-
-# class LayerFilter(models.Model):
-#     """
-#     Model for LayerFilter Data
-#         * Association:
-#             * Inherits from :model:`models.Model`
-#             * Has many :model:`support.Layer`
-#     """
-
-#     default = models.CharField(
-#         _('Default value for filters'),
-#         max_length=40,
-#         blank=True,
-#         null=True,
-#     )
-
-#     filter_type = models.CharField(
-#         _('Filter Type'),
-#         max_length=40
-#     )
-
-#     label = models.CharField(
-#         _('Filter Label'),
-#         max_length=40
-#     )
-
-#     layers = models.ManyToManyField(
-#         Layer,
-#         related_name='layer_filters'
-#     )
-
-#     class Meta:
-#         app_label = 'support'
-#         verbose_name = 'LayerFilter'
-#         verbose_name_plural = 'LayerFilters'
-
-#     def __str__(self):
-#         return "{}: {}".format(self.label, self.filter_type)

@@ -63,6 +63,10 @@ urlpatterns = [
     ),
     path('alerts/', include(
         ('priority_alerts.urls', 'alerts'),
-        namespace='alerts')
+        namespace='alerts'),
+    ),
+    path('land-use/', include(
+        ('land_use.urls', 'land-use'),
+        namespace='land-use'),
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
