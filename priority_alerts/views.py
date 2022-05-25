@@ -12,20 +12,24 @@ from priority_alerts import (
 
 
 class AuthModelMixIn:
+    """Default Authentication for priority_alerts views."""
     permission_class = (permissions.AllowAny,)
 
 
 class AlertsView(generics.ListAPIView):
+    """View..."""
     queryset = models
     serializer_class = serializers.AlertsSerializers
     filterset_class = alerts_filters.AlertsFilter
     bbox_filter_field = 'geom'
     filter_backend = (
         DjangoFilterBackend,
-        gis_filters.InBBoxFilter,)
+        gis_filters.InBBoxFilter,
+    )
 
 
 class AlertsTableView(generics.ListAPIView):
+    """View..."""
     queryset = models.UrgentAlerts
     serializers_class = serializers.AlertsTableSerializers
     filterset_class = alerts_filters.AlertsFilter
@@ -34,6 +38,7 @@ class AlertsTableView(generics.ListAPIView):
 
 
 class AlertsDetailView(generics.RetrieveAPIView):
+    """View..."""
     queryset = models.UrgentAlerts
     serializers_class = serializers.AlertsDetailSerializers
     filterset_class = alerts_filters.AlertsFilter
@@ -42,6 +47,7 @@ class AlertsDetailView(generics.RetrieveAPIView):
 
 
 class AlertsStatsView(generics.ListAPIView):
+    """View..."""
     queryset = models.UrgentAlerts
     serializers_class = serializers.AlertsStatsSerializers
     filterset_class = alerts_filters.AlertsFilter
@@ -50,6 +56,7 @@ class AlertsStatsView(generics.ListAPIView):
 
 
 class AlertsClassesView(generics.ListAPIView):
+    """View..."""
     queryset = models.UrgentAlerts
     serializers_class = serializers.AlertsClassesSerializers
     filterset_class = alerts_filters.AlertsFilter

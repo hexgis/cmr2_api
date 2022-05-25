@@ -39,7 +39,7 @@ class MonitoringConsolidatedView(generics.ListAPIView, AuthModelMixIn):
     bbox_filter_field = 'geom'
     filter_backends = (
         gis_filters.InBBoxFilter,
-        DjangoFilterBackend
+        DjangoFilterBackend,
     )
 
 

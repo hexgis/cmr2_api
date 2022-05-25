@@ -27,7 +27,7 @@
     filter_alias: id_cr
     layers:
     - 321
-    - 322
+    - 319
     - 1
     - 6
     - 22
@@ -40,7 +40,7 @@
     label: co_funai
     filter_alias: id_funai
     layers: 
-     - 322
+     - 319
      - 1
      - 6
 - model: support.layerfilter

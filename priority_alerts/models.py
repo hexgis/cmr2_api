@@ -4,6 +4,7 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class UrgentAlerts(models.Model):
+    """UrgentAlerts model data for priorit_alerts."""
 
     id = models.IntegerField(
         _('Polygon identifier and primary key'),
@@ -149,8 +150,9 @@ class UrgentAlerts(models.Model):
     )
 
     class Meta:
+        """Meta class for `models.UrgentAlerts` model."""
         app_label = 'priority_alerts'
-        verbose_name = 'Priority Alert'
-        verbose_name_plural = 'Priorities Alerts'
-        # db_table = 'funai\".\"vw_alerta_urgente_consolidado_a'
+        verbose_name = 'Urgent Alert'
+        verbose_name_plural = 'Urgent Alerts'
+        # db_table = 'funai\".\"vw_img_alerta_urgente_consolidado_a'
         # managed = False
