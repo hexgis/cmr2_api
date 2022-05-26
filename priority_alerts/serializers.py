@@ -5,42 +5,28 @@ from priority_alerts import models
 
 
 class AlertsSerializers(gis_serializers.GeoFeatureModelSerializer):
-    """Serializer..."""
+    """Serializer for geographic `models.UrgentAlerts` spatial data."""
     class Meta:
-        """Meta class for..."""
+        """Meta calss for geographic data `AlertsSerializers` serializer."""
         model = models.UrgentAlerts
         id_field = False
         geo_field = 'geom'
         fields = '__all__'
 
 
-class AlertsTableSerializers(serializers.ModelField):
-    """Serializer..."""
+class AlertsTableSerializers(serializers.ModelSerializer):
+    """Serializer to return data without geometry from `models.UrgentAlerts` data."""
     class Meta:
-        """Meta class for..."""
-        model = models.UrgentAlerts
-        exclude = ['geom']
-
-
-class AlertsDetailSerializers(serializers.ModelField):
-    """Serializer..."""
-    class Meta:
-        """Meta class for..."""
+        """Meta class for `AlertsTableSerializers` serializer."""
         model = models.UrgentAlerts
         fields = '__all__'
 
 
-class AlertsStatsSerializers(serializers.ModelField):
-    """Serializer..."""
+class AlertsClassesSerializers(serializers.ModelSerializer):
+    """Serializer to list classification stages adopted in mapping the 
+    monitoring of indigenous land.
+    """
     class Meta:
-        """Meta class for..."""
-        model = models.UrgentAlerts
-        fields = '__all__'
-
-
-class AlertsClassesSerializers(serializers.ModelField):
-    """Serializer..."""
-    class Meta:
-        """Meta class for..."""
+        """Meta class for `AlertsClassesSerializers` serializer."""
         model = models.UrgentAlerts
         fields = '__all__'

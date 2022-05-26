@@ -1,13 +1,14 @@
-from rest_framework import (
-    permissions, generics
-)
-
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework_gis import filters as gis_filters
 from priority_alerts import (
     serializers,
     models,
     filters as alerts_filters
+)
+
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework_gis import filters as gis_filters
+from rest_framework import (
+    permissions,
+    generics
 )
 
 
@@ -17,48 +18,75 @@ class AuthModelMixIn:
 
 
 class AlertsView(generics.ListAPIView):
-    """View..."""
-    queryset = models
+    """Returns the list of `models.UrgentAlerts` spatial data.
+
+    Filters:
+        * co_funai (list): filtering Regional Coordiantion using code.
+        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * start_date (str): filtering start date.
+        * end_date (str): filteringend end date.
+    """
+    queryset = models.UrgentAlerts.objects.all()
     serializer_class = serializers.AlertsSerializers
     filterset_class = alerts_filters.AlertsFilter
     bbox_filter_field = 'geom'
-    filter_backend = (
+    filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
     )
 
 
 class AlertsTableView(generics.ListAPIView):
-    """View..."""
-    queryset = models.UrgentAlerts
-    serializers_class = serializers.AlertsTableSerializers
+    """Returns list data without geometry from 'models.UrgentAlerts' data.
+
+    Filters:
+        * co_funai (list): filtering Regional Coordiantion using code.
+        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * start_date (str): filtering start date.
+        * end_date (str): filteringend end date.
+    """
+    queryset = models.UrgentAlerts.objects.all()
+    serializer_class = serializers.AlertsTableSerializers
     filterset_class = alerts_filters.AlertsFilter
     bbox_filter_field = 'geom'
-    filter_backend = (DjangoFilterBackend,)
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
 
 
 class AlertsDetailView(generics.RetrieveAPIView):
-    """View..."""
-    queryset = models.UrgentAlerts
-    serializers_class = serializers.AlertsDetailSerializers
-    filterset_class = alerts_filters.AlertsFilter
-    bbox_filter_field = 'geom'
-    filter_backend = (DjangoFilterBackend,)
+    """Returns detailed data for a queried element of `models.UrgentAlerts` data.
+
+    Filters:
+        * id (int): filtering request poligon identifier.
+    """
+    queryset = models.UrgentAlerts.objects.all()
+    serializer_class = serializers.AlertsTableSerializers
+    lookup_field = 'id'
 
 
 class AlertsStatsView(generics.ListAPIView):
-    """View..."""
-    queryset = models.UrgentAlerts
-    serializers_class = serializers.AlertsStatsSerializers
-    filterset_class = alerts_filters.AlertsFilter
-    bbox_filter_field = 'geom'
-    filter_backend = (DjangoFilterBackend,)
+    """Retrives `models.UrgentAlerts` stats data.
+
+    Filters:
+        * co_funai (list): filtering Regional Coordiantion using code.
+        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * start_date (str): filtering start date.
+        * end_date (str): filteringend end date.
+    """
+    pass
 
 
 class AlertsClassesView(generics.ListAPIView):
-    """View..."""
-    queryset = models.UrgentAlerts
-    serializers_class = serializers.AlertsClassesSerializers
+    """Flag list classification stages adopted in mapping the monitoring of 
+    indigenous land `models.UrgentAlerts` existing in the applied filters.
+    """
+    queryset = models.UrgentAlerts.objects.distinct('nu_referencia')
+    serializer_class = serializers.AlertsClassesSerializers
     filterset_class = alerts_filters.AlertsFilter
     bbox_filter_field = 'geom'
-    filter_backend = (DjangoFilterBackend,)
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )

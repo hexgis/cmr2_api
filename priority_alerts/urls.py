@@ -15,7 +15,7 @@ urlpatterns = [
         name='alerts-table'
     ),
     path(
-        'detail/',
+        'detail/<int:id>/',
         views.AlertsDetailView.as_view(),
         name='alerts-detail'
     ),
