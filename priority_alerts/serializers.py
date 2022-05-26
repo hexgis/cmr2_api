@@ -1,4 +1,5 @@
 from rest_framework import serializers
+
 from rest_framework_gis import serializers as gis_serializers
 
 from priority_alerts import models
@@ -16,7 +17,8 @@ class AlertsSerializers(gis_serializers.GeoFeatureModelSerializer):
 
 
 class AlertsTableSerializers(serializers.ModelSerializer):
-    """Serializer to return data without geometry from `models.UrgentAlerts` data."""
+    """Serializer to return data without geometry from `models.UrgentAlerts` 
+    data."""
 
     class Meta:
         """Meta class for `AlertsTableSerializers` serializer."""

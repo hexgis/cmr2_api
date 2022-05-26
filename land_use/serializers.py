@@ -1,5 +1,7 @@
 from django.db import models
+
 from rest_framework import serializers
+
 from rest_framework_gis import serializers as gis_serializers
 
 from land_use import models
@@ -22,8 +24,9 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
 
 
 class LandUseYearsSerializer(serializers.ModelSerializer):
-    """Serializer to list years with land use mapping `models.LandUseClasses` 
-    data.
+    """Serializer to list years from `models.LandUseClasses` data.
+
+    Serializes model data to return list of years with land use mapping
     """
 
     class Meta:
@@ -34,8 +37,9 @@ class LandUseYearsSerializer(serializers.ModelSerializer):
 
 
 class LandUseTableSerializer(serializers.ModelSerializer):
-    """Serializer to return data without geometry from `models.LandUseClasses`
-     data.
+    """Serializer to return model from `models.LandUseClasses` data.
+    
+    Serializes model data to return table info without geometry.
     """
 
     class Meta:

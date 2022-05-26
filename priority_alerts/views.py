@@ -1,14 +1,16 @@
+from django_filters.rest_framework import DjangoFilterBackend
+
+from rest_framework_gis import filters as gis_filters
+
+from rest_framework import (
+    permissions,
+    generics
+)
+
 from priority_alerts import (
     serializers,
     models,
     filters as alerts_filters
-)
-
-from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework_gis import filters as gis_filters
-from rest_framework import (
-    permissions,
-    generics
 )
 
 
@@ -22,7 +24,7 @@ class AlertsView(generics.ListAPIView):
 
     Filters:
         * co_cr (list): filtering Regional Coordiantion using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * co_funai (list): filtering Indigenous Lands using Funai code.
         * start_date (str): filtering start date.
         * end_date (str): filteringend end date.
         * in_bbox (bbox): bounding box
@@ -43,7 +45,7 @@ class AlertsTableView(generics.ListAPIView):
 
     Filters:
         * co_cr (list): filtering Regional Coordiantion using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * co_funai (list): filtering Indigenous Lands using Funai code.
         * start_date (str): filtering start date.
         * end_date (str): filteringend end date.
         * in_bbox (bbox): bounding box
@@ -60,8 +62,7 @@ class AlertsTableView(generics.ListAPIView):
 
 
 class AlertsDetailView(generics.RetrieveAPIView):
-    """Returns detailed data for a queried element of `models.UrgentAlerts` 
-    data.
+    """Returns detailed of queried element from `models.UrgentAlerts` data.
 
     Filters:
         * id (int): filtering request poligon identifier.
@@ -79,8 +80,17 @@ class AlertsStatsView(generics.ListAPIView):
         * co_funai (list): filtering Indigenou Lands using Funai code.
         * start_date (str): filtering start date.
         * end_date (str): filteringend end date.
+        * in_bbox (bbox): bounding box
+            (min lon, min lat, max lon, max lat).
     """
-    pass
+    queryset = models.UrgentAlerts.objects.all()
+    serializer_class = serializers.AlertsStatsSerializers
+    filterset_class = alerts_filters.AlertsFilter
+    bbox_filter_field = 'geom'
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
 
 
 class AlertsClassesView(generics.ListAPIView):
@@ -89,7 +99,7 @@ class AlertsClassesView(generics.ListAPIView):
 
     Filters:
         * co_cr (list): filtering Regional Coordiantion using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * co_funai (list): filtering Indigenous Lands using Funai code.
         * start_date (str): filtering start date.
         * end_date (str): filteringend end date.
         * in_bbox (bbox): bounding box
