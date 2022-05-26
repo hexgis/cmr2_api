@@ -7,7 +7,7 @@ class AlertsFilter(rest_framework.FilterSet):
     """Django filter `models.UrgentAlerts` data.
 
     Filter:
-        * co_funai (int): filtering Regional Coordiantion using code.
+        * co_funai (int): filtering Indigenou Lands using Funai code.
     """
     co_funai = rest_framework.NumberFilter(
         field_name='co_funai',
