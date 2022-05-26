@@ -1,5 +1,7 @@
 from django.db import models
+
 from rest_framework import serializers
+
 from rest_framework_gis import serializers as gis_serializers
 
 from land_use import models
@@ -7,6 +9,7 @@ from land_use import models
 
 class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
     """Serializer for geographic `models.LandUseClasses` spatial data."""
+
     class Meta:
         """Meta calss for geographic data `LandUseSerializer` serializer."""
         model = models.LandUseClasses
@@ -14,24 +17,33 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
         geo_field = 'geom'
         fields = (
             'id',
+            'no_estagio',
             'nu_latitude',
             'nu_longitude',
         )
 
 
 class LandUseYearsSerializer(serializers.ModelSerializer):
-    """Serializer to list years with land use mapping 'models.LandUseClasses' data."""
+    """Serializer to list years from `models.LandUseClasses` data.
+
+    Serializes model data to return list of years with land use mapping
+    """
+
     class Meta:
-        """Meta class for 'LandUseYearsSerializer' serializer."""
+        """Meta class for `LandUseYearsSerializer` serializer."""
         model = models.LandUseClasses
         id_field = False
         fields = ('nu_ano',)
 
 
 class LandUseTableSerializer(serializers.ModelSerializer):
-    """Serializer to return data without geometry from 'models.LandUseClasses' data."""
+    """Serializer to return model from `models.LandUseClasses` data.
+    
+    Serializes model data to return table info without geometry.
+    """
+
     class Meta:
-        """Meta class for 'LandUseTableSerializer' serializer."""
+        """Meta class for `LandUseTableSerializer` serializer."""
         model = models.LandUseClasses
         fields = (
             'id',
@@ -53,9 +65,12 @@ class LandUseTableSerializer(serializers.ModelSerializer):
 
 
 class LandUseClassesSerializer(serializers.ModelSerializer):
-    """Serializer to list classification stages adopted in land use mapping 'models.LandUseClasses' data."""
+    """Serializer to list classification stages adopted in land use mapping 
+    'models.LandUseClasses' data.
+    """
+
     class Meta:
-        """Meta class for 'LandUseClassesSerializer' serializer."""
+        """Meta class for `LandUseClassesSerializer` serializer."""
         model = models.LandUseClasses
         id_field = False
         fields = ('no_estagio',)

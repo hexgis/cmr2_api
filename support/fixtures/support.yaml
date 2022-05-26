@@ -760,7 +760,7 @@
   pk: 105
   fields:
       name: L8 Bahia (2019)
-      order: 274
+      order: 63
       layer_type: wms
       layers_group: 8
       active_on_init: false
@@ -2460,12 +2460,11 @@
       layer_type: wms
       layers_group: 19
       active_on_init: false
-
 - model: support.layer
   pk: 320
   fields:
       name: Pista de pouso
-      order: 352
+      order: 64
       layer_type: wms
       layers_group: 1
       active_on_init: false

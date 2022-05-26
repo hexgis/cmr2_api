@@ -17,11 +17,11 @@ from rest_framework import(
 
 
 class AuthModelMixIn:
-    """Default Authentication for monitoring views."""
+    """Default Authentication for land_use views."""
     permission_classes = (permissions.AllowAny,)
 
 
-class LandUseView(generics.ListAPIView):
+class LandUseView(AuthModelMixIn, generics.ListAPIView):
     """Returns the list of `models.LandUseClasses` spatial data.
 
     Filters:
@@ -41,7 +41,7 @@ class LandUseView(generics.ListAPIView):
     )
 
 
-class LandUseDetailView(generics.RetrieveAPIView):
+class LandUseDetailView(AuthModelMixIn, generics.RetrieveAPIView):
     """Returns detailed data for a queried element of `models.LandUseClasses` data.
 
     Filters:
@@ -52,7 +52,7 @@ class LandUseDetailView(generics.RetrieveAPIView):
     lookup_field = 'id'
 
 
-class LandUseYearsView(generics.ListAPIView):
+class LandUseYearsView(AuthModelMixIn, generics.ListAPIView):
     """Return list of years that have land use mapping for filters applied of 
     `models.LandUseClasses` data.
 
@@ -70,7 +70,7 @@ class LandUseYearsView(generics.ListAPIView):
     filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
-class LandUseTableView(generics.ListAPIView):
+class LandUseTableView(AuthModelMixIn, generics.ListAPIView):
     """Returns list data without geometry from 'models.LandUseClasses' data.
 
     Filters:
@@ -87,7 +87,7 @@ class LandUseTableView(generics.ListAPIView):
     filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
-class LandUseClassesView(generics.ListAPIView):
+class LandUseClassesView(AuthModelMixIn, generics.ListAPIView):
     """Flag list classification stages adopted in the mapping of land use of 
     `models.LandUseClasses` existing in the applied filters.
 
@@ -105,7 +105,7 @@ class LandUseClassesView(generics.ListAPIView):
     filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
-class LandUseStatsView(generics.ListAPIView):
+class LandUseStatsView(AuthModelMixIn, generics.ListAPIView):
     """Retrives `models.LandUseClasses` stats data.
 
     Filters:

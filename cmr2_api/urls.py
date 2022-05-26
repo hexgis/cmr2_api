@@ -61,6 +61,10 @@ urlpatterns = [
         ('monitoring.urls', 'monitoring'),
         namespace='monitoring')
     ),
+    path('alerts/', include(
+        ('priority_alerts.urls', 'alerts'),
+        namespace='alerts'),
+    ),
     path('land-use/', include(
         ('land_use.urls', 'land-use'),
         namespace='land-use'),
