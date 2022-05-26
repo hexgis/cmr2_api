@@ -16,11 +16,11 @@ from monitoring import (
 
 
 class AuthModelMixIn:
-    """Default Authentication for monitoring views."""
+    """Default Authentication for `monitoring` views."""
     permission_classes = (permissions.AllowAny,)
 
 
-class MonitoringConsolidatedView(generics.ListAPIView, AuthModelMixIn):
+class MonitoringConsolidatedView(AuthModelMixIn, generics.ListAPIView):
     """Returns list data for `monitoring.models.MonitoringConsolidated`.
 
     Filters:
@@ -43,8 +43,8 @@ class MonitoringConsolidatedView(generics.ListAPIView, AuthModelMixIn):
     )
 
 
-class MonitoringConsolidatedDetailView(generics.RetrieveAPIView, AuthModelMixIn):
-    """Detail data for `monitoring.MonitoringConsolidated`
+class MonitoringConsolidatedDetailView(AuthModelMixIn, generics.RetrieveAPIView):
+    """Detail data for `monitoring.MonitoringConsolidated`.
 
     Filters:
         * id (int): filtering request poligon identifier.
@@ -56,15 +56,15 @@ class MonitoringConsolidatedDetailView(generics.RetrieveAPIView, AuthModelMixIn)
     filter_backends = (DjangoFilterBackend,)
 
 
-class MonitoringConsolidatedStatsView(generics.ListAPIView, AuthModelMixIn):
+class MonitoringConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
     """Retrieves `monitoring.MonitoringConsolidated` stats data.
 
     Filters:
         * co_cr (list): filtering Regional Coordenation using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code
-        * stage (list): stage name. E.g.: CR, DG, FF, DR
-        * start_date (str): filtering start date
-        * end_date (str): filteringend ende date
+        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * stage (list): stage name. E.g.: CR, DG, FF, DR.
+        * start_date (str): filtering start date.
+        * end_date (str): filteringend ende date.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
     """
@@ -97,7 +97,7 @@ class MonitoringConsolidatedStatsView(generics.ListAPIView, AuthModelMixIn):
         return response.Response(data, status=status.HTTP_200_OK)
 
 
-class MonitoringConsolidatedClassesView(generics.ListAPIView, AuthModelMixIn):
+class MonitoringConsolidatedClassesView(AuthModelMixIn, generics.ListAPIView):
     """Lists abbreviation of types `stages` for `monitoring.MonitoringConsolidated`."""
 
     queryset = models.MonitoringConsolidated.objects.order_by(
@@ -106,15 +106,15 @@ class MonitoringConsolidatedClassesView(generics.ListAPIView, AuthModelMixIn):
     serializer_class = serializers.MonitoringConsolidatedClassesSerializer
 
 
-class MonitoringConsolidatedTableView(generics.ListAPIView, AuthModelMixIn):
+class MonitoringConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
     """Returns list data for `monitoring.models.MonitoringConsolidated`.
 
     Filters:
         * co_cr (list): filtering Regional Coordenation using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code
-        * stage (list): stage name. E.g.: CR, DG, FF, DR
-        * start_date (str): filtering start date
-        * end_date (str): filteringend ende date
+        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * stage (list): stage name. E.g.: CR, DG, FF, DR.
+        * start_date (str): filtering start date.
+        * end_date (str): filteringend ende date.
     """
 
     queryset = models.MonitoringConsolidated.objects.all()
