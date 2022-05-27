@@ -84,7 +84,7 @@ class AlertsStatsView(generics.ListAPIView):
             (min lon, min lat, max lon, max lat).
     """
     queryset = models.UrgentAlerts.objects.all()
-    serializer_class = serializers.AlertsStatsSerializers
+    serializer_class = serializers.AlertsSerializers
     filterset_class = alerts_filters.AlertsFilter
     bbox_filter_field = 'geom'
     filter_backends = (
