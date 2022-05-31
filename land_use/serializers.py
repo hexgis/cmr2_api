@@ -18,7 +18,6 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
         fields = (
             'id',
             'no_estagio',
-            'no_estagio',
             'nu_latitude',
             'nu_longitude',
         )
