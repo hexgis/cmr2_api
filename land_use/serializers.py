@@ -18,6 +18,7 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
         fields = (
             'id',
             'no_estagio',
+            'no_estagio',
             'nu_latitude',
             'nu_longitude',
         )
@@ -62,15 +63,3 @@ class LandUseTableSerializer(serializers.ModelSerializer):
             'nu_area_ha',
             'dt_cadastro',
         )
-
-
-class LandUseClassesSerializer(serializers.ModelSerializer):
-    """Serializer to list classification stages adopted in land use mapping 
-    'models.LandUseClasses' data.
-    """
-
-    class Meta:
-        """Meta class for `LandUseClassesSerializer` serializer."""
-        model = models.LandUseClasses
-        id_field = False
-        fields = ('no_estagio',)
