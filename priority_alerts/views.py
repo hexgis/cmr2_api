@@ -4,7 +4,14 @@ from rest_framework_gis import filters as gis_filters
 
 from rest_framework import (
     permissions,
-    generics
+    generics,
+    response,
+    status
+)
+
+from django.db.models import (
+    Count, 
+    Sum
 )
 
 from priority_alerts import (
@@ -92,6 +99,25 @@ class AlertsStatsView(generics.ListAPIView):
         gis_filters.InBBoxFilter,
     )
 
+    def get (self, request):
+        """Get method to return stats for priority_alerts.
+
+        Returns sums for area_ha and registry.
+
+        Args:
+            request (Requests.request): Request data.
+
+        Returns:
+            response.Response: django rest_framework.Response.response api
+            response data.
+        """
+        data = self.filter_queryset(self.queryset).aggregate(
+            area_ha=Sum('nu_area_ha'),
+            total=Count('id')
+        )
+
+        return response.Response(data, status=status.HTTP_200_OK)
+
 
 class AlertsClassesView(generics.ListAPIView):
     """Flag list classification stages adopted in mapping the monitoring of 
@@ -105,7 +131,7 @@ class AlertsClassesView(generics.ListAPIView):
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
     """
-    queryset = models.UrgentAlerts.objects.distinct('nu_referencia')
+    queryset = models.UrgentAlerts.objects.distinct('no_estagio')
     serializer_class = serializers.AlertsClassesSerializers
     filterset_class = alerts_filters.AlertsFilter
     bbox_filter_field = 'geom'

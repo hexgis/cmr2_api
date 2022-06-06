@@ -20,11 +20,6 @@ urlpatterns = [
         name='mapped-years'
     ),
     path(
-        'classes/',
-        views.LandUseClassesView.as_view(),
-        name='mapped-classes'
-    ),
-    path(
         'table/',
         views.LandUseTableView.as_view(),
         name='mapped-table'

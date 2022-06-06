@@ -87,24 +87,6 @@ class LandUseTableView(AuthModelMixIn, generics.ListAPIView):
     filter_backends = (rest_framework.DjangoFilterBackend,)
 
 
-class LandUseClassesView(AuthModelMixIn, generics.ListAPIView):
-    """Flag list classification stages adopted in the mapping of land use of 
-    `models.LandUseClasses` existing in the applied filters.
-
-    Filters:
-        * co_cr (list): filtering Regional Coordination using code.
-        * co_funai (list): filtering Indigenous Lands using Funai code.
-        * map_year (list): filtering years mapped in land use mapping.
-        * in_bbox (bbox): bounding box
-            (min lon, min lat, max lon, max lat).
-    """
-    queryset = models.LandUseClasses.objects.distinct('no_estagio')
-    serializer_class = serializers.LandUseClassesSerializer
-    bbox_filter_field = 'geom'
-    filterset_class = land_use_filters.LandUseClassesFilter
-    filter_backends = (rest_framework.DjangoFilterBackend,)
-
-
 class LandUseStatsView(AuthModelMixIn, generics.ListAPIView):
     """Retrives `models.LandUseClasses` stats data.
 
