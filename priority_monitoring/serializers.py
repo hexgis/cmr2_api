@@ -55,34 +55,24 @@ class PriorityConsolidatedDetailSerializer(serializers.ModelSerializer):
         model = models.PriorityConsolidated
         id_field = False
         fields = (
-            'id',
+            'no_ti',
+            'co_funai',
+            'ds_cr',
             'no_estagio',
             'no_imagem',
-            'dt_imagem',
-            'nu_orbita',
-            'nu_ponto',
             'dt_t_zero',
             'dt_t_um',
-            'nu_area_km2',
             'nu_area_ha',
             'nu_latitude',
             'nu_longitude',
-            'tempo',
-            'contribuicao',
-            'velocidade',
-            'contiguidade',
-            'ranking',
             'prioridade',
-            'co_cr',
-            'ds_cr',
-            'co_funai',
-            'no_ti',
         )
 
 
 class PriorityConsolidatedTableSerializer(serializers.ModelSerializer):
-
+    """Serializer for table 'PriorityConsolidatedTableSerializer' data."""
     class Meta:
+        """Meta class for `PriorityConsolidatedTableSerializer` serializer."""
         model = models.PriorityConsolidated
         id_field = False
         fields = (

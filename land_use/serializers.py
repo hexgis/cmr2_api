@@ -62,3 +62,21 @@ class LandUseTableSerializer(serializers.ModelSerializer):
             'nu_area_ha',
             'dt_cadastro',
         )
+
+
+class LandUseDetailSerializer(serializers.ModelSerializer):
+    """Serializer for return detailed `models.LandUseClasses` data."""
+
+    class Meta:
+        """Meta class for `LandUseDetailSerializer` serializer."""
+        model = models.LandUseClasses
+        fields = (
+            'co_funai',
+            'no_ti',
+            'ds_cr',
+            'sg_uf',
+            'no_estagio',
+            'no_satelites',
+            'dt_imagens',
+            'nu_area_ha',
+        )

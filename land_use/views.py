@@ -48,7 +48,7 @@ class LandUseDetailView(AuthModelMixIn, generics.RetrieveAPIView):
         * id (int): filtering request poligon identifier.
     """
     queryset = models.LandUseClasses.objects.all()
-    serializer_class = serializers.LandUseTableSerializer
+    serializer_class = serializers.LandUseDetailSerializer
     lookup_field = 'id'
 
 

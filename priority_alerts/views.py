@@ -75,7 +75,7 @@ class AlertsDetailView(generics.RetrieveAPIView):
         * id (int): filtering request poligon identifier.
     """
     queryset = models.UrgentAlerts.objects.all()
-    serializer_class = serializers.AlertsTableSerializers
+    serializer_class = serializers.AlertsDetailSerializers
     lookup_field = 'id'
 
 

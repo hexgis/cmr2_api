@@ -20,6 +20,7 @@ class AlertsSerializers(gis_serializers.GeoFeatureModelSerializer):
             'nu_longitude',
         )
 
+
 class AlertsTableSerializers(serializers.ModelSerializer):
     """Serializer to return data without geometry from `models.UrgentAlerts` 
     data."""
@@ -49,6 +50,30 @@ class AlertsTableSerializers(serializers.ModelSerializer):
             'nu_longitude',
             'nu_latitude',
         )
+
+
+class AlertsDetailSerializers(serializers.ModelSerializer):
+    """Serializer to return detailed `models.UrgentAlerts` data."""
+
+    class Meta:
+        """Meta class for `AlertsDetailSerializers` serializer."""
+        model = models.UrgentAlerts
+        fields = (
+            'co_funai',
+            'no_ti',
+            'ds_cr',
+            'nu_referencia',
+            'no_estagio',
+            'no_imagem',
+            'dt_t_zero',
+            'dt_t_um',
+            'nu_area_ha',
+            'nu_longitude',
+            'nu_latitude',
+            'no_municipio',
+            'sg_uf',
+        )
+
 
 class AlertsClassesSerializers(serializers.ModelSerializer):
     """Serializer to list classification stages adopted in mapping the 

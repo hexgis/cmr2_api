@@ -35,27 +35,22 @@ class MonitoringConsolidatedSerializer(gis_serializers.GeoFeatureModelSerializer
 
 class MonitoringConsolidatedDetailSerializer(serializers.ModelSerializer):
     """Serializer for detailed `models.MonitoringConsolidated` data."""
+    
     class Meta:
         """Meta class for `MonitoringConsolidatedDetailSerializer` serializer."""
         model = models.MonitoringConsolidated
         id_field = False
         fields = (
-            'id',
-            'no_imagem',
-            'dt_imagem',
+            'co_funai',
+            'no_ti',
+            'ds_cr',
             'no_estagio',
-            'nu_orbita',
-            'nu_ponto',
-            'nu_latitude',
-            'nu_longitude',
+            'no_imagem',
             'dt_t_zero',
             'dt_t_um',
-            'co_funai',
-            'nu_area_km2',
             'nu_area_ha',
-            'co_cr',
-            'ds_cr',
-            'no_ti',
+            'nu_latitude',
+            'nu_longitude',
             'ti_nu_area_ha',
         )
 
