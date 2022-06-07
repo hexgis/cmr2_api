@@ -4,7 +4,7 @@
 class PriorityAlertsRouter:
     """PriorityMotiring tables, database router."""
 
-    route_app_labels = {}  # {'priority_alerts'}
+    route_app_labels = {'priority_alerts'}
 
     def db_for_read(self, model, **hints):
         """Database for read method."""

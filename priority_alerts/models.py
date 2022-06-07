@@ -154,5 +154,5 @@ class UrgentAlerts(models.Model):
         app_label = 'priority_alerts'
         verbose_name = 'Urgent Alert'
         verbose_name_plural = 'Urgent Alerts'
-        # db_table = 'funai\".\"vw_img_alerta_urgente_consolidado_a'
-        # managed = False
+        db_table = 'funai\".\"vw_img_alerta_urgente_consolidado_a'
+        managed = False
