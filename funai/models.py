@@ -114,8 +114,8 @@ class LimiteTerraIndigena(models.Model):
     co_funai = models.IntegerField(
         _('Funai code'),
         unique=True,
-        blank=True,
-        null=True
+        primary_key=True,
+        default=1
     )
 
     no_ti = models.CharField(
@@ -162,16 +162,16 @@ class LimiteTerraIndigena(models.Model):
 
     nu_area_ha = models.DecimalField(
         _('Area ha'),
-        max_digits=19,
-        decimal_places=10,
+        max_digits=14,
+        decimal_places=3,
         blank=True,
         null=True
     )
 
     nu_area_km = models.DecimalField(
         _('Area km'),
-        max_digits=19,
-        decimal_places=10,
+        max_digits=14,
+        decimal_places=3,
         blank=True,
         null=True
     )
