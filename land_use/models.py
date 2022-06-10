@@ -78,74 +78,98 @@ class LandUseTI(models.Model):
         blank=True
     )
 
-    nu_area_ag_ha = models.FloatField(
+    nu_area_ag_ha = models.DecimalField(
         _('Area agricultural polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_cr_ha = models.FloatField(
+    nu_area_cr_ha = models.DecimalField(
         _('Area clear cut polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_dg_ha = models.FloatField(
+    nu_area_dg_ha = models.DecimalField(
         _('Area degradation polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_ma_ha = models.FloatField(
+    nu_area_ma_ha = models.DecimalField(
         _('Area body of water polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_no_ha = models.FloatField(
+    nu_area_no_ha = models.DecimalField(
         _('Area not observed polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_rv_ha = models.FloatField(
+    nu_area_rv_ha = models.DecimalField(
         _('Area highway polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_sv_ha = models.FloatField(
+    nu_area_sv_ha = models.DecimalField(
         _('Area forestry polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_vi_ha = models.FloatField(
+    nu_area_vi_ha = models.DecimalField(
         _('Area village polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_vn_ha = models.FloatField(
+    nu_area_vn_ha = models.DecimalField(
         _('Area natural vegetation polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_mi_ha = models.FloatField(
+    nu_area_mi_ha = models.DecimalField(
         _('Area mining polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_ha = models.FloatField(
+    nu_area_ha = models.DecimalField(
         _('Area polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_km2 = models.FloatField(
+    nu_area_km2 = models.DecimalField(
         _('Area polygon km2'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
@@ -153,7 +177,7 @@ class LandUseTI(models.Model):
     nu_latitude = models.DecimalField(
         _('Latitude'),
         max_digits=20,
-        decimal_places=15,
+        decimal_places=10,
         null=True,
         blank=True,
     )
@@ -161,7 +185,7 @@ class LandUseTI(models.Model):
     nu_longitude = models.DecimalField(
         _('Longitude'),
         max_digits=20,
-        decimal_places=15,
+        decimal_places=10,
         null=True,
         blank=True,
     )
@@ -265,14 +289,18 @@ class LandUseClasses(models.Model):
         blank=True,
     )
 
-    nu_area_km2 = models.FloatField(
+    nu_area_km2 = models.DecimalField(
         _('Area polygon km2'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_ha = models.FloatField(
+    nu_area_ha = models.DecimalField(
         _('Area polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )

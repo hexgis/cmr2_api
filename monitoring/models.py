@@ -43,14 +43,18 @@ class MonitoringConsolidated(models.Model):
         blank=True,
     )
 
-    nu_area_km2 = models.BigIntegerField(
+    nu_area_km2 = models.DecimalField(
         _('Area polygon km2'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
 
-    nu_area_ha = models.BigIntegerField(
+    nu_area_ha = models.DecimalField(
         _('Area polygon ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
@@ -79,7 +83,7 @@ class MonitoringConsolidated(models.Model):
     nu_latitude = models.DecimalField(
         _('Latitude'),
         max_digits=20,
-        decimal_places=15,
+        decimal_places=10,
         null=True,
         blank=True,
     )
@@ -87,12 +91,12 @@ class MonitoringConsolidated(models.Model):
     nu_longitude = models.DecimalField(
         _('Longitude'),
         max_digits=20,
-        decimal_places=15,
+        decimal_places=10,
         null=True,
         blank=True,
     )
 
-    co_cr = models.IntegerField(
+    co_cr = models.BigIntegerField(
         _('Funai code'),
         blank=True,
         null=True,
@@ -118,8 +122,10 @@ class MonitoringConsolidated(models.Model):
         blank=True,
     )
 
-    ti_nu_area_ha = models.BigIntegerField(
+    ti_nu_area_ha = models.DecimalField(
         _('Area Indigenou Lands ha'),
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
