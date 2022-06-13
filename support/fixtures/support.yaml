@@ -6227,7 +6227,7 @@
       has_detail: false
       detail_width: null
       geoserver: 1
-      geoserver_layer_name: vw_terra_indigena_cr_mascara_antropismo_consolidado_a
+      geoserver_layer_name: terra_indigena_cr_mascara_antropismo_consolidado_a
       geoserver_layer_namespace: CMR-FUNAI
       geoserver_layer_options: null
       queryable: true
