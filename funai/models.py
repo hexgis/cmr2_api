@@ -114,8 +114,8 @@ class LimiteTerraIndigena(models.Model):
     co_funai = models.IntegerField(
         _('Funai code'),
         unique=True,
-        primary_key=True,
-        default=1
+        blank=True,
+        null=True
     )
 
     no_ti = models.CharField(
