@@ -80,8 +80,8 @@ class UrgentAlerts(models.Model):
 
     nu_area_ha = models.DecimalField(
         _('Area polygon ha'),
-        max_digits=10,
-        decimal_places=2,
+        max_digits=14,
+        decimal_places=3,
         null=True,
         blank=True,
     )
@@ -100,7 +100,7 @@ class UrgentAlerts(models.Model):
     )
 
     co_cr = models.BigIntegerField(
-        _('Funai code'),
+        _('Regional Coordination code'),
         blank=True,
         null=True,
     )
@@ -129,7 +129,7 @@ class UrgentAlerts(models.Model):
     nu_latitude = models.DecimalField(
         _('Latitude'),
         max_digits=20,
-        decimal_places=15,
+        decimal_places=10,
         null=True,
         blank=True,
     )
@@ -137,7 +137,7 @@ class UrgentAlerts(models.Model):
     nu_longitude = models.DecimalField(
         _('Longitude'),
         max_digits=20,
-        decimal_places=15,
+        decimal_places=10,
         null=True,
         blank=True,
     )
