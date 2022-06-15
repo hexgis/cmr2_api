@@ -25,13 +25,13 @@
 - model: support.CategoryLayersGroup
   pk: 4
   fields:
-      name: Dados PRODES (INPE)
+      name: DADOS_PRODES_(INPE)
       icon: layers
       description: "Dado preliminar de 2020 composto por 102 cenas prioritárias. As 102 cenas selecionadas como prioritárias atendem a três critérios: 1- cobrir a região onde foram registrados pelo menos 90% do desmatamento no período anterior do PRODES (agosto/2018 a julho/2019); 2) cobrir regiões onde foram registrados pelo menos 90% dos avisos de desmatamento do DETER 2019/2020; 3) cobrir os 43 municípios prioritários para fiscalização referidos no Decreto Federal 6.321/2007 e atualizado em 2018 e 2020 pelas Portarias No. 428 e 162 do Ministério do Meio Ambiente (MMA)."
 - model: support.CategoryLayersGroup
   pk: 5
   fields:
-      name: MONITORAMENTO DIÁRIO
+      name: MONITORAMENTO_ANTROPISMO
       icon: layers
       description: Grupo Layers destinado as camadas envolvidas nas atividades do Monitoramento Diário das Terras Indígenas.
 - model: support.CategoryLayersGroup
@@ -6254,7 +6254,7 @@
       has_detail: false
       detail_width: null
       geoserver: 1
-      geoserver_layer_name: vw_prodes_com_terra_indigena_a
+      geoserver_layer_name: vw_prodes_terra_indigena
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: true

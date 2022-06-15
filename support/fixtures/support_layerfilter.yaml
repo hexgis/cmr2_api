@@ -22,9 +22,9 @@
   pk: 3
   fields:
     default: 
-    filter_type: Coordenação Regional
-    label: co_cr
-    filter_alias: id_cr
+    filter_type: co_cr
+    label: Coordenação Regional
+    filter_alias: co_cr
     layers:
     - 321
     - 319
@@ -36,13 +36,21 @@
   pk: 4
   fields:
     default: 
-    filter_type: Terras Indígenas
-    label: co_funai
-    filter_alias: id_funai
+    filter_type: co_funai
+    label: Terras Indígenas
+    filter_alias: co_funai
     layers: 
      - 319
      - 321
      - 1
+- model: support.layerfilter
+  pk: 4
+  fields:
+    default: 
+    filter_type: co_funai
+    label: Terras Indígenas Aldeias
+    filter_alias: terra_indigena_co_funai
+    layers: 
      - 6
 - model: support.layerfilter
   pk: 5
