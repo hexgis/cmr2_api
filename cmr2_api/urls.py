@@ -69,4 +69,8 @@ urlpatterns = [
         ('land_use.urls', 'land-use'),
         namespace='land-use'),
     ),
+    path('documentary/', include(
+        ('documentary.urls','documentary'),
+        namespace='documentary'),
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

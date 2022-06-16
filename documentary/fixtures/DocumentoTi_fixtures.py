@@ -1,0 +1,50 @@
+SELECT * FROM public.manager_documentosti
+where
+	acao_id = 14 and			
+	no_ti ilike 'Xingu%' or
+	no_ti ilike 'Kanela Memortumré' or
+	no_ti ilike 'Porquinhos Dos Canela-Apãnjekra' or
+	no_ti ilike 'Porquinhos Dos Canela-Apãnjekra' or
+	no_ti ilike 'Taego Ãwa'
+order by no_ti 
+
+
+
+
+
+
+4572	documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_574_Ciclo68_TI_Kanela_Memortu_xv48mxg.pdf	Alerta_Urgente_574_Ciclo68_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	486	true	false	2022-05-10 15:11:47.623 -0300	2022-05-10 15:11:47.623 -0300	20702	14	2022-05-10
+3965	alerta_urgente/Alerta_Urgente_311_Ciclo57_TI_Kanela_Memortumré_mapa1_CR_CR.pdf	Alerta_Urgente_311_Ciclo57_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	488	true	false	2021-05-20 15:01:05.038 -0300	2021-05-20 15:01:05.039 -0300	20702	14	2021-05-16
+91	documentos_terra_indigena/kanela Memortumré/20702_kanela_Memortumré.pdf	Fundo Amazônia	.pdf	Kanela Memortumré	15	true	false	2017-07-05 17:14:45.167 -0300	2017-07-05 17:14:45.167 -0300	20702	5	
+3493	alerta_urgente/Alerta_Urgente_279_Ciclo55_TI_Kanela_Memortumré_mapa1_CR_CR.pdf	Alerta_Urgente_279_Ciclo55_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	488	true	false	2021-05-12 16:06:09.354 -0300	2021-05-12 16:06:09.354 -0300	20702	14	2021-04-07
+4537	documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_560_Ciclo67_TI_Kanela_Memortu_ZrAtrwt.pdf	Alerta_Urgente_560_Ciclo67_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	488	true	false	2022-04-05 10:56:27.798 -0300	2022-04-05 10:56:27.797 -0300	20702	14	2022-04-01
+4419	documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_530_Ciclo65_TI_Kanela_Memortu_3KZzO1s.pdf	Alerta_Urgente_530_Ciclo65_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	486	true	false	2022-02-02 14:25:50.958 -0300	2022-02-02 14:25:50.958 -0300	20702	14	2022-02-02
+4301	documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortu_EbvzgOn.pdf	Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	486	true	false	2021-10-28 09:32:16.456 -0300	2021-10-28 09:32:16.456 -0300	20702	14	2021-10-20
+181	documentos_terra_indigena/Kanela Memortumré/20702_Kanela_Memortumré.pdf	Gestão Territorial e Ambiental	.pdf	Kanela Memortumré	15	true	false	2017-07-05 18:13:51.613 -0300	2017-07-05 18:13:51.613 -0300	20702	6	
+4329	documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortu_rBpqrEP.pdf	Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	488	true	false	2021-12-14 13:44:24.515 -0300	2021-12-14 13:44:24.515 -0300	20702	14	2021-11-08
+4296	documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortu_gd99VKe.pdf	Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	487	true	false	2021-10-20 16:10:32.879 -0300	2021-10-20 16:10:32.879 -0300	20702	14	2021-10-20
+4330	documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortu_nMoQYyS.pdf	Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortumré_mapa2_CR_CR	.pdf	Kanela Memortumré	488	true	false	2021-12-14 13:45:27.196 -0300	2021-12-14 13:45:27.196 -0300	20702	14	2021-11-08
+3930	alerta_urgente/Alerta_Urgente_23_TI_Kanela_Memortumré_mapa1_23-2018.pdf	Alerta_Urgente_23_TI_Kanela_Memortumré_mapa1_23-2018	.pdf	Kanela Memortumré	488	true	false	2021-05-20 09:26:57.759 -0300	2021-05-20 09:26:57.759 -0300	20702	14	2018-03-21
+3521	alerta_urgente/Alerta_Urgente_303_Ciclo56_TI_Kanela_Memortumré_mapa1_CR_CR.pdf	Alerta_Urgente_303_Ciclo56_TI_Kanela_Memortumré_mapa1_CR_CR	.pdf	Kanela Memortumré	488	true	false	2021-05-12 16:49:18.554 -0300	2021-05-12 16:49:18.554 -0300	20702	14	2021-05-09
+4300	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_472_Ciclo61_TI__ONwNT0T.pdf	Alerta_Urgente_472_Ciclo61_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	486	true	false	2021-10-28 09:31:39.121 -0300	2021-10-28 09:31:39.121 -0300	36602	14	2021-10-20
+4604	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_588_Ciclo68_TI__aOozEyB.pdf	Alerta_Urgente_588_Ciclo68_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	542	true	false	2022-05-25 14:14:42.465 -0300	2022-05-25 14:14:42.465 -0300	36602	14	2022-05-25
+94	documentos_terra_indigena/Porquinhos dos Canela/Apãnjekra/36602_Porquinhos_dos_Canela-Apãnjekra.pdf	Fundo Amazônia	.pdf	Porquinhos dos Canela-Apãnjekra	15	true	false	2017-07-05 17:14:45.852 -0300	2017-07-05 17:14:45.852 -0300	36602	5	
+3509	alerta_urgente/Alerta_Urgente_294_Ciclo56_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf	Alerta_Urgente_294_Ciclo56_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2021-05-12 16:33:22.476 -0300	2021-05-12 16:33:22.476 -0300	36602	14	2021-04-30
+3709	alerta_urgente/Alerta_Urgente_157_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf	Alerta_Urgente_157_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2021-05-17 16:32:07.195 -0300	2021-05-17 16:32:07.195 -0300	36602	14	2019-07-30
+3723	alerta_urgente/Alerta_Urgente_148_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf	Alerta_Urgente_148_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2021-05-17 16:48:49.539 -0300	2021-05-17 16:48:49.540 -0300	36602	14	2019-06-28
+3929	alerta_urgente/Alerta_Urgente_22_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_22-2018.pdf	Alerta_Urgente_22_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_22-2018	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2021-05-20 09:25:05.552 -0300	2021-05-20 09:25:05.552 -0300	36602	14	2018-03-21
+3938	alerta_urgente/Alerta_Urgente_10_TI_Porquinhos_dos_Canela_Apãnjekra-FernandoFalcao_MA_10-2018.pdf	Alerta_Urgente_10_TI_Porquinhos_dos_Canela_Apãnjekra-FernandoFalcao_MA_10-2018	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2021-05-20 10:29:36.832 -0300	2021-05-20 10:29:36.832 -0300	36602	14	2017-11-13
+3964	alerta_urgente/Alerta_Urgente_310_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR-DG_DG.pdf	Alerta_Urgente_310_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR-DG_DG	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2021-05-20 14:59:41.525 -0300	2021-05-20 14:59:41.525 -0300	36602	14	2021-05-16
+3966	alerta_urgente/Alerta_Urgente_312_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf	Alerta_Urgente_312_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2021-05-20 15:02:13.003 -0300	2021-05-20 15:02:13.003 -0300	36602	14	2021-05-16
+4014	alerta_urgente/Alerta_Urgente_336_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf	Alerta_Urgente_336_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	486	true	false	2021-06-07 09:47:10.023 -0300	2021-06-07 09:47:10.023 -0300	36602	14	2021-06-01
+4497	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_378_Ciclo58_TI__Isad9sK.pdf	Alerta_Urgente_378_Ciclo58_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2022-04-01 14:14:46.847 -0300	2022-04-01 14:14:46.847 -0300	36602	14	2021-07-03
+4295	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_472_Ciclo61_TI__F0kEaKc.pdf	Alerta_Urgente_472_Ciclo61_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	487	true	false	2021-10-20 16:08:24.857 -0300	2021-10-20 16:08:24.857 -0300	36602	14	2021-10-20
+4573	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_575_Ciclo68_TI__8fdUzQc.pdf	Alerta_Urgente_575_Ciclo68_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	486	true	false	2022-05-10 15:50:33.768 -0300	2022-05-10 15:50:33.768 -0300	36602	14	2022-05-10
+4501	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_446_Ciclo60_TI__Ic00dUA.pdf	Alerta_Urgente_446_Ciclo60_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	486	true	false	2022-04-01 14:22:08.366 -0300	2022-04-01 14:22:08.366 -0300	36602	14	2021-09-17
+4535	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_559_Ciclo67_TI__bLqXDrG.pdf	Alerta_Urgente_559_Ciclo67_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2022-04-05 10:54:41.146 -0300	2022-04-05 10:54:41.146 -0300	36602	14	2022-04-01
+4471	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_485_Ciclo62_TI__vxjR6ga.pdf	Alerta_Urgente_485_Ciclo62_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	494	true	false	2022-04-01 11:23:00.645 -0300	2022-04-01 11:23:00.645 -0300	36602	14	2021-12-10
+4536	documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_559_Ciclo67_TI__1tKTwHM.pdf	Alerta_Urgente_559_Ciclo67_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa2_CR_CR	.pdf	Porquinhos dos Canela-Apãnjekra	488	true	false	2022-04-05 10:55:21.622 -0300	2022-04-05 10:55:21.622 -0300	36602	14	2022-04-01
+4290	documentos_terra_indigena/Taego Ãwa/Alerta_Urgente_468_Ciclo61_TI_Taego_Ãwa_mapa1_CR_CR.pdf	Alerta_Urgente_468_Ciclo61_TI_Taego_Ãwa_mapa1_CR_CR	.pdf	Taego Ãwa	486	true	false	2021-10-15 13:44:09.866 -0300	2021-10-15 13:44:09.866 -0300	73301	14	2021-10-15
+1735	documentos_terra_indigena/Taego Ãwa/SPO_nº._465_CR_Araguaia_Tocantins_-_NC3348.pdf	SPO nº. 465 CR Araguaia Tocantins - NC3348	.pdf	Taego Ãwa	76	true	false	2017-12-07 11:09:30.580 -0200	2017-12-07 11:09:30.580 -0200	73301	8	
+3757	alerta_urgente/Alerta_Urgente_117_TI_Taego_Ãwa_mapa1_CR.pdf	Alerta_Urgente_117_TI_Taego_Ãwa_mapa1_CR	.pdf	Taego Ãwa	488	true	false	2021-05-18 10:41:12.621 -0300	2021-05-18 10:41:12.621 -0300	73301	14	2018-11-30
+3577	alerta_urgente/Alerta_Urgente_213_Ciclo49_TI_Taego_Ãwa_mapa1_CR_CR.pdf	Alerta_Urgente_213_Ciclo49_TI_Taego_Ãwa_mapa1_CR_CR	.pdf	Taego Ãwa	488	true	false	2021-05-14 09:54:12.401 -0300	2021-05-14 09:54:12.401 -0300	73301	14	2020-08-31
