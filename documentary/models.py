@@ -1,52 +1,54 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
+from documentary.utils import (
+    diretorio_mapas_uso_solo,
+    diretorio_ti
+)
 
 
 class Acao(models.Model):
     """Acao model data for documentary model."""
-    id = models.IntegerField(
-        _('primary key'),
-        unique=True,
-        primary_key=True,
-    )
+    # id = models.IntegerField(
+    #     _('Primary key'),
+    #     unique=True,
+    #     primary_key=True,
+    # )
 
     no_acao = models.CharField(
-        _("nome da ação"),
+        _('Action name'),
         max_length=255,
         unique=True,
     )
 
     dt_cadastro = models.DateTimeField(
-        _("Data do cadastro"),
+        _('Registration date'),
         null=True,
         blank=True,
     )
     class Meta:
-        """"""
+        """"Meta class for `documentary.Acao` model."""
         app_label = 'documentary'
         verbose_name = 'Action'
         verbose_name_plural = 'Actions'
-        db_table = 'painel\".\"manager_acao'
-        managed = False
 
 
 class Usuario(models.Model):
-
-    usuario_id = models.IntegerField(
-        _('primary key'),
+    """Usuario model data for documentary model."""
+    id = models.IntegerField(
+        _('User id key'),
         unique=True,
         primary_key=True,
     )
 
     first_name = models.CharField(
-        _('nome de quem cadastrou'),
+        _('Name of who registered'),
         max_length=255,
         unique=True,
     )
     
     class Meta:
-        """"""
+        """"Meta class for `documentary.Usuario` model."""
         app_label = 'documentary'
         verbose_name = 'User'
         verbose_name_plural = 'Users'
@@ -56,86 +58,322 @@ class Usuario(models.Model):
 
 class DocumentosTI(models.Model):
     """DocumentosTI model data for documentary model."""
+    id = models.IntegerField(
+        _('Primary key'),
+        unique=True,
+        primary_key=True,
+    )
+    
     path_documento = models.FileField(
-		_("Path do documento"),
-		upload_to=self.diretorio_ti()
+		_('Document path'),
+		upload_to=diretorio_ti,
 	)
 
     no_documento = models.CharField(
-    	_("Nome do documento"),
-    	max_length=255
+    	_('Document name'),
+    	max_length=255,
+        null=True,
+        blank=True,
     )
 
     no_extensao = models.CharField(
-    	_("Extensão do documento"),
-    	max_length=5
+    	_('Document extension'),
+    	max_length=255,
+        null=True,
+        blank=True,
     )
 
     co_funai = models.IntegerField(
-    	_("Código da Terra Indígena")
+    	_('Funai code - Indigenou Lands'),
+        null=True,
+        blank=True,
     )
 
     no_ti = models.CharField(
-    	_("Nome da Terra Indígena"),
-    	max_length=255
+    	_('Indigenou Lands name'),
+    	max_length=255,
+        null=True,
+        blank=True,
     )
 
     acao = models.ForeignKey(
-    	Acao,
-        related_name=_('documentos_ti'),
-    	blank=False,
+    	'documentary.Acao',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosti_type',
+    	# blank=False,
     	null=False,
     )
     
-    usuario = models.ForeignKey(
-    	Usuario, 
-        related_name=_('usuario_id'),
-        blank=False,
+    usuario_id = models.ForeignKey(
+    	'documentary.Usuario',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosti_usuario_id',
+        # blank=False,
     	null=False,
     )
 
     st_disponivel = models.BooleanField(
-    	_("Documento disponível"),
+    	_('Document available'),
     	default=False,
+        null=True,
+        blank=True,
     )
 
     st_excluido = models.BooleanField(
-    	_("Documento excluído"),
+    	_('Deleted document'),
     	default=False,
+        null=True,
+        blank=True,
     )
 
     dt_cadastro = models.DateTimeField(
-    	_("Data do cadastro")
+    	_('Document registration date'),
+        null=True,
+        blank=True,
     )
 
     dt_atualizacao = models.DateTimeField(
-    	_("Data da ultima atualização")
+    	_('Last update date'),
+        null=True,
+        blank=True,
     )
 
     dt_documento = models.DateField(
-    	_("Data do documento"),
+    	_('Date of document'),
     	null=True,
     	blank=True,
     )
     class Meta:
-        """"""
+        """"Meta class for `documentary.DocumentosTI` model."""
         app_label = 'documentary'
         verbose_name = 'DocumentTI'
         verbose_name_plural = 'DocumentsTI'
-        db_table = 'painel\".\"manager_documentosti'
-        managed = False
-
-    def diretorio_ti(instance, filename):
-        return "documentos_terra_indigena/{0}/{1}".format(instance.no_ti, filename)
+        # db_table = 'painel\".\"manager_documentosti'
+        # managed = False
 
 
-# class MapasUsoOcupacaoSolo(models.Model):
+class MapasUsoOcupacaoSolo(models.Model):
+    """MapasUsoOcupacaoSolo model data for documentary model."""
+    id = models.IntegerField(
+        _('Primary key'),
+        unique=True,
+        primary_key=True,
+    )
+    
+    path_documento = models.FileField(
+		_('Document path'),
+		upload_to=diretorio_ti,
+	)
 
-#     class Meta:
+    no_documento = models.CharField(
+    	_('Document name'),
+    	max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    co_funai = models.IntegerField(
+    	_('Funai code - Indigenou Lands'),
+        null=True,
+        blank=True,
+    )
+
+    tipo_id = models.ForeignKey(
+    	'documentary.Acao',
+        on_delete=models.DO_NOTHING,
+        related_name='Maps_type',
+    	# blank=False,
+    	null=False,
+    )
+    
+    usuario_id = models.ForeignKey(
+    	'documentary.Usuario',
+        on_delete=models.DO_NOTHING,
+        related_name='Maps_usuario_id',
+        # blank=False,
+    	null=False,
+    )
+
+    st_disponivel = models.BooleanField(
+    	_('Document available'),
+    	default=False,
+        null=True,
+        blank=True,
+    )
+
+    st_excluido = models.BooleanField(
+    	_('Deleted document'),
+    	default=False,
+        null=True,
+        blank=True,
+    )
+
+    dt_cadastro = models.DateTimeField(
+    	_('Document registration date'),
+        # auto_now_add=true, ???
+        null=True,
+        blank=True,
+    )
+
+    dt_atualizacao = models.DateTimeField(
+    	_('Last update date'),
+        # auto_now=true, ???
+        null=True,
+        blank=True,
+    )
+
+    dt_documento = models.DateField(
+    	_('Date of document'),
+    	null=True,
+    	blank=True,
+    )
+    
+    nu_ano = models.IntegerField(
+        _('Delivery reference year'),
+        null=True,
+        blank=True,
+    )
+       
+    nu_ano_mapa = models.IntegerField(
+        _('Year of the map'),
+        null=True,
+        blank=True,
+    )
+    
+    class Meta:
+        """"Meta class for `documentary.MapasUsoOcupacaoSolo` model."""
+        app_label = 'documentary'
+        verbose_name = 'Use Land Occupancy Map'
+        verbose_name_plural = 'Use Land Occupancy Maps'
         # db_table = 'painel\".\"manager_mapasusoocupacaosolo'
         # managed = False
 
 
-# class DocumentaryDocs(models.Model):
 
-#     class Meta:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class DocumentaryDocs(models.Model):
+    """DocumentaryDocs model data for documentary model."""
+    id = models.IntegerField(
+        _('Primary key'),
+        unique=True,
+        primary_key=True,
+    )
+    
+    path_documento = models.FileField(
+		_('Document path'),
+		upload_to=diretorio_ti,
+	)
+
+    no_documento = models.CharField(
+    	_('Document name'),
+    	max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    no_extensao = models.CharField(
+    	_('Document extension'),
+    	max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    co_funai = models.IntegerField(
+    	_('Funai code - Indigenou Lands'),
+        null=True,
+        blank=True,
+    )
+
+    no_ti = models.CharField(
+    	_('Indigenou Lands name'),
+    	max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    acao = models.ForeignKey(
+    	'documentary.Acao',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosdocs_type',
+    	# blank=False,
+    	null=False,
+    )
+    
+    usuario_id = models.ForeignKey(
+    	'documentary.Usuario',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosdocs_usuario_id',
+        # blank=False,
+    	null=False,
+    )
+
+    st_disponivel = models.BooleanField(
+    	_('Document available'),
+    	default=False,
+        null=True,
+        blank=True,
+    )
+
+    st_excluido = models.BooleanField(
+    	_('Deleted document'),
+    	default=False,
+        null=True,
+        blank=True,
+    )
+
+    dt_cadastro = models.DateTimeField(
+    	_('Document registration date'),
+        null=True,
+        blank=True,
+    )
+
+    dt_atualizacao = models.DateTimeField(
+    	_('Last update date'),
+        null=True,
+        blank=True,
+    )
+
+    dt_documento = models.DateField(
+    	_('Date of document'),
+    	null=True,
+    	blank=True,
+    )
+    
+    nu_ano = models.IntegerField(
+        _('Delivery reference year'),
+        null=True,
+        blank=True,
+    )
+       
+    nu_ano_mapa = models.IntegerField(
+        _('Year of the map'),
+        null=True,
+        blank=True,
+    )
+    
+    class Meta:
+        """"Meta class for `documentary.DocumentosTI` model."""
+        app_label = 'documentary'
+        verbose_name = 'Documentary Doc'
+        verbose_name_plural = 'Documentary Docs'
