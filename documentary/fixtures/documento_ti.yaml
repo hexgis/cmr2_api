@@ -1,0 +1,560 @@
+- model: documentary.DocumentosTI
+  pk: 4572
+  fields:
+    id: 4572
+    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_574_Ciclo68_TI_Kanela_Memortu_xv48mxg.pdf
+    no_documento: Alerta_Urgente_574_Ciclo68_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 486  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-05-10 15:11:47.623
+    dt_atualizacao: 2022-05-10 15:11:47.623
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2022-05-10
+- model: documentary.DocumentosTI
+  pk: 3965
+  fields:
+    id: 3965
+    path_documento: alerta_urgente/Alerta_Urgente_311_Ciclo57_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_311_Ciclo57_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-20 15:01:05.038
+    dt_atualizacao: 2021-05-20 15:01:05.039
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2021-05-16
+- model: documentary.DocumentosTI
+  pk: 91
+  fields:
+    id: 91
+    path_documento: documentos_terra_indigena/kanela Memortumré/20702_kanela_Memortumré.pdf
+    no_documento:   Fundo Amazônia
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 15  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2017-07-05 17:14:45.167
+    dt_atualizacao: 2017-07-05 17:14:45.167
+    co_funai: 20702
+    acao_id: 5
+    dt_documento: 
+- model: documentary.DocumentosTI
+  pk: 3493
+  fields:
+    id: 3493
+    path_documento: alerta_urgente/Alerta_Urgente_279_Ciclo55_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_279_Ciclo55_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-12 16:06:09.354
+    dt_atualizacao: 2021-05-12 16:06:09.354
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2021-04-07
+- model: documentary.DocumentosTI
+  pk: 4537
+  fields:
+    id: 4537
+    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_560_Ciclo67_TI_Kanela_Memortu_ZrAtrwt.pdf
+    no_documento:   Alerta_Urgente_560_Ciclo67_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-04-05 10:56:27.798
+    dt_atualizacao: 2022-04-05 10:56:27.797
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2022-04-01
+- model: documentary.DocumentosTI
+  pk: 4419
+  fields:
+    id: 4419
+    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_530_Ciclo65_TI_Kanela_Memortu_3KZzO1s.pdf
+    no_documento:   Alerta_Urgente_530_Ciclo65_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 486  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-02-02 14:25:50.958
+    dt_atualizacao: 2022-02-02 14:25:50.958
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2022-02-02
+- model: documentary.DocumentosTI
+  pk: 4301
+  fields:
+    id: 4301
+    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortu_EbvzgOn.pdf
+    no_documento:   Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 486  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-10-28 09:32:16.456
+    dt_atualizacao: 2021-10-28 09:32:16.456
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2021-10-20
+- model: documentary.DocumentosTI
+  pk: 181
+  fields:
+    id: 181
+    path_documento: documentos_terra_indigena/Kanela Memortumré/20702_Kanela_Memortumré.pdf
+    no_documento:   Gestão Territorial e Ambiental
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 15  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2017-07-05 18:13:51.613
+    dt_atualizacao: 2017-07-05 18:13:51.613
+    co_funai: 20702
+    acao_id: 6
+    dt_documento: 
+- model: documentary.DocumentosTI
+  pk: 4329
+  fields:
+    id: 4329
+    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortu_rBpqrEP.pdf
+    no_documento:   Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-12-14 13:44:24.515
+    dt_atualizacao: 2021-12-14 13:44:24.515
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2021-11-08
+- model: documentary.DocumentosTI
+  pk: 4296
+  fields:
+    id: 4296
+    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortu_gd99VKe.pdf
+    no_documento:   Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 487  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-10-20 16:10:32.879
+    dt_atualizacao: 2021-10-20 16:10:32.879
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2021-10-20
+- model: documentary.DocumentosTI
+  pk: 4330
+  fields:
+    id: 4330
+    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortu_nMoQYyS.pdf
+    no_documento:   Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortumré_mapa2_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-12-14 13:45:27.196
+    dt_atualizacao: 2021-12-14 13:45:27.196
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2021-11-08
+- model: documentary.DocumentosTI
+  pk: 3930
+  fields:
+    id: 3930
+    path_documento: alerta_urgente/Alerta_Urgente_23_TI_Kanela_Memortumré_mapa1_23-2018.pdf
+    no_documento:   Alerta_Urgente_23_TI_Kanela_Memortumré_mapa1_23-2018
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-20 09:26:57.759
+    dt_atualizacao: 2021-05-20 09:26:57.759
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2018-03-21
+- model: documentary.DocumentosTI
+  pk: 3521
+  fields:
+    id: 3521
+    path_documento: alerta_urgente/Alerta_Urgente_303_Ciclo56_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_303_Ciclo56_TI_Kanela_Memortumré_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Kanela Memortumré  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-12 16:49:18.554
+    dt_atualizacao: 2021-05-12 16:49:18.554
+    co_funai: 20702
+    acao_id: 14
+    dt_documento: 2021-05-09
+- model: documentary.DocumentosTI
+  pk: 4300
+  fields:
+    id: 4300
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_472_Ciclo61_TI__ONwNT0T.pdf
+    no_documento:   Alerta_Urgente_472_Ciclo61_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 486  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-10-28 09:31:39.121
+    dt_atualizacao: 2021-10-28 09:31:39.121
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-10-20
+- model: documentary.DocumentosTI
+  pk: 4604
+  fields:
+    id: 4604
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_588_Ciclo68_TI__aOozEyB.pdf
+    no_documento:   Alerta_Urgente_588_Ciclo68_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 542  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-05-25 14:14:42.465
+    dt_atualizacao: 2022-05-25 14:14:42.465
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2022-05-25
+- model: documentary.DocumentosTI
+  pk: 94
+  fields:
+    id: 94
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela/Apãnjekra/36602_Porquinhos_dos_Canela-Apãnjekra.pdf
+    no_documento:   Fundo Amazônia
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 15  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2017-07-05 17:14:45.852
+    dt_atualizacao: 2017-07-05 17:14:45.852
+    co_funai: 36602
+    acao_id: 5
+    dt_documento: 
+- model: documentary.DocumentosTI
+  pk: 3509
+  fields:
+    id: 3509
+    path_documento: alerta_urgente/Alerta_Urgente_294_Ciclo56_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_294_Ciclo56_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-12 16:33:22.476
+    dt_atualizacao: 2021-05-12 16:33:22.476
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-04-30
+- model: documentary.DocumentosTI
+  pk: 3709
+  fields:
+    id: 3709
+    path_documento: alerta_urgente/Alerta_Urgente_157_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_157_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-17 16:32:07.195
+    dt_atualizacao: 2021-05-17 16:32:07.195
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2019-07-30
+- model: documentary.DocumentosTI
+  pk: 3723
+  fields:
+    id: 3723
+    path_documento: alerta_urgente/Alerta_Urgente_148_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_148_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-17 16:48:49.539
+    dt_atualizacao: 2021-05-17 16:48:49.540
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2019-06-28
+- model: documentary.DocumentosTI
+  pk: 3929
+  fields:
+    id: 3929
+    path_documento: alerta_urgente/Alerta_Urgente_22_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_22-2018.pdf
+    no_documento:   Alerta_Urgente_22_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_22-2018
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-20 09:25:05.552
+    dt_atualizacao: 2021-05-20 09:25:05.552
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2018-03-21
+- model: documentary.DocumentosTI
+  pk: 3938
+  fields:
+    id: 3938
+    path_documento: alerta_urgente/Alerta_Urgente_10_TI_Porquinhos_dos_Canela_Apãnjekra-FernandoFalcao_MA_10-2018.pdf
+    no_documento:   Alerta_Urgente_10_TI_Porquinhos_dos_Canela_Apãnjekra-FernandoFalcao_MA_10-2018
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-20 10:29:36.832
+    dt_atualizacao: 2021-05-20 10:29:36.832
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2017-11-13
+- model: documentary.DocumentosTI
+  pk: 3964
+  fields:
+    id: 3964
+    path_documento: alerta_urgente/Alerta_Urgente_310_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR-DG_DG.pdf
+    no_documento:   Alerta_Urgente_310_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR-DG_DG
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-20 14:59:41.525
+    dt_atualizacao: 2021-05-20 14:59:41.525
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-05-16
+- model: documentary.DocumentosTI
+  pk: 3966
+  fields:
+    id: 3966
+    path_documento: alerta_urgente/Alerta_Urgente_312_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_312_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-20 15:02:13.003
+    dt_atualizacao: 2021-05-20 15:02:13.003
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-05-16
+- model: documentary.DocumentosTI
+  pk: 4014
+  fields:
+    id: 4014
+    path_documento: alerta_urgente/Alerta_Urgente_336_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_336_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 486  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-06-07 09:47:10.023
+    dt_atualizacao: 2021-06-07 09:47:10.023
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-06-01
+- model: documentary.DocumentosTI
+  pk: 4497
+  fields:
+    id: 4497
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_378_Ciclo58_TI__Isad9sK.pdf
+    no_documento:   Alerta_Urgente_378_Ciclo58_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-04-01 14:14:46.847
+    dt_atualizacao: 2022-04-01 14:14:46.847
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-07-03
+- model: documentary.DocumentosTI
+  pk: 4295
+  fields:
+    id: 4295
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_472_Ciclo61_TI__F0kEaKc.pdf
+    no_documento:   Alerta_Urgente_472_Ciclo61_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 487  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-10-20 16:08:24.857
+    dt_atualizacao: 2021-10-20 16:08:24.857
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-10-20
+- model: documentary.DocumentosTI
+  pk: 4573
+  fields:
+    id: 4573
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_575_Ciclo68_TI__8fdUzQc.pdf
+    no_documento:   Alerta_Urgente_575_Ciclo68_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 486  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-05-10 15:50:33.768
+    dt_atualizacao: 2022-05-10 15:50:33.768
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2022-05-10
+- model: documentary.DocumentosTI
+  pk: 4501
+  fields:
+    id: 4501
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_446_Ciclo60_TI__Ic00dUA.pdf
+    no_documento:   Alerta_Urgente_446_Ciclo60_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 486  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-04-01 14:22:08.366
+    dt_atualizacao: 2022-04-01 14:22:08.366
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-09-17
+- model: documentary.DocumentosTI
+  pk: 4535
+  fields:
+    id: 4535
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_559_Ciclo67_TI__bLqXDrG.pdf
+    no_documento:   Alerta_Urgente_559_Ciclo67_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-04-05 10:54:41.146
+    dt_atualizacao: 2022-04-05 10:54:41.146
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2022-04-01
+- model: documentary.DocumentosTI
+  pk: 4471
+  fields:
+    id: 4471
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_485_Ciclo62_TI__vxjR6ga.pdf
+    no_documento:   Alerta_Urgente_485_Ciclo62_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 494  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-04-01 11:23:00.645
+    dt_atualizacao: 2022-04-01 11:23:00.645
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2021-12-10
+- model: documentary.DocumentosTI
+  pk: 4536
+  fields:
+    id: 4536
+    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_559_Ciclo67_TI__1tKTwHM.pdf
+    no_documento:   Alerta_Urgente_559_Ciclo67_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa2_CR_CR
+    no_extensao: .pdf
+    no_ti : Porquinhos dos Canela-Apãnjekra  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2022-04-05 10:55:21.622
+    dt_atualizacao: 2022-04-05 10:55:21.622
+    co_funai: 36602
+    acao_id: 14
+    dt_documento: 2022-04-01
+- model: documentary.DocumentosTI
+  pk: 4290
+  fields:
+    id: 4290
+    path_documento: documentos_terra_indigena/Taego Ãwa/Alerta_Urgente_468_Ciclo61_TI_Taego_Ãwa_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_468_Ciclo61_TI_Taego_Ãwa_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Taego Ãwa  
+    usuario_id: 486  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-10-15 13:44:09.866
+    dt_atualizacao: 2021-10-15 13:44:09.866
+    co_funai: 73301
+    acao_id: 14
+    dt_documento: 2021-10-15
+- model: documentary.DocumentosTI
+  pk: 1735
+  fields:
+    id: 1735
+    path_documento: documentos_terra_indigena/Taego Ãwa/SPO_nº._465_CR_Araguaia_Tocantins_-_NC3348.pdf
+    no_documento:   SPO nº. 465 CR Araguaia Tocantins - NC3348
+    no_extensao: .pdf
+    no_ti : Taego Ãwa  
+    usuario_id: 76  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2017-12-07 11:09:30.580
+    dt_atualizacao: 2017-12-07 11:09:30.580
+    co_funai: 73301
+    acao_id: 8
+    dt_documento: 
+- model: documentary.DocumentosTI
+  pk: 3757
+  fields:
+    id: 3757
+    path_documento: alerta_urgente/Alerta_Urgente_117_TI_Taego_Ãwa_mapa1_CR.pdf
+    no_documento:   Alerta_Urgente_117_TI_Taego_Ãwa_mapa1_CR
+    no_extensao: .pdf
+    no_ti : Taego Ãwa  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-18 10:41:12.621
+    dt_atualizacao: 2021-05-18 10:41:12.621
+    co_funai: 73301
+    acao_id: 14
+    dt_documento: 2018-11-30
+- model: documentary.DocumentosTI
+  pk: 3577
+  fields:
+    id: 3577
+    path_documento: alerta_urgente/Alerta_Urgente_213_Ciclo49_TI_Taego_Ãwa_mapa1_CR_CR.pdf
+    no_documento:   Alerta_Urgente_213_Ciclo49_TI_Taego_Ãwa_mapa1_CR_CR
+    no_extensao: .pdf
+    no_ti : Taego Ãwa  
+    usuario_id: 488  
+    st_disponivel: true
+    st_excluido: false
+    dt_cadastro: 2021-05-14 09:54:12.401
+    dt_atualizacao: 2021-05-14 09:54:12.401
+    co_funai: 73301
+    acao_id: 14
+    dt_documento: 2020-08-31
