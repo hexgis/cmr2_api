@@ -7,8 +7,9 @@ from documentary.utils import (
 )
 
 
-class Acao(models.Model):
-    """Acao model data for documentary model."""
+class Action(models.Model):
+    """Action model data for documentary model."""
+
     # id = models.IntegerField(
     #     _('Primary key'),
     #     unique=True,
@@ -27,14 +28,15 @@ class Acao(models.Model):
         blank=True,
     )
     class Meta:
-        """"Meta class for `documentary.Acao` model."""
+        """"Meta class for `documentary.Action` model."""
         app_label = 'documentary'
         verbose_name = 'Action'
         verbose_name_plural = 'Actions'
 
-
+    
 class Usuario(models.Model):
     """Usuario model data for documentary model."""
+
     id = models.IntegerField(
         _('User id key'),
         unique=True,
@@ -44,7 +46,8 @@ class Usuario(models.Model):
     first_name = models.CharField(
         _('Name of who registered'),
         max_length=255,
-        unique=True,
+        null=True,
+        blank=True,
     )
     
     class Meta:
@@ -58,6 +61,7 @@ class Usuario(models.Model):
 
 class DocumentosTI(models.Model):
     """DocumentosTI model data for documentary model."""
+
     id = models.IntegerField(
         _('Primary key'),
         unique=True,
@@ -67,6 +71,7 @@ class DocumentosTI(models.Model):
     path_documento = models.FileField(
 		_('Document path'),
 		upload_to=diretorio_ti,
+        max_length=255,
 	)
 
     no_documento = models.CharField(
@@ -96,8 +101,8 @@ class DocumentosTI(models.Model):
         blank=True,
     )
 
-    acao = models.ForeignKey(
-    	'documentary.Acao',
+    acao_id = models.ForeignKey(
+    	'documentary.Action',
         on_delete=models.DO_NOTHING,
         related_name='documentosti_type',
     	# blank=False,
@@ -143,6 +148,7 @@ class DocumentosTI(models.Model):
     	null=True,
     	blank=True,
     )
+
     class Meta:
         """"Meta class for `documentary.DocumentosTI` model."""
         app_label = 'documentary'
@@ -154,6 +160,7 @@ class DocumentosTI(models.Model):
 
 class MapasUsoOcupacaoSolo(models.Model):
     """MapasUsoOcupacaoSolo model data for documentary model."""
+
     id = models.IntegerField(
         _('Primary key'),
         unique=True,
@@ -162,12 +169,13 @@ class MapasUsoOcupacaoSolo(models.Model):
     
     path_documento = models.FileField(
 		_('Document path'),
-		upload_to=diretorio_ti,
+		upload_to=diretorio_mapas_uso_solo,
+        max_length=255,
 	)
 
     no_documento = models.CharField(
     	_('Document name'),
-    	max_length=255,
+    	max_length=555,
         null=True,
         blank=True,
     )
@@ -179,7 +187,7 @@ class MapasUsoOcupacaoSolo(models.Model):
     )
 
     tipo_id = models.ForeignKey(
-    	'documentary.Acao',
+        'documentary.Action',
         on_delete=models.DO_NOTHING,
         related_name='Maps_type',
     	# blank=False,
@@ -274,6 +282,7 @@ class MapasUsoOcupacaoSolo(models.Model):
 
 class DocumentaryDocs(models.Model):
     """DocumentaryDocs model data for documentary model."""
+
     id = models.IntegerField(
         _('Primary key'),
         unique=True,
@@ -282,7 +291,10 @@ class DocumentaryDocs(models.Model):
     
     path_documento = models.FileField(
 		_('Document path'),
+        # adicionar condição para saber de qual ditretória irá ser realizado 
+        # o acesso aos mapas: "diretorio_mapas_uso_solo" ou "diretorio_ti"
 		upload_to=diretorio_ti,
+        max_length=255,
 	)
 
     no_documento = models.CharField(
@@ -292,34 +304,6 @@ class DocumentaryDocs(models.Model):
         blank=True,
     )
 
-    no_extensao = models.CharField(
-    	_('Document extension'),
-    	max_length=255,
-        null=True,
-        blank=True,
-    )
-
-    co_funai = models.IntegerField(
-    	_('Funai code - Indigenou Lands'),
-        null=True,
-        blank=True,
-    )
-
-    no_ti = models.CharField(
-    	_('Indigenou Lands name'),
-    	max_length=255,
-        null=True,
-        blank=True,
-    )
-
-    acao = models.ForeignKey(
-    	'documentary.Acao',
-        on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_type',
-    	# blank=False,
-    	null=False,
-    )
-    
     usuario_id = models.ForeignKey(
     	'documentary.Usuario',
         on_delete=models.DO_NOTHING,
@@ -354,6 +338,34 @@ class DocumentaryDocs(models.Model):
         blank=True,
     )
 
+    co_funai = models.IntegerField(
+    	_('Funai code - Indigenou Lands'),
+        null=True,
+        blank=True,
+    )
+
+    acao_id = models.ForeignKey(
+    	'documentary.Action',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosdocs_type',
+    	# blank=False,
+    	null=False,
+    )
+    
+    no_extensao = models.CharField(
+    	_('Document extension'),
+    	max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    no_ti = models.CharField(
+    	_('Indigenou Lands name'),
+    	max_length=255,
+        null=True,
+        blank=True,
+    )
+
     dt_documento = models.DateField(
     	_('Date of document'),
     	null=True,
@@ -373,7 +385,7 @@ class DocumentaryDocs(models.Model):
     )
     
     class Meta:
-        """"Meta class for `documentary.DocumentosTI` model."""
+        """"Meta class for `documentary.DocumentaryDocs` model."""
         app_label = 'documentary'
         verbose_name = 'Documentary Doc'
         verbose_name_plural = 'Documentary Docs'
