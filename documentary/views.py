@@ -1,3 +1,19 @@
-from django.shortcuts import render
+from rest_framework import (
+    permissions,
+    generics
+)
 
-# Create your views here.
+from documentary import (
+    models, 
+    serializers
+)
+
+
+class AuthModelMix:
+    permission_class = (permissions.AllowAny,)
+
+
+class ActionListVeiw(generics.ListAPIView):
+    queryset = models.Action.objects.all().order_by('no_acao')
+    serializer_class = serializers.ActionListSerializers
+
