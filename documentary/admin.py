@@ -3,7 +3,7 @@ from django.contrib import admin
 from documentary import models
 
 
-class AcaoAdmin(admin.ModelAdmin):
+class ActionAdmin(admin.ModelAdmin):
     list_display = (
     	'no_acao',
 	    'dt_cadastro',
@@ -68,9 +68,33 @@ class MapasUsoOcupacaoSoloAdmin(admin.ModelAdmin):
     search_fields = list_display
 
     
+class DocumentaryDocsAdmin(admin.ModelAdmin):
+    list_display = (
+        'id',
+        'path_documento',
+        'no_documento',
+        'usuario_id',
+        'st_disponivel',
+        'st_excluido',
+        'dt_cadastro',
+        'dt_atualizacao',
+        'co_funai',
+        'acao_id',
+        'no_extensao',
+        'no_ti',
+        'dt_documento',
+        'nu_ano',
+        'nu_ano_mapa',
+    )
     
+    fields = list_display
     
-admin.site.register(models.Acao, AcaoAdmin)
+    search_fields = list_display
+
+
+    
+admin.site.register(models.Action, ActionAdmin)
 admin.site.register(models.Usuario, UsuarioAdmin)
 admin.site.register(models.DocumentosTI, DocumentosTIAdmin)
 admin.site.register(models.MapasUsoOcupacaoSolo, MapasUsoOcupacaoSoloAdmin)
+admin.site.register(models.DocumentaryDocs, DocumentaryDocsAdmin)
