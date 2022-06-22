@@ -1,11 +1,11 @@
 from django.urls import path
 
-from documentary import views
+from documental import views
 
 urlpatterns = [
     path(
         'list-actions/',
-        views.ActionListVeiw.as_view(),
+        views.ActionListView.as_view(),
         name='listar-action'
     )
 ]

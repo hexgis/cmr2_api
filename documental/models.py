@@ -1,14 +1,14 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from documentary.utils import (
+from documental.utils import (
     diretorio_mapas_uso_solo,
     diretorio_ti
 )
 
 
 class Action(models.Model):
-    """Action model data for documentary model."""
+    """Action model data for documental model."""
 
     # id = models.IntegerField(
     #     _('Primary key'),
@@ -28,14 +28,14 @@ class Action(models.Model):
         blank=True,
     )
     class Meta:
-        """"Meta class for `documentary.Action` model."""
-        app_label = 'documentary'
+        """"Meta class for `documental.Action` model."""
+        app_label = 'documental'
         verbose_name = 'Action'
         verbose_name_plural = 'Actions'
 
     
 class Usuario(models.Model):
-    """Usuario model data for documentary model."""
+    """Usuario model data for documental model."""
 
     id = models.IntegerField(
         _('User id key'),
@@ -51,8 +51,8 @@ class Usuario(models.Model):
     )
     
     class Meta:
-        """"Meta class for `documentary.Usuario` model."""
-        app_label = 'documentary'
+        """"Meta class for `documental.Usuario` model."""
+        app_label = 'documental'
         verbose_name = 'User'
         verbose_name_plural = 'Users'
         # db_table = 'painel\".\"auth_user'
@@ -60,7 +60,7 @@ class Usuario(models.Model):
 
 
 class DocumentosTI(models.Model):
-    """DocumentosTI model data for documentary model."""
+    """DocumentosTI model data for documental model."""
 
     id = models.IntegerField(
         _('Primary key'),
@@ -68,10 +68,17 @@ class DocumentosTI(models.Model):
         primary_key=True,
     )
     
-    path_documento = models.FileField(
+    # path_documento = models.FileField(
+	# 	_('Document path'),
+	# 	upload_to=diretorio_ti,
+    #     max_length=255,
+	# )
+
+    path_documento = models.CharField(
 		_('Document path'),
-		upload_to=diretorio_ti,
         max_length=255,
+        null=True,
+        blank=True,
 	)
 
     no_documento = models.CharField(
@@ -102,7 +109,7 @@ class DocumentosTI(models.Model):
     )
 
     acao_id = models.ForeignKey(
-    	'documentary.Action',
+    	'documental.Action',
         on_delete=models.DO_NOTHING,
         related_name='documentosti_type',
     	# blank=False,
@@ -110,7 +117,7 @@ class DocumentosTI(models.Model):
     )
     
     usuario_id = models.ForeignKey(
-    	'documentary.Usuario',
+    	'documental.Usuario',
         on_delete=models.DO_NOTHING,
         related_name='documentosti_usuario_id',
         # blank=False,
@@ -150,8 +157,8 @@ class DocumentosTI(models.Model):
     )
 
     class Meta:
-        """"Meta class for `documentary.DocumentosTI` model."""
-        app_label = 'documentary'
+        """"Meta class for `documental.DocumentosTI` model."""
+        app_label = 'documental'
         verbose_name = 'DocumentTI'
         verbose_name_plural = 'DocumentsTI'
         # db_table = 'painel\".\"manager_documentosti'
@@ -159,7 +166,7 @@ class DocumentosTI(models.Model):
 
 
 class MapasUsoOcupacaoSolo(models.Model):
-    """MapasUsoOcupacaoSolo model data for documentary model."""
+    """MapasUsoOcupacaoSolo model data for documental model."""
 
     id = models.IntegerField(
         _('Primary key'),
@@ -167,10 +174,17 @@ class MapasUsoOcupacaoSolo(models.Model):
         primary_key=True,
     )
     
-    path_documento = models.FileField(
+    # path_documento = models.FileField(
+	# 	_('Document path'),
+	# 	upload_to=diretorio_mapas_uso_solo,
+    #     max_length=255,
+	# )
+
+    path_documento = models.CharField(
 		_('Document path'),
-		upload_to=diretorio_mapas_uso_solo,
         max_length=255,
+        null=True,
+        blank=True,
 	)
 
     no_documento = models.CharField(
@@ -187,7 +201,7 @@ class MapasUsoOcupacaoSolo(models.Model):
     )
 
     tipo_id = models.ForeignKey(
-        'documentary.Action',
+        'documental.Action',
         on_delete=models.DO_NOTHING,
         related_name='Maps_type',
     	# blank=False,
@@ -195,7 +209,7 @@ class MapasUsoOcupacaoSolo(models.Model):
     )
     
     usuario_id = models.ForeignKey(
-    	'documentary.Usuario',
+    	'documental.Usuario',
         on_delete=models.DO_NOTHING,
         related_name='Maps_usuario_id',
         # blank=False,
@@ -249,8 +263,8 @@ class MapasUsoOcupacaoSolo(models.Model):
     )
     
     class Meta:
-        """"Meta class for `documentary.MapasUsoOcupacaoSolo` model."""
-        app_label = 'documentary'
+        """"Meta class for `documental.MapasUsoOcupacaoSolo` model."""
+        app_label = 'documental'
         verbose_name = 'Use Land Occupancy Map'
         verbose_name_plural = 'Use Land Occupancy Maps'
         # db_table = 'painel\".\"manager_mapasusoocupacaosolo'
@@ -280,8 +294,8 @@ class MapasUsoOcupacaoSolo(models.Model):
 
 
 
-class DocumentaryDocs(models.Model):
-    """DocumentaryDocs model data for documentary model."""
+class DocumentalDocs(models.Model):
+    """DocumentalDocs model data for documental model."""
 
     id = models.IntegerField(
         _('Primary key'),
@@ -289,12 +303,19 @@ class DocumentaryDocs(models.Model):
         primary_key=True,
     )
     
-    path_documento = models.FileField(
+    # path_documento = models.FileField(
+	# 	_('Document path'),
+    #     # adicionar condição para saber de qual ditretória irá ser realizado 
+    #     # o acesso aos mapas: "diretorio_mapas_uso_solo" ou "diretorio_ti"
+	# 	upload_to=diretorio_ti,
+    #     max_length=255,
+	# )
+
+    path_documento = models.CharField(
 		_('Document path'),
-        # adicionar condição para saber de qual ditretória irá ser realizado 
-        # o acesso aos mapas: "diretorio_mapas_uso_solo" ou "diretorio_ti"
-		upload_to=diretorio_ti,
         max_length=255,
+        null=True,
+        blank=True,
 	)
 
     no_documento = models.CharField(
@@ -305,7 +326,7 @@ class DocumentaryDocs(models.Model):
     )
 
     usuario_id = models.ForeignKey(
-    	'documentary.Usuario',
+    	'documental.Usuario',
         on_delete=models.DO_NOTHING,
         related_name='documentosdocs_usuario_id',
         # blank=False,
@@ -345,7 +366,7 @@ class DocumentaryDocs(models.Model):
     )
 
     acao_id = models.ForeignKey(
-    	'documentary.Action',
+    	'documental.Action',
         on_delete=models.DO_NOTHING,
         related_name='documentosdocs_type',
     	# blank=False,
@@ -385,7 +406,10 @@ class DocumentaryDocs(models.Model):
     )
     
     class Meta:
-        """"Meta class for `documentary.DocumentaryDocs` model."""
-        app_label = 'documentary'
-        verbose_name = 'Documentary Doc'
-        verbose_name_plural = 'Documentary Docs'
+        """"Meta class for `documental.DocumentalDocs` model."""
+        app_label = 'documental'
+        verbose_name = 'Documental Doc'
+        verbose_name_plural = 'Documental Docs'
+    
+    def __str__(self) -> str:
+        return self.path_documento

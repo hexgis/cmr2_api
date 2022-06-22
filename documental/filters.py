@@ -1,6 +1,6 @@
 from django_filters import rest_framework
 
-from documentary import models
+from documental import models
 
 class NumberInFilter(
     rest_framework.BaseInFilter,
@@ -52,7 +52,7 @@ class DocumentosTIFilter(rest_framework.FilterSet):
     
     class Meta:
         """Meta class for `AlertsFilter` filter."""
-        model = models.UrgentAlerts
+        model = models.DocumentosTI
         fields = (
             'co_funai',
             'co_cr',
@@ -87,9 +87,8 @@ class MapasUsoOcupacaoSoloFilter(rest_framework.FilterSet):
 
     class Meta:
         """Meta class for `AlertsFilter` filter."""
-        model = models.UrgentAlerts
+        model = models.MapasUsoOcupacaoSolo
         fields = (
             'co_funai',
-            'co_cr',
             'map_year',
         )

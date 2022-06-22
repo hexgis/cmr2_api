@@ -1,10 +1,10 @@
-"""Database routers documentary app."""
+"""Database routers documental app."""
 
 
 class PriorityMonitoringRouter:
-    """Documentary tables, database router."""
+    """Documental tables, database router."""
 
-    route_app_labels = {} #{'documentary'}
+    route_app_labels = {} #{'documental'}
 
     def db_for_read(self, model, **hints):
         """Database for read method."""

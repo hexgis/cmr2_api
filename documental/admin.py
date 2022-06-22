@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from documentary import models
+from documental import models
 
 
 class ActionAdmin(admin.ModelAdmin):
@@ -68,7 +68,7 @@ class MapasUsoOcupacaoSoloAdmin(admin.ModelAdmin):
     search_fields = list_display
 
     
-class DocumentaryDocsAdmin(admin.ModelAdmin):
+class DocumentalDocsAdmin(admin.ModelAdmin):
     list_display = (
         'id',
         'path_documento',
@@ -97,4 +97,4 @@ admin.site.register(models.Action, ActionAdmin)
 admin.site.register(models.Usuario, UsuarioAdmin)
 admin.site.register(models.DocumentosTI, DocumentosTIAdmin)
 admin.site.register(models.MapasUsoOcupacaoSolo, MapasUsoOcupacaoSoloAdmin)
-admin.site.register(models.DocumentaryDocs, DocumentaryDocsAdmin)
+admin.site.register(models.DocumentalDocs, DocumentalDocsAdmin)

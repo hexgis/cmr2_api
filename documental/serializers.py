@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from documentary import models
+from documental import models
 
 
 class ActionListSerializers(serializers.ModelSerializer):
@@ -12,3 +12,5 @@ class ActionListSerializers(serializers.ModelSerializer):
             'id',
             'no_acao',
         )
+
+

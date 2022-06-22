@@ -1,4 +1,4 @@
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 542
   fields:
     id: 542
@@ -14,7 +14,7 @@
     date_joined: 2021-12-15 11:36:16.192
     coordenacao_regional: []
     avatar: 
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 15
   fields:
     id: 15
@@ -30,7 +30,7 @@
     date_joined: 2016-07-19 16:22:15.000
     coordenacao_regional: []
     avatar: Avatar/default/avatar_usuario.jpg
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 494
   fields:
     id: 494
@@ -46,7 +46,7 @@
     date_joined: 2021-05-21 09:53:40.392
     coordenacao_regional: []
     avatar: 
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 76
   fields:
     id: 76
@@ -62,7 +62,7 @@
     date_joined: 2016-11-23 16:07:30.063
     coordenacao_regional: [{"id_cr": "coordenacao_regional_amapa_e_norte_do_para"}]  
     avatar: Avatar/default/avatar_usuario.jpg
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 486
   fields:
     id: 486
@@ -78,7 +78,7 @@
     date_joined: 2021-03-04 13:04:03.856
     coordenacao_regional: []
     avatar: 
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 487
   fields:
     id: 487
@@ -94,7 +94,7 @@
     date_joined: 2021-03-04 13:06:56.659
     coordenacao_regional: []
     avatar: 
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 488
   fields:
     id: 488
@@ -110,7 +110,7 @@
     date_joined: 2021-03-04 13:08:32.141
     coordenacao_regional: []
     avatar: 
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 498
   fields:
     id: 498
@@ -126,7 +126,7 @@
     date_joined: 2021-06-25 09:34:06.100
     coordenacao_regional: []
     avatar: 
-- model: documentary.Usuario
+- model: documental.Usuario
   pk: 330
   fields:
     id: 330
