@@ -30,11 +30,9 @@ services:
       && python manage.py loaddata urgent_alerts.yaml
       && python manage.py loaddata land_use_ti.yaml
       && python manage.py loaddata land_use_classes.yaml
-      && python manage.py loaddata acao_cadastrada.yaml
-      && python manage.py loaddata users_who_registered.yaml
+      && python manage.py loaddata documental_acao_cadastrada.yaml
+      && python manage.py loaddata documental_users_who_registered.yaml
       && python manage.py loaddata documental_docs.yaml
-      && python manage.py loaddata documento_ti.yaml
-      && python manage.py loaddata mapas_uso_ocupacao_solo.yaml
       && python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/
