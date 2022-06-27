@@ -109,6 +109,8 @@ DATABASES = {
     },
 }
 
+DOCUMENTOS =  os.getenv('DOCUMENTOS', 'https://cmr.funai.gov.br/media/documental/') 
+
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
