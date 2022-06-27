@@ -41,22 +41,10 @@
       icon: layers
       description: Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo
 - model: support.layersgroup
-  pk: 1
+  pk: 2
   fields:
-      name: Funai
-      order: 1
-      category_groups: 1
-- model: support.layersgroup
-  pk: 3
-  fields:
-      name: Cartografia Básica (CB)
-      order: 3
-      category_groups: 1
-- model: support.layersgroup
-  pk: 4
-  fields:
-      name: Gestão Fundiária
-      order: 4
+      name: Camadas de Sobreposição
+      order: 2
       category_groups: 1
 - model: support.layersgroup
   pk: 5
@@ -152,231 +140,239 @@
   pk: 1
   fields:
       name: Terras Indígenas
-      order: 350
+      order: 1194
       layer_type: wms
-      layers_group: 1
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 3
   fields:
       name: Terra Indígena em Estudo
-      order: 348
+      order: 1194
       layer_type: wms
-      layers_group: 1
-      active_on_init: false
-- model: support.layer
-  pk: 4
-  fields:
-      name: Buffer de TI  (10 Km)
-      order: 347
-      layer_type: wms
-      layers_group: 1
-      active_on_init: false
-- model: support.layer
-  pk: 5
-  fields:
-      name: Buffer de TI (6 Km)
-      order: 345
-      layer_type: wms
-      layers_group: 1
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 6
   fields:
       name: Aldeias Indígenas
-      order: 346
+      order: 1193
       layer_type: wms
-      layers_group: 1
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 4
+  fields:
+      name: Buffer de TI  (10 Km)
+      order: 1192
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 5
+  fields:
+      name: Buffer de TI (6 Km)
+      order: 1191
+      layer_type: wms
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 7
   fields:
       name: Coordenações Regionais
-      order: 344
+      order: 1190
       layer_type: wms
-      layers_group: 1
-      active_on_init: false
-- model: support.layer
-  pk: 8
-  fields:
-      name: Unidades Federativas
-      order: 343
-      layer_type: wms
-      layers_group: 3
-      active_on_init: false
-- model: support.layer
-  pk: 9
-  fields:
-      name: Áreas Municipais
-      order: 342
-      layer_type: wms
-      layers_group: 3
-      active_on_init: false
-- model: support.layer
-  pk: 10
-  fields:
-      name: Amazônia Legal
-      order: 341
-      layer_type: wms
-      layers_group: 3
-      active_on_init: false
-- model: support.layer
-  pk: 11
-  fields:
-      name: Semiárido
-      order: 340
-      layer_type: wms
-      layers_group: 3
-      active_on_init: false
-- model: support.layer
-  pk: 12
-  fields:
-      name: Biomas
-      order: 339
-      layer_type: wms
-      layers_group: 3
-      active_on_init: false
-- model: support.layer
-  pk: 13
-  fields:
-      name: Unidades de Conservação Federal
-      order: 338
-      layer_type: wms
-      layers_group: 3
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 14
   fields:
       name: Áreas Quilombolas
-      order: 337
+      order: 1184
       layer_type: wms
-      layers_group: 1
-      active_on_init: false
-- model: support.layer
-  pk: 15
-  fields:
-      name: Assentamentos Rurais
-      order: 336
-      layer_type: wms
-      layers_group: 4
-      active_on_init: false
-- model: support.layer
-  pk: 16
-  fields:
-      name: CAR
-      order: 335
-      layer_type: wms
-      layers_group: 4
-      active_on_init: false
-- model: support.layer
-  pk: 17
-  fields:
-      name: Imóveis Certificados Privados (SNCI)
-      order: 334
-      layer_type: wms
-      layers_group: 4
-      active_on_init: false
-- model: support.layer
-  pk: 18
-  fields:
-      name: Imóveis Certificados Públicos (SNCI)
-      order: 333
-      layer_type: wms
-      layers_group: 4
-      active_on_init: false
-- model: support.layer
-  pk: 19
-  fields:
-      name: Imóveis Certificados Privados (SIGEF)
-      order: 332
-      layer_type: wms
-      layers_group: 4
-      active_on_init: false
-- model: support.layer
-  pk: 20
-  fields:
-      name: Imóveis Certificados Públicos (SIGEF)
-      order: 331
-      layer_type: wms
-      layers_group: 4
-      active_on_init: false
-- model: support.layer
-  pk: 21
-  fields:
-      name: Trechos Rodoviários
-      order: 330
-      layer_type: wms
-      layers_group: 3
-      active_on_init: false
-- model: support.layer
-  pk: 22
-  fields:
-      name: Trechos de Drenagem
-      order: 329
-      layer_type: wms
-      layers_group: 3
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 23
   fields:
       name: Faixa de Fronteira
-      order: 328
+      order: 1183
       layer_type: wms
-      layers_group: 1
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 24
   fields:
       name: Antenas VSAT
-      order: 327
+      order: 1182
       layer_type: wms
-      layers_group: 1
+      layers_group: 2
       active_on_init: false
 - model: support.layer
-  pk: 25
+  pk: 320
   fields:
-      name: Grade SENTINEL-2
-      order: 326
+      name: Pista de pouso
+      order: 1181
       layer_type: wms
-      layers_group: 3
+      layers_group: 2
       active_on_init: false
 - model: support.layer
-  pk: 26
+  pk: 21
   fields:
-      name: Grade LANDSAT
-      order: 325
+      name: Trechos Rodoviários
+      order: 1180
       layer_type: wms
-      layers_group: 3
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 27
   fields:
       name: Dados Sigmine
-      order: 324
+      order: 1174
       layer_type: wms
-      layers_group: 1
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 8
+  fields:
+      name: Unidades Federativas
+      order: 1173
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 9
+  fields:
+      name: Áreas Municipais
+      order: 1172
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 10
+  fields:
+      name: Amazônia Legal
+      order: 1171
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 11
+  fields:
+      name: Semiárido
+      order: 1170
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 12
+  fields:
+      name: Biomas
+      order: 1164
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 13
+  fields:
+      name: Unidades de Conservação Federal
+      order: 1163
+      layer_type: wms
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 28
   fields:
       name: Comitês de Bacias Hidrográficas Estaduais
-      order: 323
+      order: 1162
       layer_type: wms
-      layers_group: 1
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 29
   fields:
       name: Unidades de Gestão de Recursos Hídricos
-      order: 322
+      order: 1161
       layer_type: wms
-      layers_group: 1
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 22
+  fields:
+      name: Trechos de Drenagem
+      order: 1160
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 15
+  fields:
+      name: Assentamentos Rurais
+      order: 1154
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 16
+  fields:
+      name: CAR
+      order: 1153
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 17
+  fields:
+      name: Imóveis Certificados Privados (SNCI)
+      order: 1152
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 18
+  fields:
+      name: Imóveis Certificados Públicos (SNCI)
+      order: 1151
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 19
+  fields:
+      name: Imóveis Certificados Privados (SIGEF)
+      order: 1150
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 20
+  fields:
+      name: Imóveis Certificados Públicos (SIGEF)
+      order: 1144
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 25
+  fields:
+      name: Grade SENTINEL-2
+      order: 1143
+      layer_type: wms
+      layers_group: 2
+      active_on_init: false
+- model: support.layer
+  pk: 26
+  fields:
+      name: Grade LANDSAT
+      order: 1142
+      layer_type: wms
+      layers_group: 2
       active_on_init: false
 - model: support.layer
   pk: 30
   fields:
       name: Imagens Alta resolução - Atualizadas
-      order: 321
+      order: 1094
       layer_type: wms
       layers_group: 5
       active_on_init: false
@@ -384,7 +380,7 @@
   pk: 31
   fields:
       name: Grade de imagens - Atualizadas
-      order: 320
+      order: 1093
       layer_type: wms
       layers_group: 5
       active_on_init: false
@@ -392,7 +388,7 @@
   pk: 32
   fields:
       name: AQUA M-M
-      order: 319
+      order: 1084
       layer_type: wms
       layers_group: 16
       active_on_init: false
@@ -400,7 +396,7 @@
   pk: 33
   fields:
       name: AQUA M-T
-      order: 318
+      order: 1083
       layer_type: wms
       layers_group: 16
       active_on_init: false
@@ -408,7 +404,7 @@
   pk: 34
   fields:
       name: Risco de Fogo - Previsão 1 dia
-      order: 317
+      order: 1082
       layer_type: wms
       layers_group: 17
       active_on_init: false
@@ -416,9 +412,25 @@
   pk: 35
   fields:
       name: Risco de Fogo - Previsão 2 dias
-      order: 316
+      order: 1081
       layer_type: wms
       layers_group: 17
+      active_on_init: false
+- model: support.layer
+  pk: 319
+  fields:
+      name: Antropismo Consolidado
+      order: 1074
+      layer_type: wms
+      layers_group: 19
+      active_on_init: false
+- model: support.layer
+  pk: 321
+  fields:
+      name: PRODES (INPE)
+      order: 1064
+      layer_type: wms
+      layers_group: 15
       active_on_init: false
 - model: support.layer
   pk: 36
@@ -2451,30 +2463,6 @@
       order: 65
       layer_type: wms
       layers_group: 18
-      active_on_init: false
-- model: support.layer
-  pk: 319
-  fields:
-      name: Antropismo Consolidado
-      order: 354
-      layer_type: wms
-      layers_group: 19
-      active_on_init: false
-- model: support.layer
-  pk: 320
-  fields:
-      name: Pista de pouso
-      order: 64
-      layer_type: wms
-      layers_group: 1
-      active_on_init: false
-- model: support.layer
-  pk: 321
-  fields:
-      name: PRODES (INPE)
-      order: 353
-      layer_type: wms
-      layers_group: 15
       active_on_init: false
 - model: support.wmslayer
   pk: 1
