@@ -133,7 +133,7 @@
 - model: support.layersgroup
   pk: 19
   fields:
-      name: Monitoramento Diário
+      name: Monitoramento Antropismo
       order: 19
       category_groups: 5
 - model: support.layer
