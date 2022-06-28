@@ -1,6 +1,6 @@
 from rest_framework import serializers
-from urllib.parse import urljoin
 
+import urllib
 from django.conf import settings
 
 from documental import models
@@ -66,12 +66,7 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
         """
 
         url_document = super().to_representation(instance)
-        url_document['url_doc'] = urljoin (settings.DOCUMENTOS, instance.path_documento)
-        
-        # basejoin = urljoin(base, url, allow_fragments=True)
-        # Join a base URL and a possibly relative URL to form an absolute interpretation of the latter.
-        
-        
+        url_document['url_doc'] = urllib.parse.urljoin (settings.DOCUMENTOS, instance.path_documento)     
         return url_document
 
 
