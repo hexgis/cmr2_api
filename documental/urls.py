@@ -9,8 +9,8 @@ urlpatterns = [
         name='listar-action'
     ),
     path(
-        'get-doc/',
-        views.DocumentalDocsViews.as_view(),
-        name='get-doc-ti'
+        'list/',
+        views.DocumentalListViews.as_view(),
+        name='list-doc'
     )
 ]

@@ -1,11 +1,14 @@
 from rest_framework import serializers
+from urllib.parse import urljoin
+
+from django.conf import settings
 
 from documental import models
-from django.conf import settings
 
 
 class ActionListSerializers(serializers.ModelSerializer):
     """Serializer for return list actions `models.Action` data."""
+
     class Meta:
         """Meta class for `ActionListSerializers` serializer."""
         model = models.Action
@@ -16,8 +19,8 @@ class ActionListSerializers(serializers.ModelSerializer):
 
 
 class UsuarioSerializers(serializers.ModelSerializer):
-    """Serializer to return user who entered the document `models.Usuario` data.
-    """
+    """Serializer to return the user who entered the `models.Usuario` data."""
+
     class Meta:
         """Meta class for `UsuarioSerializers` serializer."""
         model = models.Usuario
@@ -28,11 +31,14 @@ class UsuarioSerializers(serializers.ModelSerializer):
 
 
 class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
-    """Serializer to return datas to action category USO_OCUPAÇÃO_DO_SOLO to
-    `models.DocumentalDocs` data.
+    """Serializer to return action category `models.DocumentalDocs` data.
+
+    Data only for the action category linked to USO_OCUPAÇÃO_DO_SOLO
     """
+
     usuario_id = UsuarioSerializers()
     acao_id = ActionListSerializers()
+
     class Meta:
         """Meta class for `MapasUsoOcupacaoSoloSerializers` serializer."""
         model = models.DocumentalDocs
@@ -58,8 +64,14 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
         Returns:
             url_document -> str
         """
+
         url_document = super().to_representation(instance)
-        url_document['url_doc'] = settings.DOCUMENTOS + instance.path_documento
+        url_document['url_doc'] = urljoin (settings.DOCUMENTOS, instance.path_documento)
+        
+        # basejoin = urljoin(base, url, allow_fragments=True)
+        # Join a base URL and a possibly relative URL to form an absolute interpretation of the latter.
+        
+        
         return url_document
 
 
