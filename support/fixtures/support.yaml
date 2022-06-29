@@ -133,7 +133,7 @@
 - model: support.layersgroup
   pk: 19
   fields:
-      name: Monitoramento Antropismo
+      name: Antropismo Consolidado
       order: 19
       category_groups: 5
 - model: support.layer

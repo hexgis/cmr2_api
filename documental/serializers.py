@@ -62,7 +62,7 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
         download the documents in `models.DocumentalDocs`  
                 
         Returns:
-            url_document -> str
+            str: url to document
         """
 
         url_document = super().to_representation(instance)

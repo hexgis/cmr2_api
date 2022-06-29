@@ -38,5 +38,5 @@ class DocumentalListViews(generics.ListAPIView):
     queryset = models.DocumentalDocs.objects.all().order_by('dt_cadastro')
     serializer_class = serializers.MapasUsoOcupacaoSoloSerializers
     filterset_class = documental_filters.DocumentalDocsFilter
-    filter_backends = DjangoFilterBackend,
+    filter_backends = (DjangoFilterBackend,)
     
