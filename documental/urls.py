@@ -7,5 +7,10 @@ urlpatterns = [
         'list-actions/',
         views.ActionListView.as_view(),
         name='listar-action'
+    ),
+    path(
+        'list/',
+        views.DocumentalListViews.as_view(),
+        name='list-doc'
     )
 ]
