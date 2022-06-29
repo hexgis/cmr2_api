@@ -66,7 +66,7 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
         """
 
         url_document = super().to_representation(instance)
-        url_document['url_doc'] = urllib.parse.urljoin (settings.DOCUMENTOS, instance.path_documento)     
+        url_document['url_doc'] = urllib.parse.urljoin(settings.DOCUMENTOS, instance.path_documento)     
         return url_document
 
 
