@@ -27,11 +27,12 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
         * co_funai (list): filtering Indigenou Lands using Funai code.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
+        * map_year (list): filteringend years of the maps.
     """
     
-    acao_id = rest_framework.CharFilter(
+    acao_id = CharInFilter(
         field_name='acao_id',
-        lookup_expr='exact',
+        lookup_expr='in',
         required=True
     )
     
@@ -55,6 +56,11 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
         lookup_expr='lte'
     )
 
+    map_year = NumberInFilter(
+        field_name='nu_ano',
+        lookup_expr='in'
+    )
+
     class Meta:
         """Meta class for `DocumentalDocsFilter` filter."""
         model = models.DocumentalDocs
@@ -64,4 +70,5 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
             'co_funai',
             'start_date',
             'end_date',
+            'map_year',
         )       

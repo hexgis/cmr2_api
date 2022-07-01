@@ -33,10 +33,31 @@ class DocumentalListViews(generics.ListAPIView):
         * co_funai (list): filtering Indigenou Lands using Funai code.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
+        * map_year (list): filteringend years of the maps.
     """
 
     queryset = models.DocumentalDocs.objects.all().order_by('dt_cadastro')
-    serializer_class = serializers.MapasUsoOcupacaoSoloSerializers
     filterset_class = documental_filters.DocumentalDocsFilter
     filter_backends = (DjangoFilterBackend,)
     
+    def get_serializer_class(self):
+        """Get method to return data acoording to the action category selected
+        in the `models.DocumentosDoc` data.
+
+        Returns one serializers class to `views.ActionListView`
+        
+        Returns:
+            `serializers.MapasUsoOcupacaoSoloSerializers` or
+            `serializers.DocumentosTISerializers`.
+        """
+
+        actions_id_land_use = ['101', '102', '103']
+        error_mensag = 'Action not defined in your request.'
+        requested_action = str(self.request.GET.get('acao_id', error_mensag))
+
+        if requested_action in actions_id_land_use:
+            print(f"MapasUsoOcupacaoSolo: {requested_action}")
+            return serializers.MapasUsoOcupacaoSoloSerializers
+        else:
+            print(f"DocumentosTI: {requested_action}")
+            return serializers.DocumentosTISerializers
