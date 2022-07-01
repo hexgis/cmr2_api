@@ -22,7 +22,7 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
     """Django filter `models.DocumentalDocs` data.
 
     Filter:
-        * acao_id (int): action identifier to be filtered
+        * acao_id (int): action identifier to be filtered.
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenou Lands using Funai code.
         * start_date (str): filtering start date.

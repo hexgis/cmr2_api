@@ -28,7 +28,7 @@ class ActionListView(generics.ListAPIView):
 class DocumentalListViews(generics.ListAPIView):
     """Returns `models.DocumentosDoc` data acoording to the selected actions.
     Filter:
-        * acao_id (int) (mandatory): action identifier to be filtered
+        * acao_id (int) (mandatory): action identifier to be filtered.
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenou Lands using Funai code.
         * start_date (str): filtering start date.
@@ -56,8 +56,6 @@ class DocumentalListViews(generics.ListAPIView):
         requested_action = str(self.request.GET.get('acao_id', error_mensag))
 
         if requested_action in actions_id_land_use:
-            print(f"MapasUsoOcupacaoSolo: {requested_action}")
             return serializers.MapasUsoOcupacaoSoloSerializers
         else:
-            print(f"DocumentosTI: {requested_action}")
             return serializers.DocumentosTISerializers

@@ -4,7 +4,9 @@ from django.utils.translation import ugettext_lazy as _
 
 
 class Action(models.Model):
+# class DocsAction(models.Model):
     """Action model data for documental model."""
+    # """DocsAction model data for documental model."""
 
     no_acao = models.CharField(
         _('Action name'),
@@ -18,11 +20,27 @@ class Action(models.Model):
         blank=True,
     )
 
+    # categoria_acao = models.CharField(
+    #     _('Category actions'),
+    #     max_length=255,
+    #     null=True,
+    #     blank=True,
+    # )
+
+    # descricao = models.CharField(
+    #     _('Description of documental type'),
+    #     max_length=512,
+    #     null=True,
+    #     blank=True,
+    # )
+
     class Meta:
         """"Meta class for `documental.Action` model."""
+        # """"Meta class for `documental.DocsAction` model."""
         app_label = 'documental'
-        verbose_name = 'Action'
-        verbose_name_plural = 'Actions'
+        verbose_name = 'Action' #'Document Action'
+        verbose_name_plural = 'Actions' #'Documents Actions'
+
 
     
 class Usuario(models.Model):
@@ -113,7 +131,7 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
-    acao_id = models.ForeignKey(
+    id_tipo = models.ForeignKey(
     	'documental.Action',
         on_delete=models.DO_NOTHING,
         related_name='documentosdocs_type',
@@ -141,7 +159,7 @@ class DocumentalDocs(models.Model):
         null=True
     )
 
-    no_cr = models.CharField(
+    ds_cr = models.CharField(
         _('Regional Coordenation name'),
         max_length=255,
         blank=True,
