@@ -19,16 +19,16 @@ class AuthModelMix:
 
 
 class ActionListView(generics.ListAPIView):
-    """Returns the list of data in `models.Action`."""
+    """Returns the list of data in `models.DocsAction`."""
 
-    queryset = models.Action.objects.all().order_by('no_acao')
+    queryset = models.DocsAction.objects.all().order_by('no_acao')
     serializer_class = serializers.ActionListSerializers
 
 
 class DocumentalListViews(generics.ListAPIView):
     """Returns `models.DocumentosDoc` data acoording to the selected actions.
     Filter:
-        * acao_id (int) (mandatory): action identifier to be filtered.
+        * id_acao (int) (mandatory): action identifier to be filtered.
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenou Lands using Funai code.
         * start_date (str): filtering start date.
@@ -51,9 +51,9 @@ class DocumentalListViews(generics.ListAPIView):
             `serializers.DocumentosTISerializers`.
         """
 
-        actions_id_land_use = ['101', '102', '103']
+        actions_id_land_use = ['11', '12', '13']
         error_mensag = 'Action not defined in your request.'
-        requested_action = str(self.request.GET.get('acao_id', error_mensag))
+        requested_action = str(self.request.GET.get('id_acao', error_mensag))
 
         if requested_action in actions_id_land_use:
             return serializers.MapasUsoOcupacaoSoloSerializers

@@ -7,14 +7,15 @@ from documental import models
 
 
 class ActionListSerializers(serializers.ModelSerializer):
-    """Serializer for return list actions `models.Action` data."""
+    """Serializer for return list actions `models.DocsAction` data."""
 
     class Meta:
         """Meta class for `ActionListSerializers` serializer."""
-        model = models.Action
+        model = models.DocsAction
         fields = (
             'id',
             'no_acao',
+            'descricao',
         )
 
 
@@ -37,7 +38,7 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
     """
 
     usuario_id = UsuarioSerializers()
-    acao_id = ActionListSerializers()
+    id_acao = ActionListSerializers()
 
     class Meta:
         """Meta class for `MapasUsoOcupacaoSoloSerializers` serializer."""
@@ -53,7 +54,7 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
             'dt_cadastro',
             'dt_atualizacao',
             'nu_ano_mapa',
-            'acao_id',
+            'id_acao',
             'usuario_id',
         )
     
@@ -77,8 +78,8 @@ class DocumentosTISerializers(serializers.ModelSerializer):
     """
 
     usuario_id = UsuarioSerializers()
-    acao_id = ActionListSerializers()
-    
+    id_acao = ActionListSerializers()
+
     class Meta:
         """Meta class for `DocumentosTISerializers` serializer."""
         model = models.DocumentalDocs
@@ -86,16 +87,20 @@ class DocumentosTISerializers(serializers.ModelSerializer):
             'id',
             'path_documento',
             'no_documento',
-            'no_extensao',
-            'no_ti',
+            'usuario_id',
             'st_disponivel',
             'st_excluido',
             'dt_cadastro',
             'dt_atualizacao',
             'co_funai',
+            'id_tipo',
+            'no_extensao',
+            'no_ti',
+            'co_cr',
+            'ds_cr',
             'dt_documento',
-            'acao_id',
-            'usuario_id',
+            'nu_ano',
+            'nu_ano_mapa',
         )
 
     def to_representation(self, instance):

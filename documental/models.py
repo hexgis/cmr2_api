@@ -3,10 +3,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
-class Action(models.Model):
-# class DocsAction(models.Model):
-    """Action model data for documental model."""
-    # """DocsAction model data for documental model."""
+class DocsAction(models.Model):
+    """DocsAction model data for documental model."""
 
     no_acao = models.CharField(
         _('Action name'),
@@ -20,26 +18,18 @@ class Action(models.Model):
         blank=True,
     )
 
-    # categoria_acao = models.CharField(
-    #     _('Category actions'),
-    #     max_length=255,
-    #     null=True,
-    #     blank=True,
-    # )
-
-    # descricao = models.CharField(
-    #     _('Description of documental type'),
-    #     max_length=512,
-    #     null=True,
-    #     blank=True,
-    # )
+    descricao = models.CharField(
+        _('Description of documental type'),
+        max_length=512,
+        null=True,
+        blank=True,
+    )
 
     class Meta:
-        """"Meta class for `documental.Action` model."""
-        # """"Meta class for `documental.DocsAction` model."""
+        """"Meta class for `documental.DocsAction` model."""
         app_label = 'documental'
-        verbose_name = 'Action' #'Document Action'
-        verbose_name_plural = 'Actions' #'Documents Actions'
+        verbose_name = 'Document Action'
+        verbose_name_plural = 'Documents Actions'
 
 
     
@@ -131,10 +121,10 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
-    id_tipo = models.ForeignKey(
-    	'documental.Action',
+    id_acao = models.ForeignKey(
+    	'documental.DocsAction',
         on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_type',
+        related_name='documentosdocs_action',
     	blank=False,
     	null=False,
     )
