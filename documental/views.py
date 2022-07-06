@@ -51,11 +51,14 @@ class DocumentalListViews(generics.ListAPIView):
             `serializers.DocumentosTISerializers`.
         """
 
-        actions_id_land_use = ['11', '12', '13']
+        actions_id_land_use = [11, 12, 13,]
         error_mensag = 'Action not defined in your request.'
-        requested_action = str(self.request.GET.get('id_acao', error_mensag))
-
-        if requested_action in actions_id_land_use:
-            return serializers.MapasUsoOcupacaoSoloSerializers
-        else:
-            return serializers.DocumentosTISerializers
+        requested_action = self.request.GET.get('id_acao', error_mensag)
+        requested_action = list(map(int,requested_action.split(',')))
+        for id_action, action in enumerate(requested_action):
+            if action in actions_id_land_use:
+                print("MapasUsoOcupacaoSoloSerializers")
+                return serializers.MapasUsoOcupacaoSoloSerializers
+            else:
+                print("DocumentosTISerializers")
+                return serializers.DocumentosTISerializers

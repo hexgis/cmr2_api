@@ -125,8 +125,7 @@ class DocumentalDocs(models.Model):
     	'documental.DocsAction',
         on_delete=models.DO_NOTHING,
         related_name='documentosdocs_action',
-    	blank=False,
-    	null=False,
+        null=True
     )
     
     no_extensao = models.CharField(

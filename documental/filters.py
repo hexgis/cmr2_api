@@ -32,7 +32,7 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
         * map_year (list): filteringend years of the maps.
     """
     
-    id_acao = CharInFilter(
+    id_acao = NumberInFilter(
         field_name='id_acao',
         lookup_expr='in',
         required=True
