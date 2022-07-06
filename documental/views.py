@@ -18,14 +18,14 @@ class AuthModelMix:
     permission_class = (permissions.AllowAny,)
 
 
-class ActionListView(generics.ListAPIView):
+class ActionListView(AuthModelMix, generics.ListAPIView):
     """Returns the list of data in `models.DocsAction`."""
 
     queryset = models.DocsAction.objects.all().order_by('no_acao')
     serializer_class = serializers.ActionListSerializers
 
 
-class DocumentalListViews(generics.ListAPIView):
+class DocumentalListViews(AuthModelMix, generics.ListAPIView):
     """Returns `models.DocumentosDoc` data acoording to the selected actions.
     Filter:
         * id_acao (int) (mandatory): action identifier to be filtered.
@@ -55,10 +55,10 @@ class DocumentalListViews(generics.ListAPIView):
         error_mensag = 'Action not defined in your request.'
         requested_action = self.request.GET.get('id_acao', error_mensag)
         requested_action = list(map(int,requested_action.split(',')))
+
         for id_action, action in enumerate(requested_action):
             if action in actions_id_land_use:
-                print("MapasUsoOcupacaoSoloSerializers")
                 return serializers.MapasUsoOcupacaoSoloSerializers
             else:
-                print("DocumentosTISerializers")
                 return serializers.DocumentosTISerializers
+                
