@@ -53,7 +53,7 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
 
         actions_id_land_use = [11, 12, 13,]
         error_mensag = 'Action not defined in your request.'
-        requested_action = self.request.GET.get('id_acao', error_mensag)
+        requested_action = self.request.GET.get('id_acao')
         requested_action = list(map(int,requested_action.split(',')))
 
         for id_action, action in enumerate(requested_action):
