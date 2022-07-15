@@ -58,7 +58,8 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
 
         if all(item in actions_id_land_use for item in requested_action):
             return serializers.MapasUsoOcupacaoSoloSerializers
-        elif not any(item in requested_action for item in actions_id_land_use):
+        elif not any(item in requested_action for item in
+            actions_id_land_use):
             return serializers.DocumentosTISerializers
         else :
             raise exceptions.ParseError(
