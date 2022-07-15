@@ -7,14 +7,15 @@ from documental import models
 
 
 class ActionListSerializers(serializers.ModelSerializer):
-    """Serializer for return list actions `models.Action` data."""
+    """Serializer for return list actions `models.DocsAction` data."""
 
     class Meta:
         """Meta class for `ActionListSerializers` serializer."""
-        model = models.Action
+        model = models.DocsAction
         fields = (
             'id',
             'no_acao',
+            'descricao',
         )
 
 
@@ -37,7 +38,7 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
     """
 
     usuario_id = UsuarioSerializers()
-    acao_id = ActionListSerializers()
+    id_acao = ActionListSerializers()
 
     class Meta:
         """Meta class for `MapasUsoOcupacaoSoloSerializers` serializer."""
@@ -46,20 +47,23 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
             'id',
             'path_documento',
             'no_documento',
-            'co_funai',
             'st_disponivel',
             'st_excluido',
-            'nu_ano',
+            'co_funai',
+            'no_ti',
+            'co_cr',
+            'ds_cr',
             'dt_cadastro',
             'dt_atualizacao',
+            'nu_ano',
             'nu_ano_mapa',
-            'acao_id',
+            'id_acao',
             'usuario_id',
         )
     
     def to_representation(self, instance):
-        """Method to return in `DocumentosTISerializers` the full URL to
-        download the documents in `models.DocumentalDocs`  
+        """Method to return in `MapasUsoOcupacaoSoloSerializers` the full URL
+        to download the documents in `models.DocumentalDocs`.
                 
         Returns:
             str: url to document
@@ -70,3 +74,44 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
         return url_document
 
 
+class DocumentosTISerializers(serializers.ModelSerializer):
+    """Serializer to return action category `models.DocumentalDocs` data.
+
+    Data only for the action category linked to DOCUMENTAL_TI.
+    """
+
+    usuario_id = UsuarioSerializers()
+    id_acao = ActionListSerializers()
+
+    class Meta:
+        """Meta class for `DocumentosTISerializers` serializer."""
+        model = models.DocumentalDocs
+        fields = (
+            'id',
+            'path_documento',
+            'no_documento',
+            'no_extensao',
+            'st_disponivel',
+            'st_excluido',
+            'co_funai',
+            'no_ti',
+            'co_cr',
+            'ds_cr',
+            'dt_cadastro',
+            'dt_atualizacao',
+            'dt_documento',
+            'id_acao',
+            'usuario_id',
+        )
+
+    def to_representation(self, instance):
+        """Method to return in `DocumentosTISerializers` the full URL to
+        download the documents in `models.DocumentalDocs`.
+                
+        Returns:
+            str: url to document
+        """
+
+        url_document = super().to_representation(instance)
+        url_document['url_doc'] = urllib.parse.urljoin(settings.DOCUMENTOS, instance.path_documento)
+        return url_document
