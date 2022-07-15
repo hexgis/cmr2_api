@@ -2,7 +2,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework import (
     permissions,
-    generics
+    generics,
+    exceptions
 )
 
 from documental import (
@@ -55,9 +56,12 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
         requested_action = self.request.GET.get('id_acao')
         requested_action = list(map(int,requested_action.split(',')))
 
-        for id_action, action in enumerate(requested_action):
-            if action in actions_id_land_use:
-                return serializers.MapasUsoOcupacaoSoloSerializers
-            else:
-                return serializers.DocumentosTISerializers
+        if all(item in actions_id_land_use for item in requested_action):
+            return serializers.MapasUsoOcupacaoSoloSerializers
+        elif not any(item in requested_action for item in actions_id_land_use):
+            return serializers.DocumentosTISerializers
+        else :
+            raise exceptions.ParseError(
+                "Não permitido retorno de dados de DocumentoTI"
+                " UsoEOcupaçãoDoSolo na mesma requisição", None)
                 
