@@ -8,7 +8,7 @@ class DocsActionAdmin(admin.ModelAdmin):
 
     list_display = (
     	'no_acao',
-	    'dt_cadastro',
+	    'dt_criacao',
         'descricao',
 	)
 

@@ -5,6 +5,11 @@ from django.utils.translation import ugettext_lazy as _
 
 class DocsAction(models.Model):
     """DocsAction model data for documental model."""
+    id = models.IntegerField(
+        _('Action id key'),
+        unique=True,
+        primary_key=True,
+    )
 
     no_acao = models.CharField(
         _('Action name'),
@@ -12,7 +17,7 @@ class DocsAction(models.Model):
         unique=True,
     )
 
-    dt_cadastro = models.DateTimeField(
+    dt_criacao = models.DateTimeField(
         _('Registration date'),
         null=True,
         blank=True,
@@ -85,8 +90,7 @@ class DocumentalDocs(models.Model):
     	'documental.Usuario',
         on_delete=models.DO_NOTHING,
         related_name='documentosdocs_usuario_id',
-        blank=False,
-    	null=False,
+    	null=True,
     )
 
     st_disponivel = models.BooleanField(
