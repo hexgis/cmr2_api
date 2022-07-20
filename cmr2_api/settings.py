@@ -52,7 +52,6 @@ INSTALLED_APPS = [
     'monitoring',
     'priority_alerts',
     'land_use',
-    'documental',
 ]
 
 MIDDLEWARE = [
