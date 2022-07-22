@@ -8,7 +8,7 @@ class DocsAction(models.Model):
     id = models.IntegerField(
         _('Action id key'),
         unique=True,
-        primary_key=True,
+        primary_key=False,
     )
 
     no_acao = models.CharField(
@@ -44,7 +44,7 @@ class Usuario(models.Model):
     id = models.IntegerField(
         _('User id key'),
         unique=True,
-        primary_key=True,
+        primary_key=False,
     )
 
     first_name = models.CharField(
