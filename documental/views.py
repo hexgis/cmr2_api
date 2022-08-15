@@ -1,5 +1,10 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.parsers import FileUploadParser
+from rest_framework.views import APIView
+from django.urls import reverse_lazy
+from rest_framework.response import Response
+from rest_framework import status
 
 from rest_framework import (
     permissions,
@@ -76,7 +81,7 @@ class DocumentView(APIView):
     parser_class = (FileUploadParser,)
     # permission_classes = [DocumentViewPerm, ]
     # allow any for the example!!!
-    permission_classes = [AllowAny, ]
+    permission_classes = [IsAuthenticated, ]
 
     def post(self, request, *args, **kwargs):
         file_serializer = serializers.DocumentSerializer(data=request.data)
@@ -89,7 +94,6 @@ class DocumentView(APIView):
         if file_serializer.is_valid():
             file_serializer.save(user=self.request.user)
             # save all fields 
-            # remark  # category 
             data = request.data.get('data')
             action = request.data.get('action')
 

@@ -72,7 +72,7 @@ class Document(models.Model):
     data = models.CharField(max_length=200, blank=True, null=True)
     action = models.CharField(
         'Document action',
-        max_length=64,
+        max_length=200,
     )
     def __str__(self):
         return self.file.name
