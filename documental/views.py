@@ -1,4 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.parsers import FileUploadParser
 
 from rest_framework import (
     permissions,
@@ -65,4 +66,36 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
             raise exceptions.ParseError(
                 "Não permitido retorno de dados de DocumentoTI"
                 " UsoEOcupaçãoDoSolo na mesma requisição", None)
-                
+
+class DocumentView(APIView):
+
+    http_method_names = ['post']
+    model = models.Document
+    # fields = ['upload', ]
+    success_url = reverse_lazy('/')
+    parser_class = (FileUploadParser,)
+    # permission_classes = [DocumentViewPerm, ]
+    # allow any for the example!!!
+    permission_classes = [AllowAny, ]
+
+    def post(self, request, *args, **kwargs):
+        file_serializer = serializers.DocumentSerializer(data=request.data)
+        ########################################################
+        # when uploading keep these headers- no content type !!!
+
+        # headers = {'Authorization': '{}'.format(token), 'Accept': 
+        # 'application/json'}
+        ########################################################
+        if file_serializer.is_valid():
+            file_serializer.save(user=self.request.user)
+            # save all fields 
+            # remark  # category 
+            data = request.data.get('data')
+            action = request.data.get('action')
+
+            return Response(file_serializer.data, 
+                status=status.HTTP_201_CREATED)
+
+        else:
+            return Response(file_serializer.errors, 
+                status=status.HTTP_400_BAD_REQUEST)

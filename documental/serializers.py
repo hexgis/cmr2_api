@@ -30,6 +30,11 @@ class UsuarioSerializers(serializers.ModelSerializer):
             'first_name',
         )
 
+class DocumentSerializer(serializers.ModelSerializer):
+    class Meta():
+        model = models.Document
+        fields = ('file', 'data', 'uploaded_at', 'action')
+
 
 class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
     """Serializer to return action category `models.DocumentalDocs` data.

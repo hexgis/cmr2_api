@@ -37,7 +37,6 @@ class DocsAction(models.Model):
         verbose_name_plural = 'Documents Actions'
 
 
-    
 class Usuario(models.Model):
     """Usuario model data for documental model."""
 
@@ -53,7 +52,7 @@ class Usuario(models.Model):
         null=True,
         blank=True,
     )
-    
+
     class Meta:
         """"Meta class for `documental.Usuario` model."""
         app_label = 'documental'
@@ -61,6 +60,22 @@ class Usuario(models.Model):
         verbose_name_plural = 'Users'
         # db_table = 'painel\".\"auth_user'
         # managed = False
+
+
+class Document(models.Model):
+    class Meta:
+        ordering = ['uploaded_at']
+
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    file = models.FileField(blank=False, null=False)
+    # description
+    data = models.CharField(max_length=200, blank=True, null=True)
+    action = models.CharField(
+        'Document action',
+        max_length=64,
+    )
+    def __str__(self):
+        return self.file.name
 
 
 class DocumentalDocs(models.Model):
@@ -73,75 +88,75 @@ class DocumentalDocs(models.Model):
     )
 
     path_documento = models.CharField(
-		_('Document path'),
+        _('Document path'),
         max_length=255,
         null=True,
         blank=True,
-	)
+    )
 
     no_documento = models.CharField(
-    	_('Document name'),
-    	max_length=255,
+        _('Document name'),
+        max_length=255,
         null=True,
         blank=True,
     )
 
     usuario_id = models.ForeignKey(
-    	'documental.Usuario',
+        'documental.Usuario',
         on_delete=models.DO_NOTHING,
         related_name='documentosdocs_usuario_id',
-    	null=True,
+        null=True,
     )
 
     st_disponivel = models.BooleanField(
-    	_('Document available'),
-    	default=False,
+        _('Document available'),
+        default=False,
         null=True,
         blank=True,
     )
 
     st_excluido = models.BooleanField(
-    	_('Deleted document'),
-    	default=False,
+        _('Deleted document'),
+        default=False,
         null=True,
         blank=True,
     )
 
     dt_cadastro = models.DateTimeField(
-    	_('Document registration date'),
+        _('Document registration date'),
         null=True,
         blank=True,
     )
 
     dt_atualizacao = models.DateTimeField(
-    	_('Last update date'),
+        _('Last update date'),
         null=True,
         blank=True,
     )
 
     co_funai = models.IntegerField(
-    	_('Funai code - Indigenou Lands'),
+        _('Funai code - Indigenou Lands'),
         null=True,
         blank=True,
     )
 
     id_acao = models.ForeignKey(
-    	'documental.DocsAction',
+        'documental.DocsAction',
         on_delete=models.DO_NOTHING,
         related_name='documentosdocs_action',
         null=True
     )
-    
+
     no_extensao = models.CharField(
-    	_('Document extension'),
-    	max_length=255,
+        _('Document extension'),
+        max_length=255,
         null=True,
         blank=True,
     )
 
     no_ti = models.CharField(
-    	_('Indigenou Lands name'),
-    	max_length=255,
+        _('Indigenou Lands name'),
+        max_length=255,
         null=True,
         blank=True,
     )
@@ -160,29 +175,29 @@ class DocumentalDocs(models.Model):
     )
 
     dt_documento = models.DateField(
-    	_('Date of document'),
-    	null=True,
-    	blank=True,
+        _('Date of document'),
+        null=True,
+        blank=True,
     )
-    
+
     nu_ano = models.IntegerField(
         _('Delivery reference year'),
         null=True,
         blank=True,
     )
-    
+
     nu_ano_mapa = models.IntegerField(
         _('Year of the map'),
         null=True,
         blank=True,
     )
-    
+
     class Meta:
         """"Meta class for `documental.DocumentalDocs` model."""
         app_label = 'documental'
         verbose_name = 'Documental Doc'
         verbose_name_plural = 'Documental Docs'
-    
+
     def __str__(self) -> str:
         """Returns `documental.DocumentalDocs` string data.
 
