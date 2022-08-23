@@ -62,17 +62,25 @@ class Usuario(models.Model):
         # managed = False
 
 
-class Document(models.Model):
+class DocumentUpload(models.Model):
     class Meta:
         ordering = ['uploaded_at']
 
     uploaded_at = models.DateTimeField(auto_now_add=True)
+    
     file = models.FileField(blank=False, null=False)
-    # description
-    data = models.CharField(max_length=200, blank=True, null=True)
-    action = models.CharField(
-        'Document action',
-        max_length=200,
+    
+    dt_cadastro = models.DateTimeField(
+        _('Document registration date'),
+        null=True,
+        blank=True,
+    )
+    
+    id_acao = models.ForeignKey(
+        'documental.DocsAction',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosdocs_action',
+        null=True
     )
     def __str__(self):
         return self.file.name

@@ -30,10 +30,10 @@ class UsuarioSerializers(serializers.ModelSerializer):
             'first_name',
         )
 
-class DocumentSerializer(serializers.ModelSerializer):
+class DocumentUploadSerializer(serializers.ModelSerializer):
     class Meta():
-        model = models.Document
-        fields = ('file', 'data', 'uploaded_at', 'action')
+        model = models.DocumentUpload
+        fields = ('file', 'dt_cadastro', 'uploaded_at', 'id_acao')
 
 
 class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):

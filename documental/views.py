@@ -75,27 +75,18 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
 class DocumentView(APIView):
 
     http_method_names = ['post']
-    model = models.Document
-    # fields = ['upload', ]
+    model = models.DocumentUpload
     success_url = reverse_lazy('/')
     parser_class = (FileUploadParser,)
-    # permission_classes = [DocumentViewPerm, ]
-    # allow any for the example!!!
     permission_classes = [IsAuthenticated, ]
 
     def post(self, request, *args, **kwargs):
-        file_serializer = serializers.DocumentSerializer(data=request.data)
-        ########################################################
-        # when uploading keep these headers- no content type !!!
-
-        # headers = {'Authorization': '{}'.format(token), 'Accept': 
-        # 'application/json'}
-        ########################################################
+        file_serializer = serializers.DocumentUploadSerializer(data=request.data)
         if file_serializer.is_valid():
             file_serializer.save(user=self.request.user)
             # save all fields 
-            data = request.data.get('data')
-            action = request.data.get('action')
+            dt_cadastro = request.data.get('dt_cadastro')
+            id_acao = request.data.get('id_acao')
 
             return Response(file_serializer.data, 
                 status=status.HTTP_201_CREATED)
