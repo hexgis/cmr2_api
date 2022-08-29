@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'funai',
     'monitoring',
     'priority_alerts',
+    'catalog',
     'land_use',
 ]
 
