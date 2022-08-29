@@ -22,7 +22,7 @@ class AuthModelMix:
 class ActionListView(AuthModelMix, generics.ListAPIView):
     """Returns the list of data in `models.DocsAction`."""
 
-    queryset = models.DocsAction.objects.all().order_by('no_acao')
+    queryset = models.DocsAction.objects.all().order_by('no_action')
     serializer_class = serializers.ActionListSerializers
 
 
@@ -37,7 +37,7 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
         * map_year (list): filteringend years of the maps.
     """
 
-    queryset = models.DocumentalDocs.objects.all().order_by('dt_cadastro')
+    queryset = models.DocumentalDocs.objects.all().order_by('dt_registration')
     filterset_class = documental_filters.DocumentalDocsFilter
     filter_backends = (DjangoFilterBackend,)
     
@@ -53,7 +53,7 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
         """
 
         actions_id_land_use = [11, 12, 13,]
-        requested_action = self.request.GET.get('id_acao')
+        requested_action = self.request.GET.get('action_id')
         requested_action = list(map(int,requested_action.split(',')))
 
         if all(item in actions_id_land_use for item in requested_action):

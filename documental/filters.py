@@ -33,7 +33,7 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
     """
     
     id_acao = NumberInFilter(
-        field_name='id_acao',
+        field_name='action_id',
         lookup_expr='in',
         required=True
     )
@@ -49,17 +49,17 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
     )
 
     start_date = rest_framework.DateFilter(
-        field_name='dt_documento',
+        field_name='dt_document',
         lookup_expr='gte'
     )
 
     end_date = rest_framework.DateFilter(
-        field_name='dt_documento',
+        field_name='dt_document',
         lookup_expr='lte'
     )
 
     map_year = NumberInFilter(
-        field_name='nu_ano',
+        field_name='nu_year',
         lookup_expr='in'
     )
 
