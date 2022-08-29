@@ -8,7 +8,6 @@ class DocsAction(models.Model):
     id_action = models.IntegerField(
         _('Action id key'),
         unique=True,
-        default=9999,
     )
 
     no_acao = models.CharField(
@@ -43,7 +42,6 @@ class UsersCMR(models.Model):
     id_user = models.IntegerField(
         _('Identifier User'),
         unique=True,
-        default=494,
     )
 
     first_name = models.CharField(
@@ -68,7 +66,6 @@ class DocumentalDocs(models.Model):
     id_document = models.IntegerField(
         _('Primary key'),
         unique=True,
-        default=4572,
     )
 
     path_documento = models.CharField(
@@ -85,17 +82,12 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
-    usuario_id = models.IntegerField(
-    	_('Temp'),
-        null=True,
-        blank=True,
+    usercmr_id = models.ForeignKey(
+    	'documental.UsersCMR',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosdocs_usercmr',
+    	null=True,
     )
-    # usuario_id = models.ForeignKey(
-    # 	'documental.Usuario',
-    #     on_delete=models.DO_NOTHING,
-    #     related_name='documentosdocs_usuario_id',
-    # 	null=True,
-    # )
 
     st_disponivel = models.BooleanField(
     	_('Document available'),
@@ -134,12 +126,12 @@ class DocumentalDocs(models.Model):
         null=True,
         blank=True,
     )
-    # id_acao = models.ForeignKey(
-    # 	'documental.DocsAction',
-    #     on_delete=models.DO_NOTHING,
-    #     related_name='documentosdocs_action',
-    #     null=True
-    # )
+    action_id = models.ForeignKey(
+    	'documental.DocsAction',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosdocs_action',
+        null=True
+    )
     
     no_extensao = models.CharField(
     	_('Document extension'),
