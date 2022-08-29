@@ -19,7 +19,7 @@ class DocsActionAdmin(admin.ModelAdmin):
 
 
 class UsuarioAdmin(admin.ModelAdmin):
-    """Django administrator `model.Usuario` data."""
+    """Django administrator `model.UsersCMR` data."""
 
     list_display = (
         'id',
@@ -59,5 +59,5 @@ class DocumentalDocsAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.DocsAction, DocsActionAdmin)
-admin.site.register(models.Usuario, UsuarioAdmin)
+admin.site.register(models.UsersCMR, UsuarioAdmin)
 admin.site.register(models.DocumentalDocs, DocumentalDocsAdmin)

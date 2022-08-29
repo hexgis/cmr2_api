@@ -20,11 +20,11 @@ class ActionListSerializers(serializers.ModelSerializer):
 
 
 class UsuarioSerializers(serializers.ModelSerializer):
-    """Serializer to return the user who entered the `models.Usuario` data."""
+    """Serializer to return the user who entered the `models.UsersCMR` data."""
 
     class Meta:
         """Meta class for `UsuarioSerializers` serializer."""
-        model = models.Usuario
+        model = models.UsersCMR
         fields = (
             'id',
             'first_name',

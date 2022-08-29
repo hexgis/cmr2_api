@@ -37,12 +37,11 @@ class DocsAction(models.Model):
         verbose_name_plural = 'Documents Actions'
 
 
-    
-class Usuario(models.Model):
-    """Usuario model data for documental model."""
+class UsersCMR(models.Model):
+    """UsersCMR model data for documental model."""
 
     id_user = models.IntegerField(
-        _('User id key'),
+        _('Identifier User'),
         unique=True,
         default=494,
     )
@@ -55,10 +54,10 @@ class Usuario(models.Model):
     )
     
     class Meta:
-        """"Meta class for `documental.Usuario` model."""
+        """"Meta class for `documental.UsersCMR` model."""
         app_label = 'documental'
-        verbose_name = 'User'
-        verbose_name_plural = 'Users'
+        verbose_name = 'User CMR'
+        verbose_name_plural = 'Users CMR'
         # db_table = 'painel\".\"auth_user'
         # managed = False
 
@@ -86,12 +85,17 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
-    usuario_id = models.ForeignKey(
-    	'documental.Usuario',
-        on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_usuario_id',
-    	null=True,
+    usuario_id = models.IntegerField(
+    	_('Temp'),
+        null=True,
+        blank=True,
     )
+    # usuario_id = models.ForeignKey(
+    # 	'documental.Usuario',
+    #     on_delete=models.DO_NOTHING,
+    #     related_name='documentosdocs_usuario_id',
+    # 	null=True,
+    # )
 
     st_disponivel = models.BooleanField(
     	_('Document available'),
@@ -125,12 +129,17 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
-    id_acao = models.ForeignKey(
-    	'documental.DocsAction',
-        on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_action',
-        null=True
+    id_acao = models.IntegerField(
+    	_('Temp'),
+        null=True,
+        blank=True,
     )
+    # id_acao = models.ForeignKey(
+    # 	'documental.DocsAction',
+    #     on_delete=models.DO_NOTHING,
+    #     related_name='documentosdocs_action',
+    #     null=True
+    # )
     
     no_extensao = models.CharField(
     	_('Document extension'),
