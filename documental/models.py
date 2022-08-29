@@ -6,24 +6,31 @@ from django.utils.translation import ugettext_lazy as _
 class DocsAction(models.Model):
     """DocsAction model data for documental model."""
     id_action = models.IntegerField(
-        _('Action id key'),
+        _('Identifier Action'),
         unique=True,
     )
 
-    no_acao = models.CharField(
+    no_action = models.CharField(
         _('Action name'),
         max_length=255,
         unique=True,
     )
 
-    dt_criacao = models.DateTimeField(
+    dt_creation = models.DateTimeField(
         _('Registration date'),
         null=True,
         blank=True,
     )
-
-    descricao = models.CharField(
-        _('Description of documental type'),
+    
+    action_type = models.CharField(
+        _('Type of action'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    description = models.CharField(
+        _('Description of action'),
         max_length=512,
         null=True,
         blank=True,
@@ -64,18 +71,20 @@ class DocumentalDocs(models.Model):
     """DocumentalDocs model data for documental model."""
 
     id_document = models.IntegerField(
-        _('Primary key'),
-        unique=True,
+        #Estudar viabilidade construir chave composta id_document+action_type
+        _('Identifier key'),
+        null=False,
+        blank=False,
     )
 
-    path_documento = models.CharField(
-		_('Document path'),
+    path_document = models.CharField(
+		_('Document file path'),
         max_length=255,
         null=True,
         blank=True,
 	)
 
-    no_documento = models.CharField(
+    no_document = models.CharField(
     	_('Document name'),
     	max_length=255,
         null=True,
@@ -89,27 +98,27 @@ class DocumentalDocs(models.Model):
     	null=True,
     )
 
-    st_disponivel = models.BooleanField(
+    st_available = models.BooleanField(
     	_('Document available'),
     	default=False,
         null=True,
         blank=True,
     )
 
-    st_excluido = models.BooleanField(
+    st_excluded = models.BooleanField(
     	_('Deleted document'),
     	default=False,
         null=True,
         blank=True,
     )
 
-    dt_cadastro = models.DateTimeField(
+    dt_registration = models.DateTimeField(
     	_('Document registration date'),
         null=True,
         blank=True,
     )
 
-    dt_atualizacao = models.DateTimeField(
+    dt_update = models.DateTimeField(
     	_('Last update date'),
         null=True,
         blank=True,
@@ -121,11 +130,6 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
-    id_acao = models.IntegerField(
-    	_('Temp'),
-        null=True,
-        blank=True,
-    )
     action_id = models.ForeignKey(
     	'documental.DocsAction',
         on_delete=models.DO_NOTHING,
@@ -133,7 +137,7 @@ class DocumentalDocs(models.Model):
         null=True
     )
     
-    no_extensao = models.CharField(
+    no_extension = models.CharField(
     	_('Document extension'),
     	max_length=255,
         null=True,
@@ -160,19 +164,19 @@ class DocumentalDocs(models.Model):
         null=True
     )
 
-    dt_documento = models.DateField(
+    dt_document = models.DateField(
     	_('Date of document'),
     	null=True,
     	blank=True,
     )
     
-    nu_ano = models.IntegerField(
+    nu_year = models.IntegerField(
         _('Delivery reference year'),
         null=True,
         blank=True,
     )
     
-    nu_ano_mapa = models.IntegerField(
+    nu_year_map = models.IntegerField(
         _('Year of the map'),
         null=True,
         blank=True,
@@ -190,4 +194,4 @@ class DocumentalDocs(models.Model):
         Returns:
             str: model data path_documento.
         """
-        return self.path_documento
+        return self.path_document
