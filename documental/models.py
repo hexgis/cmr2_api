@@ -5,10 +5,10 @@ from django.utils.translation import ugettext_lazy as _
 
 class DocsAction(models.Model):
     """DocsAction model data for documental model."""
-    id = models.IntegerField(
+    id_action = models.IntegerField(
         _('Action id key'),
         unique=True,
-        primary_key=True,
+        default=9999,
     )
 
     no_acao = models.CharField(
@@ -41,10 +41,10 @@ class DocsAction(models.Model):
 class Usuario(models.Model):
     """Usuario model data for documental model."""
 
-    id = models.IntegerField(
+    id_user = models.IntegerField(
         _('User id key'),
         unique=True,
-        primary_key=True,
+        default=494,
     )
 
     first_name = models.CharField(
@@ -66,10 +66,10 @@ class Usuario(models.Model):
 class DocumentalDocs(models.Model):
     """DocumentalDocs model data for documental model."""
 
-    id = models.IntegerField(
+    id_document = models.IntegerField(
         _('Primary key'),
         unique=True,
-        primary_key=True,
+        default=4572,
     )
 
     path_documento = models.CharField(
