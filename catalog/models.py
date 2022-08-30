@@ -20,7 +20,7 @@ class Sattelite (models.Model):
 
     description = models.TextField(
         _("Description"),
-        max_length=510,
+        max_length=511,
         blank=True,
         null=True,
     )
