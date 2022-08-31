@@ -5,12 +5,12 @@ from catalog import views
 
 urlpatterns = [
     path('Satellite',
-        views.SatteliteView.as_view(),
-        name='Satellite-catalog'
-    ),
+         views.SatteliteView.as_view(),
+         name='Satellite-catalog'
+         ),
 
-    path('',
-        views.CatalogView.as_view(),
-        name='catalog'
-    )
+    path('<int:pk>/',
+         views.CatalogView.as_view(),
+         name='catalog'
+         )
 ]

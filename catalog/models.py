@@ -3,6 +3,7 @@ from django.contrib.gis.db import models
 
 from django.utils.translation import ugettext_lazy as _
 
+
 class Satellite (models.Model):
     '''Model to store satellite information.'''
 
@@ -15,8 +16,8 @@ class Satellite (models.Model):
     name = models.CharField(
         _('Name Satellite'),
         max_length=255,
-        blank=True, # blank=False,
-        null=True, # null=False,
+        blank=True,  # blank=False,
+        null=True,  # null=False,
     )
 
     description = models.TextField(
@@ -28,6 +29,7 @@ class Satellite (models.Model):
 
     def __str__(self) -> str:
         return self.name or self.identifier
+
 
 class Catalogs (models.Model):
     # objectid = models.AutoField(
@@ -42,7 +44,7 @@ class Catalogs (models.Model):
     )
 
     product = models.CharField(
-        _('Product ID'),
+        _('Product scene'),
         max_length=255,
         null=True,
         blank=True
@@ -59,21 +61,11 @@ class Catalogs (models.Model):
         # related_query_name="%(app_label)s_%(class)ss"
     )
 
-    path = models.CharField(
-        _('Image repository'),
-        max_length=500
-    )
-
     type = models.CharField(
         _('Composition type'),
         max_length=30,
         null=True,
         blank=True
-    )
-
-    url_tms = models.CharField(
-        _('Tile path'),
-        max_length=500
     )
 
     date = models.DateField(
@@ -85,10 +77,30 @@ class Catalogs (models.Model):
         null=True,
     )
 
+    url_tms = models.CharField(
+        _('Tile path'),
+        max_length=511
+    )
+
+    path = models.CharField(
+        _('Image repository'),
+        max_length=511,
+    )
+
+    download_link = models.CharField(
+        _('Image repository'),
+        max_length=511,
+    )
+
+    download_available = models.BooleanField(
+        _("Download allowed"),
+        default=False,
+
+    )
+
     max_native_zoom = models.IntegerField(
-        _('sss'),
-        blank=True,
-        null=True,
+        _('Maximum zoom scale'),
+        default=15,
 
     )
 
@@ -104,8 +116,9 @@ class Catalogs (models.Model):
         abstract = True
         ordering = ['-data']
 
-    # def __str__(self):
-    #     return str(self.image)
+    def __str__(self):
+        return str(self.image)
+
 
 class Landsat8Catalog (Catalogs):
     """Model for Landsat scenes catalog."""
@@ -130,6 +143,7 @@ class Landsat8Catalog (Catalogs):
         verbose_name = 'Landsat8 Catalog'
         verbose_name_plural = 'Landsat8 Catalogs'
 
+
 class Sentinel2Catalog (Catalogs):
     """Model for Sentinel 2 scenes catalog."""
 
@@ -152,21 +166,9 @@ class Sentinel2Catalog (Catalogs):
         null=True,
         blank=True,
     )
+
     class Meta:
         """"Meta class for `catalog.Sentinel2Catalog` model."""
         app_label = 'catalog'
         verbose_name = 'Sentinel2 Catalog'
         verbose_name_plural = 'Sentinel2 Catalogs'
-
-
-
-
-
-
-
-
-
-
-
-
-
