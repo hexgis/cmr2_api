@@ -4,8 +4,13 @@ from django.urls import path
 from catalog import views
 
 urlpatterns = [
-    path('sattelite',
+    path('Satellite',
         views.SatteliteView.as_view(),
-        name='sattelite-catalog'
+        name='Satellite-catalog'
     ),
+
+    path('',
+        views.CatalogView.as_view(),
+        name='catalog'
+    )
 ]

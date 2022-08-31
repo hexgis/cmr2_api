@@ -13,5 +13,9 @@ class AuthModelMixIn:
     permission_classes = (permissions.AllowAny,)
 
 class SatteliteView(AuthModelMixIn, generics.ListAPIView):
-    queryset = models.Sattelite.objects.all()
+    queryset = models.Satellite.objects.all()
     serializer_class = serializers.SatteliteSerializer
+
+class CatalogView(AuthModelMixIn, generics.ListAPIView):
+    queryset = models.Landsat8Catalog.objects.all()
+    serializer_class = serializers.Landsat8CatalogSerializer

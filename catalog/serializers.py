@@ -8,8 +8,13 @@ class SatteliteSerializer(serializers.ModelSerializer):
 
     class Meta:
         """Meta Class for `catalog.SatteliteSerializer` serializer."""
-        model = models.Sattelite
+        model = models.Satellite
         fields = (
             'identifier',
             'name',
         )
+
+class Landsat8CatalogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Landsat8Catalog
+        fields = "__all__"
