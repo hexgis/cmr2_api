@@ -104,6 +104,50 @@ class Catalogs (models.Model):
 
     )
 
+    co_cr = models.BigIntegerField(
+        _('Regional Coordenation code'),
+    )
+
+    ds_cr = models.CharField(
+        _('Regional Coordenation name'),
+        max_length=255,
+    )
+
+    co_funai = models.IntegerField(
+        _('Funai code'),
+    )
+
+    no_ti = models.CharField(
+        _('Name of Indigenous Lands'),
+        max_length=255,
+    )
+
+    municipio = models.CharField(
+        _('County'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
+    sg_uf = models.CharField(
+        _('State aconymn'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
+    resolution = models.IntegerField(
+        _('Spatial resolution'),
+        null=True,
+        blank=True,
+    )
+
+    centroid = models.PointField(
+        _('Centroid scene'),
+        srid=4674,
+        null=True,
+        blank=True,
+    )
     # geom = models.PolygonField(
     geom = models.GeometryField(
         _('Geometry Field'),
