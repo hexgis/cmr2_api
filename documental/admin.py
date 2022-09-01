@@ -7,16 +7,15 @@ class DocsActionAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsAction` data."""
 
     list_display = (
-    	'id_action',
+        'id_action',
         'no_action',
         'action_type',
         'description',
-	)
+    )
 
     fields = list_display
 
     search_fields = list_display
-
 
 
 class UsuarioAdmin(admin.ModelAdmin):
@@ -26,18 +25,19 @@ class UsuarioAdmin(admin.ModelAdmin):
         'id_user',
         'first_name',
     )
+
     fields = list_display
 
     search_fields = list_display
- 
-   
+
+
 class DocumentalDocsAdmin(admin.ModelAdmin):
     """Django administrator `model.DocumentalDocs` data."""
 
     list_display = (
         'id_document',
         'path_document',
-        'no_document', 
+        'no_document',
         'usercmr_id',
         'st_available',
         'st_excluded',
@@ -53,9 +53,9 @@ class DocumentalDocsAdmin(admin.ModelAdmin):
         'nu_year',
         'nu_year_map',
     )
-    
+
     fields = list_display
-    
+
     search_fields = list_display
 
 

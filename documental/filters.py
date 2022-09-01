@@ -2,21 +2,20 @@ from django_filters import rest_framework
 
 from documental import models
 
+
 class NumberInFilter(
     rest_framework.BaseInFilter,
     rest_framework.NumberFilter
 ):
     """Base class used for creating IN lookup filters to filter numbers."""
-
     pass
-    
-    
+
+
 class CharInFilter(
     rest_framework.BaseInFilter,
     rest_framework.CharFilter
-):    
+):
     """Base class used for creating IN lookup filters to filter characters."""
-
     pass
 
 
@@ -31,13 +30,12 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
         * end_date (str): filtering end date.
         * map_year (list): filteringend years of the maps.
     """
-    
     id_acao = NumberInFilter(
         field_name='action_id',
         lookup_expr='in',
         required=True
     )
-    
+
     co_cr = NumberInFilter(
         field_name='co_cr',
         lookup_expr='in'
@@ -73,4 +71,4 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
             'start_date',
             'end_date',
             'map_year',
-        )       
+        )

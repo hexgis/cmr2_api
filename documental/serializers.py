@@ -61,17 +61,18 @@ class MapasUsoOcupacaoSoloSerializers(serializers.ModelSerializer):
             'action_id',
             'usercmr_id',
         )
-    
+
     def to_representation(self, instance):
         """Method to return in `MapasUsoOcupacaoSoloSerializers` the full URL
         to download the documents in `models.DocumentalDocs`.
-                
+
         Returns:
             str: url to document
         """
 
         url_document = super().to_representation(instance)
-        url_document['url_doc'] = urllib.parse.urljoin(settings.DOCUMENTOS, instance.path_document)     
+        url_document['url_doc'] = urllib.parse.urljoin(
+            settings.DOCUMENTOS, instance.path_document)
         return url_document
 
 
@@ -108,11 +109,12 @@ class DocumentosTISerializers(serializers.ModelSerializer):
     def to_representation(self, instance):
         """Method to return in `DocumentosTISerializers` the full URL to
         download the documents in `models.DocumentalDocs`.
-                
+
         Returns:
             str: url to document
         """
 
         url_document = super().to_representation(instance)
-        url_document['url_doc'] = urllib.parse.urljoin(settings.DOCUMENTOS, instance.path_document)
+        url_document['url_doc'] = urllib.parse.urljoin(
+            settings.DOCUMENTOS, instance.path_document)
         return url_document

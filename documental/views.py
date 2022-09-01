@@ -40,29 +40,28 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
     queryset = models.DocumentalDocs.objects.all().order_by('dt_registration')
     filterset_class = documental_filters.DocumentalDocsFilter
     filter_backends = (DjangoFilterBackend,)
-    
+
     def get_serializer_class(self):
         """Get method to return data acoording to the action category selected
         in the `models.DocumentosDoc` data.
 
         Returns one serializers class to `views.ActionListView`
-        
+
         Returns:
             `serializers.MapasUsoOcupacaoSoloSerializers` or
             `serializers.DocumentosTISerializers`.
         """
 
-        actions_id_land_use = [11, 12, 13,]
+        actions_id_land_use = [11, 12, 13, ]
         requested_action = self.request.GET.get('action_id')
-        requested_action = list(map(int,requested_action.split(',')))
+        requested_action = list(map(int, requested_action.split(',')))
 
         if all(item in actions_id_land_use for item in requested_action):
             return serializers.MapasUsoOcupacaoSoloSerializers
         elif not any(item in requested_action for item in
-            actions_id_land_use):
+                     actions_id_land_use):
             return serializers.DocumentosTISerializers
-        else :
+        else:
             raise exceptions.ParseError(
                 "Não permitido retorno de dados de DocumentoTI"
                 " UsoEOcupaçãoDoSolo na mesma requisição", None)
-                
