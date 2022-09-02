@@ -22,6 +22,8 @@ class Landsat8CatalogAdmin(admin.ModelAdmin):
     """Django Administrator `model.Landsat8Catalog` data."""
     # list_display = [field.name for field in models.Landsat8Catalog._meta.get_fields()]
     list_display = (
+        'id',
+        'pk',
         'image',
         'satellite',
         'type',
@@ -55,6 +57,8 @@ class Sentinel2CatalogAdmin(admin.ModelAdmin):
 
     # list_display = [field.name for field in models.Sentinel2Catalog._meta.get_fields()]
     list_display = (
+        'id',
+        'pk',
         'image',
         'satellite',
         'type',

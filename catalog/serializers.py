@@ -15,6 +15,14 @@ class SatteliteSerializer(serializers.ModelSerializer):
         )
 
 class Landsat8CatalogSerializer(serializers.ModelSerializer):
+    # satellite = SatteliteSerializer()
     class Meta:
         model = models.Landsat8Catalog
+        fields = "__all__"
+
+class Sentinel2CatalogSerializer(serializers.ModelSerializer):
+    # satellite = SatteliteSerializer()
+
+    class Meta:
+        model = models.Sentinel2Catalog
         fields = "__all__"
