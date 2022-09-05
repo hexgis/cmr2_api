@@ -8,10 +8,14 @@ from catalog import (
     serializers,
 )
 
+
 class AuthModelMixIn:
-    """Default Authentication for land_use views."""
+    """Default Authentication for catalog views."""
     permission_classes = (permissions.AllowAny,)
 
-class SatteliteView(AuthModelMixIn, generics.ListAPIView):
-    queryset = models.Sattelite.objects.all()
-    serializer_class = serializers.SatteliteSerializer
+
+class SatelliteView(AuthModelMixIn, generics.ListAPIView):
+    """Returns the list of satellites in `models.Satellite`."""
+
+    queryset = models.Satellite.objects.all()
+    serializer_class = serializers.SatelliteSerializer

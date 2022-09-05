@@ -3,8 +3,8 @@ from django.contrib import admin
 from catalog import models
 
 
-class SatteliteAdmin(admin.ModelAdmin):
-    """Django Administrator `model.Sattelite` data."""
+class SatelliteAdmin(admin.ModelAdmin):
+    """Django Administrator `model.Satellite` data."""
 
     list_display = (
         'identifier',
@@ -16,5 +16,4 @@ class SatteliteAdmin(admin.ModelAdmin):
 
     search_fields = list_display
 
-
-admin.site.register(models.Sattelite, SatteliteAdmin)
+admin.site.register(models.Satellite, SatelliteAdmin)

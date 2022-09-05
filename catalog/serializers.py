@@ -3,12 +3,13 @@ from rest_framework import serializers
 from catalog import models
 
 
-class SatteliteSerializer(serializers.ModelSerializer):
-    """Serializer to return registered sattelites."""
+
+class SatelliteSerializer(serializers.ModelSerializer):
+    """Serializer to return registered sattelites `models.Satellite` data."""
 
     class Meta:
         """Meta Class for `catalog.SatteliteSerializer` serializer."""
-        model = models.Sattelite
+        model = models.Satellite
         fields = (
             'identifier',
             'name',
