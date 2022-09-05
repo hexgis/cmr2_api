@@ -12,18 +12,35 @@ from catalog import (
     filters as catalog_filters
 )
 
-
 class AuthModelMixIn:
     """Default Authentication for land_use views."""
     permission_classes = (permissions.AllowAny,)
 
 
 class SatteliteView(AuthModelMixIn, generics.ListAPIView):
-    queryset = models.Satellite.objects.all()
+    queryset = models.Sattelite.objects.all()
     serializer_class = serializers.SatteliteSerializer
 
 
 class CatalogView(AuthModelMixIn, generics.ListAPIView):
+    """Returns the models list of existing catalogs for the requested filter.
+
+    Filters:
+        * satellite (list): filtering Satellite using identify.
+        * percent_cloud (list): filtering less than or equal for cloud values.
+        * start_date (str): filtering start date.
+        * end_date (str): filtering end date.
+        * in_bbox (bbox): bounding box
+            (min lon, min lat, max lon, max lat).
+
+    Returns:
+        * if filter satellit is `sat_landsat8=2`
+            `serializers.Landsat8CatalogSerializer` of data in 
+            `models.Landsat8Catalog`.
+        * if filter satellit is `sat_sentinel2=3`
+            `serializers.Sentinel2CatalogSerializer` of data in 
+            `models.Sentinel2Catalog`.
+    """
 
     bbox_filter_field = 'geom'
     filterset_class = catalog_filters.CatalogFilter

@@ -5,7 +5,7 @@ from catalog import models
 
 
 class SatteliteAdmin(admin.ModelAdmin):
-    """Django Administrator `model.Satellite` data."""
+    """Django Administrator `model.Sattelite` data."""
 
     list_display = (
         'identifier',
@@ -20,7 +20,7 @@ class SatteliteAdmin(admin.ModelAdmin):
 
 class Landsat8CatalogAdmin(admin.ModelAdmin):
     """Django Administrator `model.Landsat8Catalog` data."""
-    # list_display = [field.name for field in models.Landsat8Catalog._meta.get_fields()]
+
     list_display = (
         'id',
         'pk',
@@ -51,11 +51,11 @@ class Landsat8CatalogAdmin(admin.ModelAdmin):
 
 class Sentinel2CatalogAdmin(admin.ModelAdmin):
     """Django Administrator `model.Sentinel2Catalog` data."""
-    def tile(self, instance):
-        return "{}{}{}".format(instance.utm_zone,
-                               instance.latitude_band, instance.grid_square)
+    
+    # def tile(self, instance):
+    #     return "{}{}{}".format(instance.utm_zone,
+    #                            instance.latitude_band, instance.grid_square)
 
-    # list_display = [field.name for field in models.Sentinel2Catalog._meta.get_fields()]
     list_display = (
         'id',
         'pk',
@@ -63,7 +63,8 @@ class Sentinel2CatalogAdmin(admin.ModelAdmin):
         'satellite',
         'type',
         'date',
-        'utm_zone',#'tile',
+        'utm_zone',
+        #'tile',
     )
 
     fields = (
@@ -82,6 +83,6 @@ class Sentinel2CatalogAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
-admin.site.register(models.Satellite, SatteliteAdmin)
+admin.site.register(models.Satellite, SatelliteAdmin)
 admin.site.register(models.Landsat8Catalog, Landsat8CatalogAdmin)
 admin.site.register(models.Sentinel2Catalog, Sentinel2CatalogAdmin)

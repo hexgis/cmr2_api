@@ -4,24 +4,24 @@ from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
-class Satellite (models.Model):
-    '''Model to store satellite information.'''
+class Sattelite (models.Model):
+    """Model to store satellite information."""
 
     identifier = models.CharField(
-        _('Identifier'),
+        _("Identifier"),
         max_length=40,
         unique=True,
     )
 
     name = models.CharField(
-        _('Name Satellite'),
+        _("Name sattelite"),
         max_length=255,
-        blank=True,  # blank=False,
-        null=True,  # null=False,
+        blank=True, # blank=False,
+        null=True, # null=False,
     )
 
     description = models.TextField(
-        _('Description'),
+        _("Description"),
         max_length=511,
         blank=True,
         null=True,
@@ -32,10 +32,7 @@ class Satellite (models.Model):
 
 
 class Catalogs (models.Model):
-    # objectid = models.AutoField(
-    #     _(''),
-    #     primary_key=True
-    # )
+    """Abstract model for Catalogs"""
 
     image = models.CharField(
         _('Color composition name'),
@@ -54,11 +51,7 @@ class Catalogs (models.Model):
         'catalog.Satellite',
         null=True,
         blank=True,
-        # on_delete=models.CASCADE,
         on_delete=models.DO_NOTHING,
-        # related_name='catalog_satellite'
-        # related_name="%(app_label)s_%(class)s_status",
-        # related_query_name="%(app_label)s_%(class)ss"
     )
 
     type = models.CharField(
@@ -142,28 +135,6 @@ class Catalogs (models.Model):
         blank=True,
     )
 
-    centroid = models.PointField(
-        _('Centroid scene'),
-        srid=4674,
-        null=True,
-        blank=True,
-    )
-
-    nu_latitude = models.CharField(
-        _('Numero latitude'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    nu_longitude = models.CharField(
-        _('Numero longitude'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-
     # geom = models.PolygonField(
     geom = models.GeometryField(
         _('Geometry Field'),
@@ -173,10 +144,19 @@ class Catalogs (models.Model):
     )
 
     class Meta:
+        """"Meta class for `catalog.Catalogs` abstract model."""
+        app_label = 'catalog'
+        verbose_name = 'Abastract Catalog'
+        verbose_name_plural = 'Abastract Catalogs'
         abstract = True
         ordering = ['-data']
 
     def __str__(self):
+        """Returns `catalog.Catalogs` string data.
+
+        Returns:
+            str: model data image.
+        """
         return str(self.image)
 
 
@@ -205,7 +185,7 @@ class Landsat8Catalog (Catalogs):
 
 
 class Sentinel2Catalog (Catalogs):
-    """Model for Sentinel 2 scenes catalog."""
+    """Model for Sentinel-2 scenes catalog."""
 
     utm_zone = models.IntegerField(
         _('UTM Zone'),

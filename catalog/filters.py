@@ -4,6 +4,14 @@ from catalog import models
 
 
 class CatalogFilter(rest_framework.FilterSet):
+    """Django filter `models.Catalog` data.
+
+    Filters:
+        * satellite (list): filtering Satellite using identify.
+        * percent_cloud (list): filtering less than or equal for cloud values.
+        * start_date (str): filtering start date.
+        * end_date (str): filtering end date.
+    """
     
     satellite = rest_framework.NumberFilter(
         field_name='satellite',
@@ -27,5 +35,6 @@ class CatalogFilter(rest_framework.FilterSet):
     )
 
     class Meta:
+        """Meta class for 'CatalogFilter' filter."""
         model = models.Catalogs
         fields = ['start_date', 'end_date', 'percent_cloud']
