@@ -1,5 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 
+from rest_framework_gis import filters as gis_filters
+
 from rest_framework import(
     generics,
     permissions,
@@ -47,7 +49,10 @@ class CatalogView(AuthModelMixIn, generics.ListAPIView):
 
     bbox_filter_field = 'geom'
     filterset_class = catalog_filters.CatalogFilter
-    filter_backends = (DjangoFilterBackend,)
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
 
     sat_landsat8=2
     sat_sentinel2=3

@@ -145,6 +145,20 @@ class Catalogs (models.Model):
         null=True,
         blank=True,
     )
+    
+    nu_latitude = models.CharField(
+        _('Numero latitude'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+
+    nu_longitude = models.CharField(
+        _('Numero longitude'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
 
     # geom = models.PolygonField(
     geom = models.GeometryField(

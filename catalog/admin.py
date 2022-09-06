@@ -1,4 +1,3 @@
-# from django.contrib import admin
 from django.contrib.gis import admin
 
 from catalog import models
@@ -18,7 +17,7 @@ class SatelliteAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
-class Landsat8CatalogAdmin(admin.ModelAdmin):
+class Landsat8CatalogAdmin(admin.GeoModelAdmin):
     """Django Administrator `model.Landsat8Catalog` data."""
 
     list_display = (
@@ -42,16 +41,16 @@ class Landsat8CatalogAdmin(admin.ModelAdmin):
         'cloud_cover',
         'orbita',
         'ponto',
-        # 'geom',
+        'geom',
         'max_native_zoom',
     )
 
     search_fields = list_display
 
 
-class Sentinel2CatalogAdmin(admin.ModelAdmin):
+class Sentinel2CatalogAdmin(admin.GeoModelAdmin):
     """Django Administrator `model.Sentinel2Catalog` data."""
-    
+
     # def tile(self, instance):
     #     return "{}{}{}".format(instance.utm_zone,
     #                            instance.latitude_band, instance.grid_square)
@@ -75,8 +74,8 @@ class Sentinel2CatalogAdmin(admin.ModelAdmin):
         'url_tms',
         'date',
         'cloud_cover',
-        'tile',
-        # 'geom',
+        # 'tile',
+        'geom',
         'max_native_zoom',
     )
 
