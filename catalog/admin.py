@@ -4,8 +4,8 @@ from django.contrib.gis import admin
 from catalog import models
 
 
-class SatteliteAdmin(admin.ModelAdmin):
-    """Django Administrator `model.Sattelite` data."""
+class SatelliteAdmin(admin.ModelAdmin):
+    """Django Administrator `model.Satellite` data."""
 
     list_display = (
         'identifier',

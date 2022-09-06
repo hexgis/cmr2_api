@@ -1,10 +1,10 @@
-- model: catalog.Satellite
+- model: catalog.satellite
   pk: 2
   fields:
     identifier: LC08
     name: Landsat 8
     description: 'Disponível desde Fevereiro de 2013, o Landsat8 entrega cenas com resoluções de 15m no PAN e 30m no MS (com fusionamento digital, é possivel gerar imagens coloridas de 15m), com revisita a cada 16 dias.'
-- model: catalog.Satellite
+- model: catalog.satellite
   pk: 3
   fields:
     identifier: Sentinel-2
