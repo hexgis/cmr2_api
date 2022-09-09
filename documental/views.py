@@ -52,16 +52,17 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
             `serializers.DocumentosTISerializers`.
         """
 
-        actions_id_land_use = [11, 12, 13, ]
-        requested_action = self.request.GET.get('action_id')
-        requested_action = list(map(int, requested_action.split(',')))
+        actions_id_land_use = {11, 12, 13}
+        requested_action = self.request.GET.get('id_acao')
+        requested_action = set(map(int, requested_action.split(',')))
 
-        if all(item in actions_id_land_use for item in requested_action):
+        condiction_land_use = actions_id_land_use.copy()
+
+        if len(condiction_land_use.union(requested_action).difference(actions_id_land_use)) == 0:
             return serializers.MapasUsoOcupacaoSoloSerializers
-        elif not any(item in requested_action for item in
-                     actions_id_land_use):
+        elif actions_id_land_use.isdisjoint(requested_action):
             return serializers.DocumentosTISerializers
         else:
             raise exceptions.ParseError(
-                "Não permitido retorno de dados de DocumentoTI"
-                " UsoEOcupaçãoDoSolo na mesma requisição", None)
+                "Não permitido retorno de documentos de DocumentoTI e"
+                " UsoOcupaçãoDoSolo na mesma requisição", None)

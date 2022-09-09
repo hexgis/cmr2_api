@@ -92,7 +92,7 @@ class DocumentosTISerializers(serializers.ModelSerializer):
             'id_document',
             'path_document',
             'no_document',
-            'no_extensao',
+            'no_extension',
             'st_available',
             'st_excluded',
             'co_funai',
@@ -101,7 +101,7 @@ class DocumentosTISerializers(serializers.ModelSerializer):
             'ds_cr',
             'dt_registration',
             'dt_update',
-            'dt_documento',
+            'dt_document',
             'action_id',
             'usercmr_id',
         )
