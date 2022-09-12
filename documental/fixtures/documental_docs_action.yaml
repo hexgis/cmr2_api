@@ -1,91 +1,105 @@
 - model: documental.DocsAction
   pk: 1
   fields:
-    id: 1
-    no_acao: Projeto PNUD (TIs Vulneráveis)  
-    dt_criacao: 2017-07-03 00:00:00.000
-    descricao: Documento TI
+    id_action: 1
+    no_action: Projeto PNUD (TIs Vulneráveis)  
+    dt_creation: 2017-07-03 00:00:00.000
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 2
   fields:
-    id: 2
-    no_acao: Prevenção (2016)        
-    dt_criacao: 2017-07-03 00:00:00.000
-    descricao: Documento TI
+    id_action: 2
+    no_action: Prevenção (2016)        
+    dt_creation: 2017-07-03 00:00:00.000
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 3
   fields:
-    id: 3
-    no_acao: Fiscalização (2016)     
-    dt_criacao: 2017-07-03 00:00:00.000
-    descricao: Documento TI
+    id_action: 3
+    no_action: Fiscalização (2016)     
+    dt_creation: 2017-07-03 00:00:00.000
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 4
   fields:
-    id: 4
-    no_acao: Vigilância      
-    dt_criacao: 2017-07-03 00:00:00.000
-    descricao: Documento TI
+    id_action: 4
+    no_action: Vigilância      
+    dt_creation: 2017-07-03 00:00:00.000
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 5
   fields:
-    id: 5
-    no_acao: Fundo Amazônia  
-    dt_criacao: 2017-07-03 00:00:00.000
-    descricao: Documento TI
+    id_action: 5
+    no_action: Fundo Amazônia  
+    dt_creation: 2017-07-03 00:00:00.000
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 6
   fields:
-    id: 6
-    no_acao: Gestão Territorial e Ambiental  
-    dt_criacao: 2017-07-03 00:00:00.000
-    descricao: Documento TI
+    id_action: 6
+    no_action: Gestão Territorial e Ambiental  
+    dt_creation: 2017-07-03 00:00:00.000
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 7
   fields:
-    id: 7
-    no_acao: FIP DGM 
-    dt_criacao: 2017-07-03 00:00:00.000
-    descricao: Documento TI
+    id_action: 7
+    no_action: FIP DGM 
+    dt_creation: 2017-07-03 00:00:00.000
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 8
   fields:
-    id: 8
-    no_acao: Prevenção (2017)        
-    dt_criacao: 2017-07-11 00:00:00.000
-    descricao: Documento TI
+    id_action: 8
+    no_action: Prevenção (2017)        
+    dt_creation: 2017-07-11 00:00:00.000
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 9
   fields:
-    id: 9
-    no_acao: Fiscalização (2017)     
-    dt_criacao: 2017-08-24 11:02:38.513
-    descricao: Documento TI
+    id_action: 9
+    no_action: Fiscalização (2017)     
+    dt_creation: 2017-08-24 11:02:38.513
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 10
   fields:
-    id: 10
-    no_acao: Alertas Urgentes        
-    dt_criacao: 2021-06-22 17:32:07.045
-    descricao: Documento TI
+    id_action: 10
+    no_action: Alertas Urgentes        
+    dt_creation: 2021-06-22 17:32:07.045
+    action_type: DOCUMENTS_TI
+    description: Documento TI
 - model: documental.DocsAction
   pk: 11
   fields:
-    id: 11
-    no_acao: Imagem de Alta Resolução        
-    dt_criacao: 2020-01-03 15:57:30.900
-    descricao: Mapas de Uso e Ocupação do Solo
+    id_action: 11
+    no_action: Imagem de Alta Resolução        
+    dt_creation: 2020-01-03 15:57:30.900
+    action_type: MAPS_TI
+    description: Mapas de Uso e Ocupação do Solo
 - model: documental.DocsAction
   pk: 12
   fields:
-    id: 12
-    no_acao: Uso e Ocupação do Solo  
-    dt_criacao: 2020-01-03 15:57:30.911
-    descricao: Mapas de Uso e Ocupação do Solo
+    id_action: 12
+    no_action: Uso e Ocupação do Solo  
+    dt_creation: 2020-01-03 15:57:30.911
+    action_type: MAPS_TI
+    description: Mapas de Uso e Ocupação do Solo
 - model: documental.DocsAction
   pk: 13
   fields:
-    id: 13
-    no_acao: Uso e Ocupação com Imagem de Alta Resolução     
-    dt_criacao: 2020-01-03 15:57:30.913
-    descricao: Mapas de Uso e Ocupação do Solo
+    id_action: 13
+    no_action: Uso e Ocupação com Imagem de Alta Resolução     
+    dt_creation: 2020-01-03 15:57:30.913
+    action_type: MAPS_TI
+    description: Mapas de Uso e Ocupação do Solo
+  

@@ -7,57 +7,58 @@ class DocsActionAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsAction` data."""
 
     list_display = (
-    	'no_acao',
-	    'dt_criacao',
-        'descricao',
-	)
+        'id_action',
+        'no_action',
+        'action_type',
+        'description',
+    )
 
     fields = list_display
 
     search_fields = list_display
-
 
 
 class UsuarioAdmin(admin.ModelAdmin):
     """Django administrator `model.Usuario` data."""
 
     list_display = (
-        'id',
+        'id_user',
         'first_name',
     )
+
     fields = list_display
 
     search_fields = list_display
- 
-   
+
+
 class DocumentalDocsAdmin(admin.ModelAdmin):
     """Django administrator `model.DocumentalDocs` data."""
 
     list_display = (
-        'id',
-        'path_documento',
-        'no_documento',
-        'usuario_id',
-        'st_disponivel',
-        'st_excluido',
-        'dt_cadastro',
-        'dt_atualizacao',
+        'id_document',
+        'path_document',
+        'no_document',
+        'usercmr_id',
+        'st_available',
+        'st_excluded',
+        'dt_registration',
+        'dt_update',
         'co_funai',
-        'id_acao',
-        'no_extensao',
+        'action_id',
+        'no_extension',
         'no_ti',
         'co_cr',
         'ds_cr',
-        'dt_documento',
-        'nu_ano',
-        'nu_ano_mapa',
+        'dt_document',
+        'nu_year',
+        'nu_year_map',
     )
-    
+
     fields = list_display
-    
+
     search_fields = list_display
 
 
 admin.site.register(models.DocsAction, DocsActionAdmin)
-admin.site.register(models.Usuario, UsuarioAdmin)
+admin.site.register(models.UsersCMR, UsuarioAdmin)
 admin.site.register(models.DocumentalDocs, DocumentalDocsAdmin)

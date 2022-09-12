@@ -1,1960 +1,1960 @@
 - model: documental.DocumentalDocs
   pk: 4572
   fields:
-    id: 4572
-    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_574_Ciclo68_TI_Kanela_Memortu_xv48mxg.pdf
-    no_documento: Alerta_Urgente_574_Ciclo68_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 486  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-05-10 15:11:47.623
-    dt_atualizacao: 2022-05-10 15:11:47.623
+    id_document: 4572
+    path_document: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_574_Ciclo68_TI_Kanela_Memortu_xv48mxg.pdf
+    no_document: Alerta_Urgente_574_Ciclo68_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 486  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-05-10 15:11:47.623
+    dt_update: 2022-05-10 15:11:47.623
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2022-05-10
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2022-05-10
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3965
   fields:
-    id: 3965
-    path_documento: alerta_urgente/Alerta_Urgente_311_Ciclo57_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_311_Ciclo57_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-20 15:01:05.038
-    dt_atualizacao: 2021-05-20 15:01:05.039
+    id_document: 3965
+    path_document: alerta_urgente/Alerta_Urgente_311_Ciclo57_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_311_Ciclo57_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-20 15:01:05.038
+    dt_update: 2021-05-20 15:01:05.039
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2021-05-16
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-05-16
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 91
   fields:
-    id: 91
-    path_documento: documentos_terra_indigena/kanela Memortumré/20702_kanela_Memortumré.pdf
-    no_documento:   Fundo Amazônia
-    usuario_id: 15  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2017-07-05 17:14:45.167
-    dt_atualizacao: 2017-07-05 17:14:45.167
+    id_document: 91
+    path_document: documentos_terra_indigena/kanela Memortumré/20702_kanela_Memortumré.pdf
+    no_document:   Fundo Amazônia
+    usercmr_id: 15  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2017-07-05 17:14:45.167
+    dt_update: 2017-07-05 17:14:45.167
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 5
-    no_extensao: .pdf
+    action_id: 5
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3493
   fields:
-    id: 3493
-    path_documento: alerta_urgente/Alerta_Urgente_279_Ciclo55_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_279_Ciclo55_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-12 16:06:09.354
-    dt_atualizacao: 2021-05-12 16:06:09.354
+    id_document: 3493
+    path_document: alerta_urgente/Alerta_Urgente_279_Ciclo55_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_279_Ciclo55_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-12 16:06:09.354
+    dt_update: 2021-05-12 16:06:09.354
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2021-04-07
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-04-07
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4537
   fields:
-    id: 4537
-    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_560_Ciclo67_TI_Kanela_Memortu_ZrAtrwt.pdf
-    no_documento:   Alerta_Urgente_560_Ciclo67_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-04-05 10:56:27.798
-    dt_atualizacao: 2022-04-05 10:56:27.797
+    id_document: 4537
+    path_document: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_560_Ciclo67_TI_Kanela_Memortu_ZrAtrwt.pdf
+    no_document:   Alerta_Urgente_560_Ciclo67_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-04-05 10:56:27.798
+    dt_update: 2022-04-05 10:56:27.797
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2022-04-01
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2022-04-01
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4419
   fields:
-    id: 4419
-    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_530_Ciclo65_TI_Kanela_Memortu_3KZzO1s.pdf
-    no_documento:   Alerta_Urgente_530_Ciclo65_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 486  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-02-02 14:25:50.958
-    dt_atualizacao: 2022-02-02 14:25:50.958
+    id_document: 4419
+    path_document: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_530_Ciclo65_TI_Kanela_Memortu_3KZzO1s.pdf
+    no_document:   Alerta_Urgente_530_Ciclo65_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 486  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-02-02 14:25:50.958
+    dt_update: 2022-02-02 14:25:50.958
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2022-02-02
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2022-02-02
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4301
   fields:
-    id: 4301
-    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortu_EbvzgOn.pdf
-    no_documento:   Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 486  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-10-28 09:32:16.456
-    dt_atualizacao: 2021-10-28 09:32:16.456
+    id_document: 4301
+    path_document: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortu_EbvzgOn.pdf
+    no_document:   Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 486  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-10-28 09:32:16.456
+    dt_update: 2021-10-28 09:32:16.456
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2021-10-20
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-10-20
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 181
   fields:
-    id: 181
-    path_documento: documentos_terra_indigena/Kanela Memortumré/20702_Kanela_Memortumré.pdf
-    no_documento:   Gestão Territorial e Ambiental
-    usuario_id: 15  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2017-07-05 18:13:51.613
-    dt_atualizacao: 2017-07-05 18:13:51.613
+    id_document: 181
+    path_document: documentos_terra_indigena/Kanela Memortumré/20702_Kanela_Memortumré.pdf
+    no_document:   Gestão Territorial e Ambiental
+    usercmr_id: 15  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2017-07-05 18:13:51.613
+    dt_update: 2017-07-05 18:13:51.613
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 6
-    no_extensao: .pdf
+    action_id: 6
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4329
   fields:
-    id: 4329
-    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortu_rBpqrEP.pdf
-    no_documento:   Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-12-14 13:44:24.515
-    dt_atualizacao: 2021-12-14 13:44:24.515
+    id_document: 4329
+    path_document: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortu_rBpqrEP.pdf
+    no_document:   Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-12-14 13:44:24.515
+    dt_update: 2021-12-14 13:44:24.515
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2021-11-08
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-11-08
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4296
   fields:
-    id: 4296
-    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortu_gd99VKe.pdf
-    no_documento:   Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 487  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-10-20 16:10:32.879
-    dt_atualizacao: 2021-10-20 16:10:32.879
+    id_document: 4296
+    path_document: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortu_gd99VKe.pdf
+    no_document:   Alerta_Urgente_473_Ciclo61_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 487  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-10-20 16:10:32.879
+    dt_update: 2021-10-20 16:10:32.879
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2021-10-20
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-10-20
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4330
   fields:
-    id: 4330
-    path_documento: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortu_nMoQYyS.pdf
-    no_documento:   Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortumré_mapa2_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-12-14 13:45:27.196
-    dt_atualizacao: 2021-12-14 13:45:27.196
+    id_document: 4330
+    path_document: documentos_terra_indigena/Kanela Memortumré/Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortu_nMoQYyS.pdf
+    no_document:   Alerta_Urgente_486_Ciclo62_TI_Kanela_Memortumré_mapa2_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-12-14 13:45:27.196
+    dt_update: 2021-12-14 13:45:27.196
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2021-11-08
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-11-08
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3930
   fields:
-    id: 3930
-    path_documento: alerta_urgente/Alerta_Urgente_23_TI_Kanela_Memortumré_mapa1_23-2018.pdf
-    no_documento:   Alerta_Urgente_23_TI_Kanela_Memortumré_mapa1_23-2018
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-20 09:26:57.759
-    dt_atualizacao: 2021-05-20 09:26:57.759
+    id_document: 3930
+    path_document: alerta_urgente/Alerta_Urgente_23_TI_Kanela_Memortumré_mapa1_23-2018.pdf
+    no_document:   Alerta_Urgente_23_TI_Kanela_Memortumré_mapa1_23-2018
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-20 09:26:57.759
+    dt_update: 2021-05-20 09:26:57.759
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2018-03-21
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2018-03-21
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3521
   fields:
-    id: 3521
-    path_documento: alerta_urgente/Alerta_Urgente_303_Ciclo56_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_303_Ciclo56_TI_Kanela_Memortumré_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-12 16:49:18.554
-    dt_atualizacao: 2021-05-12 16:49:18.554
+    id_document: 3521
+    path_document: alerta_urgente/Alerta_Urgente_303_Ciclo56_TI_Kanela_Memortumré_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_303_Ciclo56_TI_Kanela_Memortumré_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-12 16:49:18.554
+    dt_update: 2021-05-12 16:49:18.554
     co_funai: 20702
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Kanela Memortumré  
-    dt_documento: 2021-05-09
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-05-09
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4300
   fields:
-    id: 4300
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_472_Ciclo61_TI__ONwNT0T.pdf
-    no_documento:   Alerta_Urgente_472_Ciclo61_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 486  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-10-28 09:31:39.121
-    dt_atualizacao: 2021-10-28 09:31:39.121
+    id_document: 4300
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_472_Ciclo61_TI__ONwNT0T.pdf
+    no_document:   Alerta_Urgente_472_Ciclo61_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 486  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-10-28 09:31:39.121
+    dt_update: 2021-10-28 09:31:39.121
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-10-20
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-10-20
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4604
   fields:
-    id: 4604
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_588_Ciclo68_TI__aOozEyB.pdf
-    no_documento:   Alerta_Urgente_588_Ciclo68_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 542  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-05-25 14:14:42.465
-    dt_atualizacao: 2022-05-25 14:14:42.465
+    id_document: 4604
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_588_Ciclo68_TI__aOozEyB.pdf
+    no_document:   Alerta_Urgente_588_Ciclo68_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 542  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-05-25 14:14:42.465
+    dt_update: 2022-05-25 14:14:42.465
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2022-05-25
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2022-05-25
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 94
   fields:
-    id: 94
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela/Apãnjekra/36602_Porquinhos_dos_Canela-Apãnjekra.pdf
-    no_documento:   Fundo Amazônia
-    usuario_id: 15  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2017-07-05 17:14:45.852
-    dt_atualizacao: 2017-07-05 17:14:45.852
+    id_document: 94
+    path_document: documentos_terra_indigena/Porquinhos dos Canela/Apãnjekra/36602_Porquinhos_dos_Canela-Apãnjekra.pdf
+    no_document:   Fundo Amazônia
+    usercmr_id: 15  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2017-07-05 17:14:45.852
+    dt_update: 2017-07-05 17:14:45.852
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 5
-    no_extensao: .pdf
+    action_id: 5
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3509
   fields:
-    id: 3509
-    path_documento: alerta_urgente/Alerta_Urgente_294_Ciclo56_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_294_Ciclo56_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-12 16:33:22.476
-    dt_atualizacao: 2021-05-12 16:33:22.476
+    id_document: 3509
+    path_document: alerta_urgente/Alerta_Urgente_294_Ciclo56_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_294_Ciclo56_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-12 16:33:22.476
+    dt_update: 2021-05-12 16:33:22.476
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-04-30
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-04-30
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3709
   fields:
-    id: 3709
-    path_documento: alerta_urgente/Alerta_Urgente_157_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_157_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-17 16:32:07.195
-    dt_atualizacao: 2021-05-17 16:32:07.195
+    id_document: 3709
+    path_document: alerta_urgente/Alerta_Urgente_157_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_157_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-17 16:32:07.195
+    dt_update: 2021-05-17 16:32:07.195
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2019-07-30
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2019-07-30
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3723
   fields:
-    id: 3723
-    path_documento: alerta_urgente/Alerta_Urgente_148_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_148_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-17 16:48:49.539
-    dt_atualizacao: 2021-05-17 16:48:49.540
+    id_document: 3723
+    path_document: alerta_urgente/Alerta_Urgente_148_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_148_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-17 16:48:49.539
+    dt_update: 2021-05-17 16:48:49.540
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2019-06-28
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2019-06-28
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3929
   fields:
-    id: 3929
-    path_documento: alerta_urgente/Alerta_Urgente_22_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_22-2018.pdf
-    no_documento:   Alerta_Urgente_22_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_22-2018
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-20 09:25:05.552
-    dt_atualizacao: 2021-05-20 09:25:05.552
+    id_document: 3929
+    path_document: alerta_urgente/Alerta_Urgente_22_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_22-2018.pdf
+    no_document:   Alerta_Urgente_22_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_22-2018
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-20 09:25:05.552
+    dt_update: 2021-05-20 09:25:05.552
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2018-03-21
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2018-03-21
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3938
   fields:
-    id: 3938
-    path_documento: alerta_urgente/Alerta_Urgente_10_TI_Porquinhos_dos_Canela_Apãnjekra-FernandoFalcao_MA_10-2018.pdf
-    no_documento:   Alerta_Urgente_10_TI_Porquinhos_dos_Canela_Apãnjekra-FernandoFalcao_MA_10-2018
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-20 10:29:36.832
-    dt_atualizacao: 2021-05-20 10:29:36.832
+    id_document: 3938
+    path_document: alerta_urgente/Alerta_Urgente_10_TI_Porquinhos_dos_Canela_Apãnjekra-FernandoFalcao_MA_10-2018.pdf
+    no_document:   Alerta_Urgente_10_TI_Porquinhos_dos_Canela_Apãnjekra-FernandoFalcao_MA_10-2018
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-20 10:29:36.832
+    dt_update: 2021-05-20 10:29:36.832
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2017-11-13
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2017-11-13
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3964
   fields:
-    id: 3964
-    path_documento: alerta_urgente/Alerta_Urgente_310_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR-DG_DG.pdf
-    no_documento:   Alerta_Urgente_310_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR-DG_DG
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-20 14:59:41.525
-    dt_atualizacao: 2021-05-20 14:59:41.525
+    id_document: 3964
+    path_document: alerta_urgente/Alerta_Urgente_310_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR-DG_DG.pdf
+    no_document:   Alerta_Urgente_310_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR-DG_DG
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-20 14:59:41.525
+    dt_update: 2021-05-20 14:59:41.525
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-05-16
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-05-16
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3966
   fields:
-    id: 3966
-    path_documento: alerta_urgente/Alerta_Urgente_312_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_312_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-20 15:02:13.003
-    dt_atualizacao: 2021-05-20 15:02:13.003
+    id_document: 3966
+    path_document: alerta_urgente/Alerta_Urgente_312_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_312_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-20 15:02:13.003
+    dt_update: 2021-05-20 15:02:13.003
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-05-16
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-05-16
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4014
   fields:
-    id: 4014
-    path_documento: alerta_urgente/Alerta_Urgente_336_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_336_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 486  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-06-07 09:47:10.023
-    dt_atualizacao: 2021-06-07 09:47:10.023
+    id_document: 4014
+    path_document: alerta_urgente/Alerta_Urgente_336_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_336_Ciclo57_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 486  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-06-07 09:47:10.023
+    dt_update: 2021-06-07 09:47:10.023
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-06-01
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-06-01
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4497
   fields:
-    id: 4497
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_378_Ciclo58_TI__Isad9sK.pdf
-    no_documento:   Alerta_Urgente_378_Ciclo58_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-04-01 14:14:46.847
-    dt_atualizacao: 2022-04-01 14:14:46.847
+    id_document: 4497
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_378_Ciclo58_TI__Isad9sK.pdf
+    no_document:   Alerta_Urgente_378_Ciclo58_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-04-01 14:14:46.847
+    dt_update: 2022-04-01 14:14:46.847
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-07-03
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-07-03
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4295
   fields:
-    id: 4295
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_472_Ciclo61_TI__F0kEaKc.pdf
-    no_documento:   Alerta_Urgente_472_Ciclo61_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 487  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-10-20 16:08:24.857
-    dt_atualizacao: 2021-10-20 16:08:24.857
+    id_document: 4295
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_472_Ciclo61_TI__F0kEaKc.pdf
+    no_document:   Alerta_Urgente_472_Ciclo61_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 487  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-10-20 16:08:24.857
+    dt_update: 2021-10-20 16:08:24.857
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-10-20
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-10-20
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4573
   fields:
-    id: 4573
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_575_Ciclo68_TI__8fdUzQc.pdf
-    no_documento:   Alerta_Urgente_575_Ciclo68_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 486  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-05-10 15:50:33.768
-    dt_atualizacao: 2022-05-10 15:50:33.768
+    id_document: 4573
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_575_Ciclo68_TI__8fdUzQc.pdf
+    no_document:   Alerta_Urgente_575_Ciclo68_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 486  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-05-10 15:50:33.768
+    dt_update: 2022-05-10 15:50:33.768
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2022-05-10
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2022-05-10
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4501
   fields:
-    id: 4501
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_446_Ciclo60_TI__Ic00dUA.pdf
-    no_documento:   Alerta_Urgente_446_Ciclo60_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 486  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-04-01 14:22:08.366
-    dt_atualizacao: 2022-04-01 14:22:08.366
+    id_document: 4501
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_446_Ciclo60_TI__Ic00dUA.pdf
+    no_document:   Alerta_Urgente_446_Ciclo60_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 486  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-04-01 14:22:08.366
+    dt_update: 2022-04-01 14:22:08.366
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-09-17
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-09-17
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4535
   fields:
-    id: 4535
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_559_Ciclo67_TI__bLqXDrG.pdf
-    no_documento:   Alerta_Urgente_559_Ciclo67_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-04-05 10:54:41.146
-    dt_atualizacao: 2022-04-05 10:54:41.146
+    id_document: 4535
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_559_Ciclo67_TI__bLqXDrG.pdf
+    no_document:   Alerta_Urgente_559_Ciclo67_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-04-05 10:54:41.146
+    dt_update: 2022-04-05 10:54:41.146
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2022-04-01
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2022-04-01
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4471
   fields:
-    id: 4471
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_485_Ciclo62_TI__vxjR6ga.pdf
-    no_documento:   Alerta_Urgente_485_Ciclo62_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
-    usuario_id: 494  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-04-01 11:23:00.645
-    dt_atualizacao: 2022-04-01 11:23:00.645
+    id_document: 4471
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_485_Ciclo62_TI__vxjR6ga.pdf
+    no_document:   Alerta_Urgente_485_Ciclo62_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa1_CR_CR
+    usercmr_id: 494  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-04-01 11:23:00.645
+    dt_update: 2022-04-01 11:23:00.645
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2021-12-10
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-12-10
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4536
   fields:
-    id: 4536
-    path_documento: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_559_Ciclo67_TI__1tKTwHM.pdf
-    no_documento:   Alerta_Urgente_559_Ciclo67_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa2_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2022-04-05 10:55:21.622
-    dt_atualizacao: 2022-04-05 10:55:21.622
+    id_document: 4536
+    path_document: documentos_terra_indigena/Porquinhos dos Canela-Apãnjekra/Alerta_Urgente_559_Ciclo67_TI__1tKTwHM.pdf
+    no_document:   Alerta_Urgente_559_Ciclo67_TI_Porquinhos_Dos_Canela-Apãnjekra_mapa2_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2022-04-05 10:55:21.622
+    dt_update: 2022-04-05 10:55:21.622
     co_funai: 36602
     co_cr: 30202001997
     ds_cr: COORDENACAO REGIONAL MARANHÃO
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
-    dt_documento: 2022-04-01
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2022-04-01
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 4290
   fields:
-    id: 4290
-    path_documento: documentos_terra_indigena/Taego Ãwa/Alerta_Urgente_468_Ciclo61_TI_Taego_Ãwa_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_468_Ciclo61_TI_Taego_Ãwa_mapa1_CR_CR
-    usuario_id: 486  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-10-15 13:44:09.866
-    dt_atualizacao: 2021-10-15 13:44:09.866
+    id_document: 4290
+    path_document: documentos_terra_indigena/Taego Ãwa/Alerta_Urgente_468_Ciclo61_TI_Taego_Ãwa_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_468_Ciclo61_TI_Taego_Ãwa_mapa1_CR_CR
+    usercmr_id: 486  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-10-15 13:44:09.866
+    dt_update: 2021-10-15 13:44:09.866
     co_funai: 73301
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Taego Ãwa  
-    dt_documento: 2021-10-15
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2021-10-15
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 1735
   fields:
-    id: 1735
-    path_documento: documentos_terra_indigena/Taego Ãwa/SPO_nº._465_CR_Araguaia_Tocantins_-_NC3348.pdf
-    no_documento:   SPO nº. 465 CR Araguaia Tocantins - NC3348
-    usuario_id: 76  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2017-12-07 11:09:30.580
-    dt_atualizacao: 2017-12-07 11:09:30.580
+    id_document: 1735
+    path_document: documentos_terra_indigena/Taego Ãwa/SPO_nº._465_CR_Araguaia_Tocantins_-_NC3348.pdf
+    no_document:   SPO nº. 465 CR Araguaia Tocantins - NC3348
+    usercmr_id: 76  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2017-12-07 11:09:30.580
+    dt_update: 2017-12-07 11:09:30.580
     co_funai: 73301
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 8
-    no_extensao: .pdf
+    action_id: 8
+    no_extension: .pdf
     no_ti : Taego Ãwa  
-    dt_documento: 
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3757
   fields:
-    id: 3757
-    path_documento: alerta_urgente/Alerta_Urgente_117_TI_Taego_Ãwa_mapa1_CR.pdf
-    no_documento:   Alerta_Urgente_117_TI_Taego_Ãwa_mapa1_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-18 10:41:12.621
-    dt_atualizacao: 2021-05-18 10:41:12.621
+    id_document: 3757
+    path_document: alerta_urgente/Alerta_Urgente_117_TI_Taego_Ãwa_mapa1_CR.pdf
+    no_document:   Alerta_Urgente_117_TI_Taego_Ãwa_mapa1_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-18 10:41:12.621
+    dt_update: 2021-05-18 10:41:12.621
     co_funai: 73301
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Taego Ãwa  
-    dt_documento: 2018-11-30
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2018-11-30
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 3577
   fields:
-    id: 3577
-    path_documento: alerta_urgente/Alerta_Urgente_213_Ciclo49_TI_Taego_Ãwa_mapa1_CR_CR.pdf
-    no_documento:   Alerta_Urgente_213_Ciclo49_TI_Taego_Ãwa_mapa1_CR_CR
-    usuario_id: 488  
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-14 09:54:12.401
-    dt_atualizacao: 2021-05-14 09:54:12.401
+    id_document: 3577
+    path_document: alerta_urgente/Alerta_Urgente_213_Ciclo49_TI_Taego_Ãwa_mapa1_CR_CR.pdf
+    no_document:   Alerta_Urgente_213_Ciclo49_TI_Taego_Ãwa_mapa1_CR_CR
+    usercmr_id: 488  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-14 09:54:12.401
+    dt_update: 2021-05-14 09:54:12.401
     co_funai: 73301
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
-    id_acao: 10
-    no_extensao: .pdf
+    action_id: 10
+    no_extension: .pdf
     no_ti : Taego Ãwa  
-    dt_documento: 2020-08-31
-    nu_ano: null
-    nu_ano_mapa: null
+    dt_document: 2020-08-31
+    nu_year: null
+    nu_year_map: null
 - model: documental.DocumentalDocs
   pk: 127
   fields:
-    id: 127
-    path_documento: mapas_uso_ocupacao_solo/3201/Mapa_Uso_e_Ocupacao_do_Solo_2015_Arara_coFunai_3201.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Arara_coFunai_3201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:08:20.377
-    dt_atualizacao: 2020-01-03 16:08:20.377
-    usuario_id: 330
+    id_document: 127
+    path_document: mapas_uso_ocupacao_solo/3201/Mapa_Uso_e_Ocupacao_do_Solo_2015_Arara_coFunai_3201.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Arara_coFunai_3201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:08:20.377
+    dt_update: 2020-01-03 16:08:20.377
+    usercmr_id: 330
     co_funai: 3201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 128
   fields:
-    id: 128
-    path_documento: mapas_uso_ocupacao_solo/3201/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_Z53fYxN.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Arara_coFunai_3201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:08:21.177
-    dt_atualizacao: 2020-01-03 16:08:21.177
-    usuario_id: 330
+    id_document: 128
+    path_document: mapas_uso_ocupacao_solo/3201/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_Z53fYxN.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Arara_coFunai_3201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:08:21.177
+    dt_update: 2020-01-03 16:08:21.177
+    usercmr_id: 330
     co_funai: 3201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 129
   fields:
-    id: 129
-    path_documento: mapas_uso_ocupacao_solo/3201/Imagem_Alta_Resolucao_2015_TI_Arara_coFunai_3201.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Arara_coFunai_3201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:08:21.651
-    dt_atualizacao: 2020-01-03 16:08:21.651
-    usuario_id: 330
+    id_document: 129
+    path_document: mapas_uso_ocupacao_solo/3201/Imagem_Alta_Resolucao_2015_TI_Arara_coFunai_3201.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Arara_coFunai_3201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:08:21.651
+    dt_update: 2020-01-03 16:08:21.651
+    usercmr_id: 330
     co_funai: 3201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 373
   fields:
-    id: 373
-    path_documento: mapas_uso_ocupacao_solo/21501/Imagem_Alta_Resolucao_2015_TI_Kararaô_coFunai_21501.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Kararaô_coFunai_21501.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:02.624
-    dt_atualizacao: 2020-01-03 16:10:02.624
-    usuario_id: 330
+    id_document: 373
+    path_document: mapas_uso_ocupacao_solo/21501/Imagem_Alta_Resolucao_2015_TI_Kararaô_coFunai_21501.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Kararaô_coFunai_21501.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:02.624
+    dt_update: 2020-01-03 16:10:02.624
+    usercmr_id: 330
     co_funai: 21501
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 374
   fields:
-    id: 374
-    path_documento: mapas_uso_ocupacao_solo/21501/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_bkzNE00.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Kararaô_coFunai_21501.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:03.094
-    dt_atualizacao: 2020-01-03 16:10:03.094
-    usuario_id: 330
+    id_document: 374
+    path_document: mapas_uso_ocupacao_solo/21501/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_bkzNE00.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Kararaô_coFunai_21501.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:03.094
+    dt_update: 2020-01-03 16:10:03.094
+    usercmr_id: 330
     co_funai: 21501
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 375
   fields:
-    id: 375
-    path_documento: mapas_uso_ocupacao_solo/21501/Mapa_Uso_e_Ocupacao_do_Solo_2015_Kararaô_coFunai_21501.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Kararaô_coFunai_21501.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:03.458
-    dt_atualizacao: 2020-01-03 16:10:03.458
-    usuario_id: 330
+    id_document: 375
+    path_document: mapas_uso_ocupacao_solo/21501/Mapa_Uso_e_Ocupacao_do_Solo_2015_Kararaô_coFunai_21501.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Kararaô_coFunai_21501.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:03.458
+    dt_update: 2020-01-03 16:10:03.458
+    usercmr_id: 330
     co_funai: 21501
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 391
   fields:
-    id: 391
-    path_documento: mapas_uso_ocupacao_solo/60001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_7nJfak9.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:10.047
-    dt_atualizacao: 2020-01-03 16:10:10.047
-    usuario_id: 330
+    id_document: 391
+    path_document: mapas_uso_ocupacao_solo/60001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_7nJfak9.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:10.047
+    dt_update: 2020-01-03 16:10:10.047
+    usercmr_id: 330
     co_funai: 60001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 392
   fields:
-    id: 392
-    path_documento: mapas_uso_ocupacao_solo/60001/Mapa_Uso_e_Ocupacao_do_Solo_2015_Arara_da_Volta_Grande_do__cs22Yiq.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Arara da Volta Grande do Xingu_coFunai_60001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:10.356
-    dt_atualizacao: 2020-01-03 16:10:10.356
-    usuario_id: 330
+    id_document: 392
+    path_document: mapas_uso_ocupacao_solo/60001/Mapa_Uso_e_Ocupacao_do_Solo_2015_Arara_da_Volta_Grande_do__cs22Yiq.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Arara da Volta Grande do Xingu_coFunai_60001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:10.356
+    dt_update: 2020-01-03 16:10:10.356
+    usercmr_id: 330
     co_funai: 60001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 393
   fields:
-    id: 393
-    path_documento: mapas_uso_ocupacao_solo/60001/Imagem_Alta_Resolucao_2015_TI_Arara_da_Volta_Grande_do_Xin_liEPLG9.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:10.800
-    dt_atualizacao: 2020-01-03 16:10:10.800
-    usuario_id: 330
+    id_document: 393
+    path_document: mapas_uso_ocupacao_solo/60001/Imagem_Alta_Resolucao_2015_TI_Arara_da_Volta_Grande_do_Xin_liEPLG9.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:10.800
+    dt_update: 2020-01-03 16:10:10.800
+    usercmr_id: 330
     co_funai: 60001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 454
   fields:
-    id: 454
-    path_documento: mapas_uso_ocupacao_solo/3801/Mapa_Uso_e_Ocupacao_do_Solo_2015_Araweté_Igarapé_Ipixuna_co_U6MCw5J.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Araweté Igarapé Ipixuna_coFunai_3801.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:35.020
-    dt_atualizacao: 2020-01-03 16:10:35.020
-    usuario_id: 330
+    id_document: 454
+    path_document: mapas_uso_ocupacao_solo/3801/Mapa_Uso_e_Ocupacao_do_Solo_2015_Araweté_Igarapé_Ipixuna_co_U6MCw5J.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Araweté Igarapé Ipixuna_coFunai_3801.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:35.020
+    dt_update: 2020-01-03 16:10:35.020
+    usercmr_id: 330
     co_funai: 3801
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 455
   fields:
-    id: 455
-    path_documento: mapas_uso_ocupacao_solo/3801/Imagem_Alta_Resolucao_2015_TI_Araweté_Igarapé_Ipixuna_coFunai_3801.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Araweté Igarapé Ipixuna_coFunai_3801.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:35.488
-    dt_atualizacao: 2020-01-03 16:10:35.488
-    usuario_id: 330
+    id_document: 455
+    path_document: mapas_uso_ocupacao_solo/3801/Imagem_Alta_Resolucao_2015_TI_Araweté_Igarapé_Ipixuna_coFunai_3801.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Araweté Igarapé Ipixuna_coFunai_3801.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:35.488
+    dt_update: 2020-01-03 16:10:35.488
+    usercmr_id: 330
     co_funai: 3801
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 456
   fields:
-    id: 456
-    path_documento: mapas_uso_ocupacao_solo/3801/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_SdgoMfO.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Araweté Igarapé Ipixuna_coFunai_3801.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:35.949
-    dt_atualizacao: 2020-01-03 16:10:35.949
-    usuario_id: 330
+    id_document: 456
+    path_document: mapas_uso_ocupacao_solo/3801/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_SdgoMfO.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Araweté Igarapé Ipixuna_coFunai_3801.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:35.949
+    dt_update: 2020-01-03 16:10:35.949
+    usercmr_id: 330
     co_funai: 3801
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 487
   fields:
-    id: 487
-    path_documento: mapas_uso_ocupacao_solo/3002/Mapa_Uso_e_Ocupacao_do_Solo_2015_Apyterewa_coFunai_3002.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Apyterewa_coFunai_3002.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:49.262
-    dt_atualizacao: 2020-01-03 16:10:49.262
-    usuario_id: 330
+    id_document: 487
+    path_document: mapas_uso_ocupacao_solo/3002/Mapa_Uso_e_Ocupacao_do_Solo_2015_Apyterewa_coFunai_3002.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Apyterewa_coFunai_3002.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:49.262
+    dt_update: 2020-01-03 16:10:49.262
+    usercmr_id: 330
     co_funai: 3002
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 488
   fields:
-    id: 488
-    path_documento: mapas_uso_ocupacao_solo/3002/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_zkau4LN.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Apyterewa_coFunai_3002.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:49.816
-    dt_atualizacao: 2020-01-03 16:10:49.816
-    usuario_id: 330
+    id_document: 488
+    path_document: mapas_uso_ocupacao_solo/3002/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_zkau4LN.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Apyterewa_coFunai_3002.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:49.816
+    dt_update: 2020-01-03 16:10:49.816
+    usercmr_id: 330
     co_funai: 3002
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 489
   fields:
-    id: 489
-    path_documento: mapas_uso_ocupacao_solo/3002/Imagem_Alta_Resolucao_2015_TI_Apyterewa_coFunai_3002.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Apyterewa_coFunai_3002.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:10:50.346
-    dt_atualizacao: 2020-01-03 16:10:50.346
-    usuario_id: 330
+    id_document: 489
+    path_document: mapas_uso_ocupacao_solo/3002/Imagem_Alta_Resolucao_2015_TI_Apyterewa_coFunai_3002.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Apyterewa_coFunai_3002.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:10:50.346
+    dt_update: 2020-01-03 16:10:50.346
+    usercmr_id: 330
     co_funai: 3002
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 583
   fields:
-    id: 583
-    path_documento: mapas_uso_ocupacao_solo/7601/Mapa_Uso_e_Ocupacao_do_Solo_2015_Cachoeira_Seca_coFunai_7601.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Cachoeira Seca_coFunai_7601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:11:28.834
-    dt_atualizacao: 2020-01-03 16:11:28.834
-    usuario_id: 330
+    id_document: 583
+    path_document: mapas_uso_ocupacao_solo/7601/Mapa_Uso_e_Ocupacao_do_Solo_2015_Cachoeira_Seca_coFunai_7601.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Cachoeira Seca_coFunai_7601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:11:28.834
+    dt_update: 2020-01-03 16:11:28.834
+    usercmr_id: 330
     co_funai: 7601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 584
   fields:
-    id: 584
-    path_documento: mapas_uso_ocupacao_solo/7601/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_kdDpo09.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Cachoeira Seca_coFunai_7601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:11:29.264
-    dt_atualizacao: 2020-01-03 16:11:29.264
-    usuario_id: 330
+    id_document: 584
+    path_document: mapas_uso_ocupacao_solo/7601/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_kdDpo09.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Cachoeira Seca_coFunai_7601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:11:29.264
+    dt_update: 2020-01-03 16:11:29.264
+    usercmr_id: 330
     co_funai: 7601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 585
   fields:
-    id: 585
-    path_documento: mapas_uso_ocupacao_solo/7601/Imagem_Alta_Resolucao_2015_TI_Cachoeira_Seca_coFunai_7601.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Cachoeira Seca_coFunai_7601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:11:29.734
-    dt_atualizacao: 2020-01-03 16:11:29.734
-    usuario_id: 330
+    id_document: 585
+    path_document: mapas_uso_ocupacao_solo/7601/Imagem_Alta_Resolucao_2015_TI_Cachoeira_Seca_coFunai_7601.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Cachoeira Seca_coFunai_7601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:11:29.734
+    dt_update: 2020-01-03 16:11:29.734
+    usercmr_id: 330
     co_funai: 7601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 721
   fields:
-    id: 721
-    path_documento: mapas_uso_ocupacao_solo/23201/Imagem_Alta_Resolucao_2015_TI_Koatinemo_coFunai_23201.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Koatinemo_coFunai_23201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:12:26.927
-    dt_atualizacao: 2020-01-03 16:12:26.927
-    usuario_id: 330
+    id_document: 721
+    path_document: mapas_uso_ocupacao_solo/23201/Imagem_Alta_Resolucao_2015_TI_Koatinemo_coFunai_23201.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Koatinemo_coFunai_23201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:12:26.927
+    dt_update: 2020-01-03 16:12:26.927
+    usercmr_id: 330
     co_funai: 23201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 722
   fields:
-    id: 722
-    path_documento: mapas_uso_ocupacao_solo/23201/Mapa_Uso_e_Ocupacao_do_Solo_2015_Koatinemo_coFunai_23201.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Koatinemo_coFunai_23201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:12:27.252
-    dt_atualizacao: 2020-01-03 16:12:27.252
-    usuario_id: 330
+    id_document: 722
+    path_document: mapas_uso_ocupacao_solo/23201/Mapa_Uso_e_Ocupacao_do_Solo_2015_Koatinemo_coFunai_23201.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Koatinemo_coFunai_23201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:12:27.252
+    dt_update: 2020-01-03 16:12:27.252
+    usercmr_id: 330
     co_funai: 23201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 723
   fields:
-    id: 723
-    path_documento: mapas_uso_ocupacao_solo/23201/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_g1qn1G6.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Koatinemo_coFunai_23201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 16:12:27.663
-    dt_atualizacao: 2020-01-03 16:12:27.663
-    usuario_id: 330
+    id_document: 723
+    path_document: mapas_uso_ocupacao_solo/23201/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_g1qn1G6.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Koatinemo_coFunai_23201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 16:12:27.663
+    dt_update: 2020-01-03 16:12:27.663
+    usercmr_id: 330
     co_funai: 23201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 756
   fields:
-    id: 756
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_brUHtnZ.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Juruna do Km 17_coFunai_62001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 17:52:53.677
-    dt_atualizacao: 2020-01-03 17:52:53.677
-    usuario_id: 330
+    id_document: 756
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_brUHtnZ.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Juruna do Km 17_coFunai_62001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 17:52:53.677
+    dt_update: 2020-01-03 17:52:53.677
+    usercmr_id: 330
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 757
   fields:
-    id: 757
-    path_documento: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2015_TI_Juruna_do_Km_17_coFunai_62001.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Juruna do Km 17_coFunai_62001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 17:52:54.125
-    dt_atualizacao: 2020-01-03 17:52:54.125
-    usuario_id: 330
+    id_document: 757
+    path_document: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2015_TI_Juruna_do_Km_17_coFunai_62001.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Juruna do Km 17_coFunai_62001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 17:52:54.125
+    dt_update: 2020-01-03 17:52:54.125
+    usercmr_id: 330
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 758
   fields:
-    id: 758
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2015_Juruna_do_Km_17_coFunai_62001.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Juruna do Km 17_coFunai_62001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 17:52:54.445
-    dt_atualizacao: 2020-01-03 17:52:54.445
-    usuario_id: 330
+    id_document: 758
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2015_Juruna_do_Km_17_coFunai_62001.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Juruna do Km 17_coFunai_62001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 17:52:54.445
+    dt_update: 2020-01-03 17:52:54.445
+    usercmr_id: 330
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 759
   fields:
-    id: 759
-    path_documento: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2015_TI_Juruna_do_Km_17_coFunai_6200_IABDiFZ.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Juruna do Km 17 (Adquirida)_coFunai_62001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 17:54:02.445
-    dt_atualizacao: 2020-01-03 17:54:02.445
-    usuario_id: 330
+    id_document: 759
+    path_document: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2015_TI_Juruna_do_Km_17_coFunai_6200_IABDiFZ.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Juruna do Km 17 (Adquirid_documenta)_coFunai_62001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 17:54:02.445
+    dt_update: 2020-01-03 17:54:02.445
+    usercmr_id: 330
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 760
   fields:
-    id: 760
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2015_Juruna_do_Km_17_coFunai_6_cr1S4I7.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Juruna do Km 17 (Adquirida)_coFunai_62001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 17:54:48.431
-    dt_atualizacao: 2020-01-03 17:54:48.431
-    usuario_id: 330
+    id_document: 760
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2015_Juruna_do_Km_17_coFunai_6_cr1S4I7.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Juruna do Km 17 (Adquirid_documenta)_coFunai_62001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 17:54:48.431
+    dt_update: 2020-01-03 17:54:48.431
+    usercmr_id: 330
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 761
   fields:
-    id: 761
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_ucfw4qD.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Juruna do Km 17 (Adquirida)_coFunai_62001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-01-03 17:55:25.963
-    dt_atualizacao: 2020-01-03 17:55:25.963
-    usuario_id: 330
+    id_document: 761
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_ucfw4qD.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Juruna do Km 17 (Adquirid_documenta)_coFunai_62001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-01-03 17:55:25.963
+    dt_update: 2020-01-03 17:55:25.963
+    usercmr_id: 330
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 762
   fields:
-    id: 762
-    path_documento: mapas_uso_ocupacao_solo/72601/Imagem_Alta_Resolucao_2015_TI_Ituna_Itatá_restrição_de_uso_huCNvKm.pdf
-    no_documento: Imagem_Alta_Resolucao_2015_TI_Ituna Itatá (restrição de uso)_coFunai_72601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-04-03 17:09:25.091
-    dt_atualizacao: 2020-04-03 17:09:25.091
-    usuario_id: 330
+    id_document: 762
+    path_document: mapas_uso_ocupacao_solo/72601/Imagem_Alta_Resolucao_2015_TI_Ituna_Itatá_restrição_de_uso_huCNvKm.pdf
+    no_document: Imagem_Alta_Resolucao_2015_TI_Ituna Itatá (restrição de uso)_coFunai_72601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-04-03 17:09:25.091
+    dt_update: 2020-04-03 17:09:25.091
+    usercmr_id: 330
     co_funai: 72601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 763
   fields:
-    id: 763
-    path_documento: mapas_uso_ocupacao_solo/72601/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_dReMOmZ.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Ituna Itatá (restrição de uso)_coFunai_72601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-04-03 17:13:02.039
-    dt_atualizacao: 2020-04-03 17:13:02.039
-    usuario_id: 330
+    id_document: 763
+    path_document: mapas_uso_ocupacao_solo/72601/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_dReMOmZ.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2015_TI_Ituna Itatá (restrição de uso)_coFunai_72601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-04-03 17:13:02.039
+    dt_update: 2020-04-03 17:13:02.039
+    usercmr_id: 330
     co_funai: 72601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 764
   fields:
-    id: 764
-    path_documento: mapas_uso_ocupacao_solo/72601/Mapa_Uso_e_Ocupacao_do_Solo_2015_Ituna_Itatá_restrição_de__ox99nx2.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2015_Ituna Itatá (restrição de uso)_coFunai_72601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2020-04-03 17:13:54.502
-    dt_atualizacao: 2020-04-03 17:13:54.502
-    usuario_id: 330
+    id_document: 764
+    path_document: mapas_uso_ocupacao_solo/72601/Mapa_Uso_e_Ocupacao_do_Solo_2015_Ituna_Itatá_restrição_de__ox99nx2.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2015_Ituna Itatá (restrição de uso)_coFunai_72601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2020-04-03 17:13:54.502
+    dt_update: 2020-04-03 17:13:54.502
+    usercmr_id: 330
     co_funai: 72601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2015
-    nu_ano_mapa: 2015
+    dt_document: null
+    nu_year: 2015
+    nu_year_map: 2015
 - model: documental.DocumentalDocs
   pk: 1104
   fields:
-    id: 1104
-    path_documento: mapas_uso_ocupacao_solo/23201/Imagem_Alta_Resolucao_2019_TI_Koatinemo_coFunai_23201.pdf
-    no_documento: Imagem_Alta_Resolucao_2019_TI_Koatinemo_coFunai_23201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:33:22.933
-    dt_atualizacao: 2021-05-27 15:33:22.933
-    usuario_id: 330
+    id_document: 1104
+    path_document: mapas_uso_ocupacao_solo/23201/Imagem_Alta_Resolucao_2019_TI_Koatinemo_coFunai_23201.pdf
+    no_document: Imagem_Alta_Resolucao_2019_TI_Koatinemo_coFunai_23201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:33:22.933
+    dt_update: 2021-05-27 15:33:22.933
+    usercmr_id: 330
     co_funai: 23201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1105
   fields:
-    id: 1105
-    path_documento: mapas_uso_ocupacao_solo/23201/Mapa_Uso_e_Ocupacao_do_Solo_2019_Koatinemo_coFunai_23201.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2019_Koatinemo_coFunai_23201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:33:26.758
-    dt_atualizacao: 2021-05-27 15:33:26.758
-    usuario_id: 330
+    id_document: 1105
+    path_document: mapas_uso_ocupacao_solo/23201/Mapa_Uso_e_Ocupacao_do_Solo_2019_Koatinemo_coFunai_23201.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2019_Koatinemo_coFunai_23201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:33:26.758
+    dt_update: 2021-05-27 15:33:26.758
+    usercmr_id: 330
     co_funai: 23201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1127
   fields:
-    id: 1127
-    path_documento: mapas_uso_ocupacao_solo/21501/Mapa_Uso_e_Ocupacao_do_Solo_2019_Kararaô_coFunai_21501.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2019_Kararaô_coFunai_21501.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:33:36.987
-    dt_atualizacao: 2021-05-27 15:33:36.987
-    usuario_id: 330
+    id_document: 1127
+    path_document: mapas_uso_ocupacao_solo/21501/Mapa_Uso_e_Ocupacao_do_Solo_2019_Kararaô_coFunai_21501.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2019_Kararaô_coFunai_21501.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:33:36.987
+    dt_update: 2021-05-27 15:33:36.987
+    usercmr_id: 330
     co_funai: 21501
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1159
   fields:
-    id: 1159
-    path_documento: mapas_uso_ocupacao_solo/72601/Imagem_Alta_Resolucao_2019_TI_Ituna_Itatá_restrição_de_uso_ITWPaJr.pdf
-    no_documento: Imagem_Alta_Resolucao_2019_TI_Ituna_Itatá (restrição de uso)_coFunai_72601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:00.815
-    dt_atualizacao: 2021-05-27 15:34:00.815
-    usuario_id: 330
+    id_document: 1159
+    path_document: mapas_uso_ocupacao_solo/72601/Imagem_Alta_Resolucao_2019_TI_Ituna_Itatá_restrição_de_uso_ITWPaJr.pdf
+    no_document: Imagem_Alta_Resolucao_2019_TI_Ituna_Itatá (restrição de uso)_coFunai_72601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:00.815
+    dt_update: 2021-05-27 15:34:00.815
+    usercmr_id: 330
     co_funai: 72601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1160
   fields:
-    id: 1160
-    path_documento: mapas_uso_ocupacao_solo/72601/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_0TnQgBX.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Ituna_Itatá (restrição de uso)_coFunai_72601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:01.376
-    dt_atualizacao: 2021-05-27 15:34:01.376
-    usuario_id: 330
+    id_document: 1160
+    path_document: mapas_uso_ocupacao_solo/72601/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_0TnQgBX.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Ituna_Itatá (restrição de uso)_coFunai_72601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:01.376
+    dt_update: 2021-05-27 15:34:01.376
+    usercmr_id: 330
     co_funai: 72601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1161
   fields:
-    id: 1161
-    path_documento: mapas_uso_ocupacao_solo/72601/Mapa_Uso_e_Ocupacao_do_Solo_2019_Ituna_Itatá_restrição_de__iQJ1Phm.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2019_Ituna_Itatá (restrição de uso)_coFunai_72601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:02.384
-    dt_atualizacao: 2021-05-27 15:34:02.384
-    usuario_id: 330
+    id_document: 1161
+    path_document: mapas_uso_ocupacao_solo/72601/Mapa_Uso_e_Ocupacao_do_Solo_2019_Ituna_Itatá_restrição_de__iQJ1Phm.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2019_Ituna_Itatá (restrição de uso)_coFunai_72601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:02.384
+    dt_update: 2021-05-27 15:34:02.384
+    usercmr_id: 330
     co_funai: 72601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1192
   fields:
-    id: 1192
-    path_documento: mapas_uso_ocupacao_solo/3002/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_7UoaGYL.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Apyterewa_coFunai_3002.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:44.816
-    dt_atualizacao: 2021-05-27 15:34:44.816
-    usuario_id: 330
+    id_document: 1192
+    path_document: mapas_uso_ocupacao_solo/3002/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_7UoaGYL.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Apyterewa_coFunai_3002.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:44.816
+    dt_update: 2021-05-27 15:34:44.816
+    usercmr_id: 330
     co_funai: 3002
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1193
   fields:
-    id: 1193
-    path_documento: mapas_uso_ocupacao_solo/3002/Mapa_Uso_e_Ocupacao_do_Solo_2019_Apyterewa_coFunai_3002.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2019_Apyterewa_coFunai_3002.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:45.130
-    dt_atualizacao: 2021-05-27 15:34:45.130
-    usuario_id: 330
+    id_document: 1193
+    path_document: mapas_uso_ocupacao_solo/3002/Mapa_Uso_e_Ocupacao_do_Solo_2019_Apyterewa_coFunai_3002.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2019_Apyterewa_coFunai_3002.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:45.130
+    dt_update: 2021-05-27 15:34:45.130
+    usercmr_id: 330
     co_funai: 3002
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1194
   fields:
-    id: 1194
-    path_documento: mapas_uso_ocupacao_solo/3002/Imagem_Alta_Resolucao_2019_TI_Apyterewa_coFunai_3002.pdf
-    no_documento: Imagem_Alta_Resolucao_2019_TI_Apyterewa_coFunai_3002.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:45.835
-    dt_atualizacao: 2021-05-27 15:34:45.836
-    usuario_id: 330
+    id_document: 1194
+    path_document: mapas_uso_ocupacao_solo/3002/Imagem_Alta_Resolucao_2019_TI_Apyterewa_coFunai_3002.pdf
+    no_document: Imagem_Alta_Resolucao_2019_TI_Apyterewa_coFunai_3002.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:45.835
+    dt_update: 2021-05-27 15:34:45.836
+    usercmr_id: 330
     co_funai: 3002
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1198
   fields:
-    id: 1198
-    path_documento: mapas_uso_ocupacao_solo/3801/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_Sfmh41H.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Araweté Igarapé Ipixuna_coFunai_3801.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:47.654
-    dt_atualizacao: 2021-05-27 15:34:47.654
-    usuario_id: 330
+    id_document: 1198
+    path_document: mapas_uso_ocupacao_solo/3801/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_Sfmh41H.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Araweté Igarapé Ipixuna_coFunai_3801.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:47.654
+    dt_update: 2021-05-27 15:34:47.654
+    usercmr_id: 330
     co_funai: 3801
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1199
   fields:
-    id: 1199
-    path_documento: mapas_uso_ocupacao_solo/3801/Mapa_Uso_e_Ocupacao_do_Solo_2019_Araweté_Igarapé_Ipixuna_co_cTeuBRc.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2019_Araweté Igarapé Ipixuna_coFunai_3801.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:47.911
-    dt_atualizacao: 2021-05-27 15:34:47.911
-    usuario_id: 330
+    id_document: 1199
+    path_document: mapas_uso_ocupacao_solo/3801/Mapa_Uso_e_Ocupacao_do_Solo_2019_Araweté_Igarapé_Ipixuna_co_cTeuBRc.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2019_Araweté Igarapé Ipixuna_coFunai_3801.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:47.911
+    dt_update: 2021-05-27 15:34:47.911
+    usercmr_id: 330
     co_funai: 3801
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1200
   fields:
-    id: 1200
-    path_documento: mapas_uso_ocupacao_solo/3801/Imagem_Alta_Resolucao_2019_TI_Araweté_Igarapé_Ipixuna_coFunai_3801.pdf
-    no_documento: Imagem_Alta_Resolucao_2019_TI_Araweté Igarapé Ipixuna_coFunai_3801.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:34:48.444
-    dt_atualizacao: 2021-05-27 15:34:48.444
-    usuario_id: 330
+    id_document: 1200
+    path_document: mapas_uso_ocupacao_solo/3801/Imagem_Alta_Resolucao_2019_TI_Araweté_Igarapé_Ipixuna_coFunai_3801.pdf
+    no_document: Imagem_Alta_Resolucao_2019_TI_Araweté Igarapé Ipixuna_coFunai_3801.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:34:48.444
+    dt_update: 2021-05-27 15:34:48.444
+    usercmr_id: 330
     co_funai: 3801
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1283
   fields:
-    id: 1283
-    path_documento: mapas_uso_ocupacao_solo/60001/Mapa_Uso_e_Ocupacao_do_Solo_2019_Arara_da_Volta_Grande_do__iBC5rAc.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2019_Arara da Volta Grande do Xingu_coFunai_60001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:35:38.824
-    dt_atualizacao: 2021-05-27 15:35:38.824
-    usuario_id: 330
+    id_document: 1283
+    path_document: mapas_uso_ocupacao_solo/60001/Mapa_Uso_e_Ocupacao_do_Solo_2019_Arara_da_Volta_Grande_do__iBC5rAc.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2019_Arara da Volta Grande do Xingu_coFunai_60001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:35:38.824
+    dt_update: 2021-05-27 15:35:38.824
+    usercmr_id: 330
     co_funai: 60001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1362
   fields:
-    id: 1362
-    path_documento: mapas_uso_ocupacao_solo/3201/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_sPr7HdE.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Arara_coFunai_3201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:36:32.768
-    dt_atualizacao: 2021-05-27 15:36:32.768
-    usuario_id: 330
+    id_document: 1362
+    path_document: mapas_uso_ocupacao_solo/3201/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_sPr7HdE.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Arara_coFunai_3201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:36:32.768
+    dt_update: 2021-05-27 15:36:32.768
+    usercmr_id: 330
     co_funai: 3201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1363
   fields:
-    id: 1363
-    path_documento: mapas_uso_ocupacao_solo/3201/Imagem_Alta_Resolucao_2019_TI_Arara_coFunai_3201.pdf
-    no_documento: Imagem_Alta_Resolucao_2019_TI_Arara_coFunai_3201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:36:33.382
-    dt_atualizacao: 2021-05-27 15:36:33.382
-    usuario_id: 330
+    id_document: 1363
+    path_document: mapas_uso_ocupacao_solo/3201/Imagem_Alta_Resolucao_2019_TI_Arara_coFunai_3201.pdf
+    no_document: Imagem_Alta_Resolucao_2019_TI_Arara_coFunai_3201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:36:33.382
+    dt_update: 2021-05-27 15:36:33.382
+    usercmr_id: 330
     co_funai: 3201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1364
   fields:
-    id: 1364
-    path_documento: mapas_uso_ocupacao_solo/3201/Mapa_Uso_e_Ocupacao_do_Solo_2019_Arara_coFunai_3201.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2019_Arara_coFunai_3201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:36:33.639
-    dt_atualizacao: 2021-05-27 15:36:33.639
-    usuario_id: 330
+    id_document: 1364
+    path_document: mapas_uso_ocupacao_solo/3201/Mapa_Uso_e_Ocupacao_do_Solo_2019_Arara_coFunai_3201.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2019_Arara_coFunai_3201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:36:33.639
+    dt_update: 2021-05-27 15:36:33.639
+    usercmr_id: 330
     co_funai: 3201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1390
   fields:
-    id: 1390
-    path_documento: mapas_uso_ocupacao_solo/7601/Imagem_Alta_Resolucao_2019_TI_Cachoeira_Seca_coFunai_7601.pdf
-    no_documento: Imagem_Alta_Resolucao_2019_TI_Cachoeira Seca_coFunai_7601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:36:47.164
-    dt_atualizacao: 2021-05-27 15:36:47.164
-    usuario_id: 330
+    id_document: 1390
+    path_document: mapas_uso_ocupacao_solo/7601/Imagem_Alta_Resolucao_2019_TI_Cachoeira_Seca_coFunai_7601.pdf
+    no_document: Imagem_Alta_Resolucao_2019_TI_Cachoeira Seca_coFunai_7601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:36:47.164
+    dt_update: 2021-05-27 15:36:47.164
+    usercmr_id: 330
     co_funai: 7601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1391
   fields:
-    id: 1391
-    path_documento: mapas_uso_ocupacao_solo/7601/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_Xa1zkhL.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Cachoeira Seca_coFunai_7601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:36:47.676
-    dt_atualizacao: 2021-05-27 15:36:47.677
-    usuario_id: 330
+    id_document: 1391
+    path_document: mapas_uso_ocupacao_solo/7601/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_Xa1zkhL.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Cachoeira Seca_coFunai_7601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:36:47.676
+    dt_update: 2021-05-27 15:36:47.677
+    usercmr_id: 330
     co_funai: 7601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1392
   fields:
-    id: 1392
-    path_documento: mapas_uso_ocupacao_solo/7601/Mapa_Uso_e_Ocupacao_do_Solo_2019_Cachoeira_Seca_coFunai_7601.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_2019_Cachoeira Seca_coFunai_7601.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-27 15:36:47.956
-    dt_atualizacao: 2021-05-27 15:36:47.956
-    usuario_id: 330
+    id_document: 1392
+    path_document: mapas_uso_ocupacao_solo/7601/Mapa_Uso_e_Ocupacao_do_Solo_2019_Cachoeira_Seca_coFunai_7601.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_2019_Cachoeira Seca_coFunai_7601.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-27 15:36:47.956
+    dt_update: 2021-05-27 15:36:47.956
+    usercmr_id: 330
     co_funai: 7601
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1472
   fields:
-    id: 1472
-    path_documento: mapas_uso_ocupacao_solo/23201/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Koatinemo_coFunai_23201.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Koatinemo_coFunai_23201.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-31 09:00:29.332
-    dt_atualizacao: 2021-05-31 09:00:29.332
-    usuario_id: 330
+    id_document: 1472
+    path_document: mapas_uso_ocupacao_solo/23201/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Koatinemo_coFunai_23201.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Koatinemo_coFunai_23201.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-31 09:00:29.332
+    dt_update: 2021-05-31 09:00:29.332
+    usercmr_id: 330
     co_funai: 23201
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1473
   fields:
-    id: 1473
-    path_documento: mapas_uso_ocupacao_solo/21501/Imagem_Alta_Resolucao_2019_TI_Kararaô_coFunai_21501.pdf
-    no_documento: Imagem_Alta_Resolucao_2019_TI_Kararaô_coFunai_21501.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-31 09:00:29.332
-    dt_atualizacao: 2021-05-31 09:00:29.332
-    usuario_id: 330
+    id_document: 1473
+    path_document: mapas_uso_ocupacao_solo/21501/Imagem_Alta_Resolucao_2019_TI_Kararaô_coFunai_21501.pdf
+    no_document: Imagem_Alta_Resolucao_2019_TI_Kararaô_coFunai_21501.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-31 09:00:29.332
+    dt_update: 2021-05-31 09:00:29.332
+    usercmr_id: 330
     co_funai: 21501
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1474
   fields:
-    id: 1474
-    path_documento: mapas_uso_ocupacao_solo/21501/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Kararaô_coFunai_21501.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Kararaô_coFunai_21501.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-31 09:00:29.332
-    dt_atualizacao: 2021-05-31 09:00:29.332
-    usuario_id: 330
+    id_document: 1474
+    path_document: mapas_uso_ocupacao_solo/21501/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Kararaô_coFunai_21501.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Kararaô_coFunai_21501.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-31 09:00:29.332
+    dt_update: 2021-05-31 09:00:29.332
+    usercmr_id: 330
     co_funai: 21501
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1479
   fields:
-    id: 1479
-    path_documento: mapas_uso_ocupacao_solo/60001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
-    no_documento: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-31 09:00:29.332
-    dt_atualizacao: 2021-05-31 09:00:29.332
-    usuario_id: 330
+    id_document: 1479
+    path_document: mapas_uso_ocupacao_solo/60001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
+    no_document: Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao2019_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-31 09:00:29.332
+    dt_update: 2021-05-31 09:00:29.332
+    usercmr_id: 330
     co_funai: 60001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1480
   fields:
-    id: 1480
-    path_documento: mapas_uso_ocupacao_solo/60001/Imagem_Alta_Resolucao_2019_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
-    no_documento: Imagem_Alta_Resolucao_2019_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-05-31 09:00:29.332
-    dt_atualizacao: 2021-05-31 09:00:29.332
-    usuario_id: 330
+    id_document: 1480
+    path_document: mapas_uso_ocupacao_solo/60001/Imagem_Alta_Resolucao_2019_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
+    no_document: Imagem_Alta_Resolucao_2019_TI_Arara da Volta Grande do Xingu_coFunai_60001.pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-31 09:00:29.332
+    dt_update: 2021-05-31 09:00:29.332
+    usercmr_id: 330
     co_funai: 60001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2019
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2019
 - model: documental.DocumentalDocs
   pk: 1506
   fields:
-    id: 1506
-    path_documento: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2019_TI_Juruna_do_Km_17_coFunai_62001_1-2.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa1-Imagem..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:29:43.294
-    dt_atualizacao: 2021-11-26 15:29:43.294
-    usuario_id: 498
+    id_document: 1506
+    path_document: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2019_TI_Juruna_do_Km_17_coFunai_62001_1-2.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa1-Imagem..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:29:43.294
+    dt_update: 2021-11-26 15:29:43.294
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
 - model: documental.DocumentalDocs
   pk: 1507
   fields:
-    id: 1507
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2019_Juruna_do_Km_17_coFunai_62001_1-2.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa1-A..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:31:33.535
-    dt_atualizacao: 2021-11-26 15:31:33.535
-    usuario_id: 498
+    id_document: 1507
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2019_Juruna_do_Km_17_coFunai_62001_1-2.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa1-A..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:31:33.535
+    dt_update: 2021-11-26 15:31:33.535
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
 - model: documental.DocumentalDocs
   pk: 1508
   fields:
-    id: 1508
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_HHFSqfR.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa1-B..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:32:58.589
-    dt_atualizacao: 2021-11-26 15:32:58.589
-    usuario_id: 498
+    id_document: 1508
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_HHFSqfR.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa1-B..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:32:58.589
+    dt_update: 2021-11-26 15:32:58.589
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
 - model: documental.DocumentalDocs
   pk: 1509
   fields:
-    id: 1509
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2019_Juruna_do_Km_17_coFunai_62001_2-2.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa2-A..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:35:43.477
-    dt_atualizacao: 2021-11-26 15:35:43.477
-    usuario_id: 498
+    id_document: 1509
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2019_Juruna_do_Km_17_coFunai_62001_2-2.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa2-A..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:35:43.477
+    dt_update: 2021-11-26 15:35:43.477
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
 - model: documental.DocumentalDocs
   pk: 1511
   fields:
-    id: 1511
-    path_documento: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2019_TI_Juruna_do_Km_17_coFunai_62001_2-2.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa2-Imagem..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:44:00.233
-    dt_atualizacao: 2021-11-26 15:44:00.233
-    usuario_id: 498
+    id_document: 1511
+    path_document: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2019_TI_Juruna_do_Km_17_coFunai_62001_2-2.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa2-Imagem..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:44:00.233
+    dt_update: 2021-11-26 15:44:00.233
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
 - model: documental.DocumentalDocs
   pk: 1512
   fields:
-    id: 1512
-    path_documento: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2019_TI_Juruna_do_Km_17_coFunai_62001.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa3-Imagem..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:45:46.161
-    dt_atualizacao: 2021-11-26 15:45:46.161
-    usuario_id: 498
+    id_document: 1512
+    path_document: mapas_uso_ocupacao_solo/62001/Imagem_Alta_Resolucao_2019_TI_Juruna_do_Km_17_coFunai_62001.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa3-Imagem..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:45:46.161
+    dt_update: 2021-11-26 15:45:46.161
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 11
-    no_extensao: null
+    action_id: 11
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
 - model: documental.DocumentalDocs
   pk: 1513
   fields:
-    id: 1513
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2019_Juruna_do_Km_17_coFunai_62001.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa3-A..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:46:37.945
-    dt_atualizacao: 2021-11-26 15:46:37.945
-    usuario_id: 498
+    id_document: 1513
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_2019_Juruna_do_Km_17_coFunai_62001.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa3-A..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:46:37.945
+    dt_update: 2021-11-26 15:46:37.945
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 12
-    no_extensao: null
+    action_id: 12
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
 - model: documental.DocumentalDocs
   pk: 1514
   fields:
-    id: 1514
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_bRLXqHB.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa3-B..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:48:50.389
-    dt_atualizacao: 2021-11-26 15:48:50.390
-    usuario_id: 498
+    id_document: 1514
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_bRLXqHB.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa3-B..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:48:50.389
+    dt_update: 2021-11-26 15:48:50.390
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
 - model: documental.DocumentalDocs
   pk: 1510
   fields:
-    id: 1510
-    path_documento: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_uUyFgYv.pdf
-    no_documento: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa2-B..pdf
-    st_disponivel: true
-    st_excluido: false
-    dt_cadastro: 2021-11-26 15:37:02.202
-    dt_atualizacao: 2021-11-26 15:37:02.202
-    usuario_id: 498
+    id_document: 1510
+    path_document: mapas_uso_ocupacao_solo/62001/Mapa_Uso_e_Ocupacao_do_Solo_basemap_ImagemAltaResolucao201_uUyFgYv.pdf
+    no_document: Terra_Indígena_Jurana_do_Km_17-PA-2019_-_Mapa2-B..pdf
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-11-26 15:37:02.202
+    dt_update: 2021-11-26 15:37:02.202
+    usercmr_id: 498
     co_funai: 62001
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
-    id_acao: 13
-    no_extensao: null
+    action_id: 13
+    no_extension: null
     no_ti: null
-    dt_documento: null
-    nu_ano: 2019
-    nu_ano_mapa: 2018
+    dt_document: null
+    nu_year: 2019
+    nu_year_map: 2018
