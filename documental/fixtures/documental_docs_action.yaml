@@ -102,4 +102,11 @@
     dt_creation: 2020-01-03 15:57:30.913
     action_type: MAPS_TI
     description: Mapas de Uso e Ocupação do Solo
-  
+- model: documental.DocsAction
+  pk: 14
+  fields:
+    id_action: 14
+    no_action: Default da Mapoteca     
+    dt_creation: 2020-01-03 15:57:30.913
+    action_type: MAPOTECA
+    description: Mapas de Uso e Ocupação do Solo

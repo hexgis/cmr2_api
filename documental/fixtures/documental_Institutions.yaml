@@ -1,0 +1,186 @@
+- model: documental.AuthInstitutionTemp
+  pk: 1
+  fields:
+    id_institution: 9
+    name: Museu do Índio
+    institution_type: NULL
+- model: documental.AuthInstitutionTemp
+  pk: 2
+  fields:
+    id_institution: 1
+    name: CMR
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 3
+  fields:
+    id_institution: 2
+    name: PNUD
+    institution_type: Outros
+- model: documental.AuthInstitutionTemp
+  pk: 4
+  fields:
+    id_institution: 3
+    name: Ibama
+    institution_type: Outros
+- model: documental.AuthInstitutionTemp
+  pk: 5
+  fields:
+    id_institution: 5
+    name: CGMT
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 6
+  fields:
+    id_institution: 6
+    name: CGIIRC
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 7
+  fields:
+    id_institution: 7
+    name: CGGEO
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 8
+  fields:
+    id_institution: 8
+    name: CGGAM
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 10
+  fields:
+    id_institution: 10
+    name: Público
+    institution_type: DEFAULT
+- model: documental.AuthInstitutionTemp
+  pk: 11
+  fields:
+    id_institution: 11
+    name: DPT
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 12
+  fields:
+    id_institution: 12
+    name: DPDS
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 13
+  fields:
+    id_institution: 13
+    name: DAGES
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 14
+  fields:
+    id_institution: 14
+    name: CGRL
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 15
+  fields:
+    id_institution: 15
+    name: CGGE
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 16
+  fields:
+    id_institution: 16
+    name: CGOF
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 17
+  fields:
+    id_institution: 17
+    name: CGGP
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 18
+  fields:
+    id_institution: 18
+    name: CGTIC
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 19
+  fields:
+    id_institution: 19
+    name: CGAF
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 20
+  fields:
+    id_institution: 20
+    name: CGID
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 21
+  fields:
+    id_institution: 21
+    name: CGETNO
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 22
+  fields:
+    id_institution: 22
+    name: CGLIC
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 23
+  fields:
+    id_institution: 23
+    name: CGPC
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 24
+  fields:
+    id_institution: 24
+    name: CGPDS
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 25
+  fields:
+    id_institution: 25
+    name: Presidência
+    institution_type: Funai Sede
+- model: documental.AuthInstitutionTemp
+  pk: 28
+  fields:
+    id_institution: 28
+    name: ABIN
+    institution_type: Outros
+- model: documental.AuthInstitutionTemp
+  pk: 29
+  fields:
+    id_institution: 29
+    name: Polícia Federal
+    institution_type: Outros
+- model: documental.AuthInstitutionTemp
+  pk: 30
+  fields:
+    id_institution: 30
+    name: Censipam
+    institution_type: Outros
+- model: documental.AuthInstitutionTemp
+  pk: 31
+  fields:
+    id_institution: 31
+    name: INPE
+    institution_type: Outros
+- model: documental.AuthInstitutionTemp
+  pk: 32
+  fields:
+    id_institution: 32
+    name: Casa Civil
+    institution_type: Outros
+- model: documental.AuthInstitutionTemp
+  pk: 33
+  fields:
+    id_institution: 33
+    name: Receita Federal
+    institution_type: Outros
+- model: documental.AuthInstitutionTemp
+  pk: 34
+  fields:
+    id_institution: 34
+    name: ANM
+    institution_type: Outros
