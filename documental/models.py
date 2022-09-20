@@ -1,4 +1,5 @@
 from django.db import models
+from django.forms import CharField
 
 from django.utils.translation import ugettext_lazy as _
 
@@ -64,7 +65,40 @@ class UsersCMR(models.Model):
         app_label = 'documental'
         verbose_name = 'User CMR'
         verbose_name_plural = 'Users CMR'
+        # usuario = models.ForeignKey(settings.AUTH_USER_MODEL, related_name=_('usuario'))
         # db_table = 'painel\".\"auth_user'
+        # managed = False
+
+
+class AuthInstitutionTemp(models.Model):
+    """Institution model data for documental model."""
+
+    id_institution = models.IntegerField(
+        _('Identifier institution'),
+        unique=True,
+    )
+
+    name = models.CharField(
+        _('Name institution'),
+        max_length=255,
+        unique=True,
+        null=False,
+    )
+
+    institution_type = models.CharField(
+        _('Type of institution'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        """"Meta class for `documental.auth_institution_temp` model."""
+        app_label = 'documental'
+        verbose_name = 'Auth Institution Temp'
+        verbose_name_plural = 'Auth Institutions Temp'
+        ordering = ['-name']
+        # db_table = 'painel\".\"auth_institution'
         # managed = False
 
 
@@ -94,8 +128,16 @@ class DocumentalDocs(models.Model):
     usercmr_id = models.ForeignKey(
         'documental.UsersCMR',
         on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_usercmr',
+        # related_name='documentosdocsx_usercmrx',
         null=True,
+    )
+
+    institution = models.ForeignKey(
+        'documental.AuthInstitutionTemp',
+        # related_name=_('docsmapotecax_authinstitutionx'),
+        on_delete=models.DO_NOTHING,
+        null=True,
+        default=10,
     )
 
     st_available = models.BooleanField(
@@ -133,8 +175,76 @@ class DocumentalDocs(models.Model):
     action_id = models.ForeignKey(
         'documental.DocsAction',
         on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_action',
-        null=True
+        # related_name='documentosdocsx_actionx',
+        null=True,
+    )
+
+    co_cr = models.BigIntegerField(
+        _('Regional Coordenation code'),
+        blank=True,
+        null=True,
+    )
+
+    ds_cr = models.CharField(
+        _('Regional Coordenation name'),
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        """"Meta class for `documental.DocumentalDocs` model."""
+        abstract = True
+        ordering = ['-dt_registration']
+        app_label = 'documental'
+        verbose_name = 'Documental Doc'
+        verbose_name_plural = 'Documental Docs'
+
+    def __str__(self) -> str:
+        """Returns `documental.DocumentalDocs` string data.
+
+        Returns:
+            str: model data path_documento.
+        """
+        return self.path_document
+
+
+class DocsLandUser(DocumentalDocs):
+    """DocsLandUser model data for documental model."""
+
+    nu_year = models.IntegerField(
+        _('Delivery reference year'),
+        null=True,
+        blank=True,
+    )
+
+    nu_year_map = models.IntegerField(
+        _('Year of the map'),
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        """"Meta class for `documental.UsersCMR` model."""
+        app_label = 'documental'
+        verbose_name = 'Document Land User'
+        verbose_name_plural = 'Documents Land User'
+
+    def __str__(self) -> str:
+        """Returns `documental.DocsLandUser` string data.
+        Returns:
+            str: model data document name.
+        """
+        return self.no_document
+
+
+class DocsDocumentTI(DocumentalDocs):
+    """DocsDocumentTI model data for documental model."""
+
+    dt_document = models.DateField(
+        _('Date of document'),
+        null=True,
+        blank=True,
     )
 
     no_extension = models.CharField(
@@ -151,47 +261,58 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
-    co_cr = models.BigIntegerField(
-        _('Regional Coordenation code'),
-        blank=True,
-        null=True
-    )
+    class Meta:
+        """"Meta class for `documental.DocsDocumentTI` model."""
+        app_label = 'documental'
+        verbose_name = 'Document Indigenou Lands'
+        verbose_name_plural = 'Documents Indigenou Lands'
 
-    ds_cr = models.CharField(
-        _('Regional Coordenation name'),
+    def __str__(self) -> str:
+        """Returns `documental.DocsDocumentTI` string data.
+        Returns:
+            str: model data document name.
+        """
+        return self.no_document
+
+
+# from django.contrib.postgres.fields.jsonb import JSONField
+class DocsMapoteca(DocumentalDocs):
+    """DocsMapoteca model data for documental model."""
+
+    no_descricao = models.CharField(
+        _('Descrição do arquivo'),
         max_length=255,
         blank=True,
-        null=True
+        null=True,
     )
 
-    dt_document = models.DateField(
-        _('Date of document'),
-        null=True,
+    formato = models.CharField(
+        _('Formato do Mapa'),
+        max_length=2,
         blank=True,
+        null=True,
     )
-
-    nu_year = models.IntegerField(
-        _('Delivery reference year'),
-        null=True,
+    
+    # js_ti = CharField(
+    #     _('Array de Terras Indígenas em formato JSON ex: [{\"no_ti\":\"Cachoeira Seca\"}]'),
+    #     default=[],
+    # )
+    js_tii = models.CharField(
+        _('Array de Terras Indígenas'),
+        max_length=255,
         blank=True,
-    )
-
-    nu_year_map = models.IntegerField(
-        _('Year of the map'),
         null=True,
-        blank=True,
     )
 
     class Meta:
-        """"Meta class for `documental.DocumentalDocs` model."""
+        """"Meta class for `documental.DocsMapoteca` model."""
         app_label = 'documental'
-        verbose_name = 'Documental Doc'
-        verbose_name_plural = 'Documental Docs'
+        verbose_name = 'Document Mapoteca'
+        verbose_name_plural = 'Documents Mapoteca'
 
     def __str__(self) -> str:
-        """Returns `documental.DocumentalDocs` string data.
-
+        """Returns `documental.DocsMapoteca` string data.
         Returns:
-            str: model data path_documento.
+            str: model data document name.
         """
-        return self.path_document
+        return self.no_document
