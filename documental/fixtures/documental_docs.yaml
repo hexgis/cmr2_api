@@ -1714,9 +1714,9 @@
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
     action_id: 14
-    no_descricao: 2 9 9 testando
-    formato: A4
-    js_tii: [{"no_ti": "XPTO_299", "co_funai": 73301}]
+    no_description: 2 9 9 testando
+    map_dimension: A4
+    js_ti: [{"no_ti": "XPTO_299", "co_funai": 73301}]
 - model: documental.DocsMapoteca
   pk: 147
   fields:
@@ -1732,6 +1732,6 @@
     co_cr: 30202001962
     ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
     action_id: 14
-    no_descricao: 1 4 7 testando
-    formato: A0
-    js_tii: [{"no_ti": "XPTO_147"}] 
+    no_description: 1 4 7 testando
+    map_dimension: A0
+    js_ti: [{"no_ti": "XPTO_147"}] 

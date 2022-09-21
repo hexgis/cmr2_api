@@ -137,6 +137,7 @@ class DocsDocumentTISerializers(serializers.ModelSerializer):
             settings.DOCUMENTOS, instance.path_document)
         return url_document
 
+
 class DocsMapotecaSerializers(serializers.ModelSerializer):
     """Serializer to return action category `models.DocsMapoteca` data.
 
@@ -162,9 +163,9 @@ class DocsMapotecaSerializers(serializers.ModelSerializer):
             'co_cr',
             'ds_cr',
             # 'no_ti',
-            'no_descricao',
-            'formato',
-            'js_tii',
+            'no_description',
+            'map_dimension',
+            'js_ti',
             'action_id',
             'usercmr_id',
             'institution',
@@ -173,11 +174,12 @@ class DocsMapotecaSerializers(serializers.ModelSerializer):
     def to_representation(self, instance):
         """Method to return in `DocsMapotecaSerializers` the full URL to
         download the documents in `models.DocsMapoteca`.
-                
+
         Returns:
             str: url to Mapoteca document
         """
 
         url_document = super().to_representation(instance)
-        url_document['url_doc'] = urllib.parse.urljoin(settings.DOCUMENTOS, instance.path_document)
+        url_document['url_doc'] = urllib.parse.urljoin(
+            settings.DOCUMENTOS, instance.path_document)
         return url_document

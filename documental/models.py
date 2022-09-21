@@ -1,14 +1,14 @@
 from django.db import models
-from django.forms import CharField
 
 from django.utils.translation import ugettext_lazy as _
+from django.contrib.postgres.fields.jsonb import JSONField
 
 
 class DocsAction(models.Model):
     """DocsAction model data for documental model."""
 
     id_action = models.IntegerField(
-        _('Identifier Action'),
+        _('Action Identifier'),
         unique=True,
     )
 
@@ -40,6 +40,7 @@ class DocsAction(models.Model):
 
     class Meta:
         """"Meta class for `documental.DocsAction` model."""
+        ordering = ['action_type']
         app_label = 'documental'
         verbose_name = 'Document Action'
         verbose_name_plural = 'Documents Actions'
@@ -49,7 +50,7 @@ class UsersCMR(models.Model):
     """UsersCMR model data for documental model."""
 
     id_user = models.IntegerField(
-        _('Identifier User'),
+        _('User Identifier'),
         unique=True,
     )
 
@@ -74,7 +75,7 @@ class AuthInstitutionTemp(models.Model):
     """Institution model data for documental model."""
 
     id_institution = models.IntegerField(
-        _('Identifier institution'),
+        _('Institution Identifier'),
         unique=True,
     )
 
@@ -93,7 +94,7 @@ class AuthInstitutionTemp(models.Model):
     )
 
     class Meta:
-        """"Meta class for `documental.auth_institution_temp` model."""
+        """"Meta class for `documental.AuthInstitutionTemp` model."""
         app_label = 'documental'
         verbose_name = 'Auth Institution Temp'
         verbose_name_plural = 'Auth Institutions Temp'
@@ -106,7 +107,7 @@ class DocumentalDocs(models.Model):
     """DocumentalDocs model data for documental model."""
 
     id_document = models.IntegerField(
-        _('Identifier key'),
+        _('Key Identifier'),
         null=False,
         blank=False,
     )
@@ -128,16 +129,16 @@ class DocumentalDocs(models.Model):
     usercmr_id = models.ForeignKey(
         'documental.UsersCMR',
         on_delete=models.DO_NOTHING,
-        # related_name='documentosdocsx_usercmrx',
+        # related_name='documentosdocs_usercmr',
         null=True,
     )
 
     institution = models.ForeignKey(
         'documental.AuthInstitutionTemp',
-        # related_name=_('docsmapotecax_authinstitutionx'),
         on_delete=models.DO_NOTHING,
+        # related_name=_('DocsMapoteca_institution'),
         null=True,
-        default=10,
+        default=10
     )
 
     st_available = models.BooleanField(
@@ -167,7 +168,7 @@ class DocumentalDocs(models.Model):
     )
 
     co_funai = models.IntegerField(
-        _('Funai code - Indigenou Lands'),
+        _('Funai code - Indigenous Lands'),
         null=True,
         blank=True,
     )
@@ -175,7 +176,7 @@ class DocumentalDocs(models.Model):
     action_id = models.ForeignKey(
         'documental.DocsAction',
         on_delete=models.DO_NOTHING,
-        # related_name='documentosdocsx_actionx',
+        # related_name='documentosdocs_action',
         null=True,
     )
 
@@ -255,7 +256,7 @@ class DocsDocumentTI(DocumentalDocs):
     )
 
     no_ti = models.CharField(
-        _('Indigenou Lands name'),
+        _('Indigenous Lands name'),
         max_length=255,
         null=True,
         blank=True,
@@ -264,8 +265,8 @@ class DocsDocumentTI(DocumentalDocs):
     class Meta:
         """"Meta class for `documental.DocsDocumentTI` model."""
         app_label = 'documental'
-        verbose_name = 'Document Indigenou Lands'
-        verbose_name_plural = 'Documents Indigenou Lands'
+        verbose_name = 'Document Indigenous Lands'
+        verbose_name_plural = 'Documents Indigenous Lands'
 
     def __str__(self) -> str:
         """Returns `documental.DocsDocumentTI` string data.
@@ -275,29 +276,28 @@ class DocsDocumentTI(DocumentalDocs):
         return self.no_document
 
 
-# from django.contrib.postgres.fields.jsonb import JSONField
 class DocsMapoteca(DocumentalDocs):
     """DocsMapoteca model data for documental model."""
 
-    no_descricao = models.CharField(
-        _('Descrição do arquivo'),
+    no_description = models.CharField(
+        _('File Description'),
         max_length=255,
         blank=True,
         null=True,
     )
 
-    formato = models.CharField(
-        _('Formato do Mapa'),
+    map_dimension = models.CharField(
+        _('Map page dimension'),
         max_length=2,
         blank=True,
         null=True,
     )
-    
-    # js_ti = CharField(
-    #     _('Array de Terras Indígenas em formato JSON ex: [{\"no_ti\":\"Cachoeira Seca\"}]'),
+
+    # js_ti = JSONField(
+    #     _('Array of Indigenous Lands in JSON format ex: [{\"no_ti\":\"Cachoeira Seca\"}]'),
     #     default=[],
     # )
-    js_tii = models.CharField(
+    js_ti = models.CharField(
         _('Array de Terras Indígenas'),
         max_length=255,
         blank=True,
