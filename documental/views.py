@@ -24,6 +24,7 @@ class ActionListView(AuthModelMix, generics.ListAPIView):
 
     queryset = models.DocsAction.objects.all().order_by('no_action')
     serializer_class = serializers.ActionListSerializers
+    filterset_class = documental_filters.DocsActionFilter
 
 
 class DocumentalListViews(AuthModelMix, generics.ListAPIView):
@@ -54,8 +55,10 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
         action_type_docs = self.get_action_type()
         
         if action_type_docs == "DOCUMENTS_TI":
+            # self.filterset_class = documental_filters.DocsDocumentTIFilter
             return serializers.DocsDocumentTISerializers
         elif action_type_docs == "MAPS_TI":
+            # self.filterset_class = documental_filters.DocsLandUserFilter
             return serializers.DocsLandUserSerializers
         elif action_type_docs == "MAPOTECA":
             return serializers.DocsMapotecaSerializers
