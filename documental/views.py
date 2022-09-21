@@ -37,7 +37,6 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
         * map_year (list): filteringend years of the maps.
     """
 
-    queryset = models.DocumentalDocs.objects.all().order_by('dt_registration')
     filterset_class = documental_filters.DocumentalDocsFilter
     filter_backends = (DjangoFilterBackend,)
 
@@ -51,17 +50,44 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
             `serializers.MapasUsoOcupacaoSoloSerializers` or
             `serializers.DocumentosTISerializers`.
         """
+        
+        action_type_docs = self.get_action_type()
+        
+        if action_type_docs == "DOCUMENTS_TI":
+            return serializers.DocsDocumentTISerializers
+        elif action_type_docs == "MAPS_TI":
+            return serializers.DocsLandUserSerializers
+        elif action_type_docs == "MAPOTECA":
+            return serializers.DocsMapotecaSerializers
 
-        actions_id_land_use = [11, 12, 13]
-        requested_action = self.request.GET.get('id_acao')
-        requested_action = list(map(int, requested_action.split(',')))
+    def get_queryset(self):
+        """Função get_queryset """
 
-        if all(item in actions_id_land_use for item in requested_action):
-            return serializers.MapasUsoOcupacaoSoloSerializers
-        elif not any(item in requested_action for item in
-                     actions_id_land_use):
-            return serializers.DocumentosTISerializers
+        action_type_docs = self.get_action_type()
+
+        if action_type_docs == "DOCUMENTS_TI":
+            return models.DocsDocumentTI.objects.all().order_by('dt_registration')
+        elif action_type_docs == "MAPS_TI":
+            return models.DocsLandUser.objects.all().order_by('dt_registration')
+        elif action_type_docs == "MAPOTECA":
+            return models.DocsMapoteca.objects.all().order_by('dt_registration')
         else:
             raise exceptions.ParseError(
-                "Não permitido retorno de dados de DocumentoTI"
-                " UsoEOcupaçãoDoSolo na mesma requisição", None)
+                "XPTO Não permitido retorno de dados com mais de uma TIPO DE AÇÃO"
+                " na mesma requisição", None)
+
+    def get_action_type(self):
+        """Função get_action_type"""
+
+        requested_action = self.request.GET.get('id_acao')
+        requested_action = list(map(int, requested_action.split(',')))
+        
+        action_type_docs = models.DocsAction.objects.values(
+            'action_type').filter(id_action__in=requested_action).distinct()
+        
+        if action_type_docs.count() == 1:
+            return str(action_type_docs[0]['action_type'])
+        else:
+            raise exceptions.ParseError(
+                "Não permitido retorno de dados com mais de uma TIPO DE AÇÃO"
+                " na mesma requisição ou TIPO DE AÇÃO não registrada", None)
