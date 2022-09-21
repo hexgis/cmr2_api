@@ -20,17 +20,19 @@ class CharInFilter(
 
 
 class DocsActionFilter(rest_framework.FilterSet):
-    # description = rest_framework.CharFilter(
-    #     field_name='description',
-    #     lookup_expr='iexact',
-    #     # required=True,
-    # )
-    # class Meta:
-    #     model = models.DocsAction
-    #     fields = (
-    #         'description'
-    #     )
+    action_type = rest_framework.CharFilter(
+        field_name='action_type',
+        # required=True,
+    )
+
+    class Meta:
+        model = models.DocsAction
+        fields = (
+            'action_type',
+        )
     pass
+
+
 class DocumentalDocsFilter(rest_framework.FilterSet):
     """Django filter `models.DocumentalDocs` data.
 
@@ -57,6 +59,7 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
         field_name='co_funai',
         lookup_expr='in'
     )
+
     class Meta:
         """Meta class for `DocumentalDocsFilter` filter."""
         model = models.DocumentalDocs
@@ -77,6 +80,7 @@ class DocsDocumentTIFilter(DocumentalDocsFilter):
         field_name='dt_document',
         lookup_expr='lte'
     )
+
     class Meta:
         """Meta class for `DocumentalDocsFilter` filter."""
         model = models.DocsDocumentTI
@@ -84,11 +88,14 @@ class DocsDocumentTIFilter(DocumentalDocsFilter):
             'start_date',
             'end_date',
         )
+
+
 class DocsLandUserFilter(DocumentalDocsFilter):
     map_year = NumberInFilter(
         field_name='nu_year',
         lookup_expr='in'
     )
+
     class Meta:
         """Meta class for `DocumentalDocsFilter` filter."""
         model = models.DocsLandUser
