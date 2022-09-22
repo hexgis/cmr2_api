@@ -5,6 +5,7 @@
     no_action: Projeto PNUD (TIs Vulneráveis)  
     dt_creation: 2017-07-03 00:00:00.000
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 2
@@ -13,6 +14,7 @@
     no_action: Prevenção (2016)        
     dt_creation: 2017-07-03 00:00:00.000
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 3
@@ -21,6 +23,7 @@
     no_action: Fiscalização (2016)     
     dt_creation: 2017-07-03 00:00:00.000
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 4
@@ -29,6 +32,7 @@
     no_action: Vigilância      
     dt_creation: 2017-07-03 00:00:00.000
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 5
@@ -37,6 +41,7 @@
     no_action: Fundo Amazônia  
     dt_creation: 2017-07-03 00:00:00.000
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 6
@@ -45,6 +50,7 @@
     no_action: Gestão Territorial e Ambiental  
     dt_creation: 2017-07-03 00:00:00.000
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 7
@@ -53,6 +59,7 @@
     no_action: FIP DGM 
     dt_creation: 2017-07-03 00:00:00.000
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 8
@@ -61,6 +68,7 @@
     no_action: Prevenção (2017)        
     dt_creation: 2017-07-11 00:00:00.000
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 9
@@ -69,6 +77,7 @@
     no_action: Fiscalização (2017)     
     dt_creation: 2017-08-24 11:02:38.513
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 10
@@ -77,6 +86,7 @@
     no_action: Alertas Urgentes        
     dt_creation: 2021-06-22 17:32:07.045
     action_type: DOCUMENTS_TI
+    action_type_group: NULL
     description: Documento TI
 - model: documental.DocsAction
   pk: 11
@@ -84,7 +94,8 @@
     id_action: 11
     no_action: Imagem de Alta Resolução        
     dt_creation: 2020-01-03 15:57:30.900
-    action_type: MAPS_TI
+    action_type: MAPS_LAND_USER
+    action_type_group: NULL
     description: Mapas de Uso e Ocupação do Solo
 - model: documental.DocsAction
   pk: 12
@@ -92,7 +103,8 @@
     id_action: 12
     no_action: Uso e Ocupação do Solo  
     dt_creation: 2020-01-03 15:57:30.911
-    action_type: MAPS_TI
+    action_type: MAPS_LAND_USER
+    action_type_group: NULL
     description: Mapas de Uso e Ocupação do Solo
 - model: documental.DocsAction
   pk: 13
@@ -100,13 +112,285 @@
     id_action: 13
     no_action: Uso e Ocupação com Imagem de Alta Resolução     
     dt_creation: 2020-01-03 15:57:30.913
-    action_type: MAPS_TI
+    action_type: MAPS_LAND_USER
+    action_type_group: NULL
     description: Mapas de Uso e Ocupação do Solo
 - model: documental.DocsAction
-  pk: 14
+  pk: 101
   fields:
-    id_action: 14
-    no_action: Default da Mapoteca     
-    dt_creation: 2020-01-03 15:57:30.913
+    id_action: 109
+    no_action: Museu do Índio
+    dt_creation: NULL
     action_type: MAPOTECA
-    description: Mapas de Uso e Ocupação do Solo
+    action_type_group: NULL
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 102
+  fields:
+    id_action: 101
+    no_action: CMR
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 103
+  fields:
+    id_action: 102
+    no_action: PNUD
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 104
+  fields:
+    id_action: 103
+    no_action: Ibama
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 105
+  fields:
+    id_action: 105
+    no_action: CGMT
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 106
+  fields:
+    id_action: 106
+    no_action: CGIIRC
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 107
+  fields:
+    id_action: 107
+    no_action: CGGEO
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 108
+  fields:
+    id_action: 108
+    no_action: CGGAM
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 110
+  fields:
+    id_action: 110
+    no_action: Público
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: DEFAULT
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 111
+  fields:
+    id_action: 111
+    no_action: DPT
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 112
+  fields:
+    id_action: 112
+    no_action: DPDS
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 113
+  fields:
+    id_action: 113
+    no_action: DAGES
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 114
+  fields:
+    id_action: 114
+    no_action: CGRL
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 115
+  fields:
+    id_action: 115
+    no_action: CGGE
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 116
+  fields:
+    id_action: 116
+    no_action: CGOF
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 117
+  fields:
+    id_action: 117
+    no_action: CGGP
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 118
+  fields:
+    id_action: 118
+    no_action: CGTIC
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 119
+  fields:
+    id_action: 119
+    no_action: CGAF
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 120
+  fields:
+    id_action: 120
+    no_action: CGID
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 121
+  fields:
+    id_action: 121
+    no_action: CGETNO
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 122
+  fields:
+    id_action: 122
+    no_action: CGLIC
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 123
+  fields:
+    id_action: 123
+    no_action: CGPC
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 124
+  fields:
+    id_action: 124
+    no_action: CGPDS
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 125
+  fields:
+    id_action: 125
+    no_action: Presidência
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Funai Sede
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 128
+  fields:
+    id_action: 128
+    no_action: ABIN
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 129
+  fields:
+    id_action: 129
+    no_action: Polícia Federal
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 130
+  fields:
+    id_action: 130
+    no_action: Censipam
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 131
+  fields:
+    id_action: 131
+    no_action: INPE
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 132
+  fields:
+    id_action: 132
+    no_action: Casa Civil
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 133
+  fields:
+    id_action: 133
+    no_action: Receita Federal
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
+- model: documental.DocsAction
+  pk: 134
+  fields:
+    id_action: 134
+    no_action: ANM
+    dt_creation: NULL
+    action_type: MAPOTECA
+    action_type_group: Outros
+    description: Mapoteca
