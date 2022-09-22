@@ -1,7 +1,6 @@
 from django.db import models
 
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.postgres.fields.jsonb import JSONField
 
 
 class DocsAction(models.Model):
@@ -26,6 +25,13 @@ class DocsAction(models.Model):
 
     action_type = models.CharField(
         _('Type of action'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    action_type_group = models.CharField(
+        _('Group within action types'),
         max_length=255,
         null=True,
         blank=True,
@@ -71,38 +77,6 @@ class UsersCMR(models.Model):
         # managed = False
 
 
-class AuthInstitutionTemp(models.Model):
-    """Institution model data for documental model."""
-
-    id_institution = models.IntegerField(
-        _('Institution Identifier'),
-        unique=True,
-    )
-
-    name = models.CharField(
-        _('Name institution'),
-        max_length=255,
-        unique=True,
-        null=False,
-    )
-
-    institution_type = models.CharField(
-        _('Type of institution'),
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-
-    class Meta:
-        """"Meta class for `documental.AuthInstitutionTemp` model."""
-        app_label = 'documental'
-        verbose_name = 'Auth Institution Temp'
-        verbose_name_plural = 'Auth Institutions Temp'
-        ordering = ['-name']
-        # db_table = 'painel\".\"auth_institution'
-        # managed = False
-
-
 class DocumentalDocs(models.Model):
     """DocumentalDocs model data for documental model."""
 
@@ -129,16 +103,7 @@ class DocumentalDocs(models.Model):
     usercmr_id = models.ForeignKey(
         'documental.UsersCMR',
         on_delete=models.DO_NOTHING,
-        # related_name='documentosdocs_usercmr',
         null=True,
-    )
-
-    institution = models.ForeignKey(
-        'documental.AuthInstitutionTemp',
-        on_delete=models.DO_NOTHING,
-        # related_name=_('DocsMapoteca_institution'),
-        null=True,
-        default=10
     )
 
     st_available = models.BooleanField(
@@ -173,10 +138,16 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
+    no_ti = models.CharField(
+        _('Indigenous Lands name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
     action_id = models.ForeignKey(
         'documental.DocsAction',
         on_delete=models.DO_NOTHING,
-        # related_name='documentosdocs_action',
         null=True,
     )
 
@@ -255,13 +226,6 @@ class DocsDocumentTI(DocumentalDocs):
         blank=True,
     )
 
-    no_ti = models.CharField(
-        _('Indigenous Lands name'),
-        max_length=255,
-        null=True,
-        blank=True,
-    )
-
     class Meta:
         """"Meta class for `documental.DocsDocumentTI` model."""
         app_label = 'documental'
@@ -293,6 +257,7 @@ class DocsMapoteca(DocumentalDocs):
         null=True,
     )
 
+    # from django.contrib.postgres.fields.jsonb import JSONField
     # js_ti = JSONField(
     #     _('Array of Indigenous Lands in JSON format ex: [{\"no_ti\":\"Cachoeira Seca\"}]'),
     #     default=[],

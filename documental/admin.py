@@ -13,12 +13,11 @@ list_documental_abstract_class = [
     'dt_registration',
     'dt_update',
     'co_funai',
+    'no_ti',
     'co_cr',
     'ds_cr',
     'action_id',
-    'institution',
 ]
-# 'no_ti',
 
 
 class DocsActionAdmin(admin.ModelAdmin):
@@ -29,6 +28,7 @@ class DocsActionAdmin(admin.ModelAdmin):
         'no_action',
         'dt_creation',
         'action_type',
+        'action_type_group',
         'description',
     )
 
@@ -50,25 +50,12 @@ class UsersCMRAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
-class AuthInstitutionTemp(admin.ModelAdmin):
-    list_display = (
-        'id_institution',
-        'name',
-        'institution_type',
-    )
-
-    fields = list_display
-
-    search_fields = list_display
-
-
 class DocsDocumentTIAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsDocumentTI` data."""
 
     list_display = [
         'no_extension',
         'dt_document',
-        'no_ti',
     ] + list_documental_abstract_class
 
     fields = list_display

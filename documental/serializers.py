@@ -16,12 +16,13 @@ class ActionListSerializers(serializers.ModelSerializer):
             'id_action',
             'no_action',
             'action_type',
+            'action_type_group',
             'description',
         )
 
 
 class UsuarioSerializers(serializers.ModelSerializer):
-    """Serializer to return the user who entered the `models.Usuario` data."""
+    """Serializer to return the user who entered the `models.UsersCMR` data."""
 
     class Meta:
         """Meta class for `UsuarioSerializers` serializer."""
@@ -32,28 +33,14 @@ class UsuarioSerializers(serializers.ModelSerializer):
         )
 
 
-class AuthInstitutionTempSerializers(serializers.ModelSerializer):
-    """Serializer to return institutions registered in the `models.AuthInstitutionTemp` data."""
-
-    class Meta:
-        """Meta class for `AuthInstitutionTempSerializers` seriralizer."""
-        model = models.AuthInstitutionTemp
-        fields = (
-            'id_institution',
-            'name',
-            'institution_type',
-        )
-
-
 class DocsLandUserSerializers(serializers.ModelSerializer):
     """Serializer to return action category `models.DocsLandUser` data.
 
-    Data only for the action category linked to USO_OCUPAÇÃO_DO_SOLO
+    Data only for the action category linked to "USO_OCUPAÇÃO_DO_SOLO"
     """
 
     usercmr_id = UsuarioSerializers()
     action_id = ActionListSerializers()
-    institution = AuthInstitutionTempSerializers()
 
     class Meta:
         """Meta class for `DocsLandUserSerializers` serializer."""
@@ -74,7 +61,6 @@ class DocsLandUserSerializers(serializers.ModelSerializer):
             'nu_year_map',
             'action_id',
             'usercmr_id',
-            'institution',
         )
 
     def to_representation(self, instance):
@@ -94,12 +80,11 @@ class DocsLandUserSerializers(serializers.ModelSerializer):
 class DocsDocumentTISerializers(serializers.ModelSerializer):
     """Serializer to return action category `models.DocsDocumentTI` data.
 
-    Data only for the action category linked to DOCUMENTAL_TI.
+    Data only for the action category linked to "DOCUMENTAL_TI".
     """
 
     usercmr_id = UsuarioSerializers()
     action_id = ActionListSerializers()
-    institution = AuthInstitutionTempSerializers()
 
     class Meta:
         """Meta class for `DocsDocumentTISerializers` serializer."""
@@ -121,7 +106,6 @@ class DocsDocumentTISerializers(serializers.ModelSerializer):
             'no_ti',
             'action_id',
             'usercmr_id',
-            'institution',
         )
 
     def to_representation(self, instance):
@@ -141,12 +125,11 @@ class DocsDocumentTISerializers(serializers.ModelSerializer):
 class DocsMapotecaSerializers(serializers.ModelSerializer):
     """Serializer to return action category `models.DocsMapoteca` data.
 
-    Data only for the action category linked to MAPOTECA.
+    Data only for the action category linked to "MAPOTECA".
     """
 
     usercmr_id = UsuarioSerializers()
     action_id = ActionListSerializers()
-    institution = AuthInstitutionTempSerializers()
 
     class Meta:
         """Meta class for `DocsMapotecaSerializers` serializer."""
@@ -168,7 +151,6 @@ class DocsMapotecaSerializers(serializers.ModelSerializer):
             'js_ti',
             'action_id',
             'usercmr_id',
-            'institution',
         )
 
     def to_representation(self, instance):
