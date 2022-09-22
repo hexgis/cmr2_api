@@ -30,7 +30,6 @@ class DocsActionFilter(rest_framework.FilterSet):
         fields = (
             'action_type',
         )
-    pass
 
 
 class DocumentalDocsFilter(rest_framework.FilterSet):
@@ -40,9 +39,6 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
         * id_acao (int): action identifier to be filtered.
         * co_cr (list): filtering Regional Coordination using code.
         * co_funai (list): filtering Indigenou Lands using Funai code.
-        * start_date (str): filtering start date.
-        * end_date (str): filtering end date.
-        * map_year (list): filteringend years of the maps.
     """
     id_acao = NumberInFilter(
         field_name='action_id',
@@ -71,6 +67,12 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
 
 
 class DocsDocumentTIFilter(DocumentalDocsFilter):
+    """Django filter `models.DocsDocumentTI` data.
+
+    Filter:
+        * start_date (str): filtering start date.
+        * end_date (str): filtering end date.
+    """
     start_date = rest_framework.DateFilter(
         field_name='dt_document',
         lookup_expr='gte'
@@ -82,7 +84,7 @@ class DocsDocumentTIFilter(DocumentalDocsFilter):
     )
 
     class Meta:
-        """Meta class for `DocumentalDocsFilter` filter."""
+        """Meta class for `DocsDocumentTIFilter` filter."""
         model = models.DocsDocumentTI
         fields = (
             'start_date',
@@ -91,13 +93,18 @@ class DocsDocumentTIFilter(DocumentalDocsFilter):
 
 
 class DocsLandUserFilter(DocumentalDocsFilter):
+    """Django filter `models.DocsLandUser` data.
+
+    Filter:
+        * map_year (list): filteringend years of the maps.
+    """
     map_year = NumberInFilter(
         field_name='nu_year',
         lookup_expr='in'
     )
 
     class Meta:
-        """Meta class for `DocumentalDocsFilter` filter."""
+        """Meta class for `DocsLandUserFilter` filter."""
         model = models.DocsLandUser
         fields = (
             'map_year',
