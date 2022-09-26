@@ -90,8 +90,23 @@ class DocsMapotecaAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
+class DocumentUploadAdmin(admin.ModelAdmin):
+    list_display = [
+        # 'uploaded_at',
+        'file',
+        'dt_cadastro',
+        'id_acao'
+    ]
+
+    fields = list_display
+
+    search_fields = list_display
+
+
 admin.site.register(models.DocsAction, DocsActionAdmin)
 admin.site.register(models.UsersCMR, UsersCMRAdmin)
 admin.site.register(models.DocsDocumentTI, DocsDocumentTIAdmin)
 admin.site.register(models.DocsLandUser, DocsLandUserAdmin)
 admin.site.register(models.DocsMapoteca, DocsMapotecaAdmin)
+
+admin.site.register(models.DocumentUpload, DocumentUploadAdmin)

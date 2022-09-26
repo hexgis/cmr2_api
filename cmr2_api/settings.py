@@ -154,6 +154,14 @@ USE_L10N = True
 
 USE_TZ = True
 
+# Media files configuration
+
+# Path where media is stored
+MEDIA_ROOT = ( os.path.join(BASE_DIR, 'media/'))
+
+# Base URL to serve media files
+MEDIA_URL = '/media/'
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
