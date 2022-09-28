@@ -20,6 +20,11 @@ class CharInFilter(
 
 
 class DocsActionFilter(rest_framework.FilterSet):
+    """Django filter models.DocsAction data.
+
+    Filter:
+        * action_type (str): list action_id in action action_type filtered.
+    """
     action_type = rest_framework.CharFilter(
         field_name='action_type',
         # required=True,

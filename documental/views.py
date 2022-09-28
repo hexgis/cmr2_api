@@ -20,7 +20,11 @@ class AuthModelMix:
 
 
 class ActionListView(AuthModelMix, generics.ListAPIView):
-    """Returns the list of data in `models.DocsAction`."""
+    """Returns the list of data in `models.DocsAction`.
+
+    Filter:
+        * action_type (str): list action_id in action action_type filtered.
+    """
 
     queryset = models.DocsAction.objects.all()
     serializer_class = serializers.ActionListSerializers
@@ -128,4 +132,4 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
             return models.DocsMapoteca.objects.all()
         else:
             raise exceptions.ParseError(
-                "ERRO in the data set returned", None)
+                "ERROR in the data set returned", None)

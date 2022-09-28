@@ -3,21 +3,22 @@ from django.contrib import admin
 from documental import models
 
 
-list_documental_abstract_class = [
-    'id_document',
-    'path_document',
-    'no_document',
-    'usercmr_id',
-    'st_available',
-    'st_excluded',
-    'dt_registration',
-    'dt_update',
-    'co_funai',
-    'no_ti',
-    'co_cr',
-    'ds_cr',
-    'action_id',
-]
+class ListDocumentalAbstractClass(admin.ModelAdmin):
+    list_displayy = [
+        'id_document',
+        'path_document',
+        'no_document',
+        'usercmr_id',
+        'st_available',
+        'st_excluded',
+        'dt_registration',
+        'dt_update',
+        'co_funai',
+        'no_ti',
+        'co_cr',
+        'ds_cr',
+        'action_id',
+    ]
 
 
 class DocsActionAdmin(admin.ModelAdmin):
@@ -50,40 +51,40 @@ class UsersCMRAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
-class DocsDocumentTIAdmin(admin.ModelAdmin):
+class DocsDocumentTIAdmin(ListDocumentalAbstractClass):
     """Django administrator `model.DocsDocumentTI` data."""
 
-    list_display = [
+    list_display = self.list_displayy([
         'no_extension',
         'dt_document',
-    ] + list_documental_abstract_class
+    ])
 
     fields = list_display
 
     search_fields = list_display
 
 
-class DocsLandUserAdmin(admin.ModelAdmin):
+class DocsLandUserAdmin(ListDocumentalAbstractClass):
     """Django administrator `model.DocsLandUser` data."""
 
-    list_display = [
+    list_display = self.list_display.extend([
         'nu_year',
         'nu_year_map',
-    ] + list_documental_abstract_class
+    ])
 
     fields = list_display
 
     search_fields = list_display
 
 
-class DocsMapotecaAdmin(admin.ModelAdmin):
+class DocsMapotecaAdmin(LucasListDocumentalAbstractClassClass):
     """Django administrator `model.DocsMapoteca` data."""
 
-    list_display = [
+    list_display = self.list_display.extend([
         'no_description',
         'map_dimension',
         'js_ti',
-    ] + list_documental_abstract_class
+    ])
 
     fields = list_display
 

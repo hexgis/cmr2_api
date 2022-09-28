@@ -257,11 +257,6 @@ class DocsMapoteca(DocumentalDocs):
         null=True,
     )
 
-    # from django.contrib.postgres.fields.jsonb import JSONField
-    # js_ti = JSONField(
-    #     _('Array of Indigenous Lands in JSON format ex: [{\"no_ti\":\"Cachoeira Seca\"}]'),
-    #     default=[],
-    # )
     js_ti = models.CharField(
         _('Array de Terras Indígenas'),
         max_length=255,
