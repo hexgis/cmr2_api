@@ -12,10 +12,5 @@ urlpatterns = [
         'list/',
         views.DocumentalListViews.as_view(),
         name='list-doc'
-    ),
-    path(
-        'upload/',
-        views.DocumentView.as_view(),
-        name='upload-doc'
     )
 ]

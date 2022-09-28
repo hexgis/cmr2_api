@@ -281,29 +281,3 @@ class DocsMapoteca(DocumentalDocs):
             str: model data document name.
         """
         return self.no_document
-
-
-class DocumentUpload(models.Model):
-
-    # uploaded_at = models.DateTimeField(auto_now_add=True)
-    
-    file = models.FileField(upload_to='specs')
-    
-    dt_cadastro = models.DateTimeField( #dt_cadastro
-        _('Document registration date'),
-        null=True,
-        blank=True,
-    )
-    
-    id_acao = models.ForeignKey(
-        'documental.DocsAction',
-        on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_action',
-        null=True
-    )
-    class Meta:
-        # ordering = ['uploaded_at']
-        app_label = 'documental'
-
-    # def __str__(self):
-    #     return self.file.name
