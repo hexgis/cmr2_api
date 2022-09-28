@@ -3,23 +3,22 @@ from django.contrib import admin
 from documental import models
 
 
-class ListDocumentalAbstractClass(admin.ModelAdmin):
-    list_displayy = [
-        'id_document',
-        'path_document',
-        'no_document',
-        'usercmr_id',
-        'st_available',
-        'st_excluded',
-        'dt_registration',
-        'dt_update',
-        'co_funai',
-        'no_ti',
-        'co_cr',
-        'ds_cr',
-        'action_id',
-    ]
-
+list_documental_abstract_class = [
+    'id_document',
+    'path_document',
+    'no_document',
+    'usercmr_id',
+    'st_available',
+    'st_excluded',
+    'dt_registration',
+    'dt_update',
+    'co_funai',
+    'no_ti',
+    'co_cr',
+    'ds_cr',
+    'action_id',
+    'institution',
+]
 
 class DocsActionAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsAction` data."""
@@ -54,10 +53,10 @@ class UsersCMRAdmin(admin.ModelAdmin):
 class DocsDocumentTIAdmin(ListDocumentalAbstractClass):
     """Django administrator `model.DocsDocumentTI` data."""
 
-    list_display = self.list_displayy([
+    list_display = [
         'no_extension',
         'dt_document',
-    ])
+    ] + list_documental_abstract_class
 
     fields = list_display
 
@@ -67,10 +66,10 @@ class DocsDocumentTIAdmin(ListDocumentalAbstractClass):
 class DocsLandUserAdmin(ListDocumentalAbstractClass):
     """Django administrator `model.DocsLandUser` data."""
 
-    list_display = self.list_display.extend([
+    list_display = [
         'nu_year',
         'nu_year_map',
-    ])
+    ] + list_documental_abstract_class
 
     fields = list_display
 
@@ -80,11 +79,11 @@ class DocsLandUserAdmin(ListDocumentalAbstractClass):
 class DocsMapotecaAdmin(LucasListDocumentalAbstractClassClass):
     """Django administrator `model.DocsMapoteca` data."""
 
-    list_display = self.list_display.extend([
+    list_display = [
         'no_description',
         'map_dimension',
         'js_ti',
-    ])
+    ] + list_documental_abstract_class
 
     fields = list_display
 
