@@ -62,30 +62,6 @@ class Usuario(models.Model):
         # managed = False
 
 
-class DocumentUpload(models.Model):
-    class Meta:
-        ordering = ['uploaded_at']
-
-    uploaded_at = models.DateTimeField(auto_now_add=True)
-    
-    file = models.FileField(blank=False, null=False)
-    
-    dt_cadastro = models.DateTimeField(
-        _('Document registration date'),
-        null=True,
-        blank=True,
-    )
-    
-    id_acao = models.ForeignKey(
-        'documental.DocsAction',
-        on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_action',
-        null=True
-    )
-    def __str__(self):
-        return self.file.name
-
-
 class DocumentalDocs(models.Model):
     """DocumentalDocs model data for documental model."""
 
@@ -108,6 +84,8 @@ class DocumentalDocs(models.Model):
         null=True,
         blank=True,
     )
+    
+    uploaded_at = models.DateTimeField(auto_now_add=True, null=True)
 
     usuario_id = models.ForeignKey(
         'documental.Usuario',
@@ -213,3 +191,32 @@ class DocumentalDocs(models.Model):
             str: model data path_documento.
         """
         return self.path_documento
+
+
+
+
+
+class DocumentUpload(models.Model):
+
+    # uploaded_at = models.DateTimeField(auto_now_add=True)
+
+    filee = models.FileField(upload_to='specs')
+
+    dt_cadastro = models.DateTimeField(  # dt_cadastro
+        _('Document registration date'),
+        auto_now_add=True
+    )
+
+    id_acao = models.ForeignKey(
+        'documental.DocsAction',
+        on_delete=models.DO_NOTHING,
+        related_name='documentosdocs_action',
+        null=True
+    )
+
+    class Meta:
+        # ordering = ['uploaded_at']
+        app_label = 'documental'
+
+    # def __str__(self):
+    #     return self.file.name

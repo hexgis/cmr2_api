@@ -72,25 +72,50 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
                 "Não permitido retorno de dados de DocumentoTI"
                 " UsoEOcupaçãoDoSolo na mesma requisição", None)
 
-class DocumentView(APIView):
+# class DocumentView(APIView):
 
-    http_method_names = ['post']
-    model = models.DocumentUpload
-    success_url = reverse_lazy('/')
-    parser_class = (FileUploadParser,)
-    permission_classes = [IsAuthenticated, ]
+#     http_method_names = ['post']
+#     model = models.DocumentUpload
+#     success_url = reverse_lazy('/')
+#     parser_class = (FileUploadParser,)
+#     permission_classes = [IsAuthenticated, ]
 
-    def post(self, request, *args, **kwargs):
-        file_serializer = serializers.DocumentUploadSerializer(data=request.data)
-        if file_serializer.is_valid():
-            file_serializer.save(user=self.request.user)
-            # save all fields 
-            dt_cadastro = request.data.get('dt_cadastro')
-            id_acao = request.data.get('id_acao')
+#     def post(self, request, *args, **kwargs):
+#         file_serializer = serializers.DocumentUploadSerializer(data=request.data)
+#         if file_serializer.is_valid():
+#             file_serializer.save(user=self.request.user)
+#             # save all fields 
+#             dt_cadastro = request.data.get('dt_cadastro')
+#             id_acao = request.data.get('id_acao')
 
-            return Response(file_serializer.data, 
-                status=status.HTTP_201_CREATED)
+#             return Response(file_serializer.data, 
+#                 status=status.HTTP_201_CREATED)
 
+#         else:
+#             return Response(file_serializer.errors, 
+#                 status=status.HTTP_400_BAD_REQUEST)
+
+
+class DocumentUploadView(AuthModelMix, generics.GenericAPIView):
+
+    def post(self, request):
+        import pdb; pdb.set_trace()
+        if request.method == 'POST' and request.FILES['arquivo']:
+            instance = models.DocumentUpload(
+                filee=request.FILES['arquivo'],
+                # dt_cadastro=request.FILES['registration_date']
+                # id_acao= 8
+                # Para concluir essa demanda sera necessária código em 
+                # code-review. Nesse trecho seram inseridos os atributos da 
+                # nova Model do Documental modelada na 
+                # branch "Feature/end points mapoteca".
+                # Depois será removida a class DocumentUpload e associações.
+
+            )
+            instance.save()
+            return Response("conteasdfnt", status=status.HTTP_200_OK)
+        
         else:
-            return Response(file_serializer.errors, 
+            return Response("ERROR in request.", 
                 status=status.HTTP_400_BAD_REQUEST)
+

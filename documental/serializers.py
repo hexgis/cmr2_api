@@ -120,3 +120,9 @@ class DocumentosTISerializers(serializers.ModelSerializer):
         url_document = super().to_representation(instance)
         url_document['url_doc'] = urllib.parse.urljoin(settings.DOCUMENTOS, instance.path_documento)
         return url_document
+
+
+class DocumentUploadSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.DocumentUpload
+        fields = "__all__"

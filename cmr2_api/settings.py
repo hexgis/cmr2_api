@@ -148,7 +148,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
-
+ 
 USE_L10N = True
 
 USE_TZ = True
@@ -158,6 +158,14 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+
+# Media files configuration
+
+# Path where media is stored
+MEDIA_ROOT = ( os.path.join(BASE_DIR, 'media/'))
+
+# Base URL to serve media files
+MEDIA_URL = '/media/'
 
 # Django Cors Headers
 # https://github.com/adamchainz/django-cors-headers
