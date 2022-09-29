@@ -6,6 +6,24 @@ from django.conf import settings
 from documental import models
 
 
+"""List of common fields for Serializers classes."""
+list_fields_serializers_commun = [
+    'id_document',
+    'path_document',
+    'no_document',
+    'st_available',
+    'st_excluded',
+    'dt_registration',
+    'dt_update',
+    'co_funai',
+    'co_cr',
+    'ds_cr',
+    'no_ti',
+    'action_id',
+    'usercmr_id',
+]
+
+
 class ActionListSerializers(serializers.ModelSerializer):
     """Serializer for return list actions `models.DocsAction` data."""
 
@@ -27,10 +45,10 @@ class UsuarioSerializers(serializers.ModelSerializer):
     class Meta:
         """Meta class for `UsuarioSerializers` serializer."""
         model = models.UsersCMR
-        fields = (
+        fields = [
             'id_user',
             'first_name',
-        )
+        ]
 
 
 class DocsLandUserSerializers(serializers.ModelSerializer):
@@ -45,23 +63,10 @@ class DocsLandUserSerializers(serializers.ModelSerializer):
     class Meta:
         """Meta class for `DocsLandUserSerializers` serializer."""
         model = models.DocsLandUser
-        fields = (
-            'id_document',
-            'path_document',
-            'no_document',
-            'st_available',
-            'st_excluded',
-            'dt_registration',
-            'dt_update',
-            'co_funai',
-            'co_cr',
-            'ds_cr',
-            'no_ti',
+        fields = [
             'nu_year',
             'nu_year_map',
-            'action_id',
-            'usercmr_id',
-        )
+        ] + list_fields_serializers_commun
 
     def to_representation(self, instance):
         """Method to return in `DocsLandUserSerializers` the full URL
@@ -89,24 +94,10 @@ class DocsDocumentTISerializers(serializers.ModelSerializer):
     class Meta:
         """Meta class for `DocsDocumentTISerializers` serializer."""
         model = models.DocsDocumentTI
-        fields = (
-            'id_document',
-            'path_document',
-            'no_document',
-            'st_available',
-            'st_excluded',
-            'dt_registration',
-            'dt_update',
-            'co_funai',
-            'co_cr',
-            'ds_cr',
-            'no_ti',
+        fields = [
             'dt_document',
             'no_extension',
-            'no_ti',
-            'action_id',
-            'usercmr_id',
-        )
+        ] + list_fields_serializers_commun
 
     def to_representation(self, instance):
         """Method to return in `DocsDocumentTISerializers` the full URL to
@@ -134,24 +125,11 @@ class DocsMapotecaSerializers(serializers.ModelSerializer):
     class Meta:
         """Meta class for `DocsMapotecaSerializers` serializer."""
         model = models.DocsMapoteca
-        fields = (
-            'id_document',
-            'path_document',
-            'no_document',
-            'st_available',
-            'st_excluded',
-            'dt_registration',
-            'dt_update',
-            'co_funai',
-            'co_cr',
-            'ds_cr',
-            'no_ti',
+        fields = [
             'no_description',
             'map_dimension',
             'js_ti',
-            'action_id',
-            'usercmr_id',
-        )
+        ] + list_fields_serializers_commun
 
     def to_representation(self, instance):
         """Method to return in `DocsMapotecaSerializers` the full URL to

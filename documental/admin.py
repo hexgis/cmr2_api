@@ -2,8 +2,8 @@ from django.contrib import admin
 
 from documental import models
 
-
-list_documental_abstract_class = [
+"""List of common fields for DjangoAdmin classes."""
+list_fields_admin_commun = [
     'id_document',
     'path_document',
     'no_document',
@@ -17,8 +17,8 @@ list_documental_abstract_class = [
     'co_cr',
     'ds_cr',
     'action_id',
-    'institution',
 ]
+
 
 class DocsActionAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsAction` data."""
@@ -50,40 +50,40 @@ class UsersCMRAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
-class DocsDocumentTIAdmin(ListDocumentalAbstractClass):
+class DocsDocumentTIAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsDocumentTI` data."""
 
     list_display = [
         'no_extension',
         'dt_document',
-    ] + list_documental_abstract_class
+    ] + list_fields_admin_commun
 
     fields = list_display
 
     search_fields = list_display
 
 
-class DocsLandUserAdmin(ListDocumentalAbstractClass):
+class DocsLandUserAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsLandUser` data."""
 
     list_display = [
         'nu_year',
         'nu_year_map',
-    ] + list_documental_abstract_class
+    ] + list_fields_admin_commun
 
     fields = list_display
 
     search_fields = list_display
 
 
-class DocsMapotecaAdmin(LucasListDocumentalAbstractClassClass):
+class DocsMapotecaAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsMapoteca` data."""
 
     list_display = [
         'no_description',
         'map_dimension',
         'js_ti',
-    ] + list_documental_abstract_class
+    ] + list_fields_admin_commun
 
     fields = list_display
 

@@ -27,7 +27,7 @@ class DocsActionFilter(rest_framework.FilterSet):
     """
     action_type = rest_framework.CharFilter(
         field_name='action_type',
-        # required=True,
+        required=True,
     )
 
     class Meta:
@@ -48,17 +48,17 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
     id_acao = NumberInFilter(
         field_name='action_id',
         lookup_expr='in',
-        required=True
+        required=True,
     )
 
     co_cr = NumberInFilter(
         field_name='co_cr',
-        lookup_expr='in'
+        lookup_expr='in',
     )
 
     co_funai = NumberInFilter(
         field_name='co_funai',
-        lookup_expr='in'
+        lookup_expr='in',
     )
 
     class Meta:
@@ -80,12 +80,12 @@ class DocsDocumentTIFilter(DocumentalDocsFilter):
     """
     start_date = rest_framework.DateFilter(
         field_name='dt_document',
-        lookup_expr='gte'
+        lookup_expr='gte',
     )
 
     end_date = rest_framework.DateFilter(
         field_name='dt_document',
-        lookup_expr='lte'
+        lookup_expr='lte',
     )
 
     class Meta:
@@ -105,7 +105,7 @@ class DocsLandUserFilter(DocumentalDocsFilter):
     """
     map_year = NumberInFilter(
         field_name='nu_year',
-        lookup_expr='in'
+        lookup_expr='in',
     )
 
     class Meta:
