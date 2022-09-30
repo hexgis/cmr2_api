@@ -1,4 +1,4 @@
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4572
   fields:
     id_document: 4572
@@ -16,9 +16,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2022-05-10
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3965
   fields:
     id_document: 3965
@@ -36,9 +34,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2021-05-16
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 91
   fields:
     id_document: 91
@@ -56,9 +52,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3493
   fields:
     id_document: 3493
@@ -76,9 +70,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2021-04-07
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4537
   fields:
     id_document: 4537
@@ -96,9 +88,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2022-04-01
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4419
   fields:
     id_document: 4419
@@ -116,9 +106,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2022-02-02
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4301
   fields:
     id_document: 4301
@@ -136,9 +124,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2021-10-20
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 181
   fields:
     id_document: 181
@@ -156,9 +142,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4329
   fields:
     id_document: 4329
@@ -176,9 +160,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2021-11-08
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4296
   fields:
     id_document: 4296
@@ -196,9 +178,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2021-10-20
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4330
   fields:
     id_document: 4330
@@ -216,9 +196,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2021-11-08
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3930
   fields:
     id_document: 3930
@@ -236,9 +214,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2018-03-21
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3521
   fields:
     id_document: 3521
@@ -256,9 +232,7 @@
     no_extension: .pdf
     no_ti : Kanela Memortumré  
     dt_document: 2021-05-09
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4300
   fields:
     id_document: 4300
@@ -276,9 +250,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-10-20
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4604
   fields:
     id_document: 4604
@@ -296,9 +268,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2022-05-25
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 94
   fields:
     id_document: 94
@@ -316,9 +286,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3509
   fields:
     id_document: 3509
@@ -336,9 +304,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-04-30
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3709
   fields:
     id_document: 3709
@@ -356,9 +322,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2019-07-30
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3723
   fields:
     id_document: 3723
@@ -376,9 +340,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2019-06-28
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3929
   fields:
     id_document: 3929
@@ -396,9 +358,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2018-03-21
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3938
   fields:
     id_document: 3938
@@ -416,9 +376,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2017-11-13
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3964
   fields:
     id_document: 3964
@@ -436,9 +394,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-05-16
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3966
   fields:
     id_document: 3966
@@ -456,9 +412,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-05-16
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4014
   fields:
     id_document: 4014
@@ -476,9 +430,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-06-01
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4497
   fields:
     id_document: 4497
@@ -496,9 +448,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-07-03
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4295
   fields:
     id_document: 4295
@@ -516,9 +466,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-10-20
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4573
   fields:
     id_document: 4573
@@ -536,9 +484,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2022-05-10
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4501
   fields:
     id_document: 4501
@@ -556,9 +502,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-09-17
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4535
   fields:
     id_document: 4535
@@ -576,9 +520,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2022-04-01
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4471
   fields:
     id_document: 4471
@@ -596,9 +538,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2021-12-10
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4536
   fields:
     id_document: 4536
@@ -616,9 +556,7 @@
     no_extension: .pdf
     no_ti : Porquinhos dos Canela-Apãnjekra  
     dt_document: 2022-04-01
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 4290
   fields:
     id_document: 4290
@@ -636,9 +574,7 @@
     no_extension: .pdf
     no_ti : Taego Ãwa  
     dt_document: 2021-10-15
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 1735
   fields:
     id_document: 1735
@@ -656,9 +592,7 @@
     no_extension: .pdf
     no_ti : Taego Ãwa  
     dt_document: 
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3757
   fields:
     id_document: 3757
@@ -676,9 +610,7 @@
     no_extension: .pdf
     no_ti : Taego Ãwa  
     dt_document: 2018-11-30
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsDocumentTI
   pk: 3577
   fields:
     id_document: 3577
@@ -696,9 +628,7 @@
     no_extension: .pdf
     no_ti : Taego Ãwa  
     dt_document: 2020-08-31
-    nu_year: null
-    nu_year_map: null
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 127
   fields:
     id_document: 127
@@ -713,12 +643,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 128
   fields:
     id_document: 128
@@ -733,12 +660,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 129
   fields:
     id_document: 129
@@ -753,12 +677,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 373
   fields:
     id_document: 373
@@ -773,12 +694,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 374
   fields:
     id_document: 374
@@ -793,12 +711,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 375
   fields:
     id_document: 375
@@ -813,12 +728,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 391
   fields:
     id_document: 391
@@ -833,12 +745,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 392
   fields:
     id_document: 392
@@ -853,12 +762,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 393
   fields:
     id_document: 393
@@ -873,12 +779,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 454
   fields:
     id_document: 454
@@ -893,12 +796,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 455
   fields:
     id_document: 455
@@ -913,12 +813,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
-    nu_year: 2015
+    nu_year: null
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 456
   fields:
     id_document: 456
@@ -933,12 +830,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 487
   fields:
     id_document: 487
@@ -953,12 +847,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 488
   fields:
     id_document: 488
@@ -973,12 +864,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 489
   fields:
     id_document: 489
@@ -993,12 +881,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 583
   fields:
     id_document: 583
@@ -1013,12 +898,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 584
   fields:
     id_document: 584
@@ -1033,12 +915,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 585
   fields:
     id_document: 585
@@ -1053,12 +932,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 721
   fields:
     id_document: 721
@@ -1073,12 +949,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 722
   fields:
     id_document: 722
@@ -1093,12 +966,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 723
   fields:
     id_document: 723
@@ -1113,12 +983,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 756
   fields:
     id_document: 756
@@ -1133,12 +1000,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 757
   fields:
     id_document: 757
@@ -1153,12 +1017,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 758
   fields:
     id_document: 758
@@ -1173,12 +1034,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 759
   fields:
     id_document: 759
@@ -1193,12 +1051,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 760
   fields:
     id_document: 760
@@ -1213,12 +1068,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 761
   fields:
     id_document: 761
@@ -1233,12 +1085,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 762
   fields:
     id_document: 762
@@ -1253,12 +1102,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 763
   fields:
     id_document: 763
@@ -1273,12 +1119,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 764
   fields:
     id_document: 764
@@ -1293,12 +1136,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2015
     nu_year_map: 2015
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1104
   fields:
     id_document: 1104
@@ -1313,12 +1153,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1105
   fields:
     id_document: 1105
@@ -1333,12 +1170,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1127
   fields:
     id_document: 1127
@@ -1353,12 +1187,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1159
   fields:
     id_document: 1159
@@ -1373,12 +1204,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1160
   fields:
     id_document: 1160
@@ -1393,12 +1221,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1161
   fields:
     id_document: 1161
@@ -1413,12 +1238,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1192
   fields:
     id_document: 1192
@@ -1433,12 +1255,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1193
   fields:
     id_document: 1193
@@ -1453,12 +1272,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1194
   fields:
     id_document: 1194
@@ -1473,12 +1289,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1198
   fields:
     id_document: 1198
@@ -1493,12 +1306,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1199
   fields:
     id_document: 1199
@@ -1513,12 +1323,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1200
   fields:
     id_document: 1200
@@ -1533,12 +1340,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1283
   fields:
     id_document: 1283
@@ -1553,12 +1357,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1362
   fields:
     id_document: 1362
@@ -1573,12 +1374,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1363
   fields:
     id_document: 1363
@@ -1593,12 +1391,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1364
   fields:
     id_document: 1364
@@ -1613,12 +1408,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1390
   fields:
     id_document: 1390
@@ -1633,12 +1425,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1391
   fields:
     id_document: 1391
@@ -1653,12 +1442,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1392
   fields:
     id_document: 1392
@@ -1673,12 +1459,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1472
   fields:
     id_document: 1472
@@ -1693,12 +1476,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1473
   fields:
     id_document: 1473
@@ -1713,12 +1493,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1474
   fields:
     id_document: 1474
@@ -1733,12 +1510,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1479
   fields:
     id_document: 1479
@@ -1753,12 +1527,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1480
   fields:
     id_document: 1480
@@ -1773,12 +1544,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2019
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1506
   fields:
     id_document: 1506
@@ -1793,12 +1561,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1507
   fields:
     id_document: 1507
@@ -1813,12 +1578,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1508
   fields:
     id_document: 1508
@@ -1833,12 +1595,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1509
   fields:
     id_document: 1509
@@ -1853,12 +1612,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1511
   fields:
     id_document: 1511
@@ -1873,12 +1629,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1512
   fields:
     id_document: 1512
@@ -1893,12 +1646,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 11
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1513
   fields:
     id_document: 1513
@@ -1913,12 +1663,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 12
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1514
   fields:
     id_document: 1514
@@ -1933,12 +1680,9 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
-- model: documental.DocumentalDocs
+- model: documental.DocsLandUser
   pk: 1510
   fields:
     id_document: 1510
@@ -1953,8 +1697,41 @@
     co_cr: 30202001913
     ds_cr: COORDENACAO REGIONAL CENTRO-LESTE DO PARÁ
     action_id: 13
-    no_extension: null
-    no_ti: null
-    dt_document: null
     nu_year: 2019
     nu_year_map: 2018
+- model: documental.DocsMapoteca
+  pk: 299
+  fields:
+    id_document: 299
+    path_document: Mapoteca/DocumentoMapoteca_TI_XPTO_CR_CR_299.pdf
+    no_document: DocumentoMapoteca_TI_XPTO_CR_CR_299
+    usercmr_id: 498  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-14 09:54:12.401
+    dt_update: 2021-05-14 09:54:12.401
+    co_funai: 73301
+    co_cr: 30202001962
+    ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
+    action_id: 114
+    no_description: 2 9 9 testando
+    map_dimension: A4
+    js_ti: [{"no_ti": "XPTO_299", "co_funai": 73301}]
+- model: documental.DocsMapoteca
+  pk: 147
+  fields:
+    id_document: 147
+    path_document: Mapoteca/DocumentoMapoteca_TI_XPTO_CR_CR_147.pdf
+    no_document: DocumentoMapoteca_TI_XPTO_CR_CR_147
+    usercmr_id: 498  
+    st_available: true
+    st_excluded: false
+    dt_registration: 2021-05-14 09:54:12.401
+    dt_update: 2021-05-14 09:54:12.401
+    co_funai: 73301
+    co_cr: 30202001962
+    ds_cr: COORDENACAO REGIONAL ARAGUAIA TOCANTINS
+    action_id: 129
+    no_description: 1 4 7 testando
+    map_dimension: A0
+    js_ti: [{"no_ti": "XPTO_147"}] 
