@@ -72,7 +72,6 @@ class UsersCMR(models.Model):
         app_label = 'documental'
         verbose_name = 'User CMR'
         verbose_name_plural = 'Users CMR'
-        # usuario = models.ForeignKey(settings.AUTH_USER_MODEL, related_name=_('usuario'))
         # db_table = 'painel\".\"auth_user'
         # managed = False
 
