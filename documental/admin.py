@@ -2,62 +2,96 @@ from django.contrib import admin
 
 from documental import models
 
+"""List of common fields for DjangoAdmin classes."""
+list_fields_admin_commun = [
+    'id_document',
+    'path_document',
+    'no_document',
+    'usercmr_id',
+    'st_available',
+    'st_excluded',
+    'dt_registration',
+    'dt_update',
+    'co_funai',
+    'no_ti',
+    'co_cr',
+    'ds_cr',
+    'action_id',
+]
+
 
 class DocsActionAdmin(admin.ModelAdmin):
     """Django administrator `model.DocsAction` data."""
 
     list_display = (
-    	'no_acao',
-	    'dt_criacao',
-        'descricao',
-	)
+        'id_action',
+        'no_action',
+        'dt_creation',
+        'action_type',
+        'action_type_group',
+        'description',
+    )
 
     fields = list_display
 
     search_fields = list_display
 
 
-
-class UsuarioAdmin(admin.ModelAdmin):
+class UsersCMRAdmin(admin.ModelAdmin):
     """Django administrator `model.Usuario` data."""
 
     list_display = (
-        'id',
+        'id_user',
         'first_name',
     )
+
     fields = list_display
 
     search_fields = list_display
- 
-   
-class DocumentalDocsAdmin(admin.ModelAdmin):
-    """Django administrator `model.DocumentalDocs` data."""
 
-    list_display = (
-        'id',
-        'path_documento',
-        'no_documento',
-        'usuario_id',
-        'st_disponivel',
-        'st_excluido',
-        'dt_cadastro',
-        'dt_atualizacao',
-        'co_funai',
-        'id_acao',
-        'no_extensao',
-        'no_ti',
-        'co_cr',
-        'ds_cr',
-        'dt_documento',
-        'nu_ano',
-        'nu_ano_mapa',
-    )
-    
+
+class DocsDocumentTIAdmin(admin.ModelAdmin):
+    """Django administrator `model.DocsDocumentTI` data."""
+
+    list_display = [
+        'no_extension',
+        'dt_document',
+    ] + list_fields_admin_commun
+
     fields = list_display
-    
+
+    search_fields = list_display
+
+
+class DocsLandUserAdmin(admin.ModelAdmin):
+    """Django administrator `model.DocsLandUser` data."""
+
+    list_display = [
+        'nu_year',
+        'nu_year_map',
+    ] + list_fields_admin_commun
+
+    fields = list_display
+
+    search_fields = list_display
+
+
+class DocsMapotecaAdmin(admin.ModelAdmin):
+    """Django administrator `model.DocsMapoteca` data."""
+
+    list_display = [
+        'no_description',
+        'map_dimension',
+        'js_ti',
+    ] + list_fields_admin_commun
+
+    fields = list_display
+
     search_fields = list_display
 
 
 admin.site.register(models.DocsAction, DocsActionAdmin)
-admin.site.register(models.Usuario, UsuarioAdmin)
-admin.site.register(models.DocumentalDocs, DocumentalDocsAdmin)
+admin.site.register(models.UsersCMR, UsersCMRAdmin)
+admin.site.register(models.DocsDocumentTI, DocsDocumentTIAdmin)
+admin.site.register(models.DocsLandUser, DocsLandUserAdmin)
+admin.site.register(models.DocsMapoteca, DocsMapotecaAdmin)

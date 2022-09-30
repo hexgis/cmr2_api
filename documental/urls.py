@@ -6,7 +6,7 @@ urlpatterns = [
     path(
         'list-actions/',
         views.ActionListView.as_view(),
-        name='listar-action'
+        name='list-actions'
     ),
     path(
         'list/',
