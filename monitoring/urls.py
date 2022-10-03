@@ -15,9 +15,9 @@ urlpatterns = [
         name='monitoring-detail'
     ),
     path(
-        'consolidated/stats/',
-        views.MonitoringConsolidatedStatsView.as_view(),
-        name='monitoring-stats'
+        'consolidated/map-stats/',
+        views.MonitoringConsolidatedMapStatsView.as_view(),
+        name='monitoring-map-stats'
     ),
     path(
         'consolidated/classes/',
@@ -29,4 +29,9 @@ urlpatterns = [
         views.MonitoringConsolidatedTableView.as_view(),
         name='monitoring-table'
     ),
+    path(
+        'consolidated/table-stats/',
+        views.MonitoringConsolidatedTableStatsView.as_view(),
+        name='monitoring-table-stats'
+    )
 ]

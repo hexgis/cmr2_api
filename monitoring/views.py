@@ -63,7 +63,7 @@ class MonitoringConsolidatedDetailView(AuthModelMixIn, generics.RetrieveAPIView)
     filter_backends = (DjangoFilterBackend,)
 
 
-class MonitoringConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
+class MonitoringConsolidatedMapStatsView(AuthModelMixIn, generics.ListAPIView):
     """Retrieves `monitoring.MonitoringConsolidated` stats data.
 
     Filters:
@@ -135,3 +135,28 @@ class MonitoringConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
     )
+
+
+
+
+
+
+
+
+
+
+
+class MonitoringConsolidatedTableStatsView(AuthModelMixIn, ListAPIView):
+    """"""
+
+    filterset_class = monitoring_filters.MonitoringConsolidatedStatsFilter
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
+
+    def get_serializer_class(self):
+        pass
+    
+    def get_queryset(self):
+        pass

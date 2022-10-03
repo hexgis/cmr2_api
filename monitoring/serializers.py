@@ -99,3 +99,109 @@ class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
             'no_ti',
             'ti_nu_area_ha',
         )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class ConsultaMonitoramentoTIAgrupadoAnoTISerializer(ModelSerializer):
+    ano = IntegerField()
+    cr_nu_area_ha = FloatField()
+    dg_nu_area_ha = FloatField()
+    dr_nu_area_ha = FloatField()
+    ff_nu_area_ha = FloatField()
+    total_nu_area_ha = FloatField()
+
+    class Meta:
+        model = models.MonitoringConsolidatedStats
+        fields = [
+            'ano',
+            'co_funai',
+            'no_ti',
+            'ti_nu_area_ha',
+            'cr_nu_area_ha',
+            'dg_nu_area_ha',
+            'dr_nu_area_ha',
+            'ff_nu_area_ha',
+            'total_nu_area_ha'
+        ]
+
+
+class ConsultaMonitoramentoTIAgrupadoSerializer(ModelSerializer):
+    cr_nu_area_ha = FloatField()
+    dg_nu_area_ha = FloatField()
+    dr_nu_area_ha = FloatField()
+    ff_nu_area_ha = FloatField()
+    total_nu_area_ha = FloatField()
+
+    class Meta:
+        model = models.MonitoringConsolidatedStats
+        fields = [
+            'co_funai',
+            'no_ti',
+            'ti_nu_area_ha',
+            'cr_nu_area_ha',
+            'dg_nu_area_ha',
+            'dr_nu_area_ha',
+            'ff_nu_area_ha',
+            'total_nu_area_ha'
+        ]
+
+
+class ConsultaMonitoramentoTIAgrupadoAnoSerializer(ModelSerializer):
+    ano = IntegerField()
+    cr_nu_area_ha = FloatField()
+    dg_nu_area_ha = FloatField()
+    dr_nu_area_ha = FloatField()
+    ff_nu_area_ha = FloatField()
+    total_nu_area_ha = FloatField()
+
+    class Meta:
+        model = models.MonitoringConsolidatedStats
+        fields = [
+            'ano',
+            'cr_nu_area_ha',
+            'dg_nu_area_ha',
+            'dr_nu_area_ha',
+            'ff_nu_area_ha',
+            'total_nu_area_ha'
+        ]
+
+
+class ConsultaMonitoramentoTerraIndigenaSerializer(ModelSerializer):
+    cr_nu_area_ha = FloatField()
+    dg_nu_area_ha = FloatField()
+    dr_nu_area_ha = FloatField()
+    ff_nu_area_ha = FloatField()
+    total_nu_area_ha = FloatField()
+
+    class Meta:
+        model = models.MonitoringConsolidatedStats
+        fields = [
+            'co_funai',
+            'no_ti',
+            'dt_t_um',
+            'ti_nu_area_ha',
+            'cr_nu_area_ha',
+            'dg_nu_area_ha',
+            'dr_nu_area_ha',
+            'ff_nu_area_ha',
+            'total_nu_area_ha'
+        ]

@@ -153,3 +153,30 @@ class MonitoringConsolidated(models.Model):
             str: model data name.
         """
         return f'{self.no_ti} - {self.dt_t_um} - {self.no_estagio}'
+
+
+
+class MonitoringConsolidatedStats(models.Model):
+    co_funai = models.IntegerField()
+    co_cr = models.BigIntegerField()
+    ds_cr = models.CharField(max_length=100)
+    nu_area_ha = models.DecimalField(max_digits=100, decimal_places=6)
+    no_estagio = models.CharField(max_length=2)
+    # tb_ciclo_monitoramento = models.ForeignKey(
+    #     CicloMonitoramento,
+    #     on_delete=models.DO_NOTHING
+    # )
+    geom = models.MultiPolygonField()
+    dt_t_um = models.DateField()
+    no_ti = models.CharField(max_length=100)
+    ti_nu_area_ha = models.DecimalField(max_digits=100, decimal_places=6)
+
+    def __str__(self):
+        return "Monitoring Consolidated Statistics"
+
+    class Meta:
+        app_label = 'monitoring'
+        verbose_name = 'Monitoring Consolidated Statistic'
+        verbose_name_plural = 'Monitorings Consolidated Statistics'
+        # db_table = 'funaidados\".\"img_monitoramento_ti_consolidado_a'
+        # managed = False
