@@ -35,7 +35,7 @@ class MonitoringConsolidatedSerializer(gis_serializers.GeoFeatureModelSerializer
 
 class MonitoringConsolidatedDetailSerializer(serializers.ModelSerializer):
     """Serializer for detailed `models.MonitoringConsolidated` data."""
-    
+
     class Meta:
         """Meta class for `MonitoringConsolidatedDetailSerializer` serializer."""
         model = models.MonitoringConsolidated
@@ -101,27 +101,7 @@ class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
         )
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-class ConsultaMonitoramentoTIAgrupadoAnoTISerializer(ModelSerializer):
+class ConsultaMonitoramentoTIAgrupadoAnoTISerializer(serializers.ModelSerializer):
     ano = IntegerField()
     cr_nu_area_ha = FloatField()
     dg_nu_area_ha = FloatField()
@@ -144,7 +124,7 @@ class ConsultaMonitoramentoTIAgrupadoAnoTISerializer(ModelSerializer):
         ]
 
 
-class ConsultaMonitoramentoTIAgrupadoSerializer(ModelSerializer):
+class ConsultaMonitoramentoTIAgrupadoSerializer(serializers.ModelSerializer):
     cr_nu_area_ha = FloatField()
     dg_nu_area_ha = FloatField()
     dr_nu_area_ha = FloatField()
@@ -165,7 +145,7 @@ class ConsultaMonitoramentoTIAgrupadoSerializer(ModelSerializer):
         ]
 
 
-class ConsultaMonitoramentoTIAgrupadoAnoSerializer(ModelSerializer):
+class ConsultaMonitoramentoTIAgrupadoAnoSerializer(serializers.ModelSerializer):
     ano = IntegerField()
     cr_nu_area_ha = FloatField()
     dg_nu_area_ha = FloatField()
@@ -185,7 +165,7 @@ class ConsultaMonitoramentoTIAgrupadoAnoSerializer(ModelSerializer):
         ]
 
 
-class ConsultaMonitoramentoTerraIndigenaSerializer(ModelSerializer):
+class ConsultaMonitoramentoTerraIndigenaSerializer(serializers.ModelSerializer):
     cr_nu_area_ha = FloatField()
     dg_nu_area_ha = FloatField()
     dr_nu_area_ha = FloatField()
