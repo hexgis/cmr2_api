@@ -100,14 +100,21 @@ class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
             'ti_nu_area_ha',
         )
 
+class xptoSerializers(serializers.ModelSerializer):
+    """Serializer for table 'MonitoringConsolidatedClassesSerializer' data."""
+    class Meta:
+        """Meta class for `MonitoringConsolidatedTableSerializer` serializer."""
+        model = models.MonitoringConsolidatedStats
+        fields = "__all__"
+
 
 class ConsultaMonitoramentoTIAgrupadoAnoTISerializer(serializers.ModelSerializer):
-    ano = IntegerField()
-    cr_nu_area_ha = FloatField()
-    dg_nu_area_ha = FloatField()
-    dr_nu_area_ha = FloatField()
-    ff_nu_area_ha = FloatField()
-    total_nu_area_ha = FloatField()
+    ano = serializers.IntegerField()
+    cr_nu_area_ha = serializers.FloatField()
+    dg_nu_area_ha = serializers.FloatField()
+    dr_nu_area_ha = serializers.FloatField()
+    ff_nu_area_ha = serializers.FloatField()
+    total_nu_area_ha = serializers.FloatField()
 
     class Meta:
         model = models.MonitoringConsolidatedStats
@@ -125,11 +132,11 @@ class ConsultaMonitoramentoTIAgrupadoAnoTISerializer(serializers.ModelSerializer
 
 
 class ConsultaMonitoramentoTIAgrupadoSerializer(serializers.ModelSerializer):
-    cr_nu_area_ha = FloatField()
-    dg_nu_area_ha = FloatField()
-    dr_nu_area_ha = FloatField()
-    ff_nu_area_ha = FloatField()
-    total_nu_area_ha = FloatField()
+    cr_nu_area_ha = serializers.FloatField()
+    dg_nu_area_ha = serializers.FloatField()
+    dr_nu_area_ha = serializers.FloatField()
+    ff_nu_area_ha = serializers.FloatField()
+    total_nu_area_ha = serializers.FloatField()
 
     class Meta:
         model = models.MonitoringConsolidatedStats
@@ -146,12 +153,12 @@ class ConsultaMonitoramentoTIAgrupadoSerializer(serializers.ModelSerializer):
 
 
 class ConsultaMonitoramentoTIAgrupadoAnoSerializer(serializers.ModelSerializer):
-    ano = IntegerField()
-    cr_nu_area_ha = FloatField()
-    dg_nu_area_ha = FloatField()
-    dr_nu_area_ha = FloatField()
-    ff_nu_area_ha = FloatField()
-    total_nu_area_ha = FloatField()
+    ano = serializers.IntegerField()
+    cr_nu_area_ha = serializers.FloatField()
+    dg_nu_area_ha = serializers.FloatField()
+    dr_nu_area_ha = serializers.FloatField()
+    ff_nu_area_ha = serializers.FloatField()
+    total_nu_area_ha = serializers.FloatField()
 
     class Meta:
         model = models.MonitoringConsolidatedStats
@@ -166,11 +173,11 @@ class ConsultaMonitoramentoTIAgrupadoAnoSerializer(serializers.ModelSerializer):
 
 
 class ConsultaMonitoramentoTerraIndigenaSerializer(serializers.ModelSerializer):
-    cr_nu_area_ha = FloatField()
-    dg_nu_area_ha = FloatField()
-    dr_nu_area_ha = FloatField()
-    ff_nu_area_ha = FloatField()
-    total_nu_area_ha = FloatField()
+    cr_nu_area_ha = serializers.FloatField()
+    dg_nu_area_ha = serializers.FloatField()
+    dr_nu_area_ha = serializers.FloatField()
+    ff_nu_area_ha = serializers.FloatField()
+    total_nu_area_ha = serializers.FloatField()
 
     class Meta:
         model = models.MonitoringConsolidatedStats

@@ -9,10 +9,7 @@ from rest_framework import (
     status
 )
 
-from django.db.models import (
-    Sum,
-    Count
-)
+from django.db.models import (Sum, OuterRef, Subquery, F, Case, When, Value, Count)
 
 from monitoring import (
     serializers,
@@ -137,7 +134,7 @@ class MonitoringConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
     )
 
 
-class MonitoringConsolidatedTableStatsView(AuthModelMixIn, ListAPIView):
+class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView):
     """"""
 
     filterset_class = monitoring_filters.MonitoringConsolidatedStatsFilter
@@ -147,54 +144,67 @@ class MonitoringConsolidatedTableStatsView(AuthModelMixIn, ListAPIView):
     )
 
     def get_serializer_class(self):
-        agrupar_ti = self.request.GET.get('agrupar_ti', None) \
-            if self.request.GET.get('agrupar_ti') == 'true' else None
-        agrupar_ano = self.request.GET.get('agrupar_ano', None) \
-            if self.request.GET.get('agrupar_ano') == 'true' else None
+        # agrupar_ti = self.request.GET.get('agrupar_ti', None) \
+        #     if self.request.GET.get('agrupar_ti') == 'true' else None
+        # agrupar_ano = self.request.GET.get('agrupar_ano', None) \
+        #     if self.request.GET.get('agrupar_ano') == 'true' else None
 
-        if agrupar_ti and agrupar_ano:
-            return serializers.ConsultaMonitoramentoTIAgrupadoAnoTISerializer
-        elif agrupar_ti:
-            return serializers.ConsultaMonitoramentoTIAgrupadoSerializer
-        elif agrupar_ano:
-            return serializers.ConsultaMonitoramentoTIAgrupadoAnoSerializer
-        else:
-            return serializers.ConsultaMonitoramentoTerraIndigenaSerializer
+        # if agrupar_ti and agrupar_ano:
+        #     return serializers.ConsultaMonitoramentoTIAgrupadoAnoTISerializer
+        # elif agrupar_ti:
+        #     return serializers.ConsultaMonitoramentoTIAgrupadoSerializer
+        # elif agrupar_ano:
+        #     return serializers.ConsultaMonitoramentoTIAgrupadoAnoSerializer
+        # else:
+        #     return serializers.ConsultaMonitoramentoTerraIndigenaSerializer
+        return serializers.xptoSerializers
 
     def get_queryset(self):
-        agrupar_ti = True \
-            if self.request.GET.get('agrupar_ti') == 'true' else None
-        agrupar_ano = True \
-            if self.request.GET.get('agrupar_ano') == 'true' else None
-        # ordem =  ??
-        if agrupar_ti or agrupar_ano:
-            if agrupar_ti and agrupar_ano:
-                queryset = queryset \
-                    .values('co_funai', 'no_ti', 'ti_nu_area_ha', ano=ExtractYear('dt_t_um')) \
-                    .order_by(ordem, 'ano')
-            elif agrupar_ti:
-                queryset = queryset \
-                    .values('co_funai', 'no_ti', 'ti_nu_area_ha') \
-                    .order_by(ordem)
-            elif agrupar_ano:
-                queryset = queryset \
-                    .values(ano=ExtractYear('dt_t_um')) \
-                    .order_by('ano')
-        else:
-            queryset = queryset \
-                .values('co_funai', 'dt_t_um', 'no_ti', 'ti_nu_area_ha') \
-                .order_by(ordem, 'dt_t_um')
+        # agrupar_ti = True \
+        #     if self.request.GET.get('agrupar_ti') == 'true' else None
+        # agrupar_ano = True \
+        #     if self.request.GET.get('agrupar_ano') == 'true' else None
+        # # ordem =  ??
+        # if agrupar_ti or agrupar_ano:
+        #     if agrupar_ti and agrupar_ano:
+        #         queryset = queryset \
+        #             .values('co_funai', 'no_ti', 'ti_nu_area_ha', ano=ExtractYear('dt_t_um')) \
+        #             .order_by(ordem, 'ano')
+        #     elif agrupar_ti:
+        #         queryset = queryset \
+        #             .values('co_funai', 'no_ti', 'ti_nu_area_ha') \
+        #             .order_by(ordem)
+        #     elif agrupar_ano:
+        #         queryset = queryset \
+        #             .values(ano=ExtractYear('dt_t_um')) \
+        #             .order_by('ano')
+        # else:
+        #     queryset = queryset \
+        #         .values('co_funai', 'dt_t_um', 'no_ti', 'ti_nu_area_ha') \
+        #         .order_by(ordem, 'dt_t_um')
 
-        queryset = queryset.annotate(
-            total_nu_area_ha=Sum('nu_area_ha'),
-            cr_nu_area_ha=Sum(Case(
-                When(no_estagio='CR', then=F('nu_area_ha')), default=Value(0))),
-            dg_nu_area_ha=Sum(Case(
-                When(no_estagio='DG', then=F('nu_area_ha')), default=Value(0))),
-            dr_nu_area_ha=Sum(Case(
-                When(no_estagio='DR', then=F('nu_area_ha')), default=Value(0))),
-            ff_nu_area_ha=Sum(Case(
-                When(no_estagio='FF', then=F('nu_area_ha')), default=Value(0)))
-        )
+        # queryset = queryset.annotate(
+        #     total_nu_area_ha=Sum('nu_area_ha'),
+        #     cr_nu_area_ha=Sum(Case(
+        #         When(no_estagio='CR', then=F('nu_area_ha')), default=Value(0))),
+        #     dg_nu_area_ha=Sum(Case(
+        #         When(no_estagio='DG', then=F('nu_area_ha')), default=Value(0))),
+        #     dr_nu_area_ha=Sum(Case(
+        #         When(no_estagio='DR', then=F('nu_area_ha')), default=Value(0))),
+        #     ff_nu_area_ha=Sum(Case(
+        #         When(no_estagio='FF', then=F('nu_area_ha')), default=Value(0)))
+        # )
         # return queryset
-        return models.MonitoringConsolidatedStats.objects.first()
+        from django.db.models import (Sum, OuterRef, Subquery, F, Q, Case, When, Value, Count, FloatField, functions)
+
+        if agrupar_por_ANO:
+            return models.MonitoringConsolidatedStats.objects.values(ano=functions.ExtractYear('dt_t_um')).annotate(total = Sum("nu_area_ha"),quantity_polygons= Count("no_estagio",output_field=FloatField()), cr_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="CR")), dg_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="DG")),dr_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="DR")), ff_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="FF"))).order_by("ano")
+        if agrupar_por_DIA:
+            return models.MonitoringConsolidatedStats.objects.values(dia=functions.ExtractDay('dt_t_um')).annotate(total = Sum("nu_area_ha"),quantity_polygons= Count("no_estagio",output_field=FloatField()), cr_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="CR")), dg_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="DG")),dr_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="DR")), ff_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="FF"))).order_by("dia")
+        if agrupar_por_CO_FUNAI:
+            return models.MonitoringConsolidatedStats.objects.values('co_funai','no_ti','ti_nu_area_ha').annotate(total = Sum("nu_area_ha"),quantity_polygons= Count("no_estagio",output_field=FloatField()), cr_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="CR")), dg_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="DG")),dr_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="DR")), ff_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="FF"))).order_by("no_ti")
+        if agrupar_por_CO_FUNAI_e_por_ANO:
+            return models.MonitoringConsolidatedStats.objects.values('co_funai','no_ti','ti_nu_area_ha',ano=functions.ExtractYear('dt_t_um')).annotate(total = Sum("nu_area_ha"),quantity_polygons= Count("no_estagio",output_field=FloatField()), cr_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="CR")), dg_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="DG")),dr_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="DR")), ff_nu_area_ha= Sum("nu_area_ha",filter=Q(no_estagio__exact="FF"))).order_by("ano")
+        
+        # return models.MonitoringConsolidatedStats.objects.values().filter(id__gte=303789959, id__lte=303789962)
+        # return models.MonitoringConsolidatedStats.objects.values().filter(id__gte=303789959, id__lte=303789982)

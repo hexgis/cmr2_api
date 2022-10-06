@@ -178,5 +178,5 @@ class MonitoringConsolidatedStats(models.Model):
         app_label = 'monitoring'
         verbose_name = 'Monitoring Consolidated Statistic'
         verbose_name_plural = 'Monitorings Consolidated Statistics'
-        # db_table = 'funaidados\".\"img_monitoramento_ti_consolidado_a'
-        # managed = False
+        db_table = 'funaidados\".\"img_monitoramento_ti_consolidado_a'
+        managed = False
