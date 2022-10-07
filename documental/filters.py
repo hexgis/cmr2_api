@@ -48,7 +48,7 @@ class DocumentalDocsFilter(rest_framework.FilterSet):
     id_acao = NumberInFilter(
         field_name='action_id',
         lookup_expr='in',
-        required=True,
+        # required=True,
     )
 
     co_cr = NumberInFilter(

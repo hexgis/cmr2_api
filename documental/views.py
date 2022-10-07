@@ -29,6 +29,7 @@ class ActionListView(AuthModelMix, generics.ListAPIView):
     queryset = models.DocsAction.objects.all()
     serializer_class = serializers.ActionListSerializers
     filterset_class = documental_filters.DocsActionFilter
+    filter_backends = (DjangoFilterBackend,)
 
 
 class DocumentalListViews(AuthModelMix, generics.ListAPIView):
@@ -61,18 +62,17 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
             * co_cr (list): filtering Regional Coordination using code.
             * co_funai (list): filtering Indigenou Lands using Funai code.
     """
-
+    
     filter_backends = (DjangoFilterBackend,)
     filterset_class = documental_filters.DocumentalDocsFilter
 
+    def get_requested_action(self):
+        return self.request.data['id_acao']
+        
     def get_action_type(self):
         """Return only one aciton type according to actions sent in request"""
 
-        requested_action = self.request.GET.get('id_acao')
-        requested_action = list(map(int, requested_action.split(',')))
-
-        action_type_docs = models.DocsAction.objects.values(
-            'action_type').filter(id_action__in=requested_action).distinct()
+        action_type_docs = models.DocsAction.objects.values('action_type').filter(id_action__in=self.get_requested_action()).distinct()
 
         if action_type_docs.count() == 1:
             return str(action_type_docs[0]['action_type'])
@@ -124,7 +124,7 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
 
         if action_type_docs == "DOCUMENTS_TI":
             self.filterset_class = documental_filters.DocsDocumentTIFilter
-            return models.DocsDocumentTI.objects.all()
+            return models.DocsDocumentTI.objects.filter(action_id__in=self.get_requested_action())
         elif action_type_docs == "MAPS_LAND_USER":
             self.filterset_class = documental_filters.DocsLandUserFilter
             return models.DocsLandUser.objects.all()
