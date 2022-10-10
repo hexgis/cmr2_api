@@ -25,10 +25,10 @@ class ActionListView(AuthModelMix, generics.ListAPIView):
     Filter:
         * action_type (str): list action_id in action action_type filtered.
     """
-
     queryset = models.DocsAction.objects.all()
     serializer_class = serializers.ActionListSerializers
     filterset_class = documental_filters.DocsActionFilter
+    filter_backends = (DjangoFilterBackend,)
 
 
 class DocumentalListViews(AuthModelMix, generics.ListAPIView):
@@ -67,9 +67,11 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
 
     def get_action_type(self):
         """Return only one aciton type according to actions sent in request"""
-
-        requested_action = self.request.GET.get('id_acao')
-        requested_action = list(map(int, requested_action.split(',')))
+        requested_action = list(map(int, self.request.GET.get('id_acao').split(',')))
+        # requested_action = self.request.GET.get('id_acao')
+        # import pdb; pdb.set_trace()
+        
+        # requested_action = list(map(int, requested_action.split(',')))
 
         action_type_docs = models.DocsAction.objects.values(
             'action_type').filter(id_action__in=requested_action).distinct()
