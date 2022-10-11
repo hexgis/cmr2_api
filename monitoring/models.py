@@ -143,8 +143,8 @@ class MonitoringConsolidated(models.Model):
         verbose_name = 'Monitoring Consolidated'
         verbose_name_plural = 'Monitorings Consolidated'
         ordering = ('-dt_t_um',)
-        db_table = 'funaidados\".\"img_monitoramento_terra_indigena_cr_a'
-        managed = False
+        # db_table = 'funaidados\".\"img_monitoramento_terra_indigena_cr_a'
+        # managed = False
 
     def __str__(self) -> str:
         """Returns `monitoring.Monitoring.Consolidated` string data.
@@ -155,28 +155,40 @@ class MonitoringConsolidated(models.Model):
         return f'{self.no_ti} - {self.dt_t_um} - {self.no_estagio}'
 
 
-
 class MonitoringConsolidatedStats(models.Model):
-    co_funai = models.IntegerField()
-    co_cr = models.BigIntegerField()
-    ds_cr = models.CharField(max_length=100)
-    nu_area_ha = models.DecimalField(max_digits=100, decimal_places=6)
     no_estagio = models.CharField(max_length=2)
+    dt_t_um = models.DateField()
+    ds_cr = models.CharField(max_length=255)
+    co_cr = models.BigIntegerField()
+    co_funai = models.IntegerField()
+    no_ti = models.CharField(max_length=255)
+    ti_nu_area_ha = models.DecimalField(max_digits=255, decimal_places=6)
+    dt_cadastro = models.DateField(
+        _('Register date'),
+        null=True,
+        blank=True,
+    )
+    tb_ciclo_monitoramento_id = models.CharField(max_length=255)
     # tb_ciclo_monitoramento = models.ForeignKey(
     #     CicloMonitoramento,
     #     on_delete=models.DO_NOTHING
     # )
+    no_imagem = models.CharField(max_length=255)
+    dt_imagem = models.DateField(
+        _('Image date'),
+        null=True,
+        blank=True,
+    )
+    nu_area_km2 = models.DecimalField(max_digits=255, decimal_places=6)
+    nu_area_ha = models.DecimalField(max_digits=255, decimal_places=6)
     geom = models.MultiPolygonField()
-    dt_t_um = models.DateField()
-    no_ti = models.CharField(max_length=100)
-    ti_nu_area_ha = models.DecimalField(max_digits=100, decimal_places=6)
 
-    def __str__(self):
-        return "Monitoring Consolidated Statistics"
+    # def __str__(self):
+    #     return "Monitoring Consolidated Statistics"
 
     class Meta:
         app_label = 'monitoring'
         verbose_name = 'Monitoring Consolidated Statistic'
         verbose_name_plural = 'Monitorings Consolidated Statistics'
-        db_table = 'funaidados\".\"img_monitoramento_ti_consolidado_a'
-        managed = False
+        # db_table = 'funaidados\".\"img_monitoramento_ti_consolidado_a'
+        # managed = False
