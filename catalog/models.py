@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
-class Satellite (models.Model):
+class Satellite(models.Model):
     """Model to store satellite information."""
 
     identifier = models.CharField(
@@ -13,7 +13,7 @@ class Satellite (models.Model):
     )
 
     name = models.CharField(
-        _('Name Satellite'),
+        _('Satellite name'),
         max_length=255,
         blank=True,
         null=True,
