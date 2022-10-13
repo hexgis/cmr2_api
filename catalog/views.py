@@ -60,19 +60,15 @@ class CatalogView(AuthModelMixIn, generics.ListAPIView):
     def get_queryset(self):
         request_satellite = int(self.request.GET.get('satellite'))
         if request_satellite == self.sat_sentinel2:
-            print("sentinel2     ---->")
             return models.Sentinel2Catalog.objects.all()
         elif request_satellite == self.sat_landsat8:
-            print("landsat8     ---->")
             return models.Landsat8Catalog.objects.all()
 
     def get_serializer_class(self):
         request_satellite = int(self.request.GET.get('satellite'))
         if request_satellite == self.sat_sentinel2:
-            print("sentinel2")
             return serializers.Sentinel2CatalogSerializer
         elif request_satellite == self.sat_landsat8:
-            print("landsat8")
             return serializers.Landsat8CatalogSerializer
         else:
             raise exceptions.ParseError(
