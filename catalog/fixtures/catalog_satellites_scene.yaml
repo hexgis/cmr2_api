@@ -1,0 +1,250 @@
+- model: catalog.Sentinel2Catalog
+  pk: 120
+  fields:
+    image: xpto 120
+    product: T22MCV_20190807T135119
+    satellite: 3
+    utm_zone: 024
+    latitude_band: 22MCV-024
+    grid_square: 22MCV-024
+    type: r11g8b4
+    date: 2015-08-07
+    cloud_cover: 0
+    url_tms: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT57QWwpXDUvvfSEJjNS6YeOJr71HzGrnqz6QPFLnbDbeTxdnMU
+    max_native_zoom: 55
+    co_cr: 30202001913
+    ds_cr: C.R. CENTRO-LESTE DO PARÁ
+    co_funai: 3002
+    no_ti: Apyterewa
+    municipio: São Félix do Xingu
+    sg_uf: PA
+    resolution: 10
+    nu_latitude: "-5.018667"
+    nu_longitude: "-52.308817"
+    path: Sentinel-2/S2B_MSIL1C_20190807T135119_N0208_R024_T22MCV_20190807T171202.SAFE/T22MCV_20190807T135119_r11g8b4.TIF
+    geom: SRID=4326;POLYGON ((-62.05933358599993 -6.591365120999933, -62.07287644799992
+      -6.655188532999933, -62.0753 -6.66661, -62.07530600999993 -6.666609126999933,
+      -63.7307 -6.42615, -63.71837815399993 -6.368866973999933, -63.4035 -4.90503,
+      -63.40349644299992 -4.905030516999934, -61.7524 -5.14488, -61.76836548199993
+      -5.220120487999933, -62.05933358599993 -6.591365120999933))
+    download_available: true
+    download_link: https://cmr.funai.gov.br/Sentinel-2/S2B_MSIL1C_20190807T135119_N0208_R024_T22MCV_20190807T171202.SAFE/T22MCV_20190807T135119_r11g8b4.TIF
+- model: catalog.Sentinel2Catalog
+  pk: 121
+  fields:
+    image: xpto 121
+    product: T22MDU_20190817T135119
+    satellite: 3
+    utm_zone: 024
+    latitude_band: 22MDU-024
+    grid_square: 22MDU-024
+    type: r11g8b4
+    date: 2019-08-07
+    cloud_cover: 0
+    url_tms: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT57QWwpXDUvvfSEJjNS6YeOJr71HzGrnqz6QPFLnbDbeTxdnMU
+    max_native_zoom: 55
+    co_cr: 30202001913
+    ds_cr: C.R. CENTRO-LESTE DO PARÁ
+    co_funai: 3002
+    no_ti: Apyterewa
+    municipio: São Félix do Xingu
+    sg_uf: PA
+    resolution: 10
+    nu_latitude: "-5.924646"
+    nu_longitude: "-51.407812"
+    path: Sentinel-2/S2B_MSIL1C_20190817T135119_N0208_R024_T22MDU_20190817T185313.SAFE/T22MDU_20190817T135119_r11g8b4.TIF
+    geom: SRID=4326;POLYGON ((-62.05933358599993 -6.591365120999933, -62.07287644799992
+      -6.655188532999933, -62.0753 -6.66661, -62.07530600999993 -6.666609126999933,
+      -63.7307 -6.42615, -63.71837815399993 -6.368866973999933, -63.4035 -4.90503,
+      -63.40349644299992 -4.905030516999934, -61.7524 -5.14488, -61.76836548199993
+      -5.220120487999933, -62.05933358599993 -6.591365120999933))
+    download_available: true
+    download_link: https://cmr.funai.gov.br/Sentinel-2/S2B_MSIL1C_20190817T135119_N0208_R024_T22MDU_20190817T185313.SAFE/T22MDU_20190817T135119_r11g8b4.TIF
+- model: catalog.Sentinel2Catalog
+  pk: 122
+  fields:
+    image: xpto 122
+    product: T19LCK_20190813T181543
+    satellite: 3
+    utm_zone: 039
+    latitude_band: 19LCK-039
+    grid_square: 19LCK-039
+    type: r11g8b4
+    date: 2019-08-13
+    cloud_cover: 0
+    url_tms: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT57QWwpXDUvvfSEJjNS6YeOJr71HzGrnqz6QPFLnbDbeTxdnMU
+    url_tms: https://cmr.funai.gov.br/tms3/Sentinel-2/19LCK/T19LCK_20190813T145731_r11g8b4.tms/{z}/{x}/{y}.png
+    max_native_zoom: 55
+    co_cr: 30202001845
+    ds_cr: C.R. ALTO PURUS
+    co_funai: 1201
+    no_ti: Alto Rio Purus
+    municipio: Manoel Urbano/AC, Santa Rosa do Purus/AC
+    sg_uf: AC
+    resolution: 10
+    nu_latitude: "-9.540132"
+    nu_longitude: "-70.322000"
+    path: Sentinel-2/S2A_MSIL1C_20190813T145731_N0208_R039_T19LCK_20190813T181543.SAFE/T19LCK_20190813T145731_r11g8b4.TIF
+    geom: SRID=4326;POLYGON ((-62.05933358599993 -6.591365120999933, -62.07287644799992
+      -6.655188532999933, -62.0753 -6.66661, -62.07530600999993 -6.666609126999933,
+      -63.7307 -6.42615, -63.71837815399993 -6.368866973999933, -63.4035 -4.90503,
+      -63.40349644299992 -4.905030516999934, -61.7524 -5.14488, -61.76836548199993
+      -5.220120487999933, -62.05933358599993 -6.591365120999933))
+    download_available: true
+    download_link: https://cmr.funai.gov.br/Sentinel-2/S2A_MSIL1C_20190813T145731_N0208_R039_T19LCK_20190813T181543.SAFE/T19LCK_20190813T145731_r11g8b4.TIF
+- model: catalog.Sentinel2Catalog
+  pk: 123
+  fields:
+    image: xpto 123
+    product: T19LDJ_20190907T145729
+    satellite: 3
+    utm_zone: 039
+    latitude_band: 19LDJ-039
+    grid_square: 19LDJ-039
+    type: r11g8b4
+    date: 2019-09-07
+    cloud_cover: 0
+    url_tms: https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT57QWwpXDUvvfSEJjNS6YeOJr71HzGrnqz6QPFLnbDbeTxdnMU
+    url_tms: https://cmr.funai.gov.br/tms3/Sentinel-2/19LDJ/T19LDJ_20190907T145729_r11g8b4.tms/{z}/{x}/{y}.png
+    max_native_zoom: 55
+    co_cr: 30202001845
+    ds_cr: C.R. ALTO PURUS
+    co_funai: 26201
+    no_ti: Cabeceira do Rio Acre
+    municipio: Assis Brasil/AC
+    sg_uf: AC
+    resolution: 10
+    nu_latitude: "-10.447001"
+    nu_longitude: "-69.412441"
+    path: Sentinel-2/S2B_MSIL1C_20190907T145729_N0208_R039_T19LDJ_20190907T182043.SAFE/T19LDJ_20190907T145729_r11g8b4.TIF
+    geom: SRID=4326;POLYGON ((-62.05933358599993 -6.591365120999933, -62.07287644799992
+      -6.655188532999933, -62.0753 -6.66661, -62.07530600999993 -6.666609126999933,
+      -63.7307 -6.42615, -63.71837815399993 -6.368866973999933, -63.4035 -4.90503,
+      -63.40349644299992 -4.905030516999934, -61.7524 -5.14488, -61.76836548199993
+      -5.220120487999933, -62.05933358599993 -6.591365120999933))
+    download_available: true
+    download_link: https://cmr.funai.gov.br/Sentinel-2/S2B_MSIL1C_20190907T145729_N0208_R039_T19LDJ_20190907T182043.SAFE/T19LDJ_20190907T145729_r11g8b4.TIF
+- model: catalog.Landsat8Catalog
+  pk: 110
+  fields:
+    image: xpto 110
+    product: LC08_L1TP_225064_20211206_20211207_01_RT
+    satellite: 2
+    orbita: 225
+    ponto: 64
+    type: r6g5b4
+    date: 2021-12-07
+    cloud_cover: 61.55
+    url_tms: https://cmr.funai.gov.br/LC08_4/2021/225/064/LC08_L1TP_225064_20211206_20211207_01_RT/LC08_L1TP_225064_20211206_20211207_01_RT_r6g5b4_thumbs.jpg
+    url_tms: https://cmr.funai.gov.br/tms4/LC08/2021/225/064/LC08_L1TP_225064_20211206_20211207_01_RT/LC08_L1TP_225064_20211206_20211207_01_RT_r6g5b4.tms/{z}/{x}/{y}.png
+    max_native_zoom: 55
+    co_cr: 30202001913
+    ds_cr: C.R. CENTRO-LESTE DO PARÁ
+    co_funai: 3002
+    no_ti: Apyterewa
+    municipio: São Félix do Xingu
+    sg_uf: PA
+    resolution: 30
+    nu_latitude: "-5.785997"
+    nu_longitude: "-51.925097"
+    path: LC08_4/2021/225/064/LC08_L1TP_225064_20211206_20211207_01_RT/LC08_L1TP_225064_20211206_20211207_01_RT_r6g5b4.TIF
+    geom: SRID=4326;POLYGON ((-62.05933358599993 -6.591365120999933, -62.07287644799992
+      -6.655188532999933, -62.0753 -6.66661, -62.07530600999993 -6.666609126999933,
+      -63.7307 -6.42615, -63.71837815399993 -6.368866973999933, -63.4035 -4.90503,
+      -63.40349644299992 -4.905030516999934, -61.7524 -5.14488, -61.76836548199993
+      -5.220120487999933, -62.05933358599993 -6.591365120999933))
+    download_available: true
+    download_link: https://cmr.funai.gov.br/LC08_4/2021/225/064/LC08_L1TP_225064_20211206_20211207_01_RT/LC08_L1TP_225064_20211206_20211207_01_RT_r6g5b4.TIF
+- model: catalog.Landsat8Catalog
+  pk: 111
+  fields:
+    image: xpto 111
+    product: LC08_L1TP_226064_20201108_20201112_01_RT
+    satellite: 2
+    orbita: 226
+    ponto: 64
+    type: r6g5b4
+    date: 2020-11-08
+    cloud_cover: -1
+    url_tms: https://cmr.funai.gov.br/LC08/2020/226/064/LC08_L1TP_226064_20201108_20201112_01_RT/LC08_L1TP_226064_20201108_20201112_01_RT_r6g5b4_thumbs.jpg
+    url_tms: https://cmr.funai.gov.br/tms3/LC08/2020/226/064/LC08_L1TP_226064_20201108_20201112_01_RT/LC08_L1TP_226064_20201108_20201112_01_RT_r6g5b4.tms/{z}/{x}/{y}.png
+    max_native_zoom: 55
+    co_cr: 30202001913
+    ds_cr: C.R. CENTRO-LESTE DO PARÁ
+    co_funai: 3002
+    no_ti: Apyterewa
+    municipio: São Félix do Xingu
+    sg_uf: PA
+    resolution: 30
+    nu_latitude: "-5.785997"
+    nu_longitude: "-51.925097"
+    path: LC08/2020/226/064/LC08_L1TP_226064_20201108_20201112_01_RT/LC08_L1TP_226064_20201108_20201112_01_RT_r6g5b4.TIF
+    geom: SRID=4326;POLYGON ((-62.05933358599993 -6.591365120999933, -62.07287644799992
+      -6.655188532999933, -62.0753 -6.66661, -62.07530600999993 -6.666609126999933,
+      -63.7307 -6.42615, -63.71837815399993 -6.368866973999933, -63.4035 -4.90503,
+      -63.40349644299992 -4.905030516999934, -61.7524 -5.14488, -61.76836548199993
+      -5.220120487999933, -62.05933358599993 -6.591365120999933))
+    download_available: true
+    download_link: https://cmr.funai.gov.br/LC08/2020/226/064/LC08_L1TP_226064_20201108_20201112_01_RT/LC08_L1TP_226064_20201108_20201112_01_RT_r6g5b4.TIF
+- model: catalog.Landsat8Catalog
+  pk: 112
+  fields:
+    image: xpto 112
+    product: LC08_L1TP_003066_20211203_20211203_01_RT
+    satellite: 2
+    orbita: 003
+    ponto: 066
+    type: r6g5b4
+    date: 2021-12-03
+    cloud_cover: 65.98
+    url_tms: https://cmr.funai.gov.br/LC08_4/2021/003/066/LC08_L1TP_003066_20211203_20211203_01_RT/LC08_L1TP_003066_20211203_20211203_01_RT_r6g5b4_thumbs.jpg
+    url_tms: https://cmr.funai.gov.br/tms4/LC08/2021/003/066/LC08_L1TP_003066_20211203_20211203_01_RT/LC08_L1TP_003066_20211203_20211203_01_RT_r6g5b4.tms/{z}/{x}/{y}.png
+    max_native_zoom: 55
+    co_cr: 30202001845
+    ds_cr: C.R. ALTO PURUS
+    co_funai: 1201
+    no_ti: Alto Rio Purus
+    municipio: Manoel Urbano/AC, Santa Rosa do Purus/AC, Sena Madureira/AC
+    sg_uf: AC
+    resolution: 30
+    nu_latitude: "-8.678120"
+    nu_longitude: "-69.541459"
+    path: LC08_4/2021/003/066/LC08_L1TP_003066_20211203_20211203_01_RT/LC08_L1TP_003066_20211203_20211203_01_RT_r6g5b4.TIF
+    geom: SRID=4326;POLYGON ((-62.05933358599993 -6.591365120999933, -62.07287644799992
+      -6.655188532999933, -62.0753 -6.66661, -62.07530600999993 -6.666609126999933,
+      -63.7307 -6.42615, -63.71837815399993 -6.368866973999933, -63.4035 -4.90503,
+      -63.40349644299992 -4.905030516999934, -61.7524 -5.14488, -61.76836548199993
+      -5.220120487999933, -62.05933358599993 -6.591365120999933))
+    download_available: true
+    download_link: https://cmr.funai.gov.br/LC08_4/2021/003/066/LC08_L1TP_003066_20211203_20211203_01_RT/LC08_L1TP_003066_20211203_20211203_01_RT_r6g5b4.TIF
+- model: catalog.Landsat8Catalog
+  pk: 113
+  fields:
+    image: xpto 113
+    product: LC08_L1TP_004067_20211007_20211007_01_T2
+    satellite: 2
+    orbita: 004
+    ponto: 067
+    type: r6g5b4
+    date: 2021-10-07
+    cloud_cover: 63.25
+    url_tms: https://cmr.funai.gov.br/LC08_4/2021/004/067/LC08_L1TP_004067_20211007_20211007_01_T2/LC08_L1TP_004067_20211007_20211007_01_T2_r6g5b4_thumbs.jpg
+    url_tms: https://cmr.funai.gov.br/tms4/LC08/2021/004/067/LC08_L1TP_004067_20211007_20211007_01_T2/LC08_L1TP_004067_20211007_20211007_01_T2_r6g5b4.tms/{z}/{x}/{y}.png
+    max_native_zoom: 55
+    co_cr: 30202001845
+    ds_cr: C.R. ALTO PURUS
+    co_funai: 26201
+    no_ti: Mamoadate
+    municipio: Sena Madureira/AC
+    sg_uf: AC
+    resolution: 30
+    nu_latitude: "-10.123805"
+    nu_longitude: "-71.399108"
+    path: LC08_4/2021/004/067/LC08_L1TP_004067_20211007_20211007_01_T2/LC08_L1TP_004067_20211007_20211007_01_T2_r6g5b4.TIF
+    geom: SRID=4326;POLYGON ((-62.05933358599993 -6.591365120999933, -62.07287644799992
+      -6.655188532999933, -62.0753 -6.66661, -62.07530600999993 -6.666609126999933,
+      -63.7307 -6.42615, -63.71837815399993 -6.368866973999933, -63.4035 -4.90503,
+      -63.40349644299992 -4.905030516999934, -61.7524 -5.14488, -61.76836548199993
+      -5.220120487999933, -62.05933358599993 -6.591365120999933))
+    download_available: true
+    download_link: https://cmr.funai.gov.br/LC08_4/2021/004/067/LC08_L1TP_004067_20211007_20211007_01_T2/LC08_L1TP_004067_20211007_20211007_01_T2_r6g5b4.TIF

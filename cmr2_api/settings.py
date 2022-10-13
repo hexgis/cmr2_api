@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'rest_framework_gis',
     'django_filters',
     'corsheaders',
+    'django.contrib.gis',
     'support',
     'auth_jwt',
     'priority_monitoring',
