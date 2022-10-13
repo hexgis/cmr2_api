@@ -32,7 +32,7 @@ class CatalogView(AuthModelMixIn, generics.ListAPIView):
 
     Filters:
         * satellite (list): filtering Satellite using identify.
-        * percent_cloud (list): filtering less than or equal for cloud values.
+        * cloud_cover (list): filtering less than or equal for cloud values.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
         * in_bbox (bbox): bounding box

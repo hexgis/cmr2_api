@@ -3,7 +3,6 @@ from rest_framework import serializers
 from catalog import models
 
 
-
 class SatelliteSerializer(serializers.ModelSerializer):
     """Serializer to return registered sattelites `models.Satellite` data."""
 
@@ -15,7 +14,7 @@ class SatelliteSerializer(serializers.ModelSerializer):
             'name',
         )
 
-        
+
 class Landsat8CatalogSerializer(serializers.ModelSerializer):
     """Serializer to return `models.Landsat8Catalog` data."""
     # satellite = SatteliteSerializer()

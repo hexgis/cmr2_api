@@ -1,10 +1,9 @@
-# from django.db import models
 from django.contrib.gis.db import models
 
 from django.utils.translation import ugettext_lazy as _
 
 
-class Satellite (models.Model):
+class Satellite(models.Model):
     """Model to store satellite information."""
 
     identifier = models.CharField(
@@ -14,7 +13,7 @@ class Satellite (models.Model):
     )
 
     name = models.CharField(
-        _('Name Satellite'),
+        _('Satellite name'),
         max_length=255,
         blank=True,
         null=True,
@@ -42,7 +41,7 @@ class Satellite (models.Model):
         return self.name or self.identifier
 
 
-class Catalogs (models.Model):
+class Catalogs(models.Model):
     """Abstract model for Catalogs"""
 
     image = models.CharField(
@@ -99,13 +98,11 @@ class Catalogs (models.Model):
     download_available = models.BooleanField(
         _("Download allowed"),
         default=False,
-
     )
 
     max_native_zoom = models.IntegerField(
         _('Maximum zoom scale'),
         default=15,
-
     )
 
     co_cr = models.BigIntegerField(
@@ -185,7 +182,7 @@ class Catalogs (models.Model):
         return str(self.image)
 
 
-class Landsat8Catalog (Catalogs):
+class Landsat8Catalog(Catalogs):
     """Model for Landsat scenes catalog."""
 
     orbita = models.CharField(
@@ -209,7 +206,7 @@ class Landsat8Catalog (Catalogs):
         verbose_name_plural = 'Landsat8 Catalogs'
 
 
-class Sentinel2Catalog (Catalogs):
+class Sentinel2Catalog(Catalogs):
     """Model for Sentinel-2 scenes catalog."""
 
     utm_zone = models.IntegerField(
