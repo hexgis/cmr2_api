@@ -100,15 +100,8 @@ class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
             'ti_nu_area_ha',
         )
 
-class xptoSerializers(serializers.ModelSerializer):
-    """Serializer for table 'MonitoringConsolidatedClassesSerializer' data."""
-    class Meta:
-        """Meta class for `MonitoringConsolidatedTableSerializer` serializer."""
-        model = models.MonitoringConsolidatedStats
-        fields = "__all__"
 
-
-class ConsultaMonitoramentoTIAgrupadoAnoTISerializer(serializers.ModelSerializer):
+class MonitoringConsolidatedStatsByCoFunaiAndYearSerializer(serializers.ModelSerializer):
     ano = serializers.IntegerField()
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()
@@ -131,7 +124,7 @@ class ConsultaMonitoramentoTIAgrupadoAnoTISerializer(serializers.ModelSerializer
         ]
 
 
-class ConsultaMonitoramentoTIAgrupadoSerializer(serializers.ModelSerializer):
+class MonitoringConsolidatedStatsByCoFunaiSerializer(serializers.ModelSerializer):
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()
     dr_nu_area_ha = serializers.FloatField()
@@ -152,7 +145,7 @@ class ConsultaMonitoramentoTIAgrupadoSerializer(serializers.ModelSerializer):
         ]
 
 
-class ConsultaMonitoramentoTIAgrupadoAnoSerializer(serializers.ModelSerializer):
+class MonitoringConsolidatedStatsByYearSerializer(serializers.ModelSerializer):
     ano = serializers.IntegerField()
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()

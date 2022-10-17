@@ -143,8 +143,8 @@ class MonitoringConsolidated(models.Model):
         verbose_name = 'Monitoring Consolidated'
         verbose_name_plural = 'Monitorings Consolidated'
         ordering = ('-dt_t_um',)
-        # db_table = 'funaidados\".\"img_monitoramento_terra_indigena_cr_a'
-        # managed = False
+        db_table = 'funaidados\".\"img_monitoramento_terra_indigena_cr_a'
+        managed = False
 
     def __str__(self) -> str:
         """Returns `monitoring.Monitoring.Consolidated` string data.
@@ -168,7 +168,7 @@ class MonitoringConsolidatedStats(models.Model):
         null=True,
         blank=True,
     )
-    tb_ciclo_monitoramento_id = models.CharField(max_length=255)
+    tb_ciclo_monitoramento_id = models.CharField(max_length=255,null=True,blank=True,)
     # tb_ciclo_monitoramento = models.ForeignKey(
     #     CicloMonitoramento,
     #     on_delete=models.DO_NOTHING
@@ -190,5 +190,5 @@ class MonitoringConsolidatedStats(models.Model):
         app_label = 'monitoring'
         verbose_name = 'Monitoring Consolidated Statistic'
         verbose_name_plural = 'Monitorings Consolidated Statistics'
-        # db_table = 'funaidados\".\"img_monitoramento_ti_consolidado_a'
-        # managed = False
+        db_table = 'funaidados\".\"img_monitoramento_ti_consolidado_a'
+        managed = False

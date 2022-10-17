@@ -57,7 +57,7 @@ urlpatterns = [
         ('funai.urls', 'funai'),
         namespace='funai')
     ),
-    path('monitoring/', include(
+    path('monitoring/consolidated/', include(
         ('monitoring.urls', 'monitoring'),
         namespace='monitoring')
     ),

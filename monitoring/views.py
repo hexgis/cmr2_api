@@ -140,10 +140,18 @@ class MonitoringConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
 
 class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView):
     """
-    monitoring_by_year = True
-    monitoring_by_co_funai = True
-    monitoring_by_co_funai_and_year = True
-    monitoring_by_day = True
+    Group by:
+        grouping (str):
+            * monitoring_by_year
+            * monitoring_by_co_funai
+            * monitoring_by_co_funai_and_year
+            * se 'grouping' for igual a None ou sem referencia retorna o DEFAULT que é o monitoring_by_day
+    Filters:
+        co_cr (list): filtering Regional Coordenation using code.
+        co_funai (list): filtering Indigenou Lands using Funai code
+        stage (list): stage name. E.g.: CR, DG, FF, DR
+        start_date (str): filtering start date
+        end_date (str): filteringend ende date
     """
 
     filterset_class = monitoring_filters.MonitoringConsolidatedStatsFilter
@@ -153,22 +161,16 @@ class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView)
     )
 
     def get_serializer_class(self):
+
         data_grouping = self.request.GET.get('grouping', None)
 
         if data_grouping == "monitoring_by_co_funai_and_year":
-            return serializers.ConsultaMonitoramentoTIAgrupadoAnoTISerializer
+            return serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer
         elif data_grouping == "monitoring_by_co_funai":
-            return serializers.ConsultaMonitoramentoTIAgrupadoSerializer
+            return serializers.MonitoringConsolidatedStatsByCoFunaiSerializer
         elif data_grouping == "monitoring_by_year":
-            return serializers.ConsultaMonitoramentoTIAgrupadoAnoSerializer
-        elif data_grouping == "monitoring_by_day":
-            return serializers.ConsultaMonitoramentoTerraIndigenaSerializer
-        else:
-
-            print("Erro no serializador...")
-            return serializers.ConsultaMonitoramentoTerraIndigenaSerializer
-
-        # return serializers.xptoSerializers
+            return serializers.MonitoringConsolidatedStatsByYearSerializer
+        return serializers.ConsultaMonitoramentoTerraIndigenaSerializer
 
     def get_queryset(self):
 
@@ -180,12 +182,5 @@ class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView)
             return models.MonitoringConsolidatedStats.objects.values(ano=functions.ExtractYear('dt_t_um')).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("ano")
         elif data_grouping == "monitoring_by_co_funai":
             return models.MonitoringConsolidatedStats.objects.values('co_funai', 'no_ti', 'ti_nu_area_ha').annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("no_ti")
-        elif data_grouping == "monitoring_by_day":
-            return models.MonitoringConsolidatedStats.objects.values('co_funai', 'no_ti', 'dt_t_um', 'ti_nu_area_ha',).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("dt_t_um")
         else:
-            print("Erro no modelo...")
             return models.MonitoringConsolidatedStats.objects.values('co_funai', 'no_ti', 'dt_t_um', 'ti_nu_area_ha',).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("dt_t_um")
-
-        # dia=functions.ExtractDay('dt_t_um')
-        # return models.MonitoringConsolidatedStats.objects.values().filter(id__gte=303789959, id__lte=303789962)
-        # return models.MonitoringConsolidatedStats.objects.values().filter(id__gte=303789959, id__lte=303789982)
