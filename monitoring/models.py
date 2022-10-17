@@ -156,32 +156,73 @@ class MonitoringConsolidated(models.Model):
 
 
 class MonitoringConsolidatedStats(models.Model):
-    no_estagio = models.CharField(max_length=2)
-    dt_t_um = models.DateField()
-    ds_cr = models.CharField(max_length=255)
-    co_cr = models.BigIntegerField()
-    co_funai = models.IntegerField()
-    no_ti = models.CharField(max_length=255)
-    ti_nu_area_ha = models.DecimalField(max_digits=255, decimal_places=6)
+    """_MonitoringConsolidated model data for monitoring model."""
+    no_estagio = models.CharField(
+        _(''),
+        max_length=2
+    )
+    dt_t_um = models.DateField(
+        _(''),
+    )
+    ds_cr = models.CharField(
+        _(''),
+        max_length=255
+        )
+    co_cr = models.BigIntegerField(
+        _(''),
+    )
+    co_funai = models.IntegerField(
+        _(''),
+    )
+    no_ti = models.CharField(
+        _(''),
+        max_length=255,
+    )
+    ti_nu_area_ha = models.DecimalField(
+        _(''),
+        max_digits=255,
+        decimal_places=6,
+    )
     dt_cadastro = models.DateField(
         _('Register date'),
         null=True,
         blank=True,
     )
-    tb_ciclo_monitoramento_id = models.CharField(max_length=255,null=True,blank=True,)
+    tb_ciclo_monitoramento_id = models.CharField(
+        _(''),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
     # tb_ciclo_monitoramento = models.ForeignKey(
     #     CicloMonitoramento,
     #     on_delete=models.DO_NOTHING
-    # )
-    no_imagem = models.CharField(max_length=255)
+    # )#db_table = 'funai\".\"tb_ciclo_monitoramento'
+    no_imagem = models.CharField(
+        _(''),
+        max_length=255,
+    )
     dt_imagem = models.DateField(
         _('Image date'),
         null=True,
         blank=True,
     )
-    nu_area_km2 = models.DecimalField(max_digits=255, decimal_places=6)
-    nu_area_ha = models.DecimalField(max_digits=255, decimal_places=6)
-    geom = models.MultiPolygonField()
+    nu_area_km2 = models.DecimalField(
+        _(''),
+        max_digits=255,
+        decimal_places=6,
+    )
+    nu_area_ha = models.DecimalField(
+        _(''),
+        max_digits=255,
+        decimal_places=6,
+    )
+    geom = models.MultiPolygonField(
+         _('Geometry Field'),
+        srid=4326,
+        blank=True,
+        null=True,
+    )
 
     # def __str__(self):
     #     return "Monitoring Consolidated Statistics"

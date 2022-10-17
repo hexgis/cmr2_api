@@ -10,16 +10,18 @@ from rest_framework import (
 )
 
 from django.db.models import (
-    Sum, OuterRef, Subquery, F, Case, When, Value, Count)
+    Sum, 
+    Q, 
+    Count, 
+    FloatField, 
+    functions
+)
 
 from monitoring import (
     serializers,
     models,
     filters as monitoring_filters
 )
-
-from django.db.models import (
-    Sum, OuterRef, Subquery, F, Q, Case, When, Value, Count, FloatField, functions)
 
 
 class AuthModelMixIn:
@@ -139,19 +141,32 @@ class MonitoringConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
 
 
 class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView):
-    """
+    """Return four data set acoording to the selected grouping in the request.
+    
     Group by:
-        grouping (str):
-            * monitoring_by_year
-            * monitoring_by_co_funai
-            * monitoring_by_co_funai_and_year
-            * se 'grouping' for igual a None ou sem referencia retorna o DEFAULT que é o monitoring_by_day
+        grouping (str): define applied data grouping.
+    
     Filters:
         co_cr (list): filtering Regional Coordenation using code.
         co_funai (list): filtering Indigenou Lands using Funai code
         stage (list): stage name. E.g.: CR, DG, FF, DR
         start_date (str): filtering start date
         end_date (str): filteringend ende date
+
+    Returns group by in request field grouping:
+        * monitoring_by_year
+            `models.MonitoringConsolidatedStats` group by YEAR.
+            `serializers.MonitoringConsolidatedStatsByYearSerializer`.
+        * monitoring_by_co_funai
+            `models.MonitoringConsolidatedStats` group by CO_FUANI.
+            `serializers.MonitoringConsolidatedStatsByCoFunaiSerializer` .
+        * monitoring_by_co_funai_and_year
+            `models.MonitoringConsolidatedStats` group by CO_FUANI and YEAR.
+            `serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer`.
+        * DEFAULT is iquals monitoring_by_day
+            Used when request is None or not metch with keys previously listed.
+            `models.MonitoringConsolidatedStats` group by CO_FUANI and YEAR.
+            `serializers.MonitoringConsolidatedStatsByDaySerializer`.
     """
 
     filterset_class = monitoring_filters.MonitoringConsolidatedStatsFilter
@@ -161,6 +176,16 @@ class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView)
     )
 
     def get_serializer_class(self):
+        """Get method to return one data set acoording to selected GROUPING.
+
+        Returns one serializers class to `views.MonitoringConsolidatedTableStatsView`
+
+        Returns:
+            `serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer` or
+            `serializers.MonitoringConsolidatedStatsByCoFunaiSerializer` or
+            `serializers.MonitoringConsolidatedStatsByYearSerializer` or
+            `serializers.MonitoringConsolidatedStatsByDaySerializer`.
+        """
 
         data_grouping = self.request.GET.get('grouping', None)
 
@@ -170,9 +195,23 @@ class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView)
             return serializers.MonitoringConsolidatedStatsByCoFunaiSerializer
         elif data_grouping == "monitoring_by_year":
             return serializers.MonitoringConsolidatedStatsByYearSerializer
-        return serializers.ConsultaMonitoramentoTerraIndigenaSerializer
+        return serializers.MonitoringConsolidatedStatsByDaySerializer
 
     def get_queryset(self):
+        """Get method to return grouping data set acoording to selected GROUPING.
+
+        Returns query grouping in class `views.MonitoringConsolidatedTableStatsView`.
+
+        Returns:
+            * Grouping `monitoring_by_co_funai_and_year`:
+                `models.MonitoringConsolidatedStats` group by CO_FUANI and YEAR.
+            * Grouping `monitoring_by_year`:
+                `models.MonitoringConsolidatedStats` group by YEAR.
+            * Grouping `monitoring_by_co_funai`:
+                `models.MonitoringConsolidatedStats` group by CO_FUANI.
+            * Grouping DEFAULT:
+                `models.MonitoringConsolidatedStats` group by CO_FUANI and YEAR.
+        """
 
         data_grouping = self.request.GET.get('grouping', None)
 
@@ -182,5 +221,156 @@ class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView)
             return models.MonitoringConsolidatedStats.objects.values(ano=functions.ExtractYear('dt_t_um')).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("ano")
         elif data_grouping == "monitoring_by_co_funai":
             return models.MonitoringConsolidatedStats.objects.values('co_funai', 'no_ti', 'ti_nu_area_ha').annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("no_ti")
-        else:
-            return models.MonitoringConsolidatedStats.objects.values('co_funai', 'no_ti', 'dt_t_um', 'ti_nu_area_ha',).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("dt_t_um")
+        return models.MonitoringConsolidatedStats.objects.values('co_funai', 'no_ti', 'dt_t_um', 'ti_nu_area_ha',).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("dt_t_um")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class MonitoringConsolidatedTableStatsView2(AuthModelMixIn, generics.ListAPIView):
+    """Return four data set acoording to the selected grouping in the request.
+    
+    Group by:
+        grouping (str): define applied data grouping.
+    
+    Filters:
+        co_cr (list): filtering Regional Coordenation using code.
+        co_funai (list): filtering Indigenou Lands using Funai code
+        stage (list): stage name. E.g.: CR, DG, FF, DR
+        start_date (str): filtering start date
+        end_date (str): filteringend ende date
+
+    Returns group by in request field grouping:
+        * monitoring_by_year
+            `models.MonitoringConsolidated` group by YEAR.
+            `serializers.MonitoringConsolidatedStatsByYearSerializer`.
+        * monitoring_by_co_funai
+            `models.MonitoringConsolidated` group by CO_FUANI.
+            `serializers.MonitoringConsolidatedStatsByCoFunaiSerializer` .
+        * monitoring_by_co_funai_and_year
+            `models.MonitoringConsolidated` group by CO_FUANI and YEAR.
+            `serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer`.
+        * DEFAULT is iquals monitoring_by_day
+            Used when request is None or not metch with keys previously listed.
+            `models.MonitoringConsolidated` group by CO_FUANI and YEAR.
+            `serializers.MonitoringConsolidatedStatsByDaySerializer`.
+    """
+
+    filterset_class = monitoring_filters.MonitoringConsolidatedStatsFilter2
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
+
+    def get_serializer_class(self):
+        """Get method to return one data set acoording to selected GROUPING.
+
+        Returns one serializers class to `views.MonitoringConsolidatedTableStatsView`
+
+        Returns:
+            `serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer` or
+            `serializers.MonitoringConsolidatedStatsByCoFunaiSerializer` or
+            `serializers.MonitoringConsolidatedStatsByYearSerializer` or
+            `serializers.MonitoringConsolidatedStatsByDaySerializer`.
+        """
+
+        data_grouping = self.request.GET.get('grouping', None)
+
+        if data_grouping == "monitoring_by_co_funai_and_year":
+            return serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer2
+        elif data_grouping == "monitoring_by_co_funai":
+            return serializers.MonitoringConsolidatedStatsByCoFunaiSerializer2
+        elif data_grouping == "monitoring_by_year":
+            return serializers.MonitoringConsolidatedStatsByYearSerializer2
+        return serializers.MonitoringConsolidatedStatsByDaySerializer2
+
+    def get_queryset(self):
+        """Get method to return grouping data set acoording to selected GROUPING.
+
+        Returns query grouping in class `views.MonitoringConsolidatedTableStatsView`.
+
+        Returns:
+            * Grouping `monitoring_by_co_funai_and_year`:
+                `models.MonitoringConsolidated` group by CO_FUANI and YEAR.
+            * Grouping `monitoring_by_year`:
+                `models.MonitoringConsolidated` group by YEAR.
+            * Grouping `monitoring_by_co_funai`:
+                `models.MonitoringConsolidated` group by CO_FUANI.
+            * Grouping DEFAULT:
+                `models.MonitoringConsolidated` group by CO_FUANI and YEAR.
+        """
+
+        data_grouping = self.request.GET.get('grouping', None)
+
+        if data_grouping == "monitoring_by_co_funai_and_year":
+            return models.MonitoringConsolidated.objects.values('co_funai', 'no_ti', 'ti_nu_area_ha', ano=functions.ExtractYear('dt_t_um')).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("ano")
+        elif data_grouping == "monitoring_by_year":
+            return models.MonitoringConsolidated.objects.values(ano=functions.ExtractYear('dt_t_um')).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("ano")
+        elif data_grouping == "monitoring_by_co_funai":
+            return models.MonitoringConsolidated.objects.values('co_funai', 'no_ti', 'ti_nu_area_ha').annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("no_ti")
+        return models.MonitoringConsolidated.objects.values('co_funai', 'no_ti', 'dt_t_um', 'ti_nu_area_ha',).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("dt_t_um")
+
