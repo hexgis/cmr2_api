@@ -33,10 +33,5 @@ urlpatterns = [
         'table-stats/',
         views.MonitoringConsolidatedTableStatsView.as_view(),
         name='monitoring-table-stats'
-    ),
-    path(
-        'table-stats2/',
-        views.MonitoringConsolidatedTableStatsView2.as_view(),
-        name='monitoring-table-stats'
     )
 ]
