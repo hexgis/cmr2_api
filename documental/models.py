@@ -290,11 +290,25 @@ class DocumentUpload(models.Model):
         auto_now_add=True
     )
 
-    id_acao = models.ForeignKey(
-        'documental.DocsAction',
-        on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_action',
-        null=True
+    id_acao = models.CharField(
+        _('Action'),
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+    
+    co_cr = models.CharField(
+        _('Regional Coordenation code'),
+        max_length=255,
+        blank=True,
+        null=True,
+    )
+
+    ds_cr = models.CharField(
+        _('Regional Coordenation name'),
+        max_length=255,
+        blank=True,
+        null=True,
     )
 
     class Meta:

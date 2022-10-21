@@ -1,7 +1,8 @@
+# from django import views
 from django_filters.rest_framework import DjangoFilterBackend
 
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import FileUploadParser
+# from rest_framework.permissions import IsAuthenticated
+# from rest_framework.parsers import FileUploadParser
 from rest_framework.views import APIView
 from django.urls import reverse_lazy
 from rest_framework.response import Response
@@ -10,7 +11,8 @@ from rest_framework import status
 from rest_framework import (
     permissions,
     generics,
-    exceptions
+    exceptions,
+    parsers
 )
 
 from documental import (
@@ -166,25 +168,46 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
 #                 status=status.HTTP_400_BAD_REQUEST)
 
 
-class DocumentUploadView(AuthModelMix, generics.GenericAPIView):
+# class DocumentUploadView(AuthModelMix, generics.GenericAPIView):
 
-    def post(self, request):
-        import pdb; pdb.set_trace()
-        if request.method == 'POST' and request.FILES['arquivo']:
-            instance = models.DocumentUpload(
-                filee=request.FILES['arquivo'],
-                # dt_cadastro=request.FILES['registration_date']
-                # id_acao= 8
-                # Para concluir essa demanda sera necessária código em 
-                # code-review. Nesse trecho seram inseridos os atributos da 
-                # nova Model do Documental modelada na 
-                # branch "Feature/end points mapoteca".
-                # Depois será removida a class DocumentUpload e associações.
+#     def post(self, request):
+#         # import pdb; pdb.set_trace()
+#         if request.method == 'POST' and request.FILES['arquivo']:
+#             instance = models.DocumentUpload(
+#                 filee=request.FILES['arquivo'],
+#                 # dt_cadastro=request.FILES['registration_date']
+#                 # id_acao= 8
+#                 # Para concluir essa demanda sera necessária código em 
+#                 # code-review. Nesse trecho seram inseridos os atributos da 
+#                 # nova Model do Documental modelada na 
+#                 # branch "Feature/end points mapoteca".
+#                 # Depois será removida a class DocumentUpload e associações.
 
-            )
-            instance.save()
-            return Response("conteasdfnt", status=status.HTTP_200_OK)
+#             )
+#             instance.save()
+#             return Response("conteasdfnt", status=status.HTTP_200_OK)
         
-        else:
-            return Response("ERROR in request.", 
-                status=status.HTTP_400_BAD_REQUEST)
+#         else:
+#             return Response("ERROR in request.", 
+#                 status=status.HTTP_400_BAD_REQUEST)
+
+
+class UploadTest6view(APIView):
+    
+    def post (self, request, format=None):
+        print("----------->>>>>>>>>>>>--------------")
+        print(request.data)
+        print("----------->>>>>>>>>>>>--------------")
+        # import pdb; pdb.set_trace()
+        # images = request.FILES.getlist('file')
+        documents=request.data
+        instance = models.DocumentUpload.objects.create(
+            id_acao = documents.get('id_acao'), 
+            co_cr = documents.get('co_cr'), 
+            ds_cr = documents.get('ds_cr'), 
+            # filee = images
+            filee = documents.get('file')
+            )
+        instance.save()
+        return Response("SUCESSO", status=status.HTTP_200_OK)
+
