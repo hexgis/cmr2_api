@@ -29,7 +29,6 @@ services:
       && python manage.py loaddata support_layerfilter.yaml
       && python manage.py loaddata urgent_alerts.yaml
       && python manage.py loaddata monitoring_consolidated_stats.yaml
-      && python manage.py loaddata monitoring_priority_consolidated.yaml
       && python manage.py loaddata land_use_ti.yaml
       && python manage.py loaddata land_use_classes.yaml
       && python manage.py loaddata documental_docs_action.yaml

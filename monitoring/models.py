@@ -143,8 +143,8 @@ class MonitoringConsolidated(models.Model):
         verbose_name = 'Monitoring Consolidated'
         verbose_name_plural = 'Monitorings Consolidated'
         ordering = ('-dt_t_um',)
-        # db_table = 'funaidados\".\"img_monitoramento_terra_indigena_cr_a'
-        # managed = False
+        db_table = 'funaidados\".\"img_monitoramento_terra_indigena_cr_a'
+        managed = False
 
     def __str__(self) -> str:
         """Returns `monitoring.Monitoring.Consolidated` string data.
