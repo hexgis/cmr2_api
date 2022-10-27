@@ -36,7 +36,8 @@ class ActionListView(AuthModelMix, generics.ListAPIView):
     queryset = models.DocsAction.objects.all()
     serializer_class = serializers.ActionListSerializers
     filterset_class = documental_filters.DocsActionFilter
-
+    filter_backends = (DjangoFilterBackend,)
+    
 
 class DocumentalListViews(AuthModelMix, generics.ListAPIView):
     """Return three data set acoording to the selected actions in the request.
@@ -76,7 +77,8 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
         """Return only one aciton type according to actions sent in request"""
 
         requested_action = self.request.GET.get('id_acao')
-        requested_action = list(map(int, requested_action.split(',')))
+        requested_action = requested_action.split(',')
+        requested_action = list(map(int, requested_action))
 
         action_type_docs = models.DocsAction.objects.values(
             'action_type').filter(id_action__in=requested_action).distinct()

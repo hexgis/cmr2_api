@@ -1,0 +1,12 @@
+- model: catalog.satellite
+  pk: 2
+  fields:
+    identifier: LC08
+    name: Landsat 8
+    description: 'Disponível desde Fevereiro de 2013, o Landsat8 entrega cenas com resoluções de 15m no PAN e 30m no MS (com fusionamento digital, é possivel gerar imagens coloridas de 15m), com revisita a cada 16 dias.'
+- model: catalog.satellite
+  pk: 3
+  fields:
+    identifier: Sentinel-2
+    name: Sentinel 2
+    description: 'Disponível desde Junho de 2015, o projeto Sentinel-2 foi concebido no Programa GMES (Global Monitoring for Environment and Security) e é composta por uma constelação de 2 satélites. Entrega imagens de alta resolução com 10m em um intervalo de revisita a cada 5 dias.'
