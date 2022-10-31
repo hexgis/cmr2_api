@@ -6,6 +6,7 @@ from monitoring import models
 
 class MonitoringConsolidatedSerializer(gis_serializers.GeoFeatureModelSerializer):
     """Serializer for `models.MonitoringConsolidated` data."""
+
     class Meta:
         """Meta class for `MonitoringConsolidatedSerializer` serializer."""
         model = models.MonitoringConsolidated
@@ -57,7 +58,6 @@ class MonitoringConsolidatedDetailSerializer(serializers.ModelSerializer):
 
 class MonitoringConsolidatedClassesSerializer(serializers.ModelSerializer):
     """Serializer for stages 'models.MonitoringConsolidated' data."""
-
     def to_representation(self, instance) -> str:
         """Representates model data instance as simple string.
 
@@ -103,7 +103,7 @@ class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
 
 class MonitoringConsolidatedStatsByCoFunaiAndYearSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidatedStats` data."""
-
+    
     ano = serializers.IntegerField()
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()
@@ -129,7 +129,7 @@ class MonitoringConsolidatedStatsByCoFunaiAndYearSerializer(serializers.ModelSer
 
 class MonitoringConsolidatedStatsByCoFunaiSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidatedStats` data."""
-
+    
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()
     dr_nu_area_ha = serializers.FloatField()
@@ -153,7 +153,7 @@ class MonitoringConsolidatedStatsByCoFunaiSerializer(serializers.ModelSerializer
 
 class MonitoringConsolidatedStatsByYearSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidatedStats` data."""
-
+    
     ano = serializers.IntegerField()
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()
@@ -176,7 +176,7 @@ class MonitoringConsolidatedStatsByYearSerializer(serializers.ModelSerializer):
 
 class MonitoringConsolidatedStatsByDaySerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidatedStats` data."""
-
+    
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()
     dr_nu_area_ha = serializers.FloatField()

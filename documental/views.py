@@ -68,11 +68,6 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
     def get_action_type(self):
         """Return only one aciton type according to actions sent in request"""
         requested_action = list(map(int, self.request.GET.get('id_acao').split(',')))
-        # requested_action = self.request.GET.get('id_acao')
-        # import pdb; pdb.set_trace()
-        
-        # requested_action = list(map(int, requested_action.split(',')))
-
         action_type_docs = models.DocsAction.objects.values(
             'action_type').filter(id_action__in=requested_action).distinct()
 

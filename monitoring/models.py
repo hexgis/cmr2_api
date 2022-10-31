@@ -253,8 +253,6 @@ class MonitoringConsolidatedStats(models.Model):
         blank=True,
         null=True,
     )
-    # def __str__(self):
-    #     return "Monitoring Consolidated Statistics"
 
     class Meta:
         app_label = 'monitoring'
