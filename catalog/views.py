@@ -54,21 +54,25 @@ class CatalogView(AuthModelMixIn, generics.ListAPIView):
         gis_filters.InBBoxFilter,
     )
 
-    sat_landsat8=2
-    sat_sentinel2=3
+    sat_landsat8 = models.Satellite.objects.values("identifier").filter(
+        identifier__exact = 'LC08').get()
+    sat_sentinel2 = models.Satellite.objects.values("identifier").filter(
+        identifier__exact = 'Sentinel-2').get()
 
     def get_queryset(self):
-        request_satellite = int(self.request.GET.get('satellite'))
-        if request_satellite == self.sat_sentinel2:
+        request_satellite = str(self.request.GET.get('satellite'))
+
+        if request_satellite == self.sat_sentinel2['identifier']:
             return models.Sentinel2Catalog.objects.all()
-        elif request_satellite == self.sat_landsat8:
+        elif request_satellite == self.sat_landsat8['identifier']:
             return models.Landsat8Catalog.objects.all()
 
     def get_serializer_class(self):
-        request_satellite = int(self.request.GET.get('satellite'))
-        if request_satellite == self.sat_sentinel2:
+        request_satellite = str(self.request.GET.get('satellite'))
+
+        if request_satellite == self.sat_sentinel2['identifier']:
             return serializers.Sentinel2CatalogSerializer
-        elif request_satellite == self.sat_landsat8:
+        elif request_satellite == self.sat_landsat8['identifier']:
             return serializers.Landsat8CatalogSerializer
         else:
             raise exceptions.ParseError(
