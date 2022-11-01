@@ -1,25 +1,10 @@
+from django.db.models import Count, FloatField, Q, Sum, functions
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import generics, permissions, response, status
 from rest_framework_gis import filters as gis_filters
 
-from rest_framework import (
-    generics,
-    response,
-    permissions,
-    status
-)
-from django.db.models import (
-    Sum,
-    Q,
-    Count,
-    FloatField,
-    functions
-)
-
-from monitoring import (
-    serializers,
-    models,
-    filters as monitoring_filters
-)
+from monitoring import filters as monitoring_filters
+from monitoring import models, serializers
 
 
 class AuthModelMixIn:
@@ -51,7 +36,10 @@ class MonitoringConsolidatedView(AuthModelMixIn, generics.ListAPIView):
     )
 
 
-class MonitoringConsolidatedDetailView(AuthModelMixIn, generics.RetrieveAPIView):
+class MonitoringConsolidatedDetailView(
+        AuthModelMixIn,
+        generics.RetrieveAPIView
+):
     """Detail data for `monitoring.MonitoringConsolidated`.
 
     Filters:
@@ -107,7 +95,9 @@ class MonitoringConsolidatedMapStatsView(AuthModelMixIn, generics.ListAPIView):
 
 
 class MonitoringConsolidatedClassesView(AuthModelMixIn, generics.ListAPIView):
-    """Lists abbreviation of types `stages` for `monitoring.MonitoringConsolidated`."""
+    """
+    Lists abbreviation of types `stages` for 
+    `monitoring.MonitoringConsolidated`."""
 
     queryset = models.MonitoringConsolidated.objects.order_by(
         'no_estagio').distinct('no_estagio'
@@ -137,7 +127,10 @@ class MonitoringConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
     )
 
 
-class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView):
+class MonitoringConsolidatedTableStatsView(
+    AuthModelMixIn,
+    generics.ListAPIView
+):
     """Return four data set acoording to the selected grouping in the request.
 
     Filters:
@@ -179,12 +172,16 @@ class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView)
     def get_serializer_class(self):
         """Get method to return one data set acoording to selected GROUPING.
 
-        Returns one serializers class to `views.MonitoringConsolidatedTableStatsView`
+        Returns one serializers class to 
+        `views.MonitoringConsolidatedTableStatsView`
 
         Returns:
-            `serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer` or
-            `serializers.MonitoringConsolidatedStatsByCoFunaiSerializer` or
-            `serializers.MonitoringConsolidatedStatsByYearSerializer` or
+            `serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer`
+            or
+            `serializers.MonitoringConsolidatedStatsByCoFunaiSerializer`
+            or
+            `serializers.MonitoringConsolidatedStatsByYearSerializer`
+            or
             `serializers.MonitoringConsolidatedStatsByDaySerializer`.
         """
         data_grouping = self.request.GET.get('grouping', None)
@@ -198,29 +195,137 @@ class MonitoringConsolidatedTableStatsView(AuthModelMixIn, generics.ListAPIView)
         return serializers.MonitoringConsolidatedStatsByDaySerializer
 
     def get_queryset(self):
-        """Get method to return grouping data set acoording to selected GROUPING.
+        """
+        Get method to return grouping data set acoording to selected
+        GROUPING.
 
-        Returns query grouping in class `views.MonitoringConsolidatedTableStatsView`.
+        Returns query grouping in class
+        `views.MonitoringConsolidatedTableStatsView`.
 
         Returns:
             * Grouping `monitoring_by_co_funai_and_year`:
-                `models.MonitoringConsolidatedStats` group by CO_FUANI and YEAR.
+                `models.MonitoringConsolidatedStats`
+                group by CO_FUANI and YEAR.
+
             * Grouping `monitoring_by_year`:
-                `models.MonitoringConsolidatedStats` group by YEAR.
+                `models.MonitoringConsolidatedStats`
+                group by YEAR.
+
             * Grouping `monitoring_by_co_funai`:
-                `models.MonitoringConsolidatedStats` group by CO_FUANI.
+                `models.MonitoringConsolidatedStats`
+                group by CO_FUANI.
+
             * Grouping DEFAULT:
-                `models.MonitoringConsolidatedStats` group by CO_FUANI and YEAR.
+                `models.MonitoringConsolidatedStats`
+                group by CO_FUANI and YEAR.
         """
         data_grouping = self.request.GET.get('grouping', None)
-
         if data_grouping == "monitoring_by_co_funai_and_year":
             return models.MonitoringConsolidatedStats.objects.values(
-                'co_funai', 'no_ti', 'ti_nu_area_ha', ano=functions.ExtractYear('dt_t_um')).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("ano")
+                'co_funai',
+                'no_ti',
+                'ti_nu_area_ha',
+                ano=functions.ExtractYear('dt_t_um')
+            ).annotate(
+                total_nu_area_ha=Sum("nu_area_ha"),
+                quantity_polygons=Count(
+                    "no_estagio", output_field=FloatField()
+                ),
+                cr_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="CR")
+                ),
+                dg_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="DG")
+                ),
+                dr_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="DR")
+                ),
+                ff_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="FF")
+                )
+            ).order_by("ano")
         elif data_grouping == "monitoring_by_year":
             return models.MonitoringConsolidatedStats.objects.values(
-                ano=functions.ExtractYear('dt_t_um')).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("ano")
+                ano=functions.ExtractYear('dt_t_um')
+            ).annotate(
+                total_nu_area_ha=Sum("nu_area_ha"),
+                quantity_polygons=Count(
+                    "no_estagio",
+                    output_field=FloatField()),
+                cr_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="CR")
+                ),
+                dg_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="DG")
+                ),
+                dr_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="DR")
+                ),
+                ff_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="FF")
+                )
+            ).order_by("ano")
         elif data_grouping == "monitoring_by_co_funai":
             return models.MonitoringConsolidatedStats.objects.values(
-                'co_funai', 'no_ti', 'ti_nu_area_ha').annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("no_ti")
-        return models.MonitoringConsolidatedStats.objects.values('co_funai', 'no_ti', 'dt_t_um', 'ti_nu_area_ha',).annotate(total_nu_area_ha=Sum("nu_area_ha"), quantity_polygons=Count("no_estagio", output_field=FloatField()), cr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="CR")), dg_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DG")), dr_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="DR")), ff_nu_area_ha=Sum("nu_area_ha", filter=Q(no_estagio__exact="FF"))).order_by("dt_t_um")
+                'co_funai',
+                'no_ti',
+                'ti_nu_area_ha'
+            ).annotate(
+                total_nu_area_ha=Sum("nu_area_ha"),
+                quantity_polygons=Count(
+                    "no_estagio",
+                    output_field=FloatField()
+                ),
+                cr_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="CR")
+                ),
+                dg_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="DG")
+                ),
+                dr_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="DR")
+                ),
+                ff_nu_area_ha=Sum(
+                    "nu_area_ha",
+                    filter=Q(no_estagio__exact="FF")
+                )
+            ).order_by("no_ti")
+        return models.MonitoringConsolidatedStats.objects.values(
+            'co_funai',
+            'no_ti',
+            'dt_t_um',
+            'ti_nu_area_ha'
+        ).annotate(
+            total_nu_area_ha=Sum("nu_area_ha"),
+            quantity_polygons=Count(
+                "no_estagio",
+                output_field=FloatField()
+            ),
+            cr_nu_area_ha=Sum(
+                "nu_area_ha",
+                filter=Q(no_estagio__exact="CR")
+            ),
+            dg_nu_area_ha=Sum(
+                "nu_area_ha",
+                filter=Q(no_estagio__exact="DG")
+            ),
+            dr_nu_area_ha=Sum(
+                "nu_area_ha",
+                filter=Q(no_estagio__exact="DR")
+            ),
+            ff_nu_area_ha=Sum(
+                "nu_area_ha",
+                filter=Q(no_estagio__exact="FF")
+            )
+        ).order_by("dt_t_um")
