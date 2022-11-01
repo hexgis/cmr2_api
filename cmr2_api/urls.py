@@ -73,4 +73,8 @@ urlpatterns = [
         ('documental.urls','documental'),
         namespace='documental'),
     ),
+    path('catalog/', include(
+        ('catalog.urls', 'catalog'),
+        namespace='catalog'),
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
