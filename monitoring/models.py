@@ -153,3 +153,110 @@ class MonitoringConsolidated(models.Model):
             str: model data name.
         """
         return f'{self.no_ti} - {self.dt_t_um} - {self.no_estagio}'
+
+
+class MonitoringConsolidatedStats(models.Model):
+    """MonitoringConsolidated model data for monitoring model."""
+
+    no_imagem = models.CharField(
+        _('Image identifier'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    dt_imagem = models.DateField(
+        _('Image date'),
+        null=True,
+        blank=True,
+    )
+
+    no_estagio = models.CharField(
+        _('Stage name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    dt_t_um = models.DateField(
+        _('Date of changes hadn"t began'),
+        null=True,
+        blank=True,
+    )
+
+    dt_cadastro = models.DateField(
+        _('Date of registration'),
+        null=True,
+        blank=True,
+    )
+
+    nu_area_km2 = models.DecimalField(
+        _('Area polygon km2'),
+        max_digits=14,
+        decimal_places=3,
+        null=True,
+        blank=True,
+    )
+
+    nu_area_ha = models.DecimalField(
+        _('Area polygon ha'),
+        max_digits=14,
+        decimal_places=3,
+        null=True,
+        blank=True,
+    )
+
+    no_ciclo = models.CharField(
+        _('Cycle of monitoring Indigenous Lands in the Legal Amazon'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    co_cr = models.BigIntegerField(
+        _('Funai code'),
+        blank=True,
+        null=True,
+    )
+
+    ds_cr = models.CharField(
+        _('Regional Coordination name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    co_funai = models.IntegerField(
+        _('Funai code - Indigenou Lands'),
+        blank=True,
+        null=True,
+    )
+
+    no_ti = models.CharField(
+        _('Indigenou Lands name'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    ti_nu_area_ha = models.DecimalField(
+        _('Area Indigenou Lands ha'),
+        max_digits=14,
+        decimal_places=3,
+        null=True,
+        blank=True,
+    )
+
+    geom = models.GeometryField(
+        _('Geometry Field'),
+        srid=4326,
+        blank=True,
+        null=True,
+    )
+
+    class Meta:
+        app_label = 'monitoring'
+        verbose_name = 'Monitoring Consolidated Statistic'
+        verbose_name_plural = 'Monitorings Consolidated Statistics'
+        # db_table = 'funaidados\".\"img_monitoramento_ti_consolidado_a'
+        # managed = False
