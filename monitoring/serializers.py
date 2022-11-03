@@ -37,9 +37,7 @@ class MonitoringConsolidatedSerializer(
 
 
 class MonitoringConsolidatedDetailSerializer(serializers.ModelSerializer):
-    """
-    Serializer for detailed `models.MonitoringConsolidated` data.
-    """
+    """Serializer for detailed `models.MonitoringConsolidated` data."""
 
     class Meta:
         """
@@ -82,14 +80,14 @@ class MonitoringConsolidatedClassesSerializer(serializers.ModelSerializer):
         fields = ('no_estagio',)
 
 
-class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
+class MonitoringConsolidatedTableSerializer(
+    serializers.ModelSerializer
+):
     """Serializer for table 'models.MonitoringConsolidated' data."""
 
     class Meta:
-        """
-        Meta class for
-        `MonitoringConsolidatedTableSerializer` serializer.
-        """
+        """Meta class for
+        `MonitoringConsolidatedTableSerializer` serializer."""
         model = models.MonitoringConsolidated
         id_field = False
         fields = (
@@ -113,10 +111,10 @@ class MonitoringConsolidatedTableSerializer(serializers.ModelSerializer):
         )
 
 
-class MonitoringConsolidatedStatsByCoFunaiAndYearSerializer(
+class MonitoringConsolidatedByCoFunaiAndYearSerializer(
     serializers.ModelSerializer
 ):
-    """Serializer for table `models.MonitoringConsolidatedStats` data."""
+    """Serializer for table `models.MonitoringConsolidated` data."""
 
     ano = serializers.IntegerField()
     cr_nu_area_ha = serializers.FloatField()
@@ -127,9 +125,8 @@ class MonitoringConsolidatedStatsByCoFunaiAndYearSerializer(
 
     class Meta:
         """Meta class for
-        `MonitoringConsolidatedStatsByCoFunaiAndYearSerializer`
-        serializer."""
-        model = models.MonitoringConsolidatedStats
+        `MonitoringConsolidatedByCoFunaiAndYearSerializer` serializer."""
+        model = models.MonitoringConsolidated
         fields = [
             'ano',
             'co_funai',
@@ -143,10 +140,8 @@ class MonitoringConsolidatedStatsByCoFunaiAndYearSerializer(
         ]
 
 
-class MonitoringConsolidatedStatsByCoFunaiSerializer(
-    serializers.ModelSerializer
-):
-    """Serializer for table `models.MonitoringConsolidatedStats` data."""
+class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
+    """Serializer for table `models.MonitoringConsolidated` data."""
 
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()
@@ -155,9 +150,9 @@ class MonitoringConsolidatedStatsByCoFunaiSerializer(
     total_nu_area_ha = serializers.FloatField()
 
     class Meta:
-        """Meta class for `MonitoringConsolidatedStatsByCoFunaiSerializer` 
+        """Meta class for `MonitoringConsolidatedByCoFunaiSerializer`
         serializer."""
-        model = models.MonitoringConsolidatedStats
+        model = models.MonitoringConsolidated
         fields = [
             'co_funai',
             'no_ti',
@@ -170,10 +165,8 @@ class MonitoringConsolidatedStatsByCoFunaiSerializer(
         ]
 
 
-class MonitoringConsolidatedStatsByYearSerializer(
-        serializers.ModelSerializer
-):
-    """Serializer for table `models.MonitoringConsolidatedStats` data."""
+class MonitoringConsolidatedByYearSerializer(serializers.ModelSerializer):
+    """Serializer for table `models.MonitoringConsolidated` data."""
 
     ano = serializers.IntegerField()
     cr_nu_area_ha = serializers.FloatField()
@@ -183,9 +176,9 @@ class MonitoringConsolidatedStatsByYearSerializer(
     total_nu_area_ha = serializers.FloatField()
 
     class Meta:
-        """Meta class for `MonitoringConsolidatedStatsByYearSerializer`
+        """Meta class for `MonitoringConsolidatedByYearSerializer`
         serializer."""
-        model = models.MonitoringConsolidatedStats
+        model = models.MonitoringConsolidated
         fields = [
             'ano',
             'cr_nu_area_ha',
@@ -196,8 +189,8 @@ class MonitoringConsolidatedStatsByYearSerializer(
         ]
 
 
-class MonitoringConsolidatedStatsByDaySerializer(serializers.ModelSerializer):
-    """Serializer for table `models.MonitoringConsolidatedStats` data."""
+class MonitoringConsolidatedByDaySerializer(serializers.ModelSerializer):
+    """Serializer for table `models.MonitoringConsolidated` data."""
 
     cr_nu_area_ha = serializers.FloatField()
     dg_nu_area_ha = serializers.FloatField()
@@ -206,9 +199,9 @@ class MonitoringConsolidatedStatsByDaySerializer(serializers.ModelSerializer):
     total_nu_area_ha = serializers.FloatField()
 
     class Meta:
-        """Meta class for `MonitoringConsolidatedStatsByDaySerializer`
+        """Meta class for `MonitoringConsolidatedByDaySerializer`
         serializer."""
-        model = models.MonitoringConsolidatedStats
+        model = models.MonitoringConsolidated
         fields = [
             'co_funai',
             'no_ti',
