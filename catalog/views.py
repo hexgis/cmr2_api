@@ -39,11 +39,11 @@ class CatalogView(AuthModelMixIn, generics.ListAPIView):
             (min lon, min lat, max lon, max lat).
 
     Returns:
-        * if filter satellit is `sat_landsat8=2`
-            `serializers.Landsat8CatalogSerializer` of data in 
+        * if filter satellit is `sat_landsat8=LC08`
+            `serializers.Landsat8CatalogSerializer` of data in
             `models.Landsat8Catalog`.
-        * if filter satellit is `sat_sentinel2=3`
-            `serializers.Sentinel2CatalogSerializer` of data in 
+        * if filter satellit is `sat_sentinel2=Sentinel-2`
+            `serializers.Sentinel2CatalogSerializer` of data in
             `models.Sentinel2Catalog`.
     """
 
@@ -54,23 +54,71 @@ class CatalogView(AuthModelMixIn, generics.ListAPIView):
         gis_filters.InBBoxFilter,
     )
 
-    sat_landsat8=2
-    sat_sentinel2=3
-
     def get_queryset(self):
-        request_satellite = int(self.request.GET.get('satellite'))
-        if request_satellite == self.sat_sentinel2:
+        """Get method to return one data set acoording to satellite changed.
+
+        Returns a satellite filtered model class in `views.CatalogView`.
+
+        Returns:
+            * satellite `Sentinel-2`:
+                `models.Sentinel2Catalog`
+            * satellite `LC08`:
+                `models.Landsat8Catalog`
+        """
+        request_satellite = self.get_satellite_identifier()
+        if request_satellite == "Sentinel-2":
             return models.Sentinel2Catalog.objects.all()
-        elif request_satellite == self.sat_landsat8:
+        elif request_satellite == "LC08":
             return models.Landsat8Catalog.objects.all()
 
     def get_serializer_class(self):
-        request_satellite = int(self.request.GET.get('satellite'))
-        if request_satellite == self.sat_sentinel2:
+        """Get method to return one data set acoording to satellite changed.
+
+        Returns one serializers class to `views.CatalogView`
+
+        Returns:
+            `serializers.Sentinel2CatalogSerializer` or
+            `serializers.Landsat8CatalogSerializer`.
+        """
+        request_satellite = self.get_satellite_identifier()
+        if request_satellite == "Sentinel-2":
             return serializers.Sentinel2CatalogSerializer
-        elif request_satellite == self.sat_landsat8:
+        elif request_satellite == "LC08":
             return serializers.Landsat8CatalogSerializer
         else:
             raise exceptions.ParseError(
                 f"Satellite identify - {request_satellite} not defined!", None
             )
+
+    def get_satellite_identifier(self):
+        """Checks if the request satellite exists and 
+        
+        Returns the satellite identifier
+        """
+        request_satellite = str(self.request.GET.get('satellite'))
+        satellite_selected = models.Satellite.objects.values("identifier").filter(
+            identifier__exact = request_satellite).get()
+
+        return satellite_selected['identifier']
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# sat_sentinel2 = models.Satellite.objects.values("identifier").filter(
+#     identifier__exact = 'Sentinel-2').get()
+

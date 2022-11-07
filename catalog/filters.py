@@ -13,8 +13,8 @@ class CatalogFilter(rest_framework.FilterSet):
         * end_date (str): filtering end date.
     """
 
-    satellite = rest_framework.NumberFilter(
-        field_name='satellite',
+    satellite = rest_framework.CharFilter(
+        field_name='satellite_id__identifier',
         lookup_expr='exact',
         required=True,
     )
