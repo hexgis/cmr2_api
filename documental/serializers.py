@@ -97,6 +97,7 @@ class DocsDocumentTISerializers(serializers.ModelSerializer):
         fields = [
             'dt_document',
             'no_extension',
+            'file',
         ] + list_fields_serializers_commun
 
     def to_representation(self, instance):
@@ -145,7 +146,19 @@ class DocsMapotecaSerializers(serializers.ModelSerializer):
         return url_document
 
 
-class DocumentUploadSerializer(serializers.ModelSerializer):
+class DocsDocumentTIUploadSerializers(serializers.ModelSerializer):
     class Meta:
-        model = models.DocumentUpload
+        model = models.DocsDocumentTI
         fields = "__all__"
+
+    def create(self, validated_data):
+        """Method for saving  DocsDocumentTI serialized data
+        on database.
+        Args:
+            validated_data (dict): DocsDocumentTI serialized data
+        Returns:
+            dict: DocsDocumentTI serialized data
+        """
+        result = models.DocsDocumentTI.objects.create(**validated_data)
+        result.save()
+        return result

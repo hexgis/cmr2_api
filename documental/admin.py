@@ -56,6 +56,7 @@ class DocsDocumentTIAdmin(admin.ModelAdmin):
     list_display = [
         'no_extension',
         'dt_document',
+        'file',
     ] + list_fields_admin_commun
 
     fields = list_display

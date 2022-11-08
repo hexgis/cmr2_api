@@ -98,7 +98,7 @@ class DocumentalDocs(models.Model):
         null=True,
         blank=True,
     )
-    
+
     uploaded_at = models.DateTimeField(auto_now_add=True, null=True)
 
     usercmr_id = models.ForeignKey(
@@ -227,6 +227,11 @@ class DocsDocumentTI(DocumentalDocs):
         blank=True,
     )
 
+    file = models.FileField(
+        _('Docs DocumentTI file path'),
+        upload_to='DocumentTI/%Y%m%d/',
+    )
+
     class Meta:
         """"Meta class for `documental.DocsDocumentTI` model."""
         app_label = 'documental'
@@ -277,29 +282,3 @@ class DocsMapoteca(DocumentalDocs):
             str: model data document name.
         """
         return self.no_document
-
-
-class DocumentUpload(models.Model):
-
-    # uploaded_at = models.DateTimeField(auto_now_add=True)
-
-    filee = models.FileField(upload_to='specs')
-
-    dt_cadastro = models.DateTimeField(  # dt_cadastro
-        _('Document registration date'),
-        auto_now_add=True
-    )
-
-    id_acao = models.ForeignKey(
-        'documental.DocsAction',
-        on_delete=models.DO_NOTHING,
-        related_name='documentosdocs_action',
-        null=True
-    )
-
-    class Meta:
-        # ordering = ['uploaded_at']
-        app_label = 'documental'
-
-    # def __str__(self):
-    #     return self.file.name

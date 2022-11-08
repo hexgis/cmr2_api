@@ -1,7 +1,8 @@
 from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import FileUploadParser
+from rest_framework.parsers import (
+    FileUploadParser, MultiPartParser, FormParser)
 from rest_framework.views import APIView
 from django.urls import reverse_lazy
 from rest_framework.response import Response
@@ -36,7 +37,7 @@ class ActionListView(AuthModelMix, generics.ListAPIView):
     serializer_class = serializers.ActionListSerializers
     filterset_class = documental_filters.DocsActionFilter
     filter_backends = (DjangoFilterBackend,)
-    
+
 
 class DocumentalListViews(AuthModelMix, generics.ListAPIView):
     """Return three data set acoording to the selected actions in the request.
@@ -141,51 +142,38 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
         else:
             raise exceptions.ParseError(
                 "ERROR in the data set returned", None)
-                
-
-# class DocumentView(APIView):
-
-#     http_method_names = ['post']
-#     model = models.DocumentUpload
-#     success_url = reverse_lazy('/')
-#     parser_class = (FileUploadParser,)
-#     permission_classes = [IsAuthenticated, ]
-
-#     def post(self, request, *args, **kwargs):
-#         file_serializer = serializers.DocumentUploadSerializer(data=request.data)
-#         if file_serializer.is_valid():
-#             file_serializer.save(user=self.request.user)
-#             # save all fields 
-#             dt_cadastro = request.data.get('dt_cadastro')
-#             id_acao = request.data.get('id_acao')
-
-#             return Response(file_serializer.data, 
-#                 status=status.HTTP_201_CREATED)
-
-#         else:
-#             return Response(file_serializer.errors, 
-#                 status=status.HTTP_400_BAD_REQUEST)
 
 
-class DocumentUploadView(AuthModelMix, generics.GenericAPIView):
+class DocumentUploadView(generics.ListCreateAPIView):
 
-    def post(self, request):
-        import pdb; pdb.set_trace()
-        if request.method == 'POST' and request.FILES['arquivo']:
-            instance = models.DocumentUpload(
-                filee=request.FILES['arquivo'],
-                # dt_cadastro=request.FILES['registration_date']
-                # id_acao= 8
-                # Para concluir essa demanda sera necessária código em 
-                # code-review. Nesse trecho seram inseridos os atributos da 
-                # nova Model do Documental modelada na 
-                # branch "Feature/end points mapoteca".
-                # Depois será removida a class DocumentUpload e associações.
+    serializer_class = serializers.DocsDocumentTIUploadSerializers
 
-            )
-            instance.save()
-            return Response("conteasdfnt", status=status.HTTP_200_OK)
-        
+    def upload_file(request):
+        if request.method == 'POST':
+            serializer = serializers.DocsDocumentTIUploadSerializers(
+                request.POST, request.FILES)
+            if serializer.is_valid():
+                serializer.save(
+                    id_document=request.data['id_document'],
+                    path_document=request.data['path_document'],
+                    no_document=request.data['no_document'],
+                    uploaded_at=request.data['uploaded_at'],
+                    usercmr_id=request.data['usercmr_id'],
+                    st_availablest_available=request.data['st_available'],
+                    st_excludedst_excluded=request.data['st_excluded'],
+                    dt_registrationdt_registration=request.data['dt_registration'],
+                    dt_update=request.data['dt_update'],
+                    co_funai=request.data['co_funai'],
+                    no_ti=request.data['no_ti'],
+                    action_id=request.data['action_id'],
+                    co_cr=request.data['co_cr'],
+                    ds_cr=request.data['ds_cr'],
+                    dt_document=request.data['dt_document'],
+                    no_extension=request.data['no_extension'],
+                    file=request.FILES['file']
+                )
+                # return HttpResponseRedirect('/success/url/')
+                return Response(status=status.HTTP_201_CREATED)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
         else:
-            return Response("ERROR in request.", 
-                status=status.HTTP_400_BAD_REQUEST)
+            return Response("ERROR in request.", status=status.HTTP_400_BAD_REQUEST)
