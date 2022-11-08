@@ -21,24 +21,5 @@ class MonitoringConsolidatedAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
-class MonitoringConsolidatedStatsAdmin(admin.ModelAdmin):
-    """MonitoringConsolidatedAdmin model data."""
-
-    list_display = (
-        'dt_t_um',
-        'no_estagio',
-        'nu_area_ha',
-        'co_cr',
-        'ds_cr',
-        'co_funai',
-        'no_ti',
-    )
-
-    fields = list_display
-
-    search_fields = list_display
-
-
 admin.site.register(models.MonitoringConsolidated, MonitoringConsolidatedAdmin)
-admin.site.register(models.MonitoringConsolidatedStats,
-                    MonitoringConsolidatedStatsAdmin)
+

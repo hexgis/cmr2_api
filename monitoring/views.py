@@ -134,11 +134,13 @@ class MonitoringConsolidatedTableStatsView(
     """Return four data set acoording to the selected grouping in the request.
 
     Filters:
-        co_cr (list): filtering Regional Coordenation using code.
-        co_funai (list): filtering Indigenou Lands using Funai code.
-        stage (list): stage name. E.g.: CR, DG, FF, DR.
-        start_date (str): filtering start date.
-        end_date (str): filteringend ende date.
+        * co_cr (list): filtering Regional Coordenation using code.
+        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * stage (list): stage name. E.g.: CR, DG, FF, DR.
+        * start_date (str): filtering start date.
+        * end_date (str): filteringend ende date.
+        * in_bbox (bbox): bounding box
+            (min lon, min lat, max lon, max lat).
 
     Group by:
         grouping (str): define applied data grouping. . E.g.:
@@ -149,21 +151,21 @@ class MonitoringConsolidatedTableStatsView(
 
     Returns group by in request field grouping:
         * monitoring_by_year:
-            `models.MonitoringConsolidatedStats` group by YEAR.
-            `serializers.MonitoringConsolidatedStatsByYearSerializer`.
+            `models.MonitoringConsolidated` group by YEAR.
+            `serializers.MonitoringConsolidatedByYearSerializer`.
         * monitoring_by_co_funai:
-            `models.MonitoringConsolidatedStats` group by CO_FUANI.
-            `serializers.MonitoringConsolidatedStatsByCoFunaiSerializer`.
+            `models.MonitoringConsolidated` group by CO_FUANI.
+            `serializers.MonitoringConsolidatedByCoFunaiSerializer`.
         * monitoring_by_co_funai_and_year:
-            `models.MonitoringConsolidatedStats` group by CO_FUANI and YEAR.
-            `serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer`.
+            `models.MonitoringConsolidated` group by CO_FUANI and YEAR.
+            `serializers.MonitoringConsolidatedByCoFunaiAndYearSerializer`.
         * DEFAULT is iquals monitoring_by_day:
             Used when request is None or not metch with keys previously listed.
-            `models.MonitoringConsolidatedStats` group by CO_FUANI and YEAR.
-            `serializers.MonitoringConsolidatedStatsByDaySerializer`.
+            `models.MonitoringConsolidated` group by CO_FUANI and YEAR.
+            `serializers.MonitoringConsolidatedByDaySerializer`.
     """
 
-    filterset_class = monitoring_filters.MonitoringConsolidatedStatsFilter
+    filterset_class = monitoring_filters.MonitoringConsolidatedFilter
     filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
@@ -172,56 +174,52 @@ class MonitoringConsolidatedTableStatsView(
     def get_serializer_class(self):
         """Get method to return one data set acoording to selected GROUPING.
 
-        Returns one serializers class to 
+        Returns one serializers class to
         `views.MonitoringConsolidatedTableStatsView`
 
         Returns:
-            `serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer`
-            or
-            `serializers.MonitoringConsolidatedStatsByCoFunaiSerializer`
-            or
-            `serializers.MonitoringConsolidatedStatsByYearSerializer`
-            or
-            `serializers.MonitoringConsolidatedStatsByDaySerializer`.
+            `serializers.MonitoringConsolidatedByCoFunaiAndYearSerializer` or
+            `serializers.MonitoringConsolidatedByCoFunaiSerializer` or
+            `serializers.MonitoringConsolidatedByYearSerializer`or
+            `serializers.MonitoringConsolidatedByDaySerializer`.
         """
         data_grouping = self.request.GET.get('grouping', None)
 
         if data_grouping == "monitoring_by_co_funai_and_year":
-            return serializers.MonitoringConsolidatedStatsByCoFunaiAndYearSerializer
+            return serializers.MonitoringConsolidatedByCoFunaiAndYearSerializer
         elif data_grouping == "monitoring_by_co_funai":
-            return serializers.MonitoringConsolidatedStatsByCoFunaiSerializer
+            return serializers.MonitoringConsolidatedByCoFunaiSerializer
         elif data_grouping == "monitoring_by_year":
-            return serializers.MonitoringConsolidatedStatsByYearSerializer
-        return serializers.MonitoringConsolidatedStatsByDaySerializer
+            return serializers.MonitoringConsolidatedByYearSerializer
+        return serializers.MonitoringConsolidatedByDaySerializer
 
     def get_queryset(self):
         """
-        Get method to return grouping data set acoording to selected
-        GROUPING.
+        Get method to return grouping data set acoording to selected GROUPING.
 
         Returns query grouping in class
         `views.MonitoringConsolidatedTableStatsView`.
 
         Returns:
             * Grouping `monitoring_by_co_funai_and_year`:
-                `models.MonitoringConsolidatedStats`
+                `models.MonitoringConsolidated`
                 group by CO_FUANI and YEAR.
 
             * Grouping `monitoring_by_year`:
-                `models.MonitoringConsolidatedStats`
+                `models.MonitoringConsolidated`
                 group by YEAR.
 
             * Grouping `monitoring_by_co_funai`:
-                `models.MonitoringConsolidatedStats`
+                `models.MonitoringConsolidated`
                 group by CO_FUANI.
 
             * Grouping DEFAULT:
-                `models.MonitoringConsolidatedStats`
+                `models.MonitoringConsolidated`
                 group by CO_FUANI and YEAR.
         """
         data_grouping = self.request.GET.get('grouping', None)
         if data_grouping == "monitoring_by_co_funai_and_year":
-            return models.MonitoringConsolidatedStats.objects.values(
+            return models.MonitoringConsolidated.objects.values(
                 'co_funai',
                 'no_ti',
                 'ti_nu_area_ha',
@@ -249,7 +247,7 @@ class MonitoringConsolidatedTableStatsView(
                 )
             ).order_by("ano")
         elif data_grouping == "monitoring_by_year":
-            return models.MonitoringConsolidatedStats.objects.values(
+            return models.MonitoringConsolidated.objects.values(
                 ano=functions.ExtractYear('dt_t_um')
             ).annotate(
                 total_nu_area_ha=Sum("nu_area_ha"),
@@ -274,7 +272,7 @@ class MonitoringConsolidatedTableStatsView(
                 )
             ).order_by("ano")
         elif data_grouping == "monitoring_by_co_funai":
-            return models.MonitoringConsolidatedStats.objects.values(
+            return models.MonitoringConsolidated.objects.values(
                 'co_funai',
                 'no_ti',
                 'ti_nu_area_ha'
@@ -301,7 +299,7 @@ class MonitoringConsolidatedTableStatsView(
                     filter=Q(no_estagio__exact="FF")
                 )
             ).order_by("no_ti")
-        return models.MonitoringConsolidatedStats.objects.values(
+        return models.MonitoringConsolidated.objects.values(
             'co_funai',
             'no_ti',
             'dt_t_um',
