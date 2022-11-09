@@ -229,7 +229,7 @@ class DocsDocumentTI(DocumentalDocs):
 
     file = models.FileField(
         _('Docs DocumentTI file path'),
-        upload_to='DocumentTI/%Y%m%d/',
+        upload_to='DocumentTI/',
     )
 
     class Meta:

@@ -147,15 +147,19 @@ class DocsMapotecaSerializers(serializers.ModelSerializer):
 
 
 class DocsDocumentTIUploadSerializers(serializers.ModelSerializer):
+    """Serializer for saving DOCUMENTS_TI `models.DocsMapoteca` data."""
+
     class Meta:
+        """Meta class for `DocsDocumentTIUploadSerializers` serializer."""
         model = models.DocsDocumentTI
         fields = "__all__"
 
     def create(self, validated_data):
-        """Method for saving  DocsDocumentTI serialized data
-        on database.
+        """Method for saving  DocsDocumentTI serialized data on database.
+
         Args:
             validated_data (dict): DocsDocumentTI serialized data
+            
         Returns:
             dict: DocsDocumentTI serialized data
         """

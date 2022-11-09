@@ -145,10 +145,16 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
 
 
 class DocumentUploadView(generics.ListCreateAPIView):
-
+    """View to upload the files and their attributes `models.DocsDocumentTI`.
+    """
     serializer_class = serializers.DocsDocumentTIUploadSerializers
 
     def upload_file(request):
+        """Upload the dataset to add DOCUMENTS_TI file to the DOCUMENTS_TI.
+
+        Returns:
+            dict: upload dataset 
+        """
         if request.method == 'POST':
             serializer = serializers.DocsDocumentTIUploadSerializers(
                 request.POST, request.FILES)
