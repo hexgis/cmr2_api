@@ -165,4 +165,49 @@ class DocsDocumentTIUploadSerializers(serializers.ModelSerializer):
         """
         result = models.DocsDocumentTI.objects.create(**validated_data)
         result.save()
+
+        return result
+
+class DocsLandUserUploadSerializers(serializers.ModelSerializer):
+    """Serializer for saving DOCUMENTS_TI `models.DocsMapoteca` data."""
+
+    class Meta:
+        """Meta class for `DocsLandUserUploadSerializers` serializer."""
+        model = models.DocsLandUser
+        fields = "__all__"
+
+    def create(self, validated_data):
+        """Method for saving  DocsLandUser serialized data on database.
+
+        Args:
+            validated_data (dict): DocsLandUser serialized data
+            
+        Returns:
+            dict: DocsLandUser serialized data
+        """
+        result = models.DocsLandUser.objects.create(**validated_data)
+        result.save()
+
+        return result
+
+class DocsMapotecaUploadSerializers(serializers.ModelSerializer):
+    """Serializer for saving DOCUMENTS_TI `models.DocsMapoteca` data."""
+
+    class Meta:
+        """Meta class for `DocsMapotecaUploadSerializers` serializer."""
+        model = models.DocsMapoteca
+        fields = "__all__"
+
+    def create(self, validated_data):
+        """Method for saving  DocsMapoteca serialized data on database.
+
+        Args:
+            validated_data (dict): DocsMapoteca serialized data
+            
+        Returns:
+            dict: DocsMapoteca serialized data
+        """
+        result = models.DocsMapoteca.objects.create(**validated_data)
+        result.save()
+
         return result

@@ -4,13 +4,13 @@ from documental import models
 
 """List of common fields for DjangoAdmin classes."""
 list_fields_admin_commun = [
+    'file',
     'id_document',
     'path_document',
     'no_document',
     'usercmr_id',
     'st_available',
     'st_excluded',
-    'dt_registration',
     'dt_update',
     'co_funai',
     'no_ti',
@@ -56,12 +56,12 @@ class DocsDocumentTIAdmin(admin.ModelAdmin):
     list_display = [
         'no_extension',
         'dt_document',
-        'file',
+        'dt_registration',
     ] + list_fields_admin_commun
 
-    fields = list_display
+    fields = list_fields_admin_commun
 
-    search_fields = list_display
+    search_fields = list_fields_admin_commun
 
 
 class DocsLandUserAdmin(admin.ModelAdmin):
@@ -70,11 +70,12 @@ class DocsLandUserAdmin(admin.ModelAdmin):
     list_display = [
         'nu_year',
         'nu_year_map',
+        'dt_registration',
     ] + list_fields_admin_commun
 
-    fields = list_display
+    fields = list_fields_admin_commun
 
-    search_fields = list_display
+    search_fields = list_fields_admin_commun
 
 
 class DocsMapotecaAdmin(admin.ModelAdmin):
@@ -84,11 +85,12 @@ class DocsMapotecaAdmin(admin.ModelAdmin):
         'no_description',
         'map_dimension',
         'js_ti',
+        'dt_registration',
     ] + list_fields_admin_commun
 
-    fields = list_display
+    fields = list_fields_admin_commun
 
-    search_fields = list_display
+    search_fields = list_fields_admin_commun
 
 
 admin.site.register(models.DocsAction, DocsActionAdmin)

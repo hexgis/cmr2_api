@@ -99,8 +99,6 @@ class DocumentalDocs(models.Model):
         blank=True,
     )
 
-    uploaded_at = models.DateTimeField(auto_now_add=True, null=True)
-
     usercmr_id = models.ForeignKey(
         'documental.UsersCMR',
         on_delete=models.DO_NOTHING,
@@ -123,8 +121,8 @@ class DocumentalDocs(models.Model):
 
     dt_registration = models.DateTimeField(
         _('Document registration date'),
+        auto_now_add=True,
         null=True,
-        blank=True,
     )
 
     dt_update = models.DateTimeField(
@@ -195,6 +193,11 @@ class DocsLandUser(DocumentalDocs):
         _('Year of the map'),
         null=True,
         blank=True,
+    )
+
+    file = models.FileField(
+        _('Docs DocumentTI file path'),
+        upload_to='DocsLandUser/',
     )
 
     class Meta:
@@ -268,6 +271,11 @@ class DocsMapoteca(DocumentalDocs):
         max_length=255,
         blank=True,
         null=True,
+    )
+
+    file = models.FileField(
+        _('Docs DocsMapoteca file path'),
+        upload_to='DocsMapoteca/',
     )
 
     class Meta:
