@@ -1,6 +1,6 @@
-from django.db.models import Count, FloatField, Q, Sum, functions
+from django.db.models import Count, DecimalField, FloatField, F, Q, Sum, functions, Value
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, permissions, response, status
+from rest_framework import generics, permissions, response, status, exceptions
 from rest_framework_gis import filters as gis_filters
 
 from monitoring import filters as monitoring_filters
@@ -126,7 +126,7 @@ class MonitoringConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
         gis_filters.InBBoxFilter,
     )
 
-
+from django.shortcuts import render
 class MonitoringConsolidatedTableStatsView(
     AuthModelMixIn,
     generics.ListAPIView
@@ -164,12 +164,14 @@ class MonitoringConsolidatedTableStatsView(
             `models.MonitoringConsolidated` group by CO_FUANI and YEAR.
             `serializers.MonitoringConsolidatedByDaySerializer`.
     """
-
+    # queryset = models.MonitoringConsolidated.objects.all()
     filterset_class = monitoring_filters.MonitoringConsolidatedFilter
     filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
     )
+
+   
 
     def get_serializer_class(self):
         """Get method to return one data set acoording to selected GROUPING.
@@ -219,6 +221,7 @@ class MonitoringConsolidatedTableStatsView(
         """
         data_grouping = self.request.GET.get('grouping', None)
         if data_grouping == "monitoring_by_co_funai_and_year":
+
             return models.MonitoringConsolidated.objects.values(
                 'co_funai',
                 'no_ti',
@@ -247,7 +250,10 @@ class MonitoringConsolidatedTableStatsView(
                 )
             ).order_by("ano")
         elif data_grouping == "monitoring_by_year":
-            return models.MonitoringConsolidated.objects.values(
+            print("--------------2----------->>>>>>>>>---------")
+            # import pdb; pdb.set_trace()
+
+            querysett = models.MonitoringConsolidated.objects.values(
                 ano=functions.ExtractYear('dt_t_um')
             ).annotate(
                 total_nu_area_ha=Sum("nu_area_ha"),
@@ -269,10 +275,18 @@ class MonitoringConsolidatedTableStatsView(
                 ff_nu_area_ha=Sum(
                     "nu_area_ha",
                     filter=Q(no_estagio__exact="FF")
-                )
+                ),
+                cr_nu_area_perc=F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(100, output_field=DecimalField(max_digits=3, decimal_places=3)),
+                dg_nu_area_perc=F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(100, output_field=DecimalField(max_digits=3, decimal_places=3)),
+                dr_nu_area_perc=F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(100, output_field=DecimalField(max_digits=3, decimal_places=3)),
+                ff_nu_area_perc=F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(100, output_field=DecimalField(max_digits=3, decimal_places=3))
             ).order_by("ano")
+            import pdb; pdb.set_trace()
+
+            return querysett
         elif data_grouping == "monitoring_by_co_funai":
-            return models.MonitoringConsolidated.objects.values(
+
+            querysett = models.MonitoringConsolidated.objects.values(
                 'co_funai',
                 'no_ti',
                 'ti_nu_area_ha'
@@ -297,8 +311,18 @@ class MonitoringConsolidatedTableStatsView(
                 ff_nu_area_ha=Sum(
                     "nu_area_ha",
                     filter=Q(no_estagio__exact="FF")
-                )
+                ),
+                cr_nu_area_perc=F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(
+                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
+                dg_nu_area_perc=F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(
+                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
+                dr_nu_area_perc=F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(
+                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
+                ff_nu_area_perc=F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(
+                    100, output_field=DecimalField(max_digits=3, decimal_places=3))
             ).order_by("no_ti")
+
+            return querysett
         return models.MonitoringConsolidated.objects.values(
             'co_funai',
             'no_ti',
