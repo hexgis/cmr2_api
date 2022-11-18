@@ -1,4 +1,4 @@
-from django.db.models import Count, DecimalField, FloatField, F, Q, Sum, functions, Value
+from django.db.models import Count, DecimalField, FloatField, F, Q, Sum, functions, Value, ExpressionWrapper
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics, permissions, response, status, exceptions
 from rest_framework_gis import filters as gis_filters
@@ -217,14 +217,14 @@ class MonitoringConsolidatedTableStatsView(
             * Grouping `monitoring_by_co_funai_and_year`:
                 `models.MonitoringConsolidated`
                 group by CO_FUANI and YEAR.
-                
+    
             * Grouping `monitoring_by_co_funai_and_monthyear`:
                 `models.MonitoringConsolidated`
                 group by CO_FUANI and MONTH and YEAR.
-                
+
             * Grouping `monitoring_by_year`:
                 `models.MonitoringConsolidated`
-                group by YEAR.
+                group by YEAR.79089.307",
 
             * Grouping `monitoring_by_monthyear`:
                 `models.MonitoringConsolidated`
@@ -251,34 +251,46 @@ class MonitoringConsolidatedTableStatsView(
                 quantity_polygons=Count(
                     "no_estagio", output_field=FloatField()
                 ),
-                cr_nu_area_ha=Sum(
+                cr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR")
+                    filter=Q(no_estagio__exact="CR"),
+                    output_field=FloatField()), 0.0
                 ),
-                dg_nu_area_ha=Sum(
+                dg_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG")
+                    filter=Q(no_estagio__exact="DG"),
+                    output_field=FloatField()), 0.0
                 ),
-                dr_nu_area_ha=Sum(
+                dr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR")
+                    filter=Q(no_estagio__exact="DR"),
+                    output_field=FloatField()), 0.0
                 ),
-                ff_nu_area_ha=Sum(
+                ff_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF")
+                    filter=Q(no_estagio__exact="FF"),
+                    output_field=FloatField()), 0.0
                 ),
-                cr_nu_area_perc=F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                dg_nu_area_perc=F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                dr_nu_area_perc=F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                ff_nu_area_perc=F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3))
+                cr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                dg_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                dr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                ff_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                )
             ).order_by("ano")
 
         elif data_grouping == "monitoring_by_co_funai_and_monthyear":
-            
+
             return models.MonitoringConsolidated.objects.values(
                 'co_funai',
                 'no_ti',
@@ -290,31 +302,43 @@ class MonitoringConsolidatedTableStatsView(
                 quantity_polygons=Count(
                     "no_estagio", output_field=FloatField()
                 ),
-                cr_nu_area_ha=Sum(
+                cr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR")
+                    filter=Q(no_estagio__exact="CR"),
+                    output_field=FloatField()), 0.0
                 ),
-                dg_nu_area_ha=Sum(
+                dg_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG")
+                    filter=Q(no_estagio__exact="DG"),
+                    output_field=FloatField()), 0.0
                 ),
-                dr_nu_area_ha=Sum(
+                dr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR")
+                    filter=Q(no_estagio__exact="DR"),
+                    output_field=FloatField()), 0.0
                 ),
-                ff_nu_area_ha=Sum(
+                ff_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF")
+                    filter=Q(no_estagio__exact="FF"),
+                    output_field=FloatField()), 0.0
                 ),
-                cr_nu_area_perc=F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                dg_nu_area_perc=F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                dr_nu_area_perc=F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                ff_nu_area_perc=F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3))
-            ).order_by("mes")  
+                cr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                dg_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                dr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                ff_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                )
+            ).order_by("mes", "ano")
             
         elif data_grouping == "monitoring_by_year":
 
@@ -325,21 +349,25 @@ class MonitoringConsolidatedTableStatsView(
                 quantity_polygons=Count(
                     "no_estagio",
                     output_field=FloatField()),
-                cr_nu_area_ha=Sum(
+                cr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR")
+                    filter=Q(no_estagio__exact="CR"),
+                    output_field=FloatField()), 0.0
                 ),
-                dg_nu_area_ha=Sum(
+                dg_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG")
+                    filter=Q(no_estagio__exact="DG"),
+                    output_field=FloatField()), 0.0
                 ),
-                dr_nu_area_ha=Sum(
+                dr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR")
+                    filter=Q(no_estagio__exact="DR"),
+                    output_field=FloatField()), 0.0
                 ),
-                ff_nu_area_ha=Sum(
+                ff_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF")
+                    filter=Q(no_estagio__exact="FF"),
+                    output_field=FloatField()), 0.0
                 )
             ).order_by("ano")
 
@@ -353,23 +381,27 @@ class MonitoringConsolidatedTableStatsView(
                 quantity_polygons=Count(
                     "no_estagio",
                     output_field=FloatField()),
-                cr_nu_area_ha=Sum(
+                cr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR")
+                    filter=Q(no_estagio__exact="CR"),
+                    output_field=FloatField()), 0.0
                 ),
-                dg_nu_area_ha=Sum(
+                dg_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG")
+                    filter=Q(no_estagio__exact="DG"),
+                    output_field=FloatField()), 0.0
                 ),
-                dr_nu_area_ha=Sum(
+                dr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR")
+                    filter=Q(no_estagio__exact="DR"),
+                    output_field=FloatField()), 0.0
                 ),
-                ff_nu_area_ha=Sum(
+                ff_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF")
+                    filter=Q(no_estagio__exact="FF"),
+                    output_field=FloatField()), 0.0
                 )
-            ).order_by("mes")
+            ).order_by("mes", "ano")
 
         elif data_grouping == "monitoring_by_co_funai":
 
@@ -383,30 +415,42 @@ class MonitoringConsolidatedTableStatsView(
                     "no_estagio",
                     output_field=FloatField()
                 ),
-                cr_nu_area_ha=Sum(
+                cr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR")
+                    filter=Q(no_estagio__exact="CR"),
+                    output_field=FloatField()), 0.0
                 ),
-                dg_nu_area_ha=Sum(
+                dg_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG")
+                    filter=Q(no_estagio__exact="DG"),
+                    output_field=FloatField()), 0.0
                 ),
-                dr_nu_area_ha=Sum(
+                dr_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR")
+                    filter=Q(no_estagio__exact="DR"),
+                    output_field=FloatField()), 0.0
                 ),
-                ff_nu_area_ha=Sum(
+                ff_nu_area_ha=functions.Coalesce(Sum(
                     "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF")
+                    filter=Q(no_estagio__exact="FF"),
+                    output_field=FloatField()), 0.0
                 ),
-                cr_nu_area_perc=F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                dg_nu_area_perc=F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                dr_nu_area_perc=F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3)),
-                ff_nu_area_perc=F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(
-                    100, output_field=DecimalField(max_digits=3, decimal_places=3))
+                cr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                dg_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                dr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                ),
+                ff_nu_area_perc=functions.Coalesce(ExpressionWrapper(
+                    F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
+                    output_field=FloatField()),0.0
+                )
             ).order_by("no_ti")
 
         return models.MonitoringConsolidated.objects.values(
@@ -420,20 +464,24 @@ class MonitoringConsolidatedTableStatsView(
                 "no_estagio",
                 output_field=FloatField()
             ),
-            cr_nu_area_ha=Sum(
+            cr_nu_area_ha=functions.Coalesce(Sum(
                 "nu_area_ha",
-                filter=Q(no_estagio__exact="CR")
+                filter=Q(no_estagio__exact="CR"),
+                output_field=FloatField()), 0.0
             ),
-            dg_nu_area_ha=Sum(
+            dg_nu_area_ha=functions.Coalesce(Sum(
                 "nu_area_ha",
-                filter=Q(no_estagio__exact="DG")
+                filter=Q(no_estagio__exact="DG"),
+                output_field=FloatField()), 0.0
             ),
-            dr_nu_area_ha=Sum(
+            dr_nu_area_ha=functions.Coalesce(Sum(
                 "nu_area_ha",
-                filter=Q(no_estagio__exact="DR")
+                filter=Q(no_estagio__exact="DR"),
+                output_field=FloatField()), 0.0
             ),
-            ff_nu_area_ha=Sum(
+            ff_nu_area_ha=functions.Coalesce(Sum(
                 "nu_area_ha",
-                filter=Q(no_estagio__exact="FF")
+                filter=Q(no_estagio__exact="FF"),
+                output_field=FloatField()), 0.0
             )
         ).order_by("dt_t_um")
