@@ -122,9 +122,9 @@ class MonitoringConsolidatedByCoFunaiAndYearSerializer(
     dr_nu_area_ha = serializers.FloatField()
     ff_nu_area_ha = serializers.FloatField()
     cr_nu_area_perc = serializers.FloatField()
-    dg_nu_area_perc = serializers.DecimalField(max_digits=3, decimal_places=3)
-    dr_nu_area_perc = serializers.DecimalField(max_digits=3, decimal_places=3)
-    ff_nu_area_perc = serializers.DecimalField(max_digits=3, decimal_places=3)
+    dg_nu_area_perc = serializers.FloatField()
+    dr_nu_area_perc = serializers.FloatField()
+    ff_nu_area_perc = serializers.FloatField()
     total_nu_area_ha = serializers.FloatField()
 
     class Meta:
@@ -147,6 +147,43 @@ class MonitoringConsolidatedByCoFunaiAndYearSerializer(
             'total_nu_area_ha'
         ]
 
+class MonitoringConsolidatedByCoFunaiAndMonthYearSerializer(
+    serializers.ModelSerializer
+):
+    """Serializer for table `models.MonitoringConsolidated` data."""
+
+    mes = serializers.IntegerField()
+    ano = serializers.IntegerField()
+    cr_nu_area_ha = serializers.FloatField()
+    dg_nu_area_ha = serializers.FloatField()
+    dr_nu_area_ha = serializers.FloatField()
+    ff_nu_area_ha = serializers.FloatField()
+    cr_nu_area_perc = serializers.FloatField()
+    dg_nu_area_perc = serializers.FloatField()
+    dr_nu_area_perc = serializers.FloatField()
+    ff_nu_area_perc = serializers.FloatField()
+    total_nu_area_ha = serializers.FloatField()
+
+    class Meta:
+        """Meta class for
+        `MonitoringConsolidatedByCoFunaiAndMonthYearSerializer` serializer."""
+        model = models.MonitoringConsolidated
+        fields = [
+            'ano',
+            'mes',
+            'co_funai',
+            'no_ti',
+            'ti_nu_area_ha',
+            'cr_nu_area_ha',
+            'dg_nu_area_ha',
+            'dr_nu_area_ha',
+            'ff_nu_area_ha',
+            'cr_nu_area_perc',
+            'dg_nu_area_perc',
+            'dr_nu_area_perc',
+            'ff_nu_area_perc',
+            'total_nu_area_ha'
+        ]
 
 class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidated` data."""
@@ -156,9 +193,9 @@ class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
     dr_nu_area_ha = serializers.FloatField()
     ff_nu_area_ha = serializers.FloatField()
     cr_nu_area_perc = serializers.FloatField()
-    dg_nu_area_perc = serializers.DecimalField(max_digits=3, decimal_places=3)
-    dr_nu_area_perc = serializers.DecimalField(max_digits=3, decimal_places=3)
-    ff_nu_area_perc = serializers.DecimalField(max_digits=3, decimal_places=3)
+    dg_nu_area_perc = serializers.FloatField()
+    dr_nu_area_perc = serializers.FloatField()
+    ff_nu_area_perc = serializers.FloatField()
     total_nu_area_ha = serializers.FloatField()
 
     class Meta:
@@ -180,7 +217,32 @@ class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
             'total_nu_area_ha'
         ]
 
+class MonitoringConsolidatedByMonthYearSerializer(
+    serializers.ModelSerializer
+):
+    """Serializer for table `models.MonitoringConsolidated` data."""
 
+    mes = serializers.IntegerField()
+    ano = serializers.IntegerField()
+    cr_nu_area_ha = serializers.FloatField()
+    dg_nu_area_ha = serializers.FloatField()
+    dr_nu_area_ha = serializers.FloatField()
+    ff_nu_area_ha = serializers.FloatField()
+    total_nu_area_ha = serializers.FloatField()
+
+    class Meta:
+        """Meta class for
+        `MonitoringConsolidatedByMonthYearSerializer` serializer."""
+        model = models.MonitoringConsolidated
+        fields = [
+            'ano',
+            'mes',
+            'cr_nu_area_ha',
+            'dg_nu_area_ha',
+            'dr_nu_area_ha',
+            'ff_nu_area_ha',
+            'total_nu_area_ha'
+        ]
 class MonitoringConsolidatedByYearSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidated` data."""
 
