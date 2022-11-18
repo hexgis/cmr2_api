@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -198,6 +197,7 @@ class DocsLandUser(DocumentalDocs):
     file = models.FileField(
         _('Docs DocumentTI file path'),
         upload_to='DocsLandUser/',
+        default='Sem arquivo'
     )
 
     class Meta:
@@ -233,6 +233,7 @@ class DocsDocumentTI(DocumentalDocs):
     file = models.FileField(
         _('Docs DocumentTI file path'),
         upload_to='DocumentTI/',
+        default='Sem arquivo'
     )
 
     class Meta:
@@ -276,6 +277,7 @@ class DocsMapoteca(DocumentalDocs):
     file = models.FileField(
         _('Docs DocsMapoteca file path'),
         upload_to='DocsMapoteca/',
+        default='Sem arquivo'
     )
 
     class Meta:
