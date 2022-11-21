@@ -1,10 +1,15 @@
-from django.db.models import Count, DecimalField, FloatField, F, Q, Sum, functions, Value, ExpressionWrapper
+from django.db.models import Count, Sum, functions
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework import generics, permissions, response, status, exceptions
 from rest_framework_gis import filters as gis_filters
+from rest_framework import (
+    generics,
+    permissions,
+    response,
+    status
+)
 
 from monitoring import filters as monitoring_filters
-from monitoring import models, serializers
+from monitoring import models, serializers, groupings
 
 
 class AuthModelMixIn:
@@ -217,7 +222,7 @@ class MonitoringConsolidatedTableStatsView(
             * Grouping `monitoring_by_co_funai_and_year`:
                 `models.MonitoringConsolidated`
                 group by CO_FUANI and YEAR.
-    
+
             * Grouping `monitoring_by_co_funai_and_monthyear`:
                 `models.MonitoringConsolidated`
                 group by CO_FUANI and MONTH and YEAR.
@@ -240,248 +245,62 @@ class MonitoringConsolidatedTableStatsView(
         """
         data_grouping = self.request.GET.get('grouping', None)
         if data_grouping == "monitoring_by_co_funai_and_year":
-            
-            return models.MonitoringConsolidated.objects.values(
+            queryset = models.MonitoringConsolidated.objects.values(
                 'co_funai',
                 'no_ti',
                 'ti_nu_area_ha',
                 ano=functions.ExtractYear('dt_t_um')
-            ).annotate(
-                total_nu_area_ha=Sum("nu_area_ha"),
-                quantity_polygons=Count(
-                    "no_estagio", output_field=FloatField()
-                ),
-                cr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR"),
-                    output_field=FloatField()), 0.0
-                ),
-                dg_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG"),
-                    output_field=FloatField()), 0.0
-                ),
-                dr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR"),
-                    output_field=FloatField()), 0.0
-                ),
-                ff_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF"),
-                    output_field=FloatField()), 0.0
-                ),
-                cr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                dg_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                dr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                ff_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                )
-            ).order_by("ano")
+            )
+            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(self, queryset)
+
+            return queryset.order_by("ano")
 
         elif data_grouping == "monitoring_by_co_funai_and_monthyear":
-
-            return models.MonitoringConsolidated.objects.values(
+            queryset = models.MonitoringConsolidated.objects.values(
                 'co_funai',
                 'no_ti',
                 'ti_nu_area_ha',
                 mes=functions.ExtractMonth('dt_t_um'),
                 ano=functions.ExtractYear('dt_t_um')
-            ).annotate(
-                total_nu_area_ha=Sum("nu_area_ha"),
-                quantity_polygons=Count(
-                    "no_estagio", output_field=FloatField()
-                ),
-                cr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR"),
-                    output_field=FloatField()), 0.0
-                ),
-                dg_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG"),
-                    output_field=FloatField()), 0.0
-                ),
-                dr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR"),
-                    output_field=FloatField()), 0.0
-                ),
-                ff_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF"),
-                    output_field=FloatField()), 0.0
-                ),
-                cr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                dg_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                dr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                ff_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                )
-            ).order_by("mes", "ano")
-            
-        elif data_grouping == "monitoring_by_year":
+            )
+            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(self, queryset)
 
-            return models.MonitoringConsolidated.objects.values(
+            return queryset.order_by("mes", "ano")
+
+        elif data_grouping == "monitoring_by_year":
+            queryset = models.MonitoringConsolidated.objects.values(
                 ano=functions.ExtractYear('dt_t_um')
-            ).annotate(
-                total_nu_area_ha=Sum("nu_area_ha"),
-                quantity_polygons=Count(
-                    "no_estagio",
-                    output_field=FloatField()),
-                cr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR"),
-                    output_field=FloatField()), 0.0
-                ),
-                dg_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG"),
-                    output_field=FloatField()), 0.0
-                ),
-                dr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR"),
-                    output_field=FloatField()), 0.0
-                ),
-                ff_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF"),
-                    output_field=FloatField()), 0.0
-                )
-            ).order_by("ano")
+            )
+            queryset = groupings.GroupingClassificationOfStages.absolute_number(self, queryset)
+
+            return queryset.order_by("ano")
 
         elif data_grouping == "monitoring_by_monthyear":
-        
-            return models.MonitoringConsolidated.objects.values(
+            queryset = models.MonitoringConsolidated.objects.values(
                 mes=functions.ExtractMonth('dt_t_um'),
                 ano=functions.ExtractYear('dt_t_um')
-            ).annotate(
-                total_nu_area_ha=Sum("nu_area_ha"),
-                quantity_polygons=Count(
-                    "no_estagio",
-                    output_field=FloatField()),
-                cr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR"),
-                    output_field=FloatField()), 0.0
-                ),
-                dg_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG"),
-                    output_field=FloatField()), 0.0
-                ),
-                dr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR"),
-                    output_field=FloatField()), 0.0
-                ),
-                ff_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF"),
-                    output_field=FloatField()), 0.0
-                )
-            ).order_by("mes", "ano")
+            )
+            queryset = groupings.GroupingClassificationOfStages.absolute_number(self, queryset)
+
+            return queryset.order_by("mes", "ano")
 
         elif data_grouping == "monitoring_by_co_funai":
-
-            return models.MonitoringConsolidated.objects.values(
+            queryset = models.MonitoringConsolidated.objects.values(
                 'co_funai',
                 'no_ti',
                 'ti_nu_area_ha'
-            ).annotate(
-                total_nu_area_ha=Sum("nu_area_ha"),
-                quantity_polygons=Count(
-                    "no_estagio",
-                    output_field=FloatField()
-                ),
-                cr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="CR"),
-                    output_field=FloatField()), 0.0
-                ),
-                dg_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DG"),
-                    output_field=FloatField()), 0.0
-                ),
-                dr_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="DR"),
-                    output_field=FloatField()), 0.0
-                ),
-                ff_nu_area_ha=functions.Coalesce(Sum(
-                    "nu_area_ha",
-                    filter=Q(no_estagio__exact="FF"),
-                    output_field=FloatField()), 0.0
-                ),
-                cr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('cr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                dg_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('dg_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                dr_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('dr_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                ),
-                ff_nu_area_perc=functions.Coalesce(ExpressionWrapper(
-                    F('ff_nu_area_ha') / F('ti_nu_area_ha') * Value(100),
-                    output_field=FloatField()),0.0
-                )
-            ).order_by("no_ti")
-
-        return models.MonitoringConsolidated.objects.values(
-            'co_funai',
-            'no_ti',
-            'dt_t_um',
-            'ti_nu_area_ha'
-        ).annotate(
-            total_nu_area_ha=Sum("nu_area_ha"),
-            quantity_polygons=Count(
-                "no_estagio",
-                output_field=FloatField()
-            ),
-            cr_nu_area_ha=functions.Coalesce(Sum(
-                "nu_area_ha",
-                filter=Q(no_estagio__exact="CR"),
-                output_field=FloatField()), 0.0
-            ),
-            dg_nu_area_ha=functions.Coalesce(Sum(
-                "nu_area_ha",
-                filter=Q(no_estagio__exact="DG"),
-                output_field=FloatField()), 0.0
-            ),
-            dr_nu_area_ha=functions.Coalesce(Sum(
-                "nu_area_ha",
-                filter=Q(no_estagio__exact="DR"),
-                output_field=FloatField()), 0.0
-            ),
-            ff_nu_area_ha=functions.Coalesce(Sum(
-                "nu_area_ha",
-                filter=Q(no_estagio__exact="FF"),
-                output_field=FloatField()), 0.0
             )
-        ).order_by("dt_t_um")
+            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(self, queryset)
+
+            return queryset.order_by("no_ti")
+
+        else:
+            queryset = models.MonitoringConsolidated.objects.values(
+                'co_funai',
+                'no_ti',
+                'dt_t_um',
+                'ti_nu_area_ha'
+            )
+            queryset = groupings.GroupingClassificationOfStages.absolute_number(self, queryset)
+
+            return queryset.order_by("dt_t_um")
