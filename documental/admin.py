@@ -11,7 +11,6 @@ list_fields_admin_commun = [
     'usercmr_id',
     'st_available',
     'st_excluded',
-    'dt_update',
     'co_funai',
     'no_ti',
     'co_cr',
