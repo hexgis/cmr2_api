@@ -1,10 +1,5 @@
 from django_filters.rest_framework import DjangoFilterBackend
 
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.parsers import (
-    FileUploadParser, MultiPartParser, FormParser)
-from rest_framework.views import APIView
-from django.urls import reverse_lazy
 from rest_framework.response import Response
 from rest_framework import status
 
