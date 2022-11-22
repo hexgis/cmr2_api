@@ -121,13 +121,11 @@ class DocumentalDocs(models.Model):
     dt_registration = models.DateTimeField(
         _('Document registration date'),
         auto_now_add=True,
-        null=True,
     )
 
     dt_update = models.DateTimeField(
         _('Last update date'),
-        null=True,
-        blank=True,
+        auto_now=True,
     )
 
     co_funai = models.IntegerField(
@@ -197,7 +195,7 @@ class DocsLandUser(DocumentalDocs):
     file = models.FileField(
         _('Docs DocumentTI file path'),
         upload_to='DocsLandUser/',
-        default='Sem arquivo'
+        default='Undefined File',
     )
 
     class Meta:
@@ -233,7 +231,7 @@ class DocsDocumentTI(DocumentalDocs):
     file = models.FileField(
         _('Docs DocumentTI file path'),
         upload_to='DocumentTI/',
-        default='Sem arquivo'
+        default='Undefined File',
     )
 
     class Meta:
@@ -277,7 +275,7 @@ class DocsMapoteca(DocumentalDocs):
     file = models.FileField(
         _('Docs DocsMapoteca file path'),
         upload_to='DocsMapoteca/',
-        default='Sem arquivo'
+        default='Undefined File',
     )
 
     class Meta:

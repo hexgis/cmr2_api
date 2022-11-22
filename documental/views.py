@@ -148,7 +148,7 @@ class DocumentUploadView(generics.ListCreateAPIView):
     """View to upload the files and their attributes `models.DocsDocumentTI`.
     id_acao
     """
-    
+
     def get_serializer_class(self):
         """Get method to return one data set acoording to action category.
 
@@ -196,7 +196,8 @@ class DocumentUploadView(generics.ListCreateAPIView):
 
         if request.method == 'POST':
             if action_type_docs == "DOCUMENTS_TI":
-                serializer = serializers.DocsDocumentTIUploadSerializers(request.POST, request.FILES)
+                serializer = serializers.DocsDocumentTIUploadSerializers(
+                    request.POST, request.FILES)
                 if serializer.is_valid(raise_exception=True):
                     serializer.save(
                         file=request.FILES['file'],
@@ -220,7 +221,8 @@ class DocumentUploadView(generics.ListCreateAPIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
             elif action_type_docs == "MAPS_LAND_USER":
-                serializer = serializers.DocsLandUserUploadSerializers(request.POST, request.FILES)
+                serializer = serializers.DocsLandUserUploadSerializers(
+                    request.POST, request.FILES)
                 if serializer.is_valid(raise_exception=True):
                     serializer.save(
                         file=request.FILES['file'],
@@ -244,7 +246,8 @@ class DocumentUploadView(generics.ListCreateAPIView):
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
             elif action_type_docs == "MAPOTECA":
-                serializer = serializers.DocsMapotecaUploadSerializers(request.POST, request.FILES)
+                serializer = serializers.DocsMapotecaUploadSerializers(
+                    request.POST, request.FILES)
                 if serializer.is_valid(raise_exception=True):
                     serializer.save(
                         file=request.FILES['file'],

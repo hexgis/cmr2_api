@@ -8,6 +8,7 @@ from documental import models
 
 """List of common fields for Serializers classes."""
 list_fields_serializers_commun = [
+    'file',
     'id_document',
     'path_document',
     'no_document',
@@ -97,7 +98,6 @@ class DocsDocumentTISerializers(serializers.ModelSerializer):
         fields = [
             'dt_document',
             'no_extension',
-            'file',
         ] + list_fields_serializers_commun
 
     def to_representation(self, instance):
@@ -159,7 +159,7 @@ class DocsDocumentTIUploadSerializers(serializers.ModelSerializer):
 
         Args:
             validated_data (dict): DocsDocumentTI serialized data
-            
+
         Returns:
             dict: DocsDocumentTI serialized data
         """
@@ -167,6 +167,7 @@ class DocsDocumentTIUploadSerializers(serializers.ModelSerializer):
         result.save()
 
         return result
+
 
 class DocsLandUserUploadSerializers(serializers.ModelSerializer):
     """Serializer for saving DOCUMENTS_TI `models.DocsMapoteca` data."""
@@ -181,7 +182,7 @@ class DocsLandUserUploadSerializers(serializers.ModelSerializer):
 
         Args:
             validated_data (dict): DocsLandUser serialized data
-            
+
         Returns:
             dict: DocsLandUser serialized data
         """
@@ -189,6 +190,7 @@ class DocsLandUserUploadSerializers(serializers.ModelSerializer):
         result.save()
 
         return result
+
 
 class DocsMapotecaUploadSerializers(serializers.ModelSerializer):
     """Serializer for saving DOCUMENTS_TI `models.DocsMapoteca` data."""
@@ -203,7 +205,7 @@ class DocsMapotecaUploadSerializers(serializers.ModelSerializer):
 
         Args:
             validated_data (dict): DocsMapoteca serialized data
-            
+
         Returns:
             dict: DocsMapoteca serialized data
         """
