@@ -1,5 +1,4 @@
 from django.db import models
-
 from django.utils.translation import ugettext_lazy as _
 
 
@@ -121,14 +120,12 @@ class DocumentalDocs(models.Model):
 
     dt_registration = models.DateTimeField(
         _('Document registration date'),
-        null=True,
-        blank=True,
+        auto_now_add=True,
     )
 
     dt_update = models.DateTimeField(
         _('Last update date'),
-        null=True,
-        blank=True,
+        auto_now=True,
     )
 
     co_funai = models.IntegerField(
@@ -195,6 +192,12 @@ class DocsLandUser(DocumentalDocs):
         blank=True,
     )
 
+    file = models.FileField(
+        _('Docs DocumentTI file path'),
+        upload_to='DocsLandUser/',
+        default='Undefined File',
+    )
+
     class Meta:
         """"Meta class for `documental.UsersCMR` model."""
         app_label = 'documental'
@@ -223,6 +226,12 @@ class DocsDocumentTI(DocumentalDocs):
         max_length=255,
         null=True,
         blank=True,
+    )
+
+    file = models.FileField(
+        _('Docs DocumentTI file path'),
+        upload_to='DocumentTI/',
+        default='Undefined File',
     )
 
     class Meta:
@@ -261,6 +270,12 @@ class DocsMapoteca(DocumentalDocs):
         max_length=255,
         blank=True,
         null=True,
+    )
+
+    file = models.FileField(
+        _('Docs DocsMapoteca file path'),
+        upload_to='DocsMapoteca/',
+        default='Undefined File',
     )
 
     class Meta:
