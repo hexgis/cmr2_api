@@ -25,7 +25,6 @@ class ActionListView(AuthModelMix, generics.ListAPIView):
     Filter:
         * action_type (str): list action_id in action action_type filtered.
     """
-
     queryset = models.DocsAction.objects.all()
     serializer_class = serializers.ActionListSerializers
     filterset_class = documental_filters.DocsActionFilter

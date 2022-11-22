@@ -18,6 +18,12 @@ class MonitoringConsolidated(models.Model):
         blank=True,
     )
 
+    dt_cadastro = models.DateField(
+        _('Date of registration'),
+        null=True,
+        blank=True,
+    )
+
     dt_imagem = models.DateField(
         _('Image date'),
         null=True,

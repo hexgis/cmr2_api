@@ -2,31 +2,37 @@ from django.urls import path
 
 from monitoring import views
 
+app_name = 'monitoring'
 
 urlpatterns = [
     path(
-        'consolidated/',
+        '',
         views.MonitoringConsolidatedView.as_view(),
         name='monitoring'
     ),
     path(
-        'consolidated/detail/<int:id>/',
+        'detail/<int:id>/',
         views.MonitoringConsolidatedDetailView.as_view(),
         name='monitoring-detail'
     ),
     path(
-        'consolidated/stats/',
-        views.MonitoringConsolidatedStatsView.as_view(),
-        name='monitoring-stats'
+        'map-stats/',
+        views.MonitoringConsolidatedMapStatsView.as_view(),
+        name='monitoring-map-stats'
     ),
     path(
-        'consolidated/classes/',
+        'classes/',
         views.MonitoringConsolidatedClassesView.as_view(),
         name='monitoring-classes'
     ),
     path(
-        'consolidated/table/',
+        'table/',
         views.MonitoringConsolidatedTableView.as_view(),
         name='monitoring-table'
     ),
+    path(
+        'table-stats/',
+        views.MonitoringConsolidatedTableStatsView.as_view(),
+        name='monitoring-table-stats'
+    )
 ]

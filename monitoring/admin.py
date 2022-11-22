@@ -22,3 +22,4 @@ class MonitoringConsolidatedAdmin(admin.ModelAdmin):
 
 
 admin.site.register(models.MonitoringConsolidated, MonitoringConsolidatedAdmin)
+

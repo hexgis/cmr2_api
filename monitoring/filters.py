@@ -27,7 +27,7 @@ class MonitoringConsolidatedFilter(rest_framework.FilterSet):
         co_funai (list): filtering Indigenou Lands using Funai code
         stage (list): stage name. E.g.: CR, DG, FF, DR
         start_date (str): filtering start date
-        end_date (str): filteringend ende date
+        end_date (str): filtering end date
     """
     co_cr = NumberInFilter(
         field_name='co_cr',
