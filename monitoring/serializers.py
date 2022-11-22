@@ -60,16 +60,17 @@ class MonitoringConsolidatedDetailSerializer(serializers.ModelSerializer):
         )
 
 
+def to_representation(instance) -> str:
+    """Representates model data instance as simple string.
+
+    Returns:
+        str: abbreviation of types stages
+    """
+    return f'{instance.no_estagio}'
+
+
 class MonitoringConsolidatedClassesSerializer(serializers.ModelSerializer):
     """Serializer for stages 'models.MonitoringConsolidated' data."""
-
-    def to_representation(self, instance) -> str:
-        """Representates model data instance as simple string.
-
-        Returns:
-            str: abbreviation of types stages
-        """
-        return f'{instance.no_estagio}'
 
     class Meta:
         """
@@ -147,6 +148,7 @@ class MonitoringConsolidatedByCoFunaiAndYearSerializer(
             'total_nu_area_ha'
         ]
 
+
 class MonitoringConsolidatedByCoFunaiAndMonthYearSerializer(
     serializers.ModelSerializer
 ):
@@ -185,6 +187,7 @@ class MonitoringConsolidatedByCoFunaiAndMonthYearSerializer(
             'total_nu_area_ha'
         ]
 
+
 class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidated` data."""
 
@@ -217,6 +220,7 @@ class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
             'total_nu_area_ha'
         ]
 
+
 class MonitoringConsolidatedByMonthYearSerializer(
     serializers.ModelSerializer
 ):
@@ -231,7 +235,7 @@ class MonitoringConsolidatedByMonthYearSerializer(
     total_nu_area_ha = serializers.FloatField()
 
     class Meta:
-        """Meta class for
+        """Metaclass for
         `MonitoringConsolidatedByMonthYearSerializer` serializer."""
         model = models.MonitoringConsolidated
         fields = [
@@ -243,6 +247,8 @@ class MonitoringConsolidatedByMonthYearSerializer(
             'ff_nu_area_ha',
             'total_nu_area_ha'
         ]
+
+
 class MonitoringConsolidatedByYearSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidated` data."""
 
