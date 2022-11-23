@@ -16,6 +16,8 @@ class SatelliteAdmin(admin.ModelAdmin):
 
     search_fields = list_display
 
+    readonly_fields = fields
+
 
 class Landsat8CatalogAdmin(admin.GeoModelAdmin):
     """Django Administrator `model.Landsat8Catalog` data."""
@@ -82,6 +84,41 @@ class Sentinel2CatalogAdmin(admin.GeoModelAdmin):
     search_fields = list_display
 
 
+class CatalogAdmin(admin.GeoModelAdmin):
+    """Django Administrator `model.Catalog` data."""
+    def cloud_cover_percent(self, instance):
+        return '{}%'.format(instance.cloud_cover)
+
+    list_display = (
+        'image',
+        'type',
+        'date',
+        'pr_date',
+        'locator',
+        'sat'
+    )
+
+    fields = (
+        'image',
+        'type',
+        'image_path',
+        'url_tms',
+        'date',
+        'pr_date',
+        'cloud_cover_percent',
+        'locator',
+        'geom',
+        'sat'
+    )
+
+    search_fields = ('image',)
+
+    list_filter = ('date', )
+
+    readonly_fields = fields
+
+
+admin.site.register(models.Catalog, CatalogAdmin)
 admin.site.register(models.Satellite, SatelliteAdmin)
 admin.site.register(models.Landsat8Catalog, Landsat8CatalogAdmin)
 admin.site.register(models.Sentinel2Catalog, Sentinel2CatalogAdmin)

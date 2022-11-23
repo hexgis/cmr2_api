@@ -12,4 +12,8 @@ urlpatterns = [
          views.CatalogView.as_view(),
          name='catalog'
     ),
+    path('xpto/',
+         views.CatalogView2.as_view(),
+         name='catalog'
+    ),
 ]

@@ -32,3 +32,9 @@ class Sentinel2CatalogSerializer(serializers.ModelSerializer):
         """Meta Class for `catalog.Sentinel2CatalogSerializer` serializer."""
         model = models.Sentinel2Catalog
         fields = "__all__"
+
+
+class CatalogSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = models.Catalog
+        fields = "__all__"

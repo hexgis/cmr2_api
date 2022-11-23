@@ -27,6 +27,17 @@ class SatelliteView(AuthModelMixIn, generics.ListAPIView):
     serializer_class = serializers.SatelliteSerializer
 
 
+class CatalogView2(AuthModelMixIn, generics.ListAPIView):
+    """Returns catalogs data for the requested filter."""
+    queryset = models.Catalog.objects.all()
+    serializer_class = serializers.CatalogSerializer
+    bbox_filter_field = 'geom'
+    filterset_class = catalog_filters.CatalogFilter
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
+
 class CatalogView(AuthModelMixIn, generics.ListAPIView):
     """Returns the models list of existing catalogs for the requested filter.
 
@@ -46,9 +57,8 @@ class CatalogView(AuthModelMixIn, generics.ListAPIView):
             `serializers.Sentinel2CatalogSerializer` of data in
             `models.Sentinel2Catalog`.
     """
-
     bbox_filter_field = 'geom'
-    filterset_class = catalog_filters.CatalogFilter
+    filterset_class = catalog_filters.CatalogsFilter
     filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
