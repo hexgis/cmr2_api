@@ -1,7 +1,7 @@
 """Database routers documental app."""
 
 
-class PriorityMonitoringRouter:
+class DocumentalRouter:
     """Documental tables, database router."""
 
     route_app_labels = {} #{'documental'}
