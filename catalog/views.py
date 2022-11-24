@@ -4,8 +4,7 @@ from rest_framework_gis import filters as gis_filters
 
 from rest_framework import(
     generics,
-    permissions,
-    exceptions
+    permissions
 )
 
 from catalog import (
@@ -28,8 +27,19 @@ class SatelliteView(AuthModelMixIn, generics.ListAPIView):
 
 
 class CatalogView2(AuthModelMixIn, generics.ListAPIView):
-    """Returns catalogs data for the requested filter."""
-    queryset = models.Catalog.objects.all()
+    """Returns catalogs data for the requested filter.
+
+    Filters:
+        *** satellite (list_str): filtering Satellite using identify. E.g.:
+            LC08,
+            Sentinel-2
+        * cloud_cover (list): filtering less than or equal for cloud values.
+        * start_date (str): filtering start date.
+        * end_date (str): filtering end date.
+        * in_bbox (bbox): bounding box
+            (min lon, min lat, max lon, max lat).
+    """
+    queryset = models.Catalog.objects.all().order_by('sat')
     serializer_class = serializers.CatalogSerializer
     bbox_filter_field = 'geom'
     filterset_class = catalog_filters.CatalogFilter
@@ -38,97 +48,75 @@ class CatalogView2(AuthModelMixIn, generics.ListAPIView):
         gis_filters.InBBoxFilter,
     )
 
-class CatalogView(AuthModelMixIn, generics.ListAPIView):
-    """Returns the models list of existing catalogs for the requested filter.
+# class CatalogView(AuthModelMixIn, generics.ListAPIView):
+#     """Returns the models list of existing catalogs for the requested filter.
 
-    Filters:
-        * satellite (list): filtering Satellite using identify.
-        * cloud_cover (list): filtering less than or equal for cloud values.
-        * start_date (str): filtering start date.
-        * end_date (str): filtering end date.
-        * in_bbox (bbox): bounding box
-            (min lon, min lat, max lon, max lat).
+#     Filters:
+#         * satellite (list): filtering Satellite using identify.
+#         * cloud_cover (list): filtering less than or equal for cloud values.
+#         * start_date (str): filtering start date.
+#         * end_date (str): filtering end date.
+#         * in_bbox (bbox): bounding box
+#             (min lon, min lat, max lon, max lat).
 
-    Returns:
-        * if filter satellit is `sat_landsat8=LC08`
-            `serializers.Landsat8CatalogSerializer` of data in
-            `models.Landsat8Catalog`.
-        * if filter satellit is `sat_sentinel2=Sentinel-2`
-            `serializers.Sentinel2CatalogSerializer` of data in
-            `models.Sentinel2Catalog`.
-    """
-    bbox_filter_field = 'geom'
-    filterset_class = catalog_filters.CatalogsFilter
-    filter_backends = (
-        DjangoFilterBackend,
-        gis_filters.InBBoxFilter,
-    )
+#     Returns:
+#         * if filter satellit is `sat_landsat8=LC08`
+#             `serializers.Landsat8CatalogSerializer` of data in
+#             `models.Landsat8Catalog`.
+#         * if filter satellit is `sat_sentinel2=Sentinel-2`
+#             `serializers.Sentinel2CatalogSerializer` of data in
+#             `models.Sentinel2Catalog`.
+#     """
+#     bbox_filter_field = 'geom'
+#     filterset_class = catalog_filters.CatalogsFilter
+#     filter_backends = (
+#         DjangoFilterBackend,
+#         gis_filters.InBBoxFilter,
+#     )
 
-    def get_queryset(self):
-        """Get method to return one data set acoording to satellite changed.
+#     def get_queryset(self):
+#         """Get method to return one data set acoording to satellite changed.
 
-        Returns a satellite filtered model class in `views.CatalogView`.
+#         Returns a satellite filtered model class in `views.CatalogView`.
 
-        Returns:
-            * satellite `Sentinel-2`:
-                `models.Sentinel2Catalog`
-            * satellite `LC08`:
-                `models.Landsat8Catalog`
-        """
-        request_satellite = self.get_satellite_identifier()
-        if request_satellite == "Sentinel-2":
-            return models.Sentinel2Catalog.objects.all()
-        elif request_satellite == "LC08":
-            return models.Landsat8Catalog.objects.all()
+#         Returns:
+#             * satellite `Sentinel-2`:
+#                 `models.Sentinel2Catalog`
+#             * satellite `LC08`:
+#                 `models.Landsat8Catalog`
+#         """
+#         request_satellite = self.get_satellite_identifier()
+#         if request_satellite == "Sentinel-2":
+#             return models.Sentinel2Catalog.objects.all()
+#         elif request_satellite == "LC08":
+#             return models.Landsat8Catalog.objects.all()
 
-    def get_serializer_class(self):
-        """Get method to return one data set acoording to satellite changed.
+#     def get_serializer_class(self):
+#         """Get method to return one data set acoording to satellite changed.
 
-        Returns one serializers class to `views.CatalogView`
+#         Returns one serializers class to `views.CatalogView`
 
-        Returns:
-            `serializers.Sentinel2CatalogSerializer` or
-            `serializers.Landsat8CatalogSerializer`.
-        """
-        request_satellite = self.get_satellite_identifier()
-        if request_satellite == "Sentinel-2":
-            return serializers.Sentinel2CatalogSerializer
-        elif request_satellite == "LC08":
-            return serializers.Landsat8CatalogSerializer
-        else:
-            raise exceptions.ParseError(
-                f"Satellite identify - {request_satellite} not defined!", None
-            )
+#         Returns:
+#             `serializers.Sentinel2CatalogSerializer` or
+#             `serializers.Landsat8CatalogSerializer`.
+#         """
+#         request_satellite = self.get_satellite_identifier()
+#         if request_satellite == "Sentinel-2":
+#             return serializers.Sentinel2CatalogSerializer
+#         elif request_satellite == "LC08":
+#             return serializers.Landsat8CatalogSerializer
+#         else:
+#             raise exceptions.ParseError(
+#                 f"Satellite identify - {request_satellite} not defined!", None
+#             )
 
-    def get_satellite_identifier(self):
-        """Checks if the request satellite exists and 
+#     def get_satellite_identifier(self):
+#         """Checks if the request satellite exists and 
         
-        Returns the satellite identifier
-        """
-        request_satellite = str(self.request.GET.get('satellite'))
-        satellite_selected = models.Satellite.objects.values("identifier").filter(
-            identifier__exact = request_satellite).get()
+#         Returns the satellite identifier
+#         """
+#         request_satellite = str(self.request.GET.get('satellite'))
+#         satellite_selected = models.Satellite.objects.values("identifier").filter(
+#             identifier__exact = request_satellite).get()
 
-        return satellite_selected['identifier']
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-# sat_sentinel2 = models.Satellite.objects.values("identifier").filter(
-#     identifier__exact = 'Sentinel-2').get()
-
+#         return satellite_selected['identifier']

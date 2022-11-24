@@ -19,71 +19,6 @@ class SatelliteAdmin(admin.ModelAdmin):
     readonly_fields = fields
 
 
-class Landsat8CatalogAdmin(admin.GeoModelAdmin):
-    """Django Administrator `model.Landsat8Catalog` data."""
-
-    list_display = (
-        'id',
-        'pk',
-        'image',
-        'satellite',
-        'type',
-        'date',
-        'orbita',
-        'ponto',
-    )
-
-    fields = (
-        'image',
-        'satellite',
-        'type',
-        'path',
-        'url_tms',
-        'date',
-        'cloud_cover',
-        'orbita',
-        'ponto',
-        'geom',
-        'max_native_zoom',
-    )
-
-    search_fields = list_display
-
-
-class Sentinel2CatalogAdmin(admin.GeoModelAdmin):
-    """Django Administrator `model.Sentinel2Catalog` data."""
-
-    # def tile(self, instance):
-    #     return "{}{}{}".format(instance.utm_zone,
-    #                            instance.latitude_band, instance.grid_square)
-
-    list_display = (
-        'id',
-        'pk',
-        'image',
-        'satellite',
-        'type',
-        'date',
-        'utm_zone',
-        #'tile',
-    )
-
-    fields = (
-        'image',
-        'satellite',
-        'type',
-        'path',
-        'url_tms',
-        'date',
-        'cloud_cover',
-        # 'tile',
-        'geom',
-        'max_native_zoom',
-    )
-
-    search_fields = list_display
-
-
 class CatalogAdmin(admin.GeoModelAdmin):
     """Django Administrator `model.Catalog` data."""
     def cloud_cover_percent(self, instance):
@@ -104,7 +39,7 @@ class CatalogAdmin(admin.GeoModelAdmin):
         'image_path',
         'url_tms',
         'date',
-        'pr_date',
+        # 'pr_date',
         'cloud_cover_percent',
         'locator',
         'geom',
@@ -118,7 +53,72 @@ class CatalogAdmin(admin.GeoModelAdmin):
     readonly_fields = fields
 
 
+# class Landsat8CatalogAdmin(admin.GeoModelAdmin):
+#     """Django Administrator `model.Landsat8Catalog` data."""
+
+#     list_display = (
+#         'id',
+#         'pk',
+#         'image',
+#         'satellite',
+#         'type',
+#         'date',
+#         'orbita',
+#         'ponto',
+#     )
+
+#     fields = (
+#         'image',
+#         'satellite',
+#         'type',
+#         'path',
+#         'url_tms',
+#         'date',
+#         'cloud_cover',
+#         'orbita',
+#         'ponto',
+#         'geom',
+#         'max_native_zoom',
+#     )
+
+#     search_fields = list_display
+
+
+# class Sentinel2CatalogAdmin(admin.GeoModelAdmin):
+#     """Django Administrator `model.Sentinel2Catalog` data."""
+
+#     # def tile(self, instance):
+#     #     return "{}{}{}".format(instance.utm_zone,
+#     #                            instance.latitude_band, instance.grid_square)
+
+#     list_display = (
+#         'id',
+#         'pk',
+#         'image',
+#         'satellite',
+#         'type',
+#         'date',
+#         'utm_zone',
+#         #'tile',
+#     )
+
+#     fields = (
+#         'image',
+#         'satellite',
+#         'type',
+#         'path',
+#         'url_tms',
+#         'date',
+#         'cloud_cover',
+#         # 'tile',
+#         'geom',
+#         'max_native_zoom',
+#     )
+
+#     search_fields = list_display
+
+
 admin.site.register(models.Catalog, CatalogAdmin)
 admin.site.register(models.Satellite, SatelliteAdmin)
-admin.site.register(models.Landsat8Catalog, Landsat8CatalogAdmin)
-admin.site.register(models.Sentinel2Catalog, Sentinel2CatalogAdmin)
+# admin.site.register(models.Landsat8Catalog, Landsat8CatalogAdmin)
+# admin.site.register(models.Sentinel2Catalog, Sentinel2CatalogAdmin)

@@ -4,7 +4,7 @@
 class CatalogRouter:
     """Catalog tables, database router."""
 
-    route_app_labels = {'catalog'}
+    route_app_labels = {''}
     model_catalog = 'Catalog'
 
     def db_for_read(self, model, **hints):
