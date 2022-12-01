@@ -5,19 +5,12 @@ class CatalogRouter:
     """Catalog tables, database router."""
 
     route_app_labels = {''}
-    model_catalog = 'Catalog'
+    model_catalog = 'Catalogs'
 
     def db_for_read(self, model, **hints):
         """Database for read method."""
         if model._meta.app_label in self.route_app_labels:
-            # return 'db_for_read'
-            
-            # import pdb; pdb.set_trace()
             if model._meta.model_name == self.model_catalog.lower():
-                # import pdb; pdb.set_trace()
-                print('------------>>>>>>>>>------------------------------------- \n\n\n')
-                print("Model = ", model._meta.model_name == self.model_catalog.lower())
-                print('------------>>>>>>>>>------------------------------------- \n\n\n')
                 return 'db_for_read'
         return None
 
@@ -37,16 +30,3 @@ class CatalogRouter:
         if app_label in self.route_app_labels:
             return db == 'db_for_read'
         return None
-
-# class AccountsDBRouter:
-#        def db_for_read (self, model, **hints):
-#           if (model == Accounts):
-#              # your model name as in settings.py/DATABASES
-#              return 'accounts'
-#           return None
-       
-#        def db_for_write (self, model, **hints):
-#           if (model == Accounts):
-#              # your model name as in settings.py/DATABASES
-#              return 'accounts'
-#           return None

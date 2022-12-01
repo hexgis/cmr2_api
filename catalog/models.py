@@ -112,7 +112,6 @@ class Catalogs(models.Model):
         blank=True
     )
 
-    # geom = models.GeometryField(
     geom = models.PolygonField(
         _('Geometry Field'),
         srid=4674,
