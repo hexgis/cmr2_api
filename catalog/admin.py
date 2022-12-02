@@ -16,72 +16,42 @@ class SatelliteAdmin(admin.ModelAdmin):
 
     search_fields = list_display
 
+    readonly_fields = fields
 
-class Landsat8CatalogAdmin(admin.GeoModelAdmin):
-    """Django Administrator `model.Landsat8Catalog` data."""
+
+class CatalogsAdmin(admin.GeoModelAdmin):
+    """Django Administrator `model.Catalogs` data."""
+    def cloud_cover_percent(self, instance):
+        return '{}%'.format(instance.cloud_cover)
 
     list_display = (
-        'id',
-        'pk',
         'image',
-        'satellite',
         'type',
         'date',
-        'orbita',
-        'ponto',
+        'pr_date',
+        'locator',
+        'sat'
     )
 
     fields = (
         'image',
-        'satellite',
         'type',
-        'path',
+        'image_path',
         'url_tms',
         'date',
-        'cloud_cover',
-        'orbita',
-        'ponto',
+        # 'pr_date',
+        'cloud_cover_percent',
+        'locator',
         'geom',
-        'max_native_zoom',
+        'sat'
     )
 
-    search_fields = list_display
+    search_fields = ('image',)
+
+    list_filter = ('date', )
+
+    readonly_fields = fields
 
 
-class Sentinel2CatalogAdmin(admin.GeoModelAdmin):
-    """Django Administrator `model.Sentinel2Catalog` data."""
-
-    # def tile(self, instance):
-    #     return "{}{}{}".format(instance.utm_zone,
-    #                            instance.latitude_band, instance.grid_square)
-
-    list_display = (
-        'id',
-        'pk',
-        'image',
-        'satellite',
-        'type',
-        'date',
-        'utm_zone',
-        #'tile',
-    )
-
-    fields = (
-        'image',
-        'satellite',
-        'type',
-        'path',
-        'url_tms',
-        'date',
-        'cloud_cover',
-        # 'tile',
-        'geom',
-        'max_native_zoom',
-    )
-
-    search_fields = list_display
-
-
+admin.site.register(models.Catalogs, CatalogsAdmin)
 admin.site.register(models.Satellite, SatelliteAdmin)
-admin.site.register(models.Landsat8Catalog, Landsat8CatalogAdmin)
-admin.site.register(models.Sentinel2Catalog, Sentinel2CatalogAdmin)

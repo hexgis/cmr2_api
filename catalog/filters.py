@@ -3,19 +3,26 @@ from django_filters import rest_framework
 from catalog import models
 
 
-class CatalogFilter(rest_framework.FilterSet):
-    """Django filter `models.Catalog` data.
+class CharInFilter(
+    rest_framework.BaseInFilter,
+    rest_framework.CharFilter
+):
+    """Base class used for creating IN lookup filters to filter characters."""
+    pass
+
+
+class CatalogsFilter(rest_framework.FilterSet):
+    """Django filter `models.Catalogs` data.
 
     Filters:
-        * satellite (list): filtering Satellite using identify.
+        * satellite (list_str): filtering Satellite using identify.
         * cloud_cover (list): filtering less than or equal for cloud values.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
     """
-
-    satellite = rest_framework.CharFilter(
-        field_name='satellite_id__identifier',
-        lookup_expr='exact',
+    satellite = CharInFilter(
+        field_name='sat_id__identifier',
+        lookup_expr='in',
         required=True,
     )
 
@@ -35,10 +42,11 @@ class CatalogFilter(rest_framework.FilterSet):
     )
 
     class Meta:
-        """Meta class for 'CatalogFilter' filter."""
+        """Meta class for 'CatalogsFilter' filter."""
         model = models.Catalogs
-        fields = [
+        fields = (
+            'satellite',
+            'cloud_cover',
             'start_date',
             'end_date',
-            'cloud_cover'
-        ]
+        )
