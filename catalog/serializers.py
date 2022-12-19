@@ -17,6 +17,27 @@ class SatelliteSerializer(serializers.ModelSerializer):
 
 
 class CatalogsSerializer(serializers.ModelSerializer):
+    satellite = serializers.SerializerMethodField()
+    # satellite2 = SatelliteSerializer()
+    def get_satellite(sefl, obj):
+
+        return obj.sat.name
+
     class Meta:
         model = models.Catalogs
-        fields = "__all__"
+        # fields = "__all__"
+        fields = (
+            "objectid",
+            "image",
+            "type",
+            "image_path",
+            "url_tms",
+            "date",
+            "pr_date",
+            "cloud_cover",
+            "sat",
+            "satellite",
+            "preview",
+            # "satellite2",
+        )
+        geo_field = 'geom'

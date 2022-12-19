@@ -9,6 +9,7 @@ from rest_framework import(
 from catalog import (
     models,
     serializers,
+    pagination,
     filters as catalog_filters
 )
 
@@ -47,3 +48,4 @@ class CatalogsView(AuthModelMixIn, generics.ListAPIView):
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
     )
+    pagination_class = pagination.CatalogoGeoJsonPagination
