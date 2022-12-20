@@ -31,7 +31,7 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
             "cloud_cover",
             "sat",
             "preview",
-            "max_native_zoom"
+            "max_native_zoom",
             "type",
             "geom",
         )
