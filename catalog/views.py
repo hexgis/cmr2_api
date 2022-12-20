@@ -48,4 +48,4 @@ class CatalogsView(AuthModelMixIn, generics.ListAPIView):
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
     )
-    pagination_class = pagination.CatalogoGeoJsonPagination
+    pagination_class = pagination.CatalogGeoJsonPagination
