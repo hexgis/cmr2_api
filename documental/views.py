@@ -18,6 +18,7 @@ from documental import (
 
 class AuthModelMix:
     """Default Authentication for priority_alerts views."""
+
     permission_class = (permissions.AllowAny,)
 
 
@@ -63,6 +64,7 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
             * co_cr (list): filtering Regional Coordination using code.
             * co_funai (list): filtering Indigenou Lands using Funai code.
     """
+
     filter_backends = (DjangoFilterBackend,)
     filterset_class = documental_filters.DocumentalDocsFilter
 
@@ -96,6 +98,7 @@ class DocumentalListViews(AuthModelMix, generics.ListAPIView):
             `serializers.DocsLandUserSerializers` or
             `serializers.DocsMapotecaSerializers`.
         """
+
         action_type_docs = self.get_action_type()
 
         if action_type_docs == "DOCUMENTS_TI":
@@ -141,14 +144,32 @@ class DocumentUploadView(generics.ListCreateAPIView):
     id_acao
     """
 
-    def get_requested_action(self):
-        """Return identify action in POST request."""
-        return self.request.data['id_acao']
+    def get_serializer_class(self):
+        """Get method to return one data set acoording to action category.
 
-    def get_action_type(self):
+        Returns:
+            `serializers.DocsDocumentTIUploadSerializers` or
+            `serializers.DocsLandUserUploadSerializers` or
+            `serializers.DocsMapotecaUploadSerializers`.
+        """
+
+        action_type_docs = self.get_action_typee()
+
+        if action_type_docs == "DOCUMENTS_TI":
+            return serializers.DocsDocumentTIUploadSerializers
+        elif action_type_docs == "MAPS_LAND_USER":
+            return serializers.DocsLandUserUploadSerializers
+        elif action_type_docs == "MAPOTECA":
+            return serializers.DocsMapotecaUploadSerializers
+
+    def get_action_typee(self):
         """Return only one aciton type according to actions sent in request"""
-        action_type_docs = models.DocsAction.objects.values('action_type'
-        ).filter(id_action__exact=self.get_requested_action()).distinct()
+
+        requested_action = self.request.GET.get('id_acao')
+        requested_action = requested_action.split(',')
+        requested_action = list(map(int, requested_action))
+        action_type_docs = models.DocsAction.objects.values(
+            'action_type').filter(id_action__in=requested_action).distinct()
 
         if action_type_docs.count() == 1:
             return str(action_type_docs[0]['action_type'])
@@ -160,30 +181,13 @@ class DocumentUploadView(generics.ListCreateAPIView):
                 "Não permitido retorno de dados com mais de uma TIPO DE AÇÃO"
                 " na mesma requisição.", None)
 
-    def get_serializer_class(self):
-        """Get method to return one data set acoording to action category.
-
-        Returns:
-            `serializers.DocsDocumentTIUploadSerializers` or
-            `serializers.DocsLandUserUploadSerializers` or
-            `serializers.DocsMapotecaUploadSerializers`.
-        """
-        action_type_docs = self.get_action_type()
-
-        if action_type_docs == "DOCUMENTS_TI":
-            return serializers.DocsDocumentTIUploadSerializers
-        elif action_type_docs == "MAPS_LAND_USER":
-            return serializers.DocsLandUserUploadSerializers
-        elif action_type_docs == "MAPOTECA":
-            return serializers.DocsMapotecaUploadSerializers
-
     def upload_file(self, request):
         """Upload the dataset to add DOCUMENTS_TI file to the DOCUMENTS_TI.
 
         Returns:
             dict: upload dataset.
         """
-        action_type_docs = self.get_action_type()
+        action_type_docs = self.get_action_typee()
 
         if request.method == 'POST':
             if action_type_docs == "DOCUMENTS_TI":
