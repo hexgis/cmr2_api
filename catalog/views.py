@@ -1,7 +1,7 @@
 from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework_gis import filters as gis_filters
-from rest_framework import(
+from rest_framework import (
     generics,
     permissions
 )
