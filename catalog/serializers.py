@@ -34,5 +34,5 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
             "max_native_zoom",
             "type",
             "geom",
-e            "locator"
+            "locator"
         )
