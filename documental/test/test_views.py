@@ -37,7 +37,6 @@ class DocumentalTestCase(TestCase):
             tests:
             - If Url is ok
         """
-
         kwargs = {'action_type': 'DOCUMENT_ROOT'}
         response = self.client.get(self.list_actions, kwargs)
         self.assertTrue(status.is_success(response.status_code))
