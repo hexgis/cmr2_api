@@ -2,7 +2,7 @@ from django.db.models import Sum, Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_gis import filters as gis_filters
 from rest_framework import (
-    generics, filters, response, permissions, status
+    generics, filters, response, permissions, status, exceptions
 )
 
 from priority_monitoring import(
@@ -46,11 +46,37 @@ class PriorityConsolidatedDetailView(
     AuthModelMixIn,
     generics.RetrieveAPIView
 ):
-    """Detail data for `priority_monitoring.PriorityConsolidated`."""
+    """Detail data for `priority_monitoring.PriorityConsolidated`."""  """
+
+    Paramter:
+        geometry (boolean): returns with or without geometry
+    """
 
     queryset = models.PriorityConsolidated.objects.all()
-    serializer_class = serializers.PriorityConsolidatedDetailSerializer
     lookup_field = 'pk'
+
+    def get_serializer_class(self):
+        """Get method to return serializer detail.
+
+        Returns serializers with or without geometry:
+
+        Returns:
+            `serializers.PriorityConsolidatedDetailSerializer` or
+            `serializers.PriorityConsolidatedDetailGeomSerializer`
+        """
+
+        geometry_necessary = self.request.query_params.get('geometry')
+
+        if geometry_necessary == 'false' :
+            return serializers.PriorityConsolidatedDetailSerializer
+        elif geometry_necessary == 'true':
+            return serializers.PriorityConsolidatedDetailGeomSerializer
+        else:
+            raise exceptions.NotFound(
+                "Parameters 'geometry' must receive the values ​​of: 'true' " \
+                "or 'false'.",
+                None
+            )
 
 
 class PriorityConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
@@ -103,3 +129,6 @@ class PriorityConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
     queryset = models.PriorityConsolidated.objects.all()
     filterset_class = priority_filters.PriorityConsolidatedFilter
     filter_backends = (DjangoFilterBackend,)    
+
+
+
