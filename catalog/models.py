@@ -69,11 +69,11 @@ class Catalogs(models.Model):
     )
 
     url_tms = models.CharField(
-        _('Tile file'),
+        _('Tile file link'),
         max_length=511
     )
 
-    date = models.DateTimeField(
+    date = models.DateField(
         _('Scene Date')
     )
 
@@ -89,24 +89,31 @@ class Catalogs(models.Model):
     )
 
     locator = models.CharField(
-        _(''),
+        _('Satellite scene parameters'),
         max_length=255,
         null=True
     )
 
     max_native_zoom = models.IntegerField(
         _('Maximum zoom scale'),
-        default=15
+        default=15,
     )
 
-    sat = models.ForeignKey(
-        Satellite,
-        on_delete=models.DO_NOTHING,
-        related_name='+'
+    sat_id = models.IntegerField(
+        _('Satellite identifier'),
+        null=True,
+        blank=True
+    )
+
+    sat_name = models.CharField(
+        _('Satellite name'),
+        max_length=255,
+        null=True,
+        blank=True
     )
 
     preview = models.TextField(
-        _(''),
+        _('Image preveiw link'),
         max_length=511,
         null=True,
         blank=True
@@ -124,9 +131,8 @@ class Catalogs(models.Model):
         app_label = 'catalog'
         verbose_name = 'Catalog Scene'
         verbose_name_plural = 'Catalogs Scenes'
-        # abstract = True
-        # db_table = 'catalogo\".\"vw_img_catalogo_a'
-        # managed = False
+        db_table = 'catalogo\".\"vw_img_catalogo_a'
+        managed = False
         ordering = ('-date', )
 
     def __str__(self) -> str:

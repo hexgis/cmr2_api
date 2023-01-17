@@ -21,7 +21,7 @@ class CatalogsFilter(rest_framework.FilterSet):
         * end_date (str): filtering end date.
     """
     satellite = CharInFilter(
-        field_name='sat_id__identifier',
+        field_name='sat_id',
         lookup_expr='in',
         required=True,
     )

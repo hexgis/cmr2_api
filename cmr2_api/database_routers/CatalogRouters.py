@@ -4,14 +4,15 @@
 class CatalogRouter:
     """Catalog tables, database router."""
 
-    route_app_labels = {''}
-    model_catalog = 'Catalogs'
+    route_app_labels = {'catalog'}
+    # model_catalog = 'Catalogs'
 
     def db_for_read(self, model, **hints):
         """Database for read method."""
         if model._meta.app_label in self.route_app_labels:
-            if model._meta.model_name == self.model_catalog.lower():
-                return 'db_for_read'
+            # if model._meta.model_name == self.model_catalog.lower():
+            #     return 'db_for_read'
+            return 'db_for_read'
         return None
 
     def db_for_write(self, model, **hints):
