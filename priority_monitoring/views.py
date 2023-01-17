@@ -2,7 +2,7 @@ from django.db.models import Sum, Count
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_gis import filters as gis_filters
 from rest_framework import (
-    generics, filters, response, permissions, status, exceptions
+    generics, filters, response, permissions, status
 )
 
 from priority_monitoring import (
