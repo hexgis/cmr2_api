@@ -16,8 +16,6 @@ class SatelliteAdmin(admin.ModelAdmin):
 
     search_fields = list_display
 
-    readonly_fields = fields
-
 
 class CatalogsAdmin(admin.GeoModelAdmin):
     """Django Administrator `model.Catalogs` data."""
