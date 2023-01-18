@@ -29,7 +29,7 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
             "date",
             "pr_date",
             "cloud_cover",
-            "sat_id",
+            "sat_identifier",
             "preview",
             "max_native_zoom",
             "type",

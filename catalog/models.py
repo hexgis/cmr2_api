@@ -99,7 +99,7 @@ class Catalogs(models.Model):
         default=15,
     )
 
-    sat_id = models.IntegerField(
+    sat_identifier = models.IntegerField(
         _('Satellite identifier'),
         null=True,
         blank=True

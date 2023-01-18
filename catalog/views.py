@@ -40,7 +40,7 @@ class CatalogsView(AuthModelMixIn, generics.ListAPIView):
             (min lon, min lat, max lon, max lat).
     """
 
-    queryset = models.Catalogs.objects.all().order_by('sat_id')
+    queryset = models.Catalogs.objects.all().order_by('sat_identifier')
     serializer_class = serializers.CatalogsSerializer
     bbox_filter_field = 'geom'
     filterset_class = catalog_filters.CatalogsFilter

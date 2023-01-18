@@ -30,7 +30,7 @@ class CatalogsAdmin(admin.GeoModelAdmin):
         'date',
         'pr_date',
         'locator',
-        'sat_id'
+        'sat_identifier'
     )
 
     fields = (
@@ -39,11 +39,10 @@ class CatalogsAdmin(admin.GeoModelAdmin):
         'image_path',
         'url_tms',
         'date',
-        # 'pr_date',
         'cloud_cover_percent',
         'locator',
         'geom',
-        'sat_id'
+        'sat_identifier'
     )
 
     search_fields = ('image',)
