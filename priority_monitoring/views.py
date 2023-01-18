@@ -5,7 +5,7 @@ from rest_framework import (
     generics, filters, response, permissions, status
 )
 
-from priority_monitoring import(
+from priority_monitoring import (
     serializers,
     models,
     filters as priority_filters
@@ -46,11 +46,31 @@ class PriorityConsolidatedDetailView(
     AuthModelMixIn,
     generics.RetrieveAPIView
 ):
-    """Detail data for `priority_monitoring.PriorityConsolidated`."""
+    """Detail data for `priority_monitoring.PriorityConsolidated`."""  """
+
+    Paramter:
+        geometry (boolean): returns with or without geometry
+    """
 
     queryset = models.PriorityConsolidated.objects.all()
-    serializer_class = serializers.PriorityConsolidatedDetailSerializer
     lookup_field = 'pk'
+
+    def get_serializer_class(self):
+        """Get method to return serializer detail.
+
+        Returns serializers with or without geometry:
+
+        Returns:
+            `serializers.PriorityConsolidatedDetailSerializer` or
+            `serializers.PriorityConsolidatedDetailGeomSerializer`
+        """
+
+        geometry_necessary = self.request.query_params.get('geometry')
+
+        if geometry_necessary == 'true':
+            return serializers.PriorityConsolidatedDetailGeomSerializer
+        else:
+            return serializers.PriorityConsolidatedDetailSerializer
 
 
 class PriorityConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
@@ -98,8 +118,8 @@ class PrioritiesDistinctedListView(AuthModelMixIn, generics.ListAPIView):
 
 
 class PriorityConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
-    
+
     serializer_class = serializers.PriorityConsolidatedTableSerializer
     queryset = models.PriorityConsolidated.objects.all()
     filterset_class = priority_filters.PriorityConsolidatedFilter
-    filter_backends = (DjangoFilterBackend,)    
+    filter_backends = (DjangoFilterBackend,)

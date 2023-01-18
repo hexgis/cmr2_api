@@ -1,11 +1,11 @@
 from rest_framework import serializers
+from rest_framework_gis import serializers as gis_serializers
 
 from catalog import models
 
 
 class SatelliteSerializer(serializers.ModelSerializer):
     """Serializer to return registered sattelites `models.Satellite` data."""
-    # satellite = SatteliteSerializer()
 
     class Meta:
         """Meta Class for `catalog.SatteliteSerializer` serializer."""
@@ -16,7 +16,23 @@ class SatelliteSerializer(serializers.ModelSerializer):
         )
 
 
-class CatalogsSerializer(serializers.ModelSerializer):
+class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
+    """Serializer to return Catalogs scenes as GeoJSON compatible data."""
     class Meta:
         model = models.Catalogs
-        fields = "__all__"
+        geo_field = 'geom'
+        fields = (
+            "objectid",
+            "image",
+            "image_path",
+            "url_tms",
+            "date",
+            "pr_date",
+            "cloud_cover",
+            "sat",
+            "preview",
+            "max_native_zoom",
+            "type",
+            "geom",
+            "locator"
+        )

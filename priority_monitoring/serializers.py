@@ -101,3 +101,27 @@ class PriorityConsolidatedTableSerializer(serializers.ModelSerializer):
             'nu_latitude',
             'nu_longitude',
         )
+
+
+class PriorityConsolidatedDetailGeomSerializer(gis_serializers.GeoFeatureModelSerializer):
+    """Serializer for detailed `models.PriorityConsolidated` data."""
+
+    class Meta:
+        """Meta class for `PriorityConsolidatedDetailSerializer` serializer."""
+        model = models.PriorityConsolidated
+        geo_field = 'geom'
+        id_field = False
+        fields = (
+            'no_ti',
+            'co_funai',
+            'ds_cr',
+            'no_estagio',
+            'no_imagem',
+            'dt_t_zero',
+            'dt_t_um',
+            'nu_area_ha',
+            'nu_latitude',
+            'nu_longitude',
+            'prioridade',
+            'geom'
+        )
