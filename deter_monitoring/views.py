@@ -1,3 +1,4 @@
+from django.db.models import Count, Sum
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework_gis import filters as gis_filters
 
@@ -5,11 +6,13 @@ from rest_framework import (
     permissions,
     generics,
     response,
+    status
 )
 
 from deter_monitoring import (
     models,
-    serializers
+    serializers,
+    filters
 )
 
 class AuthModelMixIn:
@@ -18,24 +21,36 @@ class AuthModelMixIn:
     permission_classes = (permissions.AllowAny,)
 
 
-class DeterDetailView(AuthModelMixIn, generics.RetrieveAPIView):
-    """Detail data for `deter_monitoring.models.DeterTable`.
+class DeterTIDetailView(AuthModelMixIn, generics.RetrieveAPIView):
+    """Detail data for `deter_monitoring.models.DeterTI`.
 
     Filters:
         * id (int): filtering request poligon identifier.
     """
 
-    queryset = models.DeterTable.objects.all()
-    serializer_class = serializers.DeterDetailSerializer
+    queryset = models.DeterTI.objects.all()
+    serializer_class = serializers.DeterTIDetailSerializer
     lookup_field = 'id'
     filter_backends = (DjangoFilterBackend,)
 
+class DeterTIView(AuthModelMixIn, generics.ListAPIView):
+    """Returns list data for `deter_monitoring.models.DeterTI`."""
 
-class DeterView(AuthModelMixIn, generics.ListAPIView):
-    """Returns list end geom data for `deter_monitoring.models.DeterTable`."""
+    queryset = models.DeterTI.objects.all()
+    serializer_class = serializers.DeterTISerializer
+    filterset_class = filters.DeterTIFilter
+    bbox_filter_field = 'geom'
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
 
-    queryset = models.DeterTable.objects.all()
-    serializer_class = serializers.DeterSerializer
+class DeterTableTIView(AuthModelMixIn, generics.ListAPIView):
+    """Returns list end geom data for `deter_monitoring.models.DeterTI`."""
+
+    queryset = models.DeterTI.objects.all()
+    serializer_class = serializers.DeterTITableSerializer
+    filterset_class = filters.DeterTIFilter
     bbox_filter_field = 'geom'
     filter_backends = (
         gis_filters.InBBoxFilter,
@@ -43,29 +58,33 @@ class DeterView(AuthModelMixIn, generics.ListAPIView):
     )
 
 
-class DeterMapStatsView(AuthModelMixIn, generics.ListAPIView):
-    """Retrieves `deter_monitoring.models.DeterTable` map stats data."""
-    pass
-    # queryset = models.DeterTable.objects.all()
-    # serializer_class = serializers.DeterMapStatsSerializer
+class DeterTIMapStatsView(AuthModelMixIn, generics.ListAPIView):
+    """Retrieves `deter_monitoring.models.DeterTI` map stats data."""
 
-
-class DeterTableView(AuthModelMixIn, generics.ListAPIView):
-    """Returns list data for `deter_monitoring.models.DeterTable`."""
-
-    queryset = models.DeterTable.objects.all()
-    serializer_class = serializers.DeterTableSerializer
+    queryset = models.DeterTI.objects.all()
+    serializer_class = serializers.DeterTIMapStatsSerializer
+    filterset_class = filters.DeterTIFilter
+    bbox_filter_field = 'geom'
     filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
     )
 
+    def get(self, request) -> response.Response:
+        data = self.filter_queryset(self.queryset).aggregate(
+            area_total_km=Count('areatotalkm'),
+            total=Sum('id')
+        )
+        return response.Response(data, status=status.HTTP_200_OK)
 
-class DeterTableStatsView(AuthModelMixIn, generics.ListAPIView):
+
+class DeterTITableStatsView(AuthModelMixIn, generics.ListAPIView):
     """"""
     pass
-    # queryset = models.DeterTable.objects.all()
-    # serializer_class = serializers.DeterTableStatsSerializer
+    # queryset = models.DeterTI.objects.all()
+    # serializer_class = serializers.DeterTITableStatsSerializer
+    # filterset_class = filters.DeterTIFilter
+    # bbox_filter_field = 'geom'
     # filter_backends = (
     #     DjangoFilterBackend,
     #     gis_filters.InBBoxFilter,

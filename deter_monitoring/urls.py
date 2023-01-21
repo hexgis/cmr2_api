@@ -5,27 +5,27 @@ from deter_monitoring import views
 urlpatterns = [
     path(
         'detail/<int:pk>/',
-        views.DeterDetailView.as_view(),
+        views.DeterTIDetailView.as_view(),
         name='deter-monitoring-detail'
     ),
     path(
         '',
-        views.DeterView.as_view(),
+        views.DeterTIView.as_view(),
         name='deter-monitoring-geomety'
     ),
     path(
         'map-stats/',
-        views.DeterMapStatsView.as_view(),
+        views.DeterTIMapStatsView.as_view(),
         name='deter-monitoring-map-stats'
     ),
     path(
         'table/',
-        views.DeterTableView.as_view(),
+        views.DeterTableTIView.as_view(),
         name='deter-monitoring-table'
     ),
     path(
         'table-stats/',
-        views.DeterTableStatsView.as_view(),
+        views.DeterTITableStatsView.as_view(),
         name='deter-monitoring-table-stats'
     )
 ]
