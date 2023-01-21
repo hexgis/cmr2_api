@@ -1,3 +1,6 @@
 from django.contrib import admin
+from deter_monitoring import models
 
-# Register your models here.
+
+
+admin.site.register(models.DeterTI,)
