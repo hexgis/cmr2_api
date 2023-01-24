@@ -1,4 +1,4 @@
-# python manage.py test catalog.tests.test_models
+# python manage.py test catalog.tests.test_views
 from urllib import response
 from django.test import TestCase
 
@@ -41,6 +41,17 @@ class CatalogViewsURLsTests(APITestCase):
     
 
 class CatalogFiltersViewsTests(APITestCase):
+    """"""
+    def get_filters_parameters(self):
+        parameter = {
+            'satellite': 'LC08',
+            'cloud_cover': 99,
+            'start_date':'2018-06-14',
+            'end_date':'2021-10-14',
+        }
+
+        return parameter
+
     @classmethod
     def setUpTestData(cls):
         call_command('loaddata', 'catalog/fixtures/catalog_satellites.yaml', verbosity=0)
@@ -48,19 +59,52 @@ class CatalogFiltersViewsTests(APITestCase):
         cls.url_catalogs = reverse('catalog:catalog-scenes')
         cls.url_satellite = reverse('catalog:satellite-catalog')
 
-        request_ok = self.client.get(self.url_catalogs, {'satellite': 'LC08', 'cloud_cover': 99, 'start_date':'2018-06-14','end_date':'2021-10-14'})#; len(xxx.json())
-        # queryset_ok = models.Catalogs.objects.filter(sat__exact=2, cloud_cover=99, date__gte = '2015-06-14', date__lte = '2022-06-14'))
-        # request_error = self.client.get(self.url_catalogs, {'satellite': 1, 'cloud_cover': '5'})
+    def setUp(self):
+        self.client = Client()
+        self.parameter = self.get_filters_parameters()
+        self.request_valid = self.client.get(self.url_catalogs, {
+            'satellite':self.parameter['satellite'],
+            'cloud_cover':self.parameter['cloud_cover'],
+            'start_date':self.parameter['start_date'],
+            'end_date':self.parameter['end_date']
+        })
+        self.queryset_valid = models.Catalogs.objects.filter(
+            sat_id__identifier__exact=self.parameter['satellite'],
+            cloud_cover__lte=self.parameter['cloud_cover'],
+            date__gte=self.parameter['start_date'],
+            date__lte=self.parameter['end_date']
+        )
+        self.request_error = self.client.get(self.url_catalogs, {
+            'satellite': 'LC08',
+            'cloud_cover': 5,
+            'start_date': '2021-01-066'
+        })
 
-    def test_xpto1(self):
+    def test_request_with_filters_is_valid(self):
         print("------------>>>>>>>>>>-------------")
+        import pdb; pdb.set_trace()
         # self.client.get(self.url_catalogs, {'satellite': 'LC08', 'cloud_cover': 5})
-        self.request_ok
-        self.assertEqual(1 + 1, 2)
+        response = self.request_valid
+        for i in range(len(response.json())): 
+            response.json()[i]['objectid']
+            se todos os valores são iguais a = 'satellite': 'LC08',
+            #TODO: 
+            self.assertEquals(response.json()[i]['sat'], 2)
+            se todos os valores são maiores ou iguais a = 'cloud_cover': 99,
+            se todos os valores são menores ou iguas a = 'start_date':'2018-06-14',
+            se todos os valores são maiores ou iguais a = 'end_date':'2021-10-14',
+       
+        self.assertEqual(1+3, 5)
+        # self.assertEqual(request_valid.status_code, status.HTTP_200_OK)
 
-    # def for se todos for "LC08"
-    # def ver ser tem algum > do que 5
-    # def ver se data maior ou igual
-    # def ver se data menor ou igual
+    def test_request_filter_is_equals_len_queryset_filter(self):
+        response = self.request_valid.json()
+        qs = self.queryset_valid
 
-# print("\n\n\ ------------------->>>>>>>>>>>>>>>>------------")
+        self.assertEqual(len(response), qs.count())
+        # len(self.request_valid.json(),self.queryset_valid.count())
+
+    def test_invalid_parameter(self):
+        response = self.request_error
+
+        self.assertTrue(status.is_client_error(response.status_code))
