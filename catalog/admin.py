@@ -28,7 +28,8 @@ class CatalogsAdmin(admin.GeoModelAdmin):
         'date',
         'pr_date',
         'locator',
-        'sat_identifier'
+        'sat_identifier',
+        'sat_name'
     )
 
     fields = (
@@ -40,7 +41,8 @@ class CatalogsAdmin(admin.GeoModelAdmin):
         'cloud_cover_percent',
         'locator',
         'geom',
-        'sat_identifier'
+        'sat_identifier',
+        'sat_name'
     )
 
     search_fields = ('image',)

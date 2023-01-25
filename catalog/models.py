@@ -79,7 +79,6 @@ class Catalogs(models.Model):
 
     pr_date = models.DateField(
         _('Process Date'),
-        auto_now_add=True
     )
 
     cloud_cover = models.FloatField(
@@ -99,8 +98,9 @@ class Catalogs(models.Model):
         default=15,
     )
 
-    sat_identifier = models.IntegerField(
+    sat_identifier = models.CharField(
         _('Satellite identifier'),
+        max_length=255,
         null=True,
         blank=True
     )
