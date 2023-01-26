@@ -16,8 +16,6 @@ class SatelliteAdmin(admin.ModelAdmin):
 
     search_fields = list_display
 
-    readonly_fields = fields
-
 
 class CatalogsAdmin(admin.GeoModelAdmin):
     """Django Administrator `model.Catalogs` data."""
@@ -30,7 +28,8 @@ class CatalogsAdmin(admin.GeoModelAdmin):
         'date',
         'pr_date',
         'locator',
-        'sat'
+        'sat_identifier',
+        'sat_name'
     )
 
     fields = (
@@ -39,11 +38,11 @@ class CatalogsAdmin(admin.GeoModelAdmin):
         'image_path',
         'url_tms',
         'date',
-        # 'pr_date',
         'cloud_cover_percent',
         'locator',
         'geom',
-        'sat'
+        'sat_identifier',
+        'sat_name'
     )
 
     search_fields = ('image',)
