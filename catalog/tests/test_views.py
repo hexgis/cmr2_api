@@ -15,14 +15,6 @@ class CatalogViewsURLsTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
         """Class variables using dumpdata fixtures file end URLs."""
-        call_command(
-            'loaddata',
-            'catalog/fixtures/catalog_satellites.yaml',
-            verbosity=0)
-        call_command(
-            'loaddata',
-            'catalog/fixtures/catalog_scnes.yaml',
-            verbosity=0)
         cls.url_catalogs = reverse('catalog:catalog-scenes')
         cls.url_satellite = reverse('catalog:satellite-catalog')
 
