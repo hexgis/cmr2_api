@@ -107,18 +107,30 @@ class DeterTI(models.Model):
         blank=True
     )
 
-    no_ti = models.CharField(
-        _('Indigenou Lands name'),
-        max_length=255,
-        null=True,
+    co_cr = models.BigIntegerField(
+        _('Regional Coordenation code'),
         blank=True,
+        null=True
     )
 
     ds_cr = models.CharField(
-        _('Regional Coordination name'),
+        _('Regional Coordenation name'),
         max_length=255,
-        null=True,
         blank=True,
+        null=True
+    )
+
+    co_funai = models.IntegerField(
+        _('Funai code'),
+        blank=True,
+        null=True
+    )
+
+    no_ti = models.CharField(
+        _('Name of Indigenous Lands'),
+        max_length=255,
+        blank=True,
+        null=True
     )
 
     geom = models.GeometryField(
@@ -133,7 +145,7 @@ class DeterTI(models.Model):
         app_label = 'deter_monitoring'
         verbose_name = 'Deter Indigenous Lands'
         verbose_name_plural = 'Deter Indigenous Lands'
-        # db_table = 'catalogo\".\"DeterTI'
+        # db_table = 'funai\".\"lim_deter_a'
         # managed = False
         ordering = ('-view_date', 'uf')
 
