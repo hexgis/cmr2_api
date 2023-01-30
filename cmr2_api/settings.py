@@ -117,7 +117,8 @@ DOCUMENTOS = os.getenv(
 
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.CatalogRouters.CatalogRouter',
-    'cmr2_api.database_routers.DocumentalRouters.DocumentalRouter',
+    'cmr2_api.database_routers.DocumentalRouters.DocumentalRouter',    
+    'cmr2_api.database_routers.DeterMonitoringRouters.DeterMonitoringRouter',
     'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
     'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
