@@ -11,7 +11,7 @@ class DeterTIDetailSerializer(serializers.ModelSerializer):
         """Meta class for `DeterDetailSerializer` serializer."""
         model = models.DeterTI
         id_field = False
-        fields = '__all__'
+        exclude = ['geom',]
 
 
 class DeterTISerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -25,44 +25,31 @@ class DeterTISerializer(gis_serializers.GeoFeatureModelSerializer):
         fields = '__all__'
 
 
-class DeterTIMapStatsSerializer(gis_serializers.GeoFeatureModelSerializer):
+class DeterTIMapStatsSerializer(serializers.ModelSerializer):
     """Serializer for `deter_monitoring.models.DeterTI` data."""
 
     class Meta:
         """Meta class for `DeterMapStatsSerializer` serializer."""
         model = models.DeterTI
-        geo_field = 'geom'
         id_field = False
-        fields = '__all__'
+        fields = ['area_total_km',]
 
 
-class DeterTITableSerializer(gis_serializers.GeoFeatureModelSerializer):
+class DeterTITableSerializer(serializers.ModelSerializer):
     """Serializer for `deter_monitoring.models.DeterTI` data."""
 
     class Meta:
         """Meta class for `DeterTISerializer` serializer."""
         model = models.DeterTI
-        geo_field = 'geom'
         id_field = False
-        exclude = 'geom'
+        exclude = ['geom',]
 
 
-class DeterTITableStatsSerializer(gis_serializers.GeoFeatureModelSerializer):
+class DeterTITableStatsSerializer(serializers.ModelSerializer):
     """Serializer for `deter_monitoring.models.DeterTI` data."""
 
     class Meta:
         """Meta class for `DeterTIStatsSerializer` serializer."""
         model = models.DeterTI
-        geo_field = 'geom'
         id_field = False
-        fields = '__all__'
-
-# class DeterTITableStats2Serializer(serializers.ModelField):
-#    ##Para testar com e sem o campo geo_field='geom' para ver se o bbox ira funcionar
-#     """Serializer for `deter_monitoring.models.DeterTI` data."""
-
-#     class Meta:
-#         """Meta class for `DeterTIStatsSerializer` serializer."""
-#         model = models.DeterTI
-#         id_field = False
-#         fields = '__all__'        
+        exclude = ['geom',]

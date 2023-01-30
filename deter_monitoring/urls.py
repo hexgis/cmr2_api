@@ -20,7 +20,7 @@ urlpatterns = [
     ),
     path(
         'table/',
-        views.DeterTableTIView.as_view(),
+        views.DeterTITableView.as_view(),
         name='deter-monitoring-table'
     ),
     path(
