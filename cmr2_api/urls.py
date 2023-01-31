@@ -49,7 +49,7 @@ urlpatterns = [
     path('support/', include(
         ('support.urls', 'support'), namespace='support')
     ),
-    path('priority/', include(
+    path('priority/consolidated/', include(
         ('priority_monitoring.urls', 'priority_monitoring'),
         namespace='priority')
     ),
