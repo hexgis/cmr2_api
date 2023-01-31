@@ -18,8 +18,8 @@ class PiorirityConsolidatedViewsTests(APITestCase):
     def get_requered_filters_parameters(self):
         """Creating parameters requered applied to filters."""
         parameter = {
-            'start_date':'2021-12-15',
-            'end_date':'2021-07-28',
+            'start_date':'2021-07-28',
+            'end_date':'2021-12-15',
             'pk_detail':13
         }
 
@@ -91,8 +91,8 @@ class PiorirityConsolidatedFiltersViewsTests(APITestCase):
             'co_cr': 30202001920,
             'co_funai': 23001,
             'stage': 'CR',
-            'end_date':'2021-12-15',
             'start_date':'2021-07-28',
+            'end_date':'2021-12-15',
             'priority': 'Baixa',
             'pk_detail':13
         }
