@@ -24,7 +24,6 @@ class PriorityConsolidatedTest(TestCase):
 
     def test_object_model_output_is_dt_t_zero_dt_t_um(self):
         priority_output = models.PriorityConsolidated.objects.first()
-        # expected_object_name = f'{priority_output.dt_t_zero, ' - ', priority_output.dt_t_um}
         expected_object_name = '%s - %s' % (priority_output.dt_t_zero, priority_output.dt_t_um)
 
         self.assertEqual(str(priority_output), expected_object_name)
