@@ -17,7 +17,6 @@ class PriorityConsolidatedTest(TestCase):
             'priority_monitoring/fixtures/priority_consolidated.yaml',
             verbosity=0)
 
-
     def test_objects_created(self):
         """Test if object PriorityConsolidated is created."""
         self.assertTrue(models.PriorityConsolidated.objects.exists())
