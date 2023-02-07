@@ -11,7 +11,10 @@ class NumberInFilter(
     pass
 
 
-class CharInFilter(rest_framework.BaseInFilter, rest_framework.CharFilter):
+class CharInFilter(
+    rest_framework.BaseInFilter,
+    rest_framework.CharFilter
+):
     """Base class used for creating IN lookup filters to filter characters."""
     pass
 
@@ -20,10 +23,12 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
     """PriorityConsolidatedFilter data.
 
     Filters:
-        stage (str): stage name. E.g.: CR, DG, FF, DR
-        start_date (str): filtering start date
-        end_date (str): filteringend date
-        priority (str): priority level
+        * co_cr (list_int): Regional Coordination code.
+        * co_funai (list_str): Indigenous Lands code.
+        * stage (list_str): Classification stage. E.g.: CR, DG, FF, DR
+        * start_date (str): Filter for start date.
+        * end_date (str): Filter for end date.
+        * priority (str): Priority level.
     """
     # Ainda necessário vincular as tabelas do APP
     # funai CR e TI com o Priority_monitoring
@@ -37,8 +42,9 @@ class PriorityConsolidatedFilter(rest_framework.FilterSet):
         lookup_expr='in',
     )
 
-    stage = rest_framework.CharFilter(
+    stage = CharInFilter(
         field_name='no_estagio',
+        lookup_expr='in',
     )
 
     start_date = rest_framework.DateFilter(

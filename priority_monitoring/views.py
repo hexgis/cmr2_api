@@ -21,13 +21,14 @@ class PriorityConsolidatedView(AuthModelMixIn, generics.ListAPIView):
     """Returns list data for `priority_monitoring.PriorityConsolidated`.
 
     Filters:
+        * co_cr (list_int): Regional Coordination code.
+        * co_funai (list_str): Indigenous Lands code.
+        * stage (list_str): Classification stage. E.g.: CR, DG, FF, DR
+        * start_date (str): Filter for start date.
+        * end_date (str): Filter for end date.
+        * priority (str): Priority level.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
-        * co_cr (int): Regional Coordination code.
-        * co_funai (list): Indigenous Lands code.
-        * start_date (str): filter for start date.
-        * end (str): filter for end date.
-        * priority (str): priority data.
     """
 
     queryset = models.PriorityConsolidated.objects.all()
@@ -73,17 +74,18 @@ class PriorityConsolidatedDetailView(
             return serializers.PriorityConsolidatedDetailSerializer
 
 
-class PriorityConsolidatedStatsView(AuthModelMixIn, generics.ListAPIView):
+class PriorityConsolidatedMapStatsView(AuthModelMixIn, generics.ListAPIView):
     """Retrieves `priority_monitoring.PriorityConsolidated` stats data.
 
     Filters:
+        * co_cr (list_int): Regional Coordination code.
+        * co_funai (list_str): Indigenous Lands code.
+        * stage (list_str): Classification stage. E.g.: CR, DG, FF, DR
+        * start_date (str): Filter for start date.
+        * end_date (str): Filter for end date.
+        * priority (str): Priority level.
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
-        * co_cr (int): Regional Coordination code.
-        * co_funai (int): Indigenous Lands code.
-        * start_date (str): filter for start date.
-        * end (str): filter for end date.
-        * priority (str): priority data.
     """
     queryset = models.PriorityConsolidated.objects.all()
     serializer_class = serializers.PriorityConsolidatedSerializer

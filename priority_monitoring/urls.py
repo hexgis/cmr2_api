@@ -5,27 +5,27 @@ from priority_monitoring import views
 
 urlpatterns = [
     path(
-        'consolidated/',
+        '',
         views.PriorityConsolidatedView.as_view(),
         name='priority-consolidated'
     ),
     path(
-        'consolidated/priorities/',
+        'priorities/',
         views.PrioritiesDistinctedListView.as_view(),
-        name='priority-consolidated'
+        name='priority-consolidated-priorities'
     ),
     path(
-        'consolidated/detail/<int:pk>/',
+        'detail/<int:pk>/',
         views.PriorityConsolidatedDetailView.as_view(),
         name='priority-consolidated-detail'
     ),
     path(
-        'consolidated/total/',
-        views.PriorityConsolidatedStatsView.as_view(),
+        'total/',
+        views.PriorityConsolidatedMapStatsView.as_view(),
         name='priority-consolidated-stats'
     ),
     path(
-        'consolidated/table/',
+        'table/',
         views.PriorityConsolidatedTableView.as_view(),
         name='priority-consolidated-table'
     ),
