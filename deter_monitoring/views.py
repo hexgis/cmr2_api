@@ -138,6 +138,7 @@ class DeterTITableStatsView(AuthModelMixIn, generics.ListAPIView):
     Returns group by in request field grouping:
 
     """
+    #TODO: Create Table Stats after defining the business rule for creating the groupings.
     # queryset = models.DeterTI.objects.all()
     # serializer_class = serializers.DeterTITableStatsSerializer
     # filterset_class = filters.DeterTIFilter

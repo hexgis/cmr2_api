@@ -14,8 +14,8 @@ class DeterTI(models.Model):
 
     quadrant = models.CharField(
         _('Quadrant'),
-        #???
         max_length=255,
+        null=True,
         blank=True
     )
 
@@ -28,7 +28,6 @@ class DeterTI(models.Model):
 
     areatotalkm = models.DecimalField(
         _('Total area km'),
-        #???
         max_digits=14,
         decimal_places=3,
         blank=True,
@@ -36,8 +35,7 @@ class DeterTI(models.Model):
     )
 
     areamunkm = models.DecimalField(
-        _('Mu area km'),
-        #???
+        _('City area km'),
         max_digits=14,
         decimal_places=3,
         blank=True,
@@ -45,8 +43,7 @@ class DeterTI(models.Model):
     )
 
     areauckm = models.DecimalField(
-        _('uk area km'),
-        #???
+        _('UC area km'),
         max_digits=14,
         decimal_places=3,
         blank=True,
@@ -55,7 +52,6 @@ class DeterTI(models.Model):
 
     view_date = models.DateField(
         _('Visualization data'),
-        #???
         null=True,
         blank=True
     )
@@ -69,7 +65,6 @@ class DeterTI(models.Model):
 
     satellite = models.CharField(
         _('Satellite'),
-        #!!! converter o nome do satellite para o identify
         max_length=255,
         null=True,
         blank=True
@@ -78,25 +73,28 @@ class DeterTI(models.Model):
     uf = models.CharField(
         _('State acronym'),
         max_length=255,
+        null=True,
         blank=True
     )
 
     municipality = models.CharField(
         _('City name'),
         max_length=255,
+        null=True,
         blank=True
     )
 
     geocod = models.CharField(
         _('Geo code'),
         max_length=255,
+        null=True,
         blank=True
     )
 
     uc = models.CharField(
         _('Conserveation unit'),
-        #???
         max_length=255,
+        null=True,
         blank=True
     )
 
@@ -138,7 +136,7 @@ class DeterTI(models.Model):
         max_digits=20,
         decimal_places=10,
         null=True,
-        blank=True,
+        blank=True
     )
 
     nu_longitude = models.DecimalField(
@@ -146,7 +144,7 @@ class DeterTI(models.Model):
         max_digits=20,
         decimal_places=10,
         null=True,
-        blank=True,
+        blank=True
     )
     geom = models.GeometryField(
         _('Geometry Field'),
