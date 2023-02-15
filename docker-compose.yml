@@ -7,12 +7,14 @@ services:
       POSTGRES_USER: defaultuser
       POSTGRES_DB: testdb
       POSTGRES_PASSWORD: testpassword
+  
   db_for_read:
     image: circleci/postgres:10-postgis
     environment:
       POSTGRES_USER: user
       POSTGRES_DB: database
       POSTGRES_PASSWORD: asdfsa
+
   dev:
     build:
       context: .
@@ -29,6 +31,7 @@ services:
       && python manage.py loaddata land_use_ti.yaml
       && python manage.py loaddata land_use_classes.yaml
       && python manage.py loaddata catalog_satellites.yaml
+      && python manage.py loaddata catalog_scnes.yaml
       && python manage.py loaddata documental_docs_action.yaml
       && python manage.py loaddata documental_users_who_registered.yaml
       && python manage.py loaddata documental_docs.yaml
@@ -51,6 +54,26 @@ services:
     depends_on:
       - db
       - db_for_read
+
+  test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-dev
+    command: >
+      bash -c "python manage.py makemigrations --no-input
+      && python manage.py test"
+    volumes:
+      - .:/app/
+    ports:
+      - "8080:8080"
+    environment:
+      DB_USER: defaultuser
+      DB_NAME: testdb
+      DB_PASSWORD: testpassword
+      DB_HOST: db
+      PORT: 8080
+    depends_on:
+      - db
 
   prod:
     image: us.gcr.io/custom-plating-209314/cmr2_api:latest
