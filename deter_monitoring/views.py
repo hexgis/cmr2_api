@@ -19,7 +19,6 @@ class AuthModelMixIn:
     """Default Authentication for `deter_monitoring` views."""
 
     permission_classes = (permissions.AllowAny,)
-    # permission_classes = (permissions.IsAuthenticated,)
 
 
 class DeterTIDetailView(AuthModelMixIn, generics.RetrieveAPIView):
@@ -37,7 +36,7 @@ class DeterTIDetailView(AuthModelMixIn, generics.RetrieveAPIView):
 
 class DeterTIView(AuthModelMixIn, generics.ListAPIView):
     """Returns list data for `deter_monitoring.models.DeterTI`.
-    
+
     Fielters:
         * co_cr (list): filtering Regional Coordenation using code.
         * co_funai (list): filtering Indigenou Lands using Funai code
@@ -81,12 +80,7 @@ class DeterTITableView(AuthModelMixIn, generics.ListAPIView):
         gis_filters.InBBoxFilter,
         DjangoFilterBackend,
     )
-# alto volume, variedade velocidade
-# &in_bbox=-69.27978515625001,-9.879569652774814,-64.00634765625001,-8.064668502396389&co_cr=30202001845
-# &in_bbox=-78.60717773437501,-12.71536762877211,-57.51342773437501,-4.850154078505659
-# data preapraiton
-# Data Science: big Data , domain analysis, data acquisition, data transformation, data visualizations, class DeterTIMapStatsView(AuthModelMixIn, generics.ListAPIView):
-# modelo de ML: formulação matemática que explica o relacionamento entre os dados
+
 
 class DeterTIMapStatsView(AuthModelMixIn, generics.ListAPIView):
     """Retrieves `deter_monitoring.models.DeterTI` map stats data.
@@ -113,8 +107,8 @@ class DeterTIMapStatsView(AuthModelMixIn, generics.ListAPIView):
 
     def get(self, request) -> response.Response:
         data = self.filter_queryset(self.queryset).aggregate(
-            area_total_km=Count('areatotalkm'),
-            total=Sum('id')
+            area_total_km=Sum('areatotalkm'),
+            total=Count('id')
         )
         return response.Response(data, status=status.HTTP_200_OK)
 
@@ -138,7 +132,7 @@ class DeterTITableStatsView(AuthModelMixIn, generics.ListAPIView):
     Returns group by in request field grouping:
 
     """
-    #TODO: Create Table Stats after defining the business rule for creating the groupings.
+    #TODO: Create Table Stats after defining the business rule for groupings.
     # queryset = models.DeterTI.objects.all()
     # serializer_class = serializers.DeterTITableStatsSerializer
     # filterset_class = filters.DeterTIFilter
