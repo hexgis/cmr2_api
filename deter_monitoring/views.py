@@ -19,6 +19,7 @@ class AuthModelMixIn:
     """Default Authentication for `deter_monitoring` views."""
 
     permission_classes = (permissions.AllowAny,)
+    # permission_classes = (permissions.IsAuthenticated,)
 
 
 class DeterTIDetailView(AuthModelMixIn, generics.RetrieveAPIView):

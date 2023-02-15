@@ -40,7 +40,7 @@ class DeterTIFilter(rest_framework.FilterSet):
         lookup_expr='in'
     )
 
-    class_name = CharInFilter(
+    stage = CharInFilter(
         field_name='classname',
         lookup_expr='in',
     )
@@ -66,7 +66,7 @@ class DeterTIFilter(rest_framework.FilterSet):
         fields = (
             'co_cr',
             'co_funai',
-            'class_name',
+            'stage',
             'satellite',
             'start_date',
             'end_date'

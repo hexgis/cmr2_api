@@ -57,7 +57,7 @@ class DeterTI(models.Model):
         _('Visualization data'),
         #???
         null=True,
-        blank=True,
+        blank=True
     )
 
     sensor = models.CharField(
@@ -137,7 +137,7 @@ class DeterTI(models.Model):
         _('Geometry Field'),
         srid=4326,
         blank=True,
-        null=True,
+        null=True
     )
 
     class Meta:
@@ -147,7 +147,7 @@ class DeterTI(models.Model):
         verbose_name_plural = 'Deter Indigenous Lands'
         # db_table = 'funai\".\"lim_deter_a'
         # managed = False
-        ordering = ('-view_date', 'uf')
+        ordering = ('-view_date', 'no_ti')
 
     def __str__(self) -> str:
         return str(self.view_date)

@@ -17,7 +17,6 @@ class DeterTIAdmin(admin.ModelAdmin):
         'uf',
         'municipality',
         'uc',
-        'no_ti',
     )
 
     field = list_display
