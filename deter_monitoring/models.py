@@ -133,6 +133,21 @@ class DeterTI(models.Model):
         null=True
     )
 
+    nu_latitude = models.DecimalField(
+        _('Latitude'),
+        max_digits=20,
+        decimal_places=10,
+        null=True,
+        blank=True,
+    )
+
+    nu_longitude = models.DecimalField(
+        _('Longitude'),
+        max_digits=20,
+        decimal_places=10,
+        null=True,
+        blank=True,
+    )
     geom = models.GeometryField(
         _('Geometry Field'),
         srid=4326,
