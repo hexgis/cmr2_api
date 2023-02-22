@@ -163,9 +163,6 @@ class DeterTI(models.Model):
         ordering = ('-view_date', 'no_ti')
 
     def __str__(self) -> str:
-        return str(self.view_date)
-
-    def __str__(self) -> str:
         """Returns `deter_monitoring.DeterTI` string data.
 
         Returns:
