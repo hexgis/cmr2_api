@@ -111,8 +111,9 @@ DATABASES = {
     },
 }
 
-DOCUMENTOS = os.getenv(
-    'DOCUMENTOS', 'https://cmr.funai.gov.br/api/media/')
+DOMAIN_API = os.getenv('DOMAIN_API', 'https://cmr.funai.gov.br/api/')
+
+DOCUMENTOS = os.getenv('DOCUMENTOS', os.path.join(DOMAIN_API, 'media/'))
 
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.CatalogRouters.CatalogRouter',
@@ -120,7 +121,8 @@ DATABASE_ROUTERS = [
     'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
     'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
-    'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter',
+    'cmr2_api.database_routers.PriorityMonitoringRouters.\
+PriorityMonitoringRouter',
 ]
 
 # Default auto field
@@ -154,7 +156,7 @@ LANGUAGE_CODE = 'en-us'
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
- 
+
 USE_L10N = True
 
 USE_TZ = True
