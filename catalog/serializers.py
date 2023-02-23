@@ -35,8 +35,13 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
     def get_image_path(self, instance):
         """Get image_path and creates image download url."""
         if instance.image_path is not None:
-            url_catalog = instance.image_path.replace('\\','/').replace(
-                "//hex-funai.hex.com/", '').replace("media/", '')
+            url_catalog = instance.image_path.replace(
+                '\\', '/'
+            ).replace(
+                "//hex-funai.hex.com/", ''
+            ).replace(
+                "media/", ''
+            )
             url_catalog = os.path.join(settings.DOMAIN_API, url_catalog)
             return url_catalog
         else:

@@ -16,8 +16,10 @@ class CatalogRouter:
                 else:
                     return 'default'
             except NameError:
-                print("warning: Call the exception in CatalogRouter.\
-db_for_read: ", model._meta.app_label)
+                print(
+                    "warning: Call the exception in CatalogRouter. db_for_read: ",
+                    model._meta.app_label
+                )
         return None
 
     def db_for_write(self, model, **hints):
@@ -28,8 +30,10 @@ db_for_read: ", model._meta.app_label)
             else:
                 return 'default'
         except NameError:
-            print("warning: Call the exception in CatalogRouter.db_for_write: \
-", model._meta.app_label)
+            print(
+                "warning: Call the exception in CatalogRouter.db_for_write: ",
+                model._meta.app_label
+            )
 
     def allow_relation(self, obj1, obj2, **hints):
         """Relationing database."""
@@ -49,6 +53,8 @@ db_for_read: ", model._meta.app_label)
                 else:
                     return db == 'default'
             except NameError:
-                print("warning: Call the exception in CatalogRouter.\
-allow_migrate: ", app_label)
+                print(
+                    "warning: Call the exception in CatalogRouter. allow_migrate: ",
+                      app_label
+                )
         return None
