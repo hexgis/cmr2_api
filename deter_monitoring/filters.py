@@ -19,13 +19,15 @@ class CharInFilter(
     pass
 
 
-class DeterTIFilter(rest_framework.FilterSet):
-    """DeterTIFilter data.
+class DeterTIFilters(rest_framework.FilterSet):
+    """DeterTIFilters data.
 
-    Fielters:
+    Filters:
         * co_cr (list): filtering Regional Coordenation using code.
         * co_funai (list): filtering Indigenou Lands using Funai code
-        * class_name (list_str): Classification classes. E.g.: ????
+        * stage (list_str): Classification classes. E.g.:
+            "CICATRIZ_DE_QUEIMADA"; "DESMATAMENTO_VEG"; "CS_DESORDENADO";
+            "DESMATAMENTO_CR"; "CS_GEOMETRICO"; "DEGRADACAO"; "MINERACAO"
         * satellite (list_str): filtering Satellite using identify.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
@@ -61,7 +63,7 @@ class DeterTIFilter(rest_framework.FilterSet):
     )
 
     class Meta:
-        """Meta class for `DeterTIFilter` filter."""
+        """Meta class for `DeterTIFilters` filter."""
         model = models.DeterTI
         fields = (
             'co_cr',

@@ -23,9 +23,4 @@ urlpatterns = [
         views.DeterTITableView.as_view(),
         name='deter-monitoring-table'
     ),
-    # path(
-    #     'table-stats/',
-    #     views.DeterTITableStatsView.as_view(),
-    #     name='deter-monitoring-table-stats'
-    # )
 ]
