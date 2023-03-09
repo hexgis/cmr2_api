@@ -15,6 +15,7 @@ from deter_monitoring import (
     filters
 )
 
+
 class AuthModelMixIn:
     """Default Authentication for `deter_monitoring` views."""
 
@@ -34,13 +35,40 @@ class DeterTIDetailView(AuthModelMixIn, generics.RetrieveAPIView):
     filter_backends = (DjangoFilterBackend,)
 
 
-class DeterTIView(AuthModelMixIn, generics.ListAPIView):
+class DeterTIClassView(AuthModelMixIn, generics.ListAPIView):
+    """This class for `deter_monitoring.models.DeterTI` inheritance view.
+
+    Filters:
+        * co_cr (list): filtering Regional Coordenation using code.
+        * co_funai (list): filtering Indigenou Lands using Funai code.
+        * stage (list_str): Classification classes. E.g.:
+            "CICATRIZ_DE_QUEIMADA"; "DESMATAMENTO_VEG"; "CS_DESORDENADO";
+            "DESMATAMENTO_CR"; "CS_GEOMETRICO"; "DEGRADACAO"; "MINERACAO"
+        * satellite (list_str): filtering Satellite using identify.
+        * start_date (str): filtering start date.
+        * end_date (str): filtering end date.
+        * in_bbox (bbox): bounding box
+            (min lon, min lat, max lon, max lat).
+    """
+
+    queryset = models.DeterTI.objects.all()
+    filterset_class = filters.DeterTIFilters
+    bbox_filter_field = 'geom'
+    filter_backends = (
+        DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
+
+
+class DeterTIView(DeterTIClassView):
     """Returns list data for `deter_monitoring.models.DeterTI`.
 
-    Fielters:
+    Filters:
         * co_cr (list): filtering Regional Coordenation using code.
         * co_funai (list): filtering Indigenou Lands using Funai code
-        * class_name (list_str): Classification classes. E.g.: ????
+        * stage (list_str): Classification classes. E.g.:
+            "CICATRIZ_DE_QUEIMADA"; "DESMATAMENTO_VEG"; "CS_DESORDENADO";
+            "DESMATAMENTO_CR"; "CS_GEOMETRICO"; "DEGRADACAO"; "MINERACAO"
         * satellite (list_str): filtering Satellite using identify.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
@@ -48,23 +76,18 @@ class DeterTIView(AuthModelMixIn, generics.ListAPIView):
             (min lon, min lat, max lon, max lat).
     """
 
-    queryset = models.DeterTI.objects.all()
     serializer_class = serializers.DeterTISerializer
-    filterset_class = filters.DeterTIFilter
-    bbox_filter_field = 'geom'
-    filter_backends = (
-        DjangoFilterBackend,
-        gis_filters.InBBoxFilter,
-    )
 
 
-class DeterTITableView(AuthModelMixIn, generics.ListAPIView):
+class DeterTITableView(DeterTIClassView):
     """Returns list end geom data for `deter_monitoring.models.DeterTI`.
 
-    Fielters:
+    Filters:
         * co_cr (list): filtering Regional Coordenation using code.
         * co_funai (list): filtering Indigenou Lands using Funai code
-        * class_name (list_str): Classification classes. E.g.: ????
+        * stage (list_str): Classification classes. E.g.:
+            "CICATRIZ_DE_QUEIMADA"; "DESMATAMENTO_VEG"; "CS_DESORDENADO";
+            "DESMATAMENTO_CR"; "CS_GEOMETRICO"; "DEGRADACAO"; "MINERACAO"
         * satellite (list_str): filtering Satellite using identify.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
@@ -72,23 +95,18 @@ class DeterTITableView(AuthModelMixIn, generics.ListAPIView):
             (min lon, min lat, max lon, max lat).
     """
 
-    queryset = models.DeterTI.objects.all()
     serializer_class = serializers.DeterTITableSerializer
-    filterset_class = filters.DeterTIFilter
-    bbox_filter_field = 'geom'
-    filter_backends = (
-        gis_filters.InBBoxFilter,
-        DjangoFilterBackend,
-    )
 
 
-class DeterTIMapStatsView(AuthModelMixIn, generics.ListAPIView):
+class DeterTIMapStatsView(DeterTIClassView):
     """Retrieves `deter_monitoring.models.DeterTI` map stats data.
 
-    Fielters:
+    Filters:
         * co_cr (list): filtering Regional Coordenation using code.
         * co_funai (list): filtering Indigenou Lands using Funai code
-        * class_name (list_str): Classification classes. E.g.: ????
+        * stage (list_str): Classification classes. E.g.:
+            "CICATRIZ_DE_QUEIMADA"; "DESMATAMENTO_VEG"; "CS_DESORDENADO";
+            "DESMATAMENTO_CR"; "CS_GEOMETRICO"; "DEGRADACAO"; "MINERACAO"
         * satellite (list_str): filtering Satellite using identify.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
@@ -96,49 +114,22 @@ class DeterTIMapStatsView(AuthModelMixIn, generics.ListAPIView):
             (min lon, min lat, max lon, max lat).
     """
 
-    queryset = models.DeterTI.objects.all()
     serializer_class = serializers.DeterTIMapStatsSerializer
-    filterset_class = filters.DeterTIFilter
-    bbox_filter_field = 'geom'
-    filter_backends = (
-        DjangoFilterBackend,
-        gis_filters.InBBoxFilter,
-    )
 
     def get(self, request) -> response.Response:
+        """Get method to return stats maps for Deter.
+
+        Returns sums for area_km and count poligons.
+
+        Args:
+            request (Requests.request): Request data.
+
+        Returns:
+            response.Response: 
+                django rest_framework.Response.response api response data.
+        """
         data = self.filter_queryset(self.queryset).aggregate(
-            area_total_km=Sum('areatotalkm'),
+            area_km=Sum('areatotalkm'),
             total=Count('id')
         )
         return response.Response(data, status=status.HTTP_200_OK)
-
-
-class DeterTITableStatsView(AuthModelMixIn, generics.ListAPIView):
-    """Return four data set acoording to the selected grouping in the request.
-
-    Fielters:
-        * co_cr (list): filtering Regional Coordenation using code.
-        * co_funai (list): filtering Indigenou Lands using Funai code
-        * class_name (list_str): Classification classes. E.g.: ????
-        * satellite (list_str): filtering Satellite using identify.
-        * start_date (str): filtering start date.
-        * end_date (str): filtering end date.
-        * in_bbox (bbox): bounding box
-            (min lon, min lat, max lon, max lat).
-
-    Group by:
-        grouping (str): define applied data grouping. . E.g.:
-
-    Returns group by in request field grouping:
-
-    """
-    #TODO: Create Table Stats after defining the business rule for groupings.
-    # queryset = models.DeterTI.objects.all()
-    # serializer_class = serializers.DeterTITableStatsSerializer
-    # filterset_class = filters.DeterTIFilter
-    # bbox_filter_field = 'geom'
-    # filter_backends = (
-    #     DjangoFilterBackend,
-    #     gis_filters.InBBoxFilter,
-    # )
-    pass
