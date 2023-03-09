@@ -33,7 +33,7 @@ class CatalogsView(AuthModelMixIn, generics.ListAPIView):
         *** satellite (list_str): filtering Satellite using identify. E.g.:
             LC08,
             Sentinel-2
-        * cloud_cover (list): filtering less than or equal for cloud values.
+        * cloud_cover (number): filtering less than or equal for cloud values.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
         * in_bbox (bbox): bounding box
@@ -43,7 +43,7 @@ class CatalogsView(AuthModelMixIn, generics.ListAPIView):
     queryset = models.Catalogs.objects.all().order_by('sat_identifier')
     serializer_class = serializers.CatalogsSerializer
     bbox_filter_field = 'geom'
-    filterset_class = catalog_filters.CatalogsFilter
+    filterset_class = catalog_filters.CatalogsFilters
     filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,

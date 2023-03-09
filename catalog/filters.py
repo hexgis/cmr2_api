@@ -11,12 +11,12 @@ class CharInFilter(
     pass
 
 
-class CatalogsFilter(rest_framework.FilterSet):
+class CatalogsFilters(rest_framework.FilterSet):
     """Django filter `models.Catalogs` data.
 
     Filters:
         * satellite (list_str): filtering Satellite using identify.
-        * cloud_cover (list): filtering less than or equal for cloud values.
+        * cloud_cover (number): filtering less than or equal for cloud values.
         * start_date (str): filtering start date.
         * end_date (str): filtering end date.
     """
@@ -42,7 +42,7 @@ class CatalogsFilter(rest_framework.FilterSet):
     )
 
     class Meta:
-        """Meta class for 'CatalogsFilter' filter."""
+        """Meta class for 'CatalogsFilters' filter."""
         model = models.Catalogs
         fields = (
             'satellite',
