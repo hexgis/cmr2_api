@@ -4,7 +4,7 @@
 class DeterMonitoringRouter:
     """deter_monitoring tables, database router."""
 
-    route_app_labels = {} #{'deter_monitoring'}
+    route_app_labels = {'deter_monitoring'}
 
     def db_for_read(self, model, **hints):
         """Database for read method."""

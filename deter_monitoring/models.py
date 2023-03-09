@@ -20,7 +20,7 @@ class DeterTI(models.Model):
     )
 
     path_row = models.CharField(
-        _('Path row'),
+        _('Path and row'),
         max_length=255,
         null=True,
         blank=True
@@ -92,7 +92,7 @@ class DeterTI(models.Model):
     )
 
     uc = models.CharField(
-        _('Conserveation unit'),
+        _('Conservation unit'),
         max_length=255,
         null=True,
         blank=True
@@ -158,8 +158,8 @@ class DeterTI(models.Model):
         app_label = 'deter_monitoring'
         verbose_name = 'Deter Indigenous Lands'
         verbose_name_plural = 'Deter Indigenous Lands'
-        # db_table = 'funai\".\"lim_deter_a'
-        # managed = False
+        db_table = 'funai\".\"lim_deter_a'
+        managed = False
         ordering = ('-view_date', 'no_ti')
 
     def __str__(self) -> str:
