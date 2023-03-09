@@ -1,9 +1,9 @@
+import os
+
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 
-import os
 from django.conf import settings
-
 from catalog import models
 
 
@@ -28,9 +28,7 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
     def get_preview(self, instance):
         """Get preview and creates the preview url."""
         if instance.preview is not None:
-            return os.path.join(settings.DOMAIN_API, instance.preview)
-        else:
-            return "URL não encontrada"
+            return os.path.join(settings.CMR_URL, instance.preview)
 
     def get_image_path(self, instance):
         """Get image_path and creates image download url."""
@@ -42,10 +40,8 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
             ).replace(
                 "media/", ''
             )
-            url_catalog = os.path.join(settings.DOMAIN_API, url_catalog)
+            url_catalog = os.path.join(settings.CMR_URL, url_catalog)
             return url_catalog
-        else:
-            return "URL não encontrada"
 
     def get_srid(self, instance):
         """Get image srid."""

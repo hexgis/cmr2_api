@@ -111,9 +111,9 @@ DATABASES = {
     },
 }
 
-DOMAIN_API = os.getenv('DOMAIN_API', 'https://cmr.funai.gov.br/api/')
+CMR_URL = os.getenv('CMR_URL', 'https://cmr.funai.gov.br/')
 
-DOCUMENTOS = os.getenv('DOCUMENTOS', os.path.join(DOMAIN_API, 'media/'))
+DOCUMENTOS = os.getenv('DOCUMENTOS', os.path.join(CMR_URL, 'api/media/'))
 
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.CatalogRouters.CatalogRouter',
