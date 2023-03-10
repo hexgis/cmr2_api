@@ -11,9 +11,9 @@ services:
   db_for_read:
     image: circleci/postgres:10-postgis
     environment:
-      POSTGRES_USER: cmr_2_funai
-      POSTGRES_DB: cmr_funai
-      POSTGRES_PASSWORD: 'Baw745!nuT#42'
+      POSTGRES_USER: user
+      POSTGRES_DB: database
+      POSTGRES_PASSWORD: asdfsa
 
   dev:
     build:
@@ -45,13 +45,14 @@ services:
       DB_NAME: testdb
       DB_PASSWORD: testpassword
       DB_HOST: db
-      DB_USER_FOR_READ: cmr_2_funai
-      DB_NAME_FOR_READ: cmr_funai
-      DB_PASSWORD_FOR_READ: 'Baw745!nuT#42'
-      DB_HOST_FOR_READ: 192.168.100.50
+      DB_USER_FOR_READ: user
+      DB_NAME_FOR_READ: database
+      DB_PASSWORD_FOR_READ: asdfsa
+      DB_HOST_FOR_READ: db_for_read
       PORT: 8080
     depends_on:
       - db
+      - db_for_read
 
   test:
     build:
