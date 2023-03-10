@@ -1,6 +1,7 @@
 from django.contrib import admin
 from deter_monitoring import models
 
+
 class DeterTIAdmin(admin.ModelAdmin):
     """Django administrator `models.DeterTI` data."""
 

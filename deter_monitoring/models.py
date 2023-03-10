@@ -98,7 +98,7 @@ class DeterTI(models.Model):
         blank=True
     )
 
-    publish_month= models.CharField(
+    publish_month = models.CharField(
         _('Publish month'),
         max_length=255,
         null=True,

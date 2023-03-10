@@ -11,7 +11,7 @@ class DeterTIDetailSerializer(serializers.ModelSerializer):
         """Meta class for `DeterDetailSerializer` serializer."""
         model = models.DeterTI
         id_field = False
-        exclude = ['geom',]
+        exclude = ['geom', ]
 
 
 class DeterTISerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -32,7 +32,7 @@ class DeterTIMapStatsSerializer(serializers.ModelSerializer):
         """Meta class for `DeterMapStatsSerializer` serializer."""
         model = models.DeterTI
         id_field = False
-        fields = ['area_total_km',]
+        fields = ['area_total_km', ]
 
 
 class DeterTITableSerializer(serializers.ModelSerializer):
@@ -42,7 +42,7 @@ class DeterTITableSerializer(serializers.ModelSerializer):
         """Meta class for `DeterTISerializer` serializer."""
         model = models.DeterTI
         id_field = False
-        exclude = ['geom',]
+        exclude = ['geom', ]
 
 
 class DeterTITableStatsSerializer(serializers.ModelSerializer):
@@ -52,4 +52,4 @@ class DeterTITableStatsSerializer(serializers.ModelSerializer):
         """Meta class for `DeterTIStatsSerializer` serializer."""
         model = models.DeterTI
         id_field = False
-        exclude = ['geom',]
+        exclude = ['geom', ]
