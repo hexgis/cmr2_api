@@ -31,7 +31,6 @@ services:
       && python manage.py loaddata land_use_ti.yaml
       && python manage.py loaddata land_use_classes.yaml
       && python manage.py loaddata catalog_satellites.yaml
-      && python manage.py loaddata catalog_scnes.yaml
       && python manage.py loaddata documental_docs_action.yaml
       && python manage.py loaddata documental_users_who_registered.yaml
       && python manage.py loaddata documental_docs.yaml

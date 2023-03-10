@@ -49,7 +49,7 @@ urlpatterns = [
     path('support/', include(
         ('support.urls', 'support'), namespace='support')
     ),
-    path('priority/', include(
+    path('priority/consolidated/', include(
         ('priority_monitoring.urls', 'priority_monitoring'),
         namespace='priority')
     ),
@@ -76,5 +76,9 @@ urlpatterns = [
     path('catalog/', include(
         ('catalog.urls', 'catalog'),
         namespace='catalog'),
+    ),
+    path('monitoring/deter/', include(
+        ('deter_monitoring.urls', 'deter-monitoring'),
+        namespace='deter-monitoring'),
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

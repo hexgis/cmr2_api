@@ -16,7 +16,10 @@ class CatalogRouter:
                 else:
                     return 'default'
             except NameError:
-                print("warning: Call the exception in CatalogRouter.db_for_read: ", model._meta.app_label)
+                print(
+                    "warning: Call the exception in CatalogRouter. db_for_read: ",
+                    model._meta.app_label
+                )
         return None
 
     def db_for_write(self, model, **hints):
@@ -27,7 +30,10 @@ class CatalogRouter:
             else:
                 return 'default'
         except NameError:
-            print("warning: Call the exception in CatalogRouter.db_for_write: ", model._meta.app_label)
+            print(
+                "warning: Call the exception in CatalogRouter.db_for_write: ",
+                model._meta.app_label
+            )
 
     def allow_relation(self, obj1, obj2, **hints):
         """Relationing database."""
@@ -38,7 +44,8 @@ class CatalogRouter:
 
     def allow_migrate(self, db, app_label, model_name=None, **hints):
         """Allow database migration."""
-        # TODO: Investigate this function to identify a way to avoid falling into the EXECEPT.
+        # TODO: Investigate this function to identify a way to avoid falling \
+        # into the EXECEPT.
         if app_label in self.route_app_labels:
             try:
                 if model._meta.model_name == self.model_catalog.lower():
@@ -46,5 +53,8 @@ class CatalogRouter:
                 else:
                     return db == 'default'
             except NameError:
-                print("warning: Call the exception in CatalogRouter.allow_migrate: ", app_label)
+                print(
+                    "warning: Call the exception in CatalogRouter. allow_migrate: ",
+                      app_label
+                )
         return None
