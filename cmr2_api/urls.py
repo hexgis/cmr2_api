@@ -77,4 +77,8 @@ urlpatterns = [
         ('catalog.urls', 'catalog'),
         namespace='catalog'),
     ),
+    path('monitoring/deter/', include(
+        ('deter_monitoring.urls', 'deter-monitoring'),
+        namespace='deter-monitoring'),
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
