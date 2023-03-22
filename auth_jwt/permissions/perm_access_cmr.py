@@ -1,14 +1,15 @@
 from django.contrib.contenttypes.models import ContentType
+from auth_jwt.permissions import permission_granted
+
 # from rest_framework import (
 #     generics,
 #     # permissions,
 #     )
 
-permi = ('catalog.view_satellite')
+# permi = ('catalog.view_satellite')
 # permis = ('catalog.view_satellite', 'catalog.access_satellite')
-permis = ('catalog.add_satellite', 'catalog.access_satellite')
+# permis = ('catalog.add_satellite', 'catalog.access_satellite')
 # CMR_Modulo_Access.user_request_permission(self.request.user)
-
 
 
 
@@ -29,8 +30,7 @@ class CMR_Modulo_Access():
         if CMR_Modulo_Access.app_name_exists(app_name):
             # import pdb; pdb.set_trace()
             print('messageDeu bom!!!\n\n', request_user, '!\n\n', app_name)
-            print("xpto ----->>>> ",request_user.has_perms(permis))
-            return request_user.has_perms(permis)
+            print("xpto ----->>>> ",request_user.has_perms(permission_granted.permissons_access[app_name]))
+            return request_user.has_perms(permission_granted.permissons_access[app_name])
         else:
             print('messageDeu ruimmmm!!!\n\n', app_name)
-
