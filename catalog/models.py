@@ -131,7 +131,7 @@ class Catalogs(models.Model):
         app_label = 'catalog'
         verbose_name = 'Catalog Scene'
         verbose_name_plural = 'Catalogs Scenes'
-        db_table = 'catalogo\".\"vw_img_catalogo_a'
+        db_table = 'catalogo\".\"vw_new_img_catalogo_a'
         managed = False
         ordering = ('-date', )
 

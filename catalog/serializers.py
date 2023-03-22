@@ -28,18 +28,14 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
     def get_preview(self, instance):
         """Get preview and creates the preview url."""
         if instance.preview is not None:
-            return os.path.join(settings.CMR_URL, instance.preview)
+            url_catalog = instance.preview.replace("media/", '')
+            url_catalog = os.path.join(settings.CMR_URL, url_catalog)
+            return url_catalog
 
     def get_image_path(self, instance):
         """Get image_path and creates image download url."""
         if instance.image_path is not None:
-            url_catalog = instance.image_path.replace(
-                '\\', '/'
-            ).replace(
-                "//hex-funai.hex.com/", ''
-            ).replace(
-                "media/", ''
-            )
+            url_catalog = instance.image_path.replace("media/", '')
             url_catalog = os.path.join(settings.CMR_URL, url_catalog)
             return url_catalog
 
