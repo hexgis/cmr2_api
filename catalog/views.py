@@ -7,7 +7,7 @@ from rest_framework import (
     response,
     exceptions
 )
-
+from auth_jwt import perm_access_cmr
 from catalog import (
     models,
     serializers,
@@ -26,32 +26,22 @@ class AuthModelMixIn:
     # permission_classes = (permissions.AllowAny,)
     permission_classes = (permissions.IsAuthenticated,)
 
+class PossuiAcessoCMR(AuthModelMixIn):
+    def tem_permicao_acesso_cmr(self):
+        tem_permicao_cmr= perm_access_cmr.CMR_Modulo_Access.user_request_permission(self.request.user, __package__)
+        return tem_permicao_cmr
 
-permi = ('catalog.view_satellite')
-permis = ('catalog.view_satellite', 'catalog.access_satellite')
-# permis = ('catalog.add_satellite', 'catalog.access_satellite')
-# CMR_Modulo_Access.user_request_permission(self.request.user)
-class CMR_Modulo_Access():
-    cmr_catalog_modulo= ("observar_satellite", "permissao_adicional_test")
-
-    def user_request_permission(user_request):
-        # print('messageDeu bom!!!\n\n', user_request)
-        # print(user_request.has_perms(permis))
-        # import pdb; pdb.set_trace()
-        return user_request.has_perms(permis)
-
-
-class SatelliteView(AuthModelMixIn, generics.ListAPIView):
+class SatelliteView(PossuiAcessoCMR, generics.ListAPIView):
     """Returns the list of satellites in `models.Satellite`."""
     # queryset = models.Satellite.objects.all()
     serializer_class = serializers.SatelliteSerializer
     permission_required = ['catalog.view_satellite'] # 'catalog.veiw_catalogs_cmr_catalog'
 
     def get_queryset(self):
-        tem_permicao_cmr= CMR_Modulo_Access.user_request_permission(self.request.user)
-        if self.request.user.has_perms(permis) and tem_permicao_cmr:
+        # import pdb; pdb.set_trace()
+        if self.request.user.has_perms(perm_access_cmr.permis) and self.tem_permicao_acesso_cmr:
             queryset = models.Satellite.objects.all()
-            print(permis, self.request.user.has_perms(permis),"\n Lucas Sena Alves \n")
+            print(perm_access_cmr.permis, self.request.user.has_perms(perm_access_cmr.permis),"\n Lucas Sena Alves \n")
             # import pdb; pdb.set_trace()
             return queryset
         else:
