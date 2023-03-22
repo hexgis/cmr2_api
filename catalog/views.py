@@ -7,7 +7,7 @@ from rest_framework import (
     response,
     exceptions
 )
-from auth_jwt import perm_access_cmr
+from auth_jwt.permissions import perm_access_cmr, permission_granted
 from catalog import (
     models,
     serializers,
@@ -39,9 +39,10 @@ class SatelliteView(PossuiAcessoCMR, generics.ListAPIView):
 
     def get_queryset(self):
         # import pdb; pdb.set_trace()
-        if self.request.user.has_perms(perm_access_cmr.permis) and self.tem_permicao_acesso_cmr:
+        permis = permission_granted.permissons_access[__package__]
+        if self.request.user.has_perms(permis) and self.tem_permicao_acesso_cmr:
             queryset = models.Satellite.objects.all()
-            print(perm_access_cmr.permis, self.request.user.has_perms(perm_access_cmr.permis),"\n Lucas Sena Alves \n")
+            print(permis, self.request.user.has_perms(permis),"\n Lucas Sena Alves \n")
             # import pdb; pdb.set_trace()
             return queryset
         else:
@@ -60,14 +61,11 @@ class SatelliteDetailView(AuthModelMixIn, generics.RetrieveAPIView):
     filter_backends = (DjangoFilterBackend,)
 
 
-
-
+###
 from django.contrib.auth.decorators import permission_required, login_required
 from django.contrib.auth.mixins import PermissionRequiredMixin
 from rest_framework.decorators import api_view
 from django.core.exceptions import ImproperlyConfigured
-
-
 
 @api_view()
 @permission_required('auth.add_user', raise_exception=True)
@@ -122,15 +120,6 @@ class SatelliteXView(PermissionRequiredMixin, generics.ListAPIView):
 
 
 
-
-
-
-
-
-
-
-
-
 class CatalogsView(AuthModelMixIn, generics.ListAPIView):
     """Returns catalogs data for the requested filter.
 
@@ -154,24 +143,3 @@ class CatalogsView(AuthModelMixIn, generics.ListAPIView):
         gis_filters.InBBoxFilter,
     )
     pagination_class = pagination.CatalogGeoJsonPagination
-
-
-
-
-
-
-
-
-
-
-
-# http://localhost:8080/land-use/?co_cr=30202001983&co_funai=11301&map_year=2019
-
-
-# http://localhost:8080/monitoring/consolidated/table-stats/?grouping=monitoring_by_co_funai&co_cr=30202001913&co_funai=3002,7601&start_date=2017-06-24&end_date=2020-09-14
-
-# http://localhost:8080/alerts/stats/?co_cr=30202001962&co_funai=20702&end_date=2021-05-09&start_date=2019-01-01
-
-# http://localhost:8080/documental/list/?id_acao=8
-
-
