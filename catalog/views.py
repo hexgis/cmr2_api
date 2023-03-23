@@ -1,3 +1,9 @@
+from guardian.shortcuts import get_objects_for_user
+from django.core.exceptions import ImproperlyConfigured
+from rest_framework.decorators import api_view
+from django.contrib.auth.decorators import permission_required, login_required
+
+
 from django_filters.rest_framework import DjangoFilterBackend
 
 from rest_framework_gis import filters as gis_filters
@@ -26,27 +32,32 @@ class AuthModelMixIn:
     # permission_classes = (permissions.AllowAny,)
     permission_classes = (permissions.IsAuthenticated,)
 
+
 class PossuiAcessoCMR(AuthModelMixIn):
     def tem_permicao_acesso_cmr(self):
-        tem_permicao_cmr= perm_access_cmr.CMR_Modulo_Access.user_request_permission(self.request.user, __package__)
+        tem_permicao_cmr = perm_access_cmr.CMR_Modulo_Access.user_request_permission(
+            self.request.user, __package__)
         return tem_permicao_cmr
+
 
 class SatelliteView(PossuiAcessoCMR, generics.ListAPIView):
     """Returns the list of satellites in `models.Satellite`."""
-    # queryset = models.Satellite.objects.all()
     serializer_class = serializers.SatelliteSerializer
-    permission_required = ['catalog.view_satellite'] # 'catalog.veiw_catalogs_cmr_catalog'
 
+    # def get_queryset(self):
+    #     """Utilizando DjangoModelPermissions"""
+    #     if self.request.user.has_perms(permission_granted.permis_catalog_satellite) and self.tem_permicao_acesso_cmr():
+    #         queryset = models.Satellite.objects.all()
+    #         return queryset
+    #     else:
+    #         raise exceptions.PermissionDenied
     def get_queryset(self):
-        # import pdb; pdb.set_trace()
-        permis = permission_granted.permissons_access[__package__]
-        if self.request.user.has_perms(permis) and self.tem_permicao_acesso_cmr:
-            queryset = models.Satellite.objects.all()
-            print(permis, self.request.user.has_perms(permis),"\n Lucas Sena Alves \n")
-            # import pdb; pdb.set_trace()
-            return queryset
-        else:
-            raise exceptions.PermissionDenied
+        """Utilizando DjangoObjectPermissions"""
+        return get_objects_for_user(
+            self.request.user,
+            'catalog.view_satellite',
+            klass=models.Satellite
+        )
 
 
 class SatelliteDetailView(AuthModelMixIn, generics.RetrieveAPIView):
@@ -62,38 +73,41 @@ class SatelliteDetailView(AuthModelMixIn, generics.RetrieveAPIView):
 
 
 ###
-from django.contrib.auth.decorators import permission_required, login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
-from rest_framework.decorators import api_view
-from django.core.exceptions import ImproperlyConfigured
+
 
 @api_view()
 @permission_required('auth.add_user', raise_exception=True)
 def firstFunc(request):
-    print('messageDeu bom!!!\n\n', request.user, '\n\nlsa.view_satellitex: ', request.user.has_perm('lsa.view_satellitex'))
+    print('messageDeu bom!!!\n\n', request.user, '\n\nlsa.view_satellitex: ',
+          request.user.has_perm('lsa.view_satellitex'))
     # import pdb; pdb.set_trace()
     return response.Response({'message': "Deu bom!!!"})
 
+
 class SatelliteXView(PermissionRequiredMixin, generics.ListAPIView):
     serializer_class = serializers.SatelliteSerializer
-    permission_required = 'lsa.add_satellitex'
+    permission_required = 'lsa.add_full_satellitex'
     # @permission_required('lsa.view_satellitex', raise_exception=True)
+
     def firstFuncc(self):
-        print('messageDeu bom!!!\n\n', self.request.user, '\n\nlsa.view_satellitex: ', 
-        self.request.user.has_perm('lsa.view_satellitex'))
+        print('messageDeu bom!!!\n\n', self.request.user, '\n\nlsa.view_satellitex: ',
+              self.request.user.has_perm('lsa.view_satellitex'))
         # import pdb; pdb.set_trace()
         return response.Response({'message': "Deu bom!!!"})
+
     def get_queryset(self):
         queryset = models.SatelliteX.objects.all()
-        print(self.request.user.has_perm('lsa.view_satellitex'),"\n Lucas Sena Alves \n")
+        print(self.request.user.has_perm(
+            'lsa.view_satellitex'), "\n Lucas Sena Alves \n")
         # import pdb; pdb.set_trace()
         return queryset
     # def get_permission_required(self):
     #     perms = super(SatelliteXView, self).get_permission_required()
     #     print('self.fpermission_required')
-    #     return perms   
+    #     return perms
     # def get_permission_required(self):
     #     return 'lsa.view_satellitex'
+
     def get_permission_required(self):
         """
         Override this method to override the permission_required attribute.
@@ -119,8 +133,7 @@ class SatelliteXView(PermissionRequiredMixin, generics.ListAPIView):
         return perms
 
 
-
-class CatalogsView(AuthModelMixIn, generics.ListAPIView):
+class CatalogsView(PossuiAcessoCMR, generics.ListAPIView):
     """Returns catalogs data for the requested filter.
 
     Filters:
@@ -133,8 +146,6 @@ class CatalogsView(AuthModelMixIn, generics.ListAPIView):
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
     """
-
-    queryset = models.Catalogs.objects.all().order_by('sat_identifier')
     serializer_class = serializers.CatalogsSerializer
     bbox_filter_field = 'geom'
     filterset_class = catalog_filters.CatalogsFilters
@@ -143,3 +154,10 @@ class CatalogsView(AuthModelMixIn, generics.ListAPIView):
         gis_filters.InBBoxFilter,
     )
     pagination_class = pagination.CatalogGeoJsonPagination
+
+    def get_queryset(self):
+        if self.request.user.has_perms(permission_granted.permis_catalog_catalogs) and self.tem_permicao_acesso_cmr():
+            queryset = models.Catalogs.objects.all().order_by('sat_identifier')
+            return queryset
+        else:
+            raise exceptions.PermissionDenied
