@@ -197,11 +197,6 @@ REST_FRAMEWORK = {
     ),
 }
 
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'guardian.backends.ObjectPermissionBackend',
-)
-
 # djangorestframework-simplejwt token configuration
 # https://github.com/jazzband/djangorestframework-simplejwt
 

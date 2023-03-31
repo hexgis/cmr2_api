@@ -29,7 +29,6 @@ class Satellite(models.Model):
     class Meta:
         """"Meta class for `catalog.Satellite` model."""
         app_label = 'catalog'
-        permissions = [("access_satellite", "Can acesso satellite CATALOG in CMR")]
         verbose_name = 'Satellite'
         verbose_name_plural = 'Satellites'
         ordering = ('name',)
@@ -130,11 +129,10 @@ class Catalogs(models.Model):
     class Meta:
         """"Meta class for `catalog.Catalogs` abstract model."""
         app_label = 'catalog'
-        permissions = [("access_catalogs", "Can acesso catalogs CATALOG in CMR")]
         verbose_name = 'Catalog Scene'
         verbose_name_plural = 'Catalogs Scenes'
-        # db_table = 'catalogo\".\"vw_img_catalogo_a'
-        # managed = False
+        db_table = 'catalogo\".\"vw_img_catalogo_a'
+        managed = False
         ordering = ('-date', )
 
     def __str__(self) -> str:
