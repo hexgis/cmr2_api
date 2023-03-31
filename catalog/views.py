@@ -22,9 +22,10 @@ class AuthModelMixIn:
 
 
 class HasAcessCMR(AuthModelMixIn):
-    """"""
+    """Management of the first level of access to the CMR Modules."""
     def has_perm_access_cmr(self):
-        """"""
+        """Validates if the logged in user has the necessary permissions to
+        access the CMR Modules."""
         tem_permicao_cmr = perm_access_cmr.CMRModuloAccess.user_request_permission(
             self.request.user, __package__)
         return tem_permicao_cmr
@@ -35,7 +36,8 @@ class SatelliteView(HasAcessCMR, generics.ListAPIView):
     serializer_class = serializers.SatelliteSerializer
 
     def get_queryset(self):
-        """"""
+        """Returns the set of data according to access and permissions granted
+        to the logged in user"""
         if self.request.user.has_perm('catalog.view_satellite') and self.has_perm_access_cmr():
             return models.Satellite.objects.all()
         else:
@@ -63,9 +65,10 @@ class CatalogsView(HasAcessCMR, generics.ListAPIView):
         gis_filters.InBBoxFilter,
     )
     pagination_class = pagination.CatalogGeoJsonPagination
-    
+
     def get_queryset(self):
-        """"""
+        """Returns the set of data according to access and permissions granted
+        to the logged in user"""
         if self.request.user.has_perms('catalog.view_catalogs') and self.has_perm_access_cmr():
             return models.Catalogs.objects.all().order_by('sat_identifier')
         else:
