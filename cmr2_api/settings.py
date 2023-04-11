@@ -118,7 +118,7 @@ DOCUMENTOS = os.getenv('DOCUMENTOS', os.path.join(CMR_URL, 'api/media/'))
 
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.CatalogRouters.CatalogRouter',
-    'cmr2_api.database_routers.DocumentalRouters.DocumentalRouter',    
+    'cmr2_api.database_routers.DocumentalRouters.DocumentalRouter',
     'cmr2_api.database_routers.DeterMonitoringRouters.DeterMonitoringRouter',
     'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
@@ -172,7 +172,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # Media files configuration
 
 # Path where media is stored
-MEDIA_ROOT = ( os.path.join(BASE_DIR, 'media/'))
+MEDIA_ROOT = (os.path.join(BASE_DIR, 'media/'))
 
 # Base URL to serve media files
 MEDIA_URL = '/media/'
