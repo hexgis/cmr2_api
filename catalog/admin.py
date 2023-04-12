@@ -54,3 +54,5 @@ class CatalogsAdmin(admin.GeoModelAdmin):
 
 admin.site.register(models.Catalogs, CatalogsAdmin)
 admin.site.register(models.Satellite, SatelliteAdmin)
+
+
