@@ -19,8 +19,8 @@ class SatelliteSerializer(serializers.ModelSerializer):
         )
 
 
-class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
-    """Serializer to return Catalogs scenes as GeoJSON compatible data."""
+class SceneSerializer(gis_serializers.GeoFeatureModelSerializer):
+    """Serializer to return Scene scenes as GeoJSON compatible data."""
     preview = serializers.SerializerMethodField()
     image_path = serializers.SerializerMethodField()
     srid = serializers.SerializerMethodField()
@@ -44,7 +44,7 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
         return instance.geom.srid
 
     class Meta:
-        model = models.Catalogs
+        model = models.Scene
         geo_field = 'geom'
         fields = (
             "objectid",
