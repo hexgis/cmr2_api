@@ -15,7 +15,7 @@ class CatalogViewsURLsTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
         """Class variables using dumpdata fixtures file end URLs."""
-        cls.url_catalogs = reverse('catalog:catalog-scenes')
+        cls.url_Scene = reverse('catalog:catalog-scenes')
         cls.url_satellite = reverse('catalog:satellite-catalog')
 
     def setUp(self):
@@ -28,9 +28,9 @@ class CatalogViewsURLsTests(APITestCase):
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-    def test_url_catalogs(self):
+    def test_url_Scene(self):
         """Test valid URL catalog-scenes."""
-        response = self.client.get(self.url_catalogs)
+        response = self.client.get(self.url_Scene)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -60,25 +60,25 @@ class CatalogFiltersViewsTests(APITestCase):
             'loaddata',
             'catalog/fixtures/catalog_scnes.yaml',
             verbosity=0)
-        cls.url_catalogs = reverse('catalog:catalog-scenes')
+        cls.url_Scene = reverse('catalog:catalog-scenes')
 
     def setUp(self):
         """SetUp for methods, generate queryset and requests."""
         self.client = Client()
         self.parameter = self.get_filters_parameters()
-        self.request_valid = self.client.get(self.url_catalogs, {
+        self.request_valid = self.client.get(self.url_Scene, {
             'satellite':self.parameter['satellite'],
             'cloud_cover':self.parameter['cloud_cover'],
             'start_date':self.parameter['start_date'],
             'end_date':self.parameter['end_date']
         })
-        self.queryset_valid = models.Catalogs.objects.filter(
+        self.queryset_valid = models.Scene.objects.filter(
             sat_id__identifier__exact=self.parameter['satellite'],
             cloud_cover__lte=self.parameter['cloud_cover'],
             date__gte=self.parameter['start_date'],
             date__lte=self.parameter['end_date']
         )
-        self.request_error = self.client.get(self.url_catalogs, {
+        self.request_error = self.client.get(self.url_Scene, {
             'satellite': 'LC08',
             'cloud_cover': 5,
             'start_date': '2021-01-066'

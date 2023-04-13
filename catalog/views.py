@@ -44,8 +44,8 @@ class SatelliteView(HasAcessCMR, generics.ListAPIView):
             raise exceptions.PermissionDenied
 
 
-class CatalogsView(HasAcessCMR, generics.ListAPIView):
-    """Returns catalogs data for the requested filter.
+class SceneView(HasAcessCMR, generics.ListAPIView):
+    """Returns Scene data for the requested filter.
 
     Filters:
         ** satellite (list_str): filtering Satellite using identify. E.g.:
@@ -57,9 +57,9 @@ class CatalogsView(HasAcessCMR, generics.ListAPIView):
         * in_bbox (bbox): bounding box
             (min lon, min lat, max lon, max lat).
     """
-    serializer_class = serializers.CatalogsSerializer
+    serializer_class = serializers.SceneSerializer
     bbox_filter_field = 'geom'
-    filterset_class = catalog_filters.CatalogsFilters
+    filterset_class = catalog_filters.SceneFilters
     filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
@@ -69,7 +69,7 @@ class CatalogsView(HasAcessCMR, generics.ListAPIView):
     def get_queryset(self):
         """Returns the set of data according to access and permissions granted
         to the logged in user"""
-        if self.request.user.has_perms('catalog.view_catalogs') and self.has_perm_access_cmr():
-            return models.Catalogs.objects.all().order_by('sat_identifier')
+        if self.request.user.has_perms('catalog.view_Scene') and self.has_perm_access_cmr():
+            return models.Scene.objects.all().order_by('sat_identifier')
         else:
             raise exceptions.PermissionDenied
