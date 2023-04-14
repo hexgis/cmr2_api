@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.gis',
     'support',
     'auth_jwt',
+    'authorization',
     'priority_monitoring',
     'funai',
     'monitoring',
