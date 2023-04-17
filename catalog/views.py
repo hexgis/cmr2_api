@@ -7,7 +7,7 @@ from rest_framework import (
     exceptions
 )
 
-from auth_jwt.permissions import perm_access_cmr
+from authorization.permissions import perm_access_cmr
 from catalog import (
     models,
     serializers,
