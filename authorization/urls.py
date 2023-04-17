@@ -4,10 +4,9 @@ from authorization import views
 
 
 urlpatterns = [
-    path(
+    url(
         'user_permissions/',
-        views.AuthorizationUserPermissions,
+        views.logged_user_permissions,
         name='authorization-user-permissions'
     ),
-    url('first/', views.firstFunc),
 ]
