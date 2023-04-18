@@ -17,8 +17,8 @@ class SatelliteAdmin(admin.ModelAdmin):
     search_fields = list_display
 
 
-class CatalogsAdmin(admin.GeoModelAdmin):
-    """Django Administrator `model.Catalogs` data."""
+class SceneAdmin(admin.GeoModelAdmin):
+    """Django Administrator `model.Scene` data."""
     def cloud_cover_percent(self, instance):
         return '{}%'.format(instance.cloud_cover)
 
@@ -52,7 +52,7 @@ class CatalogsAdmin(admin.GeoModelAdmin):
     readonly_fields = fields
 
 
-admin.site.register(models.Catalogs, CatalogsAdmin)
+admin.site.register(models.Scene, SceneAdmin)
 admin.site.register(models.Satellite, SatelliteAdmin)
 
 

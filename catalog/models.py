@@ -42,7 +42,7 @@ class Satellite(models.Model):
         return str(self.name) or str(self.identifier)
 
 
-class Catalogs(models.Model):
+class Scene(models.Model):
     """Model for db view aggregating all satellite scene catalog."""
 
     objectid = models.AutoField(
@@ -127,11 +127,11 @@ class Catalogs(models.Model):
     )
 
     class Meta:
-        """"Meta class for `catalog.Catalogs` abstract model."""
+        """"Meta class for `catalog.Scene` abstract model."""
         app_label = 'catalog'
-        verbose_name = 'Catalog Scene'
-        verbose_name_plural = 'Catalogs Scenes'
-        db_table = 'catalogo\".\"vw_img_catalogo_a'
+        verbose_name = 'Satellite Scene'
+        verbose_name_plural = 'Satellite Scenes'
+        db_table = 'catalogo\".\"vw_new_img_catalogo_a'
         managed = False
         ordering = ('-date', )
 

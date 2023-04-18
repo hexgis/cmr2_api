@@ -9,7 +9,7 @@ urlpatterns = [
          name='satellite-catalog'
          ),
     path('',
-         views.CatalogsView.as_view(),
+         views.SceneView.as_view(),
          name='catalog-scenes'
          ),
 ]

@@ -19,8 +19,8 @@ class SatelliteSerializer(serializers.ModelSerializer):
         )
 
 
-class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
-    """Serializer to return Catalogs scenes as GeoJSON compatible data."""
+class SceneSerializer(gis_serializers.GeoFeatureModelSerializer):
+    """Serializer to return Scene scenes as GeoJSON compatible data."""
     preview = serializers.SerializerMethodField()
     image_path = serializers.SerializerMethodField()
     srid = serializers.SerializerMethodField()
@@ -28,18 +28,14 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
     def get_preview(self, instance):
         """Get preview and creates the preview url."""
         if instance.preview is not None:
-            return os.path.join(settings.CMR_URL, instance.preview)
+            url_catalog = instance.preview.replace("media/", '')
+            url_catalog = os.path.join(settings.CMR_URL, url_catalog)
+            return url_catalog
 
     def get_image_path(self, instance):
         """Get image_path and creates image download url."""
         if instance.image_path is not None:
-            url_catalog = instance.image_path.replace(
-                '\\', '/'
-            ).replace(
-                "//hex-funai.hex.com/", ''
-            ).replace(
-                "media/", ''
-            )
+            url_catalog = instance.image_path.replace("media/", '')
             url_catalog = os.path.join(settings.CMR_URL, url_catalog)
             return url_catalog
 
@@ -48,7 +44,7 @@ class CatalogsSerializer(gis_serializers.GeoFeatureModelSerializer):
         return instance.geom.srid
 
     class Meta:
-        model = models.Catalogs
+        model = models.Scene
         geo_field = 'geom'
         fields = (
             "objectid",
