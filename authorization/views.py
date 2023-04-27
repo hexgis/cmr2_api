@@ -1,9 +1,27 @@
-from rest_framework.decorators import api_view
+from rest_framework import (
+    views,
+    response
+)
 
-from rest_framework import response
+from authorization import constant
 
 
-@api_view()
-def logged_user_permissions(request):
-    """Lists all permissions associated to the logged in user."""
-    return response.Response(request.user.get_all_permissions())
+class LoggedUserPermissions(views.APIView):
+    """Logged in user permissions."""
+
+    def get(self, request, *args, **kwargs):
+        """Lists all permissions associated to the logged in user."""
+        return response.Response(request.user.get_all_permissions())
+
+
+class LoggedUserModulosCMR(views.APIView):
+    """Logged in user access."""
+
+    def get(self, request, *args, **kwargs):
+        """Informs which 'ModulosCMR' the logged in user has access to."""
+        perms_moduloscmr = dict()
+
+        for moduloscmr in list(constant.MODULOS_CMR.keys()):
+            perms_moduloscmr.update({moduloscmr: request.user.has_perms(constant.MODULOS_CMR[moduloscmr]["access"])})
+
+        return response.Response(perms_moduloscmr)

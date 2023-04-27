@@ -1,46 +1,46 @@
 MODULOS_CMR = {
     "catalog-tab": {
-    	"access":{"access_satellite","access_scene"},
+    	"access":{"catalog.access_satellite","catalog.access_scene"},
     	"description":"Meu acervo de imagens",
         "alias": "Catalogo"},
     "search-tab": {
-    	"access":{"access_monitoringconsolidated",},
+    	"access":{"monitoring.access_monitoringconsolidated",},
     	"description":"Monitoramento Diário",
         "alias": "Monitoramento"},
     "layers-tab": {
-    	"access":{"access_geoserver","access_categorylayersgroup","access_layersgroup","access_layer","access_wmslayer","access_tmslayer","access_layerfilter",},
+    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter",},
     	"description":"Camadas de Sobreposição",
         "alias": "Apoio"},
     "high-resolution-mosaics-tab": {
-    	"access":{"access_geoserver","access_categorylayersgroup","access_layersgroup","access_layer","access_wmslayer","access_tmslayer","access_layerfilter",},
+    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter",},
     	"description":"Alta Resolução e Mosaicos",
         "alias": "Imagens"},
     "support-fire-tab": {
-    	"access":{"access_geoserver","access_categorylayersgroup","access_layersgroup","access_layer","access_wmslayer","access_tmslayer","access_layerfilter",},
+    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter",},
     	"description":"Risco de Fogo e Focos de Calor",
         "alias": "Fogo"},
     "landuse-tab": {
-    	"access":{"access_landuseti","access_landuseclasses",},
+    	"access":{"land_use.access_landuseti","land_use.access_landuseclasses",},
     	"description":"Uso e Ocupação do Solo",
         "alias": "UOS"},
     "prodes-tab": {
-    	"access":{"access_geoserver","access_categorylayersgroup","access_layersgroup","access_layer","access_wmslayer","access_tmslayer","access_layerfilter",},
+    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter",},
     	"description":"PRODES (INPE)",
         "alias": "Prodes"},
     "urgent-alerts-tab": {
-    	"access":{"access_urgentalerts",},
+    	"access":{"priority_alerts.view_urgentalerts",},
     	"description":"Alerta Urgente",
         "alias": "Alertas"},
     "priority-tab": {
-    	"access":{"access_priorityconsolidated",},
+    	"access":{"priority_monitoring.access_priorityconsolidated",},
     	"description":"Polígonos Prioritários",
         "alias": "Prioritários"},
     "document-tab": {
-    	"access":{"access_docsaction","access_userscmr","access_docslanduser","access_docsdocumentti","access_docsmapoteca","access_userscmr",},
+    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter",},
     	"description":"Documental",
         "alias": "Documental"},
     "mapoteca-tab": {
-    	"access":{"access_deterti",},
+    	"access":{"deter_monitoring.access_deterti",},
     	"description":"Deter",
         "alias": "Deter"}
 }

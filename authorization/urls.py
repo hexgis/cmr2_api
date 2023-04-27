@@ -1,12 +1,16 @@
 from django.urls import path
-from django.conf.urls import url
 from authorization import views
 
 
 urlpatterns = [
-    url(
+    path(
         'user_permissions/',
-        views.logged_user_permissions,
+        views.LoggedUserPermissions.as_view(),
         name='authorization-user-permissions'
+    ),
+    path(
+        'user_moduloscmr/',
+        views.LoggedUserModulosCMR.as_view(),
+        name='authorization-user-moduloscmr'
     ),
 ]
