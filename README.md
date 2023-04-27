@@ -6,7 +6,7 @@ API de comunicação do Centro de Monitoramento Remoto da Funai.
 
 AUTENTICAÇÃO e AUTORIZAÇÃO
 
-No backend são tratadas as regras de negocio e autenticação do PortalCMR2. Da APP são esperadas os dados do usuário autenticado (usuário e senha), como retorno é encaminhado um token de autenticação possibilitando consumo de todos os acessos e permissões concedidas aos usuários conforme defininido pelo administrador do sistema.
+No backend são tratadas as regras de negócio e autenticação do PortalCMR2. Da APP são esperados os dados do usuário autenticado (usuário e senha), como retorno é encaminhado um token de autenticação possibilitando consumo de todos os acessos e permissões concedidas aos usuários conforme defininido pelo administrador do sistema.
 
 AUTENTICAÇÃO
     Para este projeto foi adotada o método de autenticação JWT(Json Web Token). Aplicada em servidores com protocolo HTTPS, essa metodologia realiza a autenticação por tokens.
@@ -18,17 +18,17 @@ AUTORIZAÇÃO (Acessos e Permissões)
     Foram adotadas as DjangoModelPermissions, ou seja, o maior grau de granularidade aplicado a esse projeto é a nível de model(tabela).
     Obs.: Para o cenário desenhado, ainda não foi necessário a aplicação de permissões a nível de objeto (DjangoObjectPermissions)
 
-    Todas as permissão são concedidas aos usuário apenas por Grupos, não é concedida nenhuma permissão diretamente a um usuário específico, visando uma melhor gestão sobre o PortalCMR2.
+    Todas as permissões são concedidas aos usuário apenas por Grupos, não é concedida nenhuma permissão diretamente a um usuário específico, visando uma melhor gestão sobre o PortalCMR2.
 
     As permissões ao consumo do BackEnd foram divididas em dois níves:
-        Nível 01 --> Acesso aos modulos do PortalCMR2;
+        Nível 01 --> Acesso aos módulos do PortalCMR2;
         Nível 02 --> Consumo e iteração dos dados persistidos em banco de dados pelo usuário. 
     Obs.: Para evitar exeption de "Permissão Negada", é necessário que o usuário tenha acesso ao dado (Nível 01) e permissão ao dado (Nível 02).
 
     As permissões default do sistema possuir 5 ações implementadas:
         "view_" --> consultar, leitura e/ou visualização os dados;
-        "add_" --> cadastrar, adicionar e/ou criar informaçẽos e dados;
-        "change_" --> atualização do dado (update), permite edita-los;
+        "add_" --> cadastrar, adicionar e/ou criar informações e dados;
+        "change_" --> atualização do dado (update), permite editá-los;
         "delete_" --> remover e/ou apagar dados e registros da base;
         "access_" --> informa se o usuário logado pode consumir e/ou acesso o dado.
     Obs.: Caso necessário, para atendimento da regra de négocio instituida, é possível adicionar permissões customizadas a cada model individualmente.
@@ -37,7 +37,7 @@ AUTORIZAÇÃO (Acessos e Permissões)
         Cada Módulo do CMR2 é composto por um ou mais conjuntos de dados. Objetivando atender uma demanda específica, cada MóduloCMR2 é uma especificidade do projeto, onde juntos compõem o PortalCMR2.
         Na implementação de cada MóduloCMR2 é possível listar as models que compõe os conjuntos de dados utilizados por cada MóduloCMR2.
         Para acessar a cada um desses MóduloCMR2, é criada uma permissão de acesso default chamada "access_", adicionada automaticamente as models dos APPs listados no setting.INSTALLED_APPS.
-        Esse acesso tem por finalidade agrupar as models que cada um dos módulo do PortalCMR2 fazem uso, dessa forma cada MóduloCMR2 só é possível ser acessado pelo usuário que tiver atrelado ao seu perfil a ação "access_" da model requisitada conforme definido pela equipe de negocio e gestão.
+        Esse acesso tem por finalidade agrupar as models que cada um dos módulos do PortalCMR2 fazem uso, dessa forma cada MóduloCMR2 só é possível ser acessado pelo usuário que tiver atrelado ao seu perfil a ação "access_" da model requisitada conforme definido pela equipe de negocio e gestão.
 
     Nível 02 - Camada de permissões
-        Fazendo uso do pacote django.contrib.auth, por padrão, é criado automaticamente 4 ações de permissões nas models dos APPs listados no setting.INSTALLED_APPS. Esses 4 parametros de permissões correspondem as operações básicas de CRUD (Create - "add_", Read - "view_", Update - "change_" e Delete - "delete_") foram encoporados a funcionalidade dos sistema para definição dos papeis dos grupos de usuários no manuzeio dos dados existentes no ProjetoCMR.
+        Fazendo uso do pacote django.contrib.auth, por padrão, é criado automaticamente 4 ações de permissões nas models dos APPs listados no setting.INSTALLED_APPS. Esses 4 parametros de permissões correspondem as operações básicas de CRUD (Create - "add_", Read - "view_", Update - "change_" e Delete - "delete_") foram encoporados a funcionalidade dos sistemas para definição dos papeis dos grupos de usuários no manuzeio dos dados existentes no ProjetoCMR.
