@@ -26,7 +26,7 @@ class HasAcessCMR(AuthModelMixIn):
     def has_perm_access_cmr(self):
         """Validates if the logged in user has the necessary permissions to
         access the CMR Modules in this APP."""
-        tem_permicao_cmr = perm_access_cmr.CMRModuloAccess.user_request_permission(
+        tem_permicao_cmr = perm_access_cmr.CMRModuleAccess.user_request_permission(
             self.request.user, __package__)
         return tem_permicao_cmr
 

@@ -1,4 +1,4 @@
-MODULOS_CMR = {
+CMR_MODULES = {
     "catalog-tab": {
     	"access":{"catalog.access_satellite","catalog.access_scene",},
     	"description":"Meu acervo de imagens",

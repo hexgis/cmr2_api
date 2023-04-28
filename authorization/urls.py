@@ -9,8 +9,8 @@ urlpatterns = [
         name='authorization-user-permissions'
     ),
     path(
-        'user_moduloscmr/',
-        views.LoggedUserModulosCMR.as_view(),
-        name='authorization-user-moduloscmr'
+        'user_cmrmodules/',
+        views.LoggedUserCMRModules.as_view(),
+        name='authorization-user-cmrmodules'
     ),
 ]
