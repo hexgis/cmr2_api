@@ -1,14 +1,14 @@
 MODULOS_CMR = {
     "catalog-tab": {
-    	"access":{"catalog.access_satellite","catalog.access_scene"},
+    	"access":{"catalog.access_satellite","catalog.access_scene",},
     	"description":"Meu acervo de imagens",
         "alias": "Catalogo"},
     "search-tab": {
-    	"access":{"monitoring.access_monitoringconsolidated",},
+    	"access":{"monitoring.access_monitoringconsolidated","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"Monitoramento Diário",
         "alias": "Monitoramento"},
     "layers-tab": {
-    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter",},
+    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"Camadas de Sobreposição",
         "alias": "Apoio"},
     "high-resolution-mosaics-tab": {
@@ -20,30 +20,38 @@ MODULOS_CMR = {
     	"description":"Risco de Fogo e Focos de Calor",
         "alias": "Fogo"},
     "landuse-tab": {
-    	"access":{"land_use.access_landuseti","land_use.access_landuseclasses",},
+    	"access":{"land_use.access_landuseti","land_use.access_landuseclasses","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"Uso e Ocupação do Solo",
         "alias": "UOS"},
     "prodes-tab": {
-    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter",},
+    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"PRODES (INPE)",
         "alias": "Prodes"},
     "urgent-alerts-tab": {
-    	"access":{"priority_alerts.view_urgentalerts",},
+    	"access":{"priority_alerts.access_urgentalerts","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"Alerta Urgente",
         "alias": "Alertas"},
     "priority-tab": {
-    	"access":{"priority_monitoring.access_priorityconsolidated",},
+    	"access":{"priority_monitoring.access_priorityconsolidated","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"Polígonos Prioritários",
         "alias": "Prioritários"},
     "document-tab": {
-    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter",},
+    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"Documental",
         "alias": "Documental"},
     "mapoteca-tab": {
-    	"access":{"deter_monitoring.access_deterti",},
+    	"access":{"deter_monitoring.access_deterti","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"Deter",
         "alias": "Deter"}
 }
+"""
+Lists all 'CMR2 Modules'.
+Each 'ModulosCMR2' key has in its value the information of:
+	* access (set): Access to 'ModuloCMR2'. List of all models used and
+	necessary for the operation of this 'ModuloCMR2'.
+	* description (str): Description of 'ModuloCMR2'.
+	* alias (str): Usual name of 'CMR2 Module'.
+"""
 
 
 GROUPS_CMR = [
@@ -60,6 +68,8 @@ GROUPS_CMR = [
 
 
 PROFILE_CMR = {
+	"TI CR (Visualizar)": {
+		"funai.access_coordenacaoregional","funai.access_limiteterraindigena","funai.view_coordenacaoregional","funai.view_limiteterraindigena",},
 	"Catalogo (Visualizar)": {
 		"access_catalogs","access_satellite","view_satellite","view_catalogs",},
 	"Catalogo (Total)": {
