@@ -46,10 +46,10 @@ MODULOS_CMR = {
 }
 """
 Lists all 'CMR2 Modules'.
-Each 'ModulosCMR2' key has in its value the information of:
-	* access (set): Access to 'ModuloCMR2'. List of all models used and
-	necessary for the operation of this 'ModuloCMR2'.
-	* description (str): Description of 'ModuloCMR2'.
+Each 'CMR2 Module' key has in its value the information of:
+	* access (set): Access to 'CMR2 Module'. List of all models used and
+	necessary for the operation of this 'CMR2 Module'.
+	* description (str): Description of 'CMR2 Module'.
 	* alias (str): Usual name of 'CMR2 Module'.
 """
 
