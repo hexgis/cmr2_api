@@ -44,7 +44,10 @@ urlpatterns = [
     path('api-docs/', schema_view.with_ui('redoc', cache_timeout=0)),
     path('admin/', admin.site.urls),
     path('auth/', include(
-        ('auth_jwt.urls', 'auth'), namespace='auth')
+        ('auth_jwt.urls', 'auth'), namespace='authentication')
+    ),
+    path('authorization/', include(
+        ('authorization.urls', 'authorization'), namespace='authorization')
     ),
     path('support/', include(
         ('support.urls', 'support'), namespace='support')
