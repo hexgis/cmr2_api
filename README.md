@@ -1,28 +1,45 @@
-# CMR API - Projeto PortalCMR2 (back-end) #
+# CMR API - Projeto PortalCMR2 (back-end)
 
 API de comunicação do Centro de Monitoramento Remoto da Funai.
 
+- Para visualizar o homologação acesse
+-
 
+# Arquitetura e Stack
 
-AUTENTICAÇÃO e AUTORIZAÇÃO
+Este serviço faz parte de um conjunto de serviços estruturados em uma arquitetura de microserviços e orientados a eventos. Para conhecer mais sobre a arquitetura da solução
+
+### Detalhes da stack e integrações:
+
+- A implementação é feita em python3
+- Uso do framework [django rest framework](https://www.django-rest-framework.org/)
+- Persistência de dados é feita em um banco [PostgreSql](https://www.postgresql.org/)
+- Utilização de [Docker](https://www.docker.com/) e Docker Compose [Docker](https://docs.docker.com/compose/) para implementação da infraestrutura
+-
+
+# Execução do código
+
+- Execute docker-compose up --build dev para executar o sistema em modo desenvolvimento.
+
+# AUTENTICAÇÃO e AUTORIZAÇÃO
 
 No backend são tratadas as regras de negócio e autenticação do PortalCMR2. Da APP são esperados os dados do usuário autenticado (usuário e senha), como retorno é encaminhado um token de autenticação possibilitando consumo de todos os acessos e permissões concedidas aos usuários conforme defininido pelo administrador do sistema.
 
 AUTENTICAÇÃO
-    Para este projeto foi adotada o método de autenticação JWT(Json Web Token). Aplicada em servidores com protocolo HTTPS, essa metodologia realiza a autenticação por tokens.
-    Esse token é gerado quando o usuário loga na aplicação, por meio de seu usuário e senha encaminhados pela APP,
-    é gerado uma string de caracteres codificada utilizada para validação do acesso e contendo outros parametros implemetados pelo pacote python SimpleJWT. 
+Para este projeto foi adotada o método de autenticação JWT(Json Web Token). Aplicada em servidores com protocolo HTTPS, essa metodologia realiza a autenticação por tokens.
+Esse token é gerado quando o usuário loga na aplicação, por meio de seu usuário e senha encaminhados pela APP,
+é gerado uma string de caracteres codificada utilizada para validação do acesso e contendo outros parametros implemetados pelo pacote python SimpleJWT.
 
 AUTORIZAÇÃO (Acessos e Permissões)
-    As permissões ao sistema aqui utlizadas são as do framework Django REST Framework do pacote django.contrib.auth.
-    Foram adotadas as DjangoModelPermissions, ou seja, o maior grau de granularidade aplicado a esse projeto é a nível de model(tabela).
-    Obs.: Para o cenário desenhado, ainda não foi necessário a aplicação de permissões a nível de objeto (DjangoObjectPermissions)
+As permissões ao sistema aqui utlizadas são as do framework Django REST Framework do pacote django.contrib.auth.
+Foram adotadas as DjangoModelPermissions, ou seja, o maior grau de granularidade aplicado a esse projeto é a nível de model(tabela).
+Obs.: Para o cenário desenhado, ainda não foi necessário a aplicação de permissões a nível de objeto (DjangoObjectPermissions)
 
     Todas as permissões são concedidas aos usuário apenas por Grupos, não é concedida nenhuma permissão diretamente a um usuário específico, visando uma melhor gestão sobre o PortalCMR2.
 
     As permissões ao consumo do BackEnd foram divididas em dois níves:
         Nível 01 --> Acesso aos módulos do PortalCMR2;
-        Nível 02 --> Consumo e iteração dos dados persistidos em banco de dados pelo usuário. 
+        Nível 02 --> Consumo e iteração dos dados persistidos em banco de dados pelo usuário.
     Obs.: Para evitar exeption de "Permissão Negada", é necessário que o usuário tenha acesso ao dado (Nível 01) e permissão ao dado (Nível 02).
 
     As permissões default do sistema possuir 5 ações implementadas:
