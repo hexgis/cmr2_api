@@ -26,20 +26,20 @@ Este serviço faz parte de um conjunto de serviços estruturados em uma arquitet
 
 - Execute docker-compose up --build dev para executar o sistema em modo desenvolvimento.
 
-# Detalhes sobre AUTENTICAÇÃO e AUTORIZAÇÃO
+# Detalhes sobre Autenticação e Autorização
 
 No backend são tratadas as regras de negócio e autenticação do PortalCMR2.
-Da APP são esperados os dados do usuário autenticado (usuário e senha), como retorno é encaminhado um token de autenticação possibilitando consumo de todos os acessos e permissões concedidas aos usuários conforme defininido pelo administrador do sistema.
+Da APP são esperados os dados do usuário autenticado (usuário e senha), como retorno é encaminhado um token de autenticação possibilitando consumo de todos os acessos e permissões concedidas aos usuários conforme definido pelo administrador do sistema.
 
-### AUTENTICAÇÃO
+### Autenticação
 
 Para este projeto foi adotada o método de autenticação JWT(Json Web Token). Aplicada em servidores com protocolo HTTPS, essa metodologia realiza a autenticação por tokens.
-Esse token é gerado quando o usuário loga na aplicação, por meio de seu usuário e senha encaminhados pela APP,
+Esse token é gerado quando o usuário entra na aplicação, por meio de seu usuário e senha encaminhados pela APP,
 é gerado uma string de caracteres codificada utilizada para validação do acesso e contendo outros parametros implemetados pelo pacote python SimpleJWT.
 
-### AUTORIZAÇÃO (Acessos e Permissões)
+### Autorização (Acessos e Permissões)
 
-As permissões ao sistema aqui utlizadas são as do framework Django REST Framework do pacote django.contrib.auth.
+As permissões ao sistema aqui utilizadas são as do framework Django REST Framework do pacote django.contrib.auth.
 Foram adotadas as DjangoModelPermissions, ou seja, o maior grau de granularidade aplicado a esse projeto é a nível de model(tabela).
 Obs.: Para o cenário desenhado, ainda não foi necessário a aplicação de permissões a nível de objeto (DjangoObjectPermissions)
 
@@ -50,7 +50,7 @@ Obs.: Para o cenário desenhado, ainda não foi necessário a aplicação de per
     As permissões ao consumo do BackEnd foram divididas em dois níves:
         Nível 01 --> Acesso aos módulos do PortalCMR2;
         Nível 02 --> Consumo e iteração dos dados persistidos em banco de dados pelo usuário.
-    Obs.: Para evitar exeption de "Permissão Negada", é necessário que o usuário tenha acesso ao dado (Nível 01) e permissão ao dado (Nível 02).
+    Obs.: Para evitar o erro de exeção de "Permissão Negada", é necessário que o usuário tenha acesso ao dado (Nível 01) e permissão ao dado (Nível 02).
 
     As permissões default do sistema possuir 5 ações implementadas:
         "view_" --> consultar, leitura e/ou visualização os dados;
@@ -71,5 +71,5 @@ Obs.: Para o cenário desenhado, ainda não foi necessário a aplicação de per
 
     Nível 02 - Camada de permissões
         Fazendo uso do pacote django.contrib.auth, por padrão, é criado automaticamente 4 ações de permissões nas models dos APPs listados no setting.INSTALLED_APPS.
-        Esses 4 parametros de permissões correspondem as operações básicas de CRUD (Create - "add_", Read - "view_", Update - "change_" e Delete - "delete_")
-        foram encoporados a funcionalidade dos sistemas para definição dos papeis dos grupos de usuários no manuzeio dos dados existentes no ProjetoCMR.
+        Esses 4 parâmetros de permissões correspondem as operações básicas de CRUD (Create - "add_", Read - "view_", Update - "change_" e Delete - "delete_")
+        foram incorporados a funcionalidade dos sistemas para definição dos papeis dos grupos de usuários no manuseio dos dados existentes no ProjetoCMR.
