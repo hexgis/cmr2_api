@@ -1,4 +1,4 @@
-# CMR API - Projeto PortalCMR2 (back-end)
+# CMR API - Projeto PortalCMR2
 
 API de comunicação do Centro de Monitoramento Remoto da Funai.
 
@@ -15,11 +15,13 @@ Este serviço faz parte de um conjunto de serviços estruturados em uma arquitet
 - Persistência de dados é feita em um banco [PostgreSql](https://www.postgresql.org/)
 - Utilização de [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/) para implementação da infraestrutura
 - Consumo de dados geoespaciais utilizando [geoserver](https://geoserver.org/)
+- Testes unitários usando [unitest](https://docs.python.org/3/library/unittest.html)
+- Utilização de pipeline de integração contíuna através do [gitlab](https://about.gitlab.com/)
 
 ### Detalhes da stack e integrações (front end):
 
 - A implementação é feita em [javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
-- Uso do framework [Vue](https://vuejs.org/) e [vuetify](https://vuetifyjs.com/)
+- Uso dos frameworks [Vue](https://vuejs.org/), [vuetify](https://vuetifyjs.com/) e [NuxtJS](Nuxt.https://v2.nuxt.com/pt/)
 - Contém um sistema de mapa interativo construido utilizando [leaflet](https://leafletjs.com/)
 
 # Execução do código
