@@ -2,40 +2,50 @@
 
 API de comunicação do Centro de Monitoramento Remoto da Funai.
 
-- Para visualizar o homologação acesse
--
+- Para visualizar o homologação clique [aqui](https://homolog-cmr-app-oq5garjiiq-uc.a.run.app/pt-br/catalog)
 
 # Arquitetura e Stack
 
-Este serviço faz parte de um conjunto de serviços estruturados em uma arquitetura de microserviços e orientados a eventos. Para conhecer mais sobre a arquitetura da solução
+Este serviço faz parte de um conjunto de serviços estruturados em uma arquitetura de microserviços, o CMR2 foi pensado para ser uma evolução do [CMR](https://cmr.funai.gov.br/).
 
-### Detalhes da stack e integrações:
+### Detalhes da stack e integrações (back end):
 
-- A implementação é feita em python3
+- A implementação é feita em [python3](https://www.python.org/downloads/)
 - Uso do framework [django rest framework](https://www.django-rest-framework.org/)
 - Persistência de dados é feita em um banco [PostgreSql](https://www.postgresql.org/)
-- Utilização de [Docker](https://www.docker.com/) e Docker Compose [Docker](https://docs.docker.com/compose/) para implementação da infraestrutura
--
+- Utilização de [Docker](https://www.docker.com/) e [Docker Compose](https://docs.docker.com/compose/) para implementação da infraestrutura
+- Consumo de dados geoespaciais utilizando [geoserver](https://geoserver.org/)
+
+### Detalhes da stack e integrações (front end):
+
+- A implementação é feita em [javascript](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript)
+- Uso do framework [Vue](https://vuejs.org/) e [vuetify](https://vuetifyjs.com/)
+- Contém um sistema de mapa interativo construido utilizando [leaflet](https://leafletjs.com/)
 
 # Execução do código
 
 - Execute docker-compose up --build dev para executar o sistema em modo desenvolvimento.
 
-# AUTENTICAÇÃO e AUTORIZAÇÃO
+# Detalhes sobre AUTENTICAÇÃO e AUTORIZAÇÃO
 
-No backend são tratadas as regras de negócio e autenticação do PortalCMR2. Da APP são esperados os dados do usuário autenticado (usuário e senha), como retorno é encaminhado um token de autenticação possibilitando consumo de todos os acessos e permissões concedidas aos usuários conforme defininido pelo administrador do sistema.
+No backend são tratadas as regras de negócio e autenticação do PortalCMR2.
+Da APP são esperados os dados do usuário autenticado (usuário e senha), como retorno é encaminhado um token de autenticação possibilitando consumo de todos os acessos e permissões concedidas aos usuários conforme defininido pelo administrador do sistema.
 
-AUTENTICAÇÃO
+### AUTENTICAÇÃO
+
 Para este projeto foi adotada o método de autenticação JWT(Json Web Token). Aplicada em servidores com protocolo HTTPS, essa metodologia realiza a autenticação por tokens.
 Esse token é gerado quando o usuário loga na aplicação, por meio de seu usuário e senha encaminhados pela APP,
 é gerado uma string de caracteres codificada utilizada para validação do acesso e contendo outros parametros implemetados pelo pacote python SimpleJWT.
 
-AUTORIZAÇÃO (Acessos e Permissões)
+### AUTORIZAÇÃO (Acessos e Permissões)
+
 As permissões ao sistema aqui utlizadas são as do framework Django REST Framework do pacote django.contrib.auth.
 Foram adotadas as DjangoModelPermissions, ou seja, o maior grau de granularidade aplicado a esse projeto é a nível de model(tabela).
 Obs.: Para o cenário desenhado, ainda não foi necessário a aplicação de permissões a nível de objeto (DjangoObjectPermissions)
 
-    Todas as permissões são concedidas aos usuário apenas por Grupos, não é concedida nenhuma permissão diretamente a um usuário específico, visando uma melhor gestão sobre o PortalCMR2.
+    Todas as permissões são concedidas aos usuário apenas por Grupos,
+    não é concedida nenhuma permissão diretamente a um usuário específico,
+    visando uma melhor gestão sobre o PortalCMR2.
 
     As permissões ao consumo do BackEnd foram divididas em dois níves:
         Nível 01 --> Acesso aos módulos do PortalCMR2;
