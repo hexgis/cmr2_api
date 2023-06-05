@@ -20,7 +20,7 @@ CMR_MODULES = {
     	"description":"Risco de Fogo e Focos de Calor",
         "alias": "Fogo"},
     "landuse-tab": {
-    	"access":{"land_use.access_landuseti","land_use.access_landuseclasses","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
+    	"access":{"land_use.access_landuseti","land_use.access_landuseclasses","funai.access_coordenacaoregional","funai.access_limiteterraindigena","documental.access_docsaction","documental.access_userscmr","documental.access_documentaldocs","documental.access_docslandUser"},
     	"description":"Uso e Ocupação do Solo",
         "alias": "UOS"},
     "prodes-tab": {
@@ -36,10 +36,14 @@ CMR_MODULES = {
     	"description":"Polígonos Prioritários",
         "alias": "Prioritários"},
     "document-tab": {
-    	"access":{"support.access_geoserver","support.access_categorylayersgroup","support.access_layersgroup","support.access_layer","support.access_wmslayer","support.access_tmslayer","support.access_layerfilter","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
+    	"access":{"documental.access_docsaction","documental.access_userscmr","documental.access_documentaldocs","documental.access_docsdocumentti"},
     	"description":"Documental",
         "alias": "Documental"},
     "mapoteca-tab": {
+    	"access":{"funai.access_coordenacaoregional","funai.access_limiteterraindigena","documental.access_docsaction","documental.access_userscmr","documental.access_documentaldocs","documental.access_docsmapoteca"},
+    	"description":"Mapoteca",
+        "alias": "Mapoteca"},
+	"deter-tab" : {
     	"access":{"deter_monitoring.access_deterti","funai.access_coordenacaoregional","funai.access_limiteterraindigena"},
     	"description":"Deter",
         "alias": "Deter"}
