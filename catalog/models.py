@@ -28,6 +28,7 @@ class Satellite(models.Model):
 
     class Meta:
         """"Meta class for `catalog.Satellite` model."""
+        
         app_label = 'catalog'
         verbose_name = 'Satellite'
         verbose_name_plural = 'Satellites'
@@ -131,6 +132,7 @@ class Scene(models.Model):
 
     class Meta:
         """"Meta class for `catalog.Scene` abstract model."""
+
         app_label = 'catalog'
         verbose_name = 'Satellite Scene'
         verbose_name_plural = 'Satellite Scenes'
@@ -139,4 +141,9 @@ class Scene(models.Model):
         ordering = ('-date', )
 
     def __str__(self) -> str:
+        """_summary_
+
+        Returns:
+            str: processed scene name
+        """
         return str(self.image)
