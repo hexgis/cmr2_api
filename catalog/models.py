@@ -65,11 +65,13 @@ class Scene(models.Model):
 
     image_path = models.CharField(
         _('Image repository'),
+        help_text='This link is used to download the processed scene.',
         max_length=511
     )
 
     url_tms = models.CharField(
         _('Tile file link'),
+        help_text='This link contains the scena TMS service file.',
         max_length=511
     )
 
@@ -114,6 +116,7 @@ class Scene(models.Model):
 
     preview = models.TextField(
         _('Image preveiw link'),
+        help_text='This link contains the scena preview thumb file.',
         max_length=511,
         null=True,
         blank=True
