@@ -2,8 +2,8 @@
   pk: 1
   fields:
       name: Funai Geoserver
-      wms_url: https://cmr.funai.gov.br/geoserver/ows?authkey=5a3e4ff0-2dbc-47de-bf95-366cc70a5bd2
-      preview_url: https://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=5a3e4ff0-2dbc-47de-bf95-366cc70a5bd2&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+      wms_url: https://cmr.funai.gov.br/geoserver/ows?authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667
+      preview_url: https://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
 - model: support.CategoryLayersGroup
   pk: 1
   fields:
