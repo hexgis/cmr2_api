@@ -59,7 +59,8 @@ services:
       dockerfile: ./Dockerfile-dev
     command: >
       bash -c "python manage.py makemigrations --no-input
-      && python manage.py test"
+      && python manage.py test auth_jwt.tests"
+      && python manage.py test funai.tests"
     volumes:
       - .:/app/
     ports:
