@@ -19,7 +19,17 @@ class SatelliteAdmin(admin.ModelAdmin):
 
 class SceneAdmin(admin.GeoModelAdmin):
     """Django Administrator `model.Scene` data."""
-    def cloud_cover_percent(self, instance):
+
+    def cloud_cover_percent(self, instance:models.Scene)-> str:
+        """_summary_
+
+        Args:
+            instance (models.Scene): Scene models data
+
+        Returns:
+            str: cloud cover in percent.
+        """
+
         return '{}%'.format(instance.cloud_cover)
 
     list_display = (
@@ -29,7 +39,7 @@ class SceneAdmin(admin.GeoModelAdmin):
         'pr_date',
         'locator',
         'sat_identifier',
-        'sat_name'
+        'sat_name',
     )
 
     fields = (
@@ -37,12 +47,13 @@ class SceneAdmin(admin.GeoModelAdmin):
         'type',
         'image_path',
         'url_tms',
+        'preview',
         'date',
         'cloud_cover_percent',
         'locator',
         'geom',
         'sat_identifier',
-        'sat_name'
+        'sat_name',
     )
 
     search_fields = ('image',)
@@ -54,5 +65,3 @@ class SceneAdmin(admin.GeoModelAdmin):
 
 admin.site.register(models.Scene, SceneAdmin)
 admin.site.register(models.Satellite, SatelliteAdmin)
-
-

@@ -28,6 +28,7 @@ class Satellite(models.Model):
 
     class Meta:
         """"Meta class for `catalog.Satellite` model."""
+        
         app_label = 'catalog'
         verbose_name = 'Satellite'
         verbose_name_plural = 'Satellites'
@@ -65,11 +66,13 @@ class Scene(models.Model):
 
     image_path = models.CharField(
         _('Image repository'),
+        help_text='This link is used to download the processed scene.',
         max_length=511
     )
 
     url_tms = models.CharField(
         _('Tile file link'),
+        help_text='This link contains the scena TMS service file.',
         max_length=511
     )
 
@@ -114,6 +117,7 @@ class Scene(models.Model):
 
     preview = models.TextField(
         _('Image preveiw link'),
+        help_text='This link contains the scena preview thumb file.',
         max_length=511,
         null=True,
         blank=True
@@ -128,6 +132,7 @@ class Scene(models.Model):
 
     class Meta:
         """"Meta class for `catalog.Scene` abstract model."""
+
         app_label = 'catalog'
         verbose_name = 'Satellite Scene'
         verbose_name_plural = 'Satellite Scenes'
@@ -136,4 +141,9 @@ class Scene(models.Model):
         ordering = ('-date', )
 
     def __str__(self) -> str:
+        """_summary_
+
+        Returns:
+            str: processed scene name
+        """
         return str(self.image)
