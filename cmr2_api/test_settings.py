@@ -1,6 +1,6 @@
+import sys
 from django.test.runner import DiscoverRunner
 from django.conf import settings
-import sys
 from django.apps import apps
 
 
@@ -8,29 +8,27 @@ if 'test' in sys.argv or 'test_coverage' in sys.argv:  # Covers regular testing 
     settings.DATABASE_ROUTERS = {}
 
 
-class DisableMigrations(object):
-    def __contains__(self, item):
-        return True
-
-    def __getitem__(self, item):
-        return "notmigrations"
-
-
 class ManagedModelTestRunner(DiscoverRunner):
     """
-    Test runner that automatically makes all unmanaged models in your Django
-    project managed for the duration of the test run, so that one doesn't need
-    to execute the SQL manually to create them.
+    United test runner that automatically makes all unmanaged models in the
+    database for alias 'test_default_db', the Django project's test database.
     """
 
     def setup_test_environment(self, *args, **kwargs): 
             """Creating test database for alias 'default' used in unit tests of unmanaged models."""
 
             get_models = apps.get_models 
-            self.unmanaged_models = [m for m in get_models() if not m._meta.managed and m._meta.app_label in settings.INSTALLED_APPS] #3
+            
+            apps_not_execut_united_test =['monitoring','catalog','priority_monitoring']
+            self.unmanaged_models = [
+                m for m in get_models() 
+                if not m._meta.managed 
+                and m._meta.app_label in settings.INSTALLED_APPS 
+                and not m._meta.app_label in apps_not_execut_united_test
+            ]
 
             for m in self.unmanaged_models:
-                m._meta.managed = True 
+                m._meta.managed = True
                 m.objects.model._meta.db_table = m.objects.model._meta.app_label + '_' + m.objects.model._meta.model_name 
 
             super(ManagedModelTestRunner, self).setup_test_environment(*args, **kwargs)
