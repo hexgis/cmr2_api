@@ -1,4 +1,4 @@
-from django.test import TestCase
+from rest_framework.test import APITestCase
 from django.contrib.auth.models import User
 from django.urls import reverse
 
@@ -8,8 +8,13 @@ from rest_framework.test import APIClient
 from .recipes import Recipes
 
 
-class TestTokenViews(TestCase):
-    """Test case for simple jwt token views."""
+class TestTokenViews(APITestCase):
+    """Test case for simple jwt token views.
+
+    Args:
+        APITestCase (class 'rest_framework.test.APITestCase'): Includes a few
+            helper classes that extend Django's existing test framework.
+    """
 
     def setUp(self):
         """Set up data for tests, created user and setting urls."""
@@ -56,8 +61,13 @@ class TestTokenViews(TestCase):
         self.assertTrue(request.data['access'])
 
 
-class TestChangePasswordView(TestCase):
-    """Test case for auth module (change password) view."""
+class TestChangePasswordView(APITestCase):
+    """Test case for auth module (change password) view.
+
+    Args:
+        APITestCase (class 'rest_framework.test.APITestCase'): Includes a few
+            helper classes that extend Django's existing test framework.
+    """
 
     def setUp(self):
         """Set up data for tests, created user and setting urls."""
