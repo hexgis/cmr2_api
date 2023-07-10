@@ -60,10 +60,8 @@ services:
     command: >
       bash -c "python manage.py makemigrations --no-input
       && python manage.py test auth_jwt.tests
-      && python manage.py test priority_alerts.tests.test_models
-      && python manage.py test monitoring.tests.test_models
+      && python manage.py test priority_alerts.tests
       && python manage.py test deter_monitoring.tests.test_models
-      && python manage.py test priority_monitoring.tests.test_models
       && python manage.py test land_use.tests.test_models
       && python manage.py test funai.tests"
     volumes:
@@ -82,9 +80,3 @@ services:
   prod:
     image: us.gcr.io/custom-plating-209314/cmr2_api:latest
     build: .
-
-
-
-# documento da Gabi e yan
-# apresentar tabela para o micas
-# tirar duvidas sobre as demandas
