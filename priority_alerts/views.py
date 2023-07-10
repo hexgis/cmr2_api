@@ -10,7 +10,7 @@ from rest_framework import (
 )
 
 from django.db.models import (
-    Count, 
+    Count,
     Sum
 )
 
@@ -79,8 +79,8 @@ class AlertsDetailView(generics.RetrieveAPIView):
     lookup_field = 'id'
 
 
-class AlertsStatsView(generics.ListAPIView):
-    """Retrives `models.UrgentAlerts` stats data.
+class AlertsMapStatsView(generics.ListAPIView):
+    """Retrives `models.UrgentAlerts` map stats data.
 
     Filters:
         * co_cr (list): filtering Regional Coordiantion using code.
@@ -100,7 +100,7 @@ class AlertsStatsView(generics.ListAPIView):
     )
 
     def get (self, request):
-        """Get method to return stats for priority_alerts.
+        """Get method to return map stats for priority_alerts.
 
         Returns sums for area_ha and registry.
 
