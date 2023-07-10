@@ -16,7 +16,7 @@ class UrgentAlertsTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
         """Class variables using data load from fixtures file."""
-        print('APP Priority_alerts models-------------->>>>>>>>>>>>>>>>>>>  1')
+
         call_command(
             'loaddata',
             'priority_alerts/fixtures/urgent_alerts.yaml',
