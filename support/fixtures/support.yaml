@@ -122,7 +122,7 @@
 - model: support.layersgroup
   pk: 19
   fields:
-      name: Antropismo Consolidado
+      name: Antropismo Consolidado - 2015
       order: 19
       category_groups: 1
 - model: support.layersgroup
