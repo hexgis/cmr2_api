@@ -140,7 +140,7 @@
 - model: support.layersgroup
   pk: 25
   fields:
-      name: Rec. Hidrícos
+      name: Recursos Hidrícos
       order: 25
       category_groups: 1
 - model: support.layersgroup
