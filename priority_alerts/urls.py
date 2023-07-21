@@ -21,8 +21,8 @@ urlpatterns = [
     ),
     path(
         'stats/',
-        views.AlertsStatsView.as_view(),
-        name='alerts-stats'
+        views.AlertsMapStatsView.as_view(),
+        name='alerts-map-stats'
     ),
     path(
         'classes/',
