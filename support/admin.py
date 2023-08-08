@@ -43,6 +43,7 @@ class LayerAdmin(admin.ModelAdmin):
         'layer_type',
         'active_on_init',
         'layers_group',
+        'is_public',
     )
 
     fields = list_display
@@ -53,6 +54,7 @@ class LayerAdmin(admin.ModelAdmin):
 
     list_filter = (
         'layer_type',
+        'is_public',
     )
 
 
