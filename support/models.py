@@ -35,6 +35,7 @@ class Geoserver(models.Model):
 
 
 class CategoryLayersGroup(models.Model):
+    """Model for Category Layers Group Data"""
 
     name = models.CharField(
         unique=True,
@@ -138,6 +139,11 @@ class Layer(models.Model):
     active_on_init = models.BooleanField(
         _('Active on Init'),
         default=False,
+    )
+
+    is_public = models.BooleanField(
+        _('Geoservice is Public'),
+        default=False
     )
 
     class Meta:
