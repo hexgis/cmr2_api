@@ -1,11 +1,12 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework import serializers
 
-# from monitoring.serializers import MonitoringTypeSerializer
 
 from support import models
 
 
 class GeoserverSerializer(ModelSerializer):
+
     class Meta:
         model = models.Geoserver
         fields = (
@@ -64,12 +65,30 @@ class LayerSerializer(ModelSerializer):
             'order',
             'layer_type',
             'active_on_init',
+            'is_public',
         )
 
-
-class LayersGroupSerializer(ModelSerializer):
+class LayersGroupAuthenticatedSerializer(ModelSerializer):
     layers = LayerSerializer(many=True, read_only=True)
+    class Meta:
+        model = models.LayersGroup
+        fields = '__all__'
 
+class LayersGroupPublicSerializer(ModelSerializer):
+    layers = serializers.SerializerMethodField()
+
+    def get_layers(self, obj):
+
+        public_layers = self.get_public_layer()
+        serializer = LayerSerializer(
+            data=public_layers.filter(layers_group=obj), many=True)
+        serializer.is_valid()
+        
+        return serializer.data
+
+    def get_public_layer(self):
+        return models.Layer.objects.filter(is_public=True)
+    
     class Meta:
         model = models.LayersGroup
         fields = '__all__'
