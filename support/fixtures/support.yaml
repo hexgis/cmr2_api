@@ -491,7 +491,7 @@
 - model: support.layer
   pk: 320
   fields:
-      name: Pista de pouso
+      name: Pista de pouso irregulares
       order: 1181
       layer_type: wms
       layers_group: 28
@@ -506,6 +506,24 @@
       layers_group: 15
       active_on_init: false
       is_public: true
+- model: support.layer
+  pk: 322
+  fields:
+      name: Bases de Proteção Etnoambiental (BAPEs)
+      order: 1185
+      layer_type: wms
+      layers_group: 28
+      active_on_init: false
+      is_public: false
+- model: support.layer
+  pk: 323
+  fields:
+      name: Unidades de Proteção Territorial (UPTs)
+      order: 1186
+      layer_type: wms
+      layers_group: 28
+      active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 36
   fields:
@@ -6575,4 +6593,30 @@
       geoserver_layer_options: null
       queryable: true
       has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 322
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_bapes_p
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 323
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_upt_p
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
       default_opacity: null
