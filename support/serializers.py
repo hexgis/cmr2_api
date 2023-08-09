@@ -1,12 +1,11 @@
 from rest_framework.serializers import ModelSerializer
 from rest_framework import serializers
 
-
 from support import models
 
 
 class GeoserverSerializer(ModelSerializer):
-"""GeoserverSerializer to serialize `models.Geoserver`."""
+    """GeoserverSerializer to serialize `models.Geoserver`."""
 
     class Meta:
         """Meta class for GeoserverSerializer."""

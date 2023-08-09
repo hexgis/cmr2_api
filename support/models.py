@@ -45,7 +45,7 @@ class CategoryLayersGroup(models.Model):
     """
 
     name = models.CharField(
-        _('Name')
+        _('Name'),
         unique=True,
         max_length=25,
         null=True
