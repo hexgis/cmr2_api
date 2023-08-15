@@ -29,10 +29,22 @@ class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
         * category (int): category group type
     """
 
-    serializer_class = serializers.LayersGroupSerializer
     queryset = models.LayersGroup.objects.all()
     filterset_class = support_filters.LayersGroupFilter
     filter_backends = (rest_framework.DjangoFilterBackend,)
+
+    def get_serializer_class(self):
+        """Get method to return one data set acoording to authenticated user.
+
+        Returns:
+            `serializers.LayersGroupAuthenticatedSerializer` or
+            `serializers.LayersGroupPublicSerializer`.
+        """
+
+        if self.request.user.is_authenticated:
+            return serializers.LayersGroupAuthenticatedSerializer
+        else:
+            return serializers.LayersGroupPublicSerializer
 
 
 class CategoryLayersGroupView(generics.ListAPIView, AuthModelMixIn):
