@@ -43,8 +43,8 @@ RUN pip install --no-cache-dir -r requirements/production.txt
 COPY . .
 
 # Run the web service on container startup. Here we use the gunicorn
-# webserver, with one worker process and 8 threads.
+# webserver, with one worker process and 3 threads.
 # For environments with multiple CPU cores, increase the number of workers
 # to be equal to the cores available.
 # Timeout is set to 0 to disable the timeouts of the workers to allow Cloud Run to handle instance scaling.
-CMD python manage.py collectstatic --no-input && python manage.py migrate && exec gunicorn --bind 0.0.0.0:$PORT --workers 4 --threads 8 --timeout 0 cmr2_api.wsgi:application
+CMD python manage.py collectstatic --no-input && python manage.py migrate && exec gunicorn --bind 0.0.0.0:$PORT --workers 3 --threads 3 --timeout 0 cmr2_api.wsgi:application
