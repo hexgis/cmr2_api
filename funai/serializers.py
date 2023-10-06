@@ -26,12 +26,6 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
         )
     def to_representation(self, instance):
         """Custom representation of the serialized data."""
-        # Obtém o valor original do campo 'ds_cr'
         ds_cr = instance.ds_cr
-
-        # Realize qualquer tratamento necessário no campo 'ds_cr' aqui
-        # Por exemplo, você pode aplicar uma formatação específica ou filtrar os dados
-        
         ds_cr = ds_cr.replace("COORDENACAO REGIONAL", "")
-        # Retorna o valor tratado
         return ds_cr.strip()
