@@ -1,50 +1,82 @@
 stages:  # List of stages for jobs, and their order of execution
-  - build-push
+  - build
+  - push
   - deploy
 
 variables:
   IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   DOCKER_TLS_CERTDIR: ""
   CA_CERTIFICATE: "$CA_CERTIFICATE"
-  DOCKER_LOGIN: docker login harbor.hex.com -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
 
-build-push-dev:
-  stage: build-push
+services:
+  - name: docker:19.03.5-dind
+    command:
+      - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
+
+build:
   image: docker:19.03.5
-  services:
-    - name: docker:19.03.5-dind
-      command:
-        - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
-  before_script:
-    - echo $
-    - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
-    - docker login harbor.hex.com -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+  stage: build
   script:
     - docker build -t $IMAGE .
-    - docker push $IMAGE
-  tags:
-    - docker
+  after_script:
+    - docker save -o app $IMAGE
+  artifacts:
+    paths:
+      - app
+    expire_in: "3 days"
   only:
+    - main
     - pipeline
+    - tags
 
-build-push-prod:
-  stage: build-push
-  image: docker:19.03.5
+test:
+  stage: test
+  image: dirceusilva/base_k8s_python:latest
+  dependencies:
+    - build
   services:
-    - name: docker:19.03.5-dind
-      command:
-        - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
+    - name: docker:dind
+      entrypoint: ["env", "-u", "DOCKER_HOST"]
+      command: ["dockerd-entrypoint.sh"]
+  variables:
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
+  before_script:
+    - /usr/sbin/update-ca-certificates --fresh
+    - export TRIVY_VERSION=$(wget -tls1 --retry-connrefused --waitretry=1 -qO - "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+    - echo $TRIVY_VERSION
+    - wget -tls1 --no-verbose --retry-connrefused --waitretry=1 https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -O - | tar -zxvf -
+  script:
+    - docker load -i app
+    - ./trivy image --exit-code 0 --no-progress --format template --template "@contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
+    # Print report
+    - ./trivy image --exit-code 0 --no-progress --severity HIGH $IMAGE
+    # Fail on severe vulnerabilities
+    - ./trivy image --exit-code 0 --severity CRITICAL --no-progress $IMAGE
+  artifacts:
+    reports:
+      container_scanning: gl-container-scanning-report.json
+  only:
+    - main
+    - pipeline
+    - tags
+
+push:
+  stage: push
+  image: docker:19.03.5
   before_script:
     - echo $
     - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
+    - docker load -i app
     - docker login harbor.hex.com -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
   script:
-    - docker build -t $IMAGE .
     - docker push $IMAGE
-  tags:
-    - docker
+  dependencies:
+    - build
   only:
-    - tag
+    - main
+    - pipeline
+    - tags
 
 deploy-dev:
   stage: deploy
@@ -58,9 +90,9 @@ deploy-dev:
     - ssh-keyscan $HMLG_SERVER_IP >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh dione@$HMLG_SERVER_IP "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /certificado:/etc/nginx/certificado -v nginx_log:/var/log/nginx $IMAGE"
+    - ssh dione@$HMLG_SERVER_IP "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 8080:8080 $IMAGE"
   only:
-   - pipeline
+    - pipeline
 
 deploy-prod-01:
   stage: deploy
@@ -74,9 +106,9 @@ deploy-prod-01:
     - ssh-keyscan $PROD_SERVER_IP_01 >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh hex@$PROD_SERVER_IP_01 "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /certificado:/etc/nginx/certificado -v nginx_log:/var/log/nginx $IMAGE"
+    - ssh hex@$PROD_SERVER_IP_01 "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 8080:8080 $IMAGE"
   only:
-   - tag
+    - tag
 
 deploy-prod-02:
   stage: deploy
@@ -90,6 +122,6 @@ deploy-prod-02:
     - ssh-keyscan $PROD_SERVER_IP_02 >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh hex@$PROD_SERVER_IP_02 "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /certificado:/etc/nginx/certificado -v nginx_log:/var/log/nginx $IMAGE"
+    - ssh hex@$PROD_SERVER_IP_02 "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 8080:8080 $IMAGE"
   only:
-   - tag
+    - tag
