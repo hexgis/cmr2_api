@@ -1,0 +1,94 @@
+stages:  # List of stages for jobs, and their order of execution
+  - build-push
+  - deploy
+
+variables:
+  IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
+  DOCKER_TLS_CERTDIR: ""
+  CA_CERTIFICATE: "$CA_CERTIFICATE"
+
+build-push-dev:
+  stage: build-push
+  image: docker:19.03.05
+  services:
+    - name: docker:19.03.5-dind
+      command:
+        - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
+  before_script:
+    - echo $
+    - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY"  --password-stdin
+  script:
+    - docker build -t $IMAGE .
+    - docker push $IMAGE
+  tags:
+    - docker
+  only:
+    - pipeline
+
+build-push-prod:
+  stage: build-push
+  image: docker:19.03.05
+  services:
+    - name: docker:19.03.5-dind
+      command:
+        - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
+  before_script:
+    - echo $
+    - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
+    - echo $CI_REGISTRY_PASSWORD | docker login -u "$CI_REGISTRY_USER" "$CI_REGISTRY"  --password-stdin
+  script:
+    - docker build -t $IMAGE .
+    - docker push $IMAGE
+  tags:
+    - docker
+  only:
+    - tag
+
+deploy-dev:
+  stage: deploy
+  image: debian:stable-slim
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY_HMLG" | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $HMLG_SERVER_IP >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh dione@$HMLG_SERVER_IP "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /certificado:/etc/nginx/certificado -v nginx_log:/var/log/nginx $IMAGE"
+  only:
+   - pipeline
+
+deploy-prod-01:
+  stage: deploy
+  image: debian:stable-slim
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $PROD_SERVER_IP_01 >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh hex@$PROD_SERVER_IP_01 "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /certificado:/etc/nginx/certificado -v nginx_log:/var/log/nginx $IMAGE"
+  only:
+   - tag
+
+deploy-prod-02:
+  stage: deploy
+  image: debian:stable-slim
+  before_script:
+    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | ssh-add -
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+    - ssh-keyscan $PROD_SERVER_IP_02 >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+  script:
+    - ssh hex@$PROD_SERVER_IP_02 "docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:80 -p 443:443 -v /certificado:/etc/nginx/certificado -v nginx_log:/var/log/nginx $IMAGE"
+  only:
+   - tag
