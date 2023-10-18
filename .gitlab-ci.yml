@@ -6,6 +6,7 @@ variables:
   IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
   DOCKER_TLS_CERTDIR: ""
   CA_CERTIFICATE: "$CA_CERTIFICATE"
+  DOCKER_LOGIN: docker login harbor.hex.com -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
 
 build-push-dev:
   stage: build-push
@@ -17,7 +18,7 @@ build-push-dev:
   before_script:
     - echo $
     - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
-    - echo $CI_REGISTRY_PASSWORD | docker login harbor.hex.com -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+    - $DOCKER_LOGIN
   script:
     - docker build -t $IMAGE .
     - docker push $IMAGE
@@ -36,7 +37,7 @@ build-push-prod:
   before_script:
     - echo $
     - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
-    - echo $CI_REGISTRY_PASSWORD | docker login harbor.hex.com -u "$CI_REGISTRY_USER" "$CI_REGISTRY" --password-stdin
+    - $DOCKER_LOGIN
   script:
     - docker build -t $IMAGE .
     - docker push $IMAGE
