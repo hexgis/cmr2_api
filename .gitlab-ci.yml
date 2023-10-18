@@ -9,7 +9,7 @@ variables:
 
 build-push-dev:
   stage: build-push
-  image: docker:19.03.05
+  image: docker:19.03.5
   services:
     - name: docker:19.03.5-dind
       command:
@@ -28,7 +28,7 @@ build-push-dev:
 
 build-push-prod:
   stage: build-push
-  image: docker:19.03.05
+  image: docker:19.03.5
   services:
     - name: docker:19.03.5-dind
       command:
