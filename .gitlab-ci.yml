@@ -1,5 +1,6 @@
 stages:  # List of stages for jobs, and their order of execution
   - build
+  - test
   - push
   - deploy
 
@@ -10,8 +11,6 @@ variables:
 
 services:
   - name: docker:19.03.5-dind
-    command:
-      - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
 
 build:
   image: docker:19.03.5
@@ -64,6 +63,10 @@ test:
 push:
   stage: push
   image: docker:19.03.5
+  services:
+    - name: docker:19.03.5-dind
+      command:
+        - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
   before_script:
     - echo $
     - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
