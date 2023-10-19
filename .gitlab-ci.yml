@@ -109,7 +109,7 @@ deploy-prod-01:
     - ssh-keyscan $PROD_SERVER_IP_01 >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh hex@$PROD_SERVER_IP_01 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
+    - ssh dev_hex@$PROD_SERVER_IP_01 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
   only:
     - main
     - tag
@@ -126,7 +126,7 @@ deploy-prod-02:
     - ssh-keyscan $PROD_SERVER_IP_02 >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh hex@$PROD_SERVER_IP_02 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
+    - ssh dev_hex@$PROD_SERVER_IP_02 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
   only:
     - main
     - tag
