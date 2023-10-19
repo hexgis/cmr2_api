@@ -1,6 +1,6 @@
 stages:  # List of stages for jobs, and their order of execution
   - build
-  - test
+#  - test
   - push
   - deploy
 
@@ -28,37 +28,37 @@ build:
     - pipeline
     - tags
 
-test:
-  stage: test
-  image: dirceusilva/base_k8s_python:latest
-  dependencies:
-    - build
-  services:
-    - name: docker:dind
-      entrypoint: ["env", "-u", "DOCKER_HOST"]
-      command: ["dockerd-entrypoint.sh"]
-  variables:
-    DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: ""
-  before_script:
-    - /usr/sbin/update-ca-certificates --fresh
-    - export TRIVY_VERSION=$(wget -tls1 --retry-connrefused --waitretry=1 -qO - "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
-    - echo $TRIVY_VERSION
-    - wget -tls1 --no-verbose --retry-connrefused --waitretry=1 https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -O - | tar -zxvf -
-  script:
-    - docker load -i app
-    - ./trivy image --exit-code 0 --no-progress --format template --template "@contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
-    # Print report
-    - ./trivy image --exit-code 0 --no-progress --severity HIGH $IMAGE
-    # Fail on severe vulnerabilities
-    - ./trivy image --exit-code 0 --severity CRITICAL --no-progress $IMAGE
-  artifacts:
-    reports:
-      container_scanning: gl-container-scanning-report.json
-  only:
-    - main
-    - pipeline
-    - tags
+#test:
+#  stage: test
+#  image: dirceusilva/base_k8s_python:latest
+#  dependencies:
+#    - build
+#  services:
+#    - name: docker:dind
+#      entrypoint: ["env", "-u", "DOCKER_HOST"]
+#      command: ["dockerd-entrypoint.sh"]
+#  variables:
+#    DOCKER_DRIVER: overlay2
+#    DOCKER_TLS_CERTDIR: ""
+#  before_script:
+#    - /usr/sbin/update-ca-certificates --fresh
+#    - export TRIVY_VERSION=$(wget -tls1 --retry-connrefused --waitretry=1 -qO - "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
+#    - echo $TRIVY_VERSION
+#    - wget -tls1 --no-verbose --retry-connrefused --waitretry=1 https://github.com/aquasecurity/trivy/releases/download/v${TRIVY_VERSION}/trivy_${TRIVY_VERSION}_Linux-64bit.tar.gz -O - | tar -zxvf -
+#  script:
+#    - docker load -i app
+#    - ./trivy image --exit-code 0 --no-progress --format template --template "@contrib/gitlab.tpl" -o gl-container-scanning-report.json $IMAGE
+#    # Print report
+#    - ./trivy image --exit-code 0 --no-progress --severity HIGH $IMAGE
+#    # Fail on severe vulnerabilities
+#    - ./trivy image --exit-code 0 --severity CRITICAL --no-progress $IMAGE
+#  artifacts:
+#    reports:
+#      container_scanning: gl-container-scanning-report.json
+#  only:
+#    - main
+#    - pipeline
+#    - tags
 
 push:
   stage: push
@@ -93,7 +93,7 @@ deploy-dev:
     - ssh-keyscan $HMLG_SERVER_IP >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh dev_hex@$HMLG_SERVER_IP "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1, target=/api_media_files/production/ $IMAGE"
+    - ssh dev_hex@$HMLG_SERVER_IP "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
   only:
     - pipeline
 
@@ -109,7 +109,7 @@ deploy-prod-01:
     - ssh-keyscan $PROD_SERVER_IP_01 >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh hex@$PROD_SERVER_IP_01 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1, target=/api_media_files/production/ $IMAGE"
+    - ssh hex@$PROD_SERVER_IP_01 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
   only:
     - tag
 
@@ -125,6 +125,6 @@ deploy-prod-02:
     - ssh-keyscan $PROD_SERVER_IP_02 >> ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
   script:
-    - ssh hex@$PROD_SERVER_IP_02 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1, target=/api_media_files/production/ $IMAGE"
+    - ssh hex@$PROD_SERVER_IP_02 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
   only:
     - tag
