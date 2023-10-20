@@ -24,8 +24,14 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
             'co_cr',
             'ds_cr'
         )
-    # def to_representation(self, instance):
-    #     """Custom representation of the serialized data."""
-    #     ds_cr = instance.ds_cr
-    #     ds_cr = ds_cr.replace("COORDENACAO REGIONAL", "")
-    #     return ds_cr.strip()
+
+    def to_representation(self, instance):
+        data = {
+            'co_cr': instance.co_cr,
+            'ds_cr': instance.ds_cr
+        }
+        for cr in ["COORDENACAO REGIONAL DE ", "COORDENACAO REGIONAL DO ", "COORDENACAO REGIONAL ",]:
+            data['ds_cr'] = data['ds_cr'].removeprefix(cr)
+
+        data['ds_cr'] = data['ds_cr'].title()
+        return data
