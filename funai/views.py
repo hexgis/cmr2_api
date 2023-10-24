@@ -1,4 +1,4 @@
-from rest_framework import generics
+from rest_framework import generics, response
 from django_filters.rest_framework import DjangoFilterBackend
 
 from funai import(
@@ -14,6 +14,13 @@ class CoordenacaoRegionalView(generics.ListAPIView):
     queryset = models.CoordenacaoRegional.objects.all()
     serializer_class = serializers.CoordenacaoRegionalSerializer
 
+    def list(self, request):
+        serializer= serializers.CoordenacaoRegionalSerializer(
+            models.CoordenacaoRegional.objects.all(), many=True)
+        serializer_data= sorted(serializer.data, key=lambda k: (k['no_regiao'],k['ds_cr']))
+
+        return response.Response(serializer_data)
+
 
 class LimiteTerraIndigenaView(generics.ListAPIView):
     """LimiteTerraIndigenaView view for Indigenous Lands data.
@@ -26,4 +33,3 @@ class LimiteTerraIndigenaView(generics.ListAPIView):
     serializer_class = serializers.LimiteTerraIndigenaSerializer
     filterset_class = filters_funai.LimiteTerraIndigenaFilter
     filter_backends = (DjangoFilterBackend,)
-

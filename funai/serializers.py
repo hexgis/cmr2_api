@@ -17,21 +17,24 @@ class LimiteTerraIndigenaSerializer(ModelSerializer):
 
 class CoordenacaoRegionalSerializer(ModelSerializer):
     """CoordenacaoRegionalSerializer model data."""
+
     class Meta:
         """Metaclass to `funai.CoordenacaoRegionalSerializer`."""
         model = models.CoordenacaoRegional
         fields = (
             'co_cr',
-            'ds_cr'
+            'ds_cr',
+            'no_regiao'
         )
 
     def to_representation(self, instance):
-        data = {
-            'co_cr': instance.co_cr,
-            'ds_cr': instance.ds_cr
-        }
-        for cr in ["COORDENACAO REGIONAL DE ", "COORDENACAO REGIONAL DO ", "COORDENACAO REGIONAL ",]:
-            data['ds_cr'] = data['ds_cr'].removeprefix(cr)
-
+        data = super().to_representation(instance)
         data['ds_cr'] = data['ds_cr'].title()
+        for cr in [
+            "Coordenacao Regional De ",
+            "Coordenacao Regional Do ",
+            "Coordenacao Regional ",
+        ]:
+            data['ds_cr'] = data['ds_cr'].removeprefix(cr)
+        
         return data
