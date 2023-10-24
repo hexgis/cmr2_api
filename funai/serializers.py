@@ -28,6 +28,12 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
         )
 
     def to_representation(self, instance):
+        """Method to return in `CoordenacaoRegionalSerializer` the data processed from
+        the names of the Regional Coordinations. 
+
+        Returns:
+            collections.OrderedDict list: data with the "ds_cr" field treated
+        """
         data = super().to_representation(instance)
         data['ds_cr'] = data['ds_cr'].title()
         for cr in [
@@ -36,5 +42,5 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
             "Coordenacao Regional ",
         ]:
             data['ds_cr'] = data['ds_cr'].removeprefix(cr)
-        
+        print('--------------------->>>>>>>>>>>',type(data), data)
         return data

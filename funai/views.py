@@ -15,6 +15,13 @@ class CoordenacaoRegionalView(generics.ListAPIView):
     serializer_class = serializers.CoordenacaoRegionalSerializer
 
     def list(self, request):
+        """Instantiating the serializer `funai.CoordenacaoRegionalSerializer`, list a
+        queryset overriding the LIST method to sort the response in ascending 
+        alphabetical order by 'no_regiao' and 'ds_cr'.
+
+        Returns:
+            rest_framework.response.Response: Return the serialized data sorted
+        """
         serializer= serializers.CoordenacaoRegionalSerializer(
             models.CoordenacaoRegional.objects.all(), many=True)
         serializer_data= sorted(serializer.data, key=lambda k: (k['no_regiao'],k['ds_cr']))
