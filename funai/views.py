@@ -1,4 +1,4 @@
-from rest_framework import generics, filters
+from rest_framework import generics
 from django_filters.rest_framework import DjangoFilterBackend
 
 from funai import(
@@ -25,5 +25,5 @@ class LimiteTerraIndigenaView(generics.ListAPIView):
     queryset = models.LimiteTerraIndigena.objects.all()
     serializer_class = serializers.LimiteTerraIndigenaSerializer
     filterset_class = filters_funai.LimiteTerraIndigenaFilter
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
-    ordering_fields = ('ds_cr',)
+    filter_backends = (DjangoFilterBackend,)
+
