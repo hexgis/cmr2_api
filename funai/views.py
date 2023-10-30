@@ -1,4 +1,4 @@
-from rest_framework import generics, filters
+from rest_framework import generics, response
 from django_filters.rest_framework import DjangoFilterBackend
 
 from funai import(
@@ -14,6 +14,20 @@ class CoordenacaoRegionalView(generics.ListAPIView):
     queryset = models.CoordenacaoRegional.objects.all()
     serializer_class = serializers.CoordenacaoRegionalSerializer
 
+    def list(self, request):
+        """Instantiating the serializer `funai.CoordenacaoRegionalSerializer`, list a
+        queryset overriding the LIST method to sort the response in ascending 
+        alphabetical order by 'no_regiao' and 'ds_cr'.
+
+        Returns:
+            rest_framework.response.Response: Return the serialized data sorted
+        """
+        serializer= serializers.CoordenacaoRegionalSerializer(
+            models.CoordenacaoRegional.objects.all(), many=True)
+        serializer_data= sorted(serializer.data, key=lambda k: (k['no_regiao'],k['ds_cr']))
+
+        return response.Response(serializer_data)
+
 
 class LimiteTerraIndigenaView(generics.ListAPIView):
     """LimiteTerraIndigenaView view for Indigenous Lands data.
@@ -25,5 +39,4 @@ class LimiteTerraIndigenaView(generics.ListAPIView):
     queryset = models.LimiteTerraIndigena.objects.all()
     serializer_class = serializers.LimiteTerraIndigenaSerializer
     filterset_class = filters_funai.LimiteTerraIndigenaFilter
-    filter_backends = (DjangoFilterBackend, filters.OrderingFilter)
-    ordering_fields = ('ds_cr',)
+    filter_backends = (DjangoFilterBackend,)

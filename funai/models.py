@@ -93,7 +93,6 @@ class CoordenacaoRegional(models.Model):
         app_label = 'funai'
         verbose_name = 'CoordenacaoRegional'
         verbose_name_plural = 'CoordenacoesRegionais'
-        ordering = ('ds_cr', )
 
     def __str__(self) -> str:
         """Returns string for class based name.
@@ -188,4 +187,4 @@ class LimiteTerraIndigena(models.Model):
         app_label = 'funai'
         verbose_name = _('Indigenous Lands')
         verbose_name_plural = _('Indigenous Lands')
-        ordering = ('-no_ti', )
+        ordering = ('no_ti', )
