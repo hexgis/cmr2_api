@@ -42,5 +42,4 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
             "Coordenacao Regional ",
         ]:
             data['ds_cr'] = data['ds_cr'].removeprefix(cr)
-        print('--------------------->>>>>>>>>>>',type(data), data)
         return data
