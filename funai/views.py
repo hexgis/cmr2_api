@@ -24,7 +24,10 @@ class CoordenacaoRegionalView(generics.ListAPIView):
         """
         serializer= serializers.CoordenacaoRegionalSerializer(
             models.CoordenacaoRegional.objects.all(), many=True)
-        serializer_data= sorted(serializer.data, key=lambda k: (k['no_regiao'],k['ds_cr']))
+        serializer_data=sorted(serializer.data, key=lambda k:(
+            # k['no_regiao'],
+            k['ds_cr']
+        ))
 
         return response.Response(serializer_data)
 
