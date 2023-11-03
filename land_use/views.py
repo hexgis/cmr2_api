@@ -67,7 +67,10 @@ class LandUseYearsView(AuthModelMixIn, generics.ListAPIView):
     serializer_class = serializers.LandUseYearsSerializer
     bbox_filter_field = 'geom'
     filterset_class = land_use_filters.LandUseClassesFilter
-    filter_backends = (rest_framework.DjangoFilterBackend,)
+    filter_backends = (
+        rest_framework.DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
 
 
 class LandUseTableView(AuthModelMixIn, generics.ListAPIView):
@@ -84,7 +87,10 @@ class LandUseTableView(AuthModelMixIn, generics.ListAPIView):
     serializer_class = serializers.LandUseTableSerializer
     bbox_filter_field = 'geom'
     filterset_class = land_use_filters.LandUseClassesFilter
-    filter_backends = (rest_framework.DjangoFilterBackend,)
+    filter_backends = (
+        rest_framework.DjangoFilterBackend,
+        gis_filters.InBBoxFilter,
+    )
 
 
 class LandUseStatsView(AuthModelMixIn, generics.ListAPIView):

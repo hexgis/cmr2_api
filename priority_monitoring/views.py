@@ -124,4 +124,8 @@ class PriorityConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
     serializer_class = serializers.PriorityConsolidatedTableSerializer
     queryset = models.PriorityConsolidated.objects.all()
     filterset_class = priority_filters.PriorityConsolidatedFilter
-    filter_backends = (DjangoFilterBackend,)
+    bbox_filter_field = 'geom'
+    filter_backends = (
+        gis_filters.InBBoxFilter,
+        DjangoFilterBackend,
+    )
