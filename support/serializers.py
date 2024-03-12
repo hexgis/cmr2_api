@@ -93,6 +93,7 @@ class LayerSerializer(ModelSerializer):
             'is_public',
         )
 
+
 class LayersGroupAuthenticatedSerializer(ModelSerializer):
     """LayersGroupAuthenticatedSerializer to serialize `models.LayersGroup`."""
 
@@ -152,4 +153,13 @@ class CategoryLayersGroupSerializer(ModelSerializer):
     class Meta:
         """Meta class for CategoryLayersGroupSerializer."""
         model = models.CategoryLayersGroup
+        fields = '__all__'
+
+
+class LayersInfoSerializer(ModelSerializer):
+    """LayersInfo to serialize `models.LayersGroup`."""
+    class Meta:
+        """Meta class for LayersInfo."""
+
+        model = models.LayersInfo
         fields = '__all__'
