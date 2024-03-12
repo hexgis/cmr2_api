@@ -30,8 +30,6 @@ class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
     """
 
     queryset = models.LayersGroup.objects.all()
-    filterset_class = support_filters.LayersGroupFilter
-    filter_backends = (rest_framework.DjangoFilterBackend,)
 
     def get_serializer_class(self):
         """Get method to return one data set acoording to authenticated user.
@@ -52,3 +50,14 @@ class CategoryLayersGroupView(generics.ListAPIView, AuthModelMixIn):
 
     queryset = models.CategoryLayersGroup.objects.all().order_by('name')
     serializer_class = serializers.CategoryLayersGroupSerializer
+
+
+class LayersInfoView(generics.ListAPIView, AuthModelMixIn):
+    """Layers Info data view.
+
+    Filters:
+        * category (int): category group type
+    """
+
+    queryset = models.LayersInfo.objects.all()
+    serializer_class = serializers.LayersInfoSerializer
