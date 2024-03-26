@@ -169,12 +169,3 @@ class CategoryLayersGroupSerializer(ModelSerializer):
         """Meta class for CategoryLayersGroupSerializer."""
         model = models.CategoryLayersGroup
         fields = '__all__'
-
-
-# class LayersInfoSerializer(ModelSerializer):
-#     """LayersInfo to serialize `models.LayersGroup`."""
-#     class Meta:
-#         """Meta class for LayersInfo."""
-
-#         model = models.LayersInfo
-#         fields = '__all__'
