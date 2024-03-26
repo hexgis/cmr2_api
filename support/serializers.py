@@ -71,12 +71,16 @@ class TmsSerializer(ModelSerializer):
 
 
 class LayersInfoSerializer(ModelSerializer):
-    """LayersInfo to serialize `models.LayersGroup`."""
+    """LayersInfo to serialize `models.LayersInfo`."""
     class Meta:
         """Meta class for LayersInfo."""
 
         model = models.LayersInfo
-        fields = '__all__'
+        fields = (
+            'fonte',
+            'dt_atualizacao',
+            'database_layer_name',
+        )
 
 
 class LayerSerializer(ModelSerializer):
@@ -85,7 +89,7 @@ class LayerSerializer(ModelSerializer):
     tms = TmsSerializer()
     wms = WmsSerializer()
     layer_filters = LayerFilterSerializer(many=True)
-    layers_info = LayersInfoSerializer()
+    layer_info = LayersInfoSerializer()
 
     class Meta:
         """Meta class for LayerSerializer."""
@@ -99,7 +103,7 @@ class LayerSerializer(ModelSerializer):
             'name',
             'order',
             'layer_type',
-            'layers_info',
+            'layer_info',
             'active_on_init',
             'is_public',
         )

@@ -1,11 +1,4 @@
 -   model: support.layersinfo
-    pk: 1
-    fields:
-        fonte: FUNAI (http://geoserver.funai.gov.br/)
-        layer_id: 324
-        dt_atualizacao: 2023-11-07
-        database_layer_name: funai.loc_pcas_p
--   model: support.layersinfo
     pk: 2
     fields:
         fonte: FUNAI (http://geoserver.funai.gov.br)
