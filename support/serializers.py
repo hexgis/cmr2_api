@@ -70,12 +70,22 @@ class TmsSerializer(ModelSerializer):
         )
 
 
+class LayersInfoSerializer(ModelSerializer):
+    """LayersInfo to serialize `models.LayersGroup`."""
+    class Meta:
+        """Meta class for LayersInfo."""
+
+        model = models.LayersInfo
+        fields = '__all__'
+
+
 class LayerSerializer(ModelSerializer):
     """LayerSerializer to serialize `models.Layer`."""
 
     tms = TmsSerializer()
     wms = WmsSerializer()
     layer_filters = LayerFilterSerializer(many=True)
+    layers_info = LayersInfoSerializer()
 
     class Meta:
         """Meta class for LayerSerializer."""
@@ -89,6 +99,7 @@ class LayerSerializer(ModelSerializer):
             'name',
             'order',
             'layer_type',
+            'layers_info',
             'active_on_init',
             'is_public',
         )
@@ -156,10 +167,10 @@ class CategoryLayersGroupSerializer(ModelSerializer):
         fields = '__all__'
 
 
-class LayersInfoSerializer(ModelSerializer):
-    """LayersInfo to serialize `models.LayersGroup`."""
-    class Meta:
-        """Meta class for LayersInfo."""
+# class LayersInfoSerializer(ModelSerializer):
+#     """LayersInfo to serialize `models.LayersGroup`."""
+#     class Meta:
+#         """Meta class for LayersInfo."""
 
-        model = models.LayersInfo
-        fields = '__all__'
+#         model = models.LayersInfo
+#         fields = '__all__'

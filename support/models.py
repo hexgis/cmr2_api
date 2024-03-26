@@ -76,6 +76,45 @@ class CategoryLayersGroup(models.Model):
         return self.name
 
 
+class LayersInfo(models.Model):
+    """
+    Model for Layers Info Data
+        * Association:
+            * Inherits from :model:`models.Model`
+    """
+    fonte = models.CharField(
+        _('Fonte'),
+        max_length=255,
+        blank=True
+    )
+
+    layer_id = models.IntegerField(
+        _('Layer id'),
+        unique=True,
+        null=True,
+        blank=True
+    )
+
+    dt_atualizacao = models.DateField(
+        _('Atualização'),
+        null=True,
+        blank=True
+    )
+
+    database_layer_name = models.CharField(
+        _('Database Layer Name'),
+        max_length=255
+    )
+
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'Layer Info'
+        verbose_name_plural = 'Layers Info'
+
+    def __str__(self):
+        return self.name
+
+
 class LayersGroup(models.Model):
     """
     Model for categorization of Layers Data
@@ -138,9 +177,18 @@ class Layer(models.Model):
     )
 
     layers_group = models.ForeignKey(
-        'support.LayersGroup',
+        LayersGroup,
         on_delete=models.DO_NOTHING,
         related_name='layers',
+        null=True,
+        blank=True
+    )
+
+    layers_info = models.ForeignKey(
+        LayersInfo,
+        to_field='layer_id',
+        on_delete=models.DO_NOTHING,
+        related_name='info',
         null=True,
         blank=True
     )
@@ -337,42 +385,3 @@ class LayerFilter(models.Model):
 
     def __str__(self):
         return "{}: {}".format(self.label, self.filter_alias)
-
-
-class LayersInfo(models.Model):
-    """
-    Model for Layers Info Data
-        * Association:
-            * Inherits from :model:`models.Model`
-    """
-
-    fonte = models.CharField(
-        _('Fonte'),
-        max_length=255,
-        blank=True
-    )
-
-    layer_id = models.IntegerField(
-        _('Layer_id'),
-        unique=True,
-        blank=True
-    )
-
-    dt_atualizacao = models.DateField(
-        _('Atualização'),
-        null=True,
-        blank=True
-    )
-
-    database_layer_name = models.CharField(
-        _('Database Layer Name'),
-        max_length=255
-    )
-
-    class Meta:
-        app_label = 'support'
-        verbose_name = 'Layer Info'
-        verbose_name_plural = 'Layers Info'
-
-    def __str__(self):
-        return self.name
