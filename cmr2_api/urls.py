@@ -73,7 +73,7 @@ urlpatterns = [
         namespace='land-use'),
     ),
     path('documental/', include(
-        ('documental.urls','documental'),
+        ('documental.urls', 'documental'),
         namespace='documental'),
     ),
     path('catalog/', include(
@@ -83,5 +83,9 @@ urlpatterns = [
     path('monitoring/deter/', include(
         ('deter_monitoring.urls', 'deter-monitoring'),
         namespace='deter-monitoring'),
+    ),
+    path('user/', include(
+        ('user_profile.urls', 'user'),
+        namespace='user'),
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
