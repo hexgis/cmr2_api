@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'land_use',
     'documental',
     'deter_monitoring',
+    'user_profile',
 ]
 
 MIDDLEWARE = [
@@ -102,7 +103,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD'),
         'HOST': os.getenv('DB_HOST'),
         'PORT': os.getenv('DB_PORT', '5432'),
-        'TEST': {'NAME': 'test_default_db',},
+        'TEST': {'NAME': 'test_default_db', },
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -115,7 +116,8 @@ DATABASES = {
     },
 }
 
-DOCUMENTS_URL = os.getenv('DOCUMENTS_URL', 'https://cmr.funai.gov.br/api/media/')
+DOCUMENTS_URL = os.getenv(
+    'DOCUMENTS_URL', 'https://cmr.funai.gov.br/api/media/')
 
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.CatalogRouters.CatalogRouter',

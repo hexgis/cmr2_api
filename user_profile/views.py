@@ -38,7 +38,7 @@ class AuthModelMixIn:
 #     queryset = models.User.objects.all()
 #     serializer_class = serializers.UserSerializer
 
-class UserLoggedGetView(generics.GenericAPIView):
+class UserLoggedGetView(AuthModelMixIn, generics.GenericAPIView):
     """View to post User logs.
 
     Returns:
