@@ -53,3 +53,18 @@ class UserSerializer(serializers.ModelSerializer):
         except Exception as exc:
             print(f'An exception occured while getting sector: {exc}')
             return None
+
+
+class UserUploadedFileSerializer(serializers.ModelSerializer):
+    """Class to serialize `models.UserUploadedFile` model data."""
+
+    class Meta:
+        """Meta class for `UserUploadedFileSerializer`."""
+
+        model = models.UserUploadedFile
+        fields = (
+            'id',
+            'name',
+            'date_created',
+            'is_active',
+        )

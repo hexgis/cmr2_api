@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import Http404
 from django.contrib.gis.geos import GEOSGeometry, WKBWriter
+from user_profile import models
 
 from rest_framework_simplejwt import authentication as jwt_authentication
 from rest_framework import (
@@ -56,3 +57,30 @@ class UserLoggedGetView(AuthModelMixIn, generics.GenericAPIView):
 
         serializer = self.serializer_class(request.user)
         return response.Response(serializer.data)
+
+
+class UserUploadFileListView(
+    AuthModelMixIn,
+    generics.ListAPIView
+):
+    """View to retrieve `models.UserUploadedFile` model data.
+
+    Raises:
+        Unauthenticated: User is not authenticated
+
+    Returns:
+        dict: uploaded file data.
+    """
+
+    serializer_class = serializers.UserUploadedFileSerializer
+
+    def get_queryset(self):
+        """Returns queryset filtered by request user and is_active status.
+
+        Returns:
+            Queryset: queryset list
+        """
+
+        return models.UserUploadedFile.objects.filter(
+            user=self.request.user.id, is_active=True
+        )

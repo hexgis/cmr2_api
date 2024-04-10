@@ -92,3 +92,38 @@ class UserSettings(models.Model):
         verbose_name = 'UserSettings'
         verbose_name_plural = 'UserSettings'
         ordering = ('-user', )
+
+
+class UserUploadedFile(models.Model):
+    """Model to store user uploaded files.
+
+    * Association:
+        * Has one :model:`django.contrib.auth.User`
+    """
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='user',
+    )
+
+    name = models.CharField(max_length=255)
+
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    is_active = models.BooleanField(default=True)
+
+    def __str__(self):
+        """Model class string.
+
+        Returns:
+            str: short description of UserUploadedFile model.
+        """
+
+        return f'{self.user}: {self.name}'
+
+    class Meta:
+        app_label = 'user_profile'
+        verbose_name = 'User Uploaded File'
+        verbose_name_plural = 'User Uploaded Files'
+        ordering = ('-user', )
