@@ -68,3 +68,58 @@ class UserUploadedFileSerializer(serializers.ModelSerializer):
             'date_created',
             'is_active',
         )
+
+
+class UserUploadFileDeleteSerializer(serializers.ModelSerializer):
+    """Serializer class for setting user status to false."""
+
+    def update(self, instance, validated_data):
+        """Post "False" value to user uploaded file "is_active" field.
+
+        Args:
+            instance (dict): Instance of user upload file.
+            validated_data (dict): Unused necessary field for update method.
+
+        Returns:
+            dict: User uploaded file instance with "is_active" field set to
+                "False".
+        """
+
+        instance.is_active = False
+        instance.save()
+        return instance
+
+    class Meta:
+        """Meta class for `UserUploadFileDeleteSerializer`."""
+
+        model = models.UserUploadedFile
+        fields = (
+            'id',
+            'is_active',
+        )
+
+
+class UserUploadFileUpdateSerializer(serializers.ModelSerializer):
+    """Serializer class for user update."""
+
+    def update(self, instance, validated_data):
+        """Updates name value to user uploaded file.
+
+        Args:
+            instance (dict): Instance of user upload file.
+            validated_data (dict): Unused necessary field for update method.
+
+        Returns:
+            dict: User uploaded file instance with updated name field.
+        """
+
+        instance.name = validated_data.get('name', instance.name)
+        instance.save()
+        return instance
+
+    class Meta:
+        model = models.UserUploadedFile
+        fields = (
+            'id',
+            'name',
+        )

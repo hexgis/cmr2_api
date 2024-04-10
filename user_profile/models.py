@@ -127,3 +127,38 @@ class UserUploadedFile(models.Model):
         verbose_name = 'User Uploaded File'
         verbose_name_plural = 'User Uploaded Files'
         ordering = ('-user', )
+
+
+class UserUploadedFileGeometry(models.Model):
+    """Model to store user uploaded file geometries.
+
+    * Association:
+        * Has one :model:`user_profile.UserUploadedFile`
+    """
+
+    user_uploaded = models.ForeignKey(
+        UserUploadedFile,
+        on_delete=models.CASCADE,
+        related_name='user_uploaded_file',
+    )
+
+    geom = models.GeometryField(srid=4326)
+
+    properties = models.JSONField(
+        null=True,
+        blank=True
+    )
+
+    def __str__(self):
+        """Model class string.
+
+        Returns:
+            str: short description of UserUploadedFileGeometry model.
+        """
+        return f'{self.id}: {self.user_uploaded}'
+
+    class Meta:
+        app_label = 'user_profile'
+        verbose_name = 'User Uploaded File - Geometry'
+        verbose_name_plural = 'User Uploaded Files - Geometries'
+        ordering = ('user_uploaded', )

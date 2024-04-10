@@ -84,3 +84,126 @@ class UserUploadFileListView(
         return models.UserUploadedFile.objects.filter(
             user=self.request.user.id, is_active=True
         )
+
+
+class UserUploadFileCreateView(
+    AuthModelMixIn,
+    generics.CreateAPIView
+):
+    """View to create `models.UserUploadFileCreateView` data.
+
+    Raises:
+        Unauthenticated: User is not authenticated.
+
+    Returns:
+        dict: uploaded data.
+    """
+
+    serializer_class = serializers.UserUploadedFileSerializer  # Not in use
+
+    def create(self, request):
+        """Creates `UserUploadedFile` and its `UserUploadedFileGeometry`.
+
+        Returns:
+            dict: uploaded data with name, created_at, created and updated.
+        """
+        try:
+            user_upload, _ = models.UserUploadedFile.objects.get_or_create(
+                name=request.data.get('name'),
+                user=request.user,
+                is_active=True
+            )
+        except Exception:
+            raise Http404('Could not create file on database')
+
+        created_data = 0
+        data_exists = 0
+
+        if not 'geometry' in request.data or \
+           not 'features' in request.data['geometry']:
+            raise Http404('Could not create file on database')
+
+        for feature in request.data['geometry']['features']:
+            try:
+                geom = GEOSGeometry(str(feature['geometry']))
+
+                if geom.hasz:
+                    geom = GEOSGeometry(WKBWriter(dim=2).write_hex(geom))
+
+                _, created = models.UserUploadedFileGeometry.objects.get_or_create(
+                    user_uploaded=user_upload,
+                    geom=geom,
+                    properties=feature['properties']
+                )
+
+                if created:
+                    created_data = created_data + 1
+                else:
+                    data_exists = data_exists + 1
+            except Exception:
+                raise Http404('Could not create geometries on database')
+
+        data = {
+            'name': user_upload.name,
+            'created_at': user_upload.date_created,
+            'created': created_data,
+            'updated': data_exists
+        }
+
+        return response.Response(data, status=status.HTTP_201_CREATED)
+
+
+class UserUploadFileDelete(
+    AuthModelMixIn,
+    generics.UpdateAPIView
+):
+    """View to update `models.UserUploadedFile` is_active status.
+
+    Raises:
+        Unauthenticated: User is not authenticated
+
+    Returns:
+        dict: User has been set as inactive.
+    """
+
+    serializer_class = serializers.UserUploadFileDeleteSerializer
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        """Returns queryset filtered by request user.
+
+        Returns:
+            Queryset: queryset list
+        """
+
+        return models.UserUploadedFile.objects.filter(
+            user=self.request.user.id
+        )
+
+
+class UserUploadFileUpdate(
+    AuthModelMixIn,
+    generics.UpdateAPIView
+):
+    """View to update `models.UserUploadedFile` model name.
+
+    Raises:
+        Unauthenticated: User is not authenticated
+
+    Returns:
+        dict: updated file name.
+    """
+
+    serializer_class = serializers.UserUploadFileUpdateSerializer
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        """Returns queryset filtered by request user.
+
+        Returns:
+            Queryset: queryset list
+        """
+
+        return models.UserUploadedFile.objects.filter(
+            user=self.request.user.id
+        )
