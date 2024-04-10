@@ -207,3 +207,50 @@ class UserUploadFileUpdate(
         return models.UserUploadedFile.objects.filter(
             user=self.request.user.id
         )
+
+
+class UserUploadFileListGeometryView(
+    AuthModelMixIn,
+    generics.ListAPIView
+):
+    """View to retrieve `models.UserUploadedFileGeometry` model data.
+
+    Raises:
+        Unauthenticated: User is not authenticated
+
+    Returns:
+        dict: uploaded file data.
+    """
+
+    serializer_class = serializers.UserUploadedFileGeometryListSerializer
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        """Returns queryset filtered by request user.
+
+        Returns:
+            Queryset: queryset list
+        """
+
+        return models.UserUploadedFileGeometry.objects.filter(
+            user_uploaded__user=self.request.user,
+            user_uploaded=self.kwargs[self.lookup_field]
+        )
+
+
+class UserUploadFileGeometryDetailView(
+    AuthModelMixIn,
+    generics.RetrieveAPIView
+):
+    """View to retrieve `models.UserUploadedFileGeometry` model data.
+
+    Raises:
+        Unauthenticated: User is not authenticated
+
+    Returns:
+        dict: uploaded file data.
+    """
+
+    lookup_field = 'id'
+    queryset = models.UserUploadedFileGeometry.objects.all()
+    serializer_class = serializers.UserUploadedFileGeometryDetailSerializer

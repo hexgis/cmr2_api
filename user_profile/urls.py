@@ -19,4 +19,10 @@ urlpatterns = [
     path('upload-file/<int:id>/update/',
          views.UserUploadFileUpdate.as_view(),
          name='upload-file-update'),
+    path('upload-file/geo/<int:id>/',
+         views.UserUploadFileListGeometryView.as_view(),
+         name='upload-file-geometry'),
+    path('upload-file/geo/detail/<int:id>/',
+         views.UserUploadFileGeometryDetailView.as_view(),
+         name='upload-file-geometry-detail')
 ]

@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
-
 from rest_framework import serializers
-
+from rest_framework_gis import serializers as gis_serializers
 from user_profile import models
 
 
@@ -122,4 +121,44 @@ class UserUploadFileUpdateSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
+        )
+
+
+class UserUploadedFileGeometryListSerializer(
+    gis_serializers.GeoFeatureModelSerializer
+):
+    """Class to serialize `models.UserUploadedFileGeometry` geo model data."""
+
+    class Meta:
+        """Meta class for `UserUploadedFileGeometryListSerializer`."""
+
+        model = models.UserUploadedFileGeometry
+        geo_field = 'geom'
+        id_field = False
+        fields = ('id', )
+
+
+class UserUploadedFileGeometryDetailSerializer(
+    serializers.ModelSerializer
+):
+    """Class to serialize `models.UserUploadedFileGeometry` model data."""
+
+    def to_representation(self, instance: models.UserUploadedFileGeometry):
+        """Returns instance.properties model data.
+
+        Args:
+            instance (models.UserUploadedFileGeometry): model data.
+
+        Returns:
+            dict: properties
+        """
+
+        return instance.properties
+
+    class Meta:
+        """Meta class for `UserUploadedFileGeometryDetailSerializer`."""
+
+        model = models.UserUploadedFileGeometry
+        fields = (
+            'id',
         )
