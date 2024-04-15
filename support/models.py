@@ -375,3 +375,69 @@ class LayerFilter(models.Model):
 
     def __str__(self):
         return "{}: {}".format(self.label, self.filter_alias)
+
+
+class CoordenacaoRegional(models.Model):
+    co_cr = models.IntegerField(unique=True)
+    no_cr = models.CharField(max_length=100)
+    no_municipio = models.CharField(max_length=100)
+    sg_uf = models.CharField(max_length=2)
+    no_uf = models.CharField(max_length=50)
+
+    def __str__(self):
+        return str(self.no_cr)
+
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'Coordenacao Regional'
+        verbose_name = 'Coordenacoes Regionais'
+        ordering = ['no_cr']
+
+
+class TerraIndigena(models.Model):
+    co_funai = models.IntegerField()
+    no_ti = models.CharField(max_length=100)
+    sg_uf = models.CharField(max_length=20)
+    no_municipio = models.TextField()
+    nu_area_ha = models.DecimalField(max_digits=100, decimal_places=2)
+    st_amazonia_legal = models.BooleanField()
+    geom = models.MultiPolygonField()
+
+    co_cr = models.ForeignKey(
+        CoordenacaoRegional,
+        to_field='co_cr',
+        related_name='terras_indigenas',
+        on_delete=models.DO_NOTHING,
+        db_column='co_cr',
+        db_constraint=False)
+
+    no_grupo_etnico = models.CharField(_("Grupo Étnico"), max_length=100)
+    ds_fase_ti = models.CharField(_("Fase TI"), max_length=100)
+    ds_modalidade = models.CharField(_("Modalidade TI"), max_length=100)
+    ds_reestudo_ti = models.CharField(_("Reestudo TI"), max_length=80)
+    dt_cadastro = models.DateTimeField()
+    st_faixa_fronteira = models.CharField(max_length=3)
+    dt_em_estudo = models.DateTimeField()
+    ds_portaria_em_estudo = models.TextField()
+    dt_delimitada = models.DateTimeField()
+    ds_despacho_delimitada = models.TextField()
+    dt_declarada = models.DateTimeField()
+    ds_portaria_declarada = models.TextField()
+    dt_homologada = models.DateTimeField()
+    ds_decreto_homologada = models.TextField()
+    dt_regularizada = models.DateTimeField()
+    ds_matricula_regularizada = models.TextField()
+    ds_doc_resumo_em_estudo = models.TextField()
+    ds_doc_resumo_delimitada = models.TextField()
+    ds_doc_resumo_declarada = models.TextField()
+    ds_doc_resumo_homologada = models.TextField()
+    ds_doc_resumo_regularizada = models.TextField()
+
+    def __str__(self):
+        return str(self.no_ti)
+
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'Terra Indigena'
+        verbose_name_plural = 'Terras Indigenas'
+        ordering = ['no_ti']
