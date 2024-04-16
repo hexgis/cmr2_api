@@ -14,7 +14,6 @@ from catalog import (
     pagination,
     filters as catalog_filters
 )
-# temp
 
 
 class AuthModelMixIn:
