@@ -341,6 +341,7 @@ class LayerFilter(models.Model):
             * Has many :model:`support.Layer`
     """
 
+# test
     default = models.CharField(
         _('Default value for filters'),
         max_length=40,
