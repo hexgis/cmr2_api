@@ -75,9 +75,10 @@ class BuscaGeoTIListView(ListAPIView):
         param = self.request.GET.get('param', None)
         queryset = models.TerraIndigena.objects.all()
 
-        if param:
-            queryset = queryset.filter(Q(no_ti__icontains=param) |
-                                       Q(no_municipio__icontains=param) |
-                                       Q(co_cr__no_cr__icontains=param))
+        queryset = queryset.filter(
+            Q(no_ti__icontains=param) |
+            Q(no_municipio__icontains=param) |
+            Q(co_cr__no_cr__icontains=param)
+        )
 
         return queryset

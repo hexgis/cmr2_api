@@ -182,3 +182,4 @@ class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
         model = models.TerraIndigena
         geo_field = 'geom'
         id_field = False
+        fields = '__all__'

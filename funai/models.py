@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
+from datetime import datetime
 
 
 class CoordenacaoRegional(models.Model):
@@ -8,7 +9,6 @@ class CoordenacaoRegional(models.Model):
     co_cr = models.BigIntegerField(
         _('Regional Coordenation code'),
         unique=True,
-        primary_key=True,
         default=1
     )
 
@@ -19,71 +19,77 @@ class CoordenacaoRegional(models.Model):
         null=True
     )
 
-    no_abreviado = models.CharField(
-        _('Regional Coordenation acronym'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    sg_cr = models.CharField(
-        _('Regional Coordenation flag'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    st_situacao = models.CharField(
-        _('Situation'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
     ds_email = models.CharField(
         _('Email'),
-        max_length=255,
+        max_length=150,
         blank=True,
         null=True
     )
 
-    no_regiao = models.CharField(
-        _('Region name'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    no_municipio = models.CharField(
-        _('City name'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    no_uf = models.CharField(
-        _('State'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    sg_uf = models.CharField(
-        _('State acronym'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
-    ds_telefone = models.CharField(
+    ds_telefone = models.TextField(
         _('Contact number'),
-        max_length=512,
         blank=True,
         null=True
     )
 
     dt_cadastro = models.DateTimeField(
         _('Register date'),
+        default=datetime.now,
+        blank=True,
+        null=True
+    )
+
+    geom = models.PointField(srid=4674)
+
+    no_abreviado = models.CharField(
+        _('Regional Coordenation acronym'),
+        max_length=50,
+        blank=True,
+        null=True
+    )
+
+    no_cr = models.CharField(
+        max_length=100
+    )
+
+    no_municipio = models.CharField(
+        _('City name'),
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    no_regiao = models.CharField(
+        _('Region name'),
+        max_length=12,
+        blank=True,
+        null=True
+    )
+
+    no_uf = models.CharField(
+        _('State'),
+        max_length=50,
+        blank=True,
+        null=True
+    )
+
+    sg_cr = models.CharField(
+        _('Regional Coordenation flag'),
+        max_length=20,
+        blank=True,
+        null=True
+    )
+
+    sg_uf = models.CharField(
+        _('State acronym'),
+        max_length=2,
+        blank=True,
+        null=True
+    )
+
+    st_situacao = models.CharField(
+        _('Situation'),
+        max_length=10,
         blank=True,
         null=True
     )
@@ -91,8 +97,9 @@ class CoordenacaoRegional(models.Model):
     class Meta:
         """Metaclass to `funai.CoordenacaoRegional`."""
         app_label = 'funai'
-        verbose_name = 'CoordenacaoRegional'
-        verbose_name_plural = 'CoordenacoesRegionais'
+        verbose_name = 'Regional Coordinations'
+        verbose_name_plural = 'Regional Coordinations'
+        ordering = ['no_cr']
 
     def __str__(self) -> str:
         """Returns string for class based name.
