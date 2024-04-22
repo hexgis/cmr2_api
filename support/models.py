@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
+from datetime import datetime
 
 
 class Geoserver(models.Model):
@@ -378,26 +379,109 @@ class LayerFilter(models.Model):
 
 
 class CoordenacaoRegional(models.Model):
-    co_cr = models.IntegerField(unique=True)
-    no_cr = models.CharField(max_length=100)
-    no_municipio = models.CharField(max_length=100)
-    sg_uf = models.CharField(max_length=2)
-    no_uf = models.CharField(max_length=50)
+
+    co_cr = models.BigIntegerField(
+        _('Regional Coordenation code'),
+        unique=True,
+        default=1
+    )
+
+    ds_email = models.CharField(
+        _('Email'),
+        max_length=150,
+        blank=True,
+        null=True
+    )
+
+    ds_telefone = models.TextField(
+        _('Contact number'),
+        blank=True,
+        null=True
+    )
+
+    dt_cadastro = models.DateTimeField(
+        _('Register date'),
+        default=datetime.now,
+        blank=True,
+        null=True
+    )
+
+    geom = models.PointField(srid=4674)
+
+    no_abreviado = models.CharField(
+        _('Regional Coordenation acronym'),
+        max_length=50,
+        blank=True,
+        null=True
+    )
+
+    no_cr = models.CharField(
+        max_length=100
+    )
+
+    no_municipio = models.CharField(
+        _('City name'),
+        max_length=100,
+        blank=True,
+        null=True
+    )
+
+    no_regiao = models.CharField(
+        _('Region name'),
+        max_length=12,
+        blank=True,
+        null=True
+    )
+
+    no_uf = models.CharField(
+        _('State'),
+        max_length=50,
+        blank=True,
+        null=True
+    )
+
+    sg_cr = models.CharField(
+        _('Regional Coordenation flag'),
+        max_length=20,
+        blank=True,
+        null=True
+    )
+
+    sg_uf = models.CharField(
+        _('State acronym'),
+        max_length=2,
+        blank=True,
+        null=True
+    )
+
+    st_situacao = models.CharField(
+        _('Situation'),
+        max_length=10,
+        blank=True,
+        null=True
+    )
 
     def __str__(self):
         return str(self.no_cr)
 
     class Meta:
+        """Metaclass to `funai.CoordenacaoRegional`."""
         app_label = 'support'
-        verbose_name = 'Coordenacao Regional'
-        verbose_name = 'Coordenacoes Regionais'
+        verbose_name = 'Regional Coordinations'
+        verbose_name_plural = 'Regional Coordinations'
         ordering = ['no_cr']
 
 
 class TerraIndigena(models.Model):
     geom = models.MultiPolygonField(srid=4674)
-    no_ti = models.CharField(max_length=100)
-    co_funai = models.IntegerField()
+    no_ti = models.CharField(
+        _('Name of Indigenous Lands'),
+        max_length=255,
+    )
+    co_funai = models.IntegerField(
+        _('Funai code'),
+        unique=True,
+    )
     no_grupo_etnico = models.CharField(_("Grupo Étnico"), max_length=255)
     ds_fase_ti = models.CharField(_("Fase TI"), max_length=100)
     ds_modalidade = models.CharField(_("Modalidade TI"), max_length=100)
@@ -437,7 +521,8 @@ class TerraIndigena(models.Model):
         return str(self.no_ti)
 
     class Meta:
+        """Metaclass to `funai.LimiteTerraIndigena`."""
         app_label = 'support'
-        verbose_name = 'Terra Indigena'
-        verbose_name_plural = 'Terras Indigenas'
+        verbose_name = _('Indigenous Lands')
+        verbose_name_plural = _('Indigenous Lands')
         ordering = ['no_ti']
