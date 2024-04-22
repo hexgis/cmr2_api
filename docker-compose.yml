@@ -37,6 +37,8 @@ services:
       python manage.py loaddata documental_docs_action.yaml &&
       python manage.py loaddata documental_users_who_registered.yaml &&
       python manage.py loaddata documental_docs.yaml &&
+      python manage.py loaddata support_cr.yaml &&
+      python manage.py loaddata support_ti.yaml &&
       python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/

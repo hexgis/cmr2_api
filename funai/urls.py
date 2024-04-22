@@ -14,4 +14,9 @@ urlpatterns = [
         views.LimiteTerraIndigenaView.as_view(),
         name='terras-indigenas'
     ),
+    path(
+        'busca-geo-ti/',
+        views.BuscaGeoTIListView.as_view(),
+        name='busca-geo-ti-list'
+    )
 ]
