@@ -30,9 +30,7 @@ class DeterTITests(APITestCase):
     def test_object_output_name_is_image(self):
         """Test the model output is named Catalog Image"""
         deter_ti_model_output = models.DeterTI.objects.first()
-        expected_object_name = '%s - %s - %s' % (deter_ti_model_output.path_row, deter_ti_model_output.view_date, deter_ti_model_output.classname)
+        expected_object_name = '%s - %s - %s' % (deter_ti_model_output.path_row,
+                                                 deter_ti_model_output.view_date, deter_ti_model_output.classname)
 
         self.assertEqual(expected_object_name, str(deter_ti_model_output))
-
-
-#TODO: Create test_views tests.
