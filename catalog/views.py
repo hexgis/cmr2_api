@@ -15,7 +15,7 @@ from catalog import (
     filters as catalog_filters
 )
 
-
+# TODO apagar depois
 class AuthModelMixIn:
     """Default Authentication for catalog views."""
     # permission_classes = (permissions.IsAuthenticated,)
