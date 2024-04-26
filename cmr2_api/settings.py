@@ -71,8 +71,6 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = True
-
 ROOT_URLCONF = 'cmr2_api.urls'
 
 TEMPLATES = [
@@ -185,7 +183,7 @@ MEDIA_URL = '/media/'
 # Django Cors Headers
 # https://github.com/adamchainz/django-cors-headers
 
-CORS_ALLOW_ALL_ORIGINS = True
+CORS_ORIGIN_ALLOW_ALL = True
 
 # djangorestframework authentication
 # https://www.django-rest-framework.org/api-guide/authentication/
