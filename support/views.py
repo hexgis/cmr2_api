@@ -32,6 +32,8 @@ class LayersGroupView(ListAPIView, AuthModelMixIn):
     """
 
     queryset = models.LayersGroup.objects.all()
+    filterset_class = support_filters.LayersGroupFilter
+    filter_backends = (rest_framework.DjangoFilterBackend,)
 
     def get_serializer_class(self):
         """Get method to return one data set acoording to authenticated user.
