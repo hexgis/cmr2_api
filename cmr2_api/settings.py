@@ -35,7 +35,6 @@ DEBUG = True
 
 INSTALLED_APPS = [
     'django.contrib.admin',
-    'corsheaders',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -59,23 +58,18 @@ INSTALLED_APPS = [
     'documental',
     'deter_monitoring',
     'user_profile',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-]
-
-CORS_ALLOWED_ORIGINS = [
-    "https://homolog-cmr-app-oq5garjiiq-uc.a.run.app",
 ]
 
 ROOT_URLCONF = 'cmr2_api.urls'
