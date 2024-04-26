@@ -72,9 +72,7 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ALLOWED_ORIGINS = [
-    "https://homolog-cmr-app-oq5garjiiq-uc.a.run.app",
-]
+CORS_ALLOWED_ORIGINS = True
 
 ROOT_URLCONF = 'cmr2_api.urls'
 
