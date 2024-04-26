@@ -4,4 +4,3 @@ bumpversion==0.6.0
 django-cors-headers==3.3.0
 ipython==7.16
 model-mommy==2.0.0
-django-cors-headers==4.3.1

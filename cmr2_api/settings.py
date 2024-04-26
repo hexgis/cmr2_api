@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'django_filters',
+    'corsheaders',
     'django.contrib.gis',
     'support',
     'auth_jwt',
@@ -69,6 +70,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ALLOWED_ORIGINS = [
+    "https://homolog-cmr-app-oq5garjiiq-uc.a.run.app",
 ]
 
 ROOT_URLCONF = 'cmr2_api.urls'
