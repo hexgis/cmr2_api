@@ -186,7 +186,7 @@ MEDIA_URL = '/media/'
 # Django Cors Headers
 # https://github.com/adamchainz/django-cors-headers
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLOW_ALL_ORIGINS = True
 
 # djangorestframework authentication
 # https://www.django-rest-framework.org/api-guide/authentication/
