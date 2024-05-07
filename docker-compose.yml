@@ -5,9 +5,6 @@ services:
     image: circleci/postgres:10-postgis
     ports:
       - "5432:5432"
-    restart: always
-    volumes:
-      - ./pg_hba.conf:/var/lib/postgresql/data/pg_hba.conf
     environment:
       POSTGRES_USER: defaultuser
       POSTGRES_DB: testdb
