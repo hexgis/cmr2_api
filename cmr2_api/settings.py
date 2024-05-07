@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'django_filters',
-    'corsheaders',
     'django.contrib.gis',
     'support',
     'auth_jwt',
@@ -58,17 +57,18 @@ INSTALLED_APPS = [
     'documental',
     'deter_monitoring',
     'user_profile',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'cmr2_api.urls'
@@ -182,8 +182,6 @@ MEDIA_URL = '/media/'
 
 # Django Cors Headers
 # https://github.com/adamchainz/django-cors-headers
-
-CORS_ORIGIN_ALLOW_ALL = True
 
 # djangorestframework authentication
 # https://www.django-rest-framework.org/api-guide/authentication/

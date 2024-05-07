@@ -3,7 +3,9 @@ from rest_framework import (
     permissions,
     authentication
 )
+from rest_framework.generics import ListAPIView, RetrieveAPIView
 from django_filters import rest_framework
+from django.db.models import Q
 
 from support import (
     models,
@@ -22,7 +24,7 @@ class AuthModelMixIn:
     permission_classes = (permissions.IsAuthenticated, )
 
 
-class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
+class LayersGroupView(ListAPIView, AuthModelMixIn):
     """Layers Group data view.
 
     Filters:
@@ -30,6 +32,8 @@ class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
     """
 
     queryset = models.LayersGroup.objects.all()
+    filterset_class = support_filters.LayersGroupFilter
+    filter_backends = (rest_framework.DjangoFilterBackend,)
 
     def get_serializer_class(self):
         """Get method to return one data set acoording to authenticated user.
@@ -45,14 +49,14 @@ class LayersGroupView(generics.ListAPIView, AuthModelMixIn):
             return serializers.LayersGroupPublicSerializer
 
 
-class CategoryLayersGroupView(generics.ListAPIView, AuthModelMixIn):
+class CategoryLayersGroupView(ListAPIView, AuthModelMixIn):
     """Category Layers Group data view."""
 
     queryset = models.CategoryLayersGroup.objects.all().order_by('name')
     serializer_class = serializers.CategoryLayersGroupSerializer
 
 
-class LayersInfoView(generics.ListAPIView, AuthModelMixIn):
+class LayersInfoView(ListAPIView, AuthModelMixIn):
     """Layers Info data view.
 
     Filters:
@@ -61,3 +65,22 @@ class LayersInfoView(generics.ListAPIView, AuthModelMixIn):
 
     queryset = models.LayersInfo.objects.all()
     serializer_class = serializers.LayersInfoSerializer
+
+
+class BuscaGeoTIListView(ListAPIView):
+    """
+    View de apresentação de dados de Terra Indígena em formato geojson para a aplicação
+    """
+    serializer_class = serializers.GeoTerraIndigenaSerializer
+
+    def get_queryset(self):
+        param = self.request.GET.get('param', None)
+        queryset = models.TerraIndigena.objects.all()
+
+        queryset = queryset.filter(
+            Q(no_ti__icontains=param) |
+            Q(no_municipio__icontains=param) |
+            Q(co_cr__no_cr__icontains=param)
+        )
+
+        return queryset

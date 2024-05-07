@@ -1,0 +1,16 @@
+- model: support.coordenacaoregional
+  pk: 1
+  fields:
+    co_cr: 30202001934
+    ds_email: "cr.cacoal@funai.gov.br"
+    ds_telefone: "(69)3441-6127/1930/2019/1618 969)8412-4556"
+    dt_cadastro: "2023-09-25T22:30:46.000Z"
+    geom: POINT (-61.448 -11.438)
+    no_abreviado: "C.R. DE CACOAL"
+    no_cr: "COORDENACAO REGIONAL DE CACOAL"
+    no_municipio: "Cacoal"
+    no_regiao: "Norte"
+    sg_uf: "RO"
+    no_uf: "Rondônia"
+    sg_cr: "CR-CAC"
+    st_situacao: "Ativo"

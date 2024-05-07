@@ -1,4 +1,6 @@
 from rest_framework.serializers import ModelSerializer
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
+from rest_framework import serializers
 
 from funai import models
 
@@ -43,3 +45,16 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
         ]:
             data['ds_cr'] = data['ds_cr'].removeprefix(cr)
         return data
+
+
+class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
+    ds_cr = serializers.SerializerMethodField()
+
+    def get_ds_cr(self, obj):
+        return obj.co_cr.ds_cr
+
+    class Meta:
+        model = models.LimiteTerraIndigena
+        geo_field = 'geom'
+        id_field = False
+        fields = '__all__'

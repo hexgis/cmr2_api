@@ -117,6 +117,12 @@ class LimiteTerraIndigena(models.Model):
         null=True
     )
 
+    geom = models.MultiPolygonField(
+        srid=4674,
+        blank=True,
+        null=True
+    )
+
     no_ti = models.CharField(
         _('Name of Indigenous Lands'),
         max_length=255,
