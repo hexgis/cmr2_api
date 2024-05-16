@@ -21,8 +21,13 @@ urlpatterns = [
         name='layer-info'
     ),
     path(
-        'busca-geo-ti/',
-        views.BuscaGeoTIListView.as_view(),
-        name='busca-geo-ti-list'
+        'ti-detail/<int:pk>/',
+        views.TiDetailView.as_view(),
+        name='ti-detail'
+    ),
+    path(
+        'ti-by-name/',
+        views.TiByNameView.as_view(),
+        name='ti-by-name'
     )
 ]
