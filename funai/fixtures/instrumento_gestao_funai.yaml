@@ -1,0 +1,18 @@
+- model: funai.InstrumentoGestaoFunai
+  pk: 557
+  fields:
+    no_ti: "Parque do Xingu"
+    no_regiao: ""
+    sg_uf: "PA / MT"
+    no_povo: "Kawaiweté, Kayapó, Kisêdjê, Waurá, Naruvôte, Paraná, Ikepeng, Tapayuna, Yudja, Metuktire, Trumai, Kamaiurá, Mapitu, Yawalapiti, Kikuro, Kalapalo,  Aweti, Kalapalo, Kamaiurá, Kuikuro, Matipu, Mehinako, Nahukuá, Naruvotu, Trumai,  Wauja e Yawalapiti"
+    no_bioma: "Amazônia"
+    ds_parceiros: "ISA"
+    cr_funai: "Xingu"
+    no_ig: "PGTA"
+    ds_status: "Elaborado"
+    nu_ano_elaboracao: 2016
+    ds_disp_meio_local: "Digital"
+    ds_tll_publi: ""
+    ds_obs: ""
+    co_funai: 33801
+    dt_cadastro: 2021-12-12 18:30:49
