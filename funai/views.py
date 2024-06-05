@@ -4,6 +4,7 @@ from django.db.models import Q, F, Func, Value
 
 from django.db.models.functions import Lower
 from rest_framework import generics
+from rest_framework.exceptions import NotFound, ValidationError
 
 
 from funai import (
@@ -61,8 +62,7 @@ class BuscaGeoTIListView(generics.ListAPIView):
     serializer_class = serializers.GeoTerraIndigenaSerializer
     queryset = models.LimiteTerraIndigena.objects.all()
 
-
-class TiByName(generics.ListAPIView):
+class TiByNameView(generics.ListAPIView):
     """
         View de apresentação de dados de Terra Indígena.
     """
@@ -90,4 +90,34 @@ class TiByName(generics.ListAPIView):
         queryset = self.get_queryset().values('id', 'no_ti', 'no_municipio', 'ds_cr')
         data = list(queryset)
         return response.Response(data)
-    
+
+class BuscaInstrumentoGestaoView(generics.ListAPIView):
+    """
+        View de apresentação dos dados de isntrumento de gestão com base no co_funai fornecido 
+    """
+    serializer_class = serializers.GeoTerraIndigenaSerializer
+
+    def get_queryset(self):
+        queryset = models.LimiteTerraIndigena.objects.all()
+        co_funai = self.request.query_params.get('co_funai', None)
+        if co_funai is None:
+            raise ValidationError("O código funai é obrigatório.")
+        
+        queryset = models.LimiteTerraIndigena.objects.filter(co_funai=co_funai)
+        return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        if not queryset.exists():
+            raise NotFound("Nenhum registro encontrado para o código fornecido.")
+        
+        instrumentos_gestao = []
+        for obj in queryset:
+            if obj.possui_ig:
+                instrumentos = models.InstrumentoGestaoFunai.objects.filter(co_funai=obj.co_funai)
+                serializer = serializers.InstrumentoGestaoSerializer(instrumentos, many=True)
+                instrumentos_gestao.append(serializer.data)
+            else:
+                instrumentos_gestao.append(None)
+        
+        return response.Response(instrumentos_gestao)

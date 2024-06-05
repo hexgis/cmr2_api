@@ -21,7 +21,12 @@ urlpatterns = [
     ),
     path(
         'ti-by-name/',
-        views.TiByName.as_view(),
+        views.TiByNameView.as_view(),
         name='busca-ti-por-nome'
+    ),
+    path(
+        'instrumento-gestao/',
+        views.BuscaInstrumentoGestaoView.as_view(),
+        name='busca-instrumento-gestao'
     )
 ]
