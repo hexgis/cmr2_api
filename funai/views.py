@@ -57,14 +57,27 @@ class LimiteTerraIndigenaView(generics.ListAPIView):
 
 class BuscaGeoTIListView(generics.ListAPIView):
     """
-    View de apresentação de dados de Terra Indígena em formato geojson para a aplicação
+        View de apresentação de dados de Terra Indígena em formato geojson para a aplicação
+            Parameters:
+                id (int): code for Indigenous Lands geodata.
     """
     serializer_class = serializers.GeoTerraIndigenaSerializer
-    queryset = models.LimiteTerraIndigena.objects.all()
+
+    def get_queryset(self):
+        queryset = models.LimiteTerraIndigena.objects.all()
+        id = self.request.query_params.get('id', None)
+        if id is None:
+            raise ValidationError("O id é obrigatório.")
+        
+        queryset = models.LimiteTerraIndigena.objects.filter(id=id)
+        return queryset
+
 
 class TiByNameView(generics.ListAPIView):
     """
         View de apresentação de dados de Terra Indígena.
+            Parameters:
+                no_ti (string): name of Indigenous Lands.
     """
 
     serializer_class = serializers.GeoTerraIndigenaSerializer
@@ -93,7 +106,9 @@ class TiByNameView(generics.ListAPIView):
 
 class BuscaInstrumentoGestaoView(generics.ListAPIView):
     """
-        View de apresentação dos dados de isntrumento de gestão com base no co_funai fornecido 
+        View de apresentação dos dados de isntrumento de gestão com base no co_funai fornecido.
+            Parameters:
+                co_funai (int): code for search management instrument by IT if it's true.
     """
     serializer_class = serializers.GeoTerraIndigenaSerializer
 

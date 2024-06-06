@@ -170,35 +170,3 @@ class CategoryLayersGroupSerializer(ModelSerializer):
         """Meta class for CategoryLayersGroupSerializer."""
         model = models.CategoryLayersGroup
         fields = '__all__'
-
-
-class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
-    ds_cr = serializers.SerializerMethodField()
-
-    def get_ds_cr(self, obj):
-        return obj.co_cr.no_cr
-
-    class Meta:
-        model = models.TerraIndigena
-        geo_field = 'geom'
-        id_field = False
-        fields = '__all__'
-
-
-class TiByNameSerializer(ModelSerializer):
-    ds_cr = serializers.SerializerMethodField()
-
-    def get_ds_cr(self, obj):
-        return obj.co_cr.no_cr
-
-    class Meta:
-        model = models.TerraIndigena
-        geo_field = 'geom'
-        id_field = False
-        fields = [
-            'id',
-            'no_ti',
-            'ds_cr',
-            'no_municipio',
-            'sg_uf',
-        ]
