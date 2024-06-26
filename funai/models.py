@@ -110,87 +110,194 @@ class LimiteTerraIndigena(models.Model):
         * Has one: `funai.CoordenacaoRegional`
     """
 
-    co_funai = models.IntegerField(
-        _('Funai code'),
-        unique=True,
-        blank=True,
-        null=True
-    )
-
     geom = models.MultiPolygonField(
         srid=4674,
         blank=True,
         null=True
-    )
+        )
 
     no_ti = models.CharField(
         _('Name of Indigenous Lands'),
         max_length=255,
-        blank=True,
-        null=True
     )
-
-    ds_fase_ti = models.CharField(
-        _('Description for TI stage'),
-        max_length=255,
-        blank=True,
-        null=True
+    co_funai = models.IntegerField(
+        _('Funai code'),
+        unique=True,
     )
-
-    ds_modalidade = models.CharField(
-        _('Modality'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
+    no_grupo_etnico = models.CharField(_("Grupo Étnico"),
+                                       max_length=255,
+                                       blank=True,
+                                       null=True
+                                       )
+    ds_fase_ti = models.CharField(_("Fase TI"), max_length=100,
+                                  blank=True,
+                                  null=True)
+    ds_modalidade = models.CharField(_("Modalidade TI"), max_length=100,
+                                     blank=True,
+                                     null=True)
+    ds_reestudo_ti = models.CharField(_("Reestudo TI"), max_length=80,
+                                      blank=True,
+                                      null=True)
+    ds_cr = models.CharField(max_length=100,         blank=True,
+                             null=True)
     co_cr = models.ForeignKey(
-        'funai.CoordenacaoRegional',
+        CoordenacaoRegional,
+        to_field='co_cr',
+        related_name='terras_indigenas',
         on_delete=models.DO_NOTHING,
-        related_name='cr',
-        null=True
+        db_column='co_cr',
+        db_constraint=False
     )
+    no_municipio = models.TextField(blank=True,
+                                    null=True)
+    sg_uf = models.CharField(max_length=20,
+                             blank=True,
+                             null=True)
+    st_faixa_fronteira = models.CharField(max_length=3,         blank=True,
+                                          null=True)
+    dt_em_estudo = models.DateField(blank=True,
+                                    null=True)
+    ds_portaria_em_estudo = models.TextField(blank=True,
+                                             null=True)
+    dt_delimitada = models.DateField(blank=True,
+                                     null=True)
+    ds_despacho_delimitada = models.TextField(blank=True,
+                                              null=True)
+    dt_declarada = models.DateField(blank=True,
+                                    null=True)
+    ds_portaria_declarada = models.TextField(blank=True,
+                                             null=True)
+    dt_homologada = models.DateField(blank=True,
+                                     null=True)
+    ds_decreto_homologada = models.TextField(blank=True,
+                                             null=True)
+    dt_regularizada = models.DateField(blank=True,
+                                       null=True)
+    ds_matricula_regularizada = models.TextField(blank=True,
+                                                 null=True)
+    ds_doc_resumo_em_estudo = models.TextField(blank=True,
+                                               null=True)
+    ds_doc_resumo_delimitada = models.TextField(blank=True,
+                                                null=True)
+    ds_doc_resumo_declarada = models.TextField(blank=True,
+                                               null=True)
+    ds_doc_resumo_homologada = models.TextField(blank=True,
+                                                null=True)
+    ds_doc_resumo_regularizada = models.TextField(blank=True,
+                                                  null=True)
 
-    ds_cr = models.CharField(
-        _('Description for Regional Coordination'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
+    st_amazonia_legal = models.BooleanField(blank=True,
+                                            null=True)
+    nu_area_ha = models.DecimalField(max_digits=100, decimal_places=2,
+                                     blank=True,
+                                     null=True)
+    dt_cadastro = models.DateTimeField(blank=True,
+                                       null=True)
 
-    sg_uf = models.CharField(
-        _('State aconymn'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
+    possui_ig = models.BooleanField(
+        default= False
+    )   
 
-    nu_area_ha = models.DecimalField(
-        _('Area ha'),
-        max_digits=14,
-        decimal_places=3,
-        blank=True,
-        null=True
-    )
-
-    nu_area_km = models.DecimalField(
-        _('Area km'),
-        max_digits=14,
-        decimal_places=3,
-        blank=True,
-        null=True
-    )
-
-    st_faixa_fronteira = models.CharField(
-        _('Border strip'),
-        max_length=255,
-        blank=True,
-        null=True
-    )
-
+    def __str__(self):
+        return str(self.no_ti)
+    
     class Meta:
         """Metaclass to `funai.LimiteTerraIndigena`."""
         app_label = 'funai'
         verbose_name = _('Indigenous Lands')
         verbose_name_plural = _('Indigenous Lands')
         ordering = ('no_ti', )
+
+class InstrumentoGestaoFunai(models.Model):
+    """Instrumental Indigenous Lands model data.
+
+    * Association:
+        * Has one: `funai.LimiteTerraIndigena`
+    """
+
+    co_funai = models.IntegerField(
+        blank=False,
+        null=False
+    )
+    no_ti = models.CharField(
+        _('Name of Indigenous Lands'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    no_regiao = models.CharField(
+        _('Region Name'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    sg_uf = models.CharField(
+        _('State aconymn'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    no_povo = models.CharField(
+        _('Hamlet Names'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    no_bioma = models.CharField(
+        _('Biom Name'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_parceiros = models.CharField(
+        _('Partners'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    cr_funai = models.CharField(
+        _('Name Funai'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    no_ig = models.CharField(
+        _('Instrumental Name'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_status = models.CharField(
+        _('status'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    nu_ano_elaboracao = models.IntegerField(
+        _('Elaborated in'),
+        blank=True,
+        null=True
+    )
+    ds_disp_meio_local = models.CharField(
+        _('Privided by'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_tll_publi = models.CharField(
+        _(''),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_obs = models.CharField(
+        _(''),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    dt_cadastro = models.DateField(
+        _('Register Date'),
+        blank=True,
+        null=True
+    )

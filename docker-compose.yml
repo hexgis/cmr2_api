@@ -9,6 +9,8 @@ services:
       POSTGRES_USER: defaultuser
       POSTGRES_DB: testdb
       POSTGRES_PASSWORD: testpassword
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   db_for_read:
     image: circleci/postgres:10-postgis
@@ -16,6 +18,8 @@ services:
       POSTGRES_USER: user
       POSTGRES_DB: database
       POSTGRES_PASSWORD: asdfsa
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   dev:
     build:
@@ -26,6 +30,7 @@ services:
       python manage.py migrate &&
       python manage.py loaddata coordenacao_regional.yaml &&
       python manage.py loaddata terras_indigenas.yaml &&
+      python manage.py loaddata instrumento_gestao_funai.yaml &&
       python manage.py loaddata user.yaml &&
       python manage.py loaddata support.yaml &&
       python manage.py loaddata support_layerfilter.yaml &&
@@ -37,8 +42,6 @@ services:
       python manage.py loaddata documental_docs_action.yaml &&
       python manage.py loaddata documental_users_who_registered.yaml &&
       python manage.py loaddata documental_docs.yaml &&
-      python manage.py loaddata support_cr.yaml &&
-      python manage.py loaddata support_ti.yaml &&
       python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/

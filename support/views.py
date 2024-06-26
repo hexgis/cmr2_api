@@ -65,30 +65,3 @@ class LayersInfoView(ListAPIView, AuthModelMixIn):
 
     queryset = models.LayersInfo.objects.all()
     serializer_class = serializers.LayersInfoSerializer
-
-
-class TiDetailView(ListAPIView):
-    """
-    View of Indigenous Land data presentation in geojson format for the application
-    """
-    serializer_class = serializers.GeoTerraIndigenaSerializer
-    queryset = models.TerraIndigena.objects.all()
-
-
-class TiByNameView(ListAPIView):
-    """
-    Presentation view for choosing the desired Indigenous Land
-    """
-    serializer_class = serializers.TiByNameSerializer
-
-    def get_queryset(self):
-        param = self.request.GET.get('param', None)
-        queryset = models.TerraIndigena.objects.all()
-
-        queryset = queryset.filter(
-            Q(no_ti__icontains=param) |
-            Q(no_municipio__icontains=param) |
-            Q(co_cr__no_cr__icontains=param)
-        )
-
-        return queryset

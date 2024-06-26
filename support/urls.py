@@ -19,15 +19,5 @@ urlpatterns = [
         'layers-info/',
         views.LayersInfoView.as_view(),
         name='layer-info'
-    ),
-    path(
-        'ti-detail/<int:pk>/',
-        views.TiDetailView.as_view(),
-        name='ti-detail'
-    ),
-    path(
-        'ti-by-name/',
-        views.TiByNameView.as_view(),
-        name='ti-by-name'
     )
 ]
