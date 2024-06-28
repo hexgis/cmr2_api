@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'deter_monitoring',
     'user_profile',
     'corsheaders',
+    'scripts',
 ]
 
 MIDDLEWARE = [
@@ -231,3 +232,5 @@ SIMPLE_JWT = {
 }
 
 TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
+
+
