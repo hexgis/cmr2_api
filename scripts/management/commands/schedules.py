@@ -27,7 +27,7 @@ def start():
     scheduler.add_job(job_to_sccon, trigger=CronTrigger(day="8", hour=0, minute="0"), id="run_sccon_d8", replace_existing=True)
     scheduler.add_job(job_to_sccon, trigger=CronTrigger(day="15", hour=0, minute="0"), id="run_sccon_d15", replace_existing=True)
     scheduler.add_job(job_to_sccon, trigger=CronTrigger(day="22", hour=0, minute="0"), id="run_sccon_d22", replace_existing=True)
-    scheduler.add_job(job_to_sccon, trigger=CronTrigger(hour=19, minute=58), id="run_sccon_now1", replace_existing=True)
+    scheduler.add_job(job_to_sccon)
     scheduler.start()
     
     LOGGER.info("Start TMS schedules job....")
@@ -36,7 +36,7 @@ def start():
 
     try:
         while True:
-            time.sleep(10)  # Espera por 10 segundos antes de verificar novamente
+            time.sleep(36000)
     except KeyboardInterrupt:
         print("Encerrando o scheduler...")
         scheduler.shutdown()
@@ -45,7 +45,4 @@ class Command(BaseCommand):
     """Starts the scheduler to run jobs at specified times""" 
 
     def handle(self, *args, **kwargs):
-        subprocess.Popen(['python', 'manage.py', 'schedules'],
-                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        self.stdout.write(self.style.SUCCESS('Scheduler started in a subprocess.'))
         start()
