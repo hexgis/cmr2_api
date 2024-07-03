@@ -50,12 +50,16 @@ class UserLoggetUpdateView (AuthModelMixIn, generics.UpdateAPIView):
         user = request.user
         theme_mode = request.data.get('theme_mode')
 
-        settings, created = models.UserSettings.objects.update_or_create(
-            user=user,
-            defaults={'dark_mode_active': theme_mode}
-        )
-
-        return response.Response(f"settings successfully updated!", status=status.HTTP_200_OK)
+        try:
+            settings, created = models.UserSettings.objects.update_or_create(
+                user=user,
+                defaults={'dark_mode_active': theme_mode}
+            )
+            return response.Response("Settings successfully updated!", status=status.HTTP_200_OK)
+        except models.UserSettings.DoesNotExist:
+            return response.Response("User settings do not exist.", status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return response.Response(f"An error occurred: {str(e)}", status=status.HTTP_400_BAD_REQUEST)
 
 class UserLoggedGetView(AuthModelMixIn, generics.GenericAPIView):
     """View to post User logs.
