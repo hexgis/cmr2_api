@@ -48,11 +48,11 @@ class UserLoggetUpdateView (AuthModelMixIn, generics.UpdateAPIView):
     
     def patch(self, request, *args, **kwargs):
         user = request.user
-        mode = request.data.get('mode')
+        theme_mode = request.data.get('theme_mode')
 
         settings, created = models.UserSettings.objects.update_or_create(
             user=user,
-            defaults={'dark_mode_active': mode}
+            defaults={'dark_mode_active': theme_mode}
         )
 
         return response.Response(f"settings successfully updated!", status=status.HTTP_200_OK)
