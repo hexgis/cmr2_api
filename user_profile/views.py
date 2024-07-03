@@ -39,6 +39,24 @@ class AuthModelMixIn:
 #     queryset = models.User.objects.all()
 #     serializer_class = serializers.UserSerializer
 
+class UserLoggetUpdateView (AuthModelMixIn, generics.UpdateAPIView):
+    """
+        View to update User settings.
+    """
+    serializer_class = serializers.UserSerializer
+    queryset = models.UserSettings.objects.all()
+    
+    def patch(self, request, *args, **kwargs):
+        user = request.user
+        mode = request.data.get('mode')
+
+        settings, created = models.UserSettings.objects.update_or_create(
+            user=user,
+            defaults={'dark_mode_active': mode}
+        )
+
+        return response.Response(f"settings successfully updated!", status=status.HTTP_200_OK)
+
 class UserLoggedGetView(AuthModelMixIn, generics.GenericAPIView):
     """View to post User logs.
 
@@ -57,7 +75,6 @@ class UserLoggedGetView(AuthModelMixIn, generics.GenericAPIView):
 
         serializer = self.serializer_class(request.user)
         return response.Response(serializer.data)
-
 
 class UserUploadFileListView(
     AuthModelMixIn,

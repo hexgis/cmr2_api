@@ -16,6 +16,10 @@ class UserSettings(models.Model):
         primary_key=True,
     )
 
+    dark_mode_active = models.BooleanField(
+        default=False
+    )
+
     drawer_open_on_init = models.BooleanField(
         default=True
     )
