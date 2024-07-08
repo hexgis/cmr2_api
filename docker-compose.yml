@@ -57,6 +57,12 @@ services:
       DB_PASSWORD_FOR_READ: asdfsa
       DB_HOST_FOR_READ: db_for_read
       PORT: 8080
+      JAZZMIN_ADMIN_SITE_TITLE: CMR Admin #Titulo da aba
+      JAZZMIN_ADMIN_SITE_HEADER: CMR Admin # Titulo do login
+      JAZZMIN_ADMIN_SITE_BRAND:  CMR Admin
+      JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico # site
+      JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
+      JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico 
     depends_on:
       - db
       - db_for_read
@@ -82,6 +88,12 @@ services:
       DB_PASSWORD: testpassword
       DB_HOST: db
       PORT: 8081
+      JAZZMIN_ADMIN_SITE_TITLE: CMR Admin
+      JAZZMIN_ADMIN_SITE_HEADER: CMR Admin
+      JAZZMIN_ADMIN_SITE_BRAND:  CMR Admin
+      JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico # site
+      JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
+      JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico 
     depends_on:
       - db
 
