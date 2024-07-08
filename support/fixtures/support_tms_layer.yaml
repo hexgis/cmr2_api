@@ -1,0 +1,21 @@
+- model: support.tmslayer
+  pk: 1
+  fields:
+    url_tms: https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2024_02_mosaic/gmap/{z}/{x}/{y}.png?api_key=PLAKc76f6fa3bfab4b1ebbd78b537c45e7a5
+    date: 2024-02-18
+    max_native_zoom: 9
+    layer: 5
+- model: support.tmslayer
+  pk: 2
+  fields:
+    url_tms: https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2024_03_mosaic/gmap/{z}/{x}/{y}.png?api_key=PLAKc76f6fa3bfab4b1ebbd78b537c45e7a5
+    date: 2024-03-23
+    max_native_zoom: 9
+    layer: 6
+- model: support.tmslayer
+  pk: 3
+  fields:
+    url_tms: https://tiles.planet.com/basemaps/v1/planet-tiles/global_monthly_2024_01_mosaic/gmap/{z}/{x}/{y}.png?api_key=57cd3a8c44024cfdb7446ac37d8d1fe9
+    date: 2024-01-15
+    max_native_zoom: 9
+    layer: 7

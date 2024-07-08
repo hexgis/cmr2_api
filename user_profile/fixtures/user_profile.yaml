@@ -1,6 +1,7 @@
--   model: user_profile_usersettings
+-   model: user_profile.usersettings
     fields:
       user_id: 1
+      dark_mode_active: false
       drawer_open_on_init: true
       interest_area_zoom_on_init: true
       map_zoom_buttons_visible: true

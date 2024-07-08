@@ -123,7 +123,7 @@
   pk: 19
   fields:
       name: Antropismo Consolidado - 2015
-      order: 19
+      order: 21
       category_groups: 1
 - model: support.layersgroup
   pk: 23
@@ -173,6 +173,14 @@
       name: Grade Satélites
       order: 30
       category_groups: 1
+- model: support.layersgroup
+  pk: 31
+  fields:
+    name: Mosaico Planet 2024
+    order: 19
+    category_groups: 3
+
+
 - model: support.layer
   pk: 1
   fields:

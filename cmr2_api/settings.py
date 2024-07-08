@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'deter_monitoring',
     'user_profile',
     'corsheaders',
+    'scripts',
 ]
 
 MIDDLEWARE = [
@@ -256,7 +257,7 @@ JAZZMIN_SETTINGS = {
     'login_logo_dark': JAZZMIN_ADMIN_LOGIN_LOGO,  # Login site
     'site_icon': JAZZMIN_ADMIN_SITE_FAVICON,  # Favicon
     'site_logo_classes': 'img-circle bg-light',
- 
+
     'welcome_sign': 'Admin control panel',
     'show_sidebar': True,
     'navigation_expanded': False,
@@ -280,7 +281,7 @@ JAZZMIN_SETTINGS = {
     'default_icon_parents': 'fas fa-chevron-circle-right',
     'default_icon_children': 'fas',
     'site_logo_classes': 'img-circle bg-light',
-    
+
 }
 
 JAZZMIN_UI_TWEAKS = {
