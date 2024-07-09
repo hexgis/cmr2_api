@@ -18,5 +18,15 @@ urlpatterns = [
         'busca-geo-ti/',
         views.BuscaGeoTIListView.as_view(),
         name='busca-geo-ti-list'
+    ),
+    path(
+        'ti-by-name/',
+        views.TiByNameView.as_view(),
+        name='busca-ti-por-nome'
+    ),
+    path(
+        'instrumento-gestao/',
+        views.BuscaInstrumentoGestaoView.as_view(),
+        name='busca-instrumento-gestao'
     )
 ]

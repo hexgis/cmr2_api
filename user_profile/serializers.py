@@ -10,6 +10,7 @@ class UserSettingsSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserSettings
         fields = (
+            'dark_mode_active',
             'map_zoom_buttons_visible',
             'drawer_open_on_init',
             'map_search_button_visible',
