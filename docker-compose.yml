@@ -47,7 +47,6 @@ services:
       python manage.py loaddata support_ti.yaml &&
       python manage.py loaddata user_profile.yaml &&
       python manage.py schedules &
-      python manage.py send_request &
       python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/
