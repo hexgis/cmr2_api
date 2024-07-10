@@ -29,7 +29,7 @@ class Command(BaseCommand):
             return
 
         # Send the request with the obtained token
-        url = "http://localhost:8080/authorization/permissions-test/"
+        url = "http://localhost:8080/authorization/grant-permissions-test/"
         payloads = [
             {
                 "email": "root@hexgis.com",
