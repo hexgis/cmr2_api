@@ -239,6 +239,3 @@ class JobSccon():
 
             except Exception as e:
                 print(f"Erro ao registrar TmsLayer: {e}")
-
-
-        # python manage.py schedules

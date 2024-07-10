@@ -6,35 +6,35 @@ class CoordenacaoRegional(models.Model):
     """Models for Regional Coordenation."""
 
     co_cr = models.BigIntegerField(
-        _('Regional Coordenation code'),
+        _('COD Coordenção Regional'),
         unique=True,
         primary_key=True,
         default=1
     )
 
     ds_cr = models.CharField(
-        _('Regional Coordenation name'),
+        _('Coordenação Regional'),
         max_length=255,
         blank=True,
         null=True
     )
 
     no_abreviado = models.CharField(
-        _('Regional Coordenation acronym'),
+        _('UF Coordenação Regional'),
         max_length=255,
         blank=True,
         null=True
     )
 
     sg_cr = models.CharField(
-        _('Regional Coordenation flag'),
+        _('Sigla Coordenação Regional'),
         max_length=255,
         blank=True,
         null=True
     )
 
     st_situacao = models.CharField(
-        _('Situation'),
+        _('Situação'),
         max_length=255,
         blank=True,
         null=True
@@ -48,42 +48,42 @@ class CoordenacaoRegional(models.Model):
     )
 
     no_regiao = models.CharField(
-        _('Region name'),
+        _('Região'),
         max_length=255,
         blank=True,
         null=True
     )
 
     no_municipio = models.CharField(
-        _('City name'),
+        _('Cidade'),
         max_length=255,
         blank=True,
         null=True
     )
 
     no_uf = models.CharField(
-        _('State'),
+        _('Estado'),
         max_length=255,
         blank=True,
         null=True
     )
 
     sg_uf = models.CharField(
-        _('State acronym'),
+        _('UF'),
         max_length=255,
         blank=True,
         null=True
     )
 
     ds_telefone = models.CharField(
-        _('Contact number'),
+        _('TEL de Contato'),
         max_length=512,
         blank=True,
         null=True
     )
 
     dt_cadastro = models.DateTimeField(
-        _('Register date'),
+        _('Data Registro'),
         blank=True,
         null=True
     )
@@ -91,8 +91,8 @@ class CoordenacaoRegional(models.Model):
     class Meta:
         """Metaclass to `funai.CoordenacaoRegional`."""
         app_label = 'funai'
-        verbose_name = 'CoordenacaoRegional'
-        verbose_name_plural = 'CoordenacoesRegionais'
+        verbose_name = 'Coordenacao Regional'
+        verbose_name_plural = 'Coordenacoes Regionais'
 
     def __str__(self) -> str:
         """Returns string for class based name.
@@ -117,11 +117,11 @@ class LimiteTerraIndigena(models.Model):
         )
 
     no_ti = models.CharField(
-        _('Name of Indigenous Lands'),
+        _('Terra Indígema'),
         max_length=255,
     )
     co_funai = models.IntegerField(
-        _('Funai code'),
+        _('COD Funai'),
         unique=True,
     )
     no_grupo_etnico = models.CharField(_("Grupo Étnico"),
@@ -204,8 +204,8 @@ class LimiteTerraIndigena(models.Model):
     class Meta:
         """Metaclass to `funai.LimiteTerraIndigena`."""
         app_label = 'funai'
-        verbose_name = _('Indigenous Lands')
-        verbose_name_plural = _('Indigenous Lands')
+        verbose_name = _('Terra Indigena')
+        verbose_name_plural = _('Terras Indigenas')
         ordering = ('no_ti', )
 
 class InstrumentoGestaoFunai(models.Model):
@@ -216,70 +216,71 @@ class InstrumentoGestaoFunai(models.Model):
     """
 
     co_funai = models.IntegerField(
+        _('Cod Funai'),
         blank=False,
         null=False
     )
     no_ti = models.CharField(
-        _('Name of Indigenous Lands'),
+        _('Terras Indígena'),
         max_length=255,
         blank=True,
         null=True
     )
     no_regiao = models.CharField(
-        _('Region Name'),
+        _('Região'),
         max_length=255,
         blank=True,
         null=True
     )
     sg_uf = models.CharField(
-        _('State aconymn'),
+        _('UF'),
         max_length=255,
         blank=True,
         null=True
     )
     no_povo = models.CharField(
-        _('Hamlet Names'),
+        _('Povos'),
         max_length=255,
         blank=True,
         null=True
     )
     no_bioma = models.CharField(
-        _('Biom Name'),
+        _('Bioma'),
         max_length=255,
         blank=True,
         null=True
     )
     ds_parceiros = models.CharField(
-        _('Partners'),
+        _('Parceiros'),
         max_length=255,
         blank=True,
         null=True
     )
     cr_funai = models.CharField(
-        _('Name Funai'),
+        _('Nome Funai'),
         max_length=255,
         blank=True,
         null=True
     )
     no_ig = models.CharField(
-        _('Instrumental Name'),
+        _('Instrumento'),
         max_length=255,
         blank=True,
         null=True
     )
     ds_status = models.CharField(
-        _('status'),
+        _('Status'),
         max_length=255,
         blank=True,
         null=True
     )
     nu_ano_elaboracao = models.IntegerField(
-        _('Elaborated in'),
+        _('Elaborado em'),
         blank=True,
         null=True
     )
     ds_disp_meio_local = models.CharField(
-        _('Privided by'),
+        _('Disponível em'),
         max_length=255,
         blank=True,
         null=True
@@ -291,13 +292,19 @@ class InstrumentoGestaoFunai(models.Model):
         null=True
     )
     ds_obs = models.CharField(
-        _(''),
+        _('Observação'),
         max_length=255,
         blank=True,
         null=True
     )
     dt_cadastro = models.DateField(
-        _('Register Date'),
+        _('Data Registro'),
         blank=True,
         null=True
     )
+
+    class Meta:
+        """Metaclass to `funai.LimiteTerraIndigena`."""
+        app_label = 'funai'
+        verbose_name = _('Instrumento de Gestao Funai')
+        verbose_name_plural = _('Instrumentos de Gestao Funai')

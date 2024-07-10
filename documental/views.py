@@ -143,6 +143,9 @@ class DocumentUploadView(generics.ListCreateAPIView):
 
     def get_requested_action(self):
         """Return identify action in POST request."""
+        if 'id_acao' not in self.request.data:
+            raise exceptions.ParseError("Parâmetro 'id_acao' não fornecido na requisição.", None)
+        
         return self.request.data['id_acao']
 
     def get_action_type(self):

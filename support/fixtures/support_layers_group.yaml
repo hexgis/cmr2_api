@@ -1,0 +1,6 @@
+- model: support.layersgroup
+  pk: 31
+  fields:
+    name: Mosaico Planet 2024
+    order: 19
+    category_groups_id: 3

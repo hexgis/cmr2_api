@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'user_profile',
     'corsheaders',
     'scripts',
+    'rolepermissions',
 ]
 
 MIDDLEWARE = [
@@ -234,3 +235,82 @@ SIMPLE_JWT = {
 TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
 
 
+################################################################################
+####                           LDAP CONFIGURATION                           ####
+################################################################################
+import ldap
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
+
+AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
+AUTH_LDAP_BIND_DN = "hex@funai.gov.br"
+AUTH_LDAP_BIND_PASSWORD = "Monitoramento.2024"
+
+AUTH_LDAP_USER_SEARCH = LDAPSearch(
+    "OU=FUNAI,DC=funai,DC=local",
+    ldap.SCOPE_SUBTREE,
+    "(sAMAccountName=%(user)s)"
+)
+
+AUTH_LDAP_USER_DN_TEMPLATE = None  # Ou defina o template de DN se necessário
+
+AUTH_LDAP_START_TLS = False
+AUTH_LDAP_CACHE_TIMEOUT = 3600
+
+AUTH_LDAP_USER_ATTR_MAP = {
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email": "mail"
+}
+
+AUTH_LDAP_FIND_GROUP_PERMS = True
+AUTH_LDAP_MIRROR_GROUPS = True
+
+AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+    "OU=FUNAI,DC=funai,DC=local",
+    ldap.SCOPE_SUBTREE,
+    "(objectClass=group)"
+)
+AUTH_LDAP_GROUP_TYPE = GroupOfNamesType()
+
+AUTH_LDAP_REQUIRE_GROUP = None
+AUTH_LDAP_DENY_GROUP = None
+
+AUTH_LDAP_CACHE_GROUPS = True
+AUTH_LDAP_GROUP_CACHE_TIMEOUT = 3600
+
+# Keep ModelBackend around for per-user permissions and maybe a local
+# superuser.
+AUTHENTICATION_BACKENDS = (
+    'django_auth_ldap.backend.LDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+################################################################################
+####                        END LDAP CONFIGURATION                          ####
+################################################################################
+
+
+################################################################################
+####                           EMAIL CONFIGURATION                          ####
+################################################################################
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '10.0.0.22'
+EMAIL_PORT = '25'
+EMAIL_SUBJECT_PREFIX = '[CMR] Centro de Monitoramento Remoto'
+EMAIL_ADMIN_FEEDBACK = "hexgisdev@gmail.com"
+DEFAULT_FROM_EMAIL = "hexgisdev@gmail.com"
+
+################################################################################
+####                           END EMAIL CONFIGURATION                      ####
+################################################################################
+
+################################################################################
+####                       PERMISSIONS MODULE CONFIGURATION                 ####
+################################################################################
+
+ROLEPERMISSIONS_MODULE = 'cmr2_api.roles'
+
+################################################################################
+####                    END PERMISSIONS MODULE CONFIGURATION                ####
+################################################################################

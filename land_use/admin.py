@@ -1,8 +1,9 @@
 from django.contrib import admin
 from land_use import models
+from cmr2_api.mixins import AdminPermissionMixin
 
 
-class LandUseClassesAdmin(admin.ModelAdmin):
+class LandUseClassesAdmin(AdminPermissionMixin,admin.ModelAdmin):
     """Django administrator `models.LandUseClasses` data."""
 
     list_display = (
@@ -54,7 +55,7 @@ class LandUseClassesAdmin(admin.ModelAdmin):
     )
 
 
-class LandUseTIAdmin(admin.ModelAdmin):
+class LandUseTIAdmin(AdminPermissionMixin,admin.ModelAdmin):
     """Django administrator `models.LandUseTi` data."""
 
     list_display = (
