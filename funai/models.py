@@ -301,3 +301,11 @@ class InstrumentoGestaoFunai(models.Model):
         blank=True,
         null=True
     )
+
+
+    class Meta:
+        """Metaclass to `funai.tb_instrumento_gestao_funai`."""
+        app_label = 'funai'
+        db_table = 'tb_instrumento_gestao_funai'
+        verbose_name = _('Management Instrument')
+        verbose_name_plural = _('Management Instruments')
