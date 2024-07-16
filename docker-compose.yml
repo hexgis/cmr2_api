@@ -30,7 +30,6 @@ services:
       python manage.py migrate &&
       python manage.py loaddata coordenacao_regional.yaml &&
       python manage.py loaddata terras_indigenas.yaml &&
-      python manage.py loaddata instrumento_gestao_funai.yaml &&
       python manage.py loaddata user.yaml &&
       python manage.py loaddata support.yaml &&
       python manage.py loaddata support_layer_info.yaml &&
