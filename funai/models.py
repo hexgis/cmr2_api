@@ -308,5 +308,5 @@ class InstrumentoGestaoFunai(models.Model):
         app_label = 'funai'
         verbose_name = _('Management Instrument')
         verbose_name_plural = _('Management Instruments')
-        db_table =  'funai\".\"tb_instrumento_gestao_funai'
+        db_table =  'tb_instrumento_gestao_funai'
         managed = False
