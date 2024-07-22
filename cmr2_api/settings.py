@@ -60,6 +60,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'scripts',
     'rolepermissions',
+    'dashboard',
 ]
 
 MIDDLEWARE = [
@@ -100,11 +101,11 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'NAME': 'cmr_funai',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '192.168.20.135',
+        'PORT': '5433',
         'TEST': {'NAME': 'test_default_db', },
     },
     'db_for_read': {
@@ -114,7 +115,6 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD_FOR_READ'),
         'HOST': os.getenv('DB_HOST_FOR_READ'),
         'PORT': os.getenv('DB_PORT_FOR_READ', '5432')
-
     },
 }
 
@@ -139,6 +139,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -242,48 +243,88 @@ import ldap
 from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 
 AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
+
 AUTH_LDAP_BIND_DN = "hex@funai.gov.br"
 AUTH_LDAP_BIND_PASSWORD = "Monitoramento.2024"
 
 AUTH_LDAP_USER_SEARCH = LDAPSearch(
-    "OU=FUNAI,DC=funai,DC=local",
-    ldap.SCOPE_SUBTREE,
-    "(sAMAccountName=%(user)s)"
+    "OU=FUNAI,DC=funai,DC=local", ldap.SCOPE_SUBTREE, "(mail=%(user)s)"
 )
 
-AUTH_LDAP_USER_DN_TEMPLATE = None  # Ou defina o template de DN se necessário
-
 AUTH_LDAP_START_TLS = False
-AUTH_LDAP_CACHE_TIMEOUT = 3600
 
+AUTH_LDAP_CONNECTION_OPTIONS = {
+    ldap.OPT_REFERRALS: 0,
+}
+
+# Populate the Django user from the LDAP directory.
 AUTH_LDAP_USER_ATTR_MAP = {
     "first_name": "givenName",
     "last_name": "sn",
     "email": "mail"
 }
 
+AUTH_LDAP_ALWAYS_UPDATE_USER = True
+
 AUTH_LDAP_FIND_GROUP_PERMS = True
-AUTH_LDAP_MIRROR_GROUPS = True
-
-AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
-    "OU=FUNAI,DC=funai,DC=local",
-    ldap.SCOPE_SUBTREE,
-    "(objectClass=group)"
-)
-AUTH_LDAP_GROUP_TYPE = GroupOfNamesType()
-
-AUTH_LDAP_REQUIRE_GROUP = None
-AUTH_LDAP_DENY_GROUP = None
-
-AUTH_LDAP_CACHE_GROUPS = True
-AUTH_LDAP_GROUP_CACHE_TIMEOUT = 3600
+AUTH_LDAP_CACHE_TIMEOUT = 3600
 
 # Keep ModelBackend around for per-user permissions and maybe a local
 # superuser.
 AUTHENTICATION_BACKENDS = (
-    'django_auth_ldap.backend.LDAPBackend',
+    # 'django_auth_ldap.backend.LDAPBackend',
+    'cmr2_api.auth_backends.MyLDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django_auth_ldap': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+        'auth_backends': {
+            'handlers': ['console'],
+            'level': 'DEBUG',
+        },
+    },
+}
+
+################ AD LOCAL DA MÁQUINA 192.168.20.136
+
+# AUTH_LDAP_SERVER_URI = 'ldap://192.168.136.128:389'
+# AUTH_LDAP_BIND_DN = 'cn=Administrator,cn=users,dc=demo,dc=lab'
+# AUTH_LDAP_BIND_PASSWORD = 'Funai@2024'
+
+# AUTH_LDAP_USER_SEARCH = LDAPSearch(
+#     'ou=funai,dc=demo,dc=lab',
+#     ldap.SCOPE_SUBTREE,
+#     '(mail=%(user)s)'
+# )
+
+# AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
+#     'dc=demo,dc=lab',
+#     ldap.SCOPE_SUBTREE,
+#     '(objectClass=top)'
+# )
+
+# AUTH_LDAP_GROUP_TYPE = GroupOfNamesType(name_attr="cn")
+
+# AUTH_LDAP_MIRROR_GROUPS = True
+
+# # Populate the Django user from the LDAP directory.
+# AUTH_LDAP_ALWAYS_UPDATE_USER = True
+# AUTH_LDAP_FIND_GROUP_PERMS = False  # Não configurar permissões por grupo
+
+# AUTH_LDAP_CACHE_TIMEOUT = 3600
 
 ################################################################################
 ####                        END LDAP CONFIGURATION                          ####

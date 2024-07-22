@@ -88,4 +88,8 @@ urlpatterns = [
         ('user_profile.urls', 'user'),
         namespace='user'),
     ),
+    path('dashboard/', include(
+        ('dashboard.urls', 'dashboard'),
+        namespace='dashboard'),
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

@@ -68,4 +68,4 @@ class AdminPermissionMixin:
             Returns:
             - bool: False, deletion is always disallowed.
         """
-        return False
+        return self.has_master_admin_role(request.user)

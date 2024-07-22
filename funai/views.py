@@ -3,7 +3,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q, F, Func, Value
 
 from django.db.models.functions import Lower
-from rest_framework import generics
 from rest_framework.exceptions import NotFound, ValidationError
 
 

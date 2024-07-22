@@ -7,7 +7,11 @@ from rolepermissions.roles import assign_role
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from rest_framework import serializers
-
+from django.contrib.auth import authenticate
+import requests 
+from dashboard import models
+from django.utils import timezone
+import pytz
 
 from rest_framework import (
     response,
@@ -15,6 +19,128 @@ from rest_framework import (
     views,
     status
 )
+
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    """
+    Customizes the token obtain pair serializer to add additional functionalities.
+    
+    Attributes:
+    - username_field: Specifies the field to be used for authentication (username).
+    - email: An optional email field to be used in the authentication process.
+
+    Methods:
+    - get_public_ip: Retrieves the public IP address of the user.
+    - get_location: Fetches the geographical location for a given IP address.
+    - validate: Validates the authentication credentials and performs additional actions.
+    """
+    username_field = 'username'
+    email = serializers.EmailField(required=False)
+
+    def get_public_ip(self):
+        """
+        Retrieves the public IP address of the user by making a request to the ipify API.
+
+        Returns:
+        - str: The public IP address of the user.
+        """
+        response = requests.get('https://api.ipify.org').text
+        return response
+    
+    def get_location(self, ip):
+        """
+        Fetches the geographical location for the given IP address using the ipapi API.
+
+        Args:
+        - ip (str): The IP address for which to fetch the location.
+
+        Returns:
+        - str: The location in the format "city, region, country" or an error message.
+        """
+        try:
+            response = requests.get(f'https://ipapi.co/{ip}/json/')
+            if response.status_code == 200:
+                data = response.json()
+                return f"{data.get('city')}, {data.get('region')}, {data.get('country_name')}"
+            else:
+                return "Unknown location"
+        except Exception as e:
+            return f"Error fetching location: {e}"
+    
+
+    def validate(self, attrs):
+        """
+        Validates the token obtain pair request and performs additional actions.
+
+        Args:
+        - attrs (dict): Dictionary of request attributes, including 'username' and 'password'.
+
+        Returns:
+        - dict: Validated data dictionary after authentication and additional actions.
+        
+        Raises:
+        - serializers.ValidationError: If authentication fails or other errors occur.
+        """
+        
+        # Retrieve username or email and password from request attributes
+        username_or_email = attrs.get('username')
+        password = attrs.get('password')
+
+        # Attempt to authenticate the user using username
+        user = authenticate(username=username_or_email, password=password)
+        if not user:
+            # If authentication fails, try to authenticate with email
+            try:
+                user = User.objects.get(email=username_or_email)
+                if not user.check_password(password):
+                    raise serializers.ValidationError(_('Wrong password.'))
+            except User.DoesNotExist:
+                raise serializers.ValidationError(_('No active account found with the given credentials.'))
+            # If user is found with email, set username in attributes
+            attrs['username'] = user.username
+
+        # Continue with the normal validation process
+        data = super().validate(attrs)
+        user = self.user
+        logged_user = User.objects.get(email=username_or_email)
+
+        # Check if the user has any groups and assign a default role if not
+        if not user.groups.exists():
+            try:
+                assign_role(user, 'nao_autenticado')  # Assigns a default role to the user
+                print('User successfully added to the group.')
+            except Exception as e:
+                print(f'Error adding user to the group: {e}')
+        
+        # If the user is authenticated, record their login details
+        if user.is_authenticated: 
+            public_user_ip = self.get_public_ip()
+            user_location = self.get_location(public_user_ip)
+            brasilia_tz = pytz.timezone('America/Sao_Paulo')
+            current_date = timezone.now().astimezone(brasilia_tz)
+            print("Adjusted date and time for Brasília:", current_date)
+            try:
+                # Save the login details in the DashboardData model
+                register = models.DashboardData(
+                    user=logged_user,
+                    last_date_login=current_date,
+                    location=user_location,
+                    ip=public_user_ip
+                )
+                register.save()
+                print(f"Access recorded successfully: {register}")
+            except Exception as e:
+                print(f"Error recording user access: {e}")
+
+        return data
+
+class CustomTokenObtainPairView(TokenObtainPairView):
+    """
+    Customizes the token obtain pair view to use the custom serializer.
+
+    Attributes:
+    - serializer_class: Specifies the custom serializer to be used for token generation.
+    """
+    serializer_class = CustomTokenObtainPairSerializer
 
 class ChangePassword(views.APIView):
     """ChangePassword APIView."""
@@ -51,37 +177,3 @@ class ChangePassword(views.APIView):
         return response.Response(
             {'message': message}, status=status.HTTP_400_BAD_REQUEST
         )
-
-
-class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
-    """
-        Customizes the token obtain pair serializer to add additional functionalities.
-    """
-    username_field = 'username'
-    email = serializers.EmailField(required=False)
-
-    def validate(self, attrs):
-        """
-            Validates the token obtain pair request and performs additional actions.
-
-            Args:
-            - attrs (dict): Dictionary of request attributes.
-
-            Returns:
-            - dict: Validated data dictionary.
-        """
-        data = super().validate(attrs)
-        user = self.user
-        if not user.groups.exists():
-            try:
-                assign_role(user, 'nao_autenticado') # Assigns a role to the user if not already assigned
-                print('Usuário adicionado ao grupo com sucesso')
-            except Exception as e:
-                print(f'Erro ao adicionar usuário ao grupo: {e}')
-        return data
-
-class CustomTokenObtainPairView(TokenObtainPairView):
-    """
-        Customizes the token obtain pair view to use the custom serializer.
-    """
-    serializer_class = CustomTokenObtainPairSerializer
