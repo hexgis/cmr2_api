@@ -88,20 +88,27 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         # Attempt to authenticate the user using username
         user = authenticate(username=username_or_email, password=password)
         if not user:
-            # If authentication fails, try to authenticate with email
+            # If authentication fails, try to authenticate with email or username
             try:
                 user = User.objects.get(email=username_or_email)
                 if not user.check_password(password):
                     raise serializers.ValidationError(_('Wrong password.'))
             except User.DoesNotExist:
-                raise serializers.ValidationError(_('No active account found with the given credentials.'))
-            # If user is found with email, set username in attributes
+                try:
+                    user = User.objects.get(username=username_or_email)
+                    if not user.check_password(password):
+                        raise serializers.ValidationError(_('Wrong password.'))
+                except User.DoesNotExist:
+                    raise serializers.ValidationError(_('No active account found with the given credentials.'))
+
+            # If user is found with email or username, set username in attributes
             attrs['username'] = user.username
+
 
         # Continue with the normal validation process
         data = super().validate(attrs)
         user = self.user
-        logged_user = User.objects.get(email=username_or_email)
+        logged_user = User.objects.get(email=username_or_email) if '@' in username_or_email else User.objects.get(username=username_or_email)
 
         # Check if the user has any groups and assign a default role if not
         if not user.groups.exists():
