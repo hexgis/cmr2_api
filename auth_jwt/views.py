@@ -1,24 +1,28 @@
-from django.utils.translation import ugettext_lazy as _
-
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from rolepermissions.roles import assign_role
+from user_agents import parse as parse_user_agent
+
 from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
-from rest_framework import serializers
-from django.contrib.auth import authenticate
-import requests 
-from dashboard import models
+from django.contrib.auth import authenticate, get_user_model
 from django.utils import timezone
+
+import requests 
 import pytz
 
 from rest_framework import (
     response,
     permissions,
     views,
-    status
+    status,
+    serializers
 )
+
+from dashboard import models
+
+User = get_user_model()
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
@@ -33,7 +37,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     - get_location: Fetches the geographical location for a given IP address.
     - validate: Validates the authentication credentials and performs additional actions.
     """
-    username_field = 'username'
     email = serializers.EmailField(required=False)
 
     def get_public_ip(self):
@@ -66,6 +69,14 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         except Exception as e:
             return f"Error fetching location: {e}"
     
+    def get_user_agent_info(self, request):
+        user_agent_str = request.META.get('HTTP_USER_AGENT', " ")
+        user_agent = parse_user_agent(user_agent_str)
+        return {
+            'browser': user_agent.browser.family,
+            'device': 'mobile' if user_agent.is_mobile else 'tablet' if user_agent.is_tablet else 'PC'
+        }
+    
 
     def validate(self, attrs):
         """
@@ -82,6 +93,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         """
         
         # Retrieve username or email and password from request attributes
+        request = self.context.get('request')
         username_or_email = attrs.get('username')
         password = attrs.get('password')
 
@@ -122,6 +134,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         if user.is_authenticated: 
             public_user_ip = self.get_public_ip()
             user_location = self.get_location(public_user_ip)
+
+            user_agent_info = self.get_user_agent_info(request)
+            print(user_agent_info)
+
+
             brasilia_tz = pytz.timezone('America/Sao_Paulo')
             current_date = timezone.now().astimezone(brasilia_tz)
             print("Adjusted date and time for Brasília:", current_date)
@@ -131,7 +148,9 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
                     user=logged_user,
                     last_date_login=current_date,
                     location=user_location,
-                    ip=public_user_ip
+                    ip=public_user_ip,
+                    browser=user_agent_info['browser'],
+                    type_device=user_agent_info['device'] 
                 )
                 register.save()
                 print(f"Access recorded successfully: {register}")

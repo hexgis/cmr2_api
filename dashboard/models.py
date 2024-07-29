@@ -23,6 +23,12 @@ class DashboardData(models.Model):
         _('IP'),
         max_length=255
     )
+    type_device = models.CharField(
+        max_length=255,
+    )
+    browser = models.CharField(
+        max_length=255
+    )
 
     class Meta:
         app_label = 'dashboard'

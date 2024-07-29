@@ -1,67 +1,95 @@
 from rest_framework import generics, response
-from rest_framework.exceptions import NotFound, ValidationError
-from dashboard import (models, serializers)
-from django.contrib.auth.models import User
-
+from rest_framework.exceptions import ValidationError
+from dashboard import models, serializers
+from django.db.models import Count
+from django.db.models.functions import TruncMonth
+from datetime import datetime
 
 class FindAllDashboardDataView(generics.ListAPIView):
     """
-        API view to retrieve DashboardData objects with optional filtering by user ID.
-
-        Attributes:
-        - serializer_class: The serializer class to be used for the response.
-        
-        Methods:
-        - get_queryset: Returns a queryset of DashboardData objects filtered by user ID if provided.
+    API view to retrieve DashboardData objects with optional filtering and monthly count.
     """
     serializer_class = serializers.DashboardDataSerializer
 
     def get_queryset(self):
         """
-            Retrieves the queryset of DashboardData objects, optionally filtering by user ID.
-
-            The method checks if a `user_id` parameter is provided in the request. 
-            If so, it filters the queryset based on the user ID. Handles cases where:
-            - The user ID is not a valid integer.
-            - No user exists with the given user ID.
-            - No data is found for the given user ID.
-
-            Args:
-            - self: The instance of the class.
-
-            Returns:
-            - queryset: A queryset of DashboardData objects, potentially filtered by user ID.
-            
-            Raises:
-            - ValidationError: If the `user_id` is not valid or if no data is found for the given user ID.
+        Retrieves the queryset of DashboardData objects, optionally filtering by the provided parameters.
         """
-        # Get all DashboardData objects
         queryset = models.DashboardData.objects.all()
         
-        # Get the user_id parameter from the request
-        user_id = self.request.query_params.get('user_id', None)
+        # Get filter parameters from the request
+        start_date = self.request.query_params.get('startDate', None)
+        end_date = self.request.query_params.get('endDate', None)
+        location = self.request.query_params.get('location', None)
+        type_device = self.request.query_params.get('type_device', None)
+        browser = self.request.query_params.get('browser', None)
         
-        # If user_id is provided and not empty
-        if user_id is not None and user_id != '':
-                    try:
-                        # Convert user_id to an integer
-                        user_id = int(user_id)
-                    except ValueError:
-                        # Raise an error if user_id is not a valid integer
-                        raise ValidationError({"detail": "Invalid user ID. Please provide a valid integer."})
-                    
-                    # Check if a user with the given user_id exists
-                    if not User.objects.filter(id=user_id).exists():
-                        raise ValidationError({"detail": "No user found for the given user ID."})
-                        
-                    # Filter the queryset by the given user_id
-                    queryset = queryset.filter(user_id=user_id)
-                    
-                    # If the filtered queryset is empty, raise an error
-                    if not queryset.exists():
-                        raise ValidationError({"detail": "No data found for the given user ID."})
+        # Filter by start date
+        if start_date:
+            try:
+                start_date = datetime.strptime(start_date, '%d/%m/%Y')
+            except ValueError:
+                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in dd/mm/yyyy format."})
+            queryset = queryset.filter(last_date_login__date__gte=start_date.date())
+        
+        # Filter by end date
+        if end_date:
+            try:
+                end_date = datetime.strptime(end_date, '%d/%m/%Y')
+            except ValueError:
+                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in dd/mm/yyyy format."})
+            queryset = queryset.filter(last_date_login__date__lte=end_date.date())
+        
+        # Filter by location
+        if location:
+            queryset = queryset.filter(location__icontains=location)
+        
+        # Filter by device type
+        if type_device:
+            queryset = queryset.filter(type_device__icontains=type_device)
+        
+        # Filter by browser
+        if browser:
+            queryset = queryset.filter(browser__icontains=browser)
 
-        # Return the final queryset
+        if not queryset.exists():
+            raise ValidationError({"detail": "No data found for the given filters."})
+        
         return queryset
+
+    def get_monthly_counts(self, queryset):
+        """
+        Retrieves the count of DashboardData objects aggregated by month and year.
+        """
+        results = (queryset
+                   .annotate(month=TruncMonth('last_date_login'))
+                   .values('month')
+                   .annotate(count=Count('id'))
+                   .order_by('month'))
         
+        # Format the month field to return month number and year
+        formatted_results = []
+        for result in results:
+            month_date = result['month']
+            month_number = month_date.month
+            year = month_date.year
+            formatted_results.append({
+                'month': month_number,
+                'year': year,
+                'count': result['count']
+            })
         
+        return formatted_results
+
+    def list(self, request, *args, **kwargs):
+        """
+        Overrides the list method to include monthly counts in the response.
+        """
+        queryset = self.get_queryset()
+        monthly_counts = self.get_monthly_counts(queryset)
+        
+        response_data = {
+            'monthly_counts': monthly_counts,
+            'data': serializers.DashboardDataSerializer(queryset, many=True).data
+        }
+        return response.Response(response_data)

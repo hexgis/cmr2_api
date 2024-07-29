@@ -18,8 +18,6 @@ class DashboardDataSerializer(serializers.ModelSerializer):
     - get_last_date_login: Formats the last login date and time.
     """
 
-    # Custom field to include the username of the user
-    user = serializers.SerializerMethodField()
     # Custom field to format the last login date and time
     last_date_login = serializers.SerializerMethodField()
 
@@ -34,19 +32,7 @@ class DashboardDataSerializer(serializers.ModelSerializer):
         - fields: List of fields to be included in the serialized output.
         """
         model = models.DashboardData
-        fields = ['id', 'last_date_login', 'location', 'ip', 'user']
-    
-    def get_user(self, obj):
-        """
-        Retrieves the username of the user associated with the DashboardData object.
-
-        Args:
-        - obj (DashboardData): The instance of the DashboardData model.
-
-        Returns:
-        - str: The username of the user.
-        """
-        return obj.user.username
+        fields = ['id','last_date_login', 'location', 'ip', 'type_device', 'browser']
     
     def get_last_date_login(self, obj):
         """
@@ -59,4 +45,4 @@ class DashboardDataSerializer(serializers.ModelSerializer):
         - str: The formatted date and time of the last login in 'dd/mm/yyyy HH:MM:SS' format.
         """
         # Convert date to the desired format
-        return obj.last_date_login.strftime('%d/%m/%Y %H:%M:%S')
+        return obj.last_date_login.strftime('%d/%m/%Y %H:%M:%S') if obj.last_date_login else None
