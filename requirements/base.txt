@@ -15,5 +15,7 @@ python-ldap==3.3.1
 django-auth-ldap==3.0.0
 ldap3==2.9.0
 apscheduler==3.10.4
-untangle==1.2.1
 django-role-permissions==3.2.0
+untangle==1.2.1
+environs[django]==11.0.0
+user-agents==2.2.0
