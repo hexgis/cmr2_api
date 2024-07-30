@@ -29,6 +29,22 @@ services:
       bash -c "python manage.py makemigrations --no-input &&
       python manage.py migrate &&
       python manage.py schedules &
+      python manage.py loaddata coordenacao_regional.yaml &&
+      python manage.py loaddata terras_indigenas.yaml &&
+      python manage.py loaddata user.yaml &&
+      python manage.py loaddata support.yaml &&
+      python manage.py loaddata support_layer_info.yaml &&
+      python manage.py loaddata support_layerfilter.yaml &&
+      python manage.py loaddata support_tms_layer.yaml &&
+      python manage.py loaddata urgent_alerts.yaml &&
+      python manage.py loaddata land_use_ti.yaml &&
+      python manage.py loaddata land_use_classes.yaml &&
+      python manage.py loaddata catalog_satellites.yaml &&
+      python manage.py loaddata documental_docs_action.yaml &&
+      python manage.py loaddata documental_users_who_registered.yaml &&
+      python manage.py loaddata documental_docs.yaml &&
+      python manage.py loaddata user_profile.yaml &&
+      sleep 10 && python manage.py schedules & 
       python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/
@@ -44,10 +60,16 @@ services:
       DB_PASSWORD_FOR_READ: asdfsa
       DB_HOST_FOR_READ: db_for_read
       PORT: 8080
+      JAZZMIN_ADMIN_SITE_TITLE: CMR Admin #Titulo da aba
+      JAZZMIN_ADMIN_SITE_HEADER: CMR Admin # Titulo do login
+      JAZZMIN_ADMIN_SITE_BRAND: CMR Admin
+      JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico # site
+      JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
+      JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico
     depends_on:
       - db
       - db_for_read
-      
+
   test:
     build:
       context: .
@@ -69,6 +91,12 @@ services:
       DB_PASSWORD: testpassword
       DB_HOST: db
       PORT: 8081
+      JAZZMIN_ADMIN_SITE_TITLE: CMR Admin
+      JAZZMIN_ADMIN_SITE_HEADER: CMR Admin
+      JAZZMIN_ADMIN_SITE_BRAND: CMR Admin
+      JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico # site
+      JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
+      JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico
     depends_on:
       - db
 

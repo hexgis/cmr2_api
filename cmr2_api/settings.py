@@ -34,6 +34,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -170,10 +171,9 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Media files configuration
 
@@ -235,7 +235,90 @@ SIMPLE_JWT = {
 
 TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
 
+# Django Jazzmin settings
+# https://django-jazzmin.readthedocs.io/configuration/
 
+JAZZMIN_ADMIN_SITE_TITLE = os.getenv(
+    'JAZZMIN_ADMIN_SITE_TITLE', 'CMR ADMIN')
+JAZZMIN_ADMIN_SITE_HEADER = os.getenv(
+    'JAZZMIN_ADMIN_SITE_HEADER', 'CMR ADMIN')
+JAZZMIN_ADMIN_SITE_BRAND = os.getenv('JAZZMIN_ADMIN_SITE_BRAND', 'CMR')
+JAZZMIN_ADMIN_SITE_LOGO = os.getenv(
+    'JAZZMIN_ADMIN_SITE_LOGO')
+JAZZMIN_ADMIN_LOGIN_LOGO = os.getenv(
+    'JAZZMIN_ADMIN_LOGIN_LOGO')
+JAZZMIN_ADMIN_SITE_FAVICON = os.getenv(
+    'JAZZMIN_ADMIN_SITE_FAVICON', '/admin_files/img/funai.svg')
+
+
+JAZZMIN_SETTINGS = {
+    'site_title': JAZZMIN_ADMIN_SITE_TITLE,
+    'site_header': JAZZMIN_ADMIN_SITE_HEADER,
+    'site_brand': JAZZMIN_ADMIN_SITE_BRAND,
+    'site_logo': JAZZMIN_ADMIN_SITE_LOGO,  # Top left admin
+    'login_logo': JAZZMIN_ADMIN_LOGIN_LOGO,  # Login site
+    'login_logo_dark': JAZZMIN_ADMIN_LOGIN_LOGO,  # Login site
+    'site_icon': JAZZMIN_ADMIN_SITE_FAVICON,  # Favicon
+    'site_logo_classes': 'img-circle bg-light',
+
+    'welcome_sign': 'Admin control panel',
+    'show_sidebar': True,
+    'navigation_expanded': False,
+    'copyright': 'Hex360 Ltda',
+    'topmenu_links': [
+        {'name': 'Home',  'url': 'admin:index'},
+        {'model': 'auth.User'},
+    ],
+    'icons': {
+        'auth': 'fas fa-users',
+        'deter_monitoring': 'fas fa-bookmark',
+        'funai': 'fas fa-tree',
+        'catalog': 'fas fa-file',
+        'land_use': 'fas fa-city',
+        'support': 'fas fa-layer-group',
+        'documental': 'fas fa-book',
+        'monitoring': 'fas fa-satellite',
+        'priority_alerts': 'fas fa-exclamation-triangle',
+        'priority_monitoring': 'fas fa-map',
+    },
+    'default_icon_parents': 'fas fa-chevron-circle-right',
+    'default_icon_children': 'fas',
+    'site_logo_classes': 'img-circle bg-light',
+
+}
+
+JAZZMIN_UI_TWEAKS = {
+    'navbar_small_text': False,
+    'footer_small_text': False,
+    'body_small_text': False,
+    'brand_small_text': False,
+    'brand_colour': False,
+    'accent': 'accent-info',
+    'navbar': 'navbar-dark',
+    'no_navbar_border': False,
+    'navbar_fixed': True,
+    'layout_boxed': False,
+    'footer_fixed': False,
+    'sidebar_fixed': False,
+    'sidebar': 'sidebar-dark-primary',
+    'sidebar_nav_small_text': True,
+    'sidebar_disable_expand': False,
+    'sidebar_nav_child_indent': False,
+    'sidebar_nav_compact_style': False,
+    'sidebar_nav_legacy_style': False,
+    'sidebar_nav_flat_style': True,
+    'theme': 'solar',
+    'dark_mode_theme': 'darkly',
+    'button_classes': {
+        'primary': 'btn-primary',
+        'secondary': 'btn-secondary',
+        'info': 'btn-info',
+        'warning': 'btn-warning',
+        'danger': 'btn-danger',
+        'success': 'btn-success'
+    },
+    'actions_sticky_top': True
+}
 ################################################################################
 ####                           LDAP CONFIGURATION                           ####
 ################################################################################
