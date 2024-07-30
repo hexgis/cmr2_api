@@ -17,6 +17,10 @@ admin_user_panel_permissions = {
     'alterar_status_do_usuario': True,      # Permission to change user status
     'alterar_grupo_do_usuario': True,       # Permission to change user group
     'alterar_permissoes_do_usuario': True,  # Permission to change user permissions
+
+    'visualizar_painel_grupos': True, # Permission to view the groups panel
+    'adicionar_grupo': True, # Permission to change one group
+    'alterar_grupo': True, # Permission to create a new group
 }
 
 # Permissions for support-related actions
@@ -24,6 +28,18 @@ support_permissions = {
     'visualizar_support': True,  # Permission to view support
     'adicionar_support': True,   # Permission to add support items
     'alterar_support': True,     # Permission to change support items
+
+    'vizualizar_support_geoserver': True,
+    'adicionar_support_geoserver': True,
+    'alterar_support_geoserver': True,
+
+    'vizualizar_support_camadas': True,
+    'adicionar_support_camadas': True,
+    'alterar_support_camadas': True,
+
+    'vizualizar_': True,
+    'adicionar_': True,
+    'alterar_': True,
 }
 
 # Permissions related to FUNAI functionalities
@@ -31,9 +47,11 @@ funai_permissions = {
     'visualizar_funai_coordenacao_reginal': True,  # Permission to view FUNAI regional coordination
     'adicionar_funai_coordenacao_reginal': True,   # Permission to add FUNAI regional coordination
     'alterar_funai_coordenacao_reginal': True,     # Permission to change FUNAI regional coordination
+
     'visualizar_funai_terras_indigenas': True,     # Permission to view indigenous lands
     'adicionar_funai_terras_indigenas': True,      # Permission to add indigenous lands
     'alterar_funai_terras_indigenas': True,        # Permission to change indigenous lands
+
     'visualizar_funai_instrumento_gestao': True,   # Permission to view management instruments
     'adicionar_funai_instrumento_gestao': True,    # Permission to add management instruments
     'alterar_funai_instrumento_gestao': True,      # Permission to change management instruments

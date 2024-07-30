@@ -15,8 +15,105 @@ admin.site.unregister(User)
 # Re-register Group template with permission checks applied
 @admin.register(Group)
 class CustomGroupAdmin(AdminPermissionMixin, GroupAdmin):
-    pass
+    """ 
+        Customizes the group admin panel with permission-based views and actions.
+    """
+    def user_permissions(self, user):
+        """
+            Retrieves the effective permissions for the given user.
 
+            Args:
+            - user (User): The user object.
+
+            Returns:
+            - list: List of tuples containing permission names and their status.
+            - list: List of user roles.
+        """
+        user_permissions = []
+        permissions_list = []
+        user_role = get_user_roles(user)
+        for role in user_role:
+            role_permissions = role.available_permissions
+            user_permissions.extend(role_permissions.keys())
+
+        for perm_name in user_permissions:
+            permissions = available_perm_status(user)
+            permissions_list.append((perm_name, permissions.get(perm_name, False)))
+
+        return permissions_list, user_role 
+
+    def has_view_permission(self, request, obj=None):
+        """
+        Checks if the current user has permission to view the group admin panel.
+
+        Args:
+        - request: The request object.
+        - obj: Optional object instance.
+
+        Returns:
+        - bool: True if the user has permission; False otherwise.
+        """
+        try:
+            current_user = request.user
+            current_user_permissions, current_user_roles = self.user_permissions(current_user)
+            for perm_name, perm_status in current_user_permissions:
+                if perm_name == 'visualizar_painel_grupos' and perm_status:
+                    return True
+            
+            return super().has_view_permission(request, obj)
+        except Exception as e:
+            
+            print(f"Erro ao verificar permissão de visualização: {e}")
+            return False
+
+    def has_change_permission(self, request, obj=None):
+        """
+            Checks if the current user has permission to change group.
+
+            Args:
+            - request: The request object.
+            - obj: Optional object instance.
+
+            Returns:
+            - bool: True if the user has permission; False otherwise.
+        """
+        try:
+            current_user = request.user
+            current_user_permissions, current_user_roles = self.user_permissions(current_user)
+
+            for perm_name, perm_status in current_user_permissions:
+                if perm_name == 'alterar_grupo' and perm_status:
+                    return True
+
+            return super().has_change_permission(request, obj)
+        except Exception as e:
+            
+            print(f"Erro ao verificar permissão de alteração: {e}")
+            return False            
+
+    def has_add_permission(self, request):
+        """
+            Checks if the current user has permission to add new groups.
+
+            Args:
+            - request: The request object.
+
+            Returns:
+            - bool: True if the user has permission; False otherwise.
+        """
+        try:
+            current_user = request.user
+            current_user_permissions, current_user_roles = self.user_permissions(current_user)
+
+            for perm_name, perm_status in current_user_permissions:
+                if perm_name == 'adicionar_grupo' and perm_status:
+                    return True
+
+            return super().has_add_permission(request)
+        except Exception as e:
+            
+            print(f"Erro ao verificar permissão de alteração: {e}")
+            return False
 def get_permissions_for_role(role_name):
     """
         Retrieves permissions available for a given role.

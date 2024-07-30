@@ -4,7 +4,12 @@ from django.db.models import Q, F, Func, Value
 
 from django.db.models.functions import Lower
 from rest_framework.exceptions import NotFound, ValidationError
+from support import serializers as supserializers
+from support import models as supmodels
+from urllib.parse import urlparse, parse_qs
+from django.conf import settings
 
+import requests
 
 from funai import (
     serializers,
@@ -99,7 +104,7 @@ class TiByNameView(generics.ListAPIView):
         return queryset
         
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset().values('id', 'no_ti', 'no_municipio', 'ds_cr')
+        queryset = self.get_queryset().values('id', 'no_ti', 'no_municipio', 'ds_cr', 'ds_fase_ti')
         data = list(queryset)
         return response.Response(data)
 
@@ -135,3 +140,85 @@ class BuscaInstrumentoGestaoView(generics.ListAPIView):
                 instrumentos_gestao.append(None)
         
         return response.Response(instrumentos_gestao)
+
+class IndegenousVillageByNameView(generics.ListAPIView):
+
+    def get_indegenous_village(self):
+        # Geoserver parameters
+        geoserver_url = settings.GEOSERVER_URL
+        params = {
+            'service': 'WFS',
+            'version': '1.0.0',
+            'request': 'GetFeature',
+            'typeName': f'CMR-PUBLICO:{settings.GEO_SEARCH_VILLAGE}',
+            'outputFormat': 'application/json',
+            'authkey': f'{settings.SECRET_KEY}'
+        }
+        param = self.request.GET.get('param', None)
+        if param:
+            params['cql_filter'] = f"no_aldeia LIKE '%{param}%'"
+
+        response = requests.get(geoserver_url, params=params, verify=False)
+
+        if response.status_code == 200:
+            data = response.json()
+            features = data.get('features', [])
+            filtered_data = [
+                {
+                    'id': feature.get('id', ''),
+                    'no_aldeia': feature['properties'].get('no_aldeia', ''),
+                    'no_municipio': feature['properties'].get('no_municipio', ''),
+                    'ds_cr': feature['properties'].get('ds_cr', ''),
+                    'ds_fase_ti': "",
+                }
+                for feature in features
+            ]
+            return filtered_data
+        else:
+            return []
+
+    def list(self, request, *args, **kwargs):
+        # Overriding the list method to use the response from get_queryset directly
+        queryset = self.get_indegenous_village() 
+        return response.Response(queryset)
+
+class TiInStudyByName(generics.ListAPIView):
+    
+    def get_indegenous_village(self):
+        # Geoserver parameters
+        geoserver_url = settings.GEOSERVER_URL
+        params = {
+            'service': 'WFS',
+            'version': '1.0.0',
+            'request': 'GetFeature',
+            'typeName': f'CMR-PUBLICO:{settings.GEO_SEARCH_STUDY_TI}',
+            'outputFormat': 'application/json',
+            'authkey': f'{settings.SECRET_KEY}'
+        }
+        param = self.request.GET.get('param', None)
+        if param:
+            params['cql_filter'] = f"no_ti LIKE '%{param}%'"
+
+        response = requests.get(geoserver_url, params=params, verify=False)
+
+        if response.status_code == 200:
+            data = response.json()
+            features = data.get('features', [])
+            filtered_data = [
+                {
+                    'id': feature.get('id', ''),
+                    'no_ti': feature['properties'].get('no_ti', ''),
+                    'no_municipio': feature['properties'].get('no_municipio', ''),
+                    'ds_cr': feature['properties'].get('ds_cr', ''),
+                    'ds_fase_ti': "",
+                }
+                for feature in features
+            ]
+            return filtered_data
+        else:
+            return []
+
+    def list(self, request, *args, **kwargs):
+        # Overriding the list method to use the response from get_queryset directly
+        queryset = self.get_indegenous_village() 
+        return response.Response(queryset)

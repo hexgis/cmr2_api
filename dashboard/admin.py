@@ -15,7 +15,11 @@ class DashboardDataAdmin(admin.ModelAdmin):
     )
 
     search_fields = list_display
-    list_filter = list_display
+    list_filter = (
+        'last_date_login',
+        'type_device',
+        'browser'
+    )
     fields = list_display
 
 admin.site.register(models.DashboardData, DashboardDataAdmin)

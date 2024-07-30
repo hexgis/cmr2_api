@@ -12,6 +12,21 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import datetime
+from environs import Env
+
+env = Env()
+env.read_env()
+
+#### INSTANCE OF ENV VARIABLES
+
+DEBUG = env.bool('DEBUG', default=False)
+SECRET_KEY = env.str('SECRET_KEY')
+GEOSERVER_URL = env.str('GEOSERVER_URL')
+GEO_SEARCH_VILLAGE = env.str('GEO_SEARCH_VILLAGE')
+GEO_SEARCH_STUDY_TI = env.str('GEO_SEARCH_STUDY_TI')
+LDAP_PASS = env.str('LDAP_PASS')
+LDAP_BASE_DN = env.str('LDAP_BASE_DN')
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -235,57 +250,97 @@ SIMPLE_JWT = {
 
 TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
 
-# Django Jazzmin settings
-# https://django-jazzmin.readthedocs.io/configuration/
 
-JAZZMIN_ADMIN_SITE_TITLE = os.getenv(
-    'JAZZMIN_ADMIN_SITE_TITLE', 'CMR ADMIN')
-JAZZMIN_ADMIN_SITE_HEADER = os.getenv(
-    'JAZZMIN_ADMIN_SITE_HEADER', 'CMR ADMIN')
-JAZZMIN_ADMIN_SITE_BRAND = os.getenv('JAZZMIN_ADMIN_SITE_BRAND', 'CMR')
-JAZZMIN_ADMIN_SITE_LOGO = os.getenv(
-    'JAZZMIN_ADMIN_SITE_LOGO')
-JAZZMIN_ADMIN_LOGIN_LOGO = os.getenv(
-    'JAZZMIN_ADMIN_LOGIN_LOGO')
-JAZZMIN_ADMIN_SITE_FAVICON = os.getenv(
-    'JAZZMIN_ADMIN_SITE_FAVICON', '/admin_files/img/funai.svg')
+################################################################################
+####                           LDAP CONFIGURATION                           ####
+################################################################################
+import ldap
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 
+AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
 
-JAZZMIN_SETTINGS = {
-    'site_title': JAZZMIN_ADMIN_SITE_TITLE,
-    'site_header': JAZZMIN_ADMIN_SITE_HEADER,
-    'site_brand': JAZZMIN_ADMIN_SITE_BRAND,
-    'site_logo': JAZZMIN_ADMIN_SITE_LOGO,  # Top left admin
-    'login_logo': JAZZMIN_ADMIN_LOGIN_LOGO,  # Login site
-    'login_logo_dark': JAZZMIN_ADMIN_LOGIN_LOGO,  # Login site
-    'site_icon': JAZZMIN_ADMIN_SITE_FAVICON,  # Favicon
-    'site_logo_classes': 'img-circle bg-light',
+AUTH_LDAP_USER_SEARCH = LDAPSearch(
+    "OU=FUNAI,DC=funai,DC=local", ldap.SCOPE_SUBTREE, "(mail=%(user)s)"
+)
 
-    'welcome_sign': 'Admin control panel',
-    'show_sidebar': True,
-    'navigation_expanded': False,
-    'copyright': 'Hex360 Ltda',
-    'topmenu_links': [
-        {'name': 'Home',  'url': 'admin:index'},
-        {'model': 'auth.User'},
-    ],
-    'icons': {
-        'auth': 'fas fa-users',
-        'deter_monitoring': 'fas fa-bookmark',
-        'funai': 'fas fa-tree',
-        'catalog': 'fas fa-file',
-        'land_use': 'fas fa-city',
-        'support': 'fas fa-layer-group',
-        'documental': 'fas fa-book',
-        'monitoring': 'fas fa-satellite',
-        'priority_alerts': 'fas fa-exclamation-triangle',
-        'priority_monitoring': 'fas fa-map',
-    },
-    'default_icon_parents': 'fas fa-chevron-circle-right',
-    'default_icon_children': 'fas',
-    'site_logo_classes': 'img-circle bg-light',
+AUTH_LDAP_START_TLS = False
 
+AUTH_LDAP_CONNECTION_OPTIONS = {
+    ldap.OPT_REFERRALS: 0,
 }
+
+# Populate the Django user from the LDAP directory.
+AUTH_LDAP_USER_ATTR_MAP = {
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email": "mail"
+}
+
+AUTH_LDAP_ALWAYS_UPDATE_USER = True
+
+AUTH_LDAP_FIND_GROUP_PERMS = True
+AUTH_LDAP_CACHE_TIMEOUT = 3600
+
+AUTHENTICATION_BACKENDS = (
+    'cmr2_api.auth_backends.MyLDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+################################################################################
+####                        END LDAP CONFIGURATION                          ####
+################################################################################
+
+################################################################################
+####                         LOGGING CONFIGURATION                         #####
+################################################################################
+
+import logging
+import logging.config
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'apscheduler': {
+            'handlers': ['console'],
+            'level': 'WARNING', 
+            'propagate': False,
+        },
+    },
+}
+
+# Configuração para capturar logs de todos os módulos
+logging.config.dictConfig(LOGGING)
+
+################################################################################
+####                       END LOGGING CONFIGURATION                       #####
+################################################################################
 
 JAZZMIN_UI_TWEAKS = {
     'navbar_small_text': False,
@@ -319,100 +374,6 @@ JAZZMIN_UI_TWEAKS = {
     },
     'actions_sticky_top': True
 }
-################################################################################
-####                           LDAP CONFIGURATION                           ####
-################################################################################
-import ldap
-from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
-
-AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
-
-AUTH_LDAP_BIND_DN = "hex@funai.gov.br"
-AUTH_LDAP_BIND_PASSWORD = "Monitoramento.2024"
-
-AUTH_LDAP_USER_SEARCH = LDAPSearch(
-    "OU=FUNAI,DC=funai,DC=local", ldap.SCOPE_SUBTREE, "(mail=%(user)s)"
-)
-
-AUTH_LDAP_START_TLS = False
-
-AUTH_LDAP_CONNECTION_OPTIONS = {
-    ldap.OPT_REFERRALS: 0,
-}
-
-# Populate the Django user from the LDAP directory.
-AUTH_LDAP_USER_ATTR_MAP = {
-    "first_name": "givenName",
-    "last_name": "sn",
-    "email": "mail"
-}
-
-AUTH_LDAP_ALWAYS_UPDATE_USER = True
-
-AUTH_LDAP_FIND_GROUP_PERMS = True
-AUTH_LDAP_CACHE_TIMEOUT = 3600
-
-# Keep ModelBackend around for per-user permissions and maybe a local
-# superuser.
-AUTHENTICATION_BACKENDS = (
-    # 'django_auth_ldap.backend.LDAPBackend',
-    'cmr2_api.auth_backends.MyLDAPBackend',
-    'django.contrib.auth.backends.ModelBackend',
-)
-
-LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'class': 'logging.StreamHandler',
-        },
-    },
-    'loggers': {
-        'django_auth_ldap': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-        'auth_backends': {
-            'handlers': ['console'],
-            'level': 'DEBUG',
-        },
-    },
-}
-
-################ AD LOCAL DA MÁQUINA 192.168.20.136
-
-# AUTH_LDAP_SERVER_URI = 'ldap://192.168.136.128:389'
-# AUTH_LDAP_BIND_DN = 'cn=Administrator,cn=users,dc=demo,dc=lab'
-# AUTH_LDAP_BIND_PASSWORD = 'Funai@2024'
-
-# AUTH_LDAP_USER_SEARCH = LDAPSearch(
-#     'ou=funai,dc=demo,dc=lab',
-#     ldap.SCOPE_SUBTREE,
-#     '(mail=%(user)s)'
-# )
-
-# AUTH_LDAP_GROUP_SEARCH = LDAPSearch(
-#     'dc=demo,dc=lab',
-#     ldap.SCOPE_SUBTREE,
-#     '(objectClass=top)'
-# )
-
-# AUTH_LDAP_GROUP_TYPE = GroupOfNamesType(name_attr="cn")
-
-# AUTH_LDAP_MIRROR_GROUPS = True
-
-# # Populate the Django user from the LDAP directory.
-# AUTH_LDAP_ALWAYS_UPDATE_USER = True
-# AUTH_LDAP_FIND_GROUP_PERMS = False  # Não configurar permissões por grupo
-
-# AUTH_LDAP_CACHE_TIMEOUT = 3600
-
-################################################################################
-####                        END LDAP CONFIGURATION                          ####
-################################################################################
-
 
 ################################################################################
 ####                           EMAIL CONFIGURATION                          ####

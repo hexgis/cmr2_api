@@ -36,56 +36,56 @@ class Command(BaseCommand):
                 "role": "dev_master_admin",
                 "permissions": []
             },
-            {
-                "email": "joaofonseca@funai.com",
-                "role": "funai_cmr_admin",
-                "permissions": []
-            },
-            {
-                "email": "andrezabarroso@funai.com",
-                "role": "autenticado",
-                "permissions": []
-            },
-            {
-                "email": "user4@funai.com",
-                "role": "funai_sede",
-                "permissions": []
-            },
-            {
-                "email": "user5@funai.com",
-                "role": "funai_coordenacao_regional",
-                "permissions": []
-            },
-            {
-                "email": "user6@funai.com",
-                "role": "funai_terra_indigena",
-                "permissions": []
-            },
-            {
-                "email": "user7@funai.com",
-                "role": "fpe",
-                "permissions": []
-            },
-            {
-                "email": "user8@funai.com",
-                "role": "outras_instituicoes",
-                "permissions": []
-            },
-            {
-                "email": "user9@funai.com",
-                "role": "academico",
-                "permissions": []
-            },
-            {
-                "email": "user10@funai.com",
-                "role": "cultural",
-                "permissions": []
-            },
-            {
-                "email": "user11@funai.com",
-                "role": "nao_autenticado",
-                "permissions": []
-            },
+            # {
+            #     "email": "joaofonseca@funai.com",
+            #     "role": "funai_cmr_admin",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "andrezabarroso@funai.com",
+            #     "role": "autenticado",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "user4@funai.com",
+            #     "role": "funai_sede",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "user5@funai.com",
+            #     "role": "funai_coordenacao_regional",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "user6@funai.com",
+            #     "role": "funai_terra_indigena",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "user7@funai.com",
+            #     "role": "fpe",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "user8@funai.com",
+            #     "role": "outras_instituicoes",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "user9@funai.com",
+            #     "role": "academico",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "user10@funai.com",
+            #     "role": "cultural",
+            #     "permissions": []
+            # },
+            # {
+            #     "email": "user11@funai.com",
+            #     "role": "nao_autenticado",
+            #     "permissions": []
+            # },
 
         ]
         headers = {

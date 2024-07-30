@@ -10,8 +10,11 @@ docutils==0.14
 drf-yasg==1.20
 pyyaml==5.2
 pyjwt==1.7.1
-psycopg2-binary==2.8.2
+psycopg2-binary==2.8.2  
 requests==2.19.1
+python-ldap==3.3.1
+django-auth-ldap==3.0.0
+ldap3==2.9.0
 apscheduler==3.10.4
 django-role-permissions==3.2.0
 untangle==1.2.1

@@ -29,22 +29,7 @@ services:
       bash -c "python manage.py makemigrations --no-input &&
       python manage.py migrate &&
       python manage.py schedules &
-      python manage.py loaddata coordenacao_regional.yaml &&
-      python manage.py loaddata terras_indigenas.yaml &&
-      python manage.py loaddata user.yaml &&
-      python manage.py loaddata support.yaml &&
-      python manage.py loaddata support_layer_info.yaml &&
-      python manage.py loaddata support_layerfilter.yaml &&
-      python manage.py loaddata support_tms_layer.yaml &&
-      python manage.py loaddata urgent_alerts.yaml &&
-      python manage.py loaddata land_use_ti.yaml &&
-      python manage.py loaddata land_use_classes.yaml &&
-      python manage.py loaddata catalog_satellites.yaml &&
-      python manage.py loaddata documental_docs_action.yaml &&
-      python manage.py loaddata documental_users_who_registered.yaml &&
-      python manage.py loaddata documental_docs.yaml &&
-      python manage.py loaddata user_profile.yaml &&
-      sleep 10 && python manage.py schedules & 
+      python manage.py monitoring_ad_users &
       python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/
