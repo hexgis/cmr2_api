@@ -32,9 +32,11 @@ class Command(BaseCommand):
         url = "http://localhost:8080/authorization/grant-permissions-test/"
         payloads = [
             {
-                "email": "root@hexgis.com",
+                "email": "valdean.junior@hex360.com.br",
                 "role": "dev_master_admin",
-                "permissions": []
+                "permissions": [],
+                "is_staff": True,
+                "is_superuser": True,
             },
             # {
             #     "email": "joaofonseca@funai.com",

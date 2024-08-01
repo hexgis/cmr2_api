@@ -45,4 +45,4 @@ class DashboardDataSerializer(serializers.ModelSerializer):
         - str: The formatted date and time of the last login in 'dd/mm/yyyy HH:MM:SS' format.
         """
         # Convert date to the desired format
-        return obj.last_date_login.strftime('%d/%m/%Y %H:%M:%S') if obj.last_date_login else None
+        return obj.last_date_login.strftime('%d/%m/%Y') if obj.last_date_login else None

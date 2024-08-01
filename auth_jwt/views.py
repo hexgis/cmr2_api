@@ -8,21 +8,35 @@ from django.contrib.auth.models import User
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth import authenticate, get_user_model
 from django.utils import timezone
-
+from django.http import JsonResponse
+from django.conf import settings
+from django.core.mail import send_mail
+from django.core.mail.message import EmailMessage
 import requests 
 import pytz
+from datetime import timedelta
+import uuid
 
 from rest_framework import (
     response,
     permissions,
     views,
     status,
-    serializers
+    serializers,
+    generics
 )
 
-from dashboard import models
+from user_profile import models as usrModels
+from user_profile import serializers as usrSerializers
+from dashboard import models as dashModels
 
 User = get_user_model()
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
@@ -144,7 +158,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             print("Adjusted date and time for Brasília:", current_date)
             try:
                 # Save the login details in the DashboardData model
-                register = models.DashboardData(
+                register = dashModels.DashboardData(
                     user=logged_user,
                     last_date_login=current_date,
                     location=user_location,
@@ -203,3 +217,72 @@ class ChangePassword(views.APIView):
         return response.Response(
             {'message': message}, status=status.HTTP_400_BAD_REQUEST
         )
+
+class ResetPassword(views.APIView):
+    serializer_class = usrSerializers.PasswordResetRequestSerializer
+    
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        email = serializer.validated_data['email']
+        
+        if email.endswith('@funai.gov.br'):
+            return response.Response({
+                "detail": "Usuários FUNAI não podem alterar o e-mail através do CMR. Para recuperar sua senha, por favor, entre em contato com o setor de TI da sua instituição."
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            user = User.objects.get(email=email)
+        except User.DoesNotExist:
+            return response.Response({"detail": "User with this email does not exist."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        usrModels.PasswordResetCode.objects.filter(user=user).delete()
+
+        # Generate reset code
+        reset_code = usrModels.PasswordResetCode.objects.create(
+            user=user,
+            expires_at=timezone.now() + timedelta(minutes=15)  # Expires in 15 minutes
+        )
+
+        reset_link = f"http://localhost:3000/password-reset/confirm/?code={reset_code.code}"
+
+        subject = 'Solicitação de Recuperação de Senha do CMR'
+        message = f'Foi solicitado a alteração de senha para o usuário {email}. Use o seguinte link para redefinir sua senha: {reset_link}'
+        from_email = settings.DEFAULT_FROM_EMAIL
+        
+        # Send email with the reset code
+        try:
+            send_mail(subject, message, from_email, [email], fail_silently=False)
+            return response.Response({"detail": "Password reset code sent."}, status=status.HTTP_200_OK)
+        except Exception as e:
+            return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+class PasswordResetConfirmView(generics.GenericAPIView):
+    serializer_class = usrSerializers.PasswordResetConfirmSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.serializer_class(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        code = self.request.query_params.get('code')
+        new_password = serializer.validated_data['new_password']
+        confirm_password = serializer.validated_data['confirm_password']
+        
+        if new_password != confirm_password:
+            return response.Response({"detail": "Passwords do not match."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        try:
+            reset_code = usrModels.PasswordResetCode.objects.get(code=code)
+        except usrModels.PasswordResetCode.DoesNotExist:
+            return response.Response({"detail": "Invalid or expired reset code."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        if reset_code.is_expired():
+            return response.Response({"detail": "Reset code has expired."}, status=status.HTTP_400_BAD_REQUEST)
+        
+        user = reset_code.user
+        user.set_password(new_password)
+        user.save()
+        
+        # Delete the reset code
+        reset_code.delete()
+        
+        return response.Response({"detail": "Password has been reset."}, status=status.HTTP_200_OK)

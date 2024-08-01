@@ -8,4 +8,9 @@ urlpatterns = [
         views.FindAllDashboardDataView.as_view(),
         name='dashboard_data'
     ),
+    path(
+        'download-csv/',
+        views.GenCSV.as_view(),
+        name='dashboard_data'
+    ),
 ]

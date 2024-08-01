@@ -383,8 +383,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = '10.0.0.22'
 EMAIL_PORT = '25'
 EMAIL_SUBJECT_PREFIX = '[CMR] Centro de Monitoramento Remoto'
-EMAIL_ADMIN_FEEDBACK = "hexgisdev@gmail.com"
-DEFAULT_FROM_EMAIL = "hexgisdev@gmail.com"
+EMAIL_ADMIN_FEEDBACK = "cmr@funai.gov.br"
+DEFAULT_FROM_EMAIL = "cmr@funai.gov.br"
 
 ################################################################################
 ####                           END EMAIL CONFIGURATION                      ####

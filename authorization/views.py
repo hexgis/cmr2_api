@@ -13,6 +13,7 @@ from rolepermissions.roles import assign_role, registered_roles, clear_roles
 from rolepermissions.permissions import grant_permission, revoke_permission, get_user_roles
 from rolepermissions.exceptions import RolePermissionScopeException
 
+from django.conf import settings
 
 class RequestPermissions(views.APIView):
     """
@@ -96,6 +97,8 @@ class GrantPermissions(views.APIView):
         permissions = request.data.get('permissions', [])
         role = request.data.get('role')
         User = get_user_model()
+        is_staff = request.data.get('is_staff', False)  # Optional, defaults to False
+        is_superuser = request.data.get('is_superuser', False)  # Optional, defaults to False
 
         try:
             user = User.objects.get(email=email)
@@ -127,6 +130,11 @@ class GrantPermissions(views.APIView):
             if is_granted:
                 grant_permission(user, perm_name)
                 granted_permissions.append(perm_name)
+        
+         # Update user's staff and superuser status
+        user.is_staff = is_staff
+        user.is_superuser = is_superuser
+        user.save()
 
         # Send email to the user
         subject = 'Alteração nas suas permissões de acesso do CMR'
@@ -145,7 +153,9 @@ class GrantPermissions(views.APIView):
             'detail': f'Permissões concedidas para o usuário com email {email}.',
             'role': role,
             'permissions': granted_permissions,
-        })
+            'is_staff': user.is_staff,
+            'is_superuser': user.is_superuser
+        }, status=200)
 
 class RevokePermissions(views.APIView):
     """
@@ -204,7 +214,7 @@ class SendEmailTest(views.APIView):
         """
         subject = request.data.get('subject')
         message = request.data.get('message')
-        from_email = 'hexgisdev@gmail.com'
+        from_email = settings.DEFAULT_FROM_EMAIL
         recipient_list = ['valdean.junior@hex360.com.br']  # Example recipient list
 
         try:
