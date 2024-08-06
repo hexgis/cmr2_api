@@ -29,7 +29,9 @@ class DashboardData(models.Model):
     browser = models.CharField(
         max_length=255
     )
-
+    latitude = models.FloatField(null=True, blank=True)
+    longitude = models.FloatField(null=True, blank=True)
+    
     class Meta:
         app_label = 'dashboard'
         verbose_name = 'Dashboard Data'

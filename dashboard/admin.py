@@ -11,7 +11,7 @@ class DashboardDataAdmin(admin.ModelAdmin):
         'location',
         'ip',
         'type_device',
-        'browser'
+        'browser',
     )
 
     search_fields = list_display

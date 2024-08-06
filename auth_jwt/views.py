@@ -11,7 +11,6 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.conf import settings
 from django.core.mail import send_mail
-from django.core.mail.message import EmailMessage
 import requests 
 import pytz
 from datetime import timedelta
@@ -77,11 +76,17 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             response = requests.get(f'https://ipapi.co/{ip}/json/')
             if response.status_code == 200:
                 data = response.json()
-                return f"{data.get('city')}, {data.get('region')}, {data.get('country_name')}"
+                return {
+                    'city': data.get('city'),
+                    'region': data.get('region'),
+                    'country_name': data.get('country_name'),
+                    'latitude': data.get('latitude'),
+                    'longitude': data.get('longitude')
+                }
             else:
-                return "Unknown location"
+                return {'error': 'Unknown location'}
         except Exception as e:
-            return f"Error fetching location: {e}"
+            return {'error': f'Error fetching location: {e}'}
     
     def get_user_agent_info(self, request):
         user_agent_str = request.META.get('HTTP_USER_AGENT', " ")
@@ -130,7 +135,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             # If user is found with email or username, set username in attributes
             attrs['username'] = user.username
 
-
         # Continue with the normal validation process
         data = super().validate(attrs)
         user = self.user
@@ -150,21 +154,23 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             user_location = self.get_location(public_user_ip)
 
             user_agent_info = self.get_user_agent_info(request)
-            print(user_agent_info)
-
+            latitudeF = user_location.get('latitude')
+            longitudeF = user_location.get('longitude')
 
             brasilia_tz = pytz.timezone('America/Sao_Paulo')
             current_date = timezone.now().astimezone(brasilia_tz)
-            print("Adjusted date and time for Brasília:", current_date)
+
             try:
                 # Save the login details in the DashboardData model
                 register = dashModels.DashboardData(
                     user=logged_user,
                     last_date_login=current_date,
-                    location=user_location,
+                    location=f"{user_location.get('city')}, {user_location.get('region')}, {user_location.get('country_name')}",
                     ip=public_user_ip,
                     browser=user_agent_info['browser'],
-                    type_device=user_agent_info['device'] 
+                    type_device=user_agent_info['device'],
+                    latitude=latitudeF,
+                    longitude=longitudeF,
                 )
                 register.save()
                 print(f"Access recorded successfully: {register}")

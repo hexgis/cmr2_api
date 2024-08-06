@@ -4,6 +4,7 @@ from dashboard import models, serializers
 from django.db.models import Count
 from django.db.models.functions import TruncMonth
 from datetime import datetime, timedelta
+from django.utils.timezone import now
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
@@ -92,6 +93,17 @@ class FindAllDashboardDataView(generics.ListAPIView):
             })
         
         return formatted_results
+    
+    def get_total_per_year(self, queryset):
+        """
+        Retrieves the count of DashboardData objects in actual year.
+        """
+        current_year = now().year
+        results = (queryset
+                .filter(last_date_login__year=current_year)
+                .aggregate(total=Count('id')))
+
+        return results['total'] or 0
 
     def list(self, request, *args, **kwargs):
         """
@@ -99,9 +111,11 @@ class FindAllDashboardDataView(generics.ListAPIView):
         """
         queryset = self.get_queryset()
         monthly_counts = self.get_monthly_counts(queryset)
+        total_year = self.get_total_per_year(queryset)
         
         response_data = {
             'monthly_counts': monthly_counts,
+            'total_year': total_year,
             'data': serializers.DashboardDataSerializer(queryset, many=True).data
         }
         return response.Response(response_data)

@@ -136,7 +136,7 @@ class UserUploadedFileGeometryListSerializer(
         model = models.UserUploadedFileGeometry
         geo_field = 'geom'
         id_field = False
-        fields = ('id', )
+        fields = ('id', 'properties')
 
 
 class UserUploadedFileGeometryDetailSerializer(
