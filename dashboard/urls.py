@@ -9,6 +9,11 @@ urlpatterns = [
         name='dashboard_data'
     ),
     path(
+        'get-year/',
+        views.FindDashboardDataYearsView.as_view(),
+        name='dashboard_data_year'
+    ),
+    path(
         'download-csv/',
         views.GenCSV.as_view(),
         name='dashboard_data'

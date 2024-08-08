@@ -2,8 +2,9 @@ from rest_framework import generics, response
 from rest_framework.exceptions import ValidationError
 from dashboard import models, serializers
 from django.db.models import Count
-from django.db.models.functions import TruncMonth
-from datetime import datetime, timedelta
+from django.db.models.functions import TruncMonth, ExtractYear
+from django.utils.dateparse import parse_date
+from datetime import datetime
 from django.utils.timezone import now
 
 from openpyxl import Workbook
@@ -24,34 +25,27 @@ class FindAllDashboardDataView(generics.ListAPIView):
         queryset = models.DashboardData.objects.all()
         
         # Get filter parameters from the request
-        start_date_str = self.request.query_params.get('startDate', None)
-        end_date_str = self.request.query_params.get('endDate', None)
-        location = self.request.query_params.get('location', None)
-        type_device = self.request.query_params.get('type_device', None)
-        browser = self.request.query_params.get('browser', None)
+        start_date_str = self.request.query_params.get('startDate')
+        end_date_str = self.request.query_params.get('endDate')
+        location = self.request.query_params.get('location')
+        type_device = self.request.query_params.get('type_device')
+        browser = self.request.query_params.get('browser')
 
-        # If no parameters are provided, default to the last 14 days 🦆 REDUZIR ESSE TANTO DE IF
-        if not any([start_date_str, end_date_str, location, type_device, browser]):
-            end_date = datetime.now()
-            start_date = end_date - timedelta(days=14)
-            start_date_str = start_date.strftime('%d/%m/%Y')
-            end_date_str = end_date.strftime('%d/%m/%Y')
-        
         # Filter by start date 
         if start_date_str:
             try:
-                start_date = datetime.strptime(start_date_str, '%d/%m/%Y')
+                start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+                queryset = queryset.filter(last_date_login__date__gte=start_date.date())
             except ValueError:
-                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in dd/mm/yyyy format."})
-            queryset = queryset.filter(last_date_login__date__gte=start_date.date())
+                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in YYYY-MM-DD format."})
         
         # Filter by end date
         if end_date_str:
             try:
-                end_date = datetime.strptime(end_date_str, '%d/%m/%Y')
+                end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
+                queryset = queryset.filter(last_date_login__date__lte=end_date.date())
             except ValueError:
-                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in dd/mm/yyyy format."})
-            queryset = queryset.filter(last_date_login__date__lte=end_date.date())
+                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in YYYY-MM-DD format."})
         
         # Filter by location
         if location:
@@ -79,7 +73,7 @@ class FindAllDashboardDataView(generics.ListAPIView):
                    .values('month')
                    .annotate(count=Count('id'))
                    .order_by('month'))
-        
+
         # Format the month field to return month number and year
         formatted_results = []
         for result in results:
@@ -93,31 +87,91 @@ class FindAllDashboardDataView(generics.ListAPIView):
             })
         
         return formatted_results
-    
-    def get_total_per_year(self, queryset):
-        """
-        Retrieves the count of DashboardData objects in actual year.
-        """
-        current_year = now().year
-        results = (queryset
-                .filter(last_date_login__year=current_year)
-                .aggregate(total=Count('id')))
-
-        return results['total'] or 0
 
     def list(self, request, *args, **kwargs):
         """
-        Overrides the list method to include monthly counts in the response.
+        Overrides the list method to include monthly counts and browser categorization in the response.
         """
         queryset = self.get_queryset()
         monthly_counts = self.get_monthly_counts(queryset)
-        total_year = self.get_total_per_year(queryset)
-        
+
+        # Update the browser field
+        for data in queryset:
+            if data.browser not in ['Chrome', 'Firefox', 'Edge', 'Safari']:
+                data.browser = 'Outros'
+
         response_data = {
             'monthly_counts': monthly_counts,
-            'total_year': total_year,
             'data': serializers.DashboardDataSerializer(queryset, many=True).data
         }
+        return response.Response(response_data)
+
+
+class FindDashboardDataYearsView(generics.ListAPIView):
+    """
+    API view to retrieve DashboardData objects with optional filtering by year range.
+    """
+    serializer_class = serializers.DashboardDataSerializer
+
+    def get_queryset(self):
+        """
+        Retrieves the queryset of DashboardData objects, filtering by the provided year range.
+        """
+        queryset = models.DashboardData.objects.all()
+        
+        # Get filter parameters from the request
+        start_date_str = self.request.query_params.get('startDate', None)
+        end_date_str = self.request.query_params.get('endDate', None)
+
+        if start_date_str:
+            try:
+                start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
+            except ValueError:
+                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in YYYY-MM-DD format."})
+        else:
+            start_date = None
+        
+        if end_date_str:
+            try:
+                end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
+            except ValueError:
+                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in YYYY-MM-DD format."})
+        else:
+            end_date = None
+        
+        if start_date and end_date:
+            start_year = datetime(start_date.year, 1, 1)
+            end_year = datetime(end_date.year, 12, 31)
+            queryset = queryset.filter(last_date_login__range=[start_year, end_year])
+        elif start_date:
+            start_year = datetime(start_date.year, 1, 1)
+            queryset = queryset.filter(last_date_login__gte=start_year)
+        elif end_date:
+            end_year = datetime(end_date.year, 12, 31)
+            queryset = queryset.filter(last_date_login__lte=end_year)
+
+        # Annotate and aggregate the data
+        results = (queryset
+                   .annotate(year=ExtractYear('last_date_login'))
+                   .values('year')
+                   .annotate(count=Count('id'))
+                   .order_by('year'))
+
+        # Format the results
+        formatted_results = [{'year': result['year'], 'count': result['count']} for result in results]
+
+        return formatted_results
+
+    def list(self, request, *args, **kwargs):
+        """
+        Overrides the list method to return yearly totals in the response.
+        """
+        queryset = self.get_queryset()
+
+        response_data = {
+            'yearly_totals': queryset  # Since get_queryset already returns formatted results
+        }
+
         return response.Response(response_data)
 
 class GenCSV(generics.GenericAPIView):
