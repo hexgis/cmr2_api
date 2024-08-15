@@ -83,6 +83,16 @@ catalog_permissions = {
     'alterar_catalog': True,     # Permission to change catalog items
 }
 
+camadas_sob_permissions = {
+    '319': True,
+    '1': True,
+    '3': True,
+    '6': True,
+    '4': True,
+    '5': True,
+    '7': True,
+}
+
 ##############################
 ### Dev Master Permissions ###
 ##############################
@@ -123,7 +133,4 @@ for permission in all_funai_panel_permissions:
 
 # Combine common permissions for general users
 common_user_permissions = {}
-common_user_permissions.update(support_permissions)
-common_user_permissions.update(funai_permissions)
-common_user_permissions.update(catalog_permissions)
-common_user_permissions.update(documental_permissions)
+common_user_permissions.update(camadas_sob_permissions)

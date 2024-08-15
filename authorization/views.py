@@ -4,16 +4,31 @@ from rest_framework import (
 )
 from django.http import JsonResponse
 from django.contrib.auth import get_user_model
-from rest_framework import views, status
-from authorization import utils
+from django.core.exceptions import ValidationError
 
-from authorization import constant
+from rest_framework import (
+    views,
+    status,
+    generics)
+
+from authorization import (
+    utils,
+    constant,
+    models,
+    serializers
+    )
+
 
 from rolepermissions.roles import assign_role, registered_roles, clear_roles
 from rolepermissions.permissions import grant_permission, revoke_permission, get_user_roles
 from rolepermissions.exceptions import RolePermissionScopeException
 
 from django.conf import settings
+
+from support import models as supportmodel
+
+from django.contrib import contenttypes, auth
+
 
 class RequestPermissions(views.APIView):
     """
@@ -244,4 +259,48 @@ class LoggedUserCMRModules(views.APIView):
             perms_cmrmodules.update({cmrmodules: request.user.has_perms(constant.CMR_MODULES[cmrmodules]["access"])})
 
         return response.Response(perms_cmrmodules)
+    
+
+class CreatePermissionsView(generics.CreateAPIView):
+    serializer_class = serializers.UserPermssionsSerializer
+
+    def create(self, request, *args, **kwargs):
+        layer_query = supportmodel.Layer.objects.all()
+        layer_data = [{"id": layer.id, "name": layer.name, "layers_g_id": layer.layers_group.id, "layers_g_name": layer.layers_group.name } for layer in layer_query]
+        response_data = {
+            "layers": layer_data,
+        }
+        for layer in layer_data:
+            try:
+                group_instance = supportmodel.LayersGroup.objects.get(id=layer['layers_g_id'])
+                layer_instance = supportmodel.Layer.objects.get(id=layer['id'])
+                models.UserPermissions.objects.get_or_create(
+                    group_id = group_instance,
+                    group_name = layer['layers_g_name'],
+                    permission = "",
+                    permission_name = "",
+                    permission_layer_id = layer_instance,
+                    permission_layer_name = layer['name'],
+                    is_layer = True,
+                )
+            except ValidationError as e:
+                return response.Response({"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            
+        return response.Response(response_data, status=status.HTTP_201_CREATED)
+        
+    # def post(self, request, *args, **kwargs):
+    #     layer_query = supportmodel.Layer.objects.all()
+    #     layer_data = [{"id": layer.id, "name": layer.name, "layers_g_id": layer.layers_group.id, "layers_g_name": layer.layers_group.name } for layer in layer_query]
+    #     response_data = {
+    #         "layers": layer_data,
+    #     }
+
+    #     # response = super().create(request, *args, **kwargs)
+
+    #     # # Adicione os dados ao response
+    #     # response.data.update(response_data)
+
+    #     return response.Response(response_data)
+
+
 

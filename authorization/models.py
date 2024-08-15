@@ -1,0 +1,50 @@
+from django.contrib.gis.db import models
+from support import models as supportmodel
+from django.core.exceptions import ValidationError
+
+class PermissionsList(models.Model):
+    group_id = models.ForeignKey(
+        supportmodel.LayersGroup,
+        on_delete=models.DO_NOTHING
+        )
+    group_name = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+        )
+    permission = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+        )
+    permission_name = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+        )
+    permission_layer_id = models.OneToOneField(
+        supportmodel.Layer,
+        on_delete=models.DO_NOTHING
+        )
+    permission_layer_name = models.CharField(
+        max_length=255,
+        blank=True,
+        null=True
+        )
+    is_layer = models.BooleanField(
+        blank=False,
+        null=False
+    )
+    class Meta:
+        app_label = 'authorization'
+        verbose_name = 'Permission'
+        verbose_name_plural = 'Permissions List'
+
+    def clean(self):
+        super().clean()
+        if self.is_layer:
+            if self.permission or self.permission_name:
+                raise ValidationError('Permission and permission_name should be null if is_layer is False.')
+        else:
+            if self.permission_layer_id or self.permission_layer_name:
+                raise ValidationError('Permission_layer_id and permission_layer_name should be null if is_layer is True.')

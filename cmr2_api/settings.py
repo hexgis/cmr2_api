@@ -243,7 +243,8 @@ REST_FRAMEWORK = {
 # https://github.com/jazzband/djangorestframework-simplejwt
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=15),
+    ## 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=999999999),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
@@ -342,38 +343,38 @@ logging.config.dictConfig(LOGGING)
 ####                       END LOGGING CONFIGURATION                       #####
 ################################################################################
 
-JAZZMIN_UI_TWEAKS = {
-    'navbar_small_text': False,
-    'footer_small_text': False,
-    'body_small_text': False,
-    'brand_small_text': False,
-    'brand_colour': False,
-    'accent': 'accent-info',
-    'navbar': 'navbar-dark',
-    'no_navbar_border': False,
-    'navbar_fixed': True,
-    'layout_boxed': False,
-    'footer_fixed': False,
-    'sidebar_fixed': False,
-    'sidebar': 'sidebar-dark-primary',
-    'sidebar_nav_small_text': True,
-    'sidebar_disable_expand': False,
-    'sidebar_nav_child_indent': False,
-    'sidebar_nav_compact_style': False,
-    'sidebar_nav_legacy_style': False,
-    'sidebar_nav_flat_style': True,
-    'theme': 'solar',
-    'dark_mode_theme': 'darkly',
-    'button_classes': {
-        'primary': 'btn-primary',
-        'secondary': 'btn-secondary',
-        'info': 'btn-info',
-        'warning': 'btn-warning',
-        'danger': 'btn-danger',
-        'success': 'btn-success'
-    },
-    'actions_sticky_top': True
-}
+# JAZZMIN_UI_TWEAKS = {
+#     'navbar_small_text': False,
+#     'footer_small_text': False,
+#     'body_small_text': False,
+#     'brand_small_text': False,
+#     'brand_colour': False,
+#     'accent': 'accent-info',
+#     'navbar': 'navbar-dark',
+#     'no_navbar_border': False,
+#     'navbar_fixed': True,
+#     'layout_boxed': False,
+#     'footer_fixed': False,
+#     'sidebar_fixed': False,
+#     'sidebar': 'sidebar-dark-primary',
+#     'sidebar_nav_small_text': True,
+#     'sidebar_disable_expand': False,
+#     'sidebar_nav_child_indent': False,
+#     'sidebar_nav_compact_style': False,
+#     'sidebar_nav_legacy_style': False,
+#     'sidebar_nav_flat_style': True,
+#     'theme': 'solar',
+#     'dark_mode_theme': 'darkly',
+#     'button_classes': {
+#         'primary': 'btn-primary',
+#         'secondary': 'btn-secondary',
+#         'info': 'btn-info',
+#         'warning': 'btn-warning',
+#         'danger': 'btn-danger',
+#         'success': 'btn-success'
+#     },
+#     'actions_sticky_top': True
+# }
 
 ################################################################################
 ####                           EMAIL CONFIGURATION                          ####

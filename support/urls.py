@@ -14,7 +14,6 @@ urlpatterns = [
         views.CategoryLayersGroupView.as_view(),
         name='Category-layer-groups'
     ),
-
     path(
         'layers-info/',
         views.LayersInfoView.as_view(),

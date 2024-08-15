@@ -178,3 +178,10 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
         if data['new_password'] != data['confirm_password']:
             raise serializers.ValidationError({"confirm_password": "Passwords do not match."})
         return data
+    
+
+class UserPermissionSerializer(serializers.ModelSerializer):
+    
+    class Meta:
+        model = models.UserPermission
+        fields = '__all__'

@@ -193,17 +193,17 @@ class GenCSV(generics.GenericAPIView):
         # Filter by start date
         if start_date:
             try:
-                start_date = datetime.strptime(start_date, '%d/%m/%Y')
+                start_date = datetime.strptime(start_date, '%Y-%m-%d')
             except ValueError:
-                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in dd/mm/yyyy format."})
+                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in yyyy/mm/dd format."})
             queryset = queryset.filter(last_date_login__date__gte=start_date.date())
         
         # Filter by end date
         if end_date:
             try:
-                end_date = datetime.strptime(end_date, '%d/%m/%Y')
+                end_date = datetime.strptime(end_date, '%Y-%m-%d')
             except ValueError:
-                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in dd/mm/yyyy format."})
+                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in yyyy/mm/dd format."})
             queryset = queryset.filter(last_date_login__date__lte=end_date.date())
         
         # Filter by location

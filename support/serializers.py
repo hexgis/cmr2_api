@@ -119,7 +119,8 @@ class LayersGroupAuthenticatedSerializer(ModelSerializer):
         """Meta class for LayersGroupAuthenticatedSerializer."""
 
         model = models.LayersGroup
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ('id','name', 'order', 'layers')
 
 
 class LayersGroupPublicSerializer(ModelSerializer):

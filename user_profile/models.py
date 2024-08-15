@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.utils import timezone
 import uuid
 
+from authorization import models as authorization_model
 
 
 class UserSettings(models.Model):
@@ -182,3 +183,18 @@ class PasswordResetCode(models.Model):
     class Meta:
         app_label = 'user_profile'
         verbose_name = 'password_reset_code'
+
+class UserPermission(models.Model):
+    user = models.ForeignKey(
+        User, 
+        on_delete=models.DO_NOTHING
+        )
+    
+    permission = models.ForeignKey(
+        authorization_model.PermissionsList,
+        on_delete=models.DO_NOTHING
+    )
+
+    class Meta:
+        app_label = 'user_profile'
+        verbose_name = 'user_permission_list'

@@ -17,6 +17,9 @@ from user_profile import (
     serializers
 )
 
+from authorization import models as authorizationmodel
+import json
+
 
 class AuthModelMixIn:
     """"Authentication Model MixIn for UserProfile views.
@@ -275,3 +278,47 @@ class UserUploadFileGeometryDetailView(
     lookup_field = 'id'
     queryset = models.UserUploadedFileGeometry.objects.all()
     serializer_class = serializers.UserUploadedFileGeometryDetailSerializer
+
+class GiverUserPermission(generics.CreateAPIView):
+    """
+    View to grant permissions to a user. This view handles the creation
+    of user permissions based on the provided `permission` or `groups` IDs.
+    """
+
+    serializer_class = serializers.UserPermissionSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            usr = self.request.user
+            permissions_ids = request.data.get('permission')
+            group_permissions_ids = request.data.get('groups')
+            
+            # Process group permissions if provided 
+            if group_permissions_ids:
+                for group_id in group_permissions_ids:
+                    groups_instances = authorizationmodel.PermissionsList.objects.filter(group_id=group_id)
+                    
+                    if groups_instances.exists():
+                        for groups_instance in groups_instances:
+                            models.UserPermission.objects.update_or_create(
+                            user=usr,
+                            permission=groups_instance
+                        )                             
+                    else:
+                        return response.Response(f"No User Permissions found for group_id {group_id}", status=status.HTTP_404_NOT_FOUND)
+            
+            # Process individual permissions if provided
+            if permissions_ids:
+                for perm in permissions_ids:
+                    permission_instance = authorizationmodel.PermissionsList.objects.get(permission_layer_id=perm)
+                    models.UserPermission.objects.update_or_create(
+                        user=usr,
+                        permission=permission_instance
+                    )
+                    return response.Response(f"Permissões concedidas com sucesso para o usuário {usr}", status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            return response.Response(f"An error occurred: {str(e)}", status=status.HTTP_400_BAD_REQUEST)
+        
+        return response.Response(f"Permissões concedidas com sucesso para o usuário {usr}", status=status.HTTP_201_CREATED)
+
