@@ -31,4 +31,7 @@ urlpatterns = [
      path('give-user-permissions/',
          views.GiverUserPermission.as_view(),
          name='give-user-permissions'),
+     path('upload-file/geo/<int:id>/update-properties/',
+         views.UserUploadFileUpdatePropertiesPatchView.as_view(),
+         name='upload-properties')
 ]

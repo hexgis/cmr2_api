@@ -3,6 +3,8 @@ from django.http import Http404
 from django.contrib.gis.geos import GEOSGeometry, WKBWriter
 from user_profile import models
 
+from rest_framework.exceptions import NotFound
+
 from rest_framework_simplejwt import authentication as jwt_authentication
 from rest_framework import (
     authentication,
@@ -322,3 +324,51 @@ class GiverUserPermission(generics.CreateAPIView):
         
         return response.Response(f"Permissões concedidas com sucesso para o usuário {usr}", status=status.HTTP_201_CREATED)
 
+
+class UserUploadFileUpdatePropertiesPatchView(AuthModelMixIn, generics.UpdateAPIView):
+    """
+    View to update `properties` field of `models.UserUploadedFileGeometry`.
+ 
+    Raises:
+        Unauthenticated: User is not authenticated
+ 
+    Returns:
+        dict: updated properties.
+    """
+    serializer_class = serializers.UserUploadedFileGeometryListSerializer
+    lookup_field = 'id'
+ 
+    def get_object(self):
+        """Get the `UserUploadedFileGeometry` object."""
+        try:
+            return models.UserUploadedFileGeometry.objects.get(
+                user_uploaded__user=self.request.user,
+                user_uploaded=self.kwargs[self.lookup_field]
+            )
+        except models.UserUploadedFileGeometry.DoesNotExist:
+            raise NotFound('Geometry not found')
+   
+    def patch(self, request, *args, **kwargs):
+        """Update `color` in `properties` of `UserUploadedFileGeometry`."""
+        geometry = self.get_object()
+ 
+        try:
+            # Extract 'color' from request data
+            color = request.data.get('color', None)
+ 
+            if color is not None:
+                # Update or initialize the properties field
+                properties = geometry.properties or {}
+                properties['color'] = color
+                geometry.properties = properties
+                geometry.save()
+ 
+            data = {
+                'id': geometry.id,
+                'properties': geometry.properties
+            }
+ 
+            return response.Response(data, status=status.HTTP_200_OK)
+ 
+        except Exception:
+            raise Http404('Could not update properties in database')
