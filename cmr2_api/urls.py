@@ -92,4 +92,8 @@ urlpatterns = [
         ('dashboard.urls', 'dashboard'),
         namespace='dashboard'),
     ),
+    path('portal/', include(
+        ('portal.urls', 'portal'),
+        namespace='portal'),
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
