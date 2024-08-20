@@ -11,9 +11,9 @@ from django.utils import timezone
 from django.http import JsonResponse
 from django.conf import settings
 from django.core.mail import send_mail
+
 import requests 
 import pytz
-from datetime import timedelta
 import uuid
 
 from rest_framework import (
@@ -25,6 +25,8 @@ from rest_framework import (
     generics
 )
 
+from datetime import timedelta
+
 from user_profile import models as usrModels
 from user_profile import serializers as usrSerializers
 from dashboard import models as dashModels
@@ -35,7 +37,7 @@ import logging
 
 logger = logging.getLogger(__name__)
 
-
+from django.template.loader import render_to_string
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
@@ -250,15 +252,23 @@ class ResetPassword(views.APIView):
             expires_at=timezone.now() + timedelta(minutes=15)  # Expires in 15 minutes
         )
 
-        reset_link = f"http://localhost:3000/auth/password-reset/confirm/?code={reset_code.code}"
+        reset_link = f"http://localhost:3000/auth/confirmar/?code={reset_code.code}"
+
+        context = {
+            'user': user,
+            'reset_link': reset_link,
+            'reset_code': reset_code.code
+        }
+        html_message = render_to_string('email/password_reset.html', context)
 
         subject = 'Solicitação de Recuperação de Senha do CMR'
-        message = f'Foi solicitado a alteração de senha para o usuário {email}. Use o seguinte link para redefinir sua senha: {reset_link}'
+        # message = f'Foi solicitado a alteração de senha para o usuário {email}. Use o seguinte link para redefinir sua senha: {reset_link}'
         from_email = settings.DEFAULT_FROM_EMAIL
         
         # Send email with the reset code
         try:
-            send_mail(subject, message, from_email, [email], fail_silently=False)
+            # send_mail(subject, message, from_email, [email], fail_silently=False)
+            send_mail(subject, message='', from_email=from_email, recipient_list=[email], html_message=html_message)
             return response.Response({"detail": "Password reset code sent."}, status=status.HTTP_200_OK)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
