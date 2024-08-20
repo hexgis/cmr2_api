@@ -250,7 +250,7 @@ class ResetPassword(views.APIView):
             expires_at=timezone.now() + timedelta(minutes=15)  # Expires in 15 minutes
         )
 
-        reset_link = f"http://localhost:3000/password-reset/confirm/?code={reset_code.code}"
+        reset_link = f"http://localhost:3000/auth/password-reset/confirm/?code={reset_code.code}"
 
         subject = 'Solicitação de Recuperação de Senha do CMR'
         message = f'Foi solicitado a alteração de senha para o usuário {email}. Use o seguinte link para redefinir sua senha: {reset_link}'
