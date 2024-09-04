@@ -9,6 +9,9 @@ from django.template.loader import render_to_string
 from user_profile import models as userProfileModels
 
 import os
+import logging
+
+logger = logging.getLogger(__name__)
 
 class VideoPortalView(APIView):
     def get(self, request, *args, **kwargs):
@@ -67,7 +70,28 @@ class CadastroView(APIView):
         coordinator_department = request.data.get('coordinatorDepartment')
         siape_registration = request.data.get('siapeRegistration')
         attachment = request.FILES.get('attachment') 
-        
+
+        if attachment:
+            upload_dir = os.path.dirname(os.path.join('media/attachments/', attachment.name))
+    
+            # Verifica se o diretório de upload existe; se não, cria-o
+            if not os.path.exists(upload_dir):
+                logger.info(f"Criando o diretório de upload: {upload_dir}")
+                os.makedirs(upload_dir)
+            else:
+                logger.info(f"O diretório de upload já existe: {upload_dir}")
+
+            upload_path = os.path.join('media/attachments/', attachment.name)
+            logger.debug(f"Upload path: {upload_path}")
+
+            # Verifica se o diretório de upload existe
+            if not os.path.exists(os.path.dirname(upload_path)):
+                logger.error(f"O caminho de upload {os.path.dirname(upload_path)} não existe.")
+            else:
+                logger.info(f"Upload do arquivo será realizado em {upload_path}.")
+        else:
+            logger.warning("Nenhum arquivo de anexo foi fornecido.")
+
         cadastro = userProfileModels.AccessRequest.objects.create(
             name=name,
             email=email,
