@@ -185,3 +185,13 @@ class UserPermissionSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.UserPermission
         fields = '__all__'
+
+class UserDataSerializer(serializers.ModelSerializer):
+    institution_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.UserData
+        fields = ['user', 'institution_name', 'institution_id'] 
+
+    def get_institution_name(self, obj):
+        return obj.institution.name if obj.institution else None

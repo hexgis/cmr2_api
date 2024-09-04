@@ -4,7 +4,10 @@ from django.utils import timezone
 import uuid
 
 from authorization import models as authorization_model
+from admin_panel import models as admin_model
 
+import os
+from datetime import datetime
 
 class UserSettings(models.Model):
     """Model to store user settings.
@@ -198,3 +201,48 @@ class UserPermission(models.Model):
     class Meta:
         app_label = 'user_profile'
         verbose_name = 'user_permission_list'
+
+class UserData(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.DO_NOTHING
+    )
+    # institution = models.OneToOneField(
+    #     admin_model.Institutions,
+    #     on_delete=models.DO_NOTHING
+    # )
+
+    # data_request_access = models.ForeignKey(
+    #   AccessRequest
+    # )
+
+    class Meta:
+        app_label='user_profile'
+        verbose_name='user data'
+        verbose_name_plural='users datas'
+
+def rename_file(instance, filename):
+    ext = filename.split('.')[-1]
+    new_filename = f"solicitacao_acesso_{instance.name}_{datetime.now().strftime('%Y-%m-%d')}.{ext}"
+    return os.path.join('attachments', new_filename)
+
+class AccessRequest(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    department = models.CharField(max_length=255)
+    user_siape_registration = models.IntegerField()
+    coordinator_name = models.CharField(max_length=255)
+    coordinator_email = models.EmailField()
+    coordinator_department = models.CharField(max_length=255)
+    coordinator_siape_registration = models.IntegerField()
+    attachment = models.FileField(upload_to=rename_file, null=True, blank=True)
+    status = models.BooleanField(
+        default=False
+    )
+    dt_solicitation = models.DateTimeField(auto_now_add=True) 
+    dt_approvement = models.DateTimeField(null=True, blank=True)
+
+    class Meta:
+        app_label='user_profile'
+        verbose_name='Access Request'
+        verbose_name_plural='Access Requests'

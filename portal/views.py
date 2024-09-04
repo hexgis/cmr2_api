@@ -6,6 +6,8 @@ from django.http import FileResponse, JsonResponse, Http404
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
 
+from user_profile import models as userProfileModels
+
 import os
 
 class VideoPortalView(APIView):
@@ -52,3 +54,32 @@ class ContatoView(APIView):
             return response.Response({"detail": "Email enviado com sucesso."}, status=status.HTTP_200_OK)
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+
+class CadastroView(APIView):
+    def post(self, request, *args, **kwargs):
+        name = request.data.get('name')
+        email = request.data.get('email')
+        department = request.data.get('department')
+        registration = request.data.get('registration')
+        coordinator_name = request.data.get('coordinatorName')
+        coordinator_email = request.data.get('coordinatorEmail')
+        coordinator_department = request.data.get('coordinatorDepartment')
+        siape_registration = request.data.get('siapeRegistration')
+        attachment = request.FILES.get('attachment')  # Recebe o arquivo do request
+        
+        # Criação do objeto no banco de dados
+        cadastro = userProfileModels.AccessRequest.objects.create(
+            name=name,
+            email=email,
+            department=department,
+            user_siape_registration=registration,
+            coordinator_name=coordinator_name,
+            coordinator_email=coordinator_email,
+            coordinator_department=coordinator_department,
+            coordinator_siape_registration=siape_registration,
+            attachment=attachment
+        )
+        # print(settings.MEDIA_ROOT)
+
+        return response.Response({'message': 'Cadastro realizado com sucesso.'}, status=status.HTTP_201_CREATED)
