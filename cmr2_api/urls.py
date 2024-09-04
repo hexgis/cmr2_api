@@ -96,4 +96,8 @@ urlpatterns = [
         ('portal.urls', 'portal'),
         namespace='portal'),
     ),
+     path('adm-panel/', include(
+        ('admin_panel.urls', 'adm-panel'),
+        namespace='adm panel'),
+    ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

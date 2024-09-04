@@ -78,6 +78,7 @@ INSTALLED_APPS = [
     'rolepermissions',
     'dashboard',
     'portal',
+    'admin_panel',
 ]
 
 MIDDLEWARE = [

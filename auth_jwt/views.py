@@ -143,12 +143,12 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         logged_user = User.objects.get(email=username_or_email) if '@' in username_or_email else User.objects.get(username=username_or_email)
 
         # Check if the user has any groups and assign a default role if not
-        if not user.groups.exists():
-            try:
-                assign_role(user, 'nao_autenticado')  # Assigns a default role to the user
-                print('User successfully added to the group.')
-            except Exception as e:
-                print(f'Error adding user to the group: {e}')
+        # if not user.groups.exists():
+        #     try:
+        #         assign_role(user, 'nao_autenticado')  # Assigns a default role to the user
+        #         print('User successfully added to the group.')
+        #     except Exception as e:
+        #         print(f'Error adding user to the group: {e}')
         
         # If the user is authenticated, record their login details
         if user.is_authenticated: 
@@ -251,7 +251,7 @@ class ResetPassword(views.APIView):
             user=user,
             expires_at=timezone.now() + timedelta(minutes=15)  # Expires in 15 minutes
         )
-
+        # 🦆 lembrar de trocar para https://cmr.funai.gov.br/auth/confirmar/?code={reset_code.code} antes de subir para produção.
         reset_link = f"http://localhost:3000/auth/confirmar/?code={reset_code.code}"
 
         context = {
@@ -292,7 +292,7 @@ class PasswordResetConfirmView(generics.GenericAPIView):
             return response.Response({"detail": "Invalid or expired reset code."}, status=status.HTTP_400_BAD_REQUEST)
         
         if reset_code.is_expired():
-            return response.Response({"detail": "Reset code has expired."}, status=status.HTTP_400_BAD_REQUEST)
+            return response.Response({"detail": "Reset code has expired."}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
         
         user = reset_code.user
         user.set_password(new_password)
@@ -302,3 +302,4 @@ class PasswordResetConfirmView(generics.GenericAPIView):
         reset_code.delete()
         
         return response.Response({"detail": "Password has been reset."}, status=status.HTTP_200_OK)
+

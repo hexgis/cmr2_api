@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Alteração de Senha</title>
+    <title>Usuário Pendente</title>
     <style>
         body {
             margin: 0;
@@ -28,7 +28,7 @@
             color: #ffffff;
             text-align: center;
             padding: 20px;
-            
+
             position: relative;
         }
 
@@ -40,7 +40,7 @@
         }
 
         .red-bar {
-            background-color: #D92B3F;
+            background-color:#D92B3F;
             height: 15px;
             width: 100%;
             position: absolute;
@@ -108,7 +108,7 @@
                 width: 100% !important;
             }
 
-           
+
         }
     </style>
 </head>
@@ -234,17 +234,15 @@
         </div>
 
         <div class="content">
-            <h1>Alteração de senha</h1>
-            <p>Prezado(a) <strong><span id="userName"></span></strong>,</p>
-            <p>Recebemos uma solicitação para alterar a sua senha. Para completar o processo, por favor, insira o código
-                de verificação abaixo no sistema:</p>
-            <p><strong>Código de Verificação: {{ reset_code }} <span id="verificationCode"></span></strong></p>
-            <p>Se você não solicitou a alteração de senha, por favor, ignore este e-mail.</p>
-            <p>Para iniciar o processo de alteração da senha, clique no botão abaixo:</p>
+            <h1>Usuário pendente de aprovação</h1>
+            <p>Prezado(a) Gestor(a) <strong><span id="manager"></span></strong>,</p>
+            <p>Um novo usuário, <strong><span id="userName"></span></strong>, está pendente de aprovação. Por favor, acesse o sistema para
+                revisar e aprovar o cadastro.</p>
+            <p>Para iniciar o processo de aprovação, clique no botão abaixo:</p>
             <p>
-                <a href="{{ reset_link }}"
-                    style="background-color: #D92B3F; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Alterar
-                    Senha</a>
+                <a href="link-para-avaliacao"
+                    style="background-color:  #D92B3F; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Aprovar
+                    Usuário</a>
             </p>
         </div>
         <div class="footer">
@@ -257,19 +255,20 @@
             <p class="footer-contact">
                 © 2024 Sua Empresa. Todos os direitos reservados.<br>
                 Rua Exemplo, 123 - Cidade, Estado - CEP 12345-678<br>
-                <a href="mailto:cmr@funai.gov.br"><span id="suporteEmail"></span></a> | <a href="tel:+5561999999999">+55
-                    61 99999-9999</a>
+                <a href="mailto:suporte@suporte.com"><span id="suporteEmail"></span></a> | <a
+                    href="tel:+5561999999999">+55
+                    11 99999-9999</a>
             </p>
         </div>
     </div>
     <script>
-        const userName = 'Usuário Teste'; // Nome do usuário
-        const verificationCode = '123456'; // Código de verificação
-        const suporteEmail = 'cmr@funai.gov.br'
+        const userName = ' Usuário Teste'; // Nome do usuário
+        const suporteEmail = 'suporte@suporte.com.br'
+        const manager = 'Gestor Teste';
 
         document.getElementById('userName').textContent = userName;
-        document.getElementById('verificationCode').textContent = verificationCode;
         document.getElementById('suporteEmail').textContent = suporteEmail;
+        document.getElementById('manager').textContent = manager;
     </script>
 </body>
 

@@ -229,8 +229,8 @@ class SendEmailTest(views.APIView):
         """
         subject = request.data.get('subject')
         message = request.data.get('message')
-        from_email = settings.DEFAULT_FROM_EMAIL
-        recipient_list = ['valdean.junior@hex360.com.br']  # Example recipient list
+        from_email = 'ts4hg84ad8@zorrodemail.com'
+        recipient_list = ['valdean1999@gmail.com']  # Example recipient list
 
         try:
             # Call the send_custom_email function from your utils module

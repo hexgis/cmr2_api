@@ -66,9 +66,8 @@ class CadastroView(APIView):
         coordinator_email = request.data.get('coordinatorEmail')
         coordinator_department = request.data.get('coordinatorDepartment')
         siape_registration = request.data.get('siapeRegistration')
-        attachment = request.FILES.get('attachment')  # Recebe o arquivo do request
+        attachment = request.FILES.get('attachment') 
         
-        # Criação do objeto no banco de dados
         cadastro = userProfileModels.AccessRequest.objects.create(
             name=name,
             email=email,
@@ -80,6 +79,5 @@ class CadastroView(APIView):
             coordinator_siape_registration=siape_registration,
             attachment=attachment
         )
-        # print(settings.MEDIA_ROOT)
-
+        
         return response.Response({'message': 'Cadastro realizado com sucesso.'}, status=status.HTTP_201_CREATED)
