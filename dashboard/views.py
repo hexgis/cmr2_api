@@ -1,16 +1,16 @@
-from rest_framework import generics, response
-from rest_framework.exceptions import ValidationError
-from dashboard import models, serializers
+from rest_framework import generics, response, status
+from rest_framework.exceptions import ValidationError, ParseError
 from django.db.models import Count
 from django.db.models.functions import TruncMonth, ExtractYear
+from django.http import HttpResponse
 from django.utils.dateparse import parse_date
-from datetime import datetime
-from django.utils.timezone import now
 
 from openpyxl import Workbook
 from openpyxl.styles import Font
+
 import io
-from django.http import HttpResponse
+
+from dashboard import models, serializers
 
 class FindAllDashboardDataView(generics.ListAPIView):
     """
@@ -23,7 +23,7 @@ class FindAllDashboardDataView(generics.ListAPIView):
         Retrieves the queryset of DashboardData objects, optionally filtering by the provided parameters.
         """
         queryset = models.DashboardData.objects.all()
-        
+
         # Get filter parameters from the request
         start_date_str = self.request.query_params.get('startDate')
         end_date_str = self.request.query_params.get('endDate')
@@ -31,61 +31,55 @@ class FindAllDashboardDataView(generics.ListAPIView):
         type_device = self.request.query_params.get('type_device')
         browser = self.request.query_params.get('browser')
 
-        # Filter by start date 
+        # Filter by start date
         if start_date_str:
-            try:
-                start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
-                queryset = queryset.filter(last_date_login__date__gte=start_date.date())
-            except ValueError:
-                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in YYYY-MM-DD format."})
-        
+            start_date = parse_date(start_date_str)
+            if not start_date:
+                raise ParseError({"detail": "Invalid start date. Please provide a valid date in YYYY-MM-DD format."})
+            queryset = queryset.filter(last_date_login__date__gte=start_date)
+
         # Filter by end date
         if end_date_str:
-            try:
-                end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
-                queryset = queryset.filter(last_date_login__date__lte=end_date.date())
-            except ValueError:
-                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in YYYY-MM-DD format."})
-        
+            end_date = parse_date(end_date_str)
+            if not end_date:
+                raise ParseError({"detail": "Invalid end date. Please provide a valid date in YYYY-MM-DD format."})
+            queryset = queryset.filter(last_date_login__date__lte=end_date)
+
         # Filter by location
         if location:
             queryset = queryset.filter(location__icontains=location)
-        
+
         # Filter by device type
         if type_device:
             queryset = queryset.filter(type_device__icontains=type_device)
-        
+
         # Filter by browser
         if browser:
             queryset = queryset.filter(browser__icontains=browser)
 
-        if not queryset.exists():
-            raise ValidationError({"detail": "No data found for the given filters."})
-        
         return queryset
 
     def get_monthly_counts(self, queryset):
         """
         Retrieves the count of DashboardData objects aggregated by month and year.
         """
-        results = (queryset
-                   .annotate(month=TruncMonth('last_date_login'))
-                   .values('month')
-                   .annotate(count=Count('id'))
-                   .order_by('month'))
+        results = (
+            queryset.annotate(month=TruncMonth('last_date_login'))
+            .values('month')
+            .annotate(count=Count('id'))
+            .order_by('month')
+        )
 
         # Format the month field to return month number and year
-        formatted_results = []
-        for result in results:
-            month_date = result['month']
-            month_number = month_date.month
-            year = month_date.year
-            formatted_results.append({
-                'month': month_number,
-                'year': year,
+        formatted_results = [
+            {
+                'month': result['month'].month,
+                'year': result['month'].year,
                 'count': result['count']
-            })
-        
+            }
+            for result in results
+        ]
+
         return formatted_results
 
     def list(self, request, *args, **kwargs):
@@ -95,16 +89,18 @@ class FindAllDashboardDataView(generics.ListAPIView):
         queryset = self.get_queryset()
         monthly_counts = self.get_monthly_counts(queryset)
 
-        # Update the browser field
-        for data in queryset:
-            if data.browser not in ['Chrome', 'Firefox', 'Edge', 'Safari']:
-                data.browser = 'Outros'
+        # Update the browser field without modifying the original queryset
+        serialized_data = serializers.DashboardDataSerializer(queryset, many=True).data
+        for data in serialized_data:
+            if data['browser'] not in ['Chrome', 'Firefox', 'Edge', 'Safari']:
+                data['browser'] = 'Outros'
 
         response_data = {
             'monthly_counts': monthly_counts,
-            'data': serializers.DashboardDataSerializer(queryset, many=True).data
+            'data': serialized_data
         }
-        return response.Response(response_data)
+        return response.Response(response_data, status=status.HTTP_200_OK)
+
 
 
 class FindDashboardDataYearsView(generics.ListAPIView):
@@ -120,47 +116,24 @@ class FindDashboardDataYearsView(generics.ListAPIView):
         queryset = models.DashboardData.objects.all()
         
         # Get filter parameters from the request
-        start_date_str = self.request.query_params.get('startDate', None)
-        end_date_str = self.request.query_params.get('endDate', None)
+        start_date_str = self.request.query_params.get('startDate')
+        end_date_str = self.request.query_params.get('endDate')
 
+        # Parse the start date
         if start_date_str:
-            try:
-                start_date = datetime.strptime(start_date_str, '%Y-%m-%d')
-            except ValueError:
-                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in YYYY-MM-DD format."})
-        else:
-            start_date = None
+            start_date = parse_date(start_date_str)
+            if not start_date:
+                raise ParseError({"detail": "Invalid start date. Please provide a valid date in YYYY-MM-DD format."})
+            queryset = queryset.filter(last_date_login__year__gte=start_date.year)
         
+        # Parse the end date
         if end_date_str:
-            try:
-                end_date = datetime.strptime(end_date_str, '%Y-%m-%d')
-            except ValueError:
-                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in YYYY-MM-DD format."})
-        else:
-            end_date = None
-        
-        if start_date and end_date:
-            start_year = datetime(start_date.year, 1, 1)
-            end_year = datetime(end_date.year, 12, 31)
-            queryset = queryset.filter(last_date_login__range=[start_year, end_year])
-        elif start_date:
-            start_year = datetime(start_date.year, 1, 1)
-            queryset = queryset.filter(last_date_login__gte=start_year)
-        elif end_date:
-            end_year = datetime(end_date.year, 12, 31)
-            queryset = queryset.filter(last_date_login__lte=end_year)
+            end_date = parse_date(end_date_str)
+            if not end_date:
+                raise ParseError({"detail": "Invalid end date. Please provide a valid date in YYYY-MM-DD format."})
+            queryset = queryset.filter(last_date_login__year__lte=end_date.year)
 
-        # Annotate and aggregate the data
-        results = (queryset
-                   .annotate(year=ExtractYear('last_date_login'))
-                   .values('year')
-                   .annotate(count=Count('id'))
-                   .order_by('year'))
-
-        # Format the results
-        formatted_results = [{'year': result['year'], 'count': result['count']} for result in results]
-
-        return formatted_results
+        return queryset
 
     def list(self, request, *args, **kwargs):
         """
@@ -168,11 +141,22 @@ class FindDashboardDataYearsView(generics.ListAPIView):
         """
         queryset = self.get_queryset()
 
+        # Annotate and aggregate the data by year
+        results = (
+            queryset.annotate(year=ExtractYear('last_date_login'))
+            .values('year')
+            .annotate(count=Count('id'))
+            .order_by('year')
+        )
+
+        # Format the results
+        formatted_results = [{'year': result['year'], 'count': result['count']} for result in results]
+
         response_data = {
-            'yearly_totals': queryset  # Since get_queryset already returns formatted results
+            'yearly_totals': formatted_results
         }
 
-        return response.Response(response_data)
+        return response.Response(response_data, status=status.HTTP_200_OK)
 
 class GenCSV(generics.GenericAPIView):
     serializer_class = serializers.DashboardDataSerializer
@@ -184,27 +168,25 @@ class GenCSV(generics.GenericAPIView):
         queryset = models.DashboardData.objects.all()
         
         # Get filter parameters from the request
-        start_date = self.request.query_params.get('startDate', None)
-        end_date = self.request.query_params.get('endDate', None)
-        location = self.request.query_params.get('location', None)
-        type_device = self.request.query_params.get('type_device', None)
-        browser = self.request.query_params.get('browser', None)
+        start_date_str = self.request.query_params.get('startDate')
+        end_date_str = self.request.query_params.get('endDate')
+        location = self.request.query_params.get('location')
+        type_device = self.request.query_params.get('type_device')
+        browser = self.request.query_params.get('browser')
         
         # Filter by start date
-        if start_date:
-            try:
-                start_date = datetime.strptime(start_date, '%Y-%m-%d')
-            except ValueError:
-                raise ValidationError({"detail": "Invalid start date. Please provide a valid date in yyyy/mm/dd format."})
-            queryset = queryset.filter(last_date_login__date__gte=start_date.date())
+        if start_date_str:
+            start_date = parse_date(start_date_str)
+            if not start_date:
+                raise ParseError({"detail": "Invalid start date. Please provide a valid date in YYYY-MM-DD format."})
+            queryset = queryset.filter(last_date_login__date__gte=start_date)
         
         # Filter by end date
-        if end_date:
-            try:
-                end_date = datetime.strptime(end_date, '%Y-%m-%d')
-            except ValueError:
-                raise ValidationError({"detail": "Invalid end date. Please provide a valid date in yyyy/mm/dd format."})
-            queryset = queryset.filter(last_date_login__date__lte=end_date.date())
+        if end_date_str:
+            end_date = parse_date(end_date_str)
+            if not end_date:
+                raise ParseError({"detail": "Invalid end date. Please provide a valid date in YYYY-MM-DD format."})
+            queryset = queryset.filter(last_date_login__date__lte=end_date)
         
         # Filter by location
         if location:
@@ -219,16 +201,16 @@ class GenCSV(generics.GenericAPIView):
             queryset = queryset.filter(browser__icontains=browser)
 
         if not queryset.exists():
-            raise ValidationError({"detail": "No data found for the given filters."})
+            raise ParseError({"detail": "No data found for the given filters."})
         
         return queryset
 
-    def generate_excel(self, data):
+    def generate_csv(self, data):
         """
         Gera um arquivo Excel com os dados fornecidos.
         
         :param data: Lista de dicionários contendo os dados a serem exportados.
-        :return: Conteúdo do arquivo Excel como uma string.
+        :return: Conteúdo do arquivo Excel como um objeto BytesIO.
         """
         # Create a new Workbook
         wb = Workbook()
@@ -259,10 +241,13 @@ class GenCSV(generics.GenericAPIView):
         Handle GET requests for generating and downloading the Excel file.
         """
         queryset = self.get_queryset()
-        data = serializers.DashboardDataSerializer(queryset, many=True).data
-        excel_content = self.generate_excel(data)
+        data = self.serializer_class(queryset, many=True).data
+        excel_content = self.generate_csv(data)
         
-        response = HttpResponse(excel_content, content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response = HttpResponse(
+            excel_content,
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
         response['Content-Disposition'] = 'attachment; filename="dashboard_data.xlsx"'
         
         return response

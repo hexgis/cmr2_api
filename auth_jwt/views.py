@@ -141,14 +141,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         data = super().validate(attrs)
         user = self.user
         logged_user = User.objects.get(email=username_or_email) if '@' in username_or_email else User.objects.get(username=username_or_email)
-
-        # Check if the user has any groups and assign a default role if not
-        # if not user.groups.exists():
-        #     try:
-        #         assign_role(user, 'nao_autenticado')  # Assigns a default role to the user
-        #         print('User successfully added to the group.')
-        #     except Exception as e:
-        #         print(f'Error adding user to the group: {e}')
         
         # If the user is authenticated, record their login details
         if user.is_authenticated: 
@@ -227,33 +219,43 @@ class ChangePassword(views.APIView):
         )
 
 class ResetPassword(views.APIView):
+    """Endpoint to handle password reset requests."""
+
     serializer_class = usrSerializers.PasswordResetRequestSerializer
     
     def post(self, request, *args, **kwargs):
+        """Handles POST requests to reset a user's password."""
+        # Validate request data
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
         email = serializer.validated_data['email']
-        
+
+        # Restrict password reset for FUNAI email addresses
         if email.endswith('@funai.gov.br'):
             return response.Response({
-                "detail": "Usuários FUNAI não podem alterar o e-mail através do CMR. Para recuperar sua senha, por favor, entre em contato com o setor de TI da sua instituição."
+                "detail": "Usuários FUNAI não podem alterar o e-mail através do CMR. "
+                          "Para recuperar sua senha, por favor, entre em contato com o setor de TI da sua instituição."
             }, status=status.HTTP_400_BAD_REQUEST)
 
+        # Check if the user with provided email exists
         try:
             user = User.objects.get(email=email)
         except User.DoesNotExist:
             return response.Response({"detail": "User with this email does not exist."}, status=status.HTTP_400_BAD_REQUEST)
-        
+
+        # Delete any existing reset codes for this user
         usrModels.PasswordResetCode.objects.filter(user=user).delete()
 
-        # Generate reset code
+        # Generate a new reset code with a 15-minute expiration
         reset_code = usrModels.PasswordResetCode.objects.create(
             user=user,
-            expires_at=timezone.now() + timedelta(minutes=15)  # Expires in 15 minutes
+            expires_at=timezone.now() + timedelta(minutes=15)
         )
-        # 🦆 lembrar de trocar para https://cmr.funai.gov.br/auth/confirmar/?code={reset_code.code} antes de subir para produção.
-        reset_link = f"http://localhost:3000/auth/confirmar/?code={reset_code.code}"
+            
+        # Generate password reset link
+        reset_link = settings.RESET_PASSWORD_URL.format(code=reset_code.code)
 
+        # Prepare email content with reset link and code
         context = {
             'user': user,
             'reset_link': reset_link,
@@ -262,44 +264,51 @@ class ResetPassword(views.APIView):
         html_message = render_to_string('email/password_reset.html', context)
 
         subject = 'Solicitação de Recuperação de Senha do CMR'
-        # message = f'Foi solicitado a alteração de senha para o usuário {email}. Use o seguinte link para redefinir sua senha: {reset_link}'
         from_email = settings.DEFAULT_FROM_EMAIL
         
-        # Send email with the reset code
+        # Send the password reset email
         try:
-            # send_mail(subject, message, from_email, [email], fail_silently=False)
             send_mail(subject, message='', from_email=from_email, recipient_list=[email], html_message=html_message)
             return response.Response({"detail": "Password reset code sent."}, status=status.HTTP_200_OK)
         except Exception as e:
+            # Handle email sending errors
             return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 class PasswordResetConfirmView(generics.GenericAPIView):
+    """Endpoint to confirm and process a password reset."""
     serializer_class = usrSerializers.PasswordResetConfirmSerializer
 
     def post(self, request, *args, **kwargs):
+        """Handles POST requests to reset the user's password."""
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
+
+        # Checks that the 'code' parameter has been supplied
         code = self.request.query_params.get('code')
+        if not code:
+            return response.Response({"detail": "Reset code is required."}, status=status.HTTP_400_BAD_REQUEST)
+
         new_password = serializer.validated_data['new_password']
         confirm_password = serializer.validated_data['confirm_password']
-        
+
         if new_password != confirm_password:
             return response.Response({"detail": "Passwords do not match."}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         try:
             reset_code = usrModels.PasswordResetCode.objects.get(code=code)
         except usrModels.PasswordResetCode.DoesNotExist:
             return response.Response({"detail": "Invalid or expired reset code."}, status=status.HTTP_400_BAD_REQUEST)
-        
+
         if reset_code.is_expired():
             return response.Response({"detail": "Reset code has expired."}, status=status.HTTP_422_UNPROCESSABLE_ENTITY)
-        
+
         user = reset_code.user
         user.set_password(new_password)
         user.save()
-        
-        # Delete the reset code
+
         reset_code.delete()
-        
+
         return response.Response({"detail": "Password has been reset."}, status=status.HTTP_200_OK)
+
+
 

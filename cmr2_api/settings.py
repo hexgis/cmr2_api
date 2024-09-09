@@ -26,6 +26,7 @@ GEO_SEARCH_VILLAGE = env.str('GEO_SEARCH_VILLAGE')
 GEO_SEARCH_STUDY_TI = env.str('GEO_SEARCH_STUDY_TI')
 LDAP_PASS = env.str('LDAP_PASS')
 LDAP_BASE_DN = env.str('LDAP_BASE_DN')
+RESET_PASSWORD_URL = env.str('RESET_PASSWORD_URL')
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -97,7 +98,10 @@ ROOT_URLCONF = 'cmr2_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),  
+            os.path.join(BASE_DIR, 'media', 'templates'),  
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -109,6 +113,7 @@ TEMPLATES = [
         },
     },
 ]
+
 
 WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 

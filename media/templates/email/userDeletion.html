@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuário Pendente</title>
+    <title>Notificação de exclusão</title>
     <style>
         body {
             margin: 0;
@@ -40,7 +40,7 @@
         }
 
         .red-bar {
-            background-color:#D92B3F;
+            background-color: #D92B3F;
             height: 15px;
             width: 100%;
             position: absolute;
@@ -234,15 +234,13 @@
         </div>
 
         <div class="content">
-            <h1>Usuário pendente de aprovação</h1>
-            <p>Prezado(a) Gestor(a) <strong><span id="manager"></span></strong>,</p>
-            <p>Um novo usuário, <strong><span id="userName"></span></strong>, está pendente de aprovação. Por favor, acesse o sistema para
-                revisar e aprovar o cadastro.</p>
-            <p>Para iniciar o processo de aprovação, clique no botão abaixo:</p>
+            <h1>Notificação de Exclusão</h1>
+            <p>Informamos que o usuário <strong><span id="userName"></span></strong> foi excluído do sistema com
+                sucesso. Se precisar de mais informações ou tiver dúvidas, estamos à disposição para ajudar.</p>
             <p>
-                <a href="link-para-avaliacao"
-                    style="background-color:  #D92B3F; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Aprovar
-                    Usuário</a>
+                <a href="link-de-acesso"
+                    style="background-color: #D92B3F; color: #ffffff; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Acesso
+                    ao sistema</a>
             </p>
         </div>
         <div class="footer">
@@ -264,11 +262,9 @@
     <script>
         const userName = ' Usuário Teste'; // Nome do usuário
         const suporteEmail = 'suporte@suporte.com.br'
-        const manager = 'Gestor Teste';
 
         document.getElementById('userName').textContent = userName;
         document.getElementById('suporteEmail').textContent = suporteEmail;
-        document.getElementById('manager').textContent = manager;
     </script>
 </body>
 

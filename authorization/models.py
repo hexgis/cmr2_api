@@ -39,6 +39,9 @@ class PermissionsList(models.Model):
         app_label = 'authorization'
         verbose_name = 'Permission'
         verbose_name_plural = 'Permissions List'
+        constraints = [
+            models.UniqueConstraint(fields=['group_id', 'permission_layer_id'], name='unique_permission_per_group_layer')
+        ]
 
     def clean(self):
         super().clean()
