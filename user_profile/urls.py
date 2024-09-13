@@ -24,5 +24,8 @@ urlpatterns = [
          name='upload-file-geometry'),
     path('upload-file/geo/detail/<int:id>/',
          views.UserUploadFileGeometryDetailView.as_view(),
-         name='upload-file-geometry-detail')
+         name='upload-file-geometry-detail'),
+     path('upload-file/geo/<int:id>/update-properties/',
+         views.UserUploadFileUpdatePropertiesPatchView.as_view(),
+         name='upload-properties')
 ]
