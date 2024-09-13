@@ -67,6 +67,7 @@ class UserUploadedFileSerializer(serializers.ModelSerializer):
             'name',
             'date_created',
             'is_active',
+            'properties',
         )
 
 
@@ -98,37 +99,11 @@ class UserUploadFileDeleteSerializer(serializers.ModelSerializer):
             'is_active',
         )
 
-
-class UserUploadFileUpdateSerializer(serializers.ModelSerializer):
-    """Serializer class for user update."""
-
-    def update(self, instance, validated_data):
-        """Updates name value to user uploaded file.
-
-        Args:
-            instance (dict): Instance of user upload file.
-            validated_data (dict): Unused necessary field for update method.
-
-        Returns:
-            dict: User uploaded file instance with updated name field.
-        """
-
-        instance.name = validated_data.get('name', instance.name)
-        instance.save()
-        return instance
-
-    class Meta:
-        model = models.UserUploadedFile
-        fields = (
-            'id',
-            'name',
-        )
-
-
 class UserUploadedFileGeometryListSerializer(
     gis_serializers.GeoFeatureModelSerializer
 ):
     """Class to serialize `models.UserUploadedFileGeometry` geo model data."""
+    marker_properties = serializers.SerializerMethodField()
 
     class Meta:
         """Meta class for `UserUploadedFileGeometryListSerializer`."""
@@ -136,16 +111,24 @@ class UserUploadedFileGeometryListSerializer(
         model = models.UserUploadedFileGeometry
         geo_field = 'geom'
         id_field = False
-        fields = ('id', )
+        fields = (
+            'id',
+            'user_uploaded',
+            'geom',
+            'marker_properties'
+            )
+        
+    def get_marker_properties(self, obj):
+        """Retorna apenas o campo `properties` do `UserUploadedFile`."""
+        if obj.user_uploaded:
+            return obj.user_uploaded.properties
+        return None
 
-
-class UserUploadedFileGeometryDetailSerializer(
-    serializers.ModelSerializer
-):
+class UserUploadedFileGeometryDetailSerializer(serializers.ModelSerializer):
     """Class to serialize `models.UserUploadedFileGeometry` model data."""
 
     def to_representation(self, instance: models.UserUploadedFileGeometry):
-        """Returns instance.properties model data.
+        """Returns properties from the related `UserUploadedFile`.
 
         Args:
             instance (models.UserUploadedFileGeometry): model data.
@@ -153,13 +136,13 @@ class UserUploadedFileGeometryDetailSerializer(
         Returns:
             dict: properties
         """
-
-        return instance.properties
+        # Acessa o campo `properties` relacionado a partir de `UserUploadedFile`
+        return instance.user_uploaded.properties
 
     class Meta:
         """Meta class for `UserUploadedFileGeometryDetailSerializer`."""
 
         model = models.UserUploadedFileGeometry
         fields = (
-            'id',
+            'id'
         )

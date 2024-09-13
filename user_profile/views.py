@@ -18,6 +18,9 @@ from user_profile import (
 )
 
 
+
+
+
 class AuthModelMixIn:
     """"Authentication Model MixIn for UserProfile views.
 
@@ -111,7 +114,7 @@ class UserUploadFileCreateView(
     AuthModelMixIn,
     generics.CreateAPIView
 ):
-    """View to create `models.UserUploadFileCreateView` data.
+    """View to create `models.UserUploadedFileCreateView` data.
 
     Raises:
         Unauthenticated: User is not authenticated.
@@ -128,42 +131,59 @@ class UserUploadFileCreateView(
         Returns:
             dict: uploaded data with name, created_at, created and updated.
         """
+        default_color = {'color': '#FF0000'}
         try:
-            user_upload, _ = models.UserUploadedFile.objects.get_or_create(
+            user_upload, created = models.UserUploadedFile.objects.get_or_create(
                 name=request.data.get('name'),
                 user=request.user,
-                is_active=True
+                is_active=True,
+                properties= default_color,
             )
-        except Exception:
-            raise Http404('Could not create file on database')
+
+            if created:
+                logger.info(f"New UserUploadedFile created for user {request.user.username}.")
+            else:
+                logger.info(f"UserUploadedFile already exists for user {request.user.username}.")
+
+        except Exception as e:
+            logger.error(f"Error creating UserUploadedFile for user {request.user.username}: {e}")
+            raise Http404('Could not create file in the database.')
 
         created_data = 0
         data_exists = 0
 
-        if not 'geometry' in request.data or \
-           not 'features' in request.data['geometry']:
-            raise Http404('Could not create file on database')
+        # Check for 'geometry' and 'features' in request data
+        if 'geometry' not in request.data or 'features' not in request.data['geometry']:
+            logger.error("Invalid request data: 'geometry' or 'features' missing.")
+            raise Http404('Could not create file in the database. Invalid request data.')
 
+        # Process each feature in geometry data
         for feature in request.data['geometry']['features']:
             try:
                 geom = GEOSGeometry(str(feature['geometry']))
 
+                # Ensure the geometry is 2D
                 if geom.hasz:
                     geom = GEOSGeometry(WKBWriter(dim=2).write_hex(geom))
 
+                # Create or get the geometry associated
                 _, created = models.UserUploadedFileGeometry.objects.get_or_create(
                     user_uploaded=user_upload,
                     geom=geom,
-                    properties=feature['properties']
                 )
 
                 if created:
-                    created_data = created_data + 1
+                    created_data += 1
+                    logger.info(f"Created new geometry for UserUploadedFile ID {user_upload.id}.")
                 else:
-                    data_exists = data_exists + 1
-            except Exception:
-                raise Http404('Could not create geometries on database')
+                    data_exists += 1
+                    logger.info(f"Geometry already exists for UserUploadedFile ID {user_upload.id}.")
 
+            except Exception as e:
+                logger.error(f"Error creating geometries for UserUploadedFile ID {user_upload.id}: {e}")
+                raise Http404(f'Could not create geometries in the database: {e}')
+
+        # Prepare the response data
         data = {
             'name': user_upload.name,
             'created_at': user_upload.date_created,
@@ -171,8 +191,9 @@ class UserUploadFileCreateView(
             'updated': data_exists
         }
 
-        return response.Response(data, status=status.HTTP_201_CREATED)
+        logger.info(f"UserUploadedFile creation process completed for user {request.user.username}.")
 
+        return response.Response(data, status=status.HTTP_201_CREATED)
 
 class UserUploadFileDelete(
     AuthModelMixIn,
@@ -201,47 +222,8 @@ class UserUploadFileDelete(
             user=self.request.user.id
         )
 
-
-class UserUploadFileUpdate(
-    AuthModelMixIn,
-    generics.UpdateAPIView
-):
-    """View to update `models.UserUploadedFile` model name.
-
-    Raises:
-        Unauthenticated: User is not authenticated
-
-    Returns:
-        dict: updated file name.
-    """
-
-    serializer_class = serializers.UserUploadFileUpdateSerializer
-    lookup_field = 'id'
-
-    def get_queryset(self):
-        """Returns queryset filtered by request user.
-
-        Returns:
-            Queryset: queryset list
-        """
-
-        return models.UserUploadedFile.objects.filter(
-            user=self.request.user.id
-        )
-
-
-class UserUploadFileListGeometryView(
-    AuthModelMixIn,
-    generics.ListAPIView
-):
-    """View to retrieve `models.UserUploadedFileGeometry` model data.
-
-    Raises:
-        Unauthenticated: User is not authenticated
-
-    Returns:
-        dict: uploaded file data.
-    """
+class UserUploadFileListGeometryView(AuthModelMixIn, generics.ListAPIView):
+    """View to retrieve `models.UserUploadedFileGeometry` model data."""
 
     serializer_class = serializers.UserUploadedFileGeometryListSerializer
     lookup_field = 'id'
@@ -252,11 +234,11 @@ class UserUploadFileListGeometryView(
         Returns:
             Queryset: queryset list
         """
-
         return models.UserUploadedFileGeometry.objects.filter(
             user_uploaded__user=self.request.user,
-            user_uploaded=self.kwargs[self.lookup_field]
+            user_uploaded__id=self.kwargs[self.lookup_field] 
         )
+
 
 
 class UserUploadFileGeometryDetailView(
@@ -275,3 +257,102 @@ class UserUploadFileGeometryDetailView(
     lookup_field = 'id'
     queryset = models.UserUploadedFileGeometry.objects.all()
     serializer_class = serializers.UserUploadedFileGeometryDetailSerializer
+
+class GiverUserPermission(generics.CreateAPIView):
+    """
+    View to grant permissions to a user. This view handles the creation
+    of user permissions based on the provided `permission` or `groups` IDs.
+    """
+
+    serializer_class = serializers.UserPermissionSerializer
+
+    def create(self, request, *args, **kwargs):
+        try:
+            usr = self.request.user
+            permissions_ids = request.data.get('permission')
+            group_permissions_ids = request.data.get('groups')
+            
+            # Process group permissions if provided 
+            if group_permissions_ids:
+                for group_id in group_permissions_ids:
+                    groups_instances = authorizationmodel.PermissionsList.objects.filter(group_id=group_id)
+                    
+                    if groups_instances.exists():
+                        for groups_instance in groups_instances:
+                            models.UserPermission.objects.update_or_create(
+                            user=usr,
+                            permission=groups_instance
+                        )                             
+                    else:
+                        return response.Response(f"No User Permissions found for group_id {group_id}", status=status.HTTP_404_NOT_FOUND)
+            
+            # Process individual permissions if provided
+            if permissions_ids:
+                for perm in permissions_ids:
+                    permission_instance = authorizationmodel.PermissionsList.objects.get(permission_layer_id=perm)
+                    models.UserPermission.objects.update_or_create(
+                        user=usr,
+                        permission=permission_instance
+                    )
+                    return response.Response(f"Permissões concedidas com sucesso para o usuário {usr}", status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            return response.Response(f"An error occurred: {str(e)}", status=status.HTTP_400_BAD_REQUEST)
+        
+        return response.Response(f"Permissões concedidas com sucesso para o usuário {usr}", status=status.HTTP_201_CREATED)
+
+class UserUploadFileUpdatePropertiesPatchView(AuthModelMixIn, generics.UpdateAPIView):
+    """
+    View to update `properties` field of `models.UserUploadedFile`.
+ 
+    Raises:
+        Unauthenticated: User is not authenticated.
+ 
+    Returns:
+        dict: Updated properties.
+    """
+    serializer_class = serializers.UserUploadedFileSerializer
+    lookup_field = 'id'
+ 
+    def get_object(self):
+        """Get the `UserUploadedFile` object."""
+        try:
+            return models.UserUploadedFile.objects.get(
+                user=self.request.user,
+                id=self.kwargs[self.lookup_field]
+            )
+        except models.UserUploadedFile.DoesNotExist:
+            raise NotFound('Uploaded file not found')
+   
+    def patch(self, request, *args, **kwargs):
+        """Update `color` in `properties` of `UserUploadedFile`."""
+        uploaded_file = self.get_object()
+ 
+        try:
+            color = request.data.get('color')
+            name = request.data.get('name')
+ 
+            if color is not None:
+                # Update or initialize the properties field
+                properties = uploaded_file.properties or {}
+                properties['color'] = color
+                uploaded_file.properties = properties
+                uploaded_file.save()
+            if name is None or '':
+                print(f'BBBBBBBBBBBBBBBBBBBBBBB {name}')
+
+            if name is not None or ' ':
+                print(f'AAAAAAAAAAAAAAAAAAAAAAAAAA {name}')
+                uploaded_file.name = name
+                uploaded_file.save()
+ 
+            data = {
+                'id': uploaded_file.id,
+                'properties': uploaded_file.properties,
+                'name': uploaded_file.name
+            }
+ 
+            return response.Response(data, status=status.HTTP_200_OK)
+ 
+        except Exception:
+            raise Http404('Could not update properties in database')
