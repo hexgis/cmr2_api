@@ -1,7 +1,8 @@
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from rolepermissions.roles import assign_role
+from rest_framework.permissions import AllowAny
+
 from user_agents import parse as parse_user_agent
 
 from django.contrib.auth.models import User
@@ -36,6 +37,7 @@ User = get_user_model()
 import logging
 
 logger = logging.getLogger(__name__)
+
 
 from django.template.loader import render_to_string
 
@@ -182,46 +184,12 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     """
     serializer_class = CustomTokenObtainPairSerializer
 
-class ChangePassword(views.APIView):
-    """ChangePassword APIView."""
-
-    permission_classes = (permissions.IsAuthenticated,)
-
-    def put(self, request):
-        """Method to receive POST data from request.
-
-        Args:
-            oldPassword (str): old password
-            newPassword (str): new password
-
-        Returns:
-            response: response data
-        """
-
-        old_password = request.data['oldPassword']
-        new_password1 = request.data['newPassword1']
-
-        if request.user.check_password(old_password):
-            request.user.set_password(new_password1)
-            request.user.save()
-
-            refresh = RefreshToken.for_user(request.user)
-
-            return response.Response({
-                'refresh': str(refresh),
-                'access': str(refresh.access_token),
-            }, status=status.HTTP_200_OK)
-        else:
-            message = _('Incorrect password.')
-
-        return response.Response(
-            {'message': message}, status=status.HTTP_400_BAD_REQUEST
-        )
-
 class ResetPassword(views.APIView):
     """Endpoint to handle password reset requests."""
 
     serializer_class = usrSerializers.PasswordResetRequestSerializer
+    permission_classes = [AllowAny]
+    authentication_classes = [] 
     
     def post(self, request, *args, **kwargs):
         """Handles POST requests to reset a user's password."""
@@ -284,7 +252,7 @@ class PasswordResetConfirmView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
 
         # Checks that the 'code' parameter has been supplied
-        code = self.request.query_params.get('code')
+        code =  request.data.get('code')
         if not code:
             return response.Response({"detail": "Reset code is required."}, status=status.HTTP_400_BAD_REQUEST)
 
