@@ -67,6 +67,7 @@ class UserUploadedFileSerializer(serializers.ModelSerializer):
             'name',
             'date_created',
             'is_active',
+            'properties',
         )
 
 
@@ -99,36 +100,11 @@ class UserUploadFileDeleteSerializer(serializers.ModelSerializer):
         )
 
 
-class UserUploadFileUpdateSerializer(serializers.ModelSerializer):
-    """Serializer class for user update."""
-
-    def update(self, instance, validated_data):
-        """Updates name value to user uploaded file.
-
-        Args:
-            instance (dict): Instance of user upload file.
-            validated_data (dict): Unused necessary field for update method.
-
-        Returns:
-            dict: User uploaded file instance with updated name field.
-        """
-
-        instance.name = validated_data.get('name', instance.name)
-        instance.save()
-        return instance
-
-    class Meta:
-        model = models.UserUploadedFile
-        fields = (
-            'id',
-            'name',
-        )
-
-
 class UserUploadedFileGeometryListSerializer(
     gis_serializers.GeoFeatureModelSerializer
 ):
     """Class to serialize `models.UserUploadedFileGeometry` geo model data."""
+    marker_properties = serializers.SerializerMethodField()
 
     class Meta:
         """Meta class for `UserUploadedFileGeometryListSerializer`."""
@@ -136,16 +112,25 @@ class UserUploadedFileGeometryListSerializer(
         model = models.UserUploadedFileGeometry
         geo_field = 'geom'
         id_field = False
-        fields = ('id', )
+        fields = (
+            'id',
+            'user_uploaded',
+            'geom',
+            'marker_properties'
+        )
+
+    def get_marker_properties(self, obj):
+        """Retorna apenas o campo `properties` do `UserUploadedFile`."""
+        if obj.user_uploaded:
+            return obj.user_uploaded.properties
+        return None
 
 
-class UserUploadedFileGeometryDetailSerializer(
-    serializers.ModelSerializer
-):
+class UserUploadedFileGeometryDetailSerializer(serializers.ModelSerializer):
     """Class to serialize `models.UserUploadedFileGeometry` model data."""
 
     def to_representation(self, instance: models.UserUploadedFileGeometry):
-        """Returns instance.properties model data.
+        """Returns properties from the related `UserUploadedFile`.
 
         Args:
             instance (models.UserUploadedFileGeometry): model data.
@@ -153,8 +138,8 @@ class UserUploadedFileGeometryDetailSerializer(
         Returns:
             dict: properties
         """
-
-        return instance.properties
+        # Acessa o campo `properties` relacionado a partir de `UserUploadedFile`
+        return instance.user_uploaded.properties
 
     class Meta:
         """Meta class for `UserUploadedFileGeometryDetailSerializer`."""
@@ -163,3 +148,39 @@ class UserUploadedFileGeometryDetailSerializer(
         fields = (
             'id',
         )
+
+
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    new_password = serializers.CharField(min_length=8, write_only=True)
+    confirm_password = serializers.CharField(min_length=8, write_only=True)
+
+    def validate(self, data):
+        """
+        Validate that the new password and confirm password match.
+        """
+        if data['new_password'] != data['confirm_password']:
+            raise serializers.ValidationError(
+                {"confirm_password": "Passwords do not match."})
+        return data
+
+
+class UserPermissionSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = models.UserPermission
+        fields = '__all__'
+
+
+class UserDataSerializer(serializers.ModelSerializer):
+    institution_name = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.UserData
+        fields = ['user', 'institution_name', 'institution_id']
+
+    def get_institution_name(self, obj):
+        return obj.institution.name if obj.institution else None

@@ -12,6 +12,22 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 import datetime
+from environs import Env
+
+env = Env()
+env.read_env()
+
+#### INSTANCE OF ENV VARIABLES
+
+DEBUG = env.bool('DEBUG', default=False)
+SECRET_KEY = env.str('SECRET_KEY')
+GEOSERVER_URL = env.str('GEOSERVER_URL')
+GEO_SEARCH_VILLAGE = env.str('GEO_SEARCH_VILLAGE')
+GEO_SEARCH_STUDY_TI = env.str('GEO_SEARCH_STUDY_TI')
+LDAP_PASS = env.str('LDAP_PASS')
+LDAP_BASE_DN = env.str('LDAP_BASE_DN')
+RESET_PASSWORD_URL = env.str('RESET_PASSWORD_URL')
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -60,6 +76,10 @@ INSTALLED_APPS = [
     'user_profile',
     'corsheaders',
     'scripts',
+    'rolepermissions',
+    'dashboard',
+    'portal',
+    'admin_panel',
 ]
 
 MIDDLEWARE = [
@@ -78,7 +98,10 @@ ROOT_URLCONF = 'cmr2_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),  
+            os.path.join(BASE_DIR, 'media', 'templates'),  
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -91,6 +114,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 
 
@@ -100,11 +124,11 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT', '5432'),
+        'NAME': 'cmr_funai',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '192.168.20.135',
+        'PORT': '5433',
         'TEST': {'NAME': 'test_default_db', },
     },
     'db_for_read': {
@@ -114,7 +138,6 @@ DATABASES = {
         'PASSWORD': os.getenv('DB_PASSWORD_FOR_READ'),
         'HOST': os.getenv('DB_HOST_FOR_READ'),
         'PORT': os.getenv('DB_PORT_FOR_READ', '5432')
-
     },
 }
 
@@ -139,6 +162,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -226,94 +250,160 @@ REST_FRAMEWORK = {
 # https://github.com/jazzband/djangorestframework-simplejwt
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=15),
+    ## 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=999999999),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
 
 TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
 
-# Django Jazzmin settings
-# https://django-jazzmin.readthedocs.io/configuration/
 
-JAZZMIN_ADMIN_SITE_TITLE = os.getenv(
-    'JAZZMIN_ADMIN_SITE_TITLE', 'CMR ADMIN')
-JAZZMIN_ADMIN_SITE_HEADER = os.getenv(
-    'JAZZMIN_ADMIN_SITE_HEADER', 'CMR ADMIN')
-JAZZMIN_ADMIN_SITE_BRAND = os.getenv('JAZZMIN_ADMIN_SITE_BRAND', 'CMR')
-JAZZMIN_ADMIN_SITE_LOGO = os.getenv(
-    'JAZZMIN_ADMIN_SITE_LOGO')
-JAZZMIN_ADMIN_LOGIN_LOGO = os.getenv(
-    'JAZZMIN_ADMIN_LOGIN_LOGO')
-JAZZMIN_ADMIN_SITE_FAVICON = os.getenv(
-    'JAZZMIN_ADMIN_SITE_FAVICON', '/admin_files/img/funai.svg')
+################################################################################
+####                           LDAP CONFIGURATION                           ####
+################################################################################
+import ldap
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 
+AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
 
-JAZZMIN_SETTINGS = {
-    'site_title': JAZZMIN_ADMIN_SITE_TITLE,
-    'site_header': JAZZMIN_ADMIN_SITE_HEADER,
-    'site_brand': JAZZMIN_ADMIN_SITE_BRAND,
-    'site_logo': JAZZMIN_ADMIN_SITE_LOGO,  # Top left admin
-    'login_logo': JAZZMIN_ADMIN_LOGIN_LOGO,  # Login site
-    'login_logo_dark': JAZZMIN_ADMIN_LOGIN_LOGO,  # Login site
-    'site_icon': JAZZMIN_ADMIN_SITE_FAVICON,  # Favicon
-    'site_logo_classes': 'img-circle bg-light',
+AUTH_LDAP_USER_SEARCH = LDAPSearch(
+    "OU=FUNAI,DC=funai,DC=local", ldap.SCOPE_SUBTREE, "(mail=%(user)s)"
+)
 
-    'welcome_sign': 'Admin control panel',
-    'show_sidebar': True,
-    'navigation_expanded': False,
-    'copyright': 'Hex360 Ltda',
-    'topmenu_links': [
-        {'name': 'Home',  'url': 'admin:index'},
-        {'model': 'auth.User'},
-    ],
-    'icons': {
-        'auth': 'fas fa-users',
-        'deter_monitoring': 'fas fa-bookmark',
-        'funai': 'fas fa-tree',
-        'catalog': 'fas fa-file',
-        'land_use': 'fas fa-city',
-        'support': 'fas fa-layer-group',
-        'documental': 'fas fa-book',
-        'monitoring': 'fas fa-satellite',
-        'priority_alerts': 'fas fa-exclamation-triangle',
-        'priority_monitoring': 'fas fa-map',
-    },
-    'default_icon_parents': 'fas fa-chevron-circle-right',
-    'default_icon_children': 'fas',
-    'site_logo_classes': 'img-circle bg-light',
+AUTH_LDAP_START_TLS = False
 
+AUTH_LDAP_CONNECTION_OPTIONS = {
+    ldap.OPT_REFERRALS: 0,
 }
 
-JAZZMIN_UI_TWEAKS = {
-    'navbar_small_text': False,
-    'footer_small_text': False,
-    'body_small_text': False,
-    'brand_small_text': False,
-    'brand_colour': False,
-    'accent': 'accent-info',
-    'navbar': 'navbar-dark',
-    'no_navbar_border': False,
-    'navbar_fixed': True,
-    'layout_boxed': False,
-    'footer_fixed': False,
-    'sidebar_fixed': False,
-    'sidebar': 'sidebar-dark-primary',
-    'sidebar_nav_small_text': True,
-    'sidebar_disable_expand': False,
-    'sidebar_nav_child_indent': False,
-    'sidebar_nav_compact_style': False,
-    'sidebar_nav_legacy_style': False,
-    'sidebar_nav_flat_style': True,
-    'theme': 'solar',
-    'dark_mode_theme': 'darkly',
-    'button_classes': {
-        'primary': 'btn-primary',
-        'secondary': 'btn-secondary',
-        'info': 'btn-info',
-        'warning': 'btn-warning',
-        'danger': 'btn-danger',
-        'success': 'btn-success'
-    },
-    'actions_sticky_top': True
+# Populate the Django user from the LDAP directory.
+AUTH_LDAP_USER_ATTR_MAP = {
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email": "mail"
 }
+
+AUTH_LDAP_ALWAYS_UPDATE_USER = True
+
+AUTH_LDAP_FIND_GROUP_PERMS = True
+AUTH_LDAP_CACHE_TIMEOUT = 3600
+
+AUTHENTICATION_BACKENDS = (
+    'cmr2_api.auth_backends.MyLDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+################################################################################
+####                        END LDAP CONFIGURATION                          ####
+################################################################################
+
+################################################################################
+####                         LOGGING CONFIGURATION                         #####
+################################################################################
+
+import logging
+import logging.config
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'apscheduler': {
+            'handlers': ['console'],
+            'level': 'WARNING', 
+            'propagate': False,
+        },
+    },
+}
+
+# Configuração para capturar logs de todos os módulos
+logging.config.dictConfig(LOGGING)
+
+################################################################################
+####                       END LOGGING CONFIGURATION                       #####
+################################################################################
+
+# JAZZMIN_UI_TWEAKS = {
+#     'navbar_small_text': False,
+#     'footer_small_text': False,
+#     'body_small_text': False,
+#     'brand_small_text': False,
+#     'brand_colour': False,
+#     'accent': 'accent-info',
+#     'navbar': 'navbar-dark',
+#     'no_navbar_border': False,
+#     'navbar_fixed': True,
+#     'layout_boxed': False,
+#     'footer_fixed': False,
+#     'sidebar_fixed': False,
+#     'sidebar': 'sidebar-dark-primary',
+#     'sidebar_nav_small_text': True,
+#     'sidebar_disable_expand': False,
+#     'sidebar_nav_child_indent': False,
+#     'sidebar_nav_compact_style': False,
+#     'sidebar_nav_legacy_style': False,
+#     'sidebar_nav_flat_style': True,
+#     'theme': 'solar',
+#     'dark_mode_theme': 'darkly',
+#     'button_classes': {
+#         'primary': 'btn-primary',
+#         'secondary': 'btn-secondary',
+#         'info': 'btn-info',
+#         'warning': 'btn-warning',
+#         'danger': 'btn-danger',
+#         'success': 'btn-success'
+#     },
+#     'actions_sticky_top': True
+# }
+
+################################################################################
+####                           EMAIL CONFIGURATION                          ####
+################################################################################
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '10.0.0.22'
+EMAIL_PORT = '25'
+EMAIL_SUBJECT_PREFIX = '[CMR] Centro de Monitoramento Remoto'
+EMAIL_ADMIN_FEEDBACK = "cmr@funai.gov.br"
+DEFAULT_FROM_EMAIL = "cmr@funai.gov.br"
+
+################################################################################
+####                           END EMAIL CONFIGURATION                      ####
+################################################################################
+
+################################################################################
+####                       PERMISSIONS MODULE CONFIGURATION                 ####
+################################################################################
+
+ROLEPERMISSIONS_MODULE = 'cmr2_api.roles'
+
+################################################################################
+####                    END PERMISSIONS MODULE CONFIGURATION                ####
+################################################################################

@@ -1,7 +1,17 @@
 from django.contrib import admin
 from user_profile import models
+from cmr2_api.mixins import AdminPermissionMixin
 
-class UserSettingsAdmin(admin.ModelAdmin):
+class UserSettingsAdmin(AdminPermissionMixin, admin.ModelAdmin):
+    """
+    Admin interface configuration for user settings management.
+
+    Attributes:
+    - list_display: Fields displayed in the list view of user settings.
+    - fields: Fields editable in the admin interface for user settings.
+    - search_fields: Fields searchable in the admin interface for user settings.
+
+    """
     list_display = (
         'user',
         'dark_mode_active',

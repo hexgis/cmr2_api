@@ -1,14 +1,20 @@
 from django.shortcuts import render
+import xml.etree.ElementTree as ET
+from support import models
+from datetime import datetime
+
+from ldap3 import Server, Connection, SUBTREE
+
+from django.contrib.auth.models import User
+
+from django.conf import settings
+
 import requests
 import json
 import untangle
-import xml.etree.ElementTree as ET
-from support import models
-from support import serializers
-from rest_framework import generics
-from datetime import datetime
-import random
+import logging
 
+logger = logging.getLogger(__name__)
 
 # Create your views here
 class JobSccon():
@@ -240,5 +246,78 @@ class JobSccon():
             except Exception as e:
                 print(f"Erro ao registrar TmsLayer: {e}")
 
+class JobMonitoringAd:
+    
+    def sincronize_with_django(self):
+        ldap_uri = '10.0.0.1'
+        ldap_port = 389
+        base_dn = settings.LDAP_BASE_DN
+        use_tls = False              
 
-        # python manage.py schedules
+        sAMAccountName = 'hex'
+        domain = 'FUNAI'
+        ldap_password = settings.LDAP_PASS
+
+        ldap_connection = None
+
+        try:
+            ldap_bind_dn = f'{domain}\\{sAMAccountName}'
+            server = Server(ldap_uri, port=ldap_port, use_ssl=use_tls)
+            ldap_connection = Connection(server, user=ldap_bind_dn, password=ldap_password, auto_bind=True)
+
+            logger.debug("LDAP connection established successfully.")
+
+            ldap_connection.search(
+                search_base=base_dn,
+                search_filter='(&(objectClass=*))',
+                search_scope=SUBTREE,
+                attributes=['sAMAccountName', 'mail']
+            )
+
+            django_users = {user.username: user for user in User.objects.all()}
+            ad_usernames = []
+
+            for entry in ldap_connection.entries:
+                user_mail = entry.mail.value if 'mail' in entry else None
+                user_samaccountname = entry.sAMAccountName.value if 'sAMAccountName' in entry else None
+
+                if not user_samaccountname or not user_mail:
+                    logger.debug(f"Skipping entry due to missing sAMAccountName or mail: {entry}")
+                    continue
+
+                ad_usernames.append(user_samaccountname)
+
+                parts = user_samaccountname.split('.')
+                first_name = parts[0] if len(parts) > 0 else ""
+                last_name = parts[1] if len(parts) > 1 else ""
+
+                user_defaults = {
+                    'first_name': first_name,
+                    'last_name': last_name,
+                    'email': user_mail,
+                }
+
+                if user_samaccountname in django_users:
+                    user = django_users[user_samaccountname]
+                    changes_needed = any(
+                        getattr(user, field) != value
+                        for field, value in user_defaults.items()
+                    )
+                    if changes_needed:
+                        for field, value in user_defaults.items():
+                            setattr(user, field, value)
+                        user.save()
+                        logger.debug(f"Updated user: {user.username}, email: {user.email}")
+                    else:
+                        logger.debug(f"No changes needed for user: {user.username}")
+                else:
+                    user = User.objects.create(username=user_samaccountname, **user_defaults)
+                    logger.debug(f"Created user: {user.username}, email: {user.email}")
+            
+        except Exception as e:
+            logger.error(f"Error: {e}")
+
+        finally:
+            if ldap_connection:
+                ldap_connection.unbind()        
+                #           python manage.py monitoring_ad_users
