@@ -13,4 +13,5 @@ urlpatterns = [
         views.LoggedUserCMRModules.as_view(),
         name='authorization-user-cmrmodules'
     ),
+    path('create-permissions/', views.CreatePermissionsView.as_view(), name='Create Permissions'),
 ]

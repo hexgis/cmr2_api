@@ -6,38 +6,38 @@ class DocsAction(models.Model):
     """DocsAction model data for documental model."""
 
     id_action = models.IntegerField(
-        _('Action Identifier'),
+        _('Identificador da Ação'),
         unique=True,
     )
 
     no_action = models.CharField(
-        _('Action name'),
+        _('Nome'),
         max_length=255,
         unique=True,
     )
 
     dt_creation = models.DateTimeField(
-        _('Registration date'),
+        _('Data de Registro'),
         null=True,
         blank=True,
     )
 
     action_type = models.CharField(
-        _('Type of action'),
+        _('Tipo de Ação'),
         max_length=255,
         null=True,
         blank=True,
     )
 
     action_type_group = models.CharField(
-        _('Group within action types'),
+        _('Grupo com Tipos de Ação'),
         max_length=255,
         null=True,
         blank=True,
     )
 
     description = models.CharField(
-        _('Description of action'),
+        _('Descrição da Ação'),
         max_length=512,
         null=True,
         blank=True,
@@ -55,12 +55,12 @@ class UsersCMR(models.Model):
     """UsersCMR model data for documental model."""
 
     id_user = models.IntegerField(
-        _('User Identifier'),
+        _('Identificador do Usuário'),
         unique=True,
     )
 
     first_name = models.CharField(
-        _('Name of who registered'),
+        _('Nome de quem se inscreveu'),
         max_length=255,
         null=True,
         blank=True,
@@ -79,20 +79,20 @@ class DocumentalDocs(models.Model):
     """DocumentalDocs model data for documental model."""
 
     id_document = models.IntegerField(
-        _('Key Identifier'),
+        _('Identificador Chave'),
         null=False,
         blank=False,
     )
 
     path_document = models.CharField(
-        _('Document file path'),
+        _('Caminho do arquivo do documento'),
         max_length=255,
         null=True,
         blank=True,
     )
 
     no_document = models.CharField(
-        _('Document name'),
+        _('Nome do Documento'),
         max_length=255,
         null=True,
         blank=True,
@@ -105,37 +105,37 @@ class DocumentalDocs(models.Model):
     )
 
     st_available = models.BooleanField(
-        _('Document available'),
+        _('Documento disponível'),
         default=False,
         null=True,
         blank=True,
     )
 
     st_excluded = models.BooleanField(
-        _('Deleted document'),
+        _('Documento excluído'),
         default=False,
         null=True,
         blank=True,
     )
 
     dt_registration = models.DateTimeField(
-        _('Document registration date'),
+        _('Data de registro do documento'),
         auto_now_add=True,
     )
 
     dt_update = models.DateTimeField(
-        _('Last update date'),
+        _('Data da última atualização'),
         auto_now=True,
     )
 
     co_funai = models.IntegerField(
-        _('Funai code - Indigenous Lands'),
+        _('Código Funai – Terras Indígenas'),
         null=True,
         blank=True,
     )
 
     no_ti = models.CharField(
-        _('Indigenous Lands name'),
+        _('Nome das Terras Indígenas'),
         max_length=255,
         null=True,
         blank=True,
@@ -148,13 +148,13 @@ class DocumentalDocs(models.Model):
     )
 
     co_cr = models.BigIntegerField(
-        _('Regional Coordenation code'),
+        _('Código de Coordenação Regional'),
         blank=True,
         null=True,
     )
 
     ds_cr = models.CharField(
-        _('Regional Coordenation name'),
+        _('Nome da Coordenação Regional'),
         max_length=255,
         blank=True,
         null=True,
@@ -181,19 +181,19 @@ class DocsLandUser(DocumentalDocs):
     """DocsLandUser model data for documental model."""
 
     nu_year = models.IntegerField(
-        _('Delivery reference year'),
+        _('Ano de referência de entrega'),
         null=True,
         blank=True,
     )
 
     nu_year_map = models.IntegerField(
-        _('Year of the map'),
+        _('Ano do mapa'),
         null=True,
         blank=True,
     )
 
     file = models.FileField(
-        _('Docs DocumentTI file path'),
+        _('Caminho do arquivo'),
         upload_to='DocsLandUser/',
         default='Undefined File',
     )
@@ -216,20 +216,20 @@ class DocsDocumentTI(DocumentalDocs):
     """DocsDocumentTI model data for documental model."""
 
     dt_document = models.DateField(
-        _('Date of document'),
+        _('Data do documento'),
         null=True,
         blank=True,
     )
 
     no_extension = models.CharField(
-        _('Document extension'),
+        _('Extensão do documento'),
         max_length=255,
         null=True,
         blank=True,
     )
 
     file = models.FileField(
-        _('Docs DocumentTI file path'),
+        _('Caminho do Arquivo'),
         upload_to='DocumentTI/',
         default='Undefined File',
     )
@@ -252,28 +252,28 @@ class DocsMapoteca(DocumentalDocs):
     """DocsMapoteca model data for documental model."""
 
     no_description = models.CharField(
-        _('File Description'),
+        _('Descrição do arquivo'),
         max_length=255,
         blank=True,
         null=True,
     )
 
     map_dimension = models.CharField(
-        _('Map page dimension'),
+        _('Dimensão da página do mapa'),
         max_length=2,
         blank=True,
         null=True,
     )
 
     js_ti = models.CharField(
-        _('Array de Terras Indígenas'),
+        _('Matriz de Terras Indígenas'),
         max_length=255,
         blank=True,
         null=True,
     )
 
     file = models.FileField(
-        _('Docs DocsMapoteca file path'),
+        _('Caminho do Aqruivo'),
         upload_to='DocsMapoteca/',
         default='Undefined File',
     )

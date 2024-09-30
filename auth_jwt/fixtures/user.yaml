@@ -1,3 +1,4 @@
+# users.yaml
 - model: auth.user
   pk: 1
   fields:
@@ -11,5 +12,166 @@
     is_staff: true
     is_active: true
     date_joined: 2019-12-19 21:43:16.265931+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: true
+    username: joao_fonseca
+    first_name: 'João'
+    last_name: 'Fonseca'
+    email: joaofonseca@funai.com
+    is_staff: true
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 3
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: andreza_barroso
+    first_name: 'Andreza'
+    last_name: 'Barroso'
+    email: andrezabarroso@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+
+- model: auth.user
+  pk: 4
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: user4
+    first_name: 'User'
+    last_name: '4'
+    email: user4@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 5
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: user5
+    first_name: 'User'
+    last_name: '5'
+    email: user5@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 6
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: user6
+    first_name: 'User'
+    last_name: '6'
+    email: user6@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 7
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: user7
+    first_name: 'User'
+    last_name: '7'
+    email: user7@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 8
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: user8
+    first_name: 'User'
+    last_name: '8'
+    email: user8@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 9
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: user9
+    first_name: 'User'
+    last_name: '9'
+    email: user9@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 10
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: user10
+    first_name: 'User'
+    last_name: '10'
+    email: user10@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
+    groups: []
+    user_permissions: []
+
+- model: auth.user
+  pk: 11
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: user11
+    first_name: 'User'
+    last_name: '11'
+    email: user11@funai.com
+    is_staff: false
+    is_active: true
+    date_joined: 2020-01-01 12:00:00.000000+00:00
     groups: []
     user_permissions: []

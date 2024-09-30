@@ -25,8 +25,8 @@ ENV PYTHONUNBUFFERED 1
 
 # Install system requirements
 RUN apt update -y
-RUN apt install gdal-bin libgdal-dev python-dev -y
-
+RUN apt install gdal-bin libgdal-dev python-dev libldap2-dev libsasl2-dev libssl-dev gcc build-essential -y
+ 
 # Install python pip requirements
 RUN python -m pip install --upgrade pip
 RUN pip install setuptools==58.0 # fixing use_2to3_fixers error
