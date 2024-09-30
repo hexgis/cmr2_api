@@ -338,11 +338,8 @@ class UserUploadFileUpdatePropertiesPatchView(AuthModelMixIn, generics.UpdateAPI
                 properties['color'] = color
                 uploaded_file.properties = properties
                 uploaded_file.save()
-            if name is None or '':
-                print(f'BBBBBBBBBBBBBBBBBBBBBBB {name}')
 
             if name is not None or ' ':
-                print(f'AAAAAAAAAAAAAAAAAAAAAAAAAA {name}')
                 uploaded_file.name = name
                 uploaded_file.save()
  
