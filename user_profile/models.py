@@ -124,6 +124,11 @@ class UserUploadedFile(models.Model):
 
     is_active = models.BooleanField(default=True)
 
+    properties = models.JSONField(
+        null=True,
+        blank=True
+    )
+
     def __str__(self):
         """Model class string.
 
@@ -153,12 +158,7 @@ class UserUploadedFileGeometry(models.Model):
         related_name='user_uploaded_file',
     )
 
-    geom = models.GeometryField(srid=4326)
-
-    properties = models.JSONField(
-        null=True,
-        blank=True
-    )
+    geom = models.GeometryField(srid=4326) 
 
     def __str__(self):
         """Model class string.
