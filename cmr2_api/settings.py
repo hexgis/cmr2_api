@@ -10,6 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+import logging.config
+import logging
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
+import ldap
 import os
 import datetime
 from environs import Env
@@ -17,7 +21,7 @@ from environs import Env
 env = Env()
 env.read_env()
 
-#### INSTANCE OF ENV VARIABLES
+# INSTANCE OF ENV VARIABLES
 
 DEBUG = env.bool('DEBUG', default=False)
 SECRET_KEY = env.str('SECRET_KEY')
@@ -99,8 +103,8 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),  
-            os.path.join(BASE_DIR, 'media', 'templates'),  
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'media', 'templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -124,11 +128,11 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'cmr_funai',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '192.168.20.135',
-        'PORT': '5433',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT', '5432'),
         'TEST': {'NAME': 'test_default_db', },
     },
     'db_for_read': {
@@ -250,7 +254,7 @@ REST_FRAMEWORK = {
 # https://github.com/jazzband/djangorestframework-simplejwt
 
 SIMPLE_JWT = {
-    ## 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
+    # 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=999999999),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
@@ -262,8 +266,6 @@ TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
 ################################################################################
 ####                           LDAP CONFIGURATION                           ####
 ################################################################################
-import ldap
-from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 
 AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
 
@@ -302,8 +304,6 @@ AUTHENTICATION_BACKENDS = (
 ####                         LOGGING CONFIGURATION                         #####
 ################################################################################
 
-import logging
-import logging.config
 
 LOGGING = {
     'version': 1,
@@ -337,7 +337,7 @@ LOGGING = {
         },
         'apscheduler': {
             'handlers': ['console'],
-            'level': 'WARNING', 
+            'level': 'WARNING',
             'propagate': False,
         },
     },
