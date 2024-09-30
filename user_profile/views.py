@@ -1,7 +1,9 @@
 from django.shortcuts import render
-from django.http import Http404
+from django.http import HttpResponseServerError
 from django.contrib.gis.geos import GEOSGeometry, WKBWriter
 from user_profile import models
+
+from rest_framework.exceptions import NotFound
 
 from rest_framework_simplejwt import authentication as jwt_authentication
 from rest_framework import (
@@ -17,8 +19,9 @@ from user_profile import (
     serializers
 )
 
+import logging
 
-
+logger = logging.getLogger(__name__)
 
 
 class AuthModelMixIn:
@@ -147,7 +150,7 @@ class UserUploadFileCreateView(
 
         except Exception as e:
             logger.error(f"Error creating UserUploadedFile for user {request.user.username}: {e}")
-            raise Http404('Could not create file in the database.')
+            raise HttpResponseServerError('Could not create file in the database.')
 
         created_data = 0
         data_exists = 0
@@ -155,7 +158,7 @@ class UserUploadFileCreateView(
         # Check for 'geometry' and 'features' in request data
         if 'geometry' not in request.data or 'features' not in request.data['geometry']:
             logger.error("Invalid request data: 'geometry' or 'features' missing.")
-            raise Http404('Could not create file in the database. Invalid request data.')
+            raise HttpResponseServerError('Could not create file in the database. Invalid request data.')
 
         # Process each feature in geometry data
         for feature in request.data['geometry']['features']:
@@ -181,7 +184,7 @@ class UserUploadFileCreateView(
 
             except Exception as e:
                 logger.error(f"Error creating geometries for UserUploadedFile ID {user_upload.id}: {e}")
-                raise Http404(f'Could not create geometries in the database: {e}')
+                raise HttpResponseServerError(f'Could not create geometries in the database: {e}')
 
         # Prepare the response data
         data = {
@@ -352,4 +355,4 @@ class UserUploadFileUpdatePropertiesPatchView(AuthModelMixIn, generics.UpdateAPI
             return response.Response(data, status=status.HTTP_200_OK)
  
         except Exception:
-            raise Http404('Could not update properties in database')
+            raise HttpResponseServerError('Could not update properties in database')
