@@ -2,6 +2,7 @@ from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
+#🦆 not in use, review to exclude.
 class LandUseTI(models.Model):
     """LandUseTI model data for land_use model."""
 
@@ -203,6 +204,57 @@ class LandUseTI(models.Model):
         verbose_name = 'Land Use Mapping TI'
         verbose_name_plural = 'Land Use Mapping TIs'
         db_table = 'funaidados\".\"img_analise_consolidado_oneatlas_dissolvido_por_ti_a'
+        managed = False
+
+class LandUseVmRegionalCoordnation(models.Model):
+    id = models.IntegerField(
+        _('primary key'),
+        unique=True,
+        primary_key=True,
+    )
+
+    cr_co_cr = models.CharField(
+        _('Code of Regional Coordination'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    cr_no_cr = models.CharField(
+        _('Name of Regional Coordination'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    cr_no_regiao = models.CharField(
+        _('Regiona Name of Regional Coordination'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+
+    ti_co_funai = models.CharField(
+        _('funai code of Indigenous Land'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+
+    ti_no_ti = models.CharField(
+        _('Name of Indigenous Land'),
+        max_length=255,
+        null=True,
+        blank=True,
+    )
+    
+    class Meta:
+        """Meta class for `models.LandUseTI` model."""
+        app_label = 'land_use'
+        verbose_name = 'Land Use Mapping Regional Coordination'
+        verbose_name_plural = 'Land Use Mapping Regional Coordinations'
+        db_table = 'funai\".\"vwm_painel_coordenacao_regional_terra_indigena'
         managed = False
 
 

@@ -80,3 +80,62 @@ class LandUseDetailSerializer(serializers.ModelSerializer):
             'dt_imagens',
             'nu_area_ha',
         )
+
+class LandUseToCompareSerializer(serializers.ModelSerializer):
+    """Serializer to return model from `models.LandUseClasses` data.
+    
+    Serializes model data to return table info without geometry.
+    """
+
+    class Meta:
+        """Meta class for `LandUseTableSerializer` serializer."""
+        model = models.LandUseClasses
+        fields = (
+            'ds_cr',
+            'co_cr',
+            'no_ti',
+            'co_funai',
+        )
+
+class LandUseCrSerializer(serializers.ModelSerializer):
+    """Serializer to return model from `models.LandUseClasses` data.
+    
+    Serializes model data to return table info without geometry.
+    """
+    co_cr = serializers.CharField(source='cr_co_cr')
+    ds_cr = serializers.CharField(source='cr_no_cr')
+    no_regiao = serializers.CharField(source='cr_no_regiao')
+
+    class Meta:
+        """Meta class for `LandUseTableSerializer` serializer."""
+        model = models.LandUseVmRegionalCoordnation
+        fields = (
+            'no_regiao',
+            'ds_cr',
+            'co_cr',
+        )
+
+class LandUseTiSerializer(serializers.ModelSerializer):
+    """Serializer to return model from `models.LandUseClasses` data.
+    
+    Serializes model data to return table info without geometry.
+    """
+    no_ti = serializers.CharField(source='ti_no_ti')
+    co_funai = serializers.CharField(source='ti_co_funai')
+    co_cr = serializers.CharField(source='cr_co_cr')
+
+    class Meta:
+        """Meta class for `LandUseTableSerializer` serializer."""
+        model = models.LandUseClasses
+        fields = (
+            'no_ti',
+            'co_funai',
+            'co_cr'
+        )
+
+class LandUseTesteSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        """Meta class for `LandUseTableSerializer` serializer."""
+        model = models.LandUseVmRegionalCoordnation
+        fields = "__all__"
