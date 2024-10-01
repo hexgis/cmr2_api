@@ -32,7 +32,7 @@ class DeterTIMapStatsSerializer(serializers.ModelSerializer):
         """Meta class for `DeterMapStatsSerializer` serializer."""
         model = models.DeterTI
         id_field = False
-        fields = ['area_total_km', ]
+        fields = ['areatotalkm', ]
 
 
 class DeterTITableSerializer(serializers.ModelSerializer):

@@ -1,0 +1,273 @@
+-   model: support.layersinfo
+    pk: 2
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br)
+        layer_id: 1
+        dt_atualizacao: 2023-09-25
+        database_layer_name: funai.lim_terra_indigena_a
+-   model: support.layersinfo
+    pk: 3
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br/)
+        layer_id: 3
+        dt_atualizacao: 2023-09-25
+        database_layer_name: funai.loc_terra_indigena_estudo_p
+-   model: support.layersinfo
+    pk: 4
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br/)
+        layer_id: 4
+        dt_atualizacao: 2021-03-25
+        database_layer_name: funai.lim_buffer_10km_recorte_a
+-   model: support.layersinfo
+    pk: 5
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br/)
+        layer_id: 5
+        dt_atualizacao: 2021-03-25
+        database_layer_name: funai.lim_buffer_6km_recorte_a
+-   model: support.layersinfo
+    pk: 6
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br/)
+        layer_id: 6
+        dt_atualizacao: 2023-09-25
+        database_layer_name: funai.loc_aldeia_indigena_p
+-   model: support.layersinfo
+    pk: 7
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br/)
+        layer_id: 7
+        dt_atualizacao: 2023-09-25
+        database_layer_name: funai.loc_coordenacao_regional_p
+-   model: support.layersinfo
+    pk: 8
+    fields:
+        fonte: IBGE (ftp://geoftp.ibge.gov.br/)
+        layer_id: 8
+        dt_atualizacao: 2021-03-23
+        database_layer_name: cb.lim_unidade_federacao_a
+-   model: support.layersinfo
+    pk: 9
+    fields:
+        fonte: IBGE (ftp://geoftp.ibge.gov.br/)
+        layer_id: 9
+        dt_atualizacao: 2021-03-23
+        database_layer_name: cb.lim_municipio_a
+-   model: support.layersinfo
+    pk: 10
+    fields:
+        fonte: MMA (http://mapas.mma.gov.br/i3geo/datadownload.htm?amazlegal)
+        layer_id: 10
+        dt_atualizacao: 2021-03-23
+        database_layer_name: cb.lim_amazonia_legal_a
+-   model: support.layersinfo
+    pk: 11
+    fields:
+        fonte: IBGE (http://www.geoservicos.ibge.gov.br/geoserver)
+        layer_id: 11
+        dt_atualizacao: 2021-03-23
+        database_layer_name: cb.lim_semiarido_a
+-   model: support.layersinfo
+    pk: 12
+    fields:
+        fonte: MMA (http://mapas.mma.gov.br/i3geo/datadownload.htm)
+        layer_id: 12
+        dt_atualizacao: 2021-03-23
+        database_layer_name: cb.veg_biomas_a
+-   model: support.layersinfo
+    pk: 13
+    fields:
+        fonte: ICMBio (http://www.icmbio.gov.br/portal/geoprocessamentos/51-menu-servicos/4004-downloads-mapa-tematico-e-dados-geoestatisticos-das-uc-s)
+        layer_id: 13
+        dt_atualizacao: 2021-03-23
+        database_layer_name: cb.lim_unidade_conservacao_federal_a
+-   model: support.layersinfo
+    pk: 14
+    fields:
+        fonte: INCRA (http://acervofundiario.incra.gov.br)
+        layer_id: 14
+        dt_atualizacao: 2022-06-20
+        database_layer_name: cb.lim_quilombolas_a
+-   model: support.layersinfo
+    pk: 15
+    fields:
+        fonte: INCRA (http://acervofundiario.incra.gov.br/)
+        layer_id: 15
+        dt_atualizacao: 2022-06-20
+        database_layer_name: cb.lim_assentamento_rural_a
+-   model: support.layersinfo
+    pk: 16
+    fields:
+        fonte: 'FUNAI (http://10.0.0.34:8080/geoserver/web/. Camada: funai:car_amazonia_legal.)'
+        layer_id: 16
+        dt_atualizacao: 2022-02-14
+        database_layer_name: funai.lim_imovel_car_a
+-   model: support.layersinfo
+    pk: 17
+    fields:
+        fonte: INCRA (http://acervofundiario.incra.gov.br)
+        layer_id: 17
+        dt_atualizacao: 2022-06-20
+        database_layer_name: cb.vw_lim_imovel_certificado_privado_a
+-   model: support.layersinfo
+    pk: 18
+    fields:
+        fonte: INCRA (http://acervofundiario.incra.gov.br)
+        layer_id: 18
+        dt_atualizacao: 2022-06-20
+        database_layer_name: cb.vw_lim_imovel_certificado_publico_a
+-   model: support.layersinfo
+    pk: 19
+    fields:
+        fonte: INCRA (https://acervofundiario.incra.gov.br/acervo/acv.php)
+        layer_id: 19
+        dt_atualizacao: null
+        database_layer_name: cb.vw_lim_imovel_certificado_sigef_privado_a
+-   model: support.layersinfo
+    pk: 20
+    fields:
+        fonte: INCRA (https://acervofundiario.incra.gov.br/acervo/acv.php)
+        layer_id: 20
+        dt_atualizacao: null
+        database_layer_name: cb.vw_lim_imovel_certificado_sigef_publico_a
+-   model: support.layersinfo
+    pk: 21
+    fields:
+        fonte: DNIT (http://www.dnit.gov.br/mapas-multimodais/shapefiles)
+        layer_id: 21
+        dt_atualizacao: 2024-03-11
+        database_layer_name: cb.tra_trecho_rodoviario_l
+-   model: support.layersinfo
+    pk: 22
+    fields:
+        fonte: IBGE (ftp://geoftp.ibge.gov.br/cartas_e_mapas/bases_cartograficas_continuas/bc250/versao2015/Shapefile/)
+        layer_id: 22
+        dt_atualizacao: 2021-03-24
+        database_layer_name: cb.hid_trecho_drenagem_ti_l
+-   model: support.layersinfo
+    pk: 23
+    fields:
+        fonte: IBGE (http://www.geoservicos.ibge.gov.br/geoserver/)
+        layer_id: 23
+        dt_atualizacao: 2021-03-24
+        database_layer_name: cb.lim_faixa_de_fronteira_a
+-   model: support.layersinfo
+    pk: 24
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br/geoserver/web/)
+        layer_id: 24
+        dt_atualizacao: 2021-09-29
+        database_layer_name: funai.loc_antenas_vsat_p
+-   model: support.layersinfo
+    pk: 25
+    fields:
+        fonte: Sentinel-2 (https://sentinel.esa.int/web/sentinel/missions/sentinel-2/data-products)
+        layer_id: 25
+        dt_atualizacao: 2017-08-29
+        database_layer_name: funai.img_grade_sentinel2_a
+-   model: support.layersinfo
+    pk: 26
+    fields:
+        fonte: IBAMA (http://siscom.ibama.gov.br/geoserver/)
+        layer_id: 26
+        dt_atualizacao: 2019-06-13
+        database_layer_name: funai.img_grade_landsat_a
+-   model: support.layersinfo
+    pk: 27
+    fields:
+        fonte: SIGMINE (https://dados.gov.br/dataset/sistema-de-informacoes-geograficas-da-mineracao-sigmine/resource/9d23429d-b9eb-4a68-83fe-2de5905fb069)
+        layer_id: 27
+        dt_atualizacao: 2024-03-11
+        database_layer_name: funaidados.lim_sigmine_ti_a
+-   model: support.layersinfo
+    pk: 28
+    fields:
+        fonte: ANA (https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/3c0e0c20-f6ae-4e3b-bb95-b27b61fdbbd8)
+        layer_id: 28
+        dt_atualizacao: 2024-03-11
+        database_layer_name: cb.hid_comites_de_bacias_estaduais_a
+-   model: support.layersinfo
+    pk: 29
+    fields:
+        fonte: ANA (https://metadados.snirh.gov.br/geonetwork/srv/por/catalog.search#/metadata/985f8821-2da3-4108-85a9-95985b37f3fe)
+        layer_id: 29
+        dt_atualizacao: 2021-03-24
+        database_layer_name: cb.hid_ugrh_a
+-   model: support.layersinfo
+    pk: 30
+    fields:
+        fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
+        layer_id: 30
+        dt_atualizacao: 2019-01-01
+        database_layer_name: CMR-FUNAI:basemap_oneatlas_2019
+-   model: support.layersinfo
+    pk: 31
+    fields:
+        fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
+        layer_id: 31
+        dt_atualizacao: 2019-01-01
+        database_layer_name: CMR-FUNAI:metadata_oneatlas_2019
+-   model: support.layersinfo
+    pk: 32
+    fields:
+        fonte: INPE (https://queimadas.dgi.inpe.br/queimadas/)
+        layer_id: 32
+        dt_atualizacao: 2024-03-11
+        database_layer_name: funai.vw_satelite_aqua_m_m_loc_focos_de_calor_p
+-   model: support.layersinfo
+    pk: 33
+    fields:
+        fonte: INPE (https://queimadas.dgi.inpe.br/queimadas/)
+        layer_id: 33
+        dt_atualizacao: 2024-03-11
+        database_layer_name: funai.vw_satelite_aqua_m_t_loc_focos_de_calor_p
+-   model: support.layersinfo
+    pk: 34
+    fields:
+        fonte: INPE (http://queimadas.dgi.inpe.br/queimadas/portal/risco-de-fogo-meteorologia/)
+        layer_id: 34
+        dt_atualizacao: 2023-11-21
+        database_layer_name: public.met_risco_fogo_previsao_1dia_a
+-   model: support.layersinfo
+    pk: 35
+    fields:
+        fonte: INPE (http://queimadas.dgi.inpe.br/queimadas/portal/risco-de-fogo-meteorologia/)
+        layer_id: 35
+        dt_atualizacao: 2023-11-21
+        database_layer_name: public.met_risco_fogo_previsao_2dias_a
+-   model: support.layersinfo
+    pk: 36
+    fields:
+        fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
+        layer_id: 319
+        dt_atualizacao: 2023-09-25
+        database_layer_name: CMR-FUNAI:terra_indigena_cr_mascara_antropismo_consolidado_a
+-   model: support.layersinfo
+    pk: 37
+    fields:
+        fonte: Pistas de Pouso Irregulares.
+        layer_id: 320
+        dt_atualizacao: 2021-03-18
+        database_layer_name: funai.loc_pistas_de_pouso_irregulares_p
+-   model: support.layersinfo
+    pk: 38
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br/)
+        layer_id: 322
+        dt_atualizacao: 2023-11-07
+        database_layer_name: funai.loc_bapes_p
+-   model: support.layersinfo
+    pk: 39
+    fields:
+        fonte: FUNAI (http://geoserver.funai.gov.br/)
+        layer_id: 323
+        dt_atualizacao: 2020-12-08
+        database_layer_name: funai.loc_upt_p
+-   model: support.layersinfo
+    pk: 40
+    fields:
+        fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
+        layer_id: 321
+        dt_atualizacao: 2023-11-07
+        database_layer_name: CMR-PUBLICO:vw_prodes_terra_indigena

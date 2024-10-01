@@ -2,26 +2,26 @@
   pk: 1
   fields:
       name: Funai Geoserver
-      wms_url: https://cmr.funai.gov.br/geoserver/ows?authkey=5a3e4ff0-2dbc-47de-bf95-366cc70a5bd2
-      preview_url: https://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=5a3e4ff0-2dbc-47de-bf95-366cc70a5bd2&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+      wms_url: https://cmr.funai.gov.br/geoserver/ows?authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667
+      preview_url: https://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
 - model: support.CategoryLayersGroup
   pk: 1
   fields:
       name: CAMADAS_DE_APOIO
       icon: layers
-      description: Grupo Layers destinado aos geoserviços vetoriais, utilizados como complemento as análises no CMR
+      description: "Grupo Layers destinado aos geoserviços vetoriais, utilizados como complemento as análises no CMR"
 - model: support.CategoryLayersGroup
   pk: 2
   fields:
       name: TEMATICA_FOGO
       icon: layers
-      description: Dados e publicaçẽos que pertencem a Temática Fogo.
+      description: "Dados e publicaçẽos que pertencem a Temática Fogo."
 - model: support.CategoryLayersGroup
   pk: 3
   fields:
       name: RASTERS
       icon: layers
-      description: Grupo Layers destinado aos geoserviços rasters (fotos aéreas, mosáicos, imagens de satélites), utilizados como base maps ou complemento as análises no CMR
+      description: "Grupo Layers destinado aos geoserviços rasters (fotos aéreas, mosáicos, imagens de satélites), utilizados como base maps ou complemento as análises no CMR."
 - model: support.CategoryLayersGroup
   pk: 4
   fields:
@@ -29,23 +29,12 @@
       icon: layers
       description: "Dado preliminar de 2020 composto por 102 cenas prioritárias. As 102 cenas selecionadas como prioritárias atendem a três critérios: 1- cobrir a região onde foram registrados pelo menos 90% do desmatamento no período anterior do PRODES (agosto/2018 a julho/2019); 2) cobrir regiões onde foram registrados pelo menos 90% dos avisos de desmatamento do DETER 2019/2020; 3) cobrir os 43 municípios prioritários para fiscalização referidos no Decreto Federal 6.321/2007 e atualizado em 2018 e 2020 pelas Portarias No. 428 e 162 do Ministério do Meio Ambiente (MMA)."
 - model: support.CategoryLayersGroup
-  pk: 5
-  fields:
-      name: MONITORAMENTO_ANTROPISMO
-      icon: layers
-      description: Grupo Layers destinado as camadas envolvidas nas atividades do Monitoramento Diário das Terras Indígenas.
-- model: support.CategoryLayersGroup
   pk: 10
   fields:
       name: BARRA_LATERAL
       icon: layers
-      description: Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo
-- model: support.layersgroup
-  pk: 2
-  fields:
-      name: Camadas de Sobreposição
-      order: 2
-      category_groups: 1
+      description: "Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo."
+
 - model: support.layersgroup
   pk: 5
   fields:
@@ -133,241 +122,317 @@
 - model: support.layersgroup
   pk: 19
   fields:
-      name: Antropismo Consolidado
-      order: 19
-      category_groups: 5
+      name: Antropismo Consolidado - 2015
+      order: 21
+      category_groups: 1
+- model: support.layersgroup
+  pk: 23
+  fields:
+      name: Terras Indígenas - FUNAI
+      order: 23
+      category_groups: 1
+- model: support.layersgroup
+  pk: 24
+  fields:
+      name: Áreas de Proteção
+      order: 24
+      category_groups: 1
+- model: support.layersgroup
+  pk: 25
+  fields:
+      name: Recursos Hídricos
+      order: 25
+      category_groups: 1
+- model: support.layersgroup
+  pk: 26
+  fields:
+      name: Mineração
+      order: 26
+      category_groups: 1
+- model: support.layersgroup
+  pk: 27
+  fields:
+      name: Imóveis Rurais
+      order: 27
+      category_groups: 1
+- model: support.layersgroup
+  pk: 28
+  fields:
+      name: Infraestrutura 
+      order: 28
+      category_groups: 1
+- model: support.layersgroup
+  pk: 29
+  fields:
+      name: Limites
+      order: 29
+      category_groups: 1
+- model: support.layersgroup
+  pk: 30
+  fields:
+      name: Grade Satélites
+      order: 30
+      category_groups: 1
+- model: support.layersgroup
+  pk: 31
+  fields:
+    name: Mosaico Planet 2024
+    order: 19
+    category_groups: 3
+
+
 - model: support.layer
   pk: 1
   fields:
       name: Terras Indígenas
       order: 1194
       layer_type: wms
-      layers_group: 2
+      layers_group: 23
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 3
   fields:
       name: Terra Indígena em Estudo
       order: 1194
       layer_type: wms
-      layers_group: 2
+      layers_group: 23
       active_on_init: false
-- model: support.layer
-  pk: 6
-  fields:
-      name: Aldeias Indígenas
-      order: 1193
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 4
   fields:
       name: Buffer de TI  (10 Km)
       order: 1192
       layer_type: wms
-      layers_group: 2
+      layers_group: 23
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 5
   fields:
       name: Buffer de TI (6 Km)
       order: 1191
       layer_type: wms
-      layers_group: 2
+      layers_group: 23
       active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 6
+  fields:
+      name: Aldeias Indígenas
+      order: 1193
+      layer_type: wms
+      layers_group: 23
+      active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 7
   fields:
       name: Coordenações Regionais
       order: 1190
       layer_type: wms
-      layers_group: 2
+      layers_group: 23
       active_on_init: false
-- model: support.layer
-  pk: 14
-  fields:
-      name: Áreas Quilombolas
-      order: 1184
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
-- model: support.layer
-  pk: 23
-  fields:
-      name: Faixa de Fronteira
-      order: 1183
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
-- model: support.layer
-  pk: 24
-  fields:
-      name: Antenas VSAT
-      order: 1182
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
-- model: support.layer
-  pk: 320
-  fields:
-      name: Pista de pouso
-      order: 1181
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
-- model: support.layer
-  pk: 21
-  fields:
-      name: Trechos Rodoviários
-      order: 1180
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
-- model: support.layer
-  pk: 27
-  fields:
-      name: Dados Sigmine
-      order: 1174
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 8
   fields:
       name: Unidades Federativas
       order: 1173
       layer_type: wms
-      layers_group: 2
+      layers_group: 29
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 9
   fields:
       name: Áreas Municipais
       order: 1172
       layer_type: wms
-      layers_group: 2
+      layers_group: 29
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 10
   fields:
       name: Amazônia Legal
       order: 1171
       layer_type: wms
-      layers_group: 2
+      layers_group: 29
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 11
   fields:
       name: Semiárido
       order: 1170
       layer_type: wms
-      layers_group: 2
+      layers_group: 29
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 12
   fields:
       name: Biomas
       order: 1164
       layer_type: wms
-      layers_group: 2
+      layers_group: 29
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 13
   fields:
       name: Unidades de Conservação Federal
       order: 1163
       layer_type: wms
-      layers_group: 2
+      layers_group: 24
       active_on_init: false
+      is_public: true
 - model: support.layer
-  pk: 28
+  pk: 14
   fields:
-      name: Comitês de Bacias Hidrográficas Estaduais
-      order: 1162
+      name: Áreas Quilombolas
+      order: 1184
       layer_type: wms
-      layers_group: 2
+      layers_group: 24
       active_on_init: false
-- model: support.layer
-  pk: 29
-  fields:
-      name: Unidades de Gestão de Recursos Hídricos
-      order: 1161
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
-- model: support.layer
-  pk: 22
-  fields:
-      name: Trechos de Drenagem
-      order: 1160
-      layer_type: wms
-      layers_group: 2
-      active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 15
   fields:
       name: Assentamentos Rurais
       order: 1154
       layer_type: wms
-      layers_group: 2
+      layers_group: 27
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 16
   fields:
       name: CAR
       order: 1153
       layer_type: wms
-      layers_group: 2
+      layers_group: 27
       active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 17
   fields:
       name: Imóveis Certificados Privados (SNCI)
       order: 1152
       layer_type: wms
-      layers_group: 2
+      layers_group: 27
       active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 18
   fields:
       name: Imóveis Certificados Públicos (SNCI)
       order: 1151
       layer_type: wms
-      layers_group: 2
+      layers_group: 27
       active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 19
   fields:
       name: Imóveis Certificados Privados (SIGEF)
       order: 1150
       layer_type: wms
-      layers_group: 2
+      layers_group: 27
       active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 20
   fields:
       name: Imóveis Certificados Públicos (SIGEF)
       order: 1144
       layer_type: wms
-      layers_group: 2
+      layers_group: 27
       active_on_init: false
+      is_public: false
+- model: support.layer
+  pk: 21
+  fields:
+      name: Trechos Rodoviários
+      order: 1180
+      layer_type: wms
+      layers_group: 28
+      active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 22
+  fields:
+      name: Trechos de Drenagem
+      order: 1160
+      layer_type: wms
+      layers_group: 25
+      active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 23
+  fields:
+      name: Faixa de Fronteira
+      order: 1183
+      layer_type: wms
+      layers_group: 29
+      active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 24
+  fields:
+      name: Antenas VSAT
+      order: 1182
+      layer_type: wms
+      layers_group: 28
+      active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 25
   fields:
       name: Grade SENTINEL-2
       order: 1143
       layer_type: wms
-      layers_group: 2
+      layers_group: 30
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 26
   fields:
       name: Grade LANDSAT
       order: 1142
       layer_type: wms
-      layers_group: 2
+      layers_group: 30
       active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 27
+  fields:
+      name: Dados Sigmine
+      order: 1174
+      layer_type: wms
+      layers_group: 26
+      active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 28
+  fields:
+      name: Comitês de Bacias Hidrográficas Estaduais
+      order: 1162
+      layer_type: wms
+      layers_group: 25
+      active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 29
+  fields:
+      name: Unidades de Gestão de Recursos Hídricos
+      order: 1161
+      layer_type: wms
+      layers_group: 25
+      active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 30
   fields:
@@ -376,6 +441,7 @@
       layer_type: wms
       layers_group: 5
       active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 31
   fields:
@@ -384,6 +450,7 @@
       layer_type: wms
       layers_group: 5
       active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 32
   fields:
@@ -392,6 +459,7 @@
       layer_type: wms
       layers_group: 16
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 33
   fields:
@@ -400,6 +468,7 @@
       layer_type: wms
       layers_group: 16
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 34
   fields:
@@ -408,6 +477,7 @@
       layer_type: wms
       layers_group: 17
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 35
   fields:
@@ -416,6 +486,7 @@
       layer_type: wms
       layers_group: 17
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 319
   fields:
@@ -424,6 +495,16 @@
       layer_type: wms
       layers_group: 19
       active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 320
+  fields:
+      name: Pista de pouso irregulares
+      order: 1181
+      layer_type: wms
+      layers_group: 28
+      active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 321
   fields:
@@ -432,6 +513,25 @@
       layer_type: wms
       layers_group: 15
       active_on_init: false
+      is_public: true
+- model: support.layer
+  pk: 322
+  fields:
+      name: Bases de Proteção Etnoambiental (BAPEs)
+      order: 1185
+      layer_type: wms
+      layers_group: 28
+      active_on_init: false
+      is_public: false
+- model: support.layer
+  pk: 323
+  fields:
+      name: Unidades de Proteção Territorial (UPTs)
+      order: 1186
+      layer_type: wms
+      layers_group: 28
+      active_on_init: false
+      is_public: false
 - model: support.layer
   pk: 36
   fields:
@@ -440,6 +540,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 37
   fields:
@@ -448,6 +549,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 38
   fields:
@@ -456,6 +558,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 39
   fields:
@@ -464,6 +567,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 40
   fields:
@@ -472,6 +576,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 41
   fields:
@@ -480,6 +585,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 42
   fields:
@@ -488,6 +594,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 43
   fields:
@@ -496,6 +603,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 44
   fields:
@@ -504,6 +612,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 45
   fields:
@@ -512,6 +621,7 @@
       layer_type: wms
       layers_group: 6
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 46
   fields:
@@ -520,6 +630,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 47
   fields:
@@ -528,6 +639,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 48
   fields:
@@ -536,6 +648,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 49
   fields:
@@ -544,6 +657,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 50
   fields:
@@ -552,6 +666,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 51
   fields:
@@ -560,6 +675,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 52
   fields:
@@ -568,6 +684,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 53
   fields:
@@ -576,6 +693,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 54
   fields:
@@ -584,6 +702,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 55
   fields:
@@ -592,6 +711,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 56
   fields:
@@ -600,6 +720,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 57
   fields:
@@ -608,6 +729,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 58
   fields:
@@ -616,6 +738,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 59
   fields:
@@ -624,6 +747,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 60
   fields:
@@ -632,6 +756,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 61
   fields:
@@ -640,6 +765,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 62
   fields:
@@ -648,6 +774,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 63
   fields:
@@ -656,6 +783,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 64
   fields:
@@ -664,6 +792,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 65
   fields:
@@ -672,6 +801,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 66
   fields:
@@ -680,6 +810,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 67
   fields:
@@ -688,6 +819,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 68
   fields:
@@ -696,6 +828,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 69
   fields:
@@ -704,6 +837,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 70
   fields:
@@ -712,6 +846,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 71
   fields:
@@ -720,6 +855,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 72
   fields:
@@ -728,6 +864,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 73
   fields:
@@ -736,6 +873,7 @@
       layer_type: wms
       layers_group: 7
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 101
   fields:
@@ -744,6 +882,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 102
   fields:
@@ -752,6 +891,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 103
   fields:
@@ -760,6 +900,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 104
   fields:
@@ -768,6 +909,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 105
   fields:
@@ -776,6 +918,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 106
   fields:
@@ -784,6 +927,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 107
   fields:
@@ -792,6 +936,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 108
   fields:
@@ -800,6 +945,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 109
   fields:
@@ -808,6 +954,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 110
   fields:
@@ -816,6 +963,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 111
   fields:
@@ -824,6 +972,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 112
   fields:
@@ -832,6 +981,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 113
   fields:
@@ -840,6 +990,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 114
   fields:
@@ -848,6 +999,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 115
   fields:
@@ -856,6 +1008,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 116
   fields:
@@ -864,6 +1017,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 117
   fields:
@@ -872,6 +1026,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 118
   fields:
@@ -880,6 +1035,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 119
   fields:
@@ -888,6 +1044,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 120
   fields:
@@ -896,6 +1053,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 121
   fields:
@@ -904,6 +1062,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 122
   fields:
@@ -912,6 +1071,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 123
   fields:
@@ -920,6 +1080,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 124
   fields:
@@ -928,6 +1089,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 125
   fields:
@@ -936,6 +1098,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 126
   fields:
@@ -944,6 +1107,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 127
   fields:
@@ -952,6 +1116,7 @@
       layer_type: wms
       layers_group: 8
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 128
   fields:
@@ -960,6 +1125,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 129
   fields:
@@ -968,6 +1134,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 130
   fields:
@@ -976,6 +1143,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 131
   fields:
@@ -984,6 +1152,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 132
   fields:
@@ -992,6 +1161,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 133
   fields:
@@ -1000,6 +1170,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 134
   fields:
@@ -1008,6 +1179,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 135
   fields:
@@ -1016,6 +1188,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 136
   fields:
@@ -1024,6 +1197,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 137
   fields:
@@ -1032,6 +1206,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 138
   fields:
@@ -1040,6 +1215,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 139
   fields:
@@ -1048,6 +1224,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 140
   fields:
@@ -1056,6 +1233,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 141
   fields:
@@ -1064,6 +1242,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 142
   fields:
@@ -1072,6 +1251,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 143
   fields:
@@ -1080,6 +1260,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 144
   fields:
@@ -1088,6 +1269,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 145
   fields:
@@ -1096,6 +1278,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 146
   fields:
@@ -1104,6 +1287,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 147
   fields:
@@ -1112,6 +1296,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 148
   fields:
@@ -1120,6 +1305,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 149
   fields:
@@ -1128,6 +1314,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 150
   fields:
@@ -1136,6 +1323,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 151
   fields:
@@ -1144,6 +1332,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 152
   fields:
@@ -1152,6 +1341,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 153
   fields:
@@ -1160,6 +1350,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 154
   fields:
@@ -1168,6 +1359,7 @@
       layer_type: wms
       layers_group: 9
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 155
   fields:
@@ -1176,6 +1368,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 156
   fields:
@@ -1184,6 +1377,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 157
   fields:
@@ -1192,6 +1386,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 158
   fields:
@@ -1200,6 +1395,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 159
   fields:
@@ -1208,6 +1404,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 160
   fields:
@@ -1216,6 +1413,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 161
   fields:
@@ -1224,6 +1422,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 162
   fields:
@@ -1232,6 +1431,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 163
   fields:
@@ -1240,6 +1440,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 164
   fields:
@@ -1248,6 +1449,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 165
   fields:
@@ -1256,6 +1458,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 166
   fields:
@@ -1264,6 +1467,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 167
   fields:
@@ -1272,6 +1476,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 168
   fields:
@@ -1280,6 +1485,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 169
   fields:
@@ -1288,6 +1494,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 170
   fields:
@@ -1296,6 +1503,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 171
   fields:
@@ -1304,6 +1512,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 172
   fields:
@@ -1312,6 +1521,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 173
   fields:
@@ -1320,6 +1530,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 174
   fields:
@@ -1328,6 +1539,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 175
   fields:
@@ -1336,6 +1548,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 176
   fields:
@@ -1344,6 +1557,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 177
   fields:
@@ -1352,6 +1566,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 178
   fields:
@@ -1360,6 +1575,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 179
   fields:
@@ -1368,6 +1584,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 180
   fields:
@@ -1376,6 +1593,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 181
   fields:
@@ -1384,6 +1602,7 @@
       layer_type: wms
       layers_group: 10
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 182
   fields:
@@ -1392,6 +1611,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 183
   fields:
@@ -1400,6 +1620,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 184
   fields:
@@ -1408,6 +1629,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 185
   fields:
@@ -1416,6 +1638,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 186
   fields:
@@ -1424,6 +1647,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 187
   fields:
@@ -1432,6 +1656,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 188
   fields:
@@ -1440,6 +1665,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 189
   fields:
@@ -1448,6 +1674,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 190
   fields:
@@ -1456,6 +1683,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 191
   fields:
@@ -1464,6 +1692,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 192
   fields:
@@ -1472,6 +1701,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 193
   fields:
@@ -1480,6 +1710,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 194
   fields:
@@ -1488,6 +1719,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 195
   fields:
@@ -1496,6 +1728,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 196
   fields:
@@ -1504,6 +1737,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 197
   fields:
@@ -1512,6 +1746,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 198
   fields:
@@ -1520,6 +1755,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 199
   fields:
@@ -1528,6 +1764,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 200
   fields:
@@ -1536,6 +1773,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 201
   fields:
@@ -1544,6 +1782,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 202
   fields:
@@ -1552,6 +1791,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 203
   fields:
@@ -1560,6 +1800,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 204
   fields:
@@ -1568,6 +1809,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 205
   fields:
@@ -1576,6 +1818,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 206
   fields:
@@ -1584,6 +1827,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 207
   fields:
@@ -1592,6 +1836,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 208
   fields:
@@ -1600,6 +1845,7 @@
       layer_type: wms
       layers_group: 11
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 209
   fields:
@@ -1608,6 +1854,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 210
   fields:
@@ -1616,6 +1863,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 211
   fields:
@@ -1624,6 +1872,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 212
   fields:
@@ -1632,6 +1881,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 213
   fields:
@@ -1640,6 +1890,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 214
   fields:
@@ -1648,6 +1899,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 215
   fields:
@@ -1656,6 +1908,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 216
   fields:
@@ -1664,6 +1917,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 217
   fields:
@@ -1672,6 +1926,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 218
   fields:
@@ -1680,6 +1935,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 219
   fields:
@@ -1688,6 +1944,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 220
   fields:
@@ -1696,6 +1953,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 221
   fields:
@@ -1704,6 +1962,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 222
   fields:
@@ -1712,6 +1971,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 223
   fields:
@@ -1720,6 +1980,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 224
   fields:
@@ -1728,6 +1989,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 225
   fields:
@@ -1736,6 +1998,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 226
   fields:
@@ -1744,6 +2007,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 227
   fields:
@@ -1752,6 +2016,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 228
   fields:
@@ -1760,6 +2025,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 229
   fields:
@@ -1768,6 +2034,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 230
   fields:
@@ -1776,6 +2043,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 231
   fields:
@@ -1784,6 +2052,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 232
   fields:
@@ -1792,6 +2061,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 233
   fields:
@@ -1800,6 +2070,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 234
   fields:
@@ -1808,6 +2079,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 235
   fields:
@@ -1816,6 +2088,7 @@
       layer_type: wms
       layers_group: 12
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 236
   fields:
@@ -1824,6 +2097,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 237
   fields:
@@ -1832,6 +2106,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 238
   fields:
@@ -1840,6 +2115,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 239
   fields:
@@ -1848,6 +2124,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 240
   fields:
@@ -1856,6 +2133,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 242
   fields:
@@ -1864,6 +2142,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 243
   fields:
@@ -1872,6 +2151,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 244
   fields:
@@ -1880,6 +2160,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 245
   fields:
@@ -1888,6 +2169,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 246
   fields:
@@ -1896,6 +2178,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 247
   fields:
@@ -1904,6 +2187,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 248
   fields:
@@ -1912,6 +2196,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 249
   fields:
@@ -1920,6 +2205,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 250
   fields:
@@ -1928,6 +2214,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 251
   fields:
@@ -1936,6 +2223,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 252
   fields:
@@ -1944,6 +2232,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 253
   fields:
@@ -1952,6 +2241,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 254
   fields:
@@ -1960,6 +2250,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 255
   fields:
@@ -1968,6 +2259,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 256
   fields:
@@ -1976,6 +2268,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 257
   fields:
@@ -1984,6 +2277,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 258
   fields:
@@ -1992,6 +2286,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 259
   fields:
@@ -2000,6 +2295,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 260
   fields:
@@ -2008,6 +2304,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 261
   fields:
@@ -2016,6 +2313,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 262
   fields:
@@ -2024,6 +2322,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 263
   fields:
@@ -2032,6 +2331,7 @@
       layer_type: wms
       layers_group: 13
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 264
   fields:
@@ -2040,6 +2340,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 266
   fields:
@@ -2048,6 +2349,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 267
   fields:
@@ -2056,6 +2358,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 268
   fields:
@@ -2064,6 +2367,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 269
   fields:
@@ -2072,6 +2376,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 270
   fields:
@@ -2080,6 +2385,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 271
   fields:
@@ -2088,6 +2394,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 272
   fields:
@@ -2096,6 +2403,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 273
   fields:
@@ -2104,6 +2412,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 274
   fields:
@@ -2112,6 +2421,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 275
   fields:
@@ -2120,6 +2430,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 276
   fields:
@@ -2128,6 +2439,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 277
   fields:
@@ -2136,6 +2448,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 278
   fields:
@@ -2144,6 +2457,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 279
   fields:
@@ -2152,6 +2466,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 280
   fields:
@@ -2160,6 +2475,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 281
   fields:
@@ -2168,6 +2484,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 282
   fields:
@@ -2176,6 +2493,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 283
   fields:
@@ -2184,6 +2502,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 284
   fields:
@@ -2192,6 +2511,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 285
   fields:
@@ -2200,6 +2520,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 286
   fields:
@@ -2208,6 +2529,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 287
   fields:
@@ -2216,6 +2538,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 288
   fields:
@@ -2224,6 +2547,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 289
   fields:
@@ -2232,6 +2556,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 290
   fields:
@@ -2240,6 +2565,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 291
   fields:
@@ -2248,6 +2574,7 @@
       layer_type: wms
       layers_group: 14
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 292
   fields:
@@ -2256,6 +2583,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 293
   fields:
@@ -2264,6 +2592,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 294
   fields:
@@ -2272,6 +2601,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 295
   fields:
@@ -2280,6 +2610,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 296
   fields:
@@ -2288,6 +2619,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 297
   fields:
@@ -2296,6 +2628,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 298
   fields:
@@ -2304,6 +2637,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 299
   fields:
@@ -2312,6 +2646,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 300
   fields:
@@ -2320,6 +2655,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 301
   fields:
@@ -2328,6 +2664,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 302
   fields:
@@ -2336,6 +2673,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 303
   fields:
@@ -2344,6 +2682,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 304
   fields:
@@ -2352,6 +2691,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 305
   fields:
@@ -2360,6 +2700,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 306
   fields:
@@ -2368,6 +2709,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 307
   fields:
@@ -2376,6 +2718,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 308
   fields:
@@ -2384,6 +2727,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 309
   fields:
@@ -2392,6 +2736,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 310
   fields:
@@ -2400,6 +2745,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 311
   fields:
@@ -2408,6 +2754,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 312
   fields:
@@ -2416,6 +2763,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 313
   fields:
@@ -2424,6 +2772,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 314
   fields:
@@ -2432,6 +2781,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 315
   fields:
@@ -2440,6 +2790,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 316
   fields:
@@ -2448,6 +2799,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 317
   fields:
@@ -2456,6 +2808,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.layer
   pk: 318
   fields:
@@ -2464,6 +2817,7 @@
       layer_type: wms
       layers_group: 18
       active_on_init: false
+      is_public: true
 - model: support.wmslayer
   pk: 1
   fields:
@@ -6247,4 +6601,30 @@
       geoserver_layer_options: null
       queryable: true
       has_opacity: true
+      default_opacity: null
+- model: support.wmslayer
+  pk: 322
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_bapes_p
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
+      default_opacity: null
+- model: support.wmslayer
+  pk: 323
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_upt_p
+      geoserver_layer_namespace: CMR-FUNAI
+      geoserver_layer_options: null
+      queryable: false
+      has_opacity: false
       default_opacity: null

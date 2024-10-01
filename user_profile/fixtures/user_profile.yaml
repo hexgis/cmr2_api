@@ -1,0 +1,19 @@
+-   model: user_profile.usersettings
+    fields:
+      user_id: 1
+      dark_mode_active: false
+      drawer_open_on_init: true
+      interest_area_zoom_on_init: true
+      map_zoom_buttons_visible: true
+      map_initial_area_visible: true
+      map_zoom_to_point_visible: true
+      map_file_loader_visible: true
+      map_draw_button_visible: true
+      map_opacity_button_visible: true
+      map_reachability_button_visible: true
+      map_my_location_visible: true
+      map_search_button_visible: true
+      map_scale_visible: true
+      minimap_visible: true
+      map_pointer_coordinates_visible: true
+      initial_extent: null

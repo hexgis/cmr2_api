@@ -10,8 +10,28 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+import logging.config
+import logging
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
+import ldap
 import os
 import datetime
+from environs import Env
+
+env = Env()
+env.read_env()
+
+# INSTANCE OF ENV VARIABLES
+
+DEBUG = env.bool('DEBUG', default=False)
+SECRET_KEY = env.str('SECRET_KEY')
+GEOSERVER_URL = env.str('GEOSERVER_URL')
+GEO_SEARCH_VILLAGE = env.str('GEO_SEARCH_VILLAGE')
+GEO_SEARCH_STUDY_TI = env.str('GEO_SEARCH_STUDY_TI')
+LDAP_PASS = env.str('LDAP_PASS')
+LDAP_BASE_DN = env.str('LDAP_BASE_DN')
+RESET_PASSWORD_URL = env.str('RESET_PASSWORD_URL')
+
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -34,6 +54,7 @@ DEBUG = True
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -44,10 +65,10 @@ INSTALLED_APPS = [
     'rest_framework',
     'rest_framework_gis',
     'django_filters',
-    'corsheaders',
     'django.contrib.gis',
     'support',
     'auth_jwt',
+    'authorization',
     'priority_monitoring',
     'funai',
     'monitoring',
@@ -56,17 +77,24 @@ INSTALLED_APPS = [
     'land_use',
     'documental',
     'deter_monitoring',
+    'user_profile',
+    'corsheaders',
+    'scripts',
+    'rolepermissions',
+    'dashboard',
+    'portal',
+    'admin_panel',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'corsheaders.middleware.CorsMiddleware',
-    'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'cmr2_api.urls'
@@ -74,7 +102,10 @@ ROOT_URLCONF = 'cmr2_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'media', 'templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -87,6 +118,7 @@ TEMPLATES = [
     },
 ]
 
+
 WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 
 
@@ -96,11 +128,12 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT', '5432')
+        'NAME': 'cmr_funai',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': '192.168.20.135',
+        'PORT': '5433',
+        'TEST': {'NAME': 'test_default_db', },
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -112,9 +145,8 @@ DATABASES = {
     },
 }
 
-CMR_URL = os.getenv('CMR_URL', 'https://cmr.funai.gov.br/')
-
-DOCUMENTOS = os.getenv('DOCUMENTOS', os.path.join(CMR_URL, 'api/media/'))
+DOCUMENTS_URL = os.getenv(
+    'DOCUMENTS_URL', 'https://cmr.funai.gov.br/api/media/')
 
 DATABASE_ROUTERS = [
     'cmr2_api.database_routers.CatalogRouters.CatalogRouter',
@@ -134,6 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -164,10 +197,9 @@ USE_L10N = True
 USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.11/howto/static-files/
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Media files configuration
 
@@ -181,6 +213,27 @@ MEDIA_URL = '/media/'
 # https://github.com/adamchainz/django-cors-headers
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+CORS_ALLOW_HEADERS = [
+    'accept',
+    'accept-encoding',
+    'authorization',
+    'content-type',
+    'dnt',
+    'origin',
+    'user-agent',
+    'x-csrftoken',
+    'x-requested-with',
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
+]
 
 # djangorestframework authentication
 # https://www.django-rest-framework.org/api-guide/authentication/
@@ -201,7 +254,156 @@ REST_FRAMEWORK = {
 # https://github.com/jazzband/djangorestframework-simplejwt
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=15),
+    # 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
+    'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=999999999),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
 }
+
+TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
+
+
+################################################################################
+####                           LDAP CONFIGURATION                           ####
+################################################################################
+
+AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
+
+AUTH_LDAP_USER_SEARCH = LDAPSearch(
+    "OU=FUNAI,DC=funai,DC=local", ldap.SCOPE_SUBTREE, "(mail=%(user)s)"
+)
+
+AUTH_LDAP_START_TLS = False
+
+AUTH_LDAP_CONNECTION_OPTIONS = {
+    ldap.OPT_REFERRALS: 0,
+}
+
+# Populate the Django user from the LDAP directory.
+AUTH_LDAP_USER_ATTR_MAP = {
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email": "mail"
+}
+
+AUTH_LDAP_ALWAYS_UPDATE_USER = True
+
+AUTH_LDAP_FIND_GROUP_PERMS = True
+AUTH_LDAP_CACHE_TIMEOUT = 3600
+
+AUTHENTICATION_BACKENDS = (
+    'cmr2_api.auth_backends.MyLDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)
+
+################################################################################
+####                        END LDAP CONFIGURATION                          ####
+################################################################################
+
+################################################################################
+####                         LOGGING CONFIGURATION                         #####
+################################################################################
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
+        'simple': {
+            'format': '{levelname} {message}',
+            'style': '{',
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple',
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'DEBUG',
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['console'],
+            'level': 'INFO',
+            'propagate': True,
+        },
+        'apscheduler': {
+            'handlers': ['console'],
+            'level': 'WARNING',
+            'propagate': False,
+        },
+    },
+}
+
+# Configuração para capturar logs de todos os módulos
+logging.config.dictConfig(LOGGING)
+
+################################################################################
+####                       END LOGGING CONFIGURATION                       #####
+################################################################################
+
+# JAZZMIN_UI_TWEAKS = {
+#     'navbar_small_text': False,
+#     'footer_small_text': False,
+#     'body_small_text': False,
+#     'brand_small_text': False,
+#     'brand_colour': False,
+#     'accent': 'accent-info',
+#     'navbar': 'navbar-dark',
+#     'no_navbar_border': False,
+#     'navbar_fixed': True,
+#     'layout_boxed': False,
+#     'footer_fixed': False,
+#     'sidebar_fixed': False,
+#     'sidebar': 'sidebar-dark-primary',
+#     'sidebar_nav_small_text': True,
+#     'sidebar_disable_expand': False,
+#     'sidebar_nav_child_indent': False,
+#     'sidebar_nav_compact_style': False,
+#     'sidebar_nav_legacy_style': False,
+#     'sidebar_nav_flat_style': True,
+#     'theme': 'solar',
+#     'dark_mode_theme': 'darkly',
+#     'button_classes': {
+#         'primary': 'btn-primary',
+#         'secondary': 'btn-secondary',
+#         'info': 'btn-info',
+#         'warning': 'btn-warning',
+#         'danger': 'btn-danger',
+#         'success': 'btn-success'
+#     },
+#     'actions_sticky_top': True
+# }
+
+################################################################################
+####                           EMAIL CONFIGURATION                          ####
+################################################################################
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = '10.0.0.22'
+EMAIL_PORT = '25'
+EMAIL_SUBJECT_PREFIX = '[CMR] Centro de Monitoramento Remoto'
+EMAIL_ADMIN_FEEDBACK = "cmr@funai.gov.br"
+DEFAULT_FROM_EMAIL = "cmr@funai.gov.br"
+
+################################################################################
+####                           END EMAIL CONFIGURATION                      ####
+################################################################################
+
+################################################################################
+####                       PERMISSIONS MODULE CONFIGURATION                 ####
+################################################################################
+
+ROLEPERMISSIONS_MODULE = 'cmr2_api.roles'
+
+################################################################################
+####                    END PERMISSIONS MODULE CONFIGURATION                ####
+################################################################################

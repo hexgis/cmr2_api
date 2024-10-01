@@ -105,8 +105,7 @@ class MonitoringConsolidatedClassesView(AuthModelMixIn, generics.ListAPIView):
     `monitoring.MonitoringConsolidated`."""
 
     queryset = models.MonitoringConsolidated.objects.order_by(
-        'no_estagio').distinct('no_estagio'
-                               )
+        'no_estagio').distinct('no_estagio')
     serializer_class = serializers.MonitoringConsolidatedClassesSerializer
 
 
@@ -125,13 +124,14 @@ class MonitoringConsolidatedTableView(AuthModelMixIn, generics.ListAPIView):
 
     queryset = models.MonitoringConsolidated.objects.all()
     serializer_class = serializers.MonitoringConsolidatedTableSerializer
+    bbox_filter_field = 'geom'
     filterset_class = monitoring_filters.MonitoringConsolidatedFilter
     filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,
     )
 
-from django.shortcuts import render
+
 class MonitoringConsolidatedTableStatsView(
     AuthModelMixIn,
     generics.ListAPIView
@@ -178,6 +178,7 @@ class MonitoringConsolidatedTableStatsView(
             `serializers.MonitoringConsolidatedByDaySerializer`.
     """
     filterset_class = monitoring_filters.MonitoringConsolidatedFilter
+    bbox_filter_field = 'geom'
     filter_backends = (
         DjangoFilterBackend,
         gis_filters.InBBoxFilter,

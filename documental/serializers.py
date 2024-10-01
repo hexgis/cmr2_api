@@ -79,7 +79,7 @@ class DocsLandUserSerializers(serializers.ModelSerializer):
 
         url_document = super().to_representation(instance)
         url_document['url_doc'] = urllib.parse.urljoin(
-            settings.DOCUMENTOS, instance.path_document)
+            settings.DOCUMENTS_URL, instance.path_document)
         return url_document
 
 
@@ -110,7 +110,7 @@ class DocsDocumentTISerializers(serializers.ModelSerializer):
 
         url_document = super().to_representation(instance)
         url_document['url_doc'] = urllib.parse.urljoin(
-            settings.DOCUMENTOS, instance.path_document)
+            settings.DOCUMENTS_URL, instance.path_document)
         return url_document
 
 
@@ -142,7 +142,7 @@ class DocsMapotecaSerializers(serializers.ModelSerializer):
 
         url_document = super().to_representation(instance)
         url_document['url_doc'] = urllib.parse.urljoin(
-            settings.DOCUMENTOS, instance.path_document)
+            settings.DOCUMENTS_URL, instance.path_document)
         return url_document
 
 

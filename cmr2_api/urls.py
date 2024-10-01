@@ -44,7 +44,10 @@ urlpatterns = [
     path('api-docs/', schema_view.with_ui('redoc', cache_timeout=0)),
     path('admin/', admin.site.urls),
     path('auth/', include(
-        ('auth_jwt.urls', 'auth'), namespace='auth')
+        ('auth_jwt.urls', 'auth'), namespace='authentication')
+    ),
+    path('authorization/', include(
+        ('authorization.urls', 'authorization'), namespace='authorization')
     ),
     path('support/', include(
         ('support.urls', 'support'), namespace='support')
@@ -70,7 +73,7 @@ urlpatterns = [
         namespace='land-use'),
     ),
     path('documental/', include(
-        ('documental.urls','documental'),
+        ('documental.urls', 'documental'),
         namespace='documental'),
     ),
     path('catalog/', include(
@@ -80,5 +83,21 @@ urlpatterns = [
     path('monitoring/deter/', include(
         ('deter_monitoring.urls', 'deter-monitoring'),
         namespace='deter-monitoring'),
+    ),
+    path('user/', include(
+        ('user_profile.urls', 'user'),
+        namespace='user'),
+    ),
+    path('dashboard/', include(
+        ('dashboard.urls', 'dashboard'),
+        namespace='dashboard'),
+    ),
+    path('portal/', include(
+        ('portal.urls', 'portal'),
+        namespace='portal'),
+    ),
+     path('adm-panel/', include(
+        ('admin_panel.urls', 'adm-panel'),
+        namespace='adm panel'),
     ),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

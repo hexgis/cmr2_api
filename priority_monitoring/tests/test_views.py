@@ -1,6 +1,3 @@
-# from inspect import Parameter
-# from time import strptime
-# from urllib import response
 from rest_framework.test import APITestCase
 from django.test import Client
 from rest_framework import status
@@ -13,10 +10,16 @@ from priority_monitoring import models
 
 
 class PiorirityConsolidatedViewsTests(APITestCase):
-    """Test case PiorirityConsolidatedViewTests data."""
+    """Test case PiorirityConsolidatedViewTests data.
+
+    Args:
+        APITestCase (class 'rest_framework.test.APITestCase'): Includes a few
+            helper classes that extend Django's existing test framework.
+    """
 
     def get_requered_filters_parameters(self):
         """Creating parameters requered applied to filters."""
+
         parameter = {
             'start_date': '2021-07-28',
             'end_date': '2021-12-15',
@@ -28,6 +31,7 @@ class PiorirityConsolidatedViewsTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
         """Class variables using dumpdata fixtures file end URLs."""
+
         cls.parameters = cls.get_requered_filters_parameters(cls)
 
         cls.url_pioririty_consolidated = reverse(
@@ -49,12 +53,15 @@ class PiorirityConsolidatedViewsTests(APITestCase):
 
     def SetUp(self):
         """SetUp for methods."""
+
         self.client = Client()
 
     def test_url_pioririty_consolidated(self):
         """Test url pioririty consolidated."""
-        res = self.client.get(self.url_pioririty_consolidated, {'start_date': self.parameters['start_date'],
-                                                                     'end_date': self.parameters['end_date']})
+
+        res = self.client.get(self.url_pioririty_consolidated, {
+            'start_date': self.parameters['start_date'],
+            'end_date': self.parameters['end_date']})
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
@@ -72,24 +79,34 @@ class PiorirityConsolidatedViewsTests(APITestCase):
 
     def test_url_pioririty_consolidated_stats(self):
         """Test url pioririty consolidated stats."""
-        res = self.client.get(self.url_pioririty_consolidated_stats, {'start_date': self.parameters['start_date'],
-                                                                           'end_date': self.parameters['end_date']})
+
+        res = self.client.get(self.url_pioririty_consolidated_stats, {
+            'start_date': self.parameters['start_date'],
+            'end_date': self.parameters['end_date']})
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
     def test_url_pioririty_consolidated_table(self):
         """Test url pioririty consolidated table."""
-        res = self.client.get(self.url_pioririty_consolidated_table, {'start_date': self.parameters['start_date'],
-                                                                           'end_date': self.parameters['end_date']})
+
+        res = self.client.get(self.url_pioririty_consolidated_table, {
+            'start_date': self.parameters['start_date'],
+            'end_date': self.parameters['end_date']})
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
 
 class PiorirityConsolidatedFiltersViewsTests(APITestCase):
-    """Test case PiorirityConsolidatedFiltersViewsTests data."""
+    """Test case PiorirityConsolidatedFiltersViewsTests data.
+
+    Args:
+        APITestCase (class 'rest_framework.test.APITestCase'): Includes a few
+            helper classes that extend Django's existing test framework.
+    """
 
     def get_filters_parameters(self):
         """Creating parameters applied to filters."""
+
         parameter = {
             'co_cr': 30202001920,
             'co_funai': 23001,
@@ -105,6 +122,7 @@ class PiorirityConsolidatedFiltersViewsTests(APITestCase):
     @classmethod
     def setUpTestData(cls):
         """Class variables using dumpdata fixtures file end URLs."""
+
         cls.parameters = cls.get_filters_parameters(cls)
 
         call_command(
@@ -122,6 +140,7 @@ class PiorirityConsolidatedFiltersViewsTests(APITestCase):
 
     def setUp(self):
         """SetUp for methods."""
+
         self.client = Client()
 
         self.queryset_valid = models.PriorityConsolidated.objects.filter(
@@ -148,24 +167,28 @@ class PiorirityConsolidatedFiltersViewsTests(APITestCase):
 
     def test_valid_parameters(self):
         """Test valid URL parameters."""
+
         res = self.request_valid
 
         self.assertEqual(res.status_code, status.HTTP_200_OK)
 
     def test_invalid_parameters(self):
         """Test invalid URL parameters."""
+
         res = self.request_error
 
         self.assertTrue(status.is_client_error(res.status_code))
 
     def test_objects_queryset_created(self):
         """Test if object queryset is created."""
+
         qs = self.queryset_valid
 
         self.assertTrue(qs.exists())
 
     def test_request_with_filters_is_valid(self):
         """Testing if the request with filters is valid."""
+
         res = self.request_valid.json()
         date_format = "%Y-%m-%d"
 
@@ -175,13 +198,14 @@ class PiorirityConsolidatedFiltersViewsTests(APITestCase):
             self.assertEqual(res[i]['no_estagio'], self.parameters['stage'])
             self.assertEqual(res[i]['prioridade'], self.parameters['priority'])
             self.assertTrue(
-                datetime.strptime(self.parameters['start_date'], date_format) <=
-                datetime.strptime(res[i]['dt_t_um'], date_format) <=
-                datetime.strptime(self.parameters['end_date'], date_format)
+                datetime.strptime(self.parameters['start_date'],date_format) <=
+                datetime.strptime(res[i]['dt_t_um'],date_format) <=
+                datetime.strptime(self.parameters['end_date'],date_format)
             )
 
     def test_request_filter_is_equals_len_queryset_filter(self):
         """test record amount of request is iqual to queyrsaf."""
+
         res = self.request_valid.json()
         qs = self.queryset_valid
 

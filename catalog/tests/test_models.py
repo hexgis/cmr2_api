@@ -5,8 +5,8 @@ from django.core.management import call_command
 from catalog import models
 
 
-class CatalogsTest(TestCase):
-    """Test case `catalog.Catalogs` model"""
+class SceneTest(TestCase):
+    """Test case `catalog.Scene` model"""
 
     @classmethod
     def setUpTestData(cls):
@@ -19,19 +19,19 @@ class CatalogsTest(TestCase):
             verbosity=0)
 
     def test_objects_created(self):
-        """Test if object Catalogs is created."""
-        self.assertTrue(models.Catalogs.objects.exists())
+        """Test if object Scene is created."""
+        self.assertTrue(models.Scene.objects.exists())
 
     def test_object_output_name_is_image(self):
         """Test the model output is named Catalog Image"""
-        catalog_image = models.Catalogs.objects.first()
+        catalog_image = models.Scene.objects.first()
         expected_object_name = f'{catalog_image.image}'
 
         self.assertEqual(expected_object_name, str(catalog_image))
 
     def test_related_catalog_satellite_exists(self):
         """Test if related catalog satellite exists"""
-        catalog_image = models.Catalogs.objects.values_list(
+        catalog_image = models.Scene.objects.values_list(
             'sat', 'sat_id__name')[:1].get()
         satellite = models.Satellite.objects.get(id=catalog_image[0])
 

@@ -11,8 +11,8 @@ class CharInFilter(
     pass
 
 
-class CatalogsFilters(rest_framework.FilterSet):
-    """Django filter `models.Catalogs` data.
+class SceneFilters(rest_framework.FilterSet):
+    """Django filter `models.Scene` data.
 
     Filters:
         * satellite (list_str): filtering Satellite using identify.
@@ -42,8 +42,8 @@ class CatalogsFilters(rest_framework.FilterSet):
     )
 
     class Meta:
-        """Meta class for 'CatalogsFilters' filter."""
-        model = models.Catalogs
+        """Meta class for 'SceneFilters' filter."""
+        model = models.Scene
         fields = (
             'satellite',
             'cloud_cover',

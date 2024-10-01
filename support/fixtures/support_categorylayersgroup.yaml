@@ -1,0 +1,7 @@
+- model: support.CategoryLayersGroup
+  pk: 3
+  fields:
+    name: RASTERS
+    icon: layers
+    description: Grupo Layers destinado aos geoserviços rasters (fotos aéreas, mosáicos, imagens de satélites), utilizados como base maps ou complemento as análises no CMR.
+

@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
+from datetime import datetime
 
 
 class Geoserver(models.Model):
@@ -16,10 +17,12 @@ class Geoserver(models.Model):
     )
 
     wms_url = models.CharField(
+        _('Wms URL'),
         max_length=500
     )
 
     preview_url = models.CharField(
+        _('Preview URL'),
         max_length=500,
         null=True,
         blank=True
@@ -35,8 +38,15 @@ class Geoserver(models.Model):
 
 
 class CategoryLayersGroup(models.Model):
+    """
+    Model of Categories to group Layers Group
+        * Association:
+            * Inherits from :model:`models.Model`
+            * Has many :model:`support.LayersGroup`
+    """
 
     name = models.CharField(
+        _('Name'),
         unique=True,
         max_length=25,
         null=True
@@ -51,6 +61,7 @@ class CategoryLayersGroup(models.Model):
     )
 
     description = models.CharField(
+        _('Description'),
         max_length=1024,
         blank=True,
         null=True
@@ -68,7 +79,7 @@ class CategoryLayersGroup(models.Model):
 
 class LayersGroup(models.Model):
     """
-    Model for Layers group Data
+    Model for categorization of Layers Data
         * Association:
             * Inherits from :model:`models.Model`
             * Has many :model:`support.Layer`
@@ -128,7 +139,7 @@ class Layer(models.Model):
     )
 
     layers_group = models.ForeignKey(
-        'support.LayersGroup',
+        LayersGroup,
         on_delete=models.DO_NOTHING,
         related_name='layers',
         null=True,
@@ -140,11 +151,54 @@ class Layer(models.Model):
         default=False,
     )
 
+    is_public = models.BooleanField(
+        _('Geoservice is Public'),
+        default=False
+    )
+
     class Meta:
         app_label = 'support'
         verbose_name = 'Layer'
         verbose_name_plural = 'Layers'
         ordering = ['-order']
+
+    def __str__(self):
+        return self.name
+
+
+class LayersInfo(models.Model):
+    """
+    Model for Layers Info Data
+        * Association:
+            * Inherits from :model:`models.Model`
+    """
+    fonte = models.CharField(
+        _('Fonte'),
+        max_length=255,
+        blank=True
+    )
+
+    layer_id = models.OneToOneField(
+        Layer,
+        on_delete=models.DO_NOTHING,
+        related_name='layer_info'
+    )
+
+    dt_atualizacao = models.DateField(
+        _('Atualização'),
+        null=True,
+        blank=True
+    )
+
+    database_layer_name = models.CharField(
+        _('Database Layer Name'),
+        max_length=255
+    )
+
+    class Meta:
+        app_label = 'support'
+        verbose_name = 'Layer Info'
+        verbose_name_plural = 'Layers Info'
 
     def __str__(self):
         return self.name
@@ -160,14 +214,17 @@ class WmsLayer(models.Model):
     """
 
     has_preview = models.BooleanField(
+        _('Has preview'),
         default=True
     )
 
     has_detail = models.BooleanField(
+        _('Has detail'),
         default=False
     )
 
     detail_width = models.IntegerField(
+        _('Detail width'),
         blank=True,
         null=True
     )
@@ -201,28 +258,31 @@ class WmsLayer(models.Model):
     )
 
     geoserver_layer_options = models.JSONField(
-        ('Geoserver Layer Options'),
+        _('Geoserver Layer Options'),
         blank=True,
         null=True
     )
 
     queryable = models.BooleanField(
+        _('WmsLayer is queryable'),
         default=True
     )
 
     has_opacity = models.BooleanField(
+        _('Has opacity'),
         default=True
     )
 
     default_opacity = models.IntegerField(
+        _('Default opacity'),
         blank=True,
         null=True
     )
 
     class Meta:
         app_label = 'support'
-        verbose_name = 'WmsLayer'
-        verbose_name_plural = 'WmsLayers'
+        verbose_name = 'WMS Layer'
+        verbose_name_plural = 'WMS Layers'
 
     def __str__(self):
         return "{}:{}".format(
@@ -240,6 +300,7 @@ class TmsLayer(models.Model):
     """
 
     url_tms = models.CharField(
+        _('URL TMS'),
         max_length=500,
         blank=True,
         null=True
@@ -266,8 +327,8 @@ class TmsLayer(models.Model):
 
     class Meta:
         app_label = 'support'
-        verbose_name = 'TmsLayer'
-        verbose_name_plural = 'TmsLayers'
+        verbose_name = 'TMS Layer'
+        verbose_name_plural = 'TMS Layers'
 
     def __str__(self):
         return self.url_tms
@@ -281,6 +342,7 @@ class LayerFilter(models.Model):
             * Has many :model:`support.Layer`
     """
 
+# test
     default = models.CharField(
         _('Default value for filters'),
         max_length=40,
@@ -310,51 +372,8 @@ class LayerFilter(models.Model):
 
     class Meta:
         app_label = 'support'
-        verbose_name = 'LayerFilter'
-        verbose_name_plural = 'LayerFilters'
+        verbose_name = 'Layer Filter'
+        verbose_name_plural = 'Layer Filters'
 
     def __str__(self):
         return "{}: {}".format(self.label, self.filter_alias)
-
-
-# class HeatmapLayer(models.Model):
-#     """
-#     Model for HeatmapLayer Data
-#         * Association:
-#             * Inherits from :model:`models.Model`
-#             * Has one :model:`support.Layer`
-#     """
-
-#     # heatmap_type = models.IntegerField(
-#     #     on_delete=models.CASCADE,
-#     #     null=True,
-#     #     blank=True
-#     # )
-#     # heatmap_type = models.ForeignKey(
-#     #     'monitoring.MonitoringType',
-#     #     on_delete=models.CASCADE,
-#     #     null=True,
-#     #     blank=True,
-#     # )
-
-#     # layer = models.OneToOneField(
-#     #     Layer,
-#     #     on_delete=models.DO_NOTHING,
-#     #     primary_key=True,
-#     #     related_name='heatmap'
-#     heatmap_type = models.CharField(
-#         _('Type_TEST'),
-#         max_length=255,
-#         blank=True,
-#         null=True
-#     )
-
-#     class Meta:
-#         app_label = 'support'
-#         verbose_name = 'HeatmapLayer'
-#         verbose_name_plural = 'HeatmapLayers'
-
-#     # def __str__(self):
-#     #     return "{}".format(
-#     #         self.heatmap_type.name or self.heatmap_type.identifier
-#     #     )
