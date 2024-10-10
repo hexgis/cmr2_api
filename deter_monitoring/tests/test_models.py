@@ -6,7 +6,7 @@ from deter_monitoring import models
 
 
 class DeterTITests(APITestCase):
-    """Test case `models.deter_monitoring.LandUseTI` model.
+    """
 
     Args:
         APITestCase (class 'rest_framework.test.APITestCase'): Includes a few
