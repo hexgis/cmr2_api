@@ -1,4 +1,5 @@
 from django.db import models
+from .critics_and_suggestions.models import *
 
 class Institutions(models.Model):
     name = models.CharField(
