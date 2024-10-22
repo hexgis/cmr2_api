@@ -46,10 +46,11 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
             data['ds_cr'] = data['ds_cr'].removeprefix(cr)
         return data
 
+
 class InstrumentoGestaoSerializer(ModelSerializer):
     """ Instrumento de Gestão data """
 
-    class Meta: 
+    class Meta:
         model = models.InstrumentoGestaoFunai
         fields = [
             'co_funai',
@@ -69,6 +70,7 @@ class InstrumentoGestaoSerializer(ModelSerializer):
             'dt_cadastro'
         ]
 
+
 class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
     ds_cr = serializers.SerializerMethodField()
     instrumentos_gestao = serializers.SerializerMethodField()
@@ -78,7 +80,8 @@ class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
 
     def get_instrumentos_gestao(self, obj):
         if obj.possui_ig:
-            instrumentos = models.InstrumentoGestaoFunai.objects.filter(co_funai=obj.co_funai)
+            instrumentos = models.InstrumentoGestaoFunai.objects.filter(
+                co_funai=obj.co_funai)
             serializer = InstrumentoGestaoSerializer(instrumentos, many=True)
             return serializer.data
         return None
@@ -88,4 +91,3 @@ class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
         geo_field = 'geom'
         id_field = False
         fields = '__all__'
-

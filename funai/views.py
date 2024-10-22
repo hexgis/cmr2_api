@@ -17,6 +17,7 @@ from funai import (
     filters as filters_funai
 )
 
+
 class Unaccent(Func):
     function = 'unaccent'
     template = '%(function)s(%(expressions)s)'
@@ -72,7 +73,7 @@ class BuscaGeoTIListView(generics.ListAPIView):
         id = self.request.query_params.get('id', None)
         if id is None:
             raise ValidationError("O id é obrigatório.")
-        
+
         queryset = models.LimiteTerraIndigena.objects.filter(id=id)
         return queryset
 
@@ -93,7 +94,7 @@ class TiByNameView(generics.ListAPIView):
         if param:
             param = param.lower()
             unaccented_param = Func(Value(param), function='unaccent')
-            
+
             queryset = queryset.annotate(
                 unaccented_no_ti=Unaccent(Lower('no_ti'))
             ).filter(
@@ -102,29 +103,42 @@ class TiByNameView(generics.ListAPIView):
         queryset = queryset.order_by('no_ti')
 
         return queryset
-        
+
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset().values('id', 'no_ti', 'no_municipio', 'ds_cr', 'ds_fase_ti')
+        queryset = self.get_queryset().values(
+            'id', 'no_ti', 'no_municipio', 'ds_cr', 'ds_fase_ti')
         data = list(queryset)
         return response.Response(data)
 
-class BuscaInstrumentoGestaoView(generics.RetrieveAPIView):
+
+class BuscaInstrumentoGestaoView(generics.ListAPIView):
     """
-        View de apresentação dos dados de isntrumento de gestão com base no co_funai fornecido.
+        View de apresentação dos dados de instrumento de gestão com base no co_funai fornecido.
             Parameters:
                 co_funai (int): code for search management instrument by IT if it's true.
     """
     serializer_class = serializers.InstrumentoGestaoSerializer
 
-    def get_object(self):
+    def get_queryset(self):
         co_funai = self.request.query_params.get('co_funai')
         if co_funai is None:
             raise NotFound(detail="Parâmetro co_funai não fornecido.")
-        
+
         try:
-            return models.InstrumentoGestaoFunai.objects.get(co_funai=co_funai)
+            # Use filter para obter todos os objetos que correspondem ao co_funai
+            instrumentos = models.InstrumentoGestaoFunai.objects.filter(
+                co_funai=co_funai)
+
+            if not instrumentos.exists():
+                raise models.InstrumentoGestaoFunai.DoesNotExist
+
+            # Retorna o primeiro objeto ou a lista completa, conforme a necessidade
+            return instrumentos  # ou, se preferir retornar todos, use return instrumentos
         except models.InstrumentoGestaoFunai.DoesNotExist:
-            raise NotFound(detail=f"Instrumento com co_funai {co_funai} não encontrado.")
+            raise NotFound(
+                detail=f"Instrumento com co_funai {co_funai} não encontrado."
+            )
+
 
 class IndegenousVillageByNameView(generics.ListAPIView):
 
@@ -164,11 +178,12 @@ class IndegenousVillageByNameView(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         # Overriding the list method to use the response from get_queryset directly
-        queryset = self.get_indegenous_village() 
+        queryset = self.get_indegenous_village()
         return response.Response(queryset)
 
+
 class TiInStudyByName(generics.ListAPIView):
-    
+
     def get_indegenous_village(self):
         # Geoserver parameters
         geoserver_url = settings.GEOSERVER_URL
@@ -205,5 +220,5 @@ class TiInStudyByName(generics.ListAPIView):
 
     def list(self, request, *args, **kwargs):
         # Overriding the list method to use the response from get_queryset directly
-        queryset = self.get_indegenous_village() 
+        queryset = self.get_indegenous_village()
         return response.Response(queryset)
