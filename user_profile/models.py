@@ -224,7 +224,7 @@ class UserData(models.Model):
 def rename_file(instance, filename):
     ext = filename.split('.')[-1]
     new_filename = f"solicitacao_acesso_{instance.name}_{datetime.now().strftime('%Y-%m-%d')}.{ext}"
-    return os.path.join('attachments', new_filename)
+    return os.path.join('attachments/access_request', new_filename)
 
 class AccessRequest(models.Model):
     name = models.CharField(max_length=255)

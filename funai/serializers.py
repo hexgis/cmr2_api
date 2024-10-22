@@ -51,7 +51,23 @@ class InstrumentoGestaoSerializer(ModelSerializer):
 
     class Meta: 
         model = models.InstrumentoGestaoFunai
-        exclude = ['id', 'co_funai', 'no_ti', 'sg_uf']
+        fields = [
+            'co_funai',
+            'no_ti',
+            'no_regiao',
+            'sg_uf',
+            'no_povo',
+            'no_bioma',
+            'ds_parceiros',
+            'cr_funai',
+            'no_ig',
+            'ds_status',
+            'nu_ano_elaboracao',
+            'ds_disp_meio_local',
+            'ds_tll_publi',
+            'ds_obs',
+            'dt_cadastro'
+        ]
 
 class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
     ds_cr = serializers.SerializerMethodField()

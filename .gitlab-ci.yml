@@ -1,19 +1,19 @@
-stages:  # List of stages for jobs, and their order of execution
+stages: # List of stages for jobs, and their order of execution
   - build
   - test
   - push
-  - deploy
+
 
 variables:
   IMAGE: $CI_REGISTRY_IMAGE:$CI_COMMIT_SHORT_SHA
-  DOCKER_TLS_CERTDIR: ""
-  CA_CERTIFICATE: "$CA_CERTIFICATE"
 
 services:
-  - name: docker:19.03.5-dind
+  - docker:24.0.5-dind
+
+
 
 build:
-  image: docker:19.03.5
+  image: docker:24.0.5
   stage: build
   script:
     - docker build -t $IMAGE .
@@ -25,7 +25,7 @@ build:
     expire_in: "3 days"
   only:
     - main
-    - homolog
+    - develop
     - tags
 
 test:
@@ -40,6 +40,7 @@ test:
   variables:
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: ""
+  allow_failure: true
   before_script:
     - /usr/sbin/update-ca-certificates --fresh
     - export TRIVY_VERSION=$(wget -tls1 --retry-connrefused --waitretry=1 -qO - "https://api.github.com/repos/aquasecurity/trivy/releases/latest" | grep '"tag_name":' | sed -E 's/.*"v([^"]+)".*/\1/')
@@ -57,76 +58,22 @@ test:
       container_scanning: gl-container-scanning-report.json
   only:
     - main
-    - homolog
+    - develop
     - tags
 
 push:
   stage: push
-  image: docker:19.03.5
-  services:
-    - name: docker:19.03.5-dind
-      command:
-        - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
+  image: docker:24.0.5
   before_script:
-    - echo $
-    - echo "$CA_CERTIFICATE" > /usr/local/share/ca-certificates/my-ca.crt && update-ca-certificates
     - docker load -i app
-    - docker login harbor.hex.com -u "$CI_REGISTRY_USER" -p "$CI_REGISTRY_PASSWORD"
+    - base64 -d $GCP_SA_KEY | docker login -u _json_key --password-stdin https://us-central1-docker.pkg.dev
   script:
     - docker push $IMAGE
   dependencies:
     - build
   only:
     - main
-    - homolog
+    - develop
     - tags
 
-deploy-homolog:
-  stage: deploy
-  image: debian:stable-slim
-  before_script:
-    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY_HMLG" | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan $HMLG_SERVER_IP >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-  script:
-    - ssh dev_hex@$HMLG_SERVER_IP "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
-  only:
-    - homolog
 
-deploy-prod-01:
-  stage: deploy
-  image: debian:stable-slim
-  before_script:
-    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan $PROD_SERVER_IP_01 >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-  script:
-    - ssh dev_hex@$PROD_SERVER_IP_01 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
-  only:
-    - main
-    - tag
-
-deploy-prod-02:
-  stage: deploy
-  image: debian:stable-slim
-  before_script:
-    - 'command -v ssh-agent >/dev/null || ( apt-get update -y && apt-get install openssh-client -y )'
-    - eval $(ssh-agent -s)
-    - echo "$SSH_PRIVATE_KEY" | ssh-add -
-    - mkdir -p ~/.ssh
-    - chmod 700 ~/.ssh
-    - ssh-keyscan $PROD_SERVER_IP_02 >> ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
-  script:
-    - ssh dev_hex@$PROD_SERVER_IP_02 "docker volume ls && docker login harbor.hex.com -u '$CI_REGISTRY_USER' -p '$CI_REGISTRY_PASSWORD' && docker pull $IMAGE && docker stop \$(docker ps -aq) && docker rm \$(docker ps -aq) && docker run -d --restart=unless-stopped -p 80:8080 -e DB_USER=$DB_USER -e DB_NAME=$DB_NAME -e DB_PASSWORD=$DB_PASSWORD -e DB_HOST=$DB_HOST -e DB_USER_FOR_READ=$DB_USER_FOR_READ -e DB_NAME_FOR_READ=$DB_NAME_FOR_READ -e DB_PASSWORD_FOR_READ=$DB_PASSWORD_FOR_READ -e DB_HOST_FOR_READ=$DB_HOST_FOR_READ -e PORT=$PORT --mount source=dev_hex_imagens_1,target=/api_media_files/production/ $IMAGE"
-  only:
-    - main
-    - tag

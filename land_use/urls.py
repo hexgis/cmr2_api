@@ -20,6 +20,16 @@ urlpatterns = [
         name='mapped-years'
     ),
     path(
+        'cr/',
+        views.LandUseCrView.as_view(),
+        name='mapped-cr'
+    ),
+    path(
+        'ti/',
+        views.LandUseTiView.as_view(),
+        name='mapped-ti'
+    ),
+    path(
         'table/',
         views.LandUseTableView.as_view(),
         name='mapped-table'

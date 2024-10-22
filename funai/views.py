@@ -108,38 +108,23 @@ class TiByNameView(generics.ListAPIView):
         data = list(queryset)
         return response.Response(data)
 
-class BuscaInstrumentoGestaoView(generics.ListAPIView):
+class BuscaInstrumentoGestaoView(generics.RetrieveAPIView):
     """
         View de apresentação dos dados de isntrumento de gestão com base no co_funai fornecido.
             Parameters:
                 co_funai (int): code for search management instrument by IT if it's true.
     """
-    serializer_class = serializers.GeoTerraIndigenaSerializer
+    serializer_class = serializers.InstrumentoGestaoSerializer
 
-    def get_queryset(self):
-        queryset = models.LimiteTerraIndigena.objects.all()
-        co_funai = self.request.query_params.get('co_funai', None)
+    def get_object(self):
+        co_funai = self.request.query_params.get('co_funai')
         if co_funai is None:
-            raise ValidationError("O código funai é obrigatório.")
+            raise NotFound(detail="Parâmetro co_funai não fornecido.")
         
-        queryset = models.LimiteTerraIndigena.objects.filter(co_funai=co_funai)
-        return queryset
-
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        if not queryset.exists():
-            raise NotFound("Nenhum registro encontrado para o código fornecido.")
-        
-        instrumentos_gestao = []
-        for obj in queryset:
-            if obj.possui_ig:
-                instrumentos = models.InstrumentoGestaoFunai.objects.filter(co_funai=obj.co_funai)
-                serializer = serializers.InstrumentoGestaoSerializer(instrumentos, many=True)
-                instrumentos_gestao.append(serializer.data)
-            else:
-                instrumentos_gestao.append(None)
-        
-        return response.Response(instrumentos_gestao)
+        try:
+            return models.InstrumentoGestaoFunai.objects.get(co_funai=co_funai)
+        except models.InstrumentoGestaoFunai.DoesNotExist:
+            raise NotFound(detail=f"Instrumento com co_funai {co_funai} não encontrado.")
 
 class IndegenousVillageByNameView(generics.ListAPIView):
 

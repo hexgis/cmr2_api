@@ -141,13 +141,13 @@ class UserUploadFileCreateView(
         Returns:
             dict: uploaded data with name, created_at, created and updated.
         """
-        default_color = {'color': '#FF0000'}
+        properties = request.data['geometry']['features'][0]['properties']
         try:
             user_upload, created = models.UserUploadedFile.objects.get_or_create(
                 name=request.data.get('name'),
                 user=request.user,
                 is_active=True,
-                properties=default_color,
+                properties=properties,
             )
 
             if created:
