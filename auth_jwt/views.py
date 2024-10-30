@@ -189,7 +189,11 @@ class ResetPassword(views.APIView):
 
     serializer_class = usrSerializers.PasswordResetRequestSerializer
     permission_classes = [AllowAny]
-    authentication_classes = [] 
+    
+    def get_authenticators(self):
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
     
     def post(self, request, *args, **kwargs):
         """Handles POST requests to reset a user's password."""
@@ -245,6 +249,12 @@ class ResetPassword(views.APIView):
 class PasswordResetConfirmView(generics.GenericAPIView):
     """Endpoint to confirm and process a password reset."""
     serializer_class = usrSerializers.PasswordResetConfirmSerializer
+    permission_classes = [AllowAny]
+    
+    def get_authenticators(self):
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
 
     def post(self, request, *args, **kwargs):
         """Handles POST requests to reset the user's password."""
