@@ -10,10 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
-import logging.config
-import logging
-from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
-import ldap
 import os
 import datetime
 from environs import Env
@@ -21,7 +17,7 @@ from environs import Env
 env = Env()
 env.read_env()
 
-# INSTANCE OF ENV VARIABLES
+#### INSTANCE OF ENV VARIABLES
 
 DEBUG = env.bool('DEBUG', default=False)
 SECRET_KEY = env.str('SECRET_KEY')
@@ -31,6 +27,13 @@ GEO_SEARCH_STUDY_TI = env.str('GEO_SEARCH_STUDY_TI')
 LDAP_PASS = env.str('LDAP_PASS')
 LDAP_BASE_DN = env.str('LDAP_BASE_DN')
 RESET_PASSWORD_URL = env.str('RESET_PASSWORD_URL')
+DB_NAME = env.str('DB_NAME')
+DB_USER = env.str('DB_USER')
+DB_PASSWORD = env.str('DB_PASSWORD')
+DB_HOST = env.str('DB_HOST')
+DB_PORT = env.int('DB_PORT')
+LDAP_URI = env.str('LDAP_URI')
+DOCUMENTS_URL = env.str('DOCUMENTS_URL')
 
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -82,11 +85,12 @@ INSTALLED_APPS = [
     'scripts',
     'rolepermissions',
     'dashboard',
-    'portal',
+    'portal.apps.PortalConfig',
     'admin_panel',
 ]
 
 MIDDLEWARE = [
+    'cmr2_api.middleware.DisableJWTOnPublicRoutesMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -95,6 +99,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'cmr2_api.middleware.GlobalMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'cmr2_api.urls'
@@ -102,10 +108,7 @@ ROOT_URLCONF = 'cmr2_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'media', 'templates'),
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'media')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -118,7 +121,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 
 
@@ -128,20 +130,19 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT', '5432'),
-        'TEST': {'NAME': 'test_default_db', },
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME_FOR_READ'),
-        'USER': os.getenv('DB_USER_FOR_READ'),
-        'PASSWORD': os.getenv('DB_PASSWORD_FOR_READ'),
-        'HOST': os.getenv('DB_HOST_FOR_READ'),
-        'PORT': os.getenv('DB_PORT_FOR_READ', '5432')
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     },
 }
 
@@ -188,7 +189,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -245,16 +246,21 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework_gis.schema.GeoFeatureAutoSchema',
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+
 }
+
 
 # djangorestframework-simplejwt token configuration
 # https://github.com/jazzband/djangorestframework-simplejwt
 
 SIMPLE_JWT = {
-    # 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
+    ## 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=999999999),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
@@ -266,8 +272,10 @@ TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
 ################################################################################
 ####                           LDAP CONFIGURATION                           ####
 ################################################################################
+import ldap
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 
-AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
+AUTH_LDAP_SERVER_URI = LDAP_URI
 
 AUTH_LDAP_USER_SEARCH = LDAPSearch(
     "OU=FUNAI,DC=funai,DC=local", ldap.SCOPE_SUBTREE, "(mail=%(user)s)"
@@ -304,6 +312,8 @@ AUTHENTICATION_BACKENDS = (
 ####                         LOGGING CONFIGURATION                         #####
 ################################################################################
 
+import logging
+import logging.config
 
 LOGGING = {
     'version': 1,
@@ -337,7 +347,7 @@ LOGGING = {
         },
         'apscheduler': {
             'handlers': ['console'],
-            'level': 'WARNING',
+            'level': 'WARNING', 
             'propagate': False,
         },
     },

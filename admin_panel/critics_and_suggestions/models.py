@@ -3,13 +3,14 @@ from django.contrib.auth.models import User
 import os
 from datetime import datetime
 from django.core.exceptions import ValidationError
-    
+from django.utils.translation import gettext_lazy as _
+
 class Ticket(models.Model):
-    class SolicitationType(models.IntegerChoices):
-        ERRO = 1, 'Erro'
-        MELHORIA = 2, 'Melhoria'
-        NOVA_FUNCINALIDADE = 3, 'Nova Funcionalidade'
-        OUTROS = 4, 'Outros'
+    class SolicitationType(models.TextChoices):
+        ERRO = "ERRO", "Erro"
+        MELHORIA = "MELHORIA", "Melhoria"
+        NOVA_FUNCINALIDADE = "NOVA_FUNCIONALIDADE", "Nova Funcionalidade"
+        OUTROS = "OUTROS", "Outros"
     
     class Complexity(models.IntegerChoices):
         FIB_1 = 1, '1'
@@ -23,7 +24,9 @@ class Ticket(models.Model):
     code = models.AutoField(
         primary_key=True
         )    
-    solicitation_type_code = models.IntegerField(
+        
+    solicitation_type = models.CharField(
+        max_length=20,
         choices=SolicitationType.choices,
         default=SolicitationType.ERRO,
     )
@@ -69,6 +72,7 @@ def rename_file_ticket(instance, filename):
     new_filename = f"ticket_{ticket_id}_{datetime.now().strftime('%Y-%m-%d')}.{ext}"
     return os.path.join('attachments/critcs_and_suggestions/question', new_filename)
 
+    
 class TicketAttachment(models.Model):
     ticket = models.ForeignKey(
         Ticket, 
@@ -84,23 +88,42 @@ class TicketAttachment(models.Model):
         db_table = 'admin_panel_tickets_attachment'
 
 class TicketStatus(models.Model):
+    
+    class StatusCategory(models.TextChoices):
+        NAO_ANALISADO = "NAO_ANALISADO", "Não Analisado"
+        EM_ANDAMENTO = "EM_ANDAMENTO", "Em Andamento"
+        CONCLUIDO = "CONCLUIDO", "Concluído"
+        RECUSADO = "RECUSADO", "Recusado"
 
-    class Status(models.IntegerChoices):
-        NAO_ANALISADO = 1, 'Não Analisado'
-        DEFERIDO = 2, 'Deferido'
-        EM_ANALISE = 3, 'Em Análise'
-        INDEFERIDO = 4, 'Indeferido'
-        EM_DESENVOLVIMENTO = 5, 'Em Desenvolvimento'
-        AGUARDANDO_GESTOR = 6, 'Aguardando Gestor'
+    class SubStatus(models.TextChoices):
+        # Substatus para 'Em Andamento'
+        AGUARDANDO_GESTOR = "AGUARDANDO_GESTOR", "Aguardando Gestor"
+        EM_DESENVOLVIMENTO = "EM_DESENVOLVIMENTO", "Em Desenvolvimento"
+        
+        # Substatus para 'Concluído'
+        CONCLUIDO = "CONCLUIDO", "Concluído"
+        EM_TESTE = "EM_TESTE", "Em Teste"
+        
+        # Substatus para 'Recusado'
+        INVIAVEL = "INVIAVEL", "Inviável"
+        INDEFERIDO = "INDEFERIDO", "Indeferido"
     
     class Priority(models.IntegerChoices):
         BAIXA = 1, 'Baixa',
         MEDIA = 2, 'Media',
         ALTA = 3, 'Alta',
     
-    status_code = models.IntegerField(
-        choices=Status.choices,
-        default=Status.NAO_ANALISADO,
+    status_category = models.CharField(
+        max_length=20,
+        choices=StatusCategory.choices,
+        default=StatusCategory.NAO_ANALISADO,
+    )
+    
+    sub_status = models.CharField(
+        max_length=20,
+        choices=SubStatus.choices,
+        null=True,
+        blank=True
     )
 
     priority_code = models.IntegerField(
@@ -123,6 +146,11 @@ class TicketStatus(models.Model):
         blank=True
         )
     
+    due_on = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+    
     class Meta:
         app_label = 'admin_panel'
         verbose_name = "Ticket Status"
@@ -131,7 +159,7 @@ class TicketStatus(models.Model):
 
 
     def __str__(self):
-        return f"{self.get_status_code_display()} para o Ticket {self.ticket.id}"
+        return f"{self.get_status_category_display()} para o Ticket {self.ticket.id}"
     
 def rename_file_ticket_status(instance, filename):
     ext = filename.split('.')[-1]
@@ -152,20 +180,6 @@ class TicketStatusAttachment(models.Model):
         verbose_name_plural = "Tickets Status Attachments"
         db_table = 'admin_panel_tickets_status_attachments'
 
-class TicketFunctionality(models.Model):
-
-    func_name = models.CharField(
-        max_length=255,
-        blank=False,
-        null=False
-    )
-    
-
-    class Meta:
-        app_label = 'admin_panel'
-        verbose_name = "Ticket Functionality"
-        verbose_name_plural = "Tickets Functionalities"
-        db_table = 'admin_panel_tickets_funcionality'
 
 class TicketAnalysisHistory(models.Model):
 
@@ -184,12 +198,12 @@ class TicketAnalysisHistory(models.Model):
         on_delete=models.DO_NOTHING, 
         )
     
-    status_code = models.IntegerField( 
-        choices=TicketStatus.Status.choices,  
-        null=True,  
-        blank=True 
+    sub_status = models.CharField(
+        max_length=20,
+        choices= TicketStatus.SubStatus.choices,
+        null=True,
+        blank=True
     )
-
     ticket = models.ForeignKey(
         'Ticket',
         on_delete=models.CASCADE,
@@ -200,3 +214,17 @@ class TicketAnalysisHistory(models.Model):
         verbose_name = "Ticket Analysis History"
         verbose_name_plural = "Tickets Analysis History"
         db_table = 'admin_panel_tickets_analysis_history'
+        
+class TicketFunctionality(models.Model):
+
+    func_name = models.CharField(
+        max_length=255,
+        blank=False,
+        null=False
+    )
+    
+    class Meta:
+        app_label = 'admin_panel'
+        verbose_name = "Ticket Functionality"
+        verbose_name_plural = "Tickets Functionalities"
+        db_table = 'admin_panel_tickets_funcionality'

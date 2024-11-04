@@ -16,8 +16,8 @@ def validate_status_ticket_choices(ticket_status):
 def validate_ticket_choices(ticket):
     errors = {}
 
-    if ticket.solicitation_type_code not in dict(Ticket.SolicitationType.choices):
-        errors['solicitation_type_code'] = 'Invalid solicitation type.'
+    if ticket.solicitation_type not in dict(Ticket.SolicitationType.choices):
+        errors['solicitation_type'] = 'Invalid solicitation type.'
 
     if errors:
         raise ValidationError(errors)
