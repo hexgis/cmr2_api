@@ -1,14 +1,13 @@
-from rest_framework import viewsets, permissions, status, response
+from rest_framework import viewsets, permissions, status
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.decorators import action
 from rest_framework.response import Response
 
-from .models import Ticket, TicketStatus, TicketFunctionality, TicketAnalysisHistory, TicketStatusAttachment, TicketAttachment
+from .models import Ticket, TicketStatus, TicketAnalysisHistory, TicketStatusAttachment, TicketAttachment
 from .serializers import (
-    TicketSerializer, TicketStatusSerializer,
-    TicketFunctionalitySerializer, TicketAnalysisHistorySerializer, TicketAttachmentSerializer, TicketStatusAttachmentSerializer
+    TicketSerializer, TicketStatusSerializer, TicketAnalysisHistorySerializer, TicketAttachmentSerializer
 )
-from .validators import validate_status_ticket_choices, validate_ticket_choices
+from .validators import validate_ticket_choices, validate_due_on
 
 from django.core.exceptions import ValidationError
 from django.utils import timezone
@@ -68,7 +67,7 @@ class TicketViewSet(viewsets.ModelViewSet):
             serializer.save(ticket=ticket, author=request.user)
             return Response(serializer.data, status=201)
         return Response(serializer.errors, status=400)
-
+    
 class TicketStatusViewSet(viewsets.ModelViewSet):
     queryset = TicketStatus.objects.all()
     serializer_class = TicketStatusSerializer
@@ -90,33 +89,39 @@ class TicketStatusViewSet(viewsets.ModelViewSet):
                 if ext.lower() not in valid_extensions:
                     invalid_attachments.append(attachment.name)
                     
-                if invalid_attachments:
-                    return Response(
-                        {'invalid_files': invalid_attachments},
-                        status=status.HTTP_400_BAD_REQUEST
-                    )
-                else:
-                    TicketStatusAttachment.objects.create(ticket_status=instance, file=attachment)
+            if invalid_attachments:
+                return Response(
+                    {'invalid_files': invalid_attachments},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+            
+            for attachment in attachments:
+                TicketStatusAttachment.objects.create(ticket_status=instance, file=attachment)
                
-            # Atualizando os campos necessários
             instance.analyzed_by = request.user
             instance.analyzed_in = timezone.now()
-
-            # Obtendo e convertendo os status_category, sub_status e priority_code
+            
             status_category = request.data.get('status_category', instance.status_category)
             sub_status = request.data.get('sub_status', instance.sub_status)
             priority_code = request.data.get('priority_code', instance.priority_code)
+            due_on = request.data.get('due_on', instance.due_on)
+            
+            try:
+                converted_due_on = validate_due_on(due_on)
+            except ValidationError as e:
+                return Response({'error': e.messages}, status=status.HTTP_400_BAD_REQUEST)
+            
+            data = request.data.copy()
+            data['due_on'] = converted_due_on
 
             instance.status_category = status_category
             instance.sub_status = sub_status
             instance.priority_code = int(priority_code)
-
-            # Validando a atualização do status
-            serializer = self.get_serializer(instance, data=request.data, partial=True)
+            
+            serializer = self.get_serializer(instance, data=data, partial=True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
 
-            # Adicionando histórico da análise
             comment = request.data.get('comment', '')
             TicketAnalysisHistory.objects.create(
                 ticket=ticket,
@@ -133,7 +138,6 @@ class TicketStatusViewSet(viewsets.ModelViewSet):
             return Response({'error': e.messages}, status=status.HTTP_400_BAD_REQUEST)
         except Exception as e:
             return Response({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
 
 
 class TicketAnalysisHistoryViewSet(viewsets.ModelViewSet):

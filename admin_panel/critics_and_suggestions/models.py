@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 from datetime import datetime
-from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
 
 class Ticket(models.Model):
@@ -146,7 +145,7 @@ class TicketStatus(models.Model):
         blank=True
         )
     
-    due_on = models.DateTimeField(
+    due_on = models.DateField(
         null=True,
         blank=True
     )
