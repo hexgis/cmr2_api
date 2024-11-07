@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
-
+from django.utils.formats import number_format
 from monitoring import models
 
 import locale
@@ -12,6 +12,7 @@ except locale.Error:
         locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
     except locale.Error:
         locale.setlocale(locale.LC_ALL, 'pt_BR')
+
 
 class MonitoringConsolidatedSerializer(
     gis_serializers.GeoFeatureModelSerializer
@@ -127,7 +128,7 @@ class MonitoringConsolidatedByCoFunaiAndYearSerializer(
     """Serializer for table `models.MonitoringConsolidated` data."""
 
     ano = serializers.IntegerField()
-    
+
     # Campos de área (com milhares e decimais personalizados)
     cr_nu_area_ha = serializers.SerializerMethodField()
     dg_nu_area_ha = serializers.SerializerMethodField()
@@ -135,13 +136,13 @@ class MonitoringConsolidatedByCoFunaiAndYearSerializer(
     ff_nu_area_ha = serializers.SerializerMethodField()
     total_nu_area_ha = serializers.SerializerMethodField()
     ti_nu_area_ha = serializers.SerializerMethodField()
-    
+
     # Campos percentuais (com 6 decimais e símbolo de %)
     cr_nu_area_perc = serializers.SerializerMethodField()
     dg_nu_area_perc = serializers.SerializerMethodField()
     dr_nu_area_perc = serializers.SerializerMethodField()
     ff_nu_area_perc = serializers.SerializerMethodField()
-    
+
     class Meta:
         """Meta class for
         `MonitoringConsolidatedByCoFunaiAndYearSerializer` serializer."""
@@ -184,9 +185,14 @@ class MonitoringConsolidatedByCoFunaiAndYearSerializer(
     def get_ti_nu_area_ha(self, obj):
         return self.format_area(obj['ti_nu_area_ha'])
 
-    # Métodos para formatação de campos percentuais
     def format_percentage(self, value):
-        return f"{value:.6f}%"
+        formatted_value = number_format(
+            value,
+            decimal_pos=6,
+            use_l10n=True,
+            force_grouping=True
+        )
+        return f"{formatted_value}%"
 
     def get_cr_nu_area_perc(self, obj):
         return self.format_percentage(obj['cr_nu_area_perc'])
@@ -207,7 +213,7 @@ class MonitoringConsolidatedByCoFunaiAndMonthYearSerializer(
     """Serializer for table `models.MonitoringConsolidated` data."""
     mes = serializers.IntegerField()
     ano = serializers.IntegerField()
-    
+
     # Campos de área (com milhares e decimais personalizados)
     cr_nu_area_ha = serializers.SerializerMethodField()
     dg_nu_area_ha = serializers.SerializerMethodField()
@@ -215,14 +221,13 @@ class MonitoringConsolidatedByCoFunaiAndMonthYearSerializer(
     ff_nu_area_ha = serializers.SerializerMethodField()
     total_nu_area_ha = serializers.SerializerMethodField()
     ti_nu_area_ha = serializers.SerializerMethodField()
-    
+
     # Campos percentuais (com 6 decimais e símbolo de %)
     cr_nu_area_perc = serializers.SerializerMethodField()
     dg_nu_area_perc = serializers.SerializerMethodField()
     dr_nu_area_perc = serializers.SerializerMethodField()
     ff_nu_area_perc = serializers.SerializerMethodField()
 
-    
     class Meta:
         """Meta class for
         `MonitoringConsolidatedByCoFunaiAndMonthYearSerializer` serializer."""
@@ -282,6 +287,7 @@ class MonitoringConsolidatedByCoFunaiAndMonthYearSerializer(
     def get_ff_nu_area_perc(self, obj):
         return self.format_percentage(obj['ff_nu_area_perc'])
 
+
 class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidated` data."""
     # Campos de área (com milhares e decimais personalizados)
@@ -291,13 +297,13 @@ class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
     ff_nu_area_ha = serializers.SerializerMethodField()
     total_nu_area_ha = serializers.SerializerMethodField()
     ti_nu_area_ha = serializers.SerializerMethodField()
-    
+
     # Campos percentuais (com 6 decimais e símbolo de %)
     cr_nu_area_perc = serializers.SerializerMethodField()
     dg_nu_area_perc = serializers.SerializerMethodField()
     dr_nu_area_perc = serializers.SerializerMethodField()
     ff_nu_area_perc = serializers.SerializerMethodField()
-    
+
     class Meta:
         """Meta class for `MonitoringConsolidatedByCoFunaiSerializer`
         serializer."""
@@ -316,7 +322,7 @@ class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
             'ff_nu_area_perc',
             'total_nu_area_ha'
         ]
-    
+
     # Métodos para formatação de campos de área
     def format_area(self, value):
         return locale.format_string("%.3f", value, grouping=True)
@@ -363,14 +369,14 @@ class MonitoringConsolidatedByMonthYearSerializer(
 
     mes = serializers.IntegerField()
     ano = serializers.IntegerField()
-    
+
     # Campos de área (com milhares e decimais personalizados)
     cr_nu_area_ha = serializers.SerializerMethodField()
     dg_nu_area_ha = serializers.SerializerMethodField()
     dr_nu_area_ha = serializers.SerializerMethodField()
     ff_nu_area_ha = serializers.SerializerMethodField()
     total_nu_area_ha = serializers.SerializerMethodField()
-    
+
     class Meta:
         """Metaclass for
         `MonitoringConsolidatedByMonthYearSerializer` serializer."""
@@ -384,7 +390,7 @@ class MonitoringConsolidatedByMonthYearSerializer(
             'ff_nu_area_ha',
             'total_nu_area_ha'
         ]
-    
+
     # Métodos para formatação de campos de área
     def format_area(self, value):
         return locale.format_string("%.3f", value, grouping=True)
@@ -409,7 +415,7 @@ class MonitoringConsolidatedByYearSerializer(serializers.ModelSerializer):
     """Serializer for table `models.MonitoringConsolidated` data."""
 
     ano = serializers.IntegerField()
-    
+
     cr_nu_area_ha = serializers.SerializerMethodField()
     dg_nu_area_ha = serializers.SerializerMethodField()
     dr_nu_area_ha = serializers.SerializerMethodField()
@@ -428,7 +434,7 @@ class MonitoringConsolidatedByYearSerializer(serializers.ModelSerializer):
             'ff_nu_area_ha',
             'total_nu_area_ha'
         ]
-    
+
     # Métodos para formatação de campos de área
     def format_area(self, value):
         return locale.format_string("%.3f", value, grouping=True)
@@ -473,7 +479,7 @@ class MonitoringConsolidatedByDaySerializer(serializers.ModelSerializer):
             'ff_nu_area_ha',
             'total_nu_area_ha'
         ]
-    
+
     # Métodos para formatação de campos de área
     def format_area(self, value):
         return locale.format_string("%.3f", value, grouping=True)
