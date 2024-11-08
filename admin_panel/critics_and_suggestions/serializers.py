@@ -1,3 +1,4 @@
+# serializers.py
 from rest_framework import serializers
 from .models import Ticket, TicketStatus, TicketFunctionality, TicketAnalysisHistory, TicketAttachment, TicketStatusAttachment
 from django.contrib.auth.models import User
@@ -46,6 +47,7 @@ class TicketStatusAttachmentSerializer(serializers.ModelSerializer):
         model = TicketStatusAttachment
         fields = ['file']
 
+
 class TicketStatusSerializer(serializers.ModelSerializer):
     status_category_name = serializers.CharField(source='get_status_category_display', read_only=True)
     sub_status_name = serializers.CharField(source='get_sub_status_display', read_only=True)
@@ -59,15 +61,15 @@ class TicketStatusSerializer(serializers.ModelSerializer):
     )
     analyzed_by = serializers.StringRelatedField(read_only=True)
 
+
     class Meta:
         model = TicketStatus
         fields = [
             'id', 'status_category_name', 'sub_status_name',
             'priority_code', 'priority_name', 'ticket', 'ticket_id', 'analyzed_by',
-            'analyzed_in', 'status_attachments', 'due_on'
+            'analyzed_in', 'status_attachments'
         ]
         read_only_fields = ['analyzed_in']
-
     
     def validate(self, data):
         # Validar compatibilidade entre status_category e sub_status
@@ -91,6 +93,25 @@ class TicketStatusSerializer(serializers.ModelSerializer):
 
         return data
 
+    # def create(self, validated_data):
+    #     ticket_status = TicketStatus.objects.create(**validated_data)
+
+    #     return ticket_status
+
+    # def create(self, validated_data):
+    #     attachments = validated_data.pop('attachments', [])
+    #     ticket = Ticket.objects.create(**validated_data)
+
+    #     for attachment in attachments:
+    #         TicketAttachment.objects.create(ticket=ticket, file=attachment)
+
+    #     TicketStatus.objects.create(
+    #         ticket=ticket,
+    #         status_code=TicketStatus.StatusCategory.NAO_ANALISADO, 
+    #     )
+
+    #     return ticket
+
 class TicketAnalysisHistorySerializer(serializers.ModelSerializer):
     
     analyzed_update_formatted = serializers.SerializerMethodField()
@@ -112,11 +133,12 @@ class TicketAnalysisHistorySerializer(serializers.ModelSerializer):
         source='ticket',
         write_only=True
     )
-    
+
+    # status_name = serializers.CharField(source='get_status_category_display', read_only=True)
     sub_status_name = serializers.CharField(source='get_sub_status_display', read_only=True)
     
 
     class Meta:
         model = TicketAnalysisHistory
-        fields = ['id', 'comment', 'author', 'author_id', 'ticket', 'ticket_id', 'sub_status_name', 'analyzed_update_formatted']
+        fields = ['id', 'comment', 'author', 'author_id', 'ticket', 'ticket_id', 'sub_status', 'sub_status_name', 'analyzed_update_formatted']
         

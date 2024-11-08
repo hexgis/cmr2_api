@@ -85,7 +85,7 @@ INSTALLED_APPS = [
     'scripts',
     'rolepermissions',
     'dashboard',
-    'portal',
+    'portal.apps.PortalConfig',
     'admin_panel',
 ]
 
@@ -203,6 +203,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 # STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Media files configuration
+
 # Path where media is stored
 MEDIA_ROOT = (os.path.join(BASE_DIR, 'media/'))
 
@@ -253,6 +254,7 @@ REST_FRAMEWORK = {
     ),
 
 }
+
 
 # djangorestframework-simplejwt token configuration
 # https://github.com/jazzband/djangorestframework-simplejwt
