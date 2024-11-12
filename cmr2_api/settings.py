@@ -10,6 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
+import logging.config
+import logging
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
+import ldap
 import os
 import datetime
 from environs import Env
@@ -17,7 +21,7 @@ from environs import Env
 env = Env()
 env.read_env()
 
-#### INSTANCE OF ENV VARIABLES
+# INSTANCE OF ENV VARIABLES
 
 DEBUG = env.bool('DEBUG', default=False)
 SECRET_KEY = env.str('SECRET_KEY')
@@ -91,6 +95,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'cmr2_api.middleware.DisableJWTOnPublicRoutesMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -100,7 +105,7 @@ MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'cmr2_api.middleware.GlobalMiddleware',
-    
+
 ]
 
 ROOT_URLCONF = 'cmr2_api.urls'
@@ -187,7 +192,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'pt-br'
 
 TIME_ZONE = 'America/Sao_Paulo'
 
@@ -260,7 +265,7 @@ REST_FRAMEWORK = {
 # https://github.com/jazzband/djangorestframework-simplejwt
 
 SIMPLE_JWT = {
-    ## 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
+    # 🦆 VOLTAR PARA 15 MINUTOS DEPOIS
     'ACCESS_TOKEN_LIFETIME': datetime.timedelta(minutes=999999999),
     'REFRESH_TOKEN_LIFETIME': datetime.timedelta(days=7),
     'AUTH_HEADER_TYPES': ('Bearer',),
@@ -272,8 +277,6 @@ TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
 ################################################################################
 ####                           LDAP CONFIGURATION                           ####
 ################################################################################
-import ldap
-from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
 
 AUTH_LDAP_SERVER_URI = LDAP_URI
 
@@ -312,8 +315,6 @@ AUTHENTICATION_BACKENDS = (
 ####                         LOGGING CONFIGURATION                         #####
 ################################################################################
 
-import logging
-import logging.config
 
 LOGGING = {
     'version': 1,
@@ -347,7 +348,7 @@ LOGGING = {
         },
         'apscheduler': {
             'handlers': ['console'],
-            'level': 'WARNING', 
+            'level': 'WARNING',
             'propagate': False,
         },
     },
