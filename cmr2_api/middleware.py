@@ -10,6 +10,7 @@ from rest_framework.permissions import AllowAny
 from django.http import JsonResponse
 from django.utils.translation import gettext_lazy as _
 
+
 class GlobalMiddleware:
     def __init__(self, get_response):
         self.get_response = get_response
@@ -18,7 +19,7 @@ class GlobalMiddleware:
         if request.method == 'POST' and request.path == '/adm-panel/tickets/':
             response = self.validate_attachments(request)
             if response:
-                return response  
+                return response
 
         response = self.get_response(request)
 
@@ -54,8 +55,8 @@ class GlobalMiddleware:
                 status=400
             )
 
-        return None 
-    
+        return None
+
     def handle_permissions_logging(self, data):
         User = get_user_model()
         new_permissions = data.get("new_permissions", [])
@@ -78,7 +79,6 @@ class GlobalMiddleware:
                 print("Log registrado com sucesso!")
             except Exception as e:
                 print(f"Erro ao registrar log: {str(e)}")
-    
 
 
 class DisableJWTOnPublicRoutesMiddleware:
@@ -98,11 +98,12 @@ class DisableJWTOnPublicRoutesMiddleware:
         route_name = resolve(request.path_info).url_name
 
         open_routes = [
-            'password-reset-request',  
+            'password-reset-request',
             'password-reset-confirm',
             'video-cmr',
             'contato',
             'access-request',
+            'cadastro',
         ]
 
         if route_name in open_routes:

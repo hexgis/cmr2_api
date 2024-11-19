@@ -37,8 +37,12 @@ DB_PASSWORD = env.str('DB_PASSWORD')
 DB_HOST = env.str('DB_HOST')
 DB_PORT = env.int('DB_PORT')
 LDAP_URI = env.str('LDAP_URI')
+DB_NAME_FOR_READ = env.str('DB_NAME_FOR_READ')
+DB_USER_FOR_READ = env.str('DB_USER_FOR_READ')
+DB_PASSWORD_FOR_READ = env.str('DB_PASSWORD_FOR_READ')
+DB_HOST_FOR_READ = env.str('DB_HOST_FOR_READ')
+DB_PORT_FOR_READ = env.int('DB_PORT_FOR_READ')
 DOCUMENTS_URL = env.str('DOCUMENTS_URL')
-
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -95,6 +99,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'cmr2_api.middleware.DisableJWTOnPublicRoutesMiddleware',
+    'cmr2_api.middleware.DisableJWTOnPublicRoutesMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -143,11 +148,11 @@ DATABASES = {
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'NAME': DB_NAME_FOR_READ,
+        'USER': DB_USER_FOR_READ,
+        'PASSWORD': DB_PASSWORD_FOR_READ,
+        'HOST': DB_HOST_FOR_READ,
+        'PORT': DB_PORT_FOR_READ,
     },
 }
 
