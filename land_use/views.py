@@ -113,13 +113,22 @@ class LandUseCrView(generics.ListAPIView):
             data_one = self.serializer_class_one(query_one, many=True).data
             data_two = self.serializer_class_two(query_two, many=True).data
 
-            filtered_data_one = [
+            filtered_data = [
                 item for item in data_one if any(
                     str(item['co_cr']) == str(data['co_cr']) for data in data_two
                 )
             ]
+            
+            formated_objects = [
+                {
+                    'no_regiao': item['no_regiao'],
+                    'ds_cr': item["ds_cr"].replace("COORDENACAO REGIONAL ", ""),
+                    "co_cr": item["co_cr"]
+                }
+                for item in filtered_data
+            ]
 
-            return response.Response(filtered_data_one)
+            return response.Response(formated_objects)
 
         except Exception as e:
             """
