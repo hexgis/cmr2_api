@@ -26,8 +26,7 @@ services:
       context: .
       dockerfile: ./Dockerfile-dev
     command: >
-      bash -c "python manage.py makemigrations --no-input &&
-      python manage.py migrate &&
+      bash -c "
       python manage.py schedules &
       python manage.py monitoring_ad_users &
       python manage.py runserver 0.0.0.0:8080"
@@ -36,14 +35,16 @@ services:
     ports:
       - "8080:8080"
     environment:
-      DB_USER: defaultuser
-      DB_NAME: testdb
-      DB_PASSWORD: testpassword
-      DB_HOST: db
-      DB_USER_FOR_READ: user
-      DB_NAME_FOR_READ: database
-      DB_PASSWORD_FOR_READ: asdfsa
-      DB_HOST_FOR_READ: db_for_read
+      DB_NAME: cmr_funai
+      DB_USER: postgres
+      DB_PASSWORD: postgres
+      DB_HOST: 192.168.20.135
+      DB_PORT: 5433
+      DB_NAME_FOR_READ: cmr_funai
+      DB_USER_FOR_READ: postgres
+      DB_PASSWORD_FOR_READ: postgres
+      DB_HOST_FOR_READ: 192.168.20.135
+      DB_PORT_FOR_READ: 5433
       PORT: 8080
       JAZZMIN_ADMIN_SITE_TITLE: CMR Admin #Titulo da aba
       JAZZMIN_ADMIN_SITE_HEADER: CMR Admin # Titulo do login

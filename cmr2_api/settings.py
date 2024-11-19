@@ -31,7 +31,18 @@ GEO_SEARCH_STUDY_TI = env.str('GEO_SEARCH_STUDY_TI')
 LDAP_PASS = env.str('LDAP_PASS')
 LDAP_BASE_DN = env.str('LDAP_BASE_DN')
 RESET_PASSWORD_URL = env.str('RESET_PASSWORD_URL')
-
+DB_NAME = env.str('DB_NAME')
+DB_USER = env.str('DB_USER')
+DB_PASSWORD = env.str('DB_PASSWORD')
+DB_HOST = env.str('DB_HOST')
+DB_PORT = env.int('DB_PORT')
+LDAP_URI = env.str('LDAP_URI')
+DB_NAME_FOR_READ = env.str('DB_NAME_FOR_READ')
+DB_USER_FOR_READ = env.str('DB_USER_FOR_READ')
+DB_PASSWORD_FOR_READ = env.str('DB_PASSWORD_FOR_READ')
+DB_HOST_FOR_READ = env.str('DB_HOST_FOR_READ')
+DB_PORT_FOR_READ = env.int('DB_PORT_FOR_READ')
+DOCUMENTS_URL = env.str('DOCUMENTS_URL')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -82,11 +93,13 @@ INSTALLED_APPS = [
     'scripts',
     'rolepermissions',
     'dashboard',
-    'portal',
+    'portal.apps.PortalConfig',
     'admin_panel',
 ]
 
 MIDDLEWARE = [
+    'cmr2_api.middleware.DisableJWTOnPublicRoutesMiddleware',
+    'cmr2_api.middleware.DisableJWTOnPublicRoutesMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -96,6 +109,8 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'cmr2_api.middleware.GlobalMiddleware',
+
 ]
 
 ROOT_URLCONF = 'cmr2_api.urls'
@@ -103,10 +118,7 @@ ROOT_URLCONF = 'cmr2_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [
-            os.path.join(BASE_DIR, 'templates'),
-            os.path.join(BASE_DIR, 'media', 'templates'),
-        ],
+        'DIRS': [os.path.join(BASE_DIR, 'media')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -119,7 +131,6 @@ TEMPLATES = [
     },
 ]
 
-
 WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 
 
@@ -129,20 +140,19 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME'),
-        'USER': os.getenv('DB_USER'),
-        'PASSWORD': os.getenv('DB_PASSWORD'),
-        'HOST': os.getenv('DB_HOST'),
-        'PORT': os.getenv('DB_PORT', '5432'),
-        'TEST': {'NAME': 'test_default_db', },
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': os.getenv('DB_NAME_FOR_READ'),
-        'USER': os.getenv('DB_USER_FOR_READ'),
-        'PASSWORD': os.getenv('DB_PASSWORD_FOR_READ'),
-        'HOST': os.getenv('DB_HOST_FOR_READ'),
-        'PORT': os.getenv('DB_PORT_FOR_READ', '5432')
+        'NAME': DB_NAME_FOR_READ,
+        'USER': DB_USER_FOR_READ,
+        'PASSWORD': DB_PASSWORD_FOR_READ,
+        'HOST': DB_HOST_FOR_READ,
+        'PORT': DB_PORT_FOR_READ,
     },
 }
 
@@ -189,7 +199,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'pt-br'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Sao_Paulo'
 
 USE_I18N = True
 
@@ -246,10 +256,15 @@ REST_FRAMEWORK = {
         'rest_framework.renderers.BrowsableAPIRenderer',
     ),
     'DEFAULT_SCHEMA_CLASS': 'rest_framework_gis.schema.GeoFeatureAutoSchema',
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+
 }
+
 
 # djangorestframework-simplejwt token configuration
 # https://github.com/jazzband/djangorestframework-simplejwt
@@ -268,7 +283,7 @@ TEST_RUNNER = 'cmr2_api.test_settings.ManagedModelTestRunner'
 ####                           LDAP CONFIGURATION                           ####
 ################################################################################
 
-AUTH_LDAP_SERVER_URI = "ldap://10.0.0.1:389"
+AUTH_LDAP_SERVER_URI = LDAP_URI
 
 AUTH_LDAP_USER_SEARCH = LDAPSearch(
     "OU=FUNAI,DC=funai,DC=local", ldap.SCOPE_SUBTREE, "(mail=%(user)s)"

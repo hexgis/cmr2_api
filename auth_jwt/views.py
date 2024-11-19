@@ -1,3 +1,5 @@
+from django.template.loader import render_to_string
+import logging
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework_simplejwt.views import TokenObtainPairView
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
@@ -13,7 +15,7 @@ from django.http import JsonResponse
 from django.conf import settings
 from django.core.mail import send_mail
 
-import requests 
+import requests
 import pytz
 import uuid
 
@@ -34,17 +36,14 @@ from dashboard import models as dashModels
 
 User = get_user_model()
 
-import logging
 
 logger = logging.getLogger(__name__)
 
 
-from django.template.loader import render_to_string
-
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     """
     Customizes the token obtain pair serializer to add additional functionalities.
-    
+
     Attributes:
     - username_field: Specifies the field to be used for authentication (username).
     - email: An optional email field to be used in the authentication process.
@@ -65,7 +64,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         """
         response = requests.get('https://api.ipify.org').text
         return response
-    
+
     def get_location(self, ip):
         """
         Fetches the geographical location for the given IP address using the ipapi API.
@@ -91,7 +90,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
                 return {'error': 'Unknown location'}
         except Exception as e:
             return {'error': f'Error fetching location: {e}'}
-    
+
     def get_user_agent_info(self, request):
         user_agent_str = request.META.get('HTTP_USER_AGENT', " ")
         user_agent = parse_user_agent(user_agent_str)
@@ -99,7 +98,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
             'browser': user_agent.browser.family,
             'device': 'mobile' if user_agent.is_mobile else 'tablet' if user_agent.is_tablet else 'PC'
         }
-    
 
     def validate(self, attrs):
         """
@@ -110,11 +108,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         Returns:
         - dict: Validated data dictionary after authentication and additional actions.
-        
+
         Raises:
         - serializers.ValidationError: If authentication fails or other errors occur.
         """
-        
+
         # Retrieve username or email and password from request attributes
         request = self.context.get('request')
         username_or_email = attrs.get('username')
@@ -134,7 +132,8 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
                     if not user.check_password(password):
                         raise serializers.ValidationError(_('Wrong password.'))
                 except User.DoesNotExist:
-                    raise serializers.ValidationError(_('No active account found with the given credentials.'))
+                    raise serializers.ValidationError(
+                        _('No active account found with the given credentials.'))
 
             # If user is found with email or username, set username in attributes
             attrs['username'] = user.username
@@ -142,10 +141,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         # Continue with the normal validation process
         data = super().validate(attrs)
         user = self.user
-        logged_user = User.objects.get(email=username_or_email) if '@' in username_or_email else User.objects.get(username=username_or_email)
-        
+        logged_user = User.objects.get(
+            email=username_or_email) if '@' in username_or_email else User.objects.get(username=username_or_email)
+
         # If the user is authenticated, record their login details
-        if user.is_authenticated: 
+        if user.is_authenticated:
             public_user_ip = self.get_public_ip()
             user_location = self.get_location(public_user_ip)
 
@@ -161,7 +161,11 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
                 register = dashModels.DashboardData(
                     user=logged_user,
                     last_date_login=current_date,
-                    location=f"{user_location.get('city')}, {user_location.get('region')}, {user_location.get('country_name')}",
+                    location=(
+                        f"{user_location.get('city')}, "
+                        f"{user_location.get('region')}, "
+                        f"{user_location.get('country_name')}"
+                    ),
                     ip=public_user_ip,
                     browser=user_agent_info['browser'],
                     type_device=user_agent_info['device'],
@@ -175,6 +179,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return data
 
+
 class CustomTokenObtainPairView(TokenObtainPairView):
     """
     Customizes the token obtain pair view to use the custom serializer.
@@ -184,13 +189,18 @@ class CustomTokenObtainPairView(TokenObtainPairView):
     """
     serializer_class = CustomTokenObtainPairSerializer
 
+
 class ResetPassword(views.APIView):
     """Endpoint to handle password reset requests."""
 
     serializer_class = usrSerializers.PasswordResetRequestSerializer
     permission_classes = [AllowAny]
-    authentication_classes = [] 
-    
+
+    def get_authenticators(self):
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
+
     def post(self, request, *args, **kwargs):
         """Handles POST requests to reset a user's password."""
         # Validate request data
@@ -219,7 +229,7 @@ class ResetPassword(views.APIView):
             user=user,
             expires_at=timezone.now() + timedelta(minutes=15)
         )
-            
+
         # Generate password reset link
         reset_link = settings.RESET_PASSWORD_URL.format(code=reset_code.code)
 
@@ -229,22 +239,33 @@ class ResetPassword(views.APIView):
             'reset_link': reset_link,
             'reset_code': reset_code.code
         }
-        html_message = render_to_string('email/password_reset.html', context)
+        html_message = render_to_string(
+            'templates/email/password_reset.html',
+            context
+        )
 
         subject = 'Solicitação de Recuperação de Senha do CMR'
         from_email = settings.DEFAULT_FROM_EMAIL
-        
+
         # Send the password reset email
         try:
-            send_mail(subject, message='', from_email=from_email, recipient_list=[email], html_message=html_message)
+            send_mail(subject, message='', from_email=from_email,
+                      recipient_list=[email], html_message=html_message)
             return response.Response({"detail": "Password reset code sent."}, status=status.HTTP_200_OK)
         except Exception as e:
             # Handle email sending errors
             return JsonResponse({'error': str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
+
 class PasswordResetConfirmView(generics.GenericAPIView):
     """Endpoint to confirm and process a password reset."""
     serializer_class = usrSerializers.PasswordResetConfirmSerializer
+    permission_classes = [AllowAny]
+
+    def get_authenticators(self):
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
 
     def post(self, request, *args, **kwargs):
         """Handles POST requests to reset the user's password."""
@@ -252,7 +273,7 @@ class PasswordResetConfirmView(generics.GenericAPIView):
         serializer.is_valid(raise_exception=True)
 
         # Checks that the 'code' parameter has been supplied
-        code =  request.data.get('code')
+        code = request.data.get('code')
         if not code:
             return response.Response({"detail": "Reset code is required."}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -277,6 +298,3 @@ class PasswordResetConfirmView(generics.GenericAPIView):
         reset_code.delete()
 
         return response.Response({"detail": "Password has been reset."}, status=status.HTTP_200_OK)
-
-
-

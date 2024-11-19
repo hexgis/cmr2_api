@@ -65,7 +65,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('geom', django.contrib.gis.db.models.fields.GeometryField(srid=4326)),
-                ('properties', models.JSONField(blank=True, null=True)),
+                # ('properties', models.JSONField(blank=True, null=True)),
                 ('user_uploaded', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='user_uploaded_file', to='user_profile.useruploadedfile')),
             ],
             options={
