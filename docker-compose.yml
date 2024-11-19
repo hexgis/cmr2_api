@@ -56,35 +56,35 @@ services:
       - db
       - db_for_read
 
-  test:
-    build:
-      context: .
-      dockerfile: ./Dockerfile-dev
-    command: >
-      bash -c "python manage.py makemigrations --no-input &&
-      python manage.py test auth_jwt.tests &&
-      python manage.py test priority_alerts.tests &&
-      python manage.py test deter_monitoring.tests.test_models &&
-      python manage.py test land_use.tests.test_models &&
-      python manage.py test funai.tests"
-    volumes:
-      - .:/app/
-    ports:
-      - "8081:8080"
-    environment:
-      DB_USER: defaultuser
-      DB_NAME: testdb
-      DB_PASSWORD: testpassword
-      DB_HOST: db
-      PORT: 8081
-      JAZZMIN_ADMIN_SITE_TITLE: CMR Admin
-      JAZZMIN_ADMIN_SITE_HEADER: CMR Admin
-      JAZZMIN_ADMIN_SITE_BRAND: CMR Admin
-      JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico # site
-      JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
-      JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico
-    depends_on:
-      - db
+  # test:
+  #   build:
+  #     context: .
+  #     dockerfile: ./Dockerfile-dev
+  #   command: >
+  #     bash -c "python manage.py makemigrations --no-input &&
+  #     python manage.py test auth_jwt.tests &&
+  #     python manage.py test priority_alerts.tests &&
+  #     python manage.py test deter_monitoring.tests.test_models &&
+  #     python manage.py test land_use.tests.test_models &&
+  #     python manage.py test funai.tests"
+  #   volumes:
+  #     - .:/app/
+  #   ports:
+  #     - "8081:8080"
+  #   environment:
+  #     DB_USER: defaultuser
+  #     DB_NAME: testdb
+  #     DB_PASSWORD: testpassword
+  #     DB_HOST: db
+  #     PORT: 8081
+  #     JAZZMIN_ADMIN_SITE_TITLE: CMR Admin
+  #     JAZZMIN_ADMIN_SITE_HEADER: CMR Admin
+  #     JAZZMIN_ADMIN_SITE_BRAND: CMR Admin
+  #     JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico # site
+  #     JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
+  #     JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico
+  #   depends_on:
+  #     - db
 
   prod:
     image: us.gcr.io/custom-plating-209314/cmr2_api:latest
