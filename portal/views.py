@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework.views import APIView
 from rest_framework import (response, status)
+from rest_framework.permissions import AllowAny
 
 from django.http import FileResponse, JsonResponse, Http404
 from django.core.mail import send_mail
@@ -15,6 +16,12 @@ logger = logging.getLogger(__name__)
 
 class VideoView(APIView):
     """Serve a video file from the media directory."""
+    permission_classes = [AllowAny]
+    
+    def get_authenticators(self):
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
 
     def get(self, request, *args, **kwargs):
         """Serve the video file or return an error if not found.
@@ -39,6 +46,12 @@ class VideoView(APIView):
 
 class ContactView(APIView):
     """Handles contact form submissions and sends an email with the details."""
+    permission_classes = [AllowAny]
+    
+    def get_authenticators(self):
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
 
     def post(self, request, *args, **kwargs):
         """Process the contact form submission and send an email.
@@ -84,6 +97,12 @@ class ContactView(APIView):
 
 class RegisterView(APIView):
     """Handles registration requests and sends an email with the details."""
+    permission_classes = [AllowAny]
+    
+    def get_authenticators(self):
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
 
     def post(self, request, *args, **kwargs):
         """Process registration data and handle file uploads.
