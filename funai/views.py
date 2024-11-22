@@ -17,6 +17,7 @@ from funai import (
     filters as filters_funai
 )
 
+from rest_framework.permissions import AllowAny
 
 class Unaccent(Func):
     function = 'unaccent'
@@ -110,6 +111,39 @@ class TiByNameView(generics.ListAPIView):
         data = list(queryset)
         return response.Response(data)
 
+class TiByNameAllInfoView(generics.ListAPIView):
+    permission_classes = [AllowAny]
+    serializer_class = serializers.TiPropertiesSerializer
+
+    def get_authenticators(self):
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
+    
+    def get_queryset(self):
+        param = self.request.GET.get('param', None)
+        queryset = models.LimiteTerraIndigena.objects.all()
+
+        if param:
+            param = param.lower()
+            unaccented_param = Func(Value(param), function='unaccent')
+            
+            queryset = queryset.annotate(
+                unaccented_no_ti=Unaccent(Lower('no_ti'))
+            ).filter(
+                Q(unaccented_no_ti__icontains=unaccented_param)
+            )
+        queryset = queryset.order_by('no_ti')
+        return_list = []
+        for item in queryset:
+            return_list.append(item)
+        
+        return queryset
+    
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return response.Response(serializer.data)
 
 class BuscaInstrumentoGestaoView(generics.ListAPIView):
     """
