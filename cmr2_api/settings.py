@@ -41,7 +41,7 @@ DB_NAME_FOR_READ = env.str('DB_NAME_FOR_READ')
 DB_USER_FOR_READ = env.str('DB_USER_FOR_READ')
 DB_PASSWORD_FOR_READ = env.str('DB_PASSWORD_FOR_READ')
 DB_HOST_FOR_READ = env.str('DB_HOST_FOR_READ')
-DB_PORT_FOR_READ = env.int('DB_PORT_FOR_READ')
+DB_PORT_FOR_READ = env.int('DB_PORT_FOR_READ', 5432)
 DOCUMENTS_URL = env.str('DOCUMENTS_URL')
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -140,11 +140,11 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': 'cmr_funai',
-        'USER': 'postgres',
-        'PASSWORD': 'postgres',
-        'HOST': '192.168.20.135',
-        'PORT': '5433',
+        'NAME': DB_NAME,
+        'USER': DB_USER,
+        'PASSWORD': DB_PASSWORD,
+        'HOST': DB_HOST,
+        'PORT': DB_PORT,
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
