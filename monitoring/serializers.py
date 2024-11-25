@@ -95,6 +95,10 @@ class MonitoringConsolidatedTableSerializer(
     serializers.ModelSerializer
 ):
     """Serializer for table 'models.MonitoringConsolidated' data."""
+    
+    nu_area_ha = serializers.SerializerMethodField()
+    nu_latitude = serializers.SerializerMethodField()
+    nu_longitude = serializers.SerializerMethodField()
 
     class Meta:
         """Meta class for
@@ -120,7 +124,21 @@ class MonitoringConsolidatedTableSerializer(
             'no_ti',
             'ti_nu_area_ha',
         )
+    
+    def format_area(self, value):
+        return locale.format_string("%.3f", value, grouping=True)
 
+    def format_coord(self, value):
+        return locale.format_string("%.6f", value, grouping=True)
+    
+    def get_nu_area_ha(self, obj):
+        return self.format_area(obj.nu_area_ha)
+    
+    def get_nu_latitude(self, obj):
+        return self.format_coord(obj.nu_latitude)
+    
+    def get_nu_longitude(self, obj):
+        return self.format_coord(obj.nu_longitude)
 
 class MonitoringConsolidatedByCoFunaiAndYearSerializer(
     serializers.ModelSerializer
@@ -463,6 +481,7 @@ class MonitoringConsolidatedByDaySerializer(serializers.ModelSerializer):
     dr_nu_area_ha = serializers.SerializerMethodField()
     ff_nu_area_ha = serializers.SerializerMethodField()
     total_nu_area_ha = serializers.SerializerMethodField()
+    ti_nu_area_ha = serializers.SerializerMethodField()
 
     class Meta:
         """Meta class for `MonitoringConsolidatedByDaySerializer`
@@ -498,3 +517,6 @@ class MonitoringConsolidatedByDaySerializer(serializers.ModelSerializer):
 
     def get_total_nu_area_ha(self, obj):
         return self.format_area(obj['total_nu_area_ha'])
+    
+    def get_ti_nu_area_ha(self, obj):
+        return self.format_area(obj['ti_nu_area_ha'])
