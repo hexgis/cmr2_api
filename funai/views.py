@@ -112,15 +112,35 @@ class TiByNameView(generics.ListAPIView):
         return response.Response(data)
 
 class TiByNameAllInfoView(generics.ListAPIView):
+    """
+    API view to retrieve information about Indigenous Lands (TIs) based on a query parameter.
+    Provides a list of TIs filtered and ordered by name.
+    """
+    
     permission_classes = [AllowAny]
     serializer_class = serializers.TiPropertiesSerializer
 
     def get_authenticators(self):
+        """
+        Overrides the default authenticator behavior. 
+        Disables JWT authentication if the '_disable_jwt' attribute is set on the request.
+        
+        Returns:
+            A list of authenticators if JWT is enabled, or an empty list if disabled.
+        """
         if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
             return []
         return super().get_authenticators()
     
     def get_queryset(self):
+        """
+        Retrieves the queryset for the Indigenous Lands (TIs).
+        Filters the queryset based on the 'param' query parameter, 
+        ignoring accents and performing a case-insensitive match.
+        
+        Returns:
+            QuerySet: A filtered and ordered queryset of `LimiteTerraIndigena` objects.
+        """
         param = self.request.GET.get('param', None)
         queryset = models.LimiteTerraIndigena.objects.all()
 
@@ -134,13 +154,21 @@ class TiByNameAllInfoView(generics.ListAPIView):
                 Q(unaccented_no_ti__icontains=unaccented_param)
             )
         queryset = queryset.order_by('no_ti')
-        return_list = []
-        for item in queryset:
-            return_list.append(item)
         
         return queryset
     
     def list(self, request, *args, **kwargs):
+        """
+        Overrides the default list method to serialize and return the queryset data.
+        
+        Args:
+            request: The HTTP request object.
+            *args: Additional positional arguments.
+            **kwargs: Additional keyword arguments.
+        
+        Returns:
+            Response: A JSON response containing serialized data of the filtered queryset.
+        """
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return response.Response(serializer.data)
