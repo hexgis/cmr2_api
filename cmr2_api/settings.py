@@ -140,11 +140,11 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'NAME': "cmr_funai",
+        'USER': "postgres",
+        'PASSWORD': "postgres",
+        'HOST': "192.168.20.135",
+        'PORT': "5433",
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
