@@ -96,8 +96,11 @@ urlpatterns = [
         ('portal.urls', 'portal'),
         namespace='portal'),
     ),
-     path('adm-panel/', include(
-        ('admin_panel.urls', 'adm-panel'),
-        namespace='adm panel'),
-    ),
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('adm-panel/', include(
+         ('admin_panel.urls', 'adm-panel'),
+         namespace='adm panel'),
+         ),
+]
+
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

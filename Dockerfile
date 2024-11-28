@@ -26,13 +26,24 @@ ENV PYTHONUNBUFFERED 1
 # Install system requirements
 RUN apt update -y
 RUN apt install gdal-bin libgdal-dev python-dev libldap2-dev libsasl2-dev libssl-dev gcc build-essential -y
- 
+
 # Install python pip requirements
 RUN python -m pip install --upgrade pip
 RUN pip install setuptools==58.0 # fixing use_2to3_fixers error
 RUN pip uninstall gdal -y
 RUN pip install numpy
 RUN pip install gdal==$(gdal-config --version) --global-option=build_ext --global-option="-I/usr/include/gdal"
+
+# Instala o pacote locales e gera o locale pt_BR.UTF-8
+RUN apt-get update && \
+    apt-get install -y locales && \
+    echo "pt_BR.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen pt_BR.UTF-8
+
+# Define as variáveis de ambiente de locale
+ENV LANG pt_BR.UTF-8
+ENV LANGUAGE pt_BR:pt
+ENV LC_ALL pt_BR.UTF-8
 
 # Install dependencies
 COPY requirements requirements/
