@@ -345,9 +345,15 @@ class UserUploadFileUpdatePropertiesPatchView(AuthModelMixIn, generics.UpdateAPI
     def get_object(self):
         """Get the `UserUploadedFile` object."""
         try:
+            uploaded_file_id = self.request.data.get('id')
+            if not uploaded_file_id:
+                raise HttpResponseServerError(
+                    'ID is required in the request body'
+                )
+
             return models.UserUploadedFile.objects.get(
                 user=self.request.user,
-                id=self.kwargs[self.lookup_field]
+                id=uploaded_file_id
             )
         except models.UserUploadedFile.DoesNotExist:
             raise NotFound('Uploaded file not found')
@@ -367,7 +373,7 @@ class UserUploadFileUpdatePropertiesPatchView(AuthModelMixIn, generics.UpdateAPI
                 uploaded_file.properties = properties
                 uploaded_file.save()
 
-            if name is not None or ' ':
+            if name is not None:
                 uploaded_file.name = name
                 uploaded_file.save()
 
@@ -379,6 +385,7 @@ class UserUploadFileUpdatePropertiesPatchView(AuthModelMixIn, generics.UpdateAPI
 
             return response.Response(data, status=status.HTTP_200_OK)
 
-        except Exception:
+        except Exception as exc:
             raise HttpResponseServerError(
-                'Could not update properties in database')
+                f'Could not update properties in database: {str(exc)}'
+            )
