@@ -352,7 +352,7 @@ class UserUploadFileUpdatePropertiesPatchView(AuthModelMixIn, generics.UpdateAPI
         except models.UserUploadedFile.DoesNotExist:
             raise NotFound('Uploaded file not found')
 
-    def patch(self, request, *args, **kwargs):
+    def post(self, request, *args, **kwargs):
         """Update `color` in `properties` of `UserUploadedFile`."""
         uploaded_file = self.get_object()
 
