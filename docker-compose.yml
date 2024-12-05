@@ -39,12 +39,12 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_HOST: 192.168.20.135
-      DB_PORT: 5432
+      DB_PORT: 5433
       DB_NAME_FOR_READ: cmr_funai
       DB_USER_FOR_READ: postgres
       DB_PASSWORD_FOR_READ: postgres
       DB_HOST_FOR_READ: 192.168.20.135
-      DB_PORT_FOR_READ: 5432
+      DB_PORT_FOR_READ: 5433
       PORT: 8080
       JAZZMIN_ADMIN_SITE_TITLE: CMR Admin #Titulo da aba
       JAZZMIN_ADMIN_SITE_HEADER: CMR Admin # Titulo do login

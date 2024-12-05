@@ -35,7 +35,7 @@ DB_NAME = env.str('DB_NAME')
 DB_USER = env.str('DB_USER')
 DB_PASSWORD = env.str('DB_PASSWORD')
 DB_HOST = env.str('DB_HOST')
-DB_PORT = env.int('DB_PORT', 5432)
+DB_PORT = env.int('DB_PORT')
 LDAP_URI = env.str('LDAP_URI')
 DB_NAME_FOR_READ = env.str('DB_NAME_FOR_READ')
 DB_USER_FOR_READ = env.str('DB_USER_FOR_READ')
@@ -137,15 +137,14 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
-        'NAME': DB_NAME,
-        'USER': DB_USER,
-        'PASSWORD': DB_PASSWORD,
-        'HOST': DB_HOST,
-        'PORT': DB_PORT,
+        'NAME': "cmr_funai",
+        'USER': "postgres",
+        'PASSWORD': "postgres",
+        'HOST': "192.168.20.135",
+        'PORT': "5433",
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
