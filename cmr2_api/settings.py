@@ -35,7 +35,7 @@ DB_NAME = env.str('DB_NAME')
 DB_USER = env.str('DB_USER')
 DB_PASSWORD = env.str('DB_PASSWORD')
 DB_HOST = env.str('DB_HOST')
-DB_PORT = env.int('DB_PORT')
+DB_PORT = env.int('DB_PORT', 5432)
 LDAP_URI = env.str('LDAP_URI')
 DB_NAME_FOR_READ = env.str('DB_NAME_FOR_READ')
 DB_USER_FOR_READ = env.str('DB_USER_FOR_READ')
@@ -136,6 +136,7 @@ WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
+
 
 DATABASES = {
     'default': {
