@@ -6,6 +6,7 @@ from rest_framework.permissions import AllowAny
 from django.http import FileResponse, JsonResponse, Http404
 from django.core.mail import send_mail
 from django.template.loader import render_to_string
+from django.conf import settings
 
 from user_profile import models as userProfileModels
 
@@ -33,7 +34,7 @@ class VideoView(APIView):
             FileResponse: If the video file exists.
             JsonResponse: If the file is not found or there's an access error.
         """
-        video_path = os.path.join('media/templates/video/video_cmr_v2.mp4')
+        video_path = os.path.join(settings.VIDEO_TEMPLATE_DIR, 'video_cmr_v2.mp4')
 
         try:
             # Open the video file and return it as a FileResponse
@@ -62,31 +63,25 @@ class ContactView(APIView):
         Returns:
             Response: Success message if email is sent, or error message if something goes wrong.
         """
-        name = request.data.get('name')
-        last_name = request.data.get('surname')
-        email_sender = request.data.get('email')
-        phone = request.data.get('phone')
-        message = request.data.get('message')
-
         # Email subject and context for the email template.
         subject = 'Contato via fale conosco'
         context = {
-            'name': name,
-            'last_name': last_name,
-            'phone': phone,
-            'message': message
+            'name': request.data.get('name'),
+            'last_name': request.data.get('surname'),
+            'phone': request.data.get('phone'),
+            'message': request.data.get('message')
         }
-
+        template_path = os.path.join(settings.EMAIL_TEMPLATES_DIR, 'contato.html')
         # Render the email message using the context.
-        html_message = render_to_string('email/contato.html', context)
+        html_message = render_to_string(template_path, context)
 
         try:
             # Send the email to specified recipients.
             send_mail(
                 subject, 
                 message='', 
-                from_email=email_sender, 
-                recipient_list=['valdean.junior@hex360.com.br', 'marcos.silva@hex360.com.br'], # 🦆 Change to admin emails.
+                from_email=request.data.get('email'), 
+                recipient_list=settings.RECIPIENT_LIST_EMAIL_DEV, # 🦆 Change to admin emails.
                 html_message=html_message
             )
             return response.Response({"detail": "Email enviado com sucesso."}, status=status.HTTP_200_OK)
@@ -124,14 +119,15 @@ class RegisterView(APIView):
         attachment = request.FILES.get('attachment')
 
         if attachment:
-            upload_path = self._handle_upload_path('media/attachments/', attachment.name)
+            attachment_path = os.path.join(settings.MEDIA_ROOT)
+            upload_path = self._handle_upload_path(f'{attachment_path}attachments/', attachment.name)
             logger.debug(f"Upload path: {upload_path}")
         else:
             logger.warning("Nenhum arquivo de anexo foi fornecido.")
         
         try:
             # Create a new record in the database.
-            cadastro = userProfileModels.AccessRequest.objects.create(
+            userProfileModels.AccessRequest.objects.create(
                 name=name,
                 email=email,
                 department=department,
@@ -146,14 +142,15 @@ class RegisterView(APIView):
             # Prepare and send the notification email.
             context = {'name': name}
             subject = 'Pedido de acesso ao CMR'
-            html_message = render_to_string('email/solicitacao_de_acesso.html', context)
+            template_path = os.path.join(settings.EMAIL_TEMPLATES_DIR, 'solicitacao_de_acesso.html')
+            html_message = render_to_string(template_path, context)
 
             try:
                 send_mail(
                     subject,
                     message='', 
                     from_email="cmr@funai.gov.br",
-                    recipient_list=['valdean.junior@hex360.com.br', 'marcos.silva@hex360.com.br'], # 🦆 Change to admin emails.
+                    recipient_list= settings.RECIPIENT_LIST_EMAIL_DEV, # 🦆 Change to admin emails.
                     html_message=html_message
                 )
                 return response.Response({"detail": "Pedido enviado com sucesso!"}, status=status.HTTP_200_OK)

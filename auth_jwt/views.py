@@ -36,7 +36,7 @@ from dashboard import models as dashModels
 
 User = get_user_model()
 
-
+import os
 logger = logging.getLogger(__name__)
 
 
@@ -239,10 +239,8 @@ class ResetPassword(views.APIView):
             'reset_link': reset_link,
             'reset_code': reset_code.code
         }
-        html_message = render_to_string(
-            'templates/email/password_reset.html',
-            context
-        )
+        template_path = os.path.join(settings.EMAIL_TEMPLATES_DIR, 'password_reset.html')
+        html_message = render_to_string( template_path, context)
 
         subject = 'Solicitação de Recuperação de Senha do CMR'
         from_email = settings.DEFAULT_FROM_EMAIL

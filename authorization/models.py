@@ -3,25 +3,6 @@ from support import models as supportmodel
 from django.core.exceptions import ValidationError
 
 class PermissionsList(models.Model):
-    group_id = models.ForeignKey(
-        supportmodel.LayersGroup,
-        on_delete=models.DO_NOTHING
-        )
-    group_name = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True
-        )
-    permission = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True
-        )
-    permission_name = models.CharField(
-        max_length=255,
-        blank=True,
-        null=True
-        )
     permission_layer_id = models.OneToOneField(
         supportmodel.Layer,
         on_delete=models.DO_NOTHING
@@ -31,10 +12,7 @@ class PermissionsList(models.Model):
         blank=True,
         null=True
         )
-    is_layer = models.BooleanField(
-        blank=False,
-        null=False
-    )
+
     class Meta:
         app_label = 'authorization'
         verbose_name = 'Permission'
