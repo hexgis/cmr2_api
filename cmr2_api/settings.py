@@ -118,7 +118,7 @@ ROOT_URLCONF = 'cmr2_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'media')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -210,15 +210,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
-# Media files configuration
-
-# Path where media is stored
-MEDIA_ROOT = (os.path.join(BASE_DIR, 'media/'))
 
 # Base URL to serve media files
 MEDIA_URL = '/media/'
+# Path where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+# Email Templates
+EMAIL_TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates', 'email')
+VIDEO_TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates', 'video')
+RECIPIENT_LIST_EMAIL_DEV = ['valdean.junior@hex360.com.br', 'marcos.silva@hex360.com.br']
+RECIPIENT_LIST_EMAIL = ['valdean.junior@hex360.com.br', 'marcos.silva@hex360.com.br', 'joao.fonseca@hex360.com.br', 'andreza.barroso@hex360.com.br', 'ricardo.nunes@hex360.com.br', 'marcelino.dantas@funai.gov.br']
+
 
 # Django Cors Headers
 # https://github.com/adamchainz/django-cors-headers
