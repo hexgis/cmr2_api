@@ -9,6 +9,3 @@ urlpatterns = [
     path('contato', views.ContactView.as_view() ,name='contato'),
     path('cadastro', views.RegisterView.as_view() ,name='cadastro'),
 ]
-
-# if settings.DEBUG:
-#     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

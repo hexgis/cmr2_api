@@ -12,7 +12,7 @@ class PermissionsList(models.Model):
         max_length=255,
         blank=True,
         null=True
-    )
+        )
 
     class Meta:
         app_label = 'authorization'
