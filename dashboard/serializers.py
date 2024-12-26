@@ -39,7 +39,7 @@ class DashboardDataSerializer(serializers.ModelSerializer):
             'location',
             'ip',
             'type_device',
-            'browser'
+            'browser',
             'latitude',
             'longitude'
         ]
