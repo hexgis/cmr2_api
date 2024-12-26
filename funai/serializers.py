@@ -92,6 +92,7 @@ class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
         id_field = False
         fields = '__all__'
 
+
 class TiPropertiesSerializer(serializers.ModelSerializer):
     """Serializador para extrair apenas as propriedades de LimiteTerraIndigena."""
     ds_cr = serializers.SerializerMethodField()
@@ -102,7 +103,8 @@ class TiPropertiesSerializer(serializers.ModelSerializer):
 
     def get_instrumentos_gestao(self, obj):
         if obj.possui_ig:
-            instrumentos = models.InstrumentoGestaoFunai.objects.filter(co_funai=obj.co_funai)
+            instrumentos = models.InstrumentoGestaoFunai.objects.filter(
+                co_funai=obj.co_funai)
             serializer = InstrumentoGestaoSerializer(instrumentos, many=True)
             return serializer.data
         return None
@@ -116,6 +118,6 @@ class TiPropertiesSerializer(serializers.ModelSerializer):
             'ds_despacho_delimitada', 'dt_declarada', 'ds_portaria_declarada', 'dt_homologada',
             'ds_decreto_homologada', 'dt_regularizada', 'ds_matricula_regularizada',
             'ds_doc_resumo_em_estudo', 'ds_doc_resumo_delimitada', 'ds_doc_resumo_declarada',
-            'ds_doc_resumo_homologada', 'ds_doc_resumo_regularizada', 'st_amazonia_legal',
+            'ds_doc_resumo_homologada', 'ds_doc_resumo_regularizada',
             'nu_area_ha', 'dt_cadastro', 'possui_ig', 'co_cr'
         )
