@@ -168,6 +168,7 @@ DATABASE_ROUTERS = [
     'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
     'cmr2_api.database_routers.PriorityMonitoringRouters.\
 PriorityMonitoringRouter',
+    'cmr2_api.database_routers.FunaiRouters.FunaiRouter',
 ]
 
 # Default auto field
