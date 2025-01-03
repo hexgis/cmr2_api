@@ -160,7 +160,7 @@ class Layer(models.Model):
         app_label = 'support'
         verbose_name = 'Layer'
         verbose_name_plural = 'Layers'
-        ordering = ['-order']
+        ordering = ['order']
 
     def __str__(self):
         return self.name
