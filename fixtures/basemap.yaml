@@ -1,0 +1,97 @@
+- model: layer.basemap
+  pk: 1
+  fields:
+    url: //{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}.png
+    label: CartoDB Voyager
+    tag: CartoDB Voyager
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>
+      contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    order: 1
+- model: layer.basemap
+  pk: 2
+  fields:
+    url: //{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png
+    label: CartoDB Dark
+    tag: CartoDB Dark
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>
+      contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+    order: 2
+- model: layer.basemap
+  pk: 3
+  fields:
+    url: //{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png
+    label: CartoDB Light
+    tag: CartoDB Light
+    attribution: Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>
+      contributors, CartoDB Imagery <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>
+    order: 3
+- model: layer.basemap
+  pk: 4
+  fields:
+    url: //{s}.tile.osm.org/{z}/{x}/{y}.png
+    label: Open Street Map
+    tag: OSM
+    attribution: '&copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>
+      contributors'
+    order: 4
+- model: layer.basemap
+  pk: 5
+  fields:
+    url: //mt0.google.com/vt/lyrs=s&x={x}&y={y}&z={z}
+    label: Google Satellite
+    tag: Google Satellite
+    attribution: Map data &copy; <a href="https://maps.google.com/">Google</a> sattelite
+      imagery
+    order: 5
+- model: layer.basemap
+  pk: 6
+  fields:
+    url: null
+    label: Bing
+    tag: Bing
+    attribution: null
+    order: 6
+- model: layer.basemap
+  pk: 7
+  fields:
+    url: //mt0.google.com/vt/lyrs=r&hl=en&x={x}&y={y}&z={z}
+    label: Google Roadmap
+    tag: Google Roadmap
+    attribution: Map data &copy; <a href="https://maps.google.com/">Google</a> Altered
+      roadmap
+    order: 7
+- model: layer.basemap
+  pk: 8
+  fields:
+    url: //mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}
+    label: Google Hybrid
+    tag: Google Hybrid
+    attribution: Map data &copy; <a href="https://maps.google.com/">Google</a> Hybrid
+    order: 8
+- model: layer.basemap
+  pk: 9
+  fields:
+    url: //server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}
+    label: ArcMap
+    tag: ArcMap
+    attribution: Map data &copy; <a href="https://desktop.arcgis.com/en/arcmap/">ArcGis
+      Basemap</a>
+    order: 9
+- model: layer.basemap
+  pk: 10
+  fields:
+    url: //tiles.planet.com/basemaps/v1/planet-tiles/planet_medres_visual_2020-10_mosaic/gmap/{z}/{x}/{y}.png?api_key=57cd3a8c44024cfdb7446ac37d8d1fe9
+    label: Planet - Out/2020
+    tag: Planet - Out/2020
+    attribution: Map data &copy; <a href="https://www.planet.com/">Planet</a>
+    order: 10
+- model: layer.basemap
+  pk: 11
+  fields:
+    url: //stamen-tiles-{s}.a.ssl.fastly.net/watercolor/{z}/{x}/{y}.jpg
+    label: Stamen Water
+    tag: Stamen Water
+    attribution: Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC
+      BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>
+      contributors
+    order: 11

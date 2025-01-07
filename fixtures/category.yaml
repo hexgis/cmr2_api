@@ -1,0 +1,30 @@
+- model: layer.category
+  pk: 1
+  fields:
+      name: CAMADAS_DE_APOIO
+      icon: layers
+      description: "Grupo Layers destinado aos geoserviços vetoriais, utilizados como complemento as análises no CMR"
+- model: layer.category
+  pk: 2
+  fields:
+      name: TEMATICA_FOGO
+      icon: layers
+      description: "Dados e publicaçẽos que pertencem a Temática Fogo."
+- model: layer.category
+  pk: 3
+  fields:
+      name: RASTERS
+      icon: layers
+      description: "Grupo Layers destinado aos geoserviços rasters (fotos aéreas, mosáicos, imagens de satélites), utilizados como base maps ou complemento as análises no CMR."
+- model: layer.category
+  pk: 4
+  fields:
+      name: DADOS_PRODES_(INPE)
+      icon: layers
+      description: "Dado preliminar de 2020 composto por 102 cenas prioritárias. As 102 cenas selecionadas como prioritárias atendem a três critérios: 1- cobrir a região onde foram registrados pelo menos 90% do desmatamento no período anterior do PRODES (agosto/2018 a julho/2019); 2) cobrir regiões onde foram registrados pelo menos 90% dos avisos de desmatamento do DETER 2019/2020; 3) cobrir os 43 municípios prioritários para fiscalização referidos no Decreto Federal 6.321/2007 e atualizado em 2018 e 2020 pelas Portarias No. 428 e 162 do Ministério do Meio Ambiente (MMA)."
+- model: layer.category
+  pk: 10
+  fields:
+      name: BARRA_LATERAL
+      icon: layers
+      description: "Modulos do CMR que estão listados na Barra_Lateral, com a finalidade de ordenação e habilitar/desabilitar os layers, sem a necessidade de sair do Mapa_Iterativo."
