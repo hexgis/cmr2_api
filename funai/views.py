@@ -4,8 +4,6 @@ from django.db.models import Q, F, Func, Value
 
 from django.db.models.functions import Lower
 from rest_framework.exceptions import NotFound, ValidationError
-from support import serializers as supserializers
-from support import models as supmodels
 from urllib.parse import urlparse, parse_qs
 from django.conf import settings
 
@@ -18,6 +16,7 @@ from funai import (
 )
 
 from rest_framework.permissions import AllowAny
+
 
 class Unaccent(Func):
     function = 'unaccent'
@@ -111,12 +110,13 @@ class TiByNameView(generics.ListAPIView):
         data = list(queryset)
         return response.Response(data)
 
+
 class TiByNameAllInfoView(generics.ListAPIView):
     """
     API view to retrieve information about Indigenous Lands (TIs) based on a query parameter.
     Provides a list of TIs filtered and ordered by name.
     """
-    
+
     permission_classes = [AllowAny]
     serializer_class = serializers.TiPropertiesSerializer
 
@@ -124,20 +124,20 @@ class TiByNameAllInfoView(generics.ListAPIView):
         """
         Overrides the default authenticator behavior. 
         Disables JWT authentication if the '_disable_jwt' attribute is set on the request.
-        
+
         Returns:
             A list of authenticators if JWT is enabled, or an empty list if disabled.
         """
         if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
             return []
         return super().get_authenticators()
-    
+
     def get_queryset(self):
         """
         Retrieves the queryset for the Indigenous Lands (TIs).
         Filters the queryset based on the 'param' query parameter, 
         ignoring accents and performing a case-insensitive match.
-        
+
         Returns:
             QuerySet: A filtered and ordered queryset of `LimiteTerraIndigena` objects.
         """
@@ -147,31 +147,32 @@ class TiByNameAllInfoView(generics.ListAPIView):
         if param:
             param = param.lower()
             unaccented_param = Func(Value(param), function='unaccent')
-            
+
             queryset = queryset.annotate(
                 unaccented_no_ti=Unaccent(Lower('no_ti'))
             ).filter(
                 Q(unaccented_no_ti__icontains=unaccented_param)
             )
         queryset = queryset.order_by('no_ti')
-        
+
         return queryset
-    
+
     def list(self, request, *args, **kwargs):
         """
         Overrides the default list method to serialize and return the queryset data.
-        
+
         Args:
             request: The HTTP request object.
             *args: Additional positional arguments.
             **kwargs: Additional keyword arguments.
-        
+
         Returns:
             Response: A JSON response containing serialized data of the filtered queryset.
         """
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return response.Response(serializer.data)
+
 
 class BuscaInstrumentoGestaoView(generics.ListAPIView):
     """

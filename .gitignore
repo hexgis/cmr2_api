@@ -1,4 +1,10 @@
 *.pyc
-
-.idea
-**/media/attachments/
+*.sqlite3
+*.coverage
+*.env
+static/*
+.vscode
+env
+static/*
+!static/admin_files/
+/media

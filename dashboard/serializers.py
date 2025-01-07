@@ -5,6 +5,7 @@ from datetime import datetime
 
 from dashboard import models
 
+
 class DashboardDataSerializer(serializers.ModelSerializer):
     """
     Serializer for the DashboardData model to format and customize the data.
@@ -24,7 +25,7 @@ class DashboardDataSerializer(serializers.ModelSerializer):
     class Meta:
         """
         Meta class for the DashboardDataSerializer.
-        
+
         Specifies the model and fields to be serialized.
 
         Attributes:
@@ -32,8 +33,17 @@ class DashboardDataSerializer(serializers.ModelSerializer):
         - fields: List of fields to be included in the serialized output.
         """
         model = models.DashboardData
-        fields = ['id','last_date_login', 'location', 'ip', 'type_device', 'browser']
-    
+        fields = [
+            'id',
+            'last_date_login',
+            'location',
+            'ip',
+            'type_device',
+            'browser',
+            'latitude',
+            'longitude'
+        ]
+
     def get_last_date_login(self, obj):
         """
         Formats the last date and time of login for the DashboardData object.
