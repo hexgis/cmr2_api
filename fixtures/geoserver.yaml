@@ -1,0 +1,72 @@
+- model: layer.geoserver
+  pk: 1
+  fields:
+    name: Funai Geoserver
+    wms_url: http://cmr.funai.gov.br/geoserver/wms?
+    thumbnail_url: http://cmr.funai.gov.br/geoserver/wms/reflect
+    preview_url: http://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+    geoserver_url: http://cmr.funai.gov.br/geoserver/
+- model: layer.geoserver
+  pk: 2
+  fields:
+    name: HEX Geoserver
+    wms_url: https://geoserver.xskylab.com/geoserver/wms?
+    thumbnail_url: https://geoserver.xskylab.com/geoserver/wms/reflect
+    preview_url: https://geoserver.xskylab.com/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+    geoserver_url: https://geoserver.xskylab.com/geoserver/
+- model: layer.geoserver
+  pk: 3
+  fields:
+    name: NESA Geoserver
+    wms_url: https://app-svc003.xskylab.com:8080/geoserver/wms?authkey=826b4cb2-cfbc-46fa-94d2-ac92e69d43ee
+    thumbnail_url: null
+    preview_url: https://app-svc003.xskylab.com:8080/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=826b4cb2-cfbc-46fa-94d2-ac92e69d43ee&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+    geoserver_url: https://app-svc003.xskylab.com:8080/geoserver/
+- model: layer.geoserver
+  pk: 5
+  fields:
+    name: INPE - Geoserver
+    wms_url: http://queimadas.dgi.inpe.br/queimadas/terrama2q/geoserver/wms?
+    thumbnail_url: http://queimadas.dgi.inpe.br/queimadas/terrama2q/geoserver/wms/reflect
+    preview_url: http://queimadas.dgi.inpe.br/queimadas/terrama2q/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+    geoserver_url: http://queimadas.dgi.inpe.br/queimadas/
+- model: layer.geoserver
+  pk: 6
+  fields:
+    name: Firms - NASA
+    wms_url: https://firms.modaps.eosdis.nasa.gov/wms/map/?
+    thumbnail_url: null
+    preview_url: null
+    geoserver_url: null
+- model: layer.geoserver
+  pk: 7
+  fields:
+    name: OWS - Mundialis
+    wms_url: http://ows.mundialis.de/services/service?
+    thumbnail_url: null
+    preview_url: null
+    geoserver_url: null
+- model: layer.geoserver
+  pk: 8
+  fields:
+    name: Geoserver - INDE
+    wms_url: https://geoservicos.inde.gov.br/geoserver/wms?
+    thumbnail_url: https://geoservicos.inde.gov.br/geoserver/wms/reflect
+    preview_url: https://geoservicos.inde.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+    geoserver_url: https://geoservicos.inde.gov.br/geoserver/
+- model: layer.geoserver
+  pk: 9
+  fields:
+    name: Boa Vista - Geoserver
+    wms_url: https://geoserver-boavistarr.xskylab.com/geoserver/wms?authkey=00086c1a-f454-49e7-977e-450197f15c54
+    thumbnail_url: https://geoserver-boavistarr.xskylab.com/geoserver/wms/reflect?authkey=00086c1a-f454-49e7-977e-450197f15c54
+    preview_url: https://geoserver-boavistarr.xskylab.com/geoserver/wms?authkey=00086c1a-f454-49e7-977e-450197f15c54&REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+    geoserver_url: https://geoserver-boavistarr.xskylab.com/geoserver/
+- model: layer.geoserver
+  pk: 10
+  fields:
+    name: Geoserver - Geonode
+    wms_url: http://geonode-pmpa.xskylab.com/geoserver/wms?
+    thumbnail_url: http://geonode-pmpa.xskylab.com/geoserver/wms/reflect?authkey=00086c1a-f454-49e7-977e-450197f15c54
+    preview_url: http://geonode-pmpa.xskylab.com/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+    geoserver_url: http://geonode-pmpa.xskylab.com/geoserver/

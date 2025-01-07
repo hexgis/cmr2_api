@@ -1,16 +1,14 @@
-version: "3.8"
+version: "3"
 
 services:
   db:
-    image: circleci/postgres:10-postgis
-    ports:
-      - "5432:5432"
+    image: circleci/postgres:12-postgis
     environment:
-      POSTGRES_USER: defaultuser
-      POSTGRES_DB: testdb
+      POSTGRES_USER: testuser
+      POSTGRES_DB: testdatabase
       POSTGRES_PASSWORD: testpassword
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "5433:5432"
 
   db_for_read:
     image: circleci/postgres:10-postgis
@@ -26,65 +24,104 @@ services:
       context: .
       dockerfile: ./Dockerfile-dev
     command: >
-      bash -c "
-      python manage.py schedules &
-      python manage.py monitoring_ad_users &
-      python manage.py runserver 0.0.0.0:8080"
+      bash -c " python manage.py collectstatic --no-input
+      && python manage.py makemigrations --no-input 
+      && python manage.py migrate --no-input
+      && python manage.py loaddata fixtures/*.yaml
+      && python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/
     ports:
       - "8080:8080"
+    # network_mode: "host"
     environment:
-      DB_NAME: cmr_funai
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_HOST: 192.168.20.135
-      DB_PORT: 5433
+      RESET_PASSWORD_URL: "https://homolog-cmr-app-oq5garjiiq-uc.a.run.app/auth/confirmar/?code={code}"
+      SECRET_KEY: OSKS92JlKSJJksio*&2j40(&0130)W082_120KKmas@
+      DB_USER: testuser
+      DB_NAME: testdatabase
+      DB_PASSWORD: testpassword
+      DB_HOST: db
       DB_NAME_FOR_READ: cmr_funai
       DB_USER_FOR_READ: postgres
       DB_PASSWORD_FOR_READ: postgres
       DB_HOST_FOR_READ: 192.168.20.135
       DB_PORT_FOR_READ: 5433
+      ALLOWED_HOSTS: '["*"]'
+      EMAIL_HOST: smtp.example.com
+      EMAIL_HOST_USER: host_user@email.com
+      EMAIL_HOST_PASSWORD: password
+      ELASTICSEARCH_URL: http://es:9200
+      BATCH_BUFFER_SIZE: 10
+      ACCESS_TOKEN_LIFETIME: "15"
+      REFRESH_TOKEN_LIFETIME: "24"
+      TIMEOUT: 300
+      TIMEOUT_BUFFER: 10
       PORT: 8080
+      JAZZMIN_HIDE_APPS: "[]"
+      JAZZMIN_HIDE_MODELS: "[]"
       JAZZMIN_ADMIN_SITE_TITLE: CMR Admin #Titulo da aba
       JAZZMIN_ADMIN_SITE_HEADER: CMR Admin # Titulo do login
-      JAZZMIN_ADMIN_SITE_BRAND: CMR Admin
-      JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico # site
+      JAZZMIN_ADMIN_SITE_BRAND: CMR
+      JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico
       JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
       JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico
+      JIRA_API_URL: https://xskylab.atlassian.net/
     depends_on:
       - db
       - db_for_read
 
-  # test:
-  #   build:
-  #     context: .
-  #     dockerfile: ./Dockerfile-dev
-  #   command: >
-  #     bash -c "python manage.py makemigrations --no-input &&
-  #     python manage.py test auth_jwt.tests &&
-  #     python manage.py test priority_alerts.tests &&
-  #     python manage.py test deter_monitoring.tests.test_models &&
-  #     python manage.py test land_use.tests.test_models &&
-  #     python manage.py test funai.tests"
-  #   volumes:
-  #     - .:/app/
-  #   ports:
-  #     - "8081:8080"
-  #   environment:
-  #     DB_USER: defaultuser
-  #     DB_NAME: testdb
-  #     DB_PASSWORD: testpassword
-  #     DB_HOST: db
-  #     PORT: 8081
-  #     JAZZMIN_ADMIN_SITE_TITLE: CMR Admin
-  #     JAZZMIN_ADMIN_SITE_HEADER: CMR Admin
-  #     JAZZMIN_ADMIN_SITE_BRAND: CMR Admin
-  #     JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/favicon.ico # site
-  #     JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
-  #     JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico
-  #   depends_on:
-  #     - db
+  test:
+    build:
+      context: .
+      dockerfile: ./Dockerfile-dev
+    command: bash -c "ls && pwd && export
+      && python manage.py makemigrations --no-input
+      && python manage.py migrate
+      && coverage erase
+      && coverage run manage.py test --no-input
+      && coverage html -d coverage_report/"
+    volumes:
+      - .:/app/
+    environment:
+      RESET_PASSWORD_URL: "https://homolog-cmr-app-oq5garjiiq-uc.a.run.app/auth/confirmar/?code={code}"
+      SECRET_KEY: OSKS92JlKSJJksio*&2j40(&0130)W082_120KKmas@
+      DB_USER: testuser
+      DB_NAME: testdatabase
+      DB_PASSWORD: testpassword
+      DB_HOST: db
+      ALLOWED_HOSTS: '["*"]'
+      EMAIL_HOST: smtp.example.com
+      EMAIL_HOST_USER: host_user@email.com
+      EMAIL_HOST_PASSWORD: password
+      SKYNETVIZ_URL: http://localhost:8080/process/catalog
+      SKYNETVIZ_TOKEN: Token secret
+      ELASTICSEARCH_URL: http://es:9200
+      SERVICE_BIGQUERY_AGRIBUSINESS_KEY: None
+      SERVICE_BIGQUERY_AGRIBUSINESS_URL: https://service-bigquery-agribusiness-oq5garjiiq-uc.a.run.app/agribusiness/
+      SERVICE_IMAGE_CLASSIFIER_API_URL: http://localhost:8001/
+      SERVICE_IMAGE_CLASSIFIER_API_KEY: Token secret
+      SERVICE_INFOSIMPLES_API_URL: https://service-infosimples-api-dtp2lowdya-uc.a.run.app/dataset/search/
+      SERVICE_INFOSIMPLES_API_KEY: Token secret
+      SERVICE_BNDES_API_URL: https://service-agribusiness-bndes-dtp2lowdya-uc.a.run.app/dataset/search/
+      SERVICE_BNDES_API_KEY: Token secret
+      SKYNET_API_URL: https://skynet.xskylab.com/
+      SKYNET_API_KEY: Token secret
+      GAIA_API_URL: "http://localhost:8001/"
+      GAIA_API_KEY: Token secret
+      ACCESS_TOKEN_LIFETIME: "15"
+      REFRESH_TOKEN_LIFETIME: "24"
+      JAZZMIN_HIDE_APPS: "[]"
+      JAZZMIN_HIDE_MODELS: "[]"
+      JAZZMIN_ADMIN_SITE_TITLE: Skyviewer Admin
+      JAZZMIN_ADMIN_SITE_HEADER: Skyviewer Admin
+      JAZZMIN_ADMIN_SITE_BRAND: Skyviewer Admin
+      JAZZMIN_ADMIN_SITE_LOGO: /admin_files/img/xskylab_icon.png
+      JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/xskylab_logo.svg
+      JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/xskylab_icon.png
+    depends_on:
+      - db
+    links:
+      - "db:db"
 
   prod:
     image: us.gcr.io/custom-plating-209314/cmr2_api:latest

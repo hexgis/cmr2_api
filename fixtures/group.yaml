@@ -1,0 +1,145 @@
+
+- model: layer.group
+  pk: 5
+  fields:
+      name: Alta Resolução
+      order: 5
+      category_groups: 3
+- model: layer.group
+  pk: 6
+  fields:
+      name: Mosaico Landsat 2015
+      order: 6
+      category_groups: 3
+- model: layer.group
+  pk: 7
+  fields:
+      name: Mosaico Landsat 2018
+      order: 7
+      category_groups: 3
+- model: layer.group
+  pk: 8
+  fields:
+      name: Mosaico Landsat 2019
+      order: 8
+      category_groups: 3
+- model: layer.group
+  pk: 9
+  fields:
+      name: Mosaico Landsat 2020
+      order: 9
+      category_groups: 3
+- model: layer.group
+  pk: 10
+  fields:
+      name: Mosaico Sentinel-1 2018
+      order: 10
+      category_groups: 3
+- model: layer.group
+  pk: 11
+  fields:
+      name: Mosaico Sentinel-1 2019
+      order: 11
+      category_groups: 3
+- model: layer.group
+  pk: 12
+  fields:
+      name: Mosaico Sentinel-1 2020
+      order: 12
+      category_groups: 3
+- model: layer.group
+  pk: 13
+  fields:
+      name: Mosaico Sentinel-2 2018
+      order: 13
+      category_groups: 3
+- model: layer.group
+  pk: 14
+  fields:
+      name: Mosaico Sentinel-2 2019
+      order: 14
+      category_groups: 3
+- model: layer.group
+  pk: 15
+  fields:
+      name: PRODES
+      order: 15
+      category_groups: 4
+- model: layer.group
+  pk: 16
+  fields:
+      name: Focos de Calor
+      order: 16
+      category_groups: 2
+- model: layer.group
+  pk: 17
+  fields:
+      name: Risco de Fogo
+      order: 17
+      category_groups: 2
+- model: layer.group
+  pk: 18
+  fields:
+      name: Mosaico Sentinel-2 2020
+      order: 18
+      category_groups: 3
+- model: layer.group
+  pk: 19
+  fields:
+      name: Antropismo Consolidado - 2015
+      order: 21
+      category_groups: 1
+- model: layer.group
+  pk: 23
+  fields:
+      name: Terras Indígenas - FUNAI
+      order: 23
+      category_groups: 1
+- model: layer.group
+  pk: 24
+  fields:
+      name: Áreas de Proteção
+      order: 24
+      category_groups: 1
+- model: layer.group
+  pk: 25
+  fields:
+      name: Recursos Hídricos
+      order: 25
+      category_groups: 1
+- model: layer.group
+  pk: 26
+  fields:
+      name: Mineração
+      order: 26
+      category_groups: 1
+- model: layer.group
+  pk: 27
+  fields:
+      name: Imóveis Rurais
+      order: 27
+      category_groups: 1
+- model: layer.group
+  pk: 28
+  fields:
+      name: Infraestrutura 
+      order: 28
+      category_groups: 1
+- model: layer.group
+  pk: 29
+  fields:
+      name: Limites
+      order: 29
+      category_groups: 1
+- model: layer.group
+  pk: 30
+  fields:
+      name: Grade Satélites
+      order: 30
+      category_groups: 1
+- model: layer.group
+  pk: 31
+  fields:
+    name: Mosaico Planet 2024
+    order: 19
+    category_groups: 3
