@@ -208,6 +208,7 @@ class LimiteTerraIndigena(models.Model):
         verbose_name_plural = _('Terras Indigenas')
         ordering = ('no_ti', )
         db_table = 'funai\".\"lim_terra_indigena_a'
+        managed = False
         
 
 class InstrumentoGestaoFunai(models.Model):
