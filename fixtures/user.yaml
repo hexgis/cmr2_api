@@ -14,3 +14,78 @@
     groups: []
     user_permissions: []
     institution: 1
+- model: user.user
+  pk: 2
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: moreno
+    first_name: "Moreno"
+    last_name: "Branco"
+    email: blackorwhite@hexgis.com
+    is_staff: false
+    is_active: true
+    date_joined: 2024-12-19 21:43:16.265931+00:00
+    groups: []
+    user_permissions: []
+    institution: 1
+- model: user.group
+  pk: 1
+  fields:
+    name: FUNAI
+    description: "Colaboradores vinculados à FUNAI."
+    layer_permissions: [1]
+    component_permissions: [1]
+- model: user.role
+  pk: 1
+  fields:
+    name: Colaborador FUNAI
+    description: "Perfil padrão."
+    groups: [1]
+- model: user.group
+  pk: 2
+  fields:
+    name: Acesso Restrito
+    description: "Usuários autenticados com autorização para acessar módulos restritos."
+    layer_permissions: []
+    component_permissions: [2]
+- model: user.role
+  pk: 2
+  fields:
+    name: Acesso Restrito
+    description: "Usuários autenticados com autorização para acessar módulos restritos."
+    groups: [2]    
+- model: user.user
+  pk: 3
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: funai
+    first_name: "Funai"
+    last_name: "User"
+    email: funaiteste@funai.gov.br
+    is_staff: false
+    is_active: true
+    date_joined: 2024-12-19 21:43:16.265931+00:00
+    roles: [1]
+    user_permissions: []
+    institution: 1    
+- model: user.user
+  pk: 4
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: false
+    username: acessorestrito
+    first_name: "Acesso"
+    last_name: "Restriterson"
+    email: acessorestrito@funai.gov.br
+    is_staff: false
+    is_active: true
+    date_joined: 2024-12-19 21:43:16.265931+00:00
+    roles: [2]
+    user_permissions: []
+    institution: 1    
+  
