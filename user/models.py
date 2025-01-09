@@ -269,57 +269,40 @@ class PasswordResetCode(models.Model):
 
 class AccessRequest(models.Model):
     """
-        Represents a user's request for access to restricted modules or areas.
+    Model for storing user requests to access restricted modules or areas.
 
-        Each request is associated with a user and records relevant details such as
-        the user's institution, department, and the approval status of the request.
-
-        Fields:
-            user (ForeignKey): The user making the request.
-            institution (ForeignKey): The institution associated with the request.
-            user_siape_registration (IntegerField): SIAPE registration of the user.
-            coordinator_name (CharField): Name of the user's coordinator.
-            coordinator_email (EmailField): Email address of the user's coordinator.
-            coordinator_department (CharField): Department of the coordinator.
-            coordinator_siape_registration (IntegerField): SIAPE registration of the coordinator.
-            attachment (FileField): Optional file attachment related to the request.
-            status (BooleanField): Indicates whether the request is approved (True) or pending (False).
-            dt_solicitation (DateTimeField): Timestamp when the request was created.
-            dt_approvement (DateTimeField): Timestamp when the request was approved.
-
-        Meta:
-            app_label (str): Application label for the model.
-            verbose_name (str): Singular name for the model in admin interfaces.
-            verbose_name_plural (str): Plural name for the model in admin interfaces.
-        """
-
+    Fields:
+        name (CharField): Name of the requester.
+        email (EmailField): Email of the requester.
+        department (CharField): Department of the requester.
+        user_siape_registration (IntegerField): SIAPE registration of the requester.
+        coordinator_name (CharField): Name of the coordinator.
+        coordinator_email (EmailField): Email of the coordinator.
+        coordinator_department (CharField): Department of the coordinator.
+        coordinator_siape_registration (IntegerField): SIAPE registration of the coordinator.
+        attachment (FileField): An optional file with further details.
+        status (BooleanField): Indicates if the request is approved (True) or pending (False).
+        dt_solicitation (DateTimeField): Timestamp of when the request was created.
+        dt_approvement (DateTimeField): Timestamp of when the request was approved.
+    """
     def rename_file(instance, filename):
         ext = filename.split('.')[-1]
         new_filename = f"solicitacao_acesso_{instance.name}_{datetime.now().strftime('%Y-%m-%d')}.{ext}"
         return os.path.join('attachments/access_request', new_filename)
 
-    user = models.ForeignKey(
-        'user.User',
-        on_delete=models.CASCADE,
-        related_name='access_requests',
-        help_text='Usuário que solicita acesso'
-    )
-
-    institution = models.ForeignKey(
-        Institution,
-        on_delete=models.CASCADE,
-        related_name='access_requests',
-    )
-
+    name = models.CharField(max_length=255)
+    email = models.EmailField()
+    department = models.CharField(max_length=255)
     user_siape_registration = models.IntegerField()
+
     coordinator_name = models.CharField(max_length=255)
     coordinator_email = models.EmailField()
     coordinator_department = models.CharField(max_length=255)
     coordinator_siape_registration = models.IntegerField()
+
     attachment = models.FileField(upload_to=rename_file, null=True, blank=True)
-    status = models.BooleanField(
-        default=False
-    )
+
+    status = models.BooleanField(default=False)
     dt_solicitation = models.DateTimeField(auto_now_add=True)
     dt_approvement = models.DateTimeField(null=True, blank=True)
 
@@ -327,3 +310,6 @@ class AccessRequest(models.Model):
         app_label = 'user'
         verbose_name = 'Access Request'
         verbose_name_plural = 'Access Requests'
+
+    def __str__(self):
+        return f"AccessRequest #{self.pk} - {self.name}"

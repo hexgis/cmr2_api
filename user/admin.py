@@ -284,22 +284,17 @@ class AccessRequestAdmin(import_export):
 
     list_display = (
         'id',
-        'user',
-        'institution',
         'status',
         'dt_solicitation',
         'dt_approvement'
     )
     list_filter = (
         'status',
-        'institution',
         'coordinator_department',
         'dt_solicitation',
         'dt_approvement',
     )
     search_fields = (
-        'user__username',
-        'user__email',
         'coordinator_name',
         'coordinator_email',
         'institution__name',

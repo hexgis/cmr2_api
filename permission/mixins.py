@@ -86,6 +86,14 @@ class VectorPermissionCheck(permissions.BasePermission):
         )
 
 
+# class AdminRoleCheck(permissions.BasePermission):
+#     """
+#     Permission class to allow access only to users with admin roles.
+#     """
+
+#     def has_permission(self, request, view):
+#         return request.user and request.user.is_authenticated and request.user.is_staff
+
 class AdminRoleCheck(permissions.BasePermission):
     """Verify if user has admin role."""
 
@@ -189,12 +197,15 @@ class PublicVectorAuth(Auth):
     )
 
 
-class AdminAuth(Auth):
-    """Allow to access view only if is admin."""
+class AdminAuth(permissions.BasePermission):
+    """
+    Allow access only if the user is an admin.
+    Combines multiple permissions defined in permission_classes.
+    """
 
     permission_classes = (
-        permissions.AllowAny,
-        AdminRoleCheck
+        permissions.AllowAny,  # Exemplo, ajuste conforme necessário
+        AdminRoleCheck,
     )
 
 

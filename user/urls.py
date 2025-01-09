@@ -1,14 +1,7 @@
 from django.urls import path, include
-from rest_framework.routers import DefaultRouter
 
 from user import views
 
-router = DefaultRouter()
-router.register(
-    r'access-requests',
-    views.AccessRequestViewSet,
-    basename='accessrequest'
-)
 
 urlpatterns = [
     path('', views.UserListView.as_view(), name='user-list'),
@@ -33,6 +26,17 @@ urlpatterns = [
     path('role/<int:id>/', views.RoleRetrieveUpdateDestroyView.as_view(), name='role'),
     path('group/', views.GroupListCreateView.as_view(), name='group-list'),
     path('group/<int:id>/', views.GroupRetrieveUpdateDestroyView.as_view(), name='group'),
+    path('access-requests/', views.AccessRequestListCreateView.as_view(),
+         name='accessrequest-create'),
+    path('access-requests/pending/', views.AccessRequestPendingView.as_view(),
+         name='accessrequest-pending'),
 
-    path('', include(router.urls)),
+    # Aprovação de uma solicitação específica (AdminAuth)
+    path('access-requests/<int:pk>/approve/',
+         views.AccessRequestApproveView.as_view(), name='accessrequest-approve'
+         ),
+
+    # Detalhes de uma solicitação específica (AdminAuth)
+    path('access-requests/<int:pk>/', views.AccessRequestDetailView.as_view(),
+         name='accessrequest-detail'),
 ]

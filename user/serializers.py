@@ -435,17 +435,17 @@ class PasswordResetRequestSerializer(serializers.Serializer):
 
 
 class AccessRequestSerializer(serializers.ModelSerializer):
-    institution = serializers.PrimaryKeyRelatedField(
-        queryset=models.Institution.objects.all(),
-        required=False,  # ou True, dependendo da lógica
-    )
+    """
+    Serializer for AccessRequest model data.
+    """
 
     class Meta:
         model = models.AccessRequest
         fields = [
             'id',
-            'user',
-            'institution',
+            'name',
+            'email',
+            'department',
             'user_siape_registration',
             'coordinator_name',
             'coordinator_email',
@@ -457,3 +457,10 @@ class AccessRequestSerializer(serializers.ModelSerializer):
             'dt_approvement',
         ]
         read_only_fields = ['status', 'dt_solicitation', 'dt_approvement']
+
+    def create(self, validated_data):
+        """
+        Overriding create to ensure any new request defaults to status=False.
+        """
+        validated_data['status'] = False
+        return super().create(validated_data)

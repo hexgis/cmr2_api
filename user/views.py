@@ -15,7 +15,7 @@ from rest_framework_gis.filters import InBBoxFilter
 from .serializers import AccessRequestSerializer
 from django.core.mail import send_mail
 from django.utils import timezone
-
+from rest_framework.views import APIView
 
 from django.conf import settings
 from rest_framework import (
@@ -370,90 +370,113 @@ class GroupListCreateView(AdminAuth, generics.ListCreateAPIView):
     queryset = models.Group.objects.all()
 
 
-class AccessRequestViewSet(AdminAuth, viewsets.ModelViewSet):
+# class AccessRequestViewSet(viewsets.ModelViewSet):
+#     """
+#     ViewSet for managing AccessRequest data.
+
+#     - POST /user/access-requests/  -> Public
+#     - GET /user/access-requests/   -> AdminAuth
+#     - GET /user/access-requests/pending/ -> AdminAuth
+#     - POST /user/access-requests/<pk>/approve/ -> AdminAuth
+#     """
+
+#     queryset = models.AccessRequest.objects.all()
+#     serializer_class = AccessRequestSerializer
+
+#     def get_permissions(self):
+#         """
+#         Assign different permission classes based on action.
+#         """
+#         if self.action == 'create':
+#             # A solicitação de acesso (POST) deve ser pública
+#             permission_classes = [Public]
+#         elif self.action in ['list', 'retrieve', 'update', 'partial_update', 'destroy', 'list_pending', 'approve']:
+#             # Todas as outras ações exigem AdminAuth
+#             permission_classes = [AdminAuth]
+#         else:
+#             permission_classes = [AdminAuth]
+
+#         return [permission() for permission in permission_classes]
+
+#     @action(detail=False, methods=['get'], url_path='pending')
+#     def list_pending(self, request):
+#         """
+#         Lists only requests where status=False (still pending).
+#         Accessible only by admin (AdminAuth).
+#         """
+#         pending_requests = self.queryset.filter(status=False)
+#         serializer = self.get_serializer(pending_requests, many=True)
+#         return Response(serializer.data, status=status.HTTP_200_OK)
+
+#     @action(detail=True, methods=['post'], url_path='approve')
+#     def approve(self, request, pk=None):
+#         """
+#         Approves a specific access request, marking status=True
+#         and recording dt_approvement. Accessible only by admin.
+#         """
+#         try:
+#             access_request = models.AccessRequest.objects.get(
+#                 pk=pk, status=False)
+#         except models.AccessRequest.DoesNotExist:
+#             return Response(
+#                 {'detail': 'Requisição não encontrada ou já aprovada.'},
+#                 status=status.HTTP_404_NOT_FOUND
+#             )
+
+#         access_request.status = True
+#         access_request.dt_approvement = timezone.now()
+#         access_request.save()
+
+#         return Response(
+#             {
+#                 'detail': 'Acesso aprovado com sucesso.',
+#                 'request_id': access_request.id
+#             },
+#             status=status.HTTP_200_OK
+#         )
+
+class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     """
-    API ViewSet for managing AccessRequest model data.
-
-    This ViewSet provides:
-        - Standard CRUD operations (create, retrieve, update, delete).
-        - Custom action to list pending requests (status=False).
-        - Custom action to approve specific requests by marking status=True
-          and updating the approval date.
-
-    Methods:
-        list_pending(request): Lists all pending access requests.
-        approve(request, pk): Approves a specific access request.
-
-    Attributes:
-        queryset (QuerySet): Default queryset for AccessRequest objects.
-        serializer_class (Serializer): Serializer used for AccessRequest model.
-        permission_classes (list): Permissions required to access the ViewSet.
+    Handles creation of new access requests (Public).
     """
+
     queryset = models.AccessRequest.objects.all()
     serializer_class = AccessRequestSerializer
 
-    @action(detail=True, methods=['post'], url_path='approve')
-    def approve(self, request, pk=None):
-        """
-        Approves a request, marking status=True 
-        and assigns role 2 ("Restricted Access") to the user
-        if the email ends in '@funai.gov.br', it also assigns role 1.
-        """
 
-        try:
-            access_request = models.AccessRequest.objects.get(
-                pk=pk,
-                status=False
-            )
-        except models.AccessRequest.DoesNotExist:
-            return Response(
-                {'detail': 'Requisição não encontrada ou já aprovada.'},
-                status=status.HTTP_404_NOT_FOUND
-            )
+class AccessRequestPendingView(Public, generics.ListCreateAPIView):
+    """
+    Lists only pending access requests (AdminAuth).
+    """
+    queryset = models.AccessRequest.objects.filter(status=False)
+    serializer_class = AccessRequestSerializer
 
-        # 1) Marca a requisição como aprovada
+
+class AccessRequestApproveView(Public, APIView):
+    """
+    Approves a specific access request by marking status=True and
+    updating dt_approvement (AdminAuth).
+    """
+
+    def post(self, request, pk, *args, **kwargs):
+        access_request = get_object_or_404(
+            models.AccessRequest, pk=pk, status=False)
         access_request.status = True
         access_request.dt_approvement = timezone.now()
         access_request.save()
 
-        user = access_request.user
-
-        try:
-            role_acesso_restrito = models.Role.objects.get(pk=2)
-            user.roles.add(role_acesso_restrito)
-        except Role.DoesNotExist:
-            return Response(
-                {'detail': 'Role de ID 2 não encontrado. Verifique o fixture user.yaml ou crie esse Role.'},
-                status=status.HTTP_400_BAD_REQUEST
-            )
-
-        if user.email.endswith('@funai.gov.br'):
-            try:
-                role_funai = models.Role.objects.get(pk=1)
-                user.roles.add(role_funai)
-            except Role.DoesNotExist:
-                return Response(
-                    {'detail': 'Role de ID 1 não encontrado. Verifique o fixture user.yaml ou crie esse Role.'},
-                    status=status.HTTP_400_BAD_REQUEST
-                )
-
-        user.is_active = True
-        user.save()
-
         return Response(
             {
-                'detail': 'Acesso aprovado com sucesso. Roles atribuídos ao usuário.',
-                'user_id': user.id,
-                'access_request_id': access_request.id
+                "detail": "Acesso aprovado com sucesso.",
+                "request_id": access_request.id,
             },
-            status=status.HTTP_200_OK
+            status=status.HTTP_200_OK,
         )
 
-    @action(detail=False, methods=['get'], url_path='pending')
-    def list_pending(self, request):
-        """
-        Lista somente as requisições que estão pendentes (status=False).
-        """
-        pending_requests = self.queryset.filter(status=False)
-        serializer = self.get_serializer(pending_requests, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+
+class AccessRequestDetailView(Public, generics.RetrieveAPIView):
+    """
+    Retrieves details of a specific access request (AdminAuth).
+    """
+    queryset = models.AccessRequest.objects.all()
+    serializer_class = AccessRequestSerializer

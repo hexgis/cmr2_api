@@ -48,7 +48,7 @@
   fields:
     name: Acesso Restrito
     description: "Usuários autenticados com autorização para acessar módulos restritos."
-    layer_permissions: []
+    layer_permissions: [2]
     component_permissions: [2]
 - model: user.role
   pk: 2
