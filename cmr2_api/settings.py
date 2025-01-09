@@ -198,7 +198,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 COMPONENT_LIST = ast.literal_eval(os.getenv(
     'COMPONENT_LIST',
     "[\
-        ('analytics', 'Analytics'),\
+        ('layers', 'Camadas de Sobreposição'),\
+        ('monitoring', 'Monitoramento Diário'),\
+        ('layers_mosaics', 'Alta Resolução e Mosaicos'),\
+        ('layers_planet', 'Camadas Planet'),\
+        ('land_use', 'Uso e Ocupação do Solo'),\
+        ('analytics', 'Módulo Analítico'),\
+        ('admin_panel', 'Painel Administrativo'),\
     ]"
 ))
 
