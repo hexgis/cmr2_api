@@ -264,19 +264,35 @@ class RoleAdmin(import_export):
     )
 
 
-# 2) Definir uma classe de Admin para AccessRequest
 class AccessRequestAdmin(import_export):
+    """
+    Admin interface for managing AccessRequest model data.
+
+    This admin class provides:
+        - Display of key fields such as user, institution, and status in the admin list view.
+        - Filtering capabilities for fields like status, institution, and solicitation date.
+        - Search functionality for user-related fields and institution name.
+        - Actions to approve multiple requests at once.
+
+    Attributes:
+        list_display (tuple): Fields to display in the admin list view.
+        list_filter (tuple): Fields to filter in the admin interface.
+        search_fields (tuple): Fields for search functionality in the admin interface.
+        readonly_fields (tuple): Fields that are read-only in the admin interface.
+        actions (list): Custom admin actions, such as batch approval of access requests.
+    """
+
     list_display = (
         'id',
         'user',
-        'institution',  # agora exibe a instituição
+        'institution',
         'status',
         'dt_solicitation',
         'dt_approvement'
     )
     list_filter = (
         'status',
-        'institution',  # para filtrar por instituição no admin
+        'institution',
         'coordinator_department',
         'dt_solicitation',
         'dt_approvement',
@@ -286,7 +302,6 @@ class AccessRequestAdmin(import_export):
         'user__email',
         'coordinator_name',
         'coordinator_email',
-        # se quiser buscar por institution__name
         'institution__name',
     )
     readonly_fields = (
@@ -301,7 +316,6 @@ class AccessRequestAdmin(import_export):
     actions = [approve_requests]
 
 
-# 3) Registrar o modelo e as classes no admin
 admin.site.register(models.User, CustomUserAdmin)
 admin.site.register(models.Institution, InstitutionAdmin)
 admin.site.register(models.Role, RoleAdmin)
@@ -310,5 +324,4 @@ admin.site.register(models.UserUploadedFile, UploadedFileAdmin)
 admin.site.register(models.UserUploadedFileGeometry,
                     UploadedFileGeometriesAdmin)
 
-# Importante: registrar o AccessRequest
 admin.site.register(AccessRequest, AccessRequestAdmin)

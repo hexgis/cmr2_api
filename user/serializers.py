@@ -435,11 +435,9 @@ class PasswordResetRequestSerializer(serializers.Serializer):
 
 
 class AccessRequestSerializer(serializers.ModelSerializer):
-    # Se você quiser que, ao enviar "institution": 1, isso vincule a Institution com pk=1
     institution = serializers.PrimaryKeyRelatedField(
         queryset=models.Institution.objects.all(),
         required=False,  # ou True, dependendo da lógica
-        allow_null=True   # se estiver usando null=True no model
     )
 
     class Meta:

@@ -371,16 +371,35 @@ class GroupListCreateView(AdminAuth, generics.ListCreateAPIView):
 
 
 class AccessRequestViewSet(AdminAuth, viewsets.ModelViewSet):
+    """
+    API ViewSet for managing AccessRequest model data.
+
+    This ViewSet provides:
+        - Standard CRUD operations (create, retrieve, update, delete).
+        - Custom action to list pending requests (status=False).
+        - Custom action to approve specific requests by marking status=True
+          and updating the approval date.
+
+    Methods:
+        list_pending(request): Lists all pending access requests.
+        approve(request, pk): Approves a specific access request.
+
+    Attributes:
+        queryset (QuerySet): Default queryset for AccessRequest objects.
+        serializer_class (Serializer): Serializer used for AccessRequest model.
+        permission_classes (list): Permissions required to access the ViewSet.
+    """
     queryset = models.AccessRequest.objects.all()
     serializer_class = AccessRequestSerializer
 
     @action(detail=True, methods=['post'], url_path='approve')
     def approve(self, request, pk=None):
         """
-        Aprova uma requisição, marcando status=True e dt_approvement.
-        Além disso, atribui o role 2 ("Acesso Restrito") ao user
-        e, caso o e-mail termine em '@funai.gov.br', também atribui o role 1.
+        Approves a request, marking status=True 
+        and assigns role 2 ("Restricted Access") to the user
+        if the email ends in '@funai.gov.br', it also assigns role 1.
         """
+
         try:
             access_request = models.AccessRequest.objects.get(
                 pk=pk,
@@ -399,7 +418,6 @@ class AccessRequestViewSet(AdminAuth, viewsets.ModelViewSet):
 
         user = access_request.user
 
-        # 2) Atribui o Role de pk=2 ("Acesso Restrito")
         try:
             role_acesso_restrito = models.Role.objects.get(pk=2)
             user.roles.add(role_acesso_restrito)
@@ -409,7 +427,6 @@ class AccessRequestViewSet(AdminAuth, viewsets.ModelViewSet):
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # 3) Se o e-mail for @funai.gov.br, atribui também o Role de pk=1
         if user.email.endswith('@funai.gov.br'):
             try:
                 role_funai = models.Role.objects.get(pk=1)
@@ -420,7 +437,6 @@ class AccessRequestViewSet(AdminAuth, viewsets.ModelViewSet):
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-        # (Opcional) Tornar o usuário ativo, se for parte do fluxo
         user.is_active = True
         user.save()
 

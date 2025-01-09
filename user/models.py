@@ -268,6 +268,30 @@ class PasswordResetCode(models.Model):
 
 
 class AccessRequest(models.Model):
+    """
+        Represents a user's request for access to restricted modules or areas.
+
+        Each request is associated with a user and records relevant details such as
+        the user's institution, department, and the approval status of the request.
+
+        Fields:
+            user (ForeignKey): The user making the request.
+            institution (ForeignKey): The institution associated with the request.
+            user_siape_registration (IntegerField): SIAPE registration of the user.
+            coordinator_name (CharField): Name of the user's coordinator.
+            coordinator_email (EmailField): Email address of the user's coordinator.
+            coordinator_department (CharField): Department of the coordinator.
+            coordinator_siape_registration (IntegerField): SIAPE registration of the coordinator.
+            attachment (FileField): Optional file attachment related to the request.
+            status (BooleanField): Indicates whether the request is approved (True) or pending (False).
+            dt_solicitation (DateTimeField): Timestamp when the request was created.
+            dt_approvement (DateTimeField): Timestamp when the request was approved.
+
+        Meta:
+            app_label (str): Application label for the model.
+            verbose_name (str): Singular name for the model in admin interfaces.
+            verbose_name_plural (str): Plural name for the model in admin interfaces.
+        """
 
     def rename_file(instance, filename):
         ext = filename.split('.')[-1]
@@ -282,12 +306,11 @@ class AccessRequest(models.Model):
     )
 
     institution = models.ForeignKey(
-        Institution,                  # Modelo de instituição
-        on_delete=models.CASCADE,     # Apaga AccessRequest se Institution for apagada
+        Institution,
+        on_delete=models.CASCADE,
         related_name='access_requests',
-        null=True,                    # Se quiser permitir nulo
-        blank=True                    # Se quiser permitir campo em branco
     )
+
     user_siape_registration = models.IntegerField()
     coordinator_name = models.CharField(max_length=255)
     coordinator_email = models.EmailField()
