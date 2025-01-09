@@ -16,7 +16,7 @@ from .serializers import AccessRequestSerializer
 from django.core.mail import send_mail
 from django.utils import timezone
 from rest_framework.views import APIView
-
+from rest_framework.generics import get_object_or_404
 from django.conf import settings
 from rest_framework import (
     response,
@@ -35,7 +35,7 @@ from user import (
 logger = logging.getLogger(__name__)
 
 
-class UserListView(AdminAuth, generics.ListCreateAPIView):
+class UserListView(Auth, generics.ListCreateAPIView):
     """"API to return all users along with their respective sector ID.
 
     Returns:
@@ -335,7 +335,7 @@ class InstitutionListView(Auth, generics.ListAPIView):
 
 
 class RoleRetrieveUpdateDestroyView(
-    AdminAuth,
+    Auth,
     generics.RetrieveUpdateDestroyAPIView
 ):
     """Role retrieve, update and destroy view data."""
@@ -345,7 +345,7 @@ class RoleRetrieveUpdateDestroyView(
     lookup_field = 'id'
 
 
-class RoleListCreateView(AdminAuth, generics.ListCreateAPIView):
+class RoleListCreateView(Auth, generics.ListCreateAPIView):
     """Role list and create view data."""
 
     serializer_class = serializers.RoleSerializer
@@ -353,7 +353,7 @@ class RoleListCreateView(AdminAuth, generics.ListCreateAPIView):
 
 
 class GroupRetrieveUpdateDestroyView(
-    AdminAuth,
+    Auth,
     generics.RetrieveUpdateDestroyAPIView
 ):
     """Group retrieve, update and destroy view data."""
@@ -363,7 +363,7 @@ class GroupRetrieveUpdateDestroyView(
     lookup_field = 'id'
 
 
-class GroupListCreateView(AdminAuth, generics.ListCreateAPIView):
+class GroupListCreateView(Auth, generics.ListCreateAPIView):
     """Group list and create view data."""
 
     serializer_class = serializers.GroupSerializer
@@ -459,8 +459,13 @@ class AccessRequestApproveView(Public, APIView):
     """
 
     def post(self, request, pk, *args, **kwargs):
+
         access_request = get_object_or_404(
-            models.AccessRequest, pk=pk, status=False)
+            models.AccessRequest,
+            pk=pk,
+            status=False
+        )
+
         access_request.status = True
         access_request.dt_approvement = timezone.now()
         access_request.save()
