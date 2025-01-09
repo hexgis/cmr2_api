@@ -14,6 +14,7 @@ from django.template.loader import render_to_string
 from rest_framework_gis.filters import InBBoxFilter
 from .serializers import AccessRequestSerializer
 from django.core.mail import send_mail
+from django.utils import timezone
 
 
 from django.conf import settings
@@ -367,3 +368,76 @@ class GroupListCreateView(AdminAuth, generics.ListCreateAPIView):
 
     serializer_class = serializers.GroupSerializer
     queryset = models.Group.objects.all()
+
+
+class AccessRequestViewSet(AdminAuth, viewsets.ModelViewSet):
+    queryset = models.AccessRequest.objects.all()
+    serializer_class = AccessRequestSerializer
+
+    @action(detail=True, methods=['post'], url_path='approve')
+    def approve(self, request, pk=None):
+        """
+        Aprova uma requisição, marcando status=True e dt_approvement.
+        Além disso, atribui o role 2 ("Acesso Restrito") ao user
+        e, caso o e-mail termine em '@funai.gov.br', também atribui o role 1.
+        """
+        try:
+            access_request = models.AccessRequest.objects.get(
+                pk=pk,
+                status=False
+            )
+        except models.AccessRequest.DoesNotExist:
+            return Response(
+                {'detail': 'Requisição não encontrada ou já aprovada.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        # 1) Marca a requisição como aprovada
+        access_request.status = True
+        access_request.dt_approvement = timezone.now()
+        access_request.save()
+
+        user = access_request.user
+
+        # 2) Atribui o Role de pk=2 ("Acesso Restrito")
+        try:
+            role_acesso_restrito = models.Role.objects.get(pk=2)
+            user.roles.add(role_acesso_restrito)
+        except Role.DoesNotExist:
+            return Response(
+                {'detail': 'Role de ID 2 não encontrado. Verifique o fixture user.yaml ou crie esse Role.'},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # 3) Se o e-mail for @funai.gov.br, atribui também o Role de pk=1
+        if user.email.endswith('@funai.gov.br'):
+            try:
+                role_funai = models.Role.objects.get(pk=1)
+                user.roles.add(role_funai)
+            except Role.DoesNotExist:
+                return Response(
+                    {'detail': 'Role de ID 1 não encontrado. Verifique o fixture user.yaml ou crie esse Role.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+        # (Opcional) Tornar o usuário ativo, se for parte do fluxo
+        user.is_active = True
+        user.save()
+
+        return Response(
+            {
+                'detail': 'Acesso aprovado com sucesso. Roles atribuídos ao usuário.',
+                'user_id': user.id,
+                'access_request_id': access_request.id
+            },
+            status=status.HTTP_200_OK
+        )
+
+    @action(detail=False, methods=['get'], url_path='pending')
+    def list_pending(self, request):
+        """
+        Lista somente as requisições que estão pendentes (status=False).
+        """
+        pending_requests = self.queryset.filter(status=False)
+        serializer = self.get_serializer(pending_requests, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)

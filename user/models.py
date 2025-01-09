@@ -274,9 +274,20 @@ class AccessRequest(models.Model):
         new_filename = f"solicitacao_acesso_{instance.name}_{datetime.now().strftime('%Y-%m-%d')}.{ext}"
         return os.path.join('attachments/access_request', new_filename)
 
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
-    department = models.CharField(max_length=255)
+    user = models.ForeignKey(
+        'user.User',
+        on_delete=models.CASCADE,
+        related_name='access_requests',
+        help_text='Usuário que solicita acesso'
+    )
+
+    institution = models.ForeignKey(
+        Institution,                  # Modelo de instituição
+        on_delete=models.CASCADE,     # Apaga AccessRequest se Institution for apagada
+        related_name='access_requests',
+        null=True,                    # Se quiser permitir nulo
+        blank=True                    # Se quiser permitir campo em branco
+    )
     user_siape_registration = models.IntegerField()
     coordinator_name = models.CharField(max_length=255)
     coordinator_email = models.EmailField()
