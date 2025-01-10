@@ -313,3 +313,44 @@ class AccessRequest(models.Model):
 
     def __str__(self):
         return f"AccessRequest #{self.pk} - {self.name}"
+
+
+class AccessRequestStatus(models.Model):
+
+    access_request_id = models.ForeignKey(
+        AccessRequest,
+        on_delete=models.CASCADE
+    )
+
+    class StatusType(models.IntegerChoices):
+        PENDENTE = 1, 'Pendente'
+        CONCEDIDA = 2, 'Concedida'
+        RECUSADA = 3, 'Recusada'
+
+    status = models.IntegerField(
+        choices=StatusType.choices,
+        default=StatusType.PENDENTE
+    )
+
+    reviewed_date = models.DateTimeField(
+        null=True,
+        blank=True
+    )
+
+    reviewed_by = models.ForeignKey(
+        User,
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True
+    )
+
+    denied_details = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True
+    )
+
+    class Meta:
+        app_label = 'user'
+        verbose_name = "Access Request Status"
+        verbose_name_plural = "Access Request Status"

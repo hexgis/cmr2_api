@@ -12,7 +12,7 @@ from django.http import HttpResponseServerError
 from django.template.loader import render_to_string
 
 from rest_framework_gis.filters import InBBoxFilter
-from .serializers import AccessRequestSerializer
+from .serializers import AccessRequestSerializer, AccessRequestDetailSerializer
 from django.core.mail import send_mail
 from django.utils import timezone
 from rest_framework.views import APIView
@@ -481,7 +481,7 @@ class AccessRequestApproveView(Public, APIView):
 
 class AccessRequestDetailView(Public, generics.RetrieveAPIView):
     """
-    Retrieves details of a specific access request (AdminAuth).
+    Retrieves details of a specific AccessRequest with formatted and related data.
     """
     queryset = models.AccessRequest.objects.all()
-    serializer_class = AccessRequestSerializer
+    serializer_class = AccessRequestDetailSerializer

@@ -464,3 +464,93 @@ class AccessRequestSerializer(serializers.ModelSerializer):
         """
         validated_data['status'] = False
         return super().create(validated_data)
+
+
+class AccessRequestDetailSerializer(serializers.ModelSerializer):
+    """
+     Serializer to return detailed information about an AccessRequest.
+     Includes status details and formatted fields.
+     """
+    """
+    Serializer to return detailed information about an AccessRequest.
+    Includes status details and formatted fields.
+    """
+
+    solicitation_date_formatted = serializers.SerializerMethodField()
+    reviewed_date_formatted = serializers.SerializerMethodField()
+    status_name = serializers.SerializerMethodField()
+    reviewed_by_name = serializers.SerializerMethodField()
+    denied_details = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.AccessRequest
+        fields = [
+            "id",
+            "name",
+            "email",
+            "department",
+            "user_siape_registration",
+            "coordinator_name",
+            "coordinator_email",
+            "coordinator_department",
+            "coordinator_siape_registration",
+            "attachment",
+            "solicitation_date_formatted",
+            "status_name",
+            "reviewed_date_formatted",
+            "reviewed_by_name",
+            "denied_details",
+        ]
+
+    def get_solicitation_date_formatted(self, obj):
+        """
+        Formats the solicitation date.
+        """
+        if obj.dt_solicitation:
+            return obj.dt_solicitation.strftime("%d/%m/%Y %H:%M:%S")
+        return None
+
+    def get_reviewed_date_formatted(self, obj):
+        """
+        Formats the reviewed date from AccessRequestStatus.
+        """
+        status = self._get_status(obj)
+        if status and status.reviewed_date:
+            return status.reviewed_date.strftime("%d/%m/%Y %H:%M:%S")
+        return None
+
+    def get_status_name(self, obj):
+        """
+        Gets the name of the status from AccessRequestStatus.
+        """
+        status = self._get_status(obj)
+        if status:
+            return status.get_status_display()
+        return "Pendente"
+
+    def get_reviewed_by_name(self, obj):
+        """
+        Gets the name of the reviewer from AccessRequestStatus.
+        """
+        status = self._get_status(obj)
+        if status and status.reviewed_by:
+            return status.reviewed_by.get_full_name()
+        return None
+
+    def get_denied_details(self, obj):
+        """
+        Gets the denied details from AccessRequestStatus.
+        """
+        status = self._get_status(obj)
+        if status:
+            return status.denied_details
+        return None
+
+    def _get_status(self, obj):
+        """
+        Helper method to get the related AccessRequestStatus object.
+        """
+        try:
+            return models.AccessRequestStatus.objects.get(access_request_id=obj)
+        except models.AccessRequestStatus.DoesNotExist:
+            return None
