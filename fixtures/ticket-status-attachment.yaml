@@ -1,0 +1,82 @@
+[
+{
+    "model": "admin_panel.ticketstatusattachment",
+    "pk": 180,
+    "fields": {
+        "ticket_status": 79,
+        "ticket_history": 434,
+        "file_path": "attachments/critcs_and_suggestions/answer/ticket_answer_91_2024-11-21.png",
+        "name_file": "png_model.png"
+    }
+},
+{
+    "model": "admin_panel.ticketstatusattachment",
+    "pk": 181,
+    "fields": {
+        "ticket_status": 79,
+        "ticket_history": 435,
+        "file_path": "attachments/critcs_and_suggestions/answer/ticket_answer_91_2024-11-21_XDot4GU.png",
+        "name_file": "ok.png"
+    }
+},
+{
+    "model": "admin_panel.ticketstatusattachment",
+    "pk": 182,
+    "fields": {
+        "ticket_status": 90,
+        "ticket_history": 486,
+        "file_path": "attachments/critcs_and_suggestions/answer/ticket_answer_113_2024-12-16.png",
+        "name_file": "cmr1 print modal.png"
+    }
+},
+{
+    "model": "admin_panel.ticketstatusattachment",
+    "pk": 183,
+    "fields": {
+        "ticket_status": 95,
+        "ticket_history": 487,
+        "file_path": "attachments/critcs_and_suggestions/answer/ticket_answer_118_2024-12-17.jpg",
+        "name_file": "a.jpg"
+    }
+},
+{
+    "model": "admin_panel.ticketstatusattachment",
+    "pk": 184,
+    "fields": {
+        "ticket_status": 105,
+        "ticket_history": 488,
+        "file_path": "attachments/critcs_and_suggestions/answer/ticket_answer_128_2024-12-17.jpg",
+        "name_file": "men tira.jpg"
+    }
+},
+{
+    "model": "admin_panel.ticketstatusattachment",
+    "pk": 185,
+    "fields": {
+        "ticket_status": 103,
+        "ticket_history": 500,
+        "file_path": "attachments/critcs_and_suggestions/answer/ticket_answer_126_2024-12-17.jpeg",
+        "name_file": "jpeg_model.jpeg"
+    }
+},
+{
+    "model": "admin_panel.ticketstatusattachment",
+    "pk": 186,
+    "fields": {
+        "ticket_status": 101,
+        "ticket_history": 501,
+        "file_path": "attachments/critcs_and_suggestions/answer/ticket_answer_124_2024-12-17.png",
+        "name_file": "cmr1 print modal.png"
+    }
+},
+{
+    "model": "admin_panel.ticketstatusattachment",
+    "pk": 187,
+    "fields": {
+        "ticket_status": 100,
+        "ticket_history": 509,
+        "file_path": "attachments/critcs_and_suggestions/answer/ticket_answer_123_2024-12-23_Et61a5Q.png",
+        "name_file": "Captura de tela 2024-05-22 075509.png"
+    }
+}
+]
