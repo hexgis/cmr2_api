@@ -57,6 +57,10 @@ urlpatterns = [
         ('monitoring.urls', 'monitoring'),
         namespace='monitoring')
     ),
+    path('permission/', include(
+        ('permission.urls', 'permission'),
+        namespace='permission')
+    ),
 ] + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT
 )

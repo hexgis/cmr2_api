@@ -204,7 +204,7 @@ class AdminAuth(permissions.BasePermission):
     """
 
     permission_classes = (
-        permissions.AllowAny,  # Exemplo, ajuste conforme necessário
+        permissions.AllowAny,
         AdminRoleCheck,
     )
 
