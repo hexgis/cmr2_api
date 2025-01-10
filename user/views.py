@@ -441,7 +441,7 @@ class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     """
 
     queryset = models.AccessRequest.objects.all()
-    serializer_class = AccessRequestSerializer
+    serializer_class = AccessRequestDetailSerializer
 
 
 class AccessRequestPendingView(Public, generics.ListCreateAPIView):
