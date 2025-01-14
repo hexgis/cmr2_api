@@ -504,7 +504,7 @@ class AccessRequestRejectView(Public, generics.RetrieveAPIView):
                 {
                     "detail": "Acesso negado ao usuário.",
                     "request_id": access_request.id,
-                    "user_id": user.id
+                    "user_id": request.user.id
                 },
                 status=status.HTTP_200_OK
             )
