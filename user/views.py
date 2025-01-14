@@ -1,3 +1,9 @@
+from . import models  # Import do AccessRequest (caso esteja no mesmo app)
+from user.models import User, Role
+from user.permissions import Public  # Ajuste caso use outra permissão
+from django.shortcuts import get_object_or_404
+from rest_framework import status
+from smtplib import SMTPException
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -24,6 +30,7 @@ from rest_framework import (
     generics,
     views,
 )
+from django.http import FileResponse, JsonResponse, Http404
 
 
 from user import (
@@ -370,71 +377,6 @@ class GroupListCreateView(Auth, generics.ListCreateAPIView):
     queryset = models.Group.objects.all()
 
 
-# class AccessRequestViewSet(viewsets.ModelViewSet):
-#     """
-#     ViewSet for managing AccessRequest data.
-
-#     - POST /user/access-requests/  -> Public
-#     - GET /user/access-requests/   -> AdminAuth
-#     - GET /user/access-requests/pending/ -> AdminAuth
-#     - POST /user/access-requests/<pk>/approve/ -> AdminAuth
-#     """
-
-#     queryset = models.AccessRequest.objects.all()
-#     serializer_class = AccessRequestSerializer
-
-#     def get_permissions(self):
-#         """
-#         Assign different permission classes based on action.
-#         """
-#         if self.action == 'create':
-#             # A solicitação de acesso (POST) deve ser pública
-#             permission_classes = [Public]
-#         elif self.action in ['list', 'retrieve', 'update', 'partial_update', 'destroy', 'list_pending', 'approve']:
-#             # Todas as outras ações exigem AdminAuth
-#             permission_classes = [AdminAuth]
-#         else:
-#             permission_classes = [AdminAuth]
-
-#         return [permission() for permission in permission_classes]
-
-#     @action(detail=False, methods=['get'], url_path='pending')
-#     def list_pending(self, request):
-#         """
-#         Lists only requests where status=False (still pending).
-#         Accessible only by admin (AdminAuth).
-#         """
-#         pending_requests = self.queryset.filter(status=False)
-#         serializer = self.get_serializer(pending_requests, many=True)
-#         return Response(serializer.data, status=status.HTTP_200_OK)
-
-#     @action(detail=True, methods=['post'], url_path='approve')
-#     def approve(self, request, pk=None):
-#         """
-#         Approves a specific access request, marking status=True
-#         and recording dt_approvement. Accessible only by admin.
-#         """
-#         try:
-#             access_request = models.AccessRequest.objects.get(
-#                 pk=pk, status=False)
-#         except models.AccessRequest.DoesNotExist:
-#             return Response(
-#                 {'detail': 'Requisição não encontrada ou já aprovada.'},
-#                 status=status.HTTP_404_NOT_FOUND
-#             )
-
-#         access_request.status = True
-#         access_request.dt_approvement = timezone.now()
-#         access_request.save()
-
-#         return Response(
-#             {
-#                 'detail': 'Acesso aprovado com sucesso.',
-#                 'request_id': access_request.id
-#             },
-#             status=status.HTTP_200_OK
-#         )
-
 class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     """
     Handles creation of new access requests (Public).
@@ -452,30 +394,85 @@ class AccessRequestPendingView(Public, generics.ListCreateAPIView):
     serializer_class = AccessRequestSerializer
 
 
+# from portal.models import AccessRequest  # Caso esteja em outro app, ajuste
+logger = logging.getLogger(__name__)
+
+
 class AccessRequestApproveView(Public, APIView):
     """
-    Approves a specific access request by marking status=True and
-    updating dt_approvement (AdminAuth).
+    Approves a specific access request by marking status=True,
+    updating dt_approvement, and creating a User entry if one does not exist.
+    Also sends a notification email upon approval.
     """
 
     def post(self, request, pk, *args, **kwargs):
+        try:
+            access_request = get_object_or_404(
+                models.AccessRequest,
+                pk=pk,
+                status=False
+            )
 
-        access_request = get_object_or_404(
-            models.AccessRequest,
-            pk=pk,
-            status=False
-        )
+            access_request.status = True
+            access_request.dt_approvement = timezone.now()
+            access_request.save()
 
-        access_request.status = True
-        access_request.dt_approvement = timezone.now()
-        access_request.save()
+            user, created = User.objects.get_or_create(
+                email=access_request.email,
+                defaults={
+                    'username': access_request.email,
+                    'first_name': access_request.name,
+                }
+            )
+
+            user.save()
+            logger.info(f"Usuário criado: {user.email}")
+            else:
+                logger.info(f"Usuário '{user.email}' já existia na base.")
+
+            subject = 'Pedido de acesso ao CMR'
+            context = {'name': access_request.name}
+            html_message = render_to_string(
+                'email/solicitacao_de_acesso.html', context)
+
+            send_mail(
+                subject=subject,
+                message='',
+                from_email="cmr@funai.gov.br",
+                recipient_list=[
+                    'valdean.junior@hex360.com.br',
+                    'marcos.silva@hex360.com.br'
+                ],
+                html_message=html_message
+            )
+
+        except Http404:
+            return Response(
+                {'detail': 'Requisição não encontrada ou já aprovada.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        except SMTPException as smtp_error:
+            logger.error(f"Erro SMTP ao enviar email: {smtp_error}")
+            return Response(
+                {'detail': 'Ocorreu um erro ao enviar o e-mail.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        except Exception as e:
+            logger.error(f"Erro inesperado: {str(e)}")
+            return Response(
+                {'detail': 'Erro inesperado durante a aprovação.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         return Response(
             {
-                "detail": "Acesso aprovado com sucesso.",
+                "detail": "Acesso aprovado e usuário cadastrado com sucesso.",
                 "request_id": access_request.id,
+                "user_id": user.id
             },
-            status=status.HTTP_200_OK,
+            status=status.HTTP_200_OK
         )
 
 
