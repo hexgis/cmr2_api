@@ -1,6 +1,5 @@
-from . import models  # Import do AccessRequest (caso esteja no mesmo app)
+from . import models
 from user.models import User, Role
-from user.permissions import Public  # Ajuste caso use outra permissão
 from django.shortcuts import get_object_or_404
 from rest_framework import status
 from smtplib import SMTPException
@@ -400,7 +399,7 @@ logger = logging.getLogger(__name__)
 
 class AccessRequestApproveView(Public, APIView):
     """
-    Approves a specific access request by marking status=True,
+    Approves a specific access request,
     updating dt_approvement, and creating a User entry if one does not exist.
     Also sends a notification email upon approval.
     """
@@ -425,8 +424,11 @@ class AccessRequestApproveView(Public, APIView):
                 }
             )
 
-            user.save()
-            logger.info(f"Usuário criado: {user.email}")
+            if created:
+                user.save()
+                logger.info(f"Usuário criado: {user.email}, acesso aprovado")
+            else:
+                logger.info(f"Usuário '{user.email}' já existia na base.")
 
             subject = 'Pedido de acesso ao CMR'
             context = {'name': access_request.name}
@@ -480,3 +482,35 @@ class AccessRequestDetailView(Public, generics.RetrieveAPIView):
     """
     queryset = models.AccessRequest.objects.all()
     serializer_class = AccessRequestDetailSerializer
+
+
+class AccessRequestRejectView(Public, generics.RetrieveAPIView):
+
+    def post(self, request, pk, *args, **kwargs):
+        try:
+            access_request = get_object_or_404(
+                models.AccessRequest,
+                pk=pk,
+                status=False
+            )
+
+            access_request.status = False
+            access_request.reviewed_date = timezone.now()
+            access_request.reviewed_by = request.user.id
+
+            access_request.save()
+
+            return Response(
+                {
+                    "detail": "Acesso negado ao usuário.",
+                    "request_id": access_request.id,
+                    "user_id": user.id
+                },
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            logger.error(f"Erro inesperado: {str(e)}")
+            return Response(
+                {'detail': 'Erro inesperado durante a aprovação.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

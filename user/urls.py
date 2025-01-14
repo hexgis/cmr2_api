@@ -70,21 +70,26 @@ urlpatterns = [
     path(
         'access-requests/',
         views.AccessRequestListCreateView.as_view(),
-        name='accessrequest-create'
+        name='access-request-create'
     ),
     path(
         'access-requests/pending/',
         views.AccessRequestPendingView.as_view(),
-        name='accessrequest-pending'
+        name='access-request-pending'
     ),
     path(
         'access-requests/<int:pk>/approve/',
         views.AccessRequestApproveView.as_view(),
-        name='accessrequest-approve'
+        name='access-request-approve'
+    ),
+    path(
+        'access-requests/<int:pk>/reject/',
+        views.AccessRequestRejectView.as_view(),
+        name='access-request-reject'
     ),
     path(
         'access-requests/<int:pk>/',
         views.AccessRequestDetailView.as_view(),
-        name='accessrequest-detail'
+        name='access-request-detail'
     ),
 ]
