@@ -1,9 +1,7 @@
 from django.contrib import admin
 from priority_alerts import models
-from cmr2_api.mixins import AdminPermissionMixin
 
-
-class PriorityAlertsAdmin(AdminPermissionMixin,admin.ModelAdmin):
+class PriorityAlertsAdmin(admin.ModelAdmin):
     """Django administrator `model.PriorityAlerts` data."""
 
     list_display = (

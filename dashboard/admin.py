@@ -1,5 +1,4 @@
 from django.contrib import admin
-from cmr2_api.mixins import AdminPermissionMixin
 from dashboard import models
 
 
