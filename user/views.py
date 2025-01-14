@@ -427,8 +427,6 @@ class AccessRequestApproveView(Public, APIView):
 
             user.save()
             logger.info(f"Usuário criado: {user.email}")
-            else:
-                logger.info(f"Usuário '{user.email}' já existia na base.")
 
             subject = 'Pedido de acesso ao CMR'
             context = {'name': access_request.name}
