@@ -1,3 +1,5 @@
+import os
+import unicodedata
 from django.contrib.auth.models import AbstractUser
 from django.utils.translation import ugettext_lazy as _
 from permission import models as permission_models
@@ -6,7 +8,6 @@ import uuid
 from django.utils import timezone
 from django.contrib.gis.db import models
 from datetime import datetime
-import os
 
 
 class Group(models.Model):
@@ -267,44 +268,107 @@ class PasswordResetCode(models.Model):
         verbose_name = 'password_reset_code'
 
 
+def rename_access_file(instance, filename):
+    """
+    Generates a consistent filename for the uploaded attachment.
+    Replaces spaces and special characters in `instance.name`.
+    """
+    ext = filename.split('.')[-1]
+    date_str = datetime.now().strftime('%Y-%m-%d')
+    normalized_name = (
+        unicodedata.normalize('NFKD', instance.name)
+        .encode('ascii', 'ignore')
+        .decode('ascii')
+        .replace(' ', '_')
+    )
+    new_filename = f"solicitacao_acesso_{normalized_name}_{date_str}.{ext}"
+    return os.path.join('attachments/access_request', new_filename)
+
+
 class AccessRequest(models.Model):
     """
     Model for storing user requests to access restricted modules or areas.
-
-    Fields:
-        name (CharField): Name of the requester.
-        email (EmailField): Email of the requester.
-        department (CharField): Department of the requester.
-        user_siape_registration (IntegerField): SIAPE registration of the requester.
-        coordinator_name (CharField): Name of the coordinator.
-        coordinator_email (EmailField): Email of the coordinator.
-        coordinator_department (CharField): Department of the coordinator.
-        coordinator_siape_registration (IntegerField): SIAPE registration of the coordinator.
-        attachment (FileField): An optional file with further details.
-        status (BooleanField): Indicates if the request is approved (True) or pending (False).
-        dt_solicitation (DateTimeField): Timestamp of when the request was created.
-        dt_approvement (DateTimeField): Timestamp of when the request was approved.
     """
-    def rename_file(instance, filename):
-        ext = filename.split('.')[-1]
-        new_filename = f"solicitacao_acesso_{instance.name}_{datetime.now().strftime('%Y-%m-%d')}.{ext}"
-        return os.path.join('attachments/access_request', new_filename)
+    class StatusType(models.IntegerChoices):
+        PENDENTE = 1, 'Pendente'
+        CONCEDIDA = 2, 'Concedida'
+        RECUSADA = 3, 'Recusada'
 
-    name = models.CharField(max_length=255)
-    email = models.EmailField()
-    department = models.CharField(max_length=255)
-    user_siape_registration = models.IntegerField()
+    name = models.CharField(
+        max_length=255,
+        help_text=_("Name of the requester")
+    )
 
-    coordinator_name = models.CharField(max_length=255)
-    coordinator_email = models.EmailField()
-    coordinator_department = models.CharField(max_length=255)
-    coordinator_siape_registration = models.IntegerField()
+    email = models.EmailField(
+        help_text=_("Email of the requester")
+    )
 
-    attachment = models.FileField(upload_to=rename_file, null=True, blank=True)
+    department = models.CharField(
+        max_length=255,
+        help_text=_("Department of the requester")
+    )
 
-    status = models.BooleanField(default=False)
-    dt_solicitation = models.DateTimeField(auto_now_add=True)
-    dt_approvement = models.DateTimeField(null=True, blank=True)
+    user_siape_registration = models.IntegerField(
+        help_text=_("SIAPE registration of the requester")
+    )
+
+    coordinator_name = models.CharField(
+        max_length=255,
+        help_text=_("Name of the coordinator")
+    )
+    coordinator_email = models.EmailField(
+
+        help_text=_("Email of the coordinator")
+    )
+
+    coordinator_department = models.CharField(
+        max_length=255,
+        help_text=_("Department of the coordinator")
+    )
+
+    coordinator_siape_registration = models.IntegerField(
+        help_text=_("SIAPE registration of the coordinator")
+    )
+
+    attachment = models.FileField(
+        upload_to=rename_access_file,
+        null=True,
+        blank=True,
+        help_text=_("Optional file with further details")
+    )
+
+    status = models.IntegerField(
+        choices=StatusType.choices,
+        default=StatusType.PENDENTE,
+        help_text=_("Current status of the access request")
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+        help_text=_("Timestamp when the request was created")
+    )
+
+    reviewed_at = models.DateTimeField(
+        null=True,
+        blank=True,
+        help_text=_(
+            "Timestamp when the request was reviewed (approved or denied)")
+    )
+
+    reviewed_by = models.ForeignKey(
+        'user.User',
+        on_delete=models.DO_NOTHING,
+        null=True,
+        blank=True,
+        help_text=_("User who reviewed this request")
+    )
+
+    denied_details = models.CharField(
+        max_length=255,
+        null=True,
+        blank=True,
+        help_text=_("Details or reason for denial (if status=Recusada)")
+    )
 
     class Meta:
         app_label = 'user'
@@ -314,43 +378,22 @@ class AccessRequest(models.Model):
     def __str__(self):
         return f"AccessRequest #{self.pk} - {self.name}"
 
+    def approve(self, reviewer):
+        """
+        Marks this request as CONCEDIDA and sets reviewer fields.
+        """
+        self.status = self.StatusType.CONCEDIDA
+        self.reviewed_at = timezone.now()
+        self.reviewed_by = reviewer
+        self.denied_details = None
+        self.save()
 
-class AccessRequestStatus(models.Model):
-
-    access_request_id = models.ForeignKey(
-        AccessRequest,
-        on_delete=models.CASCADE
-    )
-
-    class StatusType(models.IntegerChoices):
-        PENDENTE = 1, 'Pendente'
-        CONCEDIDA = 2, 'Concedida'
-        RECUSADA = 3, 'Recusada'
-
-    status = models.IntegerField(
-        choices=StatusType.choices,
-        default=StatusType.PENDENTE
-    )
-
-    reviewed_date = models.DateTimeField(
-        null=True,
-        blank=True
-    )
-
-    reviewed_by = models.ForeignKey(
-        User,
-        on_delete=models.DO_NOTHING,
-        null=True,
-        blank=True
-    )
-
-    denied_details = models.CharField(
-        max_length=255,
-        null=True,
-        blank=True
-    )
-
-    class Meta:
-        app_label = 'user'
-        verbose_name = "Access Request Status"
-        verbose_name_plural = "Access Request Status"
+    def reject(self, reviewer, denied_reason=None):
+        """
+        Marks this request as RECUSADA and sets reviewer fields, reason, etc.
+        """
+        self.status = self.StatusType.RECUSADA
+        self.reviewed_at = timezone.now()
+        self.reviewed_by = reviewer
+        self.denied_details = denied_reason
+        self.save()

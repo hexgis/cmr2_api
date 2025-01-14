@@ -264,51 +264,68 @@ class RoleAdmin(import_export):
     )
 
 
-class AccessRequestAdmin(import_export):
+class AccessRequestAdmin(admin.ModelAdmin):
     """
     Admin interface for managing AccessRequest model data.
-
-    This admin class provides:
-        - Display of key fields such as user, institution, and status in the admin list view.
-        - Filtering capabilities for fields like status, institution, and solicitation date.
-        - Search functionality for user-related fields and institution name.
-        - Actions to approve multiple requests at once.
-
-    Attributes:
-        list_display (tuple): Fields to display in the admin list view.
-        list_filter (tuple): Fields to filter in the admin interface.
-        search_fields (tuple): Fields for search functionality in the admin interface.
-        readonly_fields (tuple): Fields that are read-only in the admin interface.
-        actions (list): Custom admin actions, such as batch approval of access requests.
     """
 
     list_display = (
         'id',
+        'name',
+        'email',
+        'department',
         'status',
-        'dt_solicitation',
-        'dt_approvement'
+        'created_at',
+        'reviewed_at',
+        'reviewed_by',
     )
     list_filter = (
         'status',
+        'department',
         'coordinator_department',
-        'dt_solicitation',
-        'dt_approvement',
+        'created_at',
+        'reviewed_at',
     )
     search_fields = (
+        'name',
+        'email',
         'coordinator_name',
         'coordinator_email',
-        'institution__name',
     )
+    # Exemplo de campos que podem ser só leitura (se quiser)
     readonly_fields = (
-        'dt_solicitation',
-        'dt_approvement'
+        'created_at',
+        'reviewed_at',
+        'reviewed_by',
     )
+
+    actions = ['approve_requests', 'reject_requests']
 
     def approve_requests(self, request, queryset):
-        queryset.update(status=True, dt_approvement=timezone.now())
-    approve_requests.short_description = "Marcar solicitações selecionadas como aprovadas"
+        """
+        Admin action to approve selected AccessRequests in bulk.
+        """
+        for obj in queryset:
+            if obj.status != obj.StatusType.CONCEDIDA:
+                obj.approve(reviewer=request.user)
+        self.message_user(request, "Selected requests have been approved.")
 
-    actions = [approve_requests]
+    approve_requests.short_description = "Approve selected requests"
+
+    def reject_requests(self, request, queryset):
+        """
+        Admin action to reject selected AccessRequests in bulk.
+        """
+        for obj in queryset:
+            if obj.status != obj.StatusType.RECUSADA:
+                obj.reject(
+                    reviewer=request.user,
+                    # Ajuste se quiser interagir com o user
+                    denied_reason="Rejected via admin action"
+                )
+        self.message_user(request, "Selected requests have been rejected.")
+
+    reject_requests.short_description = "Reject selected requests"
 
 
 admin.site.register(models.User, CustomUserAdmin)
@@ -318,5 +335,4 @@ admin.site.register(models.Group, GroupAdmin)
 admin.site.register(models.UserUploadedFile, UploadedFileAdmin)
 admin.site.register(models.UserUploadedFileGeometry,
                     UploadedFileGeometriesAdmin)
-
 admin.site.register(AccessRequest, AccessRequestAdmin)

@@ -389,7 +389,7 @@ class AccessRequestPendingView(Public, generics.ListCreateAPIView):
     """
     Lists only pending access requests (AdminAuth).
     """
-    queryset = models.AccessRequest.objects.filter(status=False)
+    queryset = models.AccessRequest.objects.filter(status=1)
     serializer_class = AccessRequestSerializer
 
 
@@ -412,7 +412,7 @@ class AccessRequestApproveView(Public, APIView):
                 status=False
             )
 
-            access_request.status = True
+            access_request.status = 2
             access_request.dt_approvement = timezone.now()
             access_request.save()
 
@@ -486,7 +486,7 @@ class AccessRequestDetailView(Public, generics.RetrieveAPIView):
 
 class AccessRequestRejectView(Public, generics.RetrieveAPIView):
 
-    def post(self, request, pk, *args, **kwargs):
+    def patch(self, request, pk, *args, **kwargs):
         try:
             access_request = get_object_or_404(
                 models.AccessRequest,
@@ -494,7 +494,7 @@ class AccessRequestRejectView(Public, generics.RetrieveAPIView):
                 status=False
             )
 
-            access_request.status = False
+            access_request.status = 3
             access_request.reviewed_date = timezone.now()
             access_request.reviewed_by = request.user.id
 
