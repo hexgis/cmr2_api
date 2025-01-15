@@ -9,9 +9,6 @@ from django.contrib.auth.models import User
 
 from django.conf import settings
 
-import requests
-import json
-import untangle
 import logging
 
 logger = logging.getLogger(__name__)

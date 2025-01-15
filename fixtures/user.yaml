@@ -88,4 +88,20 @@
     roles: [2]
     user_permissions: []
     institution: 1    
+- model: user.user
+  pk: 5
+  fields:
+    password: pbkdf2_sha256$260000$wpV3mg7Ur1TZiIC6qakX1a$tHk52TuDlXBKXKIlM2byJ0gd8cURykMHcQ7sQCZZSGk=
+    last_login: null
+    is_superuser: true
+    username: valdean.junior
+    first_name: ""
+    last_name: ""
+    email: valdean.junior@hex360.com.br
+    is_staff: true
+    is_active: true
+    date_joined: 2025-01-14 21:43:16.265931+00:00
+    groups: []
+    user_permissions: []
+    institution: 1
   

@@ -1,9 +1,8 @@
 from django.contrib import admin
 
 from priority_monitoring import models
-from cmr2_api.mixins import AdminPermissionMixin
 
-class PriorityConsolidatedAdmin(AdminPermissionMixin,admin.ModelAdmin):
+class PriorityConsolidatedAdmin(admin.ModelAdmin):
     """PriorityConsolidatedAdmin model data."""
 
     list_display = (

@@ -1,8 +1,7 @@
 from django.contrib import admin
 from deter_monitoring import models
-from cmr2_api.mixins import AdminPermissionMixin
 
-class DeterTIAdmin(AdminPermissionMixin, admin.ModelAdmin):
+class DeterTIAdmin(admin.ModelAdmin):
     """Django administrator for `models.DeterTI` data."""
 
     # Fields to be displayed in the admin list view
