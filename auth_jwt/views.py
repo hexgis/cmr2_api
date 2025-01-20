@@ -160,8 +160,18 @@ class ResetPassword(Public, views.APIView):
         )
 
 class LogoutView(Auth,views.APIView):
-
+    """
+    Handles user logout by blacklisting the provided refresh token.
+    """
     def post(self, request):
+        """
+        Processes a POST request to log out the user.
+
+        Expected request body:
+        {
+            "refresh": "string"  # The refresh token to be blacklisted
+        }
+        """
         try:
             refresh_token = request.data["refresh"]
             token = RefreshToken(refresh_token)
