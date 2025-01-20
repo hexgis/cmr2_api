@@ -63,6 +63,7 @@ INSTALLED_APPS = [
     'django_json_widget',
     'dashboard',
     'rest_framework_gis',
+    'rest_framework_simplejwt.token_blacklist',
     'user',
     'permission',
     'layer',
