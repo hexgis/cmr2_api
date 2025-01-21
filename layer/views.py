@@ -96,7 +96,6 @@ class GroupsUpdateDeleteView(
 
         return response.Response(status=status.HTTP_204_NO_CONTENT)
 
-
 class LayerListView(mixins.Public, generics.ListAPIView):
     def get_serializer_class(self):
         """Gets serializer class for `models.Layer`."""

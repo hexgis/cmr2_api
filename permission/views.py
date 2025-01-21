@@ -6,6 +6,10 @@ from permission.mixins import AdminAuth, Public
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.exceptions import NotFound
+
+from layer import models as layer_model
+from layer import serializers as layer_serializer
 
 class LayerPermissionListView(AdminAuth, generics.ListAPIView):
     """
@@ -80,3 +84,25 @@ class LayerPermissionView(Public, APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    
+
+
+class LayerPermissionDiffView(Public, APIView):
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            layer_permission = LayerPermission.objects.get(pk=pk)
+        except LayerPermission.DoesNotExist:
+            raise NotFound({"detail": "LayerPermission não encontrada."})
+
+        permission_layer_ids = list(layer_permission.layers.values_list('id', flat=True))
+
+        layer_ids = list(layer_model.Layer.objects.values_list('id', flat=True))
+
+        diff_ids = [id_ for id_ in layer_ids if id_ not in permission_layer_ids]
+
+        layers = layer_model.Layer.objects.filter(id__in=diff_ids).select_related('group')
+        serializer = layer_serializer.LayerSerializer(
+            layers, many=True, fields=('id', 'name', 'group_name')
+        )
+
+        return Response(serializer.data)
