@@ -1,0 +1,110 @@
+[
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 51,
+    "fields": {
+        "ticket": 91,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_91_2024-11-21.png",
+        "name_file": "ok.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 52,
+    "fields": {
+        "ticket": 94,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_94_2024-11-22.png",
+        "name_file": "ok.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 53,
+    "fields": {
+        "ticket": 96,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_96_2024-11-22.png",
+        "name_file": "ok.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 54,
+    "fields": {
+        "ticket": 97,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_97_2024-11-22.png",
+        "name_file": "ok.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 55,
+    "fields": {
+        "ticket": 100,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_100_2024-11-22.png",
+        "name_file": "ok.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 56,
+    "fields": {
+        "ticket": 101,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_101_2024-11-22.png",
+        "name_file": "ok.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 57,
+    "fields": {
+        "ticket": 114,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_114_2024-12-16.jpg",
+        "name_file": "men tira.jpg"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 58,
+    "fields": {
+        "ticket": 115,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_115_2024-12-16.jpg",
+        "name_file": "men tira.jpg"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 59,
+    "fields": {
+        "ticket": 123,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_123_2024-12-17.png",
+        "name_file": "ERRO CAMADA DE APOIO.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 60,
+    "fields": {
+        "ticket": 124,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_124_2024-12-17.png",
+        "name_file": "ERRO CAMADA DE APOIO.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 61,
+    "fields": {
+        "ticket": 124,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_124_2024-12-17_EZ3p536.png",
+        "name_file": "cmr1 print modal.png"
+    }
+},
+{
+    "model": "admin_panel.ticketattachment",
+    "pk": 62,
+    "fields": {
+        "ticket": 129,
+        "file_path": "attachments/critcs_and_suggestions/question/ticket_129_2024-12-17.png",
+        "name_file": "cmr1 print modal.png"
+    }
+}
+]
