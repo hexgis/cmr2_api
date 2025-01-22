@@ -4,6 +4,16 @@ from rest_framework_gis import serializers as gis_serializers
 
 from priority_alerts import models
 
+import locale
+
+try:
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+except locale.Error:
+    try:
+        locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
+    except locale.Error:
+        locale.setlocale(locale.LC_ALL, 'pt_BR')
+
 
 class AlertsSerializers(gis_serializers.GeoFeatureModelSerializer):
     """Serializer for geographic `models.UrgentAlerts` spatial data."""
@@ -25,6 +35,10 @@ class AlertsTableSerializers(serializers.ModelSerializer):
     """Serializer to return data without geometry from `models.UrgentAlerts` 
     data."""
 
+    nu_latitude = serializers.SerializerMethodField()
+    nu_longitude = serializers.SerializerMethodField()
+    nu_area_ha = serializers.SerializerMethodField()
+    
     class Meta:
         """Meta class for `AlertsTableSerializers` serializer."""
         model = models.UrgentAlerts
@@ -51,6 +65,20 @@ class AlertsTableSerializers(serializers.ModelSerializer):
             'nu_latitude',
         )
 
+    def format_area(self, value):
+        return locale.format_string("%.3f", value, grouping=True)
+
+    def format_coord(self, value):
+        return locale.format_string("%.6f", value, grouping=True)
+    
+    def get_nu_area_ha(self, obj):
+        return self.format_area(obj.nu_area_ha)
+    
+    def get_nu_latitude(self, obj):
+        return self.format_coord(obj.nu_latitude)
+    
+    def get_nu_longitude(self, obj):
+        return self.format_coord(obj.nu_longitude)
 
 class AlertsDetailSerializers(serializers.ModelSerializer):
     """Serializer to return detailed `models.UrgentAlerts` data."""
