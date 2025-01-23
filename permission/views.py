@@ -36,13 +36,26 @@ class LayerPermissionView(Public, APIView):
     - PATCH: Atualiza parcialmente uma permissão de camada.
     """
 
-    def get(self, request):
+    def get(self, request, pk=None):
         """
-        Lista todas as permissões de camada.
+        Lista todas as permissões de camada ou retorna uma permissão específica.
+
+        Args:
+            request (Request): Requisição HTTP.
+            pk (int, opcional): ID da permissão.
 
         Returns:
-            Response: Lista de permissões.
+            Response: Lista de permissões ou uma única permissão.
         """
+        if pk:
+            try:
+                permission = LayerPermission.objects.get(pk=pk)               
+            except LayerPermission.DoesNotExist:
+                return Response({'detail': 'Permission not found'}, status=status.HTTP_404_NOT_FOUND)
+
+            serializer = LayerPermissionSerializer(permission)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
         permissions = LayerPermission.objects.all()
         serializer = LayerPermissionSerializer(permissions, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
