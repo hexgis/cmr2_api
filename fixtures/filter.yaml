@@ -1,0 +1,48 @@
+- model: layer.filter
+  pk: 1
+  fields:
+    default: '2020-01-01'
+    alias: date_detection
+    type: start_date
+    label: Data Inicial
+    layers: []
+- model: layer.filter
+  pk: 2
+  fields:
+    default: '2020-08-31'
+    alias: date_detection
+    type: end_date
+    label: Data Final
+    layers: []
+- model: layer.filter
+  pk: 4
+  fields:
+    default: CPF/CNPJ
+    alias: cpf_cnpj
+    type: cpf_cnpj
+    label: cpf_cnpj
+    layers: []
+- model: layer.filter
+  pk: 5
+  fields:
+    default: Rota de Ônibus
+    alias: route_long_name
+    type: name
+    label: Rota de Ônibus
+    layers: []
+- model: layer.filter
+  pk: 6
+  fields:
+    default: Loteamento
+    alias: ano
+    type: ano
+    label: Loteamento
+    layers: []
+- model: layer.filter
+  pk: 7
+  fields:
+    default: id
+    alias: id
+    type: id
+    label: id
+    layers: []

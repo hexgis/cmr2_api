@@ -1,9 +1,21 @@
-from django.urls import path, include
-
-from admin_panel import views
+from django.urls import path
+from .views import TicketListCreateView, TicketDetailView, TicketStatusView, GenXLSXView, GetChoices, SendTicketEmailView
 
 urlpatterns = [
-    path('usuarios/instituicao/', views.UsersInstitutionsView.as_view(), name='Users institutions'),
-    path('instituicao/', views.InstitutionsView.as_view(), name='institutions-list-create'),
-    path('instituicao/<int:id>/', views.InstitutionsView.as_view(), name='institutions-detail'),
+    path('tickets/', TicketListCreateView.as_view(), name='ticket-list-create'),
+    path('tickets/<int:pk>/', TicketDetailView.as_view(), name='ticket-detail'),
+
+    path('tickets/status-update/<int:ticket_id>/',
+         TicketStatusView.as_view(), name='ticket-status-update'),
+    path('tickets/status/<int:ticket_id>/', TicketStatusView.as_view(),
+         name='ticket-status-detail'),
+    path('tickets/status/', TicketStatusView.as_view(), name='ticket-status-list'),
+
+    path('tickets/choices/', GetChoices.as_view(), name='ticket-status-choices'),
+
+    path('tickets/download-tickets/', GenXLSXView.as_view(),
+         name='download-tickets-xlsx'),
+
+    path('tickets/send-email/', SendTicketEmailView.as_view(),
+         name='send-email-ticket'),
 ]

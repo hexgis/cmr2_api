@@ -1,6 +1,8 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth import get_user_model
 from django.utils.translation import ugettext_lazy as _
+User = get_user_model()
+
 
 class DashboardData(models.Model):
     user = models.ForeignKey(
@@ -14,7 +16,7 @@ class DashboardData(models.Model):
         blank=False,
         null=False,
     )
-    
+
     location = models.CharField(
         _('Localização'),
         max_length=255
@@ -31,7 +33,7 @@ class DashboardData(models.Model):
     )
     latitude = models.FloatField(null=True, blank=True)
     longitude = models.FloatField(null=True, blank=True)
-    
+
     class Meta:
         app_label = 'dashboard'
         verbose_name = 'Dashboard Data'

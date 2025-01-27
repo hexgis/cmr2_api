@@ -1,9 +1,7 @@
 from django.contrib import admin
 from monitoring import models
-from cmr2_api.mixins import AdminPermissionMixin
 
-
-class MonitoringConsolidatedAdmin(AdminPermissionMixin,admin.ModelAdmin):
+class MonitoringConsolidatedAdmin(admin.ModelAdmin):
     """MonitoringConsolidatedAdmin model data."""
 
     list_display = (

@@ -1,0 +1,29 @@
+- model: permission.layerpermission
+  pk: 1
+  fields:
+    name: PLANET
+    description: Permissão para acessar todas as imagens Planet.
+    layers:
+    - 1
+- model: permission.layerpermission
+  pk: 2
+  fields:
+    name: Acesso Restrito
+    description: Permissão para acessar camadas restritas.
+    layers:
+    - 1
+- model: permission.componentpermission
+  pk: 1
+  fields:
+    name: Acesso Restrito
+    description: conjunto de funcionalidades que os usuários tem acesso quando sua
+      solicitação de acesso restriro é aprovada pelo gestor.
+    components: '["layers", "monitoring", "layers_mosaics", "land_use", "analytics",
+      "admin_panel"]'
+- model: permission.componentpermission
+  pk: 2
+  fields:
+    name: PLANET
+    description: Conjunto de funcionalidades restritas disponibilizadas apenas aos
+      usuários pertencentes a FUNAI .
+    components: '["layers_planet"]'

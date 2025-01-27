@@ -1,4 +1,4 @@
-from django.contrib.auth.models import User
+from user.models import User
 from django.contrib.auth.hashers import make_password
 
 from model_mommy.recipe import Recipe

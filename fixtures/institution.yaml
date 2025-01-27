@@ -1,0 +1,8 @@
+- model: user.institution
+  pk: 1
+  fields:
+    name: hex
+- model: user.institution    
+  pk: 2
+  fields:
+    name: FUNAI
