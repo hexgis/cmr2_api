@@ -15,6 +15,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from permission.mixins import Auth, Public, AdminAuth
 from django.http import HttpResponseServerError
 from django.template.loader import render_to_string
+from rest_framework.exceptions import NotFound
 
 from rest_framework_gis.filters import InBBoxFilter
 from .serializers import AccessRequestSerializer, AccessRequestDetailSerializer
@@ -359,7 +360,7 @@ class RoleListCreateView(Auth, generics.ListCreateAPIView):
 
 
 class GroupRetrieveUpdateDestroyView(
-    Auth,
+    Public,
     generics.RetrieveUpdateDestroyAPIView
 ):
     """Group retrieve, update and destroy view data."""
@@ -375,6 +376,32 @@ class GroupListCreateView(Public, generics.ListCreateAPIView):
     serializer_class = serializers.GroupSerializer
     queryset = models.Group.objects.all()
 
+from permission import models as perm_models
+class GroupDiffListView(Public, APIView):
+    
+    def get(self, request, group_id):
+        # Get the group by ID or return 404
+        group = get_object_or_404(models.Group, id=group_id)
+        
+        # Get all layer permissions not associated with this group
+        unassociated_layer_permissions = perm_models.LayerPermission.objects.exclude(groups=group)
+        
+        # Get all component permissions not associated with this group
+        unassociated_component_permissions = perm_models.ComponentPermission.objects.exclude(groups=group)
+
+        # Serialize the results
+        data = {
+            "layer_permissions": [
+                {"id": permission.id, "name": permission.name}
+                for permission in unassociated_layer_permissions
+            ],
+            "component_permissions": [
+                {"id": permission.id, "name": permission.name}
+                for permission in unassociated_component_permissions
+            ]
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
 
 class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     """

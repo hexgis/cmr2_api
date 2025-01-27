@@ -358,7 +358,23 @@ class GroupSerializer(serializers.ModelSerializer):
     """GroupSerializer serializer class."""
 
     roles = SimpleRoleSerializer(many=True, read_only=True)
+    layer_permissions = serializers.SerializerMethodField()
+    component_permissions = serializers.SerializerMethodField()
 
+    def get_layer_permissions(self, obj):
+        """Retrieve the names of the layer permissions."""
+        return [
+            {"id": permission.id, "name": permission.name}
+            for permission in obj.layer_permissions.all()
+        ]
+    
+    def get_component_permissions(self, obj):
+        """Retrieve the names of the component permissions."""
+        return [
+            {"id": component.id, "name": component.name}
+            for component in obj.component_permissions.all()
+        ]
+    
     def create(self, validated_data: dict) -> models.Group:
         """Create a new group instance.
 
@@ -422,7 +438,7 @@ class GroupSerializer(serializers.ModelSerializer):
             instance.component_permissions.set(data['component_permissions'])
 
         return instance
-
+    
     class Meta:
         """Meta class for GroupsSerializer."""
 

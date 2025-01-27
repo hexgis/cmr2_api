@@ -68,6 +68,11 @@ urlpatterns = [
         name='group'
     ),
     path(
+        'group-diff/<int:group_id>/',
+        views.GroupDiffListView.as_view(),
+        name='group-diff'
+    ),
+    path(
         'access-requests/',
         views.AccessRequestListCreateView.as_view(),
         name='access-request-create'
