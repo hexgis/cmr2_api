@@ -6,6 +6,17 @@ from rest_framework_gis import serializers as gis_serializers
 
 from land_use import models
 
+import locale
+
+try:
+    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
+except locale.Error:
+    try:
+        locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
+    except locale.Error:
+        locale.setlocale(locale.LC_ALL, 'pt_BR')
+
+
 
 class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
     """Serializer for geographic `models.LandUseClasses` spatial data."""
@@ -22,46 +33,55 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
             'nu_longitude',
         )
 
+AREA_FIELDS = [
+    'nu_area_ag_ha', 'nu_area_cr_ha', 'nu_area_dg_ha', 'nu_area_ma_ha',
+    'nu_area_no_ha', 'nu_area_rv_ha', 'nu_area_sv_ha', 'nu_area_vi_ha',
+    'nu_area_vn_ha', 'nu_area_mi_ha', 'nu_area_ha', 'nu_area_km2',
+]
 
-class LandUseYearsSerializer(serializers.ModelSerializer):
-    """Serializer to list years from `models.LandUseClasses` data.
+COORD_FIELDS = ['nu_latitude', 'nu_longitude']
 
-    Serializes model data to return list of years with land use mapping
-    """
-
-    class Meta:
-        """Meta class for `LandUseYearsSerializer` serializer."""
-        model = models.LandUseClasses
-        id_field = False
-        fields = ('nu_ano',)
-
-
-class LandUseTableSerializer(serializers.ModelSerializer):
-    """Serializer to return model from `models.LandUseClasses` data.
+class FormatFieldsMixin:
+    """Mixin for format field."""
     
-    Serializes model data to return table info without geometry.
-    """
+    def format_area(self, value):
+        return locale.format_string("%.3f", value, grouping=True) if value is not None else None
+
+    def format_coord(self, value):
+        return locale.format_string("%.6f", value, grouping=True) if value is not None else None
+
+
+class LandUseTableSerializer(serializers.ModelSerializer, FormatFieldsMixin):
+    """ Serializer for return data from model `LandUsePerTi` """
+
+    for field in AREA_FIELDS:
+        locals()[field] = serializers.SerializerMethodField()
+
+    for field in COORD_FIELDS:
+        locals()[field] = serializers.SerializerMethodField()
 
     class Meta:
-        """Meta class for `LandUseTableSerializer` serializer."""
-        model = models.LandUseClasses
-        fields = (
-            'id',
-            'sg_uf',
-            'no_ti',
-            'co_funai',
-            'dt_homologada',
-            'ds_cr',
-            'co_cr',
-            'nu_ano',
-            'no_estagio',
-            'no_satelites',
-            'nu_resolucoes',
-            'dt_imagens',
-            'nu_area_km2',
-            'nu_area_ha',
-            'dt_cadastro',
-        )
+        """Meta class for `LandUseTableSerializer`."""
+        model = models.LandUsePerTi
+        fields = [
+            'id', 'sg_uf', 'no_ti', 'co_funai', 'co_cr', 'dt_homologada', 'ds_cr',
+            'nu_ano', 'no_satelites', 'nu_resolucoes', 'dt_imagens',
+        ] + AREA_FIELDS + COORD_FIELDS
+
+    def get_field_value(self, obj, field):
+        """Return formated value based on field type."""
+        value = getattr(obj, field, None)
+        if field in AREA_FIELDS:
+            return self.format_area(value)
+        elif field in COORD_FIELDS:
+            return self.format_coord(value)
+        return value
+
+    def __getattr__(self, name):
+        if name.startswith('get_') and name[4:] in AREA_FIELDS + COORD_FIELDS:
+            field = name[4:]
+            return lambda obj: self.get_field_value(obj, field)
+        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
 
 
 class LandUseDetailSerializer(serializers.ModelSerializer):
@@ -81,61 +101,8 @@ class LandUseDetailSerializer(serializers.ModelSerializer):
             'nu_area_ha',
         )
 
-class LandUseToCompareSerializer(serializers.ModelSerializer):
-    """Serializer to return model from `models.LandUseClasses` data.
-    
-    Serializes model data to return table info without geometry.
-    """
+class LandUseSearchSerializer(serializers.ModelSerializer):
 
     class Meta:
-        """Meta class for `LandUseTableSerializer` serializer."""
-        model = models.LandUseClasses
-        fields = (
-            'ds_cr',
-            'co_cr',
-            'no_ti',
-            'co_funai',
-        )
-
-class LandUseCrSerializer(serializers.ModelSerializer):
-    """Serializer to return model from `models.LandUseClasses` data.
-    
-    Serializes model data to return table info without geometry.
-    """
-    co_cr = serializers.CharField(source='cr_co_cr')
-    ds_cr = serializers.CharField(source='cr_no_cr')
-    no_regiao = serializers.CharField(source='cr_no_regiao')
-
-    class Meta:
-        """Meta class for `LandUseTableSerializer` serializer."""
-        model = models.LandUseVmRegionalCoordnation
-        fields = (
-            'no_regiao',
-            'ds_cr',
-            'co_cr',
-        )
-
-class LandUseTiSerializer(serializers.ModelSerializer):
-    """Serializer to return model from `models.LandUseClasses` data.
-    
-    Serializes model data to return table info without geometry.
-    """
-    no_ti = serializers.CharField(source='ti_no_ti')
-    co_funai = serializers.CharField(source='ti_co_funai')
-    co_cr = serializers.CharField(source='cr_co_cr')
-
-    class Meta:
-        """Meta class for `LandUseTableSerializer` serializer."""
-        model = models.LandUseClasses
-        fields = (
-            'no_ti',
-            'co_funai',
-            'co_cr'
-        )
-
-class LandUseTesteSerializer(serializers.ModelSerializer):
-
-    class Meta:
-        """Meta class for `LandUseTableSerializer` serializer."""
-        model = models.LandUseVmRegionalCoordnation
-        fields = "__all__"
+        model = models.LandUsePerTi
+        fields = ['co_funai','co_cr','nu_ano', 'ds_cr', 'no_ti']

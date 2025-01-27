@@ -14,29 +14,8 @@ urlpatterns = [
         views.LandUseDetailView.as_view(),
         name='mapped-detail'
     ),
-    path(
-        'years/',
-        views.LandUseYearsView.as_view(),
-        name='mapped-years'
-    ),
-    path(
-        'cr/',
-        views.LandUseCrView.as_view(),
-        name='mapped-cr'
-    ),
-    path(
-        'ti/',
-        views.LandUseTiView.as_view(),
-        name='mapped-ti'
-    ),
-    path(
-        'table/',
-        views.LandUseTableView.as_view(),
-        name='mapped-table'
-    ),
-    path(
-        'stats/',
-        views.LandUseStatsView.as_view(),
-        name='mapped-stats'
-    )
+    path('stats/', views.LandUseStatsView.as_view(),name='mapped-stats'),
+    path('table/', views.LandUseTabletView.as_view(), name='table-land-use'),
+    path('search/', views.LandUsePerTiSearchListView.as_view(), name='search-land-use'),
+
 ]
