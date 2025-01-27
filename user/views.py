@@ -369,7 +369,7 @@ class GroupRetrieveUpdateDestroyView(
     lookup_field = 'id'
 
 
-class GroupListCreateView(Auth, generics.ListCreateAPIView):
+class GroupListCreateView(Public, generics.ListCreateAPIView):
     """Group list and create view data."""
 
     serializer_class = serializers.GroupSerializer
