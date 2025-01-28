@@ -392,11 +392,11 @@ class GroupDiffListView(Public, APIView):
         # Serialize the results
         data = {
             "layer_permissions": [
-                {"id": permission.id, "name": permission.name}
+                {"id": permission.id, "name": permission.name, "description": permission.description}
                 for permission in unassociated_layer_permissions
             ],
             "component_permissions": [
-                {"id": permission.id, "name": permission.name}
+                {"id": permission.id, "name": permission.name, "description": permission.description}
                 for permission in unassociated_component_permissions
             ]
         }

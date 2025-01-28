@@ -364,7 +364,7 @@ class GroupSerializer(serializers.ModelSerializer):
     def get_layer_permissions(self, obj):
         """Retrieve the names of the layer permissions."""
         return [
-            {"id": permission.id, "name": permission.name}
+            {"id": permission.id, "name": permission.name, "description": permission.description}
             for permission in obj.layer_permissions.all()
         ]
     
