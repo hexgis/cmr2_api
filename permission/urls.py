@@ -3,6 +3,11 @@ from .views import LayerPermissionListView, ComponentPermissionListView, LayerPe
 
 urlpatterns = [
     path(
+        '',
+        LayerPermissionListView.as_view(),
+        name='permissions'
+    ),
+    path(
         'layer/',
         LayerPermissionView.as_view(),
         name='layer-permissions'
