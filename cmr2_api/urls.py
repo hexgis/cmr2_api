@@ -61,6 +61,10 @@ urlpatterns = [
         ('permission.urls', 'permission'),
         namespace='permission')
     ),
+    path('dashboard/', include(
+        ('dashboard.urls', 'dashboard'),
+        namespace='dashboard')
+    ),
 ] + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT
 )

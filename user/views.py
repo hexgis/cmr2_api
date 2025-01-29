@@ -39,6 +39,8 @@ from user import (
     filters
 )
 
+from utils.send_email import send_custom_email
+
 logger = logging.getLogger(__name__)
 
 
@@ -420,27 +422,33 @@ class AccessRequestPendingView(Public, generics.ListCreateAPIView):
     serializer_class = AccessRequestSerializer
 
 
-# from portal.models import AccessRequest  # Caso esteja em outro app, ajuste
-logger = logging.getLogger(__name__)
-
-
-class AccessRequestApproveView(Public, APIView):
+class AccessRequestApproveView(AdminAuth, APIView):
     """
     Approves a specific access request,
     updating dt_approvement, and creating a User entry if one does not exist.
     Also sends a notification email upon approval.
     """
-
+        
     def post(self, request, pk, *args, **kwargs):
         try:
+            admin = request.user
+            
+            permissions = request.data.get('permissions', {})
+            institution_id = permissions.get('selected_group')
+            role_ids = permissions.get('selected_roles', [])
+            
             access_request = get_object_or_404(
                 models.AccessRequest,
                 pk=pk,
-                status=False
+                status=models.AccessRequest.StatusType.PENDENTE
             )
-
+            
+            
+            institution = get_object_or_404(models.Institution, pk=institution_id)
+            roles = models.Role.objects.filter(pk__in=role_ids)
             access_request.status = 2
-            access_request.dt_approvement = timezone.now()
+            access_request.reviewed_at = timezone.now()
+            access_request.reviewed_by = admin
             access_request.save()
 
             user, created = User.objects.get_or_create(
@@ -448,44 +456,45 @@ class AccessRequestApproveView(Public, APIView):
                 defaults={
                     'username': access_request.email,
                     'first_name': access_request.name,
+                    'institution': institution,
                 }
             )
 
             if created:
+                user.roles.set(roles)
                 user.save()
                 logger.info(f"Usuário criado: {user.email}, acesso aprovado")
+
+                subject = 'Pedido de acesso aprovado'
+                recipients = [access_request.email, 'valdean.junior@hex360.com.br']
+                template_path = os.path.join(
+                        settings.EMAIL_TEMPLATES_DIR,
+                        'approvedUser.html'
+                    )
+                context = {
+                    'user_name': access_request.name
+                }
+                email_sent = send_custom_email(
+                    subject=subject,
+                    recipients=recipients,
+                    template_path=template_path,
+                    context=context,
+                )
+                if email_sent:
+                    return Response({'detail': 'E-mail enviado com sucesso.'}, status=200)
+                else:
+                    return Response({'detail': 'Falha ao enviar o e-mail.'}, status=500)
+
             else:
                 logger.info(f"Usuário '{user.email}' já existia na base.")
-
-            subject = 'Pedido de acesso ao CMR'
-            context = {'name': access_request.name}
-            html_message = render_to_string(
-                'email/solicitacao_de_acesso.html', context)
-
-            send_mail(
-                subject=subject,
-                message='',
-                from_email="cmr@funai.gov.br",
-                recipient_list=[
-                    'valdean.junior@hex360.com.br',
-                    'marcos.silva@hex360.com.br'
-                ],
-                html_message=html_message
-            )
+            
 
         except Http404:
             return Response(
                 {'detail': 'Requisição não encontrada ou já aprovada.'},
                 status=status.HTTP_404_NOT_FOUND
             )
-
-        except SMTPException as smtp_error:
-            logger.error(f"Erro SMTP ao enviar email: {smtp_error}")
-            return Response(
-                {'detail': 'Ocorreu um erro ao enviar o e-mail.'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
-
+            
         except Exception as e:
             logger.error(f"Erro inesperado: {str(e)}")
             return Response(
@@ -511,19 +520,21 @@ class AccessRequestDetailView(Public, generics.RetrieveAPIView):
     serializer_class = AccessRequestDetailSerializer
 
 
-class AccessRequestRejectView(Public, generics.RetrieveAPIView):
+class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
 
     def patch(self, request, pk, *args, **kwargs):
         try:
+            deined_details = request.data.get('denied_details')
             access_request = get_object_or_404(
                 models.AccessRequest,
                 pk=pk,
-                status=False
+                status=models.AccessRequest.StatusType.PENDENTE
             )
-
+            
             access_request.status = 3
-            access_request.reviewed_date = timezone.now()
-            access_request.reviewed_by = request.user.id
+            access_request.reviewed_at = timezone.now()
+            access_request.reviewed_by = request.user
+            access_request.denied_details = deined_details
 
             access_request.save()
 

@@ -40,5 +40,15 @@ class LandUseClassesFilter(rest_framework.FilterSet):
         fields = (
             'co_cr',
             'co_funai',
-            'map_year',
+            'map_year'
         )
+
+
+class LandUsePerTiFilter(rest_framework.FilterSet):
+    co_cr = NumberInFilter(field_name='co_cr', lookup_expr='in')
+    co_funai = NumberInFilter(field_name='co_funai', lookup_expr='in')
+    nu_ano = NumberInFilter(field_name='nu_ano', lookup_expr='in')
+
+    class Meta:
+        model = models.LandUsePerTi
+        fields = ['co_cr', 'co_funai', 'nu_ano']

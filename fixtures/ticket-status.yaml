@@ -1,0 +1,496 @@
+[
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 72,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 84,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 73,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 85,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 74,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 86,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 75,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 87,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 76,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 88,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 77,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "MEDIA",
+        "ticket": 89,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-17T19:27:27.948Z",
+        "due_on": "2024-12-26"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 78,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "MEDIA",
+        "ticket": 90,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-11-22T18:53:59.653Z",
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 79,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "MEDIA",
+        "ticket": 91,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-11-22T17:53:21.185Z",
+        "due_on": "2024-11-25"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 80,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 94,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-11-22T17:56:24.660Z",
+        "due_on": "2025-02-21"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 81,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 95,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-11-22T19:49:24.625Z",
+        "due_on": "2024-11-30"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 82,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 96,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 83,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 97,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 84,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 99,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 85,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 100,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-11-22T19:43:00.297Z",
+        "due_on": "2024-11-30"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 86,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 101,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 87,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "AGUARDANDO_GESTOR",
+        "priority_code": "ALTA",
+        "ticket": 102,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-11-22T19:54:23.863Z",
+        "due_on": "2024-11-30"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 88,
+    "fields": {
+        "status_category": "DEFERIDO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 103,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 89,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 112,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 90,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "MEDIA",
+        "ticket": 113,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-16T19:24:20.038Z",
+        "due_on": "2024-12-26"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 91,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 114,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 92,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 115,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 93,
+    "fields": {
+        "status_category": "DEFERIDO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 116,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 94,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "BAIXA",
+        "ticket": 117,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-18T14:35:42.892Z",
+        "due_on": "2024-12-20"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 95,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "MEDIA",
+        "ticket": 118,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-17T13:39:30.295Z",
+        "due_on": "2024-12-27"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 96,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "MEDIA",
+        "ticket": 119,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-18T14:02:42.200Z",
+        "due_on": "2024-12-20"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 97,
+    "fields": {
+        "status_category": "CONCLUIDO",
+        "sub_status": "EM_TESTE",
+        "priority_code": "ALTA",
+        "ticket": 120,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-18T14:03:21.569Z",
+        "due_on": "2024-12-27"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 98,
+    "fields": {
+        "status_category": "DEFERIDO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 121,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 99,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "MEDIA",
+        "ticket": 122,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-17T19:28:04.733Z",
+        "due_on": "2024-12-27"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 100,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "AGUARDANDO_GESTOR",
+        "priority_code": "MEDIA",
+        "ticket": 123,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-23T18:42:37.141Z",
+        "due_on": "2024-12-26"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 101,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "ALTA",
+        "ticket": 124,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-17T19:31:55.939Z",
+        "due_on": "2024-12-27"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 102,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "MEDIA",
+        "ticket": 125,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-17T18:10:12.281Z",
+        "due_on": "2024-12-28"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 103,
+    "fields": {
+        "status_category": "EM_ANDAMENTO",
+        "sub_status": "EM_DESENVOLVIMENTO",
+        "priority_code": "ALTA",
+        "ticket": 126,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-17T19:31:40.472Z",
+        "due_on": "2024-12-28"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 104,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 127,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 105,
+    "fields": {
+        "status_category": "CONCLUIDO",
+        "sub_status": "CONCLUIDO",
+        "priority_code": "MEDIA",
+        "ticket": 128,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-17T18:41:24.540Z",
+        "due_on": "2024-12-19"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 106,
+    "fields": {
+        "status_category": "CONCLUIDO",
+        "sub_status": "CONCLUIDO",
+        "priority_code": "MEDIA",
+        "ticket": 129,
+        "analyzed_by": 1,
+        "analyzed_in": "2024-12-18T14:04:03.243Z",
+        "due_on": "2024-12-27"
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 107,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 130,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 108,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 131,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+},
+{
+    "model": "admin_panel.ticketstatus",
+    "pk": 109,
+    "fields": {
+        "status_category": "NAO_ANALISADO",
+        "sub_status": "NAO_ANALISADO",
+        "priority_code": "BAIXA",
+        "ticket": 132,
+        "analyzed_by": null,
+        "analyzed_in": null,
+        "due_on": null
+    }
+}
+]
