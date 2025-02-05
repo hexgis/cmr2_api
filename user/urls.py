@@ -58,6 +58,11 @@ urlpatterns = [
         name='role'
     ),
     path(
+        'role-diff/<int:id>/',
+        views.RoleDiffView.as_view(),
+        name='role-difference-list'
+    ),
+    path(
         'group/',
         views.GroupListCreateView.as_view(),
         name='group-list'

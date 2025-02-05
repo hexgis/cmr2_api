@@ -38,6 +38,7 @@ from user import (
     models,
     filters
 )
+from permission import models as perm_models
 
 from utils.send_email import send_custom_email
 
@@ -360,7 +361,30 @@ class RoleListCreateView(Auth, generics.ListCreateAPIView):
     serializer_class = serializers.RoleSerializer
     queryset = models.Role.objects.all()
 
+class RoleDiffView(Public, APIView):
+    """ Returns the difference between the groups associated with a role and the groups not associated with it. """
+    def get(self, request, id=None):
+        try:
+            role = get_object_or_404(models.Role, id=id)
+            unassociated_groups = models.Group.objects.exclude(id__in=role.groups.values_list('id', flat=True))
+            group_serializer = serializers.GroupSerializer(unassociated_groups, many=True)
 
+            return Response(
+                {
+                    "unassociated_groups": group_serializer.data,
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        except Exception as e:
+            return Response(
+                {
+                    "error": "An unexpected error occurred.",
+                    "details": str(e),
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        
 class GroupRetrieveUpdateDestroyView(
     Public,
     generics.RetrieveUpdateDestroyAPIView
@@ -378,20 +402,16 @@ class GroupListCreateView(Public, generics.ListCreateAPIView):
     serializer_class = serializers.GroupSerializer
     queryset = models.Group.objects.all()
 
-from permission import models as perm_models
 class GroupDiffListView(Public, APIView):
+    """ Returns the difference between the permissions associated with a group and the permissions not associated with it. """
     
     def get(self, request, group_id):
-        # Get the group by ID or return 404
         group = get_object_or_404(models.Group, id=group_id)
         
-        # Get all layer permissions not associated with this group
         unassociated_layer_permissions = perm_models.LayerPermission.objects.exclude(groups=group)
         
-        # Get all component permissions not associated with this group
         unassociated_component_permissions = perm_models.ComponentPermission.objects.exclude(groups=group)
 
-        # Serialize the results
         data = {
             "layer_permissions": [
                 {"id": permission.id, "name": permission.name, "description": permission.description}

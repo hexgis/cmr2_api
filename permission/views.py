@@ -28,24 +28,20 @@ class ComponentPermissionListView(AdminAuth, generics.ListAPIView):
 
 class LayerPermissionView(Public, APIView):
     """
-    View para gerenciar permissões de camadas.
+    View to manage layer permissions
 
-    Métodos:
-    - GET: Retorna todas as permissões de camadas.
-    - POST: Cria uma nova permissão de camada.
-    - PATCH: Atualiza parcialmente uma permissão de camada.
+    Methods:
+    - GET: Return the layers permissions.
+    - POST: Create a new permission layer.
+    - PATCH: Update partially a layer permission.
     """
 
     def get(self, request, pk=None):
         """
-        Lista todas as permissões de camada ou retorna uma permissão específica.
+        List all permissions layer or return a specific permission.
 
         Args:
-            request (Request): Requisição HTTP.
-            pk (int, opcional): ID da permissão.
-
-        Returns:
-            Response: Lista de permissões ou uma única permissão.
+            pk (int, opcional): ID permission.
         """
         if pk:
             try:
@@ -61,15 +57,8 @@ class LayerPermissionView(Public, APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
-        """
-        Cria uma nova permissão de camada.
-
-        Args:
-            request (Request): Dados para criar a permissão.
-
-        Returns:
-            Response: Permissão criada ou erros de validação.
-        """
+        """ Create a new permission layer"""
+        
         serializer = LayerPermissionSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -77,16 +66,8 @@ class LayerPermissionView(Public, APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def patch(self, request, pk):
-        """
-        Atualiza parcialmente uma permissão de camada.
-
-        Args:
-            request (Request): Dados para atualizar a permissão.
-            pk (int): ID da permissão.
-
-        Returns:
-            Response: Permissão atualizada ou erros de validação.
-        """
+        """ Update partially a layer permission."""
+        
         try:
             permission = LayerPermission.objects.get(pk=pk)
         except LayerPermission.DoesNotExist:
@@ -101,6 +82,7 @@ class LayerPermissionView(Public, APIView):
 
 
 class LayerPermissionDiffView(Public, APIView):
+    """ returns the difference between the layers that are not in the permission """
     def get(self, request, pk, *args, **kwargs):
         try:
             layer_permission = LayerPermission.objects.get(pk=pk)
