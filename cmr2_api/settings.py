@@ -133,6 +133,7 @@ DATABASE_ROUTERS = [
     'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
     'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
+    'cmr2_api.database_routers.UserAdminRouters.UserAdminRouter',
     'cmr2_api.database_routers.PriorityMonitoringRouters.\
 PriorityMonitoringRouter',
 ]
