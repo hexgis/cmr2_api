@@ -144,7 +144,7 @@ class User(AbstractUser):
     dark_mode_active = models.BooleanField(
         default=False
     )
-    
+
     password = models.CharField(max_length=128, null=True, blank=True)
 
     class Meta:
