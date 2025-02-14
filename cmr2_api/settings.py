@@ -71,6 +71,7 @@ INSTALLED_APPS = [
     'import_export',
     'priority_alerts',
     'funai',
+    'land_use',
     'corsheaders'
 ]
 

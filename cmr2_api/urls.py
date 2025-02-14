@@ -37,6 +37,10 @@ urlpatterns = [
         ('layer.urls', 'layer'),
         namespace='layer')
     ),
+    path('land-use/', include(
+        ('land_use.urls', 'land_use'),
+        namespace='layer')
+    ),
     path('user/', include(
         ('user.urls', 'user'),
         namespace='user-profile')
