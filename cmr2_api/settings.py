@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'drf_spectacular',
     'rest_framework',
     'django_json_widget',
     'dashboard',
@@ -71,6 +72,7 @@ INSTALLED_APPS = [
     'import_export',
     'priority_alerts',
     'funai',
+    'land_use',
     'corsheaders'
 ]
 
@@ -133,6 +135,7 @@ DATABASE_ROUTERS = [
     'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
     'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
+    'cmr2_api.database_routers.UserAdminRouters.UserAdminRouter',
     'cmr2_api.database_routers.PriorityMonitoringRouters.\
 PriorityMonitoringRouter',
 ]
@@ -198,7 +201,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 COMPONENT_LIST = ast.literal_eval(os.getenv(
     'COMPONENT_LIST',
     "[\
-        ('analytics', 'Analytics'),\
+        ('layers', 'Camadas de Sobreposição'),\
+        ('monitoring', 'Monitoramento Diário'),\
+        ('layers_mosaics', 'Alta Resolução e Mosaicos'),\
+        ('layers_planet', 'Camadas Planet'),\
+        ('land_use', 'Uso e Ocupação do Solo'),\
+        ('analytics', 'Módulo Analítico'),\
+        ('admin_panel', 'Painel Administrativo'),\
     ]"
 ))
 
@@ -210,6 +219,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 

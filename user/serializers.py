@@ -351,7 +351,7 @@ class RoleSerializer(serializers.ModelSerializer):
         """Meta class for RolesSerializer."""
 
         model = models.Role
-        fields = '__all__'
+        fields = ['id', 'name', 'description', 'groups', 'users']
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -435,6 +435,102 @@ class PasswordResetRequestSerializer(serializers.Serializer):
 
 
 class AccessRequestSerializer(serializers.ModelSerializer):
+    """
+    Serializer for AccessRequest model data.
+    """
+
     class Meta:
         model = models.AccessRequest
-        fields = '__all__'
+        fields = [
+            'id',
+            'name',
+            'email',
+            'department',
+            'user_siape_registration',
+            'coordinator_name',
+            'coordinator_email',
+            'coordinator_department',
+            'coordinator_siape_registration',
+            'attachment',
+            'status',
+            'created_at',
+            'reviewed_at',
+            'reviewed_by',
+            'denied_details',
+        ]
+        read_only_fields = ['status', 'created_at', 'reviewed_at']
+
+    def create(self, validated_data):
+        """
+        Overriding create to ensure any new request defaults to status=False.
+        """
+        validated_data['status'] = models.AccessRequest.StatusType.PENDENTE
+        return super().create(validated_data)
+
+
+class AccessRequestDetailSerializer(serializers.ModelSerializer):
+    """
+     Serializer to return detailed information about an AccessRequest.
+     Includes status details and formatted fields.
+     """
+    """
+    Serializer to return detailed information about an AccessRequest.
+    Includes status details and formatted fields.
+    """
+
+    created_at_formatted = serializers.SerializerMethodField()
+    reviewed_at_formatted = serializers.SerializerMethodField()
+    status_name = serializers.SerializerMethodField()
+    reviewed_by_name = serializers.SerializerMethodField()
+    denied_details = serializers.SerializerMethodField()
+
+    class Meta:
+        model = models.AccessRequest
+        fields = [
+            "id",
+            "name",
+            "email",
+            "department",
+            "user_siape_registration",
+            "coordinator_name",
+            "coordinator_email",
+            "coordinator_department",
+            "coordinator_siape_registration",
+            "attachment",
+            "created_at_formatted",
+            "status_name",
+            "reviewed_at_formatted",
+            "reviewed_by_name",
+            "denied_details",
+        ]
+
+    def get_created_at_formatted(self, obj):
+        """
+        Formats the solicitation date.
+        """
+        return obj.created_at.strftime("%d/%m/%Y %H:%M:%S") if obj.created_at else None
+
+    def get_reviewed_at_formatted(self, obj):
+        """
+        Formats the reviewed date from AccessRequestStatus.
+        """
+        return obj.reviewed_at.strftime("%d/%m/%Y %H:%M:%S") if obj.reviewed_at else None
+
+    def get_status_name(self, obj):
+        """
+        Gets the name of the status from AccessRequestStatus.
+        """
+        return obj.get_status_display()
+
+    def get_reviewed_by_name(self, obj):
+        """
+        Gets the name of the reviewer from AccessRequestStatus.
+        """
+        return obj.reviewed_by.username  if obj.reviewed_by else None
+
+    def get_denied_details(self, obj):
+        """
+        Gets the denied details from AccessRequestStatus.
+        """
+        return obj.denied_details
+

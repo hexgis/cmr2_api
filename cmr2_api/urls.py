@@ -18,13 +18,15 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
-
+from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
     path(
         'admin/',
         admin.site.urls
     ),
+    path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
+    path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger-ui'),
     path('adm-panel/', include(
         ('admin_panel.urls', 'adm-panel'),
         namespace='adm panel'),
@@ -35,6 +37,10 @@ urlpatterns = [
     ),
     path('layer/', include(
         ('layer.urls', 'layer'),
+        namespace='layer')
+    ),
+    path('land-use/', include(
+        ('land_use.urls', 'land_use'),
         namespace='layer')
     ),
     path('user/', include(
@@ -56,6 +62,14 @@ urlpatterns = [
     path('monitoring/consolidated/', include(
         ('monitoring.urls', 'monitoring'),
         namespace='monitoring')
+    ),
+    path('permission/', include(
+        ('permission.urls', 'permission'),
+        namespace='permission')
+    ),
+    path('dashboard/', include(
+        ('dashboard.urls', 'dashboard'),
+        namespace='dashboard')
     ),
 ] + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT

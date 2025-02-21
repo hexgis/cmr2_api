@@ -1,3 +1,8 @@
+from . import models
+from user.models import User, Role
+from django.shortcuts import get_object_or_404
+from rest_framework import status
+from smtplib import SMTPException
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
@@ -12,10 +17,11 @@ from django.http import HttpResponseServerError
 from django.template.loader import render_to_string
 
 from rest_framework_gis.filters import InBBoxFilter
-from .serializers import AccessRequestSerializer
+from .serializers import AccessRequestSerializer, AccessRequestDetailSerializer
 from django.core.mail import send_mail
-
-
+from django.utils import timezone
+from rest_framework.views import APIView
+from rest_framework.generics import get_object_or_404
 from django.conf import settings
 from rest_framework import (
     response,
@@ -23,6 +29,7 @@ from rest_framework import (
     generics,
     views,
 )
+from django.http import FileResponse, JsonResponse, Http404
 
 
 from user import (
@@ -31,10 +38,12 @@ from user import (
     filters
 )
 
+from utils.send_email import send_custom_email
+
 logger = logging.getLogger(__name__)
 
 
-class UserListView(AdminAuth, generics.ListCreateAPIView):
+class UserListView(Auth, generics.ListCreateAPIView):
     """"API to return all users along with their respective sector ID.
 
     Returns:
@@ -334,7 +343,7 @@ class InstitutionListView(Auth, generics.ListAPIView):
 
 
 class RoleRetrieveUpdateDestroyView(
-    AdminAuth,
+    Auth,
     generics.RetrieveUpdateDestroyAPIView
 ):
     """Role retrieve, update and destroy view data."""
@@ -344,7 +353,7 @@ class RoleRetrieveUpdateDestroyView(
     lookup_field = 'id'
 
 
-class RoleListCreateView(AdminAuth, generics.ListCreateAPIView):
+class RoleListCreateView(Auth, generics.ListCreateAPIView):
     """Role list and create view data."""
 
     serializer_class = serializers.RoleSerializer
@@ -352,7 +361,7 @@ class RoleListCreateView(AdminAuth, generics.ListCreateAPIView):
 
 
 class GroupRetrieveUpdateDestroyView(
-    AdminAuth,
+    Auth,
     generics.RetrieveUpdateDestroyAPIView
 ):
     """Group retrieve, update and destroy view data."""
@@ -362,8 +371,157 @@ class GroupRetrieveUpdateDestroyView(
     lookup_field = 'id'
 
 
-class GroupListCreateView(AdminAuth, generics.ListCreateAPIView):
+class GroupListCreateView(Auth, generics.ListCreateAPIView):
     """Group list and create view data."""
 
     serializer_class = serializers.GroupSerializer
     queryset = models.Group.objects.all()
+
+
+class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
+    """
+    Handles creation of new access requests (Public).
+    """
+
+    queryset = models.AccessRequest.objects.all()
+    serializer_class = AccessRequestDetailSerializer
+
+
+class AccessRequestPendingView(Public, generics.ListCreateAPIView):
+    """
+    Lists only pending access requests (AdminAuth).
+    """
+    queryset = models.AccessRequest.objects.filter(status=1)
+    serializer_class = AccessRequestSerializer
+
+
+class AccessRequestApproveView(AdminAuth, APIView):
+    """
+    Approves a specific access request,
+    updating dt_approvement, and creating a User entry if one does not exist.
+    Also sends a notification email upon approval.
+    """
+        
+    def post(self, request, pk, *args, **kwargs):
+        try:
+            admin = request.user
+            
+            permissions = request.data.get('permissions', {})
+            institution_id = permissions.get('selected_group')
+            role_ids = permissions.get('selected_roles', [])
+            
+            access_request = get_object_or_404(
+                models.AccessRequest,
+                pk=pk,
+                status=models.AccessRequest.StatusType.PENDENTE
+            )
+            
+            
+            institution = get_object_or_404(models.Institution, pk=institution_id)
+            roles = models.Role.objects.filter(pk__in=role_ids)
+            access_request.status = 2
+            access_request.reviewed_at = timezone.now()
+            access_request.reviewed_by = admin
+            access_request.save()
+
+            user, created = User.objects.get_or_create(
+                email=access_request.email,
+                defaults={
+                    'username': access_request.email,
+                    'first_name': access_request.name,
+                    'institution': institution,
+                }
+            )
+
+            if created:
+                user.roles.set(roles)
+                user.save()
+                logger.info(f"Usuário criado: {user.email}, acesso aprovado")
+
+                subject = 'Pedido de acesso aprovado'
+                recipients = [access_request.email, 'valdean.junior@hex360.com.br']
+                template_path = os.path.join(
+                        settings.EMAIL_TEMPLATES_DIR,
+                        'approvedUser.html'
+                    )
+                context = {
+                    'user_name': access_request.name
+                }
+                email_sent = send_custom_email(
+                    subject=subject,
+                    recipients=recipients,
+                    template_path=template_path,
+                    context=context,
+                )
+                if email_sent:
+                    return Response({'detail': 'E-mail enviado com sucesso.'}, status=200)
+                else:
+                    return Response({'detail': 'Falha ao enviar o e-mail.'}, status=500)
+
+            else:
+                logger.info(f"Usuário '{user.email}' já existia na base.")
+            
+
+        except Http404:
+            return Response(
+                {'detail': 'Requisição não encontrada ou já aprovada.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
+            
+        except Exception as e:
+            logger.error(f"Erro inesperado: {str(e)}")
+            return Response(
+                {'detail': 'Erro inesperado durante a aprovação.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+        return Response(
+            {
+                "detail": "Acesso aprovado e usuário cadastrado com sucesso.",
+                "request_id": access_request.id,
+                "user_id": user.id
+            },
+            status=status.HTTP_200_OK
+        )
+
+
+class AccessRequestDetailView(Public, generics.RetrieveAPIView):
+    """
+    Retrieves details of a specific AccessRequest with formatted and related data.
+    """
+    queryset = models.AccessRequest.objects.all()
+    serializer_class = AccessRequestDetailSerializer
+
+
+class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
+
+    def patch(self, request, pk, *args, **kwargs):
+        try:
+            deined_details = request.data.get('denied_details')
+            access_request = get_object_or_404(
+                models.AccessRequest,
+                pk=pk,
+                status=models.AccessRequest.StatusType.PENDENTE
+            )
+            
+            access_request.status = 3
+            access_request.reviewed_at = timezone.now()
+            access_request.reviewed_by = request.user
+            access_request.denied_details = deined_details
+
+            access_request.save()
+
+            return Response(
+                {
+                    "detail": "Acesso negado ao usuário.",
+                    "request_id": access_request.id,
+                    "user_id": request.user.id
+                },
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            logger.error(f"Erro inesperado: {str(e)}")
+            return Response(
+                {'detail': 'Erro inesperado durante a aprovação.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )

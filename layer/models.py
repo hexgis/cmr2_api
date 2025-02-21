@@ -379,6 +379,10 @@ class Tms(Layer):
 
     legend_blob = models.BinaryField(blank=True, null=True)
 
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
     def save_image_preview(self):
         """Void method to update `Tms.legend_blob`."""
 
