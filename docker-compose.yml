@@ -37,14 +37,15 @@ services:
     environment:
       RESET_PASSWORD_URL: "https://homolog-cmr-app-oq5garjiiq-uc.a.run.app/auth/confirmar/?code={code}"
       SECRET_KEY: OSKS92JlKSJJksio*&2j40(&0130)W082_120KKmas@
-      DB_USER: testuser
-      DB_NAME: testdatabase
-      DB_PASSWORD: testpassword
-      DB_HOST: db
+      DB_USER: joao_fonseca
+      DB_NAME: cmr_2_funai
+      DB_PASSWORD: me6y37;51_]C
+      DB_HOST: 192.168.100.51
+      DB_PORT: 5432
       DB_NAME_FOR_READ: cmr_funai
       DB_USER_FOR_READ: postgres
       DB_PASSWORD_FOR_READ: postgres
-      DB_HOST_FOR_READ: 192.168.20.135
+      DB_HOST_FOR_READ: 192.168.100.51
       DB_PORT_FOR_READ: 5433
       ALLOWED_HOSTS: '["*"]'
       EMAIL_HOST: smtp.example.com
