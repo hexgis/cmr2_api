@@ -39,7 +39,7 @@ services:
       SECRET_KEY: OSKS92JlKSJJksio*&2j40(&0130)W082_120KKmas@
       DB_USER: testuser
       DB_NAME: testdatabase
-      DB_PASSWORD: me6y37;51_]C
+      DB_PASSWORD: testpassword
       DB_HOST: db
       DB_PORT: 5432
       DB_NAME_FOR_READ: cmr_funai
