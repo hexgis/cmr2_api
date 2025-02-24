@@ -23,11 +23,16 @@ env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# DB
 DB_NAME = env.str('DB_NAME')
 DB_USER = env.str('DB_USER')
 DB_PASSWORD = env.str('DB_PASSWORD')
 DB_HOST = env.str('DB_HOST')
+DB_PORT = env.str('DB_PORT', 5432)
+
 RESET_PASSWORD_URL = env.str('RESET_PASSWORD_URL')
+
+# DB_FOR_READ
 DB_NAME_FOR_READ = env.str('DB_NAME_FOR_READ')
 DB_USER_FOR_READ = env.str('DB_USER_FOR_READ')
 DB_PASSWORD_FOR_READ = env.str('DB_PASSWORD_FOR_READ')
@@ -118,7 +123,7 @@ DATABASES = {
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
-        'PORT': '5432',
+        'PORT': DB_PORT,
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
