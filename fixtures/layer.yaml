@@ -42,19 +42,7 @@
       is_public: true
       fonte: FUNAI (http://geoserver.funai.gov.br/)
       dt_atualizacao: 2021-03-25
-      database_layer_name: funai.lim_buffer_6km_recorte_a  
-- model: layer.layer
-  pk: 6
-  fields:
-      name: Aldeias Indígenas
-      order: 1193
-      layer_type: wms
-      group: 23
-      active_on_init: false
-      is_public: true
-      fonte: FUNAI (http://geoserver.funai.gov.br/)
-      dt_atualizacao: 2024-08-22
-      database_layer_name: funai.loc_aldeia_indigena_p       
+      database_layer_name: funai.lim_buffer_6km_recorte_a    
 - model: layer.layer
   pk: 7
   fields:
