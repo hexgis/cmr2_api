@@ -2,7 +2,7 @@
 - model: layer.layer
   pk: 1
   fields:
-      name: Terras Indígenas
+      name: Temas Indígenas
       order: 1194
       layer_type: wms
       group: 23
