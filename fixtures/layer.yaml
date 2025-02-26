@@ -3745,3 +3745,12 @@
     group: 23
     active_on_init: false
     is_public: true
+- model: layer.layer
+  pk: 449
+  fields:
+    name: Localidades Indígenas
+    order: 2308
+    layer_type: wms
+    group: 23
+    active_on_init: false
+    is_public: true

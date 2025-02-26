@@ -51,19 +51,6 @@
       has_opacity: false
       default_opacity: null
 - model: layer.wms
-  pk: 6
-  fields:
-      has_preview: true
-      has_detail: false
-      detail_width: null
-      geoserver: 1
-      geoserver_layer_name: loc_aldeia_indigena_p
-      geoserver_layer_namespace: CMR-PUBLICO
-      geoserver_layer_options: null
-      queryable: true
-      has_opacity: false
-      default_opacity: null
-- model: layer.wms
   pk: 7
   fields:
       has_preview: true
@@ -3808,15 +3795,6 @@
       queryable: false
       has_opacity: false
       default_opacity: null
-- model: layer.layer
-  pk: 449
-  fields:
-    name: Localidades Indígenas
-    order: 2308
-    layer_type: wms
-    group: 23
-    active_on_init: false
-    is_public: true
 - model: layer.wms
   pk: 445
   fields:
