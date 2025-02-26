@@ -17,16 +17,14 @@ from rest_framework.response import Response
 from rest_framework import views, response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, get_user_model
-
+from permission.mixins import Auth, Public
 logger = logging.getLogger(__name__)
 
 User = get_user_model()
 
 
-class ChangePassword(views.APIView):
+class ChangePassword(Auth, views.APIView):
     """View to change User password."""
-
-    permission_classes = (IsAuthenticated,)
 
     def post(self, request, *args, **kwargs):
         """Post method to change User password for received data.
@@ -60,11 +58,10 @@ class ChangePassword(views.APIView):
         return response.Response(error_response, status=400)
 
 
-class ResetPassword(views.APIView):
+class ResetPassword(Public, views.APIView):
     """Endpoint to handle password reset requests."""
 
     serializer_class = user_serializer.PasswordResetRequestSerializer
-    permission_classes = (AllowAny,)
 
     def get_authenticators(self):
         """
@@ -161,3 +158,24 @@ class ResetPassword(views.APIView):
             {"detail": "Password reset code sent."},
             status=status.HTTP_200_OK
         )
+
+class LogoutView(Auth,views.APIView):
+    """
+    Handles user logout by blacklisting the provided refresh token.
+    """
+    def post(self, request):
+        """
+        Processes a POST request to log out the user.
+
+        Expected request body:
+        {
+            "refresh": "string"  # The refresh token to be blacklisted
+        }
+        """
+        try:
+            refresh_token = request.data["refresh"]
+            token = RefreshToken(refresh_token)
+            token.blacklist()
+            return response.Response({"message": "Logout successful"}, status=200)
+        except Exception as e:
+            return response.Response({"error": "Invalid token"}, status=400)
