@@ -222,7 +222,7 @@ class CustomTokenObtainPairSerializer(Public, TokenObtainPairSerializer):
 
     def get_public_ip(self):
         """
-        Retorna o IP público do usuário via ipify.
+        Returns the user's public IP via ipify..
         """
         try:
             response = requests.get('https://api.ipify.org', timeout=5)
@@ -234,8 +234,8 @@ class CustomTokenObtainPairSerializer(Public, TokenObtainPairSerializer):
 
     def get_location(self, ip):
         """
-        Obtém a localização geográfica do IP fornecido via ipapi.
-        Retorna dicionário com city, region, country_name etc.
+        Get the geographic location of the IP provided via ipapi.
+        Returns dictionary with city, region, country_name, etc.
         """
         try:
             url = f'https://ipapi.co/{ip}/json/'
@@ -258,7 +258,7 @@ class CustomTokenObtainPairSerializer(Public, TokenObtainPairSerializer):
 
     def get_user_agent_info(self, request):
         """
-        Retorna informações sobre o agente de usuário (browser e tipo de dispositivo).
+        Returns information about the user agent (browser and device type).
         """
         user_agent_str = request.META.get('HTTP_USER_AGENT', "")
         user_agent = parse_user_agent(user_agent_str)
@@ -287,7 +287,7 @@ class CustomTokenObtainPairSerializer(Public, TokenObtainPairSerializer):
 
         if not user:
             raise serializers.ValidationError(
-                _("Nome de usuário ou senha inválidos.")
+                _("Invalid username or password.")
             )
 
         # Adjust the 'username' in attrs for SimpleJWT to work
