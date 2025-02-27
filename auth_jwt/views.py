@@ -1,7 +1,13 @@
-from user import serializers as user_serializer
 import os
 import logging
+import pytz
+import requests
+
+from django.views.decorators.csrf import csrf_exempt
 from datetime import timedelta
+
+from user_agents import parse as parse_user_agent
+from user import serializers as user_serializer
 
 from django.conf import settings
 from django.db import transaction
@@ -10,6 +16,7 @@ from django.http import JsonResponse
 from django.template.loader import render_to_string
 from django.utils import timezone
 from user import models as user_models
+from django.utils.translation import gettext_lazy as _
 
 from rest_framework import status, views
 from rest_framework.permissions import AllowAny, IsAuthenticated
@@ -17,10 +24,25 @@ from rest_framework.response import Response
 from rest_framework import views, response
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import authenticate, get_user_model
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from django.core.exceptions import ObjectDoesNotExist
 from permission.mixins import Auth, Public
-logger = logging.getLogger(__name__)
+from dashboard import models as dashModels
+
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework_simplejwt.views import TokenObtainPairView
+
+from rest_framework import (
+    response,
+    permissions,
+    views,
+    status,
+    serializers,
+    generics
+)
 
 User = get_user_model()
+logger = logging.getLogger(__name__)
 
 
 class ChangePassword(Auth, views.APIView):
@@ -91,8 +113,8 @@ class ResetPassword(Public, views.APIView):
 
         # Verifica se existe usuário com o e-mail fornecido
         try:
-            user = User.objects.get(email=email)
-        except User.DoesNotExist:
+            user = get_user_model().objects.get(email=email)
+        except ObjectDoesNotExist:
             return Response(
                 {"detail": "User with this email does not exist."},
                 status=status.HTTP_400_BAD_REQUEST
@@ -159,10 +181,12 @@ class ResetPassword(Public, views.APIView):
             status=status.HTTP_200_OK
         )
 
-class LogoutView(Auth,views.APIView):
+
+class LogoutView(Auth, views.APIView):
     """
     Handles user logout by blacklisting the provided refresh token.
     """
+
     def post(self, request):
         """
         Processes a POST request to log out the user.
@@ -179,3 +203,129 @@ class LogoutView(Auth,views.APIView):
             return response.Response({"message": "Logout successful"}, status=200)
         except Exception as e:
             return response.Response({"error": "Invalid token"}, status=400)
+
+
+class CustomTokenObtainPairSerializer(Public, TokenObtainPairSerializer):
+    """
+    Customizes the token obtain pair serializer to add additional functionalities.
+
+    Attributes:
+    - username_field: Specifies the field to be used for authentication (username).
+    - email: An optional email field to be used in the authentication process.
+
+    Methods:
+    - get_public_ip: Retrieves the public IP address of the user.
+    - get_location: Fetches the geographical location for a given IP address.
+    - validate: Validates the authentication credentials and performs additional actions.
+    """
+    email = serializers.EmailField(required=False)
+
+    def get_public_ip(self):
+        """
+        Retorna o IP público do usuário via ipify.
+        """
+        try:
+            response = requests.get('https://api.ipify.org', timeout=5)
+            response.raise_for_status()
+            return response.text
+        except Exception as e:
+            logger.warning(f"Could not fetch public IP: {e}")
+            return "0.0.0.0"
+
+    def get_location(self, ip):
+        """
+        Obtém a localização geográfica do IP fornecido via ipapi.
+        Retorna dicionário com city, region, country_name etc.
+        """
+        try:
+            url = f'https://ipapi.co/{ip}/json/'
+            response = requests.get(url, timeout=5)
+            if response.status_code == 200:
+                data = response.json()
+                return {
+                    'city': data.get('city'),
+                    'region': data.get('region'),
+                    'country_name': data.get('country_name'),
+                    'latitude': data.get('latitude'),
+                    'longitude': data.get('longitude')
+                }
+            else:
+                logger.warning(f"ipapi returned status {response.status_code}")
+                return {'error': 'Unknown location'}
+        except Exception as e:
+            logger.error(f"Error fetching location from ipapi: {e}")
+            return {'error': f'Error fetching location: {e}'}
+
+    def get_user_agent_info(self, request):
+        """
+        Retorna informações sobre o agente de usuário (browser e tipo de dispositivo).
+        """
+        user_agent_str = request.META.get('HTTP_USER_AGENT', "")
+        user_agent = parse_user_agent(user_agent_str)
+        return {
+            'browser': user_agent.browser.family,
+            'device': 'mobile' if user_agent.is_mobile else
+                      'tablet' if user_agent.is_tablet else 'PC'
+        }
+
+    def validate(self, attrs):
+        """
+            Main validation logic:
+            1. Authenticates the user (username/email) + password.
+            2. If successful, generate the token and record access data.
+            3. In case of failure, it returns a generic error.
+        """
+
+        request = self.context.get('request')
+        username_or_email = attrs.get('username')
+        password = attrs.get('password')
+
+        user = authenticate(
+            username_or_email=username_or_email,
+            password=password
+        )
+
+        if not user:
+            raise serializers.ValidationError(
+                _("Nome de usuário ou senha inválidos.")
+            )
+
+        # Adjust the 'username' in attrs for SimpleJWT to work
+        attrs['username'] = user.username
+
+        # Generates the token
+        data = super().validate(attrs)
+
+        self._record_user_access(request, user)
+
+        return data
+
+    def _record_user_access(self, request, user):
+        """
+        Registers the IP, location, etc., for the authenticated user in DashboardData.
+        """
+        public_user_ip = self.get_public_ip()
+        user_location = self.get_location(public_user_ip)
+        user_agent_info = self.get_user_agent_info(request)
+
+        brasilia_tz = pytz.timezone('America/Sao_Paulo')
+        current_date = timezone.now().astimezone(brasilia_tz)
+
+        try:
+            dashModels.DashboardData.objects.create(
+                user=user,
+                last_date_login=current_date,
+                location=(
+                    f"{user_location.get('city')}, "
+                    f"{user_location.get('region')}, "
+                    f"{user_location.get('country_name')}"
+                ),
+                ip=public_user_ip,
+                browser=user_agent_info['browser'],
+                type_device=user_agent_info['device'],
+                latitude=user_location.get('latitude'),
+                longitude=user_location.get('longitude'),
+            )
+            logger.info(f"Access recorded successfully for user {user}")
+        except Exception as e:
+            logger.error(f"Error recording user access: {e}")

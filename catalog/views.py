@@ -7,7 +7,6 @@ from rest_framework import (
     exceptions
 )
 
-from authorization.permissions.perm_access_cmr import CMRModuleAccess
 from catalog import (
     models,
     serializers,
@@ -16,6 +15,8 @@ from catalog import (
 )
 
 # TODO apagar depois
+
+
 class AuthModelMixIn:
     """Default Authentication for catalog views."""
     # permission_classes = (permissions.IsAuthenticated,)
