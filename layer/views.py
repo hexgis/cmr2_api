@@ -35,30 +35,27 @@ class GroupsCreateListView(mixins.PublicSafeAuth, generics.ListCreateAPIView):
         # if 'complete' in self.request.query_params.keys():
         return serializers.GroupCompleteSerializer
 
-        return serializers.GroupSerializer
+        # return serializers.GroupSerializer
 
     def get_queryset(self):
-        """Gets Queryset for `models.Group`.
-
-        Returns:
-            Queryset: filtered queryset.
-        """
-
         queryset = models.Group.objects.all()
-        if 'simple' in self.request.query_params.keys():
-            return queryset
 
-        # Removes groups that do not have layers
-        groups = models.Layer.objects.all().values('group')
-        queryset = queryset.filter(id__in=groups)
+        # filter only groups that have layers:
+        groups_ids = models.Layer.objects.values_list(
+            'group',
+            flat=True
+        ).distinct()
 
-        # Filter null layers
+        queryset = queryset.filter(id__in=groups_ids).distinct()
+
+        # The loop that "cleans" null layers:
         for group in queryset:
             layers = group.layers.filter(
-                Q(tms__isnull=False) | Q(wms__isnull=False))
+                Q(tms__isnull=False) | Q(wms__isnull=False)
+            )
             group.layers.set(layers)
 
-        return queryset
+        return queryset.distinct()
 
 
 class GroupsUpdateDeleteView(

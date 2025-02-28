@@ -16,6 +16,8 @@ import os
 from environs import Env
 import datetime
 import json
+from django_auth_ldap.config import LDAPSearch, GroupOfNamesType, PosixGroupType
+import ldap
 
 env = Env()
 env.read_env()
@@ -23,11 +25,16 @@ env.read_env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# DB
 DB_NAME = env.str('DB_NAME')
 DB_USER = env.str('DB_USER')
 DB_PASSWORD = env.str('DB_PASSWORD')
 DB_HOST = env.str('DB_HOST')
+DB_PORT = env.str('DB_PORT', 5432)
+
 RESET_PASSWORD_URL = env.str('RESET_PASSWORD_URL')
+
+# DB_FOR_READ
 DB_NAME_FOR_READ = env.str('DB_NAME_FOR_READ')
 DB_USER_FOR_READ = env.str('DB_USER_FOR_READ')
 DB_PASSWORD_FOR_READ = env.str('DB_PASSWORD_FOR_READ')
@@ -35,6 +42,8 @@ DB_HOST_FOR_READ = env.str('DB_HOST_FOR_READ')
 DB_PORT_FOR_READ = env.int('DB_PORT_FOR_READ', 5432)
 
 EMAIL_TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates', 'email')
+
+LDAP_URI = env.str('LDAP_URI')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -59,10 +68,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.gis',
+    'drf_spectacular',
     'rest_framework',
     'django_json_widget',
     'dashboard',
     'rest_framework_gis',
+    'rest_framework_simplejwt.token_blacklist',
     'user',
     'permission',
     'layer',
@@ -71,6 +82,7 @@ INSTALLED_APPS = [
     'import_export',
     'priority_alerts',
     'funai',
+    'land_use',
     'corsheaders'
 ]
 
@@ -116,7 +128,7 @@ DATABASES = {
         'USER': DB_USER,
         'PASSWORD': DB_PASSWORD,
         'HOST': DB_HOST,
-        'PORT': '5432',
+        'PORT': DB_PORT,
     },
     'db_for_read': {
         'ENGINE': 'django.contrib.gis.db.backends.postgis',
@@ -133,6 +145,7 @@ DATABASE_ROUTERS = [
     'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
     'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
+    'cmr2_api.database_routers.UserAdminRouters.UserAdminRouter',
     'cmr2_api.database_routers.PriorityMonitoringRouters.\
 PriorityMonitoringRouter',
 ]
@@ -216,6 +229,7 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
 }
 
 
@@ -352,3 +366,37 @@ EMAIL_PORT = '25'
 EMAIL_SUBJECT_PREFIX = '[CMR] Centro de Monitoramento Remoto'
 EMAIL_ADMIN_FEEDBACK = "cmr@funai.gov.br"
 DEFAULT_FROM_EMAIL = "cmr@funai.gov.br"
+
+################################################################################
+####                           LDAP CONFIGURATION                           ####
+################################################################################
+
+AUTH_LDAP_SERVER_URI = LDAP_URI
+AUTH_LDAP_SERVER_URI = LDAP_URI
+
+AUTH_LDAP_USER_SEARCH = LDAPSearch(
+    "OU=FUNAI,DC=funai,DC=local", ldap.SCOPE_SUBTREE, "(mail=%(user)s)"
+)
+
+AUTH_LDAP_START_TLS = False
+
+AUTH_LDAP_CONNECTION_OPTIONS = {
+    ldap.OPT_REFERRALS: 0,
+}
+
+# Populate the Django user from the LDAP directory.
+AUTH_LDAP_USER_ATTR_MAP = {
+    "first_name": "givenName",
+    "last_name": "sn",
+    "email": "mail"
+}
+
+AUTH_LDAP_ALWAYS_UPDATE_USER = True
+
+AUTH_LDAP_FIND_GROUP_PERMS = True
+AUTH_LDAP_CACHE_TIMEOUT = 3600
+
+AUTHENTICATION_BACKENDS = (
+    'cmr2_api.auth_backends.MyLDAPBackend',
+    'django.contrib.auth.backends.ModelBackend',
+)

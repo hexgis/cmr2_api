@@ -18,15 +18,19 @@ urlpatterns = [
         'password-reset/',
         views.ResetPassword.as_view(),
         name='reset-password'
-    ), path(
-        'obtain_token/',
-        TokenObtainPairView.as_view(),
-        name='token_obtain_pair'
     ),
+    path('obtain_token/', TokenObtainPairView.as_view(
+        serializer_class=views.CustomTokenObtainPairSerializer
+    ), name='token_obtain_pair'),
     path(
         'refresh_token/',
         TokenRefreshView.as_view(),
         name='token_refresh'
+    ),
+    path(
+        'logout/',
+        views.LogoutView.as_view(),
+        name='logout'
     ),
 
 ]

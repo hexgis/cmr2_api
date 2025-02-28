@@ -41,6 +41,7 @@ services:
       DB_NAME: testdatabase
       DB_PASSWORD: testpassword
       DB_HOST: db
+      DB_PORT: 5432
       DB_NAME_FOR_READ: cmr_funai
       DB_USER_FOR_READ: postgres
       DB_PASSWORD_FOR_READ: postgres

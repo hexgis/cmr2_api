@@ -51,19 +51,6 @@
       has_opacity: false
       default_opacity: null
 - model: layer.wms
-  pk: 6
-  fields:
-      has_preview: true
-      has_detail: false
-      detail_width: null
-      geoserver: 1
-      geoserver_layer_name: loc_aldeia_indigena_p
-      geoserver_layer_namespace: CMR-PUBLICO
-      geoserver_layer_options: null
-      queryable: true
-      has_opacity: false
-      default_opacity: null
-- model: layer.wms
   pk: 7
   fields:
       has_preview: true
@@ -3808,3 +3795,42 @@
       queryable: false
       has_opacity: false
       default_opacity: null
+- model: layer.wms
+  pk: 445
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: vw_lim_terra_indigena_possui_ig
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: layer.wms
+  pk: 333
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_sede_p
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null
+- model: layer.wms
+  pk: 449
+  fields:
+      has_preview: true
+      has_detail: false
+      detail_width: null
+      geoserver: 1
+      geoserver_layer_name: loc_indigenas
+      geoserver_layer_namespace: CMR-PUBLICO
+      geoserver_layer_options: null
+      queryable: true
+      has_opacity: true
+      default_opacity: null 
