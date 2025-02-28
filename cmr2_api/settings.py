@@ -238,7 +238,7 @@ SIMPLE_JWT = {
         minutes=int(
             os.environ.get(
                 'ACCESS_TOKEN_LIFETIME',
-                '15'
+                '9999'
             )
         )
     ),

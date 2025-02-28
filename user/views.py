@@ -15,6 +15,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from permission.mixins import Auth, Public, AdminAuth
 from django.http import HttpResponseServerError
 from django.template.loader import render_to_string
+from rest_framework.exceptions import NotFound
 
 from rest_framework_gis.filters import InBBoxFilter
 from .serializers import AccessRequestSerializer, AccessRequestDetailSerializer
@@ -37,6 +38,7 @@ from user import (
     models,
     filters
 )
+from permission import models as perm_models
 
 from utils.send_email import send_custom_email
 
@@ -359,9 +361,32 @@ class RoleListCreateView(Auth, generics.ListCreateAPIView):
     serializer_class = serializers.RoleSerializer
     queryset = models.Role.objects.all()
 
+class RoleDiffView(Public, APIView):
+    """ Returns the difference between the groups associated with a role and the groups not associated with it. """
+    def get(self, request, id=None):
+        try:
+            role = get_object_or_404(models.Role, id=id)
+            unassociated_groups = models.Group.objects.exclude(id__in=role.groups.values_list('id', flat=True))
+            group_serializer = serializers.GroupSerializer(unassociated_groups, many=True)
 
+            return Response(
+                {
+                    "unassociated_groups": group_serializer.data,
+                },
+                status=status.HTTP_200_OK,
+            )
+
+        except Exception as e:
+            return Response(
+                {
+                    "error": "An unexpected error occurred.",
+                    "details": str(e),
+                },
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            )
+        
 class GroupRetrieveUpdateDestroyView(
-    Auth,
+    Public,
     generics.RetrieveUpdateDestroyAPIView
 ):
     """Group retrieve, update and destroy view data."""
@@ -371,12 +396,34 @@ class GroupRetrieveUpdateDestroyView(
     lookup_field = 'id'
 
 
-class GroupListCreateView(Auth, generics.ListCreateAPIView):
+class GroupListCreateView(Public, generics.ListCreateAPIView):
     """Group list and create view data."""
 
     serializer_class = serializers.GroupSerializer
     queryset = models.Group.objects.all()
 
+class GroupDiffListView(Public, APIView):
+    """ Returns the difference between the permissions associated with a group and the permissions not associated with it. """
+    
+    def get(self, request, group_id):
+        group = get_object_or_404(models.Group, id=group_id)
+        
+        unassociated_layer_permissions = perm_models.LayerPermission.objects.exclude(groups=group)
+        
+        unassociated_component_permissions = perm_models.ComponentPermission.objects.exclude(groups=group)
+
+        data = {
+            "layer_permissions": [
+                {"id": permission.id, "name": permission.name, "description": permission.description}
+                for permission in unassociated_layer_permissions
+            ],
+            "component_permissions": [
+                {"id": permission.id, "name": permission.name, "description": permission.description}
+                for permission in unassociated_component_permissions
+            ]
+        }
+
+        return Response(data, status=status.HTTP_200_OK)
 
 class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     """

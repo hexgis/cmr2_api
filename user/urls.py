@@ -58,6 +58,11 @@ urlpatterns = [
         name='role'
     ),
     path(
+        'role-diff/<int:id>/',
+        views.RoleDiffView.as_view(),
+        name='role-difference-list'
+    ),
+    path(
         'group/',
         views.GroupListCreateView.as_view(),
         name='group-list'
@@ -66,6 +71,11 @@ urlpatterns = [
         'group/<int:id>/',
         views.GroupRetrieveUpdateDestroyView.as_view(),
         name='group'
+    ),
+    path(
+        'group-diff/<int:group_id>/',
+        views.GroupDiffListView.as_view(),
+        name='group-diff'
     ),
     path(
         'access-requests/',

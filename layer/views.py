@@ -92,3 +92,17 @@ class GroupsUpdateDeleteView(
             )
 
         return response.Response(status=status.HTTP_204_NO_CONTENT)
+
+class LayerListView(mixins.Public, generics.ListAPIView):
+    def get_serializer_class(self):
+        """Gets serializer class for `models.Layer`."""
+        return serializers.LayerSerializer
+
+    def get_queryset(self, *args, **kwargs):
+        """Returns the queryset for layers."""
+        return models.Layer.objects.select_related('group').all() 
+    
+    def get_serializer(self, *args, **kwargs):
+        """Customize the serializer to include specific fields."""
+        kwargs['fields'] = ('id', 'name', 'group_name') 
+        return super().get_serializer(*args, **kwargs)
