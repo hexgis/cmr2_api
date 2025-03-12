@@ -37,14 +37,14 @@
     description: "Acesso às camadas e ao componente PLANET."
     layer_permissions: [1]
     component_permissions: [1]
- - model: user.group
+- model: user.group
   pk: 2
   fields:
     name: Acesso Restrito
     description: "Acesso aos módulos restritos."
     layer_permissions: [2]
     component_permissions: [2]
- - model: user.group
+- model: user.group
   pk: 3
   fields:
     name: Administrador/Gestor
