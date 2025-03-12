@@ -44,8 +44,13 @@ urlpatterns = [
     ),
     path(
         'institution/',
-        views.InstitutionListView.as_view(),
-        name='institution'
+        views.InstitutionListCreateView.as_view(),
+        name='institution-list-create'
+    ),
+    path(
+        'institution/<int:pk>/',
+        views.InstitutionRetrieveUpdateDestroyView.as_view(),
+        name='institution-detail'
     ),
     path(
         'role/',
