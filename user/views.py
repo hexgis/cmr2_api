@@ -1,3 +1,5 @@
+from user import models, serializers
+from rest_framework import generics, status
 from . import models
 from user.models import User, Role
 from django.shortcuts import get_object_or_404
@@ -333,15 +335,53 @@ class UserUploadFileUpdatePropertiesPatchView(Auth, generics.UpdateAPIView):
         return response.Response(data, status=status.HTTP_200_OK)
 
 
-class InstitutionListView(Auth, generics.ListAPIView):
-    """"API to return all available institutions.
-
-    Returns:
-        queryset: institution queryset
-    """
+class InstitutionListCreateView(Auth, generics.ListCreateAPIView):
+    """API para listar e criar instituições."""
 
     queryset = models.Institution.objects.all()
     serializer_class = serializers.InstitutionSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class InstitutionRetrieveUpdateDestroyView(Auth, APIView):
+    """API para recuperar, atualizar e excluir uma instituição."""
+
+    def get_object(self, pk):
+        return get_object_or_404(models.Institution, pk=pk)
+
+    def get(self, request, pk, *args, **kwargs):
+        institution = self.get_object(pk)
+        serializer = serializers.InstitutionSerializer(institution)
+        return Response(serializer.data)
+
+    def put(self, request, pk, *args, **kwargs):
+        institution = self.get_object(pk)
+        serializer = serializers.InstitutionSerializer(
+            institution, data=request.data, partial=False)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def patch(self, request, pk, *args, **kwargs):
+        institution = self.get_object(pk)
+        serializer = serializers.InstitutionSerializer(
+            institution, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk, *args, **kwargs):
+        institution = self.get_object(pk)
+        institution.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 
 class RoleRetrieveUpdateDestroyView(
@@ -361,13 +401,17 @@ class RoleListCreateView(Auth, generics.ListCreateAPIView):
     serializer_class = serializers.RoleSerializer
     queryset = models.Role.objects.all()
 
+
 class RoleDiffView(Public, APIView):
     """ Returns the difference between the groups associated with a role and the groups not associated with it. """
+
     def get(self, request, id=None):
         try:
             role = get_object_or_404(models.Role, id=id)
-            unassociated_groups = models.Group.objects.exclude(id__in=role.groups.values_list('id', flat=True))
-            group_serializer = serializers.GroupSerializer(unassociated_groups, many=True)
+            unassociated_groups = models.Group.objects.exclude(
+                id__in=role.groups.values_list('id', flat=True))
+            group_serializer = serializers.GroupSerializer(
+                unassociated_groups, many=True)
 
             return Response(
                 {
@@ -384,7 +428,8 @@ class RoleDiffView(Public, APIView):
                 },
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
-        
+
+
 class GroupRetrieveUpdateDestroyView(
     Public,
     generics.RetrieveUpdateDestroyAPIView
@@ -402,28 +447,34 @@ class GroupListCreateView(Public, generics.ListCreateAPIView):
     serializer_class = serializers.GroupSerializer
     queryset = models.Group.objects.all()
 
+
 class GroupDiffListView(Public, APIView):
     """ Returns the difference between the permissions associated with a group and the permissions not associated with it. """
-    
+
     def get(self, request, group_id):
         group = get_object_or_404(models.Group, id=group_id)
-        
-        unassociated_layer_permissions = perm_models.LayerPermission.objects.exclude(groups=group)
-        
-        unassociated_component_permissions = perm_models.ComponentPermission.objects.exclude(groups=group)
+
+        unassociated_layer_permissions = perm_models.LayerPermission.objects.exclude(
+            groups=group)
+
+        unassociated_component_permissions = perm_models.ComponentPermission.objects.exclude(
+            groups=group)
 
         data = {
             "layer_permissions": [
-                {"id": permission.id, "name": permission.name, "description": permission.description}
+                {"id": permission.id, "name": permission.name,
+                    "description": permission.description}
                 for permission in unassociated_layer_permissions
             ],
             "component_permissions": [
-                {"id": permission.id, "name": permission.name, "description": permission.description}
+                {"id": permission.id, "name": permission.name,
+                    "description": permission.description}
                 for permission in unassociated_component_permissions
             ]
         }
 
         return Response(data, status=status.HTTP_200_OK)
+
 
 class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     """
@@ -448,23 +499,23 @@ class AccessRequestApproveView(AdminAuth, APIView):
     updating dt_approvement, and creating a User entry if one does not exist.
     Also sends a notification email upon approval.
     """
-        
+
     def post(self, request, pk, *args, **kwargs):
         try:
             admin = request.user
-            
+
             permissions = request.data.get('permissions', {})
             institution_id = permissions.get('selected_group')
             role_ids = permissions.get('selected_roles', [])
-            
+
             access_request = get_object_or_404(
                 models.AccessRequest,
                 pk=pk,
                 status=models.AccessRequest.StatusType.PENDENTE
             )
-            
-            
-            institution = get_object_or_404(models.Institution, pk=institution_id)
+
+            institution = get_object_or_404(
+                models.Institution, pk=institution_id)
             roles = models.Role.objects.filter(pk__in=role_ids)
             access_request.status = 2
             access_request.reviewed_at = timezone.now()
@@ -486,11 +537,12 @@ class AccessRequestApproveView(AdminAuth, APIView):
                 logger.info(f"Usuário criado: {user.email}, acesso aprovado")
 
                 subject = 'Pedido de acesso aprovado'
-                recipients = [access_request.email, 'valdean.junior@hex360.com.br']
+                recipients = [access_request.email,
+                              'valdean.junior@hex360.com.br']
                 template_path = os.path.join(
-                        settings.EMAIL_TEMPLATES_DIR,
-                        'approvedUser.html'
-                    )
+                    settings.EMAIL_TEMPLATES_DIR,
+                    'approvedUser.html'
+                )
                 context = {
                     'user_name': access_request.name
                 }
@@ -507,14 +559,13 @@ class AccessRequestApproveView(AdminAuth, APIView):
 
             else:
                 logger.info(f"Usuário '{user.email}' já existia na base.")
-            
 
         except Http404:
             return Response(
                 {'detail': 'Requisição não encontrada ou já aprovada.'},
                 status=status.HTTP_404_NOT_FOUND
             )
-            
+
         except Exception as e:
             logger.error(f"Erro inesperado: {str(e)}")
             return Response(
@@ -550,7 +601,7 @@ class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
                 pk=pk,
                 status=models.AccessRequest.StatusType.PENDENTE
             )
-            
+
             access_request.status = 3
             access_request.reviewed_at = timezone.now()
             access_request.reviewed_by = request.user
