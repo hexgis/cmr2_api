@@ -119,15 +119,20 @@
 - model: permission.componentpermission
   pk: 1
   fields:
-    name: Acesso Restrito
-    description: conjunto de funcionalidades que os usuários tem acesso quando sua
-      solicitação de acesso restriro é aprovada pelo gestor.
-    components: '["layers", "monitoring", "layers_mosaics", "land_use", "analytics",
-      "admin_panel"]'
-- model: permission.componentpermission
-  pk: 2
-  fields:
     name: PLANET
     description: Conjunto de funcionalidades restritas disponibilizadas apenas aos
       usuários pertencentes a FUNAI .
     components: '["layers_planet"]'
+- model: permission.componentpermission
+  pk: 2
+  fields:
+    name: Acesso Restrito
+    description: Conjunto de funcionalidades acessíveis aos usuários após a aprovação de sua solicitação de acesso restrito pelo gestor.
+    components: '["layers", "monitoring", "layers_mosaics", "land_use"]'
+- model: permission.componentpermission
+  pk: 3
+  fields:
+    name: Administrador/Gestor
+    description: Gerenciamento da plataforma e funcionalidades restritas.
+    components: '["layers", "monitoring", "layers_mosaics", "land_use", "analytics",
+      "admin_panel"]'

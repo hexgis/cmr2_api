@@ -34,24 +34,37 @@
   pk: 1
   fields:
     name: FUNAI
-    description: "Colaboradores vinculados à FUNAI."
+    description: "Acesso às camadas e ao componente PLANET."
     layer_permissions: [1]
     component_permissions: [1]
+ - model: user.group
+  pk: 2
+  fields:
+    name: Acesso Restrito
+    description: "Acesso aos módulos restritos."
+    layer_permissions: [2]
+    component_permissions: [2]
+ - model: user.group
+  pk: 3
+  fields:
+    name: Administrador/Gestor
+    description: "Gerenciamento da plataforma e módulos restritos."
+    layer_permissions: [1,2]
+    component_permissions: [1,2,3]   
 - model: user.role
   pk: 1
   fields:
     name: Colaborador FUNAI
     description: "Perfil padrão."
-    groups: [1]
-- model: user.group
+    groups: [1,2]
+- model: user.role
   pk: 2
   fields:
     name: Acesso Restrito
     description: "Usuários autenticados com autorização para acessar módulos restritos."
-    layer_permissions: [2]
-    component_permissions: [2]
+    groups: [2]
 - model: user.role
-  pk: 2
+  pk: 3
   fields:
     name: Acesso Restrito
     description: "Usuários autenticados com autorização para acessar módulos restritos."
