@@ -28,7 +28,6 @@ class UploadedFileAdmin(import_export):
         'name',
         'user',
         'date_created',
-        'is_active',
     )
     search_fields = (
         'name',

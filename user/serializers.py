@@ -218,9 +218,10 @@ class UserSerializer(serializers.ModelSerializer):
             'roles',
             'institution',
             'institution_id',
+            'is_active',
             'is_superuser',
             'is_staff',
-            'components'
+            'components',
         )
 
 
@@ -364,17 +365,18 @@ class GroupSerializer(serializers.ModelSerializer):
     def get_layer_permissions(self, obj):
         """Retrieve the names of the layer permissions."""
         return [
-            {"id": permission.id, "name": permission.name, "description": permission.description}
+            {"id": permission.id, "name": permission.name,
+                "description": permission.description}
             for permission in obj.layer_permissions.all()
         ]
-    
+
     def get_component_permissions(self, obj):
         """Retrieve the names of the component permissions."""
         return [
             {"id": component.id, "name": component.name}
             for component in obj.component_permissions.all()
         ]
-    
+
     def create(self, validated_data: dict) -> models.Group:
         """Create a new group instance.
 
@@ -438,7 +440,7 @@ class GroupSerializer(serializers.ModelSerializer):
             instance.component_permissions.set(data['component_permissions'])
 
         return instance
-    
+
     class Meta:
         """Meta class for GroupsSerializer."""
 
@@ -542,11 +544,10 @@ class AccessRequestDetailSerializer(serializers.ModelSerializer):
         """
         Gets the name of the reviewer from AccessRequestStatus.
         """
-        return obj.reviewed_by.username  if obj.reviewed_by else None
+        return obj.reviewed_by.username if obj.reviewed_by else None
 
     def get_denied_details(self, obj):
         """
         Gets the denied details from AccessRequestStatus.
         """
         return obj.denied_details
-
