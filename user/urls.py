@@ -5,6 +5,7 @@ from user import views
 
 urlpatterns = [
     path('', views.UserListView.as_view(), name='user-list'),
+    path('<int:pk>/', views.UserDetailView.as_view(), name='user-detail'),
     path('logged/', views.UserLoggedGetView.as_view(), name='logged'),
     path('update-settings/', views.UserSettingsUpdateView.as_view(),
          name='update-settings'),

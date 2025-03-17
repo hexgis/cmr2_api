@@ -58,6 +58,33 @@ class UserListView(Auth, generics.ListCreateAPIView):
     serializer_class = serializers.UserSerializer
 
 
+class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
+    """
+    API endpoint to retrieve, update, or delete a user.
+
+    Supported methods:
+    - GET: Returns the details of a specific user based on their ID.
+    - PATCH: Partially updates an existing user's data.
+    - PUT: Fully updates an existing user's data.
+    - DELETE: Removes the user from the database or optionally deactivates them.
+
+    URL Parameters:
+    - pk (int): ID of the user to be managed.
+    """
+
+    queryset = User.objects.all()
+    serializer_class = serializers.UserSerializer
+
+    def destroy(self, request, *args, **kwargs):
+        user = self.get_object()
+        user.is_active = False
+        user.save()
+        return Response(
+            {"message": "Usuário desativado com sucesso."},
+            status=status.HTTP_204_NO_CONTENT
+        )
+
+
 class UserLoggedGetView(Auth, generics.GenericAPIView):
     """View to post User logs.
 
