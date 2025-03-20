@@ -153,14 +153,15 @@ class UserSerializer(serializers.ModelSerializer):
         if 'password' in data:
             user.set_password(data['password'])
 
-        if 'institution' in data:
-                try:
-                    institution = models.Institution.objects.get(id=data['institution'])
-                    user.institution = institution
-                except models.Institution.DoesNotExist:
-                    raise serializers.ValidationError({
-                        'institution': 'Instituição com este ID não existe.'
-                    })
+        if 'institution_id' in data:
+            try:
+                institution = models.Institution.objects.get(
+                    id=data['institution_id'])
+                user.institution = institution
+            except models.Institution.DoesNotExist:
+                raise serializers.ValidationError({
+                    'institution': 'Instituição com este ID não existe.'
+                })
 
         if 'roles' in data:
             user.roles.clear()
@@ -195,10 +196,16 @@ class UserSerializer(serializers.ModelSerializer):
         if 'password' in data:
             instance.set_password(data['password'])
 
-        if 'institution' in data:
-            instance.institution = models.Institution.objects.get_or_create(
-                name=data['institution']
-            )[0]
+        if 'institution_id' in data:
+            try:
+                institution = models.Institution.objects.get(
+                    id=data['institution_id']
+                )
+                instance.institution = institution
+            except models.Institution.DoesNotExist:
+                raise serializers.ValidationError({
+                    'institution_id': 'Instituição com este ID não existe.'
+                })
 
         if 'roles' in data:
             instance.roles.clear()
