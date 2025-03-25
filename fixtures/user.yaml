@@ -52,7 +52,7 @@
     layer_permissions: [1,2]
     component_permissions: [1,2,3]   
 - model: user.group
-  pk: 3
+  pk: 4
   fields:
     name: Desenvolvedor
     description: "Acessos para Desenvolvedores da plataforma."
@@ -73,9 +73,15 @@
 - model: user.role
   pk: 3
   fields:
+    name: Administrador
+    description: "Módulos Restritos aos administradores."
+    groups: [3]    
+- model: user.role
+  pk: 4
+  fields:
     name: Desenvolvedor
     description: "Acessos para Desenvolvedores da plataforma."
-    groups: [3]    
+    groups: [4]    
 - model: user.user
   pk: 3
   fields:
