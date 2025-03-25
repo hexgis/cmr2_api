@@ -134,5 +134,10 @@
   fields:
     name: Administrador/Gestor
     description: Gerenciamento da plataforma e funcionalidades restritas.
-    components: '["layers", "monitoring", "layers_mosaics", "land_use", "analytics",
-      "admin_panel"]'
+    components: '[ "analytics", "admin_panel", "feedback_admin"]'
+- model: permission.componentpermission
+  pk: 4
+  fields:
+    name: Desenvolvedor
+    description: Acessos para Desenvolvedores da plataforma.
+    components: '["analytics","admin_panel", "feedback_dev"]'

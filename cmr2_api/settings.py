@@ -218,6 +218,8 @@ COMPONENT_LIST = ast.literal_eval(os.getenv(
         ('land_use', 'Uso e Ocupação do Solo'),\
         ('analytics', 'Módulo Analítico'),\
         ('admin_panel', 'Painel Administrativo'),\
+        ('feedback_dev', 'Críticas e Sugestões Dev'),\
+        ('feedback_admin', 'Críticas e Sugestões ADM'),\
     ]"
 ))
 
