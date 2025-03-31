@@ -5,6 +5,7 @@ from user import views
 
 urlpatterns = [
     path('', views.UserListView.as_view(), name='user-list'),
+    path('<int:pk>/', views.UserDetailView.as_view(), name='user-detail'),
     path('logged/', views.UserLoggedGetView.as_view(), name='logged'),
     path('update-settings/', views.UserSettingsUpdateView.as_view(),
          name='update-settings'),
@@ -44,8 +45,13 @@ urlpatterns = [
     ),
     path(
         'institution/',
-        views.InstitutionListView.as_view(),
-        name='institution'
+        views.InstitutionListCreateView.as_view(),
+        name='institution-list-create'
+    ),
+    path(
+        'institution/<int:pk>/',
+        views.InstitutionRetrieveUpdateDestroyView.as_view(),
+        name='institution-detail'
     ),
     path(
         'role/',
@@ -58,6 +64,11 @@ urlpatterns = [
         name='role'
     ),
     path(
+        'role-diff/<int:id>/',
+        views.RoleDiffView.as_view(),
+        name='role-difference-list'
+    ),
+    path(
         'group/',
         views.GroupListCreateView.as_view(),
         name='group-list'
@@ -66,6 +77,11 @@ urlpatterns = [
         'group/<int:id>/',
         views.GroupRetrieveUpdateDestroyView.as_view(),
         name='group'
+    ),
+    path(
+        'group-diff/<int:group_id>/',
+        views.GroupDiffListView.as_view(),
+        name='group-diff'
     ),
     path(
         'access-requests/',

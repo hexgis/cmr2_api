@@ -214,7 +214,20 @@ class LayerSerializer(serializers.ModelSerializer):
     tms = TmsSerializer(read_only=True)
     vector = VectorSerializer(read_only=True)
     filters = FilterSerializer(many=True)
-
+    group_name = serializers.SerializerMethodField()
+    
+    
+    def __init__(self, *args, **kwargs):
+        # Extracts `fields` from kwargs, if provided
+        fields = kwargs.pop('fields', None)
+        super().__init__(*args, **kwargs)
+        if fields:
+            # Removes fields that are not in the `fields` list
+            allowed = set(fields)
+            existing = set(self.fields)
+            for field_name in existing - allowed:
+                self.fields.pop(field_name)
+                
     def get_bbox(self, obj) -> str:
         """Get bbox from object.
 
@@ -226,6 +239,10 @@ class LayerSerializer(serializers.ModelSerializer):
         """
 
         return obj.bbox.extent if obj.bbox else None
+    
+    def get_group_name(self, obj) -> str:
+        """Get the name of the group related to the layer."""
+        return obj.group.name if obj.group else None
 
     class Meta:
         """Meta class for LayerSerializer."""

@@ -12,4 +12,5 @@ urlpatterns = [
          views.GroupsUpdateDeleteView.as_view(),
          name='layers-groups'
          ),
+    path('', views.LayerListView.as_view(), name='layers')
 ]

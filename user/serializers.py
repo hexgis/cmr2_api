@@ -153,10 +153,15 @@ class UserSerializer(serializers.ModelSerializer):
         if 'password' in data:
             user.set_password(data['password'])
 
-        if 'institution' in data:
-            user.institution = models.Institution.objects.get_or_create(
-                name=data['institution']
-            )[0]
+        if 'institution_id' in data:
+            try:
+                institution = models.Institution.objects.get(
+                    id=data['institution_id'])
+                user.institution = institution
+            except models.Institution.DoesNotExist:
+                raise serializers.ValidationError({
+                    'institution': 'Instituição com este ID não existe.'
+                })
 
         if 'roles' in data:
             user.roles.clear()
@@ -191,10 +196,16 @@ class UserSerializer(serializers.ModelSerializer):
         if 'password' in data:
             instance.set_password(data['password'])
 
-        if 'institution' in data:
-            instance.institution = models.Institution.objects.get_or_create(
-                name=data['institution']
-            )[0]
+        if 'institution_id' in data:
+            try:
+                institution = models.Institution.objects.get(
+                    id=data['institution_id']
+                )
+                instance.institution = institution
+            except models.Institution.DoesNotExist:
+                raise serializers.ValidationError({
+                    'institution_id': 'Instituição com este ID não existe.'
+                })
 
         if 'roles' in data:
             instance.roles.clear()
@@ -218,9 +229,10 @@ class UserSerializer(serializers.ModelSerializer):
             'roles',
             'institution',
             'institution_id',
+            'is_active',
             'is_superuser',
             'is_staff',
-            'components'
+            'components',
         )
 
 
@@ -358,6 +370,23 @@ class GroupSerializer(serializers.ModelSerializer):
     """GroupSerializer serializer class."""
 
     roles = SimpleRoleSerializer(many=True, read_only=True)
+    layer_permissions = serializers.SerializerMethodField()
+    component_permissions = serializers.SerializerMethodField()
+
+    def get_layer_permissions(self, obj):
+        """Retrieve the names of the layer permissions."""
+        return [
+            {"id": permission.id, "name": permission.name,
+                "description": permission.description}
+            for permission in obj.layer_permissions.all()
+        ]
+
+    def get_component_permissions(self, obj):
+        """Retrieve the names of the component permissions."""
+        return [
+            {"id": component.id, "name": component.name}
+            for component in obj.component_permissions.all()
+        ]
 
     def create(self, validated_data: dict) -> models.Group:
         """Create a new group instance.
@@ -526,11 +555,10 @@ class AccessRequestDetailSerializer(serializers.ModelSerializer):
         """
         Gets the name of the reviewer from AccessRequestStatus.
         """
-        return obj.reviewed_by.username  if obj.reviewed_by else None
+        return obj.reviewed_by.username if obj.reviewed_by else None
 
     def get_denied_details(self, obj):
         """
         Gets the denied details from AccessRequestStatus.
         """
         return obj.denied_details
-

@@ -34,28 +34,54 @@
   pk: 1
   fields:
     name: FUNAI
-    description: "Colaboradores vinculados à FUNAI."
+    description: "Acesso às camadas e ao componente PLANET."
     layer_permissions: [1]
     component_permissions: [1]
+- model: user.group
+  pk: 2
+  fields:
+    name: Acesso Restrito
+    description: "Acesso aos módulos restritos."
+    layer_permissions: [2]
+    component_permissions: [2]
+- model: user.group
+  pk: 3
+  fields:
+    name: Administrador/Gestor
+    description: "Gerenciamento da plataforma e módulos restritos."
+    layer_permissions: [1,2]
+    component_permissions: [1,2,3]   
+- model: user.group
+  pk: 4
+  fields:
+    name: Desenvolvedor
+    description: "Acessos para Desenvolvedores da plataforma."
+    layer_permissions: [1,2]
+    component_permissions: [1,2,4]       
 - model: user.role
   pk: 1
   fields:
     name: Colaborador FUNAI
     description: "Perfil padrão."
-    groups: [1]
-- model: user.group
-  pk: 2
-  fields:
-    name: Acesso Restrito
-    description: "Usuários autenticados com autorização para acessar módulos restritos."
-    layer_permissions: [2]
-    component_permissions: [2]
+    groups: [1,2]
 - model: user.role
   pk: 2
   fields:
     name: Acesso Restrito
     description: "Usuários autenticados com autorização para acessar módulos restritos."
-    groups: [2]    
+    groups: [2]
+- model: user.role
+  pk: 3
+  fields:
+    name: Administrador
+    description: "Módulos Restritos aos administradores."
+    groups: [3]    
+- model: user.role
+  pk: 4
+  fields:
+    name: Desenvolvedor
+    description: "Acessos para Desenvolvedores da plataforma."
+    groups: [4]    
 - model: user.user
   pk: 3
   fields:
@@ -91,17 +117,17 @@
 - model: user.user
   pk: 5
   fields:
-    password: pbkdf2_sha256$260000$wpV3mg7Ur1TZiIC6qakX1a$tHk52TuDlXBKXKIlM2byJ0gd8cURykMHcQ7sQCZZSGk=
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
     last_login: null
     is_superuser: true
-    username: valdean.junior
+    username: dev
     first_name: ""
     last_name: ""
-    email: valdean.junior@hex360.com.br
+    email: dev@hex360.com.br
     is_staff: true
     is_active: true
     date_joined: 2025-01-14 21:43:16.265931+00:00
-    groups: []
+    roles: [3]
     user_permissions: []
     institution: 1
   

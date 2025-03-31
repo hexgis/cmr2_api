@@ -138,6 +138,7 @@ class User(AbstractUser):
         blank=True,
         null=True,
     )
+    is_active = models.BooleanField(default=True)
 
     avatar_blob = models.BinaryField(blank=True, null=True)
 
@@ -196,8 +197,6 @@ class UserUploadedFile(models.Model):
     name = models.CharField(max_length=255)
 
     date_created = models.DateTimeField(auto_now_add=True)
-
-    is_active = models.BooleanField(default=True)
 
     class Meta:
         """Meta class for UserUploadedFile model."""
