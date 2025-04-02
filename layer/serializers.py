@@ -215,8 +215,7 @@ class LayerSerializer(serializers.ModelSerializer):
     vector = VectorSerializer(read_only=True)
     filters = FilterSerializer(many=True)
     group_name = serializers.SerializerMethodField()
-    
-    
+
     def __init__(self, *args, **kwargs):
         # Extracts `fields` from kwargs, if provided
         fields = kwargs.pop('fields', None)
@@ -227,7 +226,7 @@ class LayerSerializer(serializers.ModelSerializer):
             existing = set(self.fields)
             for field_name in existing - allowed:
                 self.fields.pop(field_name)
-                
+
     def get_bbox(self, obj) -> str:
         """Get bbox from object.
 
@@ -239,7 +238,7 @@ class LayerSerializer(serializers.ModelSerializer):
         """
 
         return obj.bbox.extent if obj.bbox else None
-    
+
     def get_group_name(self, obj) -> str:
         """Get the name of the group related to the layer."""
         return obj.group.name if obj.group else None
@@ -432,3 +431,27 @@ class VectorGeometrySerializer(serializers.ModelSerializer):
 
         fields = '__all__'
         model = models.VectorGeometry
+
+
+class InstrumentoGestaoSerializer(serializers.ModelSerializer):
+    """ Instrumento de Gestão data """
+
+    class Meta:
+        model = models.ManagementInstrument
+        fields = [
+            'co_funai',
+            'no_ti',
+            'no_regiao',
+            'sg_uf',
+            'no_povo',
+            'no_bioma',
+            'ds_parceiros',
+            'cr_funai',
+            'no_ig',
+            'ds_status',
+            'nu_ano_elaboracao',
+            'ds_disp_meio_local',
+            'ds_tll_publi',
+            'ds_obs',
+            'dt_cadastro'
+        ]

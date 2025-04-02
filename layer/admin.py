@@ -9,6 +9,7 @@ from import_export.admin import ImportExportActionModelAdmin as import_export
 from django_json_widget.widgets import JSONEditorWidget
 
 from layer import resources, models
+from permission.mixins import Auth
 
 
 class GeoserverAdmin(import_export):
@@ -379,6 +380,37 @@ class BookmarkAdmin(
     list_filter = ('user', )
 
 
+class ManagementInstrument(Auth, admin.ModelAdmin):
+    """Admin model for ManagementInstrument."""
+
+    list_display = (
+        'co_funai',
+        'no_ti',
+        'no_regiao',
+        'sg_uf',
+        'no_povo',
+        'no_bioma',
+        'ds_parceiros',
+        'cr_funai',
+        'no_ig',
+        'ds_status',
+        'nu_ano_elaboracao',
+        'ds_disp_meio_local',
+        'ds_tll_publi',
+        'ds_obs',
+        'dt_cadastro',
+    )
+
+    fields = list_display
+
+    search_fields = (
+        'no_ti',
+        'co_funai',
+        'no_regiao',
+        'sg_uf',
+    )
+
+
 admin.site.register(models.Vector, VectorAdmin)
 admin.site.register(models.Geoserver, GeoserverAdmin)
 admin.site.register(models.Group, GroupAdmin)
@@ -389,3 +421,4 @@ admin.site.register(models.Filter, FilterAdmin)
 admin.site.register(models.Basemap, BasemapAdmin)
 admin.site.register(models.VectorGeometry,
                     VectorGeometryAdmin)
+admin.site.register(models.ManagementInstrument, ManagementInstrument)

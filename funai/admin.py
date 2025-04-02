@@ -55,39 +55,3 @@ class LimiteTerraIndigenaAdmin(Auth, admin.ModelAdmin):
         'no_ti',
         'co_funai',
     )
-
-
-class InstrumentoGestaoFunaiAdmin(Auth, admin.ModelAdmin):
-    """Admin model for InstrumentoGestaoFunai."""
-
-    list_display = (
-        'co_funai',
-        'no_ti',
-        'no_regiao',
-        'sg_uf',
-        'no_povo',
-        'no_bioma',
-        'ds_parceiros',
-        'cr_funai',
-        'no_ig',
-        'ds_status',
-        'nu_ano_elaboracao',
-        'ds_disp_meio_local',
-        'ds_tll_publi',
-        'ds_obs',
-        'dt_cadastro',
-    )
-
-    fields = list_display
-
-    search_fields = (
-        'no_ti',
-        'co_funai',
-        'no_regiao',
-        'sg_uf',
-    )
-
-
-admin.site.register(models.CoordenacaoRegional, CoordenacaoRegionalAdmin)
-admin.site.register(models.LimiteTerraIndigena, LimiteTerraIndigenaAdmin)
-admin.site.register(models.InstrumentoGestaoFunai, InstrumentoGestaoFunaiAdmin)

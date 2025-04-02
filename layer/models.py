@@ -911,3 +911,104 @@ class Filter(models.Model):
         """Meta class for Filter model."""
 
         app_label = 'layer'
+
+
+class ManagementInstrument(models.Model):
+    """Instrumental Indigenous Lands model data.
+
+    * Association:
+        * Has one: `funai.LimiteTerraIndigena`
+    """
+
+    co_funai = models.IntegerField(
+        _('Cod Funai'),
+        blank=False,
+        null=False
+    )
+    no_ti = models.CharField(
+        _('Terras Indígena'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    no_regiao = models.CharField(
+        _('Região'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    sg_uf = models.CharField(
+        _('UF'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    no_povo = models.CharField(
+        _('Povos'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    no_bioma = models.CharField(
+        _('Bioma'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_parceiros = models.CharField(
+        _('Parceiros'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    cr_funai = models.CharField(
+        _('Nome Funai'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    no_ig = models.CharField(
+        _('Instrumento'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_status = models.CharField(
+        _('Status'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    nu_ano_elaboracao = models.IntegerField(
+        _('Elaborado em'),
+        blank=True,
+        null=True
+    )
+    ds_disp_meio_local = models.CharField(
+        _('Disponível em'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_tll_publi = models.CharField(
+        _(''),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_obs = models.CharField(
+        _('Observação'),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    dt_cadastro = models.DateField(
+        _('Data Registro'),
+        blank=True,
+        null=True
+    )
+
+    class Meta:
+        app_label = 'layer'
+        verbose_name = _('Management Instrument')
+        verbose_name_plural = _('Management Instruments')

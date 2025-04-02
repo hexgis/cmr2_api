@@ -93,6 +93,7 @@ class GroupsUpdateDeleteView(
 
         return response.Response(status=status.HTTP_204_NO_CONTENT)
 
+
 class LayerListView(mixins.Public, generics.ListAPIView):
     def get_serializer_class(self):
         """Gets serializer class for `models.Layer`."""
@@ -100,9 +101,38 @@ class LayerListView(mixins.Public, generics.ListAPIView):
 
     def get_queryset(self, *args, **kwargs):
         """Returns the queryset for layers."""
-        return models.Layer.objects.select_related('group').all() 
-    
+        return models.Layer.objects.select_related('group').all()
+
     def get_serializer(self, *args, **kwargs):
         """Customize the serializer to include specific fields."""
-        kwargs['fields'] = ('id', 'name', 'group_name') 
+        kwargs['fields'] = ('id', 'name', 'group_name')
         return super().get_serializer(*args, **kwargs)
+
+
+class BuscaInstrumentoGestaoView(generics.ListAPIView):
+    """
+        View de apresentação dos dados de instrumento de gestão com base no co_funai fornecido.
+            Parameters:
+                co_funai (int): code for search management instrument by IT if it's true.
+    """
+    serializer_class = serializers.InstrumentoGestaoSerializer
+
+    def get_queryset(self):
+        co_funai = self.request.query_params.get('co_funai')
+        if co_funai is None:
+            raise NotFound(detail="Parâmetro co_funai não fornecido.")
+
+        try:
+            # Use filter para obter todos os objetos que correspondem ao co_funai
+            instrumentos = models.ManagementInstrument.objects.filter(
+                co_funai=co_funai)
+
+            if not instrumentos.exists():
+                raise models.ManagementInstrument.DoesNotExist
+
+            # Retorna o primeiro objeto ou a lista completa, conforme a necessidade
+            return instrumentos  # ou, se preferir retornar todos, use return instrumentos
+        except models.ManagementInstrument.DoesNotExist:
+            raise NotFound(
+                detail=f"Instrumento com co_funai {co_funai} não encontrado."
+            )

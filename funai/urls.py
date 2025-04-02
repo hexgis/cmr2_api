@@ -29,11 +29,6 @@ urlpatterns = [
         name='busca-todas-ti-por-nome'
     ),
     path(
-        'instrumento-gestao/',
-        views.BuscaInstrumentoGestaoView.as_view(),
-        name='busca-instrumento-gestao'
-    ),
-    path(
         'village-by-name/',
         views.IndegenousVillageByNameView.as_view(),
         name='teste2'

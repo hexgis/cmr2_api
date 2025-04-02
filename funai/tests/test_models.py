@@ -11,8 +11,8 @@ class TestCoordenacaoRegionalModel(APITestCase):
     def setUpTestData(cls):
         """Class variables using data load from fixtures file."""
         call_command('loaddata', 'funai/fixtures/coordenacao_regional.yaml',
-            verbosity=0)
-    
+                     verbosity=0)
+
     def test_objects_created(self):
         """Test if object CoordenacaoRegional is created."""
         self.assertTrue(models.CoordenacaoRegional.objects.exists())
@@ -32,26 +32,27 @@ class TestTerraIndigenaModelData(APITestCase):
     def setUpTestData(cls):
         """Class variables using data load from fixtures file."""
         call_command('loaddata', 'funai/fixtures/coordenacao_regional.yaml',
-            verbosity=0)
-        
+                     verbosity=0)
+
         call_command('loaddata', 'funai/fixtures/terras_indigenas.yaml',
-            verbosity=0)
-    
+                     verbosity=0)
+
     def test_objects_created(self):
         """Test if object LimiteTerraIndigena is created."""
         self.assertTrue(models.LimiteTerraIndigena.objects.exists())
 
-class TestInstrumentoGestaoFunai(APITestCase):
-    """ Teste case `models.InstrumentoGestaoFunai` model. """
+
+class TestManagementInstrument(APITestCase):
+    """ Teste case `models.ManagementInstrument` model. """
     @classmethod
     def setUpTestData(cls):
         """ Class variables using data load from fixtures file. """
         call_command('loaddata', 'funai/fixtures/terras_indigenas.yaml',
-            verbosity=0)
-        
+                     verbosity=0)
+
         call_command('loaddata', 'funai/fixtures/instrumento_gestao_funai.yaml',
-            verbosity=0)
+                     verbosity=0)
 
     def test_objects_created(self):
-        """ Test if object InstrumentoGestaoFunai is created. """
-        self.assertTrue(models.InstrumentoGestaoFunai.objects.exists())
+        """ Test if object ManagementInstrument is created. """
+        self.assertTrue(models.ManagementInstrument.objects.exists())
