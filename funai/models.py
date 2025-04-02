@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 
 class CoordenacaoRegional(models.Model):
@@ -209,4 +210,98 @@ class LimiteTerraIndigena(models.Model):
         verbose_name_plural = _('Terras Indigenas')
         ordering = ('no_ti', )
         db_table = 'funai\".\"lim_terra_indigena_a'
+        managed = False
+
+
+class ManagementInstrument(models.Model):
+    """Instrumental Indigenous Lands model data.
+
+    * Association:
+        * Has one: `funai.LimiteTerraIndigena`
+    """
+
+    co_funai = models.IntegerField(
+        _('Cod Funai'),
+        blank=False,
+        null=False
+    )
+    no_ti = models.TextField(
+        _('Terras Indígena'),
+        blank=True,
+        null=False
+    )
+    no_regiao = models.TextField(
+        _('Região'),
+        blank=True,
+        null=False
+    )
+    sg_uf = models.TextField(
+        _('UF'),
+        blank=True,
+        null=False
+    )
+    no_povo = models.TextField(
+        _('Povos'),
+        blank=True,
+        null=False
+    )
+    no_bioma = models.TextField(
+        _('Bioma'),
+        blank=True,
+        null=False
+    )
+    ds_parceiros = models.TextField(
+        _('Parceiros'),
+        blank=True,
+        null=False
+    )
+    cr_funai = models.TextField(
+        _('Nome Funai'),
+        blank=True,
+        null=False
+    )
+    no_ig = models.TextField(
+        _('Instrumento'),
+        blank=True,
+        null=False
+    )
+    ds_status = models.TextField(
+        _('Status'),
+        blank=True,
+        null=False
+    )
+    nu_ano_elaboracao = models.TextField(
+        _('Elaborado em'),
+        blank=True,
+        null=False
+    )
+    ds_disp_meio_local = models.TextField(
+        _('Disponível em'),
+        blank=True,
+        null=False
+    )
+    ds_ttl_publi = models.TextField(
+        _(''),
+        blank=True,
+        null=False
+    )
+    ds_obs = models.TextField(
+        _('Observação'),
+        blank=True,
+        null=False
+    )
+    dt_cadastro = models.DateTimeField(
+        _('Data Registro'),
+        blank=True,
+        null=True,
+        default=timezone.now
+    )
+
+    class Meta:
+        """Metaclass to `funai.ManagementInstrument`."""
+        app_label = 'funai'
+        verbose_name = _('Instrumento de Gestão')
+        verbose_name_plural = _('Instrumentos de Gestão')
+        ordering = ('no_ti',)
+        db_table = 'funai\".\"tb_instrumento_gestao_funai'
         managed = False

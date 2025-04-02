@@ -431,27 +431,3 @@ class VectorGeometrySerializer(serializers.ModelSerializer):
 
         fields = '__all__'
         model = models.VectorGeometry
-
-
-class InstrumentoGestaoSerializer(serializers.ModelSerializer):
-    """ Instrumento de Gestão data """
-
-    class Meta:
-        model = models.ManagementInstrument
-        fields = [
-            'co_funai',
-            'no_ti',
-            'no_regiao',
-            'sg_uf',
-            'no_povo',
-            'no_bioma',
-            'ds_parceiros',
-            'cr_funai',
-            'no_ig',
-            'ds_status',
-            'nu_ano_elaboracao',
-            'ds_disp_meio_local',
-            'ds_tll_publi',
-            'ds_obs',
-            'dt_cadastro'
-        ]

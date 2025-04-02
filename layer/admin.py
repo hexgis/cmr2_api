@@ -421,4 +421,3 @@ admin.site.register(models.Filter, FilterAdmin)
 admin.site.register(models.Basemap, BasemapAdmin)
 admin.site.register(models.VectorGeometry,
                     VectorGeometryAdmin)
-admin.site.register(models.ManagementInstrument, ManagementInstrument)

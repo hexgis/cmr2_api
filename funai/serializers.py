@@ -97,3 +97,11 @@ class TiPropertiesSerializer(serializers.ModelSerializer):
             'ds_doc_resumo_homologada', 'ds_doc_resumo_regularizada',
             'nu_area_ha', 'dt_cadastro', 'possui_ig', 'co_cr'
         )
+
+
+class InstrumentoGestaoSerializer(serializers.ModelSerializer):
+    """ Instrumento de Gestão data """
+
+    class Meta:
+        model = models.ManagementInstrument
+        fields = '__all__'

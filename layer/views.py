@@ -8,7 +8,7 @@ from rest_framework import (
     status,
     views
 )
-from permission.mixins import Auth
+
 from permission import mixins
 from layer import (
     models,
@@ -107,30 +107,3 @@ class LayerListView(mixins.Public, generics.ListAPIView):
         """Customize the serializer to include specific fields."""
         kwargs['fields'] = ('id', 'name', 'group_name')
         return super().get_serializer(*args, **kwargs)
-
-
-class InstrumentListCreateView(Auth, generics.ListCreateAPIView):
-    """
-        View to list all management instruments or create a new one.
-    """
-    serializer_class = serializers.InstrumentoGestaoSerializer
-    queryset = models.ManagementInstrument.objects.all()
-
-
-class InstrumentRetrieveUpdateDestroyView(
-        Auth,
-        generics.RetrieveUpdateDestroyAPIView
-):
-    """
-        View to retrieve, update or delete a management instrument
-        based on the provided co_funai
-    """
-    serializer_class = serializers.InstrumentoGestaoSerializer
-    lookup_field = "co_funai"  # Define que a busca será pelo co_funai
-
-    def get_queryset(self):
-        return models.ManagementInstrument.objects.all()
-
-    def perform_update(self, serializer):
-        """Prevents co_funai from being changed on update"""
-        serializer.save(co_funai=self.kwargs["co_funai"])
