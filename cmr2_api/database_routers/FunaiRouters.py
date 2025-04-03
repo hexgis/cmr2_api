@@ -5,6 +5,8 @@ class FunaiRouter:
 
     def db_for_read(self, model, **hints):
         if model._meta.app_label in self.route_app_labels:
+            if model.__name__ == "CoordenacaoRegional":
+                return 'default'
             return 'db_for_read'
         return None
 
