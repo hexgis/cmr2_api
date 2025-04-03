@@ -2,10 +2,10 @@
   pk: 1
   fields:
     name: Funai Geoserver
-    wms_url: http://cmr.funai.gov.br/geoserver/wms?
-    thumbnail_url: http://cmr.funai.gov.br/geoserver/wms/reflect
-    preview_url: http://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
-    geoserver_url: http://cmr.funai.gov.br/geoserver/
+    wms_url: https://cmr.funai.gov.br/geoserver/wms?
+    thumbnail_url: https://cmr.funai.gov.br/geoserver/wms/reflect
+    preview_url: https://cmr.funai.gov.br/geoserver/wms?REQUEST=GetLegendGraphic&VERSION=1.0.0&authkey=d35fffbd-051e-4c96-bde3-bb6e1d1cb667&FORMAT=image/png&WIDTH=40&HEIGHT=40&LAYER=
+    geoserver_url: https://cmr.funai.gov.br/geoserver/
 - model: layer.geoserver
   pk: 2
   fields:

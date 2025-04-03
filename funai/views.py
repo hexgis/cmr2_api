@@ -6,7 +6,7 @@ from django.db.models.functions import Lower
 from rest_framework.exceptions import NotFound, ValidationError
 from urllib.parse import urlparse, parse_qs
 from django.conf import settings
-
+from permission.mixins import Auth
 import requests
 
 from funai import (
@@ -31,7 +31,7 @@ class CoordenacaoRegionalView(generics.ListAPIView):
 
     def list(self, request):
         """Instantiating the serializer `funai.CoordenacaoRegionalSerializer`, list a
-        queryset overriding the LIST method to sort the response in ascending 
+        queryset overriding the LIST method to sort the response in ascending
         alphabetical order by 'no_regiao' and 'ds_cr'.
 
         Returns:
@@ -122,7 +122,7 @@ class TiByNameAllInfoView(generics.ListAPIView):
 
     def get_authenticators(self):
         """
-        Overrides the default authenticator behavior. 
+        Overrides the default authenticator behavior.
         Disables JWT authentication if the '_disable_jwt' attribute is set on the request.
 
         Returns:
@@ -135,7 +135,7 @@ class TiByNameAllInfoView(generics.ListAPIView):
     def get_queryset(self):
         """
         Retrieves the queryset for the Indigenous Lands (TIs).
-        Filters the queryset based on the 'param' query parameter, 
+        Filters the queryset based on the 'param' query parameter,
         ignoring accents and performing a case-insensitive match.
 
         Returns:
@@ -172,35 +172,6 @@ class TiByNameAllInfoView(generics.ListAPIView):
         queryset = self.get_queryset()
         serializer = self.get_serializer(queryset, many=True)
         return response.Response(serializer.data)
-
-
-class BuscaInstrumentoGestaoView(generics.ListAPIView):
-    """
-        View de apresentação dos dados de instrumento de gestão com base no co_funai fornecido.
-            Parameters:
-                co_funai (int): code for search management instrument by IT if it's true.
-    """
-    serializer_class = serializers.InstrumentoGestaoSerializer
-
-    def get_queryset(self):
-        co_funai = self.request.query_params.get('co_funai')
-        if co_funai is None:
-            raise NotFound(detail="Parâmetro co_funai não fornecido.")
-
-        try:
-            # Use filter para obter todos os objetos que correspondem ao co_funai
-            instrumentos = models.InstrumentoGestaoFunai.objects.filter(
-                co_funai=co_funai)
-
-            if not instrumentos.exists():
-                raise models.InstrumentoGestaoFunai.DoesNotExist
-
-            # Retorna o primeiro objeto ou a lista completa, conforme a necessidade
-            return instrumentos  # ou, se preferir retornar todos, use return instrumentos
-        except models.InstrumentoGestaoFunai.DoesNotExist:
-            raise NotFound(
-                detail=f"Instrumento com co_funai {co_funai} não encontrado."
-            )
 
 
 class IndegenousVillageByNameView(generics.ListAPIView):
@@ -285,3 +256,43 @@ class TiInStudyByName(generics.ListAPIView):
         # Overriding the list method to use the response from get_queryset directly
         queryset = self.get_indegenous_village()
         return response.Response(queryset)
+
+
+class InstrumentListCreateView(Auth, generics.ListCreateAPIView):
+    """View to list management instruments based on the provided co_funai."""
+    serializer_class = serializers.InstrumentoGestaoSerializer
+
+    def get_queryset(self):
+        co_funai = self.request.query_params.get('co_funai')
+        if not co_funai or not co_funai.isdigit():
+            raise NotFound(
+                detail="Parâmetro co_funai inválido ou não fornecido.")
+        co_funai = int(co_funai)
+        try:
+            instrumentos = models.ManagementInstrument.objects.filter(
+                co_funai=co_funai)
+            if not instrumentos.exists():
+                raise models.ManagementInstrument.DoesNotExist
+            return instrumentos
+        except models.ManagementInstrument.DoesNotExist:
+            raise NotFound(
+                detail=f"Instrumento com co_funai {co_funai} não encontrado.")
+
+
+class InstrumentRetrieveUpdateDestroyView(
+        Auth,
+        generics.RetrieveUpdateDestroyAPIView
+):
+    """
+        View to retrieve, update or delete a management instrument
+        based on the provided co_funai
+    """
+    serializer_class = serializers.InstrumentoGestaoSerializer
+    lookup_field = "co_funai"  # Define que a busca será pelo co_funai
+
+    def get_queryset(self):
+        return models.ManagementInstrument.objects.all()
+
+    def perform_update(self, serializer):
+        """Prevents co_funai from being changed on update"""
+        serializer.save(co_funai=self.kwargs["co_funai"])

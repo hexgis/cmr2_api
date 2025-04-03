@@ -29,11 +29,6 @@ urlpatterns = [
         name='busca-todas-ti-por-nome'
     ),
     path(
-        'instrumento-gestao/',
-        views.BuscaInstrumentoGestaoView.as_view(),
-        name='busca-instrumento-gestao'
-    ),
-    path(
         'village-by-name/',
         views.IndegenousVillageByNameView.as_view(),
         name='teste2'
@@ -42,5 +37,16 @@ urlpatterns = [
         'ti-study-by-name/',
         views.TiInStudyByName.as_view(),
         name='teste3'
-    )
+    ),
+    # Management Instrument
+    path(
+        'management-instrument/',
+        views.InstrumentListCreateView.as_view(),
+        name='management-instrument-create-list'
+    ),
+    path(
+        'management-instrument/<int:co_funai>/',
+        views.InstrumentRetrieveUpdateDestroyView.as_view(),
+        name='management-instrument-detail'
+    ),
 ]

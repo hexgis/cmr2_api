@@ -47,30 +47,6 @@ class CoordenacaoRegionalSerializer(ModelSerializer):
         return data
 
 
-class InstrumentoGestaoSerializer(ModelSerializer):
-    """ Instrumento de Gestão data """
-
-    class Meta:
-        model = models.InstrumentoGestaoFunai
-        fields = [
-            'co_funai',
-            'no_ti',
-            'no_regiao',
-            'sg_uf',
-            'no_povo',
-            'no_bioma',
-            'ds_parceiros',
-            'cr_funai',
-            'no_ig',
-            'ds_status',
-            'nu_ano_elaboracao',
-            'ds_disp_meio_local',
-            'ds_tll_publi',
-            'ds_obs',
-            'dt_cadastro'
-        ]
-
-
 class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
     ds_cr = serializers.SerializerMethodField()
     instrumentos_gestao = serializers.SerializerMethodField()
@@ -80,7 +56,7 @@ class GeoTerraIndigenaSerializer(GeoFeatureModelSerializer):
 
     def get_instrumentos_gestao(self, obj):
         if obj.possui_ig:
-            instrumentos = models.InstrumentoGestaoFunai.objects.filter(
+            instrumentos = models.ManagementInstrument.objects.filter(
                 co_funai=obj.co_funai)
             serializer = InstrumentoGestaoSerializer(instrumentos, many=True)
             return serializer.data
@@ -103,7 +79,7 @@ class TiPropertiesSerializer(serializers.ModelSerializer):
 
     def get_instrumentos_gestao(self, obj):
         if obj.possui_ig:
-            instrumentos = models.InstrumentoGestaoFunai.objects.filter(
+            instrumentos = models.ManagementInstrument.objects.filter(
                 co_funai=obj.co_funai)
             serializer = InstrumentoGestaoSerializer(instrumentos, many=True)
             return serializer.data
@@ -121,3 +97,11 @@ class TiPropertiesSerializer(serializers.ModelSerializer):
             'ds_doc_resumo_homologada', 'ds_doc_resumo_regularizada',
             'nu_area_ha', 'dt_cadastro', 'possui_ig', 'co_cr'
         )
+
+
+class InstrumentoGestaoSerializer(serializers.ModelSerializer):
+    """ Instrumento de Gestão data """
+
+    class Meta:
+        model = models.ManagementInstrument
+        fields = '__all__'

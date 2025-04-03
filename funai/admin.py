@@ -57,8 +57,8 @@ class LimiteTerraIndigenaAdmin(Auth, admin.ModelAdmin):
     )
 
 
-class InstrumentoGestaoFunaiAdmin(Auth, admin.ModelAdmin):
-    """Admin model for InstrumentoGestaoFunai."""
+class ManagementInstrument(Auth, admin.ModelAdmin):
+    """Admin model for ManagementInstrument."""
 
     list_display = (
         'co_funai',
@@ -73,7 +73,7 @@ class InstrumentoGestaoFunaiAdmin(Auth, admin.ModelAdmin):
         'ds_status',
         'nu_ano_elaboracao',
         'ds_disp_meio_local',
-        'ds_tll_publi',
+        'ds_ttl_publi',
         'ds_obs',
         'dt_cadastro',
     )
@@ -88,6 +88,4 @@ class InstrumentoGestaoFunaiAdmin(Auth, admin.ModelAdmin):
     )
 
 
-admin.site.register(models.CoordenacaoRegional, CoordenacaoRegionalAdmin)
-admin.site.register(models.LimiteTerraIndigena, LimiteTerraIndigenaAdmin)
-admin.site.register(models.InstrumentoGestaoFunai, InstrumentoGestaoFunaiAdmin)
+admin.site.register(models.ManagementInstrument, ManagementInstrument)

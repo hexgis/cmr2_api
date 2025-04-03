@@ -1,5 +1,6 @@
 from django.contrib.gis.db import models
 from django.utils.translation import ugettext_lazy as _
+from django.utils import timezone
 
 
 class CoordenacaoRegional(models.Model):
@@ -212,7 +213,7 @@ class LimiteTerraIndigena(models.Model):
         managed = False
 
 
-class InstrumentoGestaoFunai(models.Model):
+class ManagementInstrument(models.Model):
     """Instrumental Indigenous Lands model data.
 
     * Association:
@@ -224,91 +225,83 @@ class InstrumentoGestaoFunai(models.Model):
         blank=False,
         null=False
     )
-    no_ti = models.CharField(
+    no_ti = models.TextField(
         _('Terras Indígena'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    no_regiao = models.CharField(
+    no_regiao = models.TextField(
         _('Região'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    sg_uf = models.CharField(
+    sg_uf = models.TextField(
         _('UF'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    no_povo = models.CharField(
+    no_povo = models.TextField(
         _('Povos'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    no_bioma = models.CharField(
+    no_bioma = models.TextField(
         _('Bioma'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    ds_parceiros = models.CharField(
+    ds_parceiros = models.TextField(
         _('Parceiros'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    cr_funai = models.CharField(
+    cr_funai = models.TextField(
         _('Nome Funai'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    no_ig = models.CharField(
+    no_ig = models.TextField(
         _('Instrumento'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    ds_status = models.CharField(
+    ds_status = models.TextField(
         _('Status'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    nu_ano_elaboracao = models.IntegerField(
+    nu_ano_elaboracao = models.TextField(
         _('Elaborado em'),
         blank=True,
-        null=True
+        null=False
     )
-    ds_disp_meio_local = models.CharField(
+    ds_disp_meio_local = models.TextField(
         _('Disponível em'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    ds_tll_publi = models.CharField(
+    ds_ttl_publi = models.TextField(
         _(''),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    ds_obs = models.CharField(
+    ds_obs = models.TextField(
         _('Observação'),
-        max_length=255,
         blank=True,
-        null=True
+        null=False
     )
-    dt_cadastro = models.DateField(
+    dt_cadastro = models.DateTimeField(
         _('Data Registro'),
         blank=True,
-        null=True
+        null=True,
+        default=timezone.now
     )
 
     class Meta:
-        """Metaclass to `funai.LimiteTerraIndigena`."""
+        """Metaclass to `funai.ManagementInstrument`."""
         app_label = 'funai'
-        verbose_name = _('Instrumento de Gestao Funai')
-        verbose_name_plural = _('Instrumentos de Gestao Funai')
+        verbose_name = _('Instrumento de Gestão')
+        verbose_name_plural = _('Instrumentos de Gestão')
+        ordering = ('no_ti',)
+        db_table = 'funai\".\"tb_instrumento_gestao_funai'
+        managed = False
