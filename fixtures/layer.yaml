@@ -8,7 +8,7 @@
       active_on_init: false
       is_public: true
       fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
-      dt_atualizacao: 2025-04-05
+      dt_atualizacao: 2025-04-04
       database_layer_name: funai.lim_terra_indigena_a     
 - model: layer.layer
   pk: 3
@@ -2849,7 +2849,7 @@
     active_on_init: false
     is_public: true
     fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
-    dt_atualizacao: 2025-04-05
+    dt_atualizacao: 2025-04-04
     database_layer_name: funai.loc_sede_p     
 - model: layer.layer
   pk: 335
@@ -3734,7 +3734,7 @@
     active_on_init: false
     is_public: true
     fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
-    dt_atualizacao: 2025-04-05
+    dt_atualizacao: 2025-04-04
     database_layer_name: funai.vw_lim_terra_indigena_possui_ig     
 - model: layer.layer
   pk: 449
@@ -3746,5 +3746,5 @@
     active_on_init: false
     is_public: true
     fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
-    dt_atualizacao: 2025-04-05
+    dt_atualizacao: 2025-04-04
     database_layer_name: funai.loc_indigenas     
