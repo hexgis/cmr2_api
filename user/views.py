@@ -232,7 +232,7 @@ class UserUploadFileListView(
         """
 
         return models.UserUploadedFile.objects.filter(
-            user=self.request.user.id, is_active=True
+            user=self.request.user.id
         )
 
 
