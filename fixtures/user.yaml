@@ -85,13 +85,13 @@
 - model: user.user
   pk: 3
   fields:
-    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    password: null
     last_login: null
     is_superuser: false
-    username: funai
+    username: hexFunaiAd
     first_name: "Funai"
     last_name: "User"
-    email: funaiteste@funai.gov.br
+    email: hex@funai.gov.br
     is_staff: false
     is_active: true
     date_joined: 2024-12-19 21:43:16.265931+00:00

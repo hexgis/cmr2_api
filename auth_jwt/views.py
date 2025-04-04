@@ -205,24 +205,80 @@ class LogoutView(Auth, views.APIView):
             return response.Response({"error": "Invalid token"}, status=400)
 
 
-class CustomTokenObtainPairSerializer(Public, TokenObtainPairSerializer):
+class CustomTokenObtainPairSerializer(serializers.Serializer):
     """
-    Customizes the token obtain pair serializer to add additional functionalities.
-
-    Attributes:
-    - username_field: Specifies the field to be used for authentication (username).
-    - email: An optional email field to be used in the authentication process.
-
-    Methods:
-    - get_public_ip: Retrieves the public IP address of the user.
-    - get_location: Fetches the geographical location for a given IP address.
-    - validate: Validates the authentication credentials and performs additional actions.
+    Custom serializer to authenticate users and generate tokens.
+    For @funai.gov.br users, authentication is done via AD only.
     """
-    email = serializers.EmailField(required=False)
+    username = serializers.CharField()
+    password = serializers.CharField(write_only=True)
+
+    def validate(self, attrs):
+        username_or_email = attrs.get('username')
+        password = attrs.get('password')
+
+        logger.debug(f"Validating credentials for: {username_or_email}")
+
+        user = authenticate(
+            request=self.context.get('request'),
+            username_or_email=username_or_email,
+            password=password
+        )
+
+        if not user:
+            logger.debug(f"Authentication failed for {username_or_email}")
+            raise serializers.ValidationError(
+                _("Invalid username or password.")
+            )
+
+        logger.debug(
+            f"User authenticated: {user.username} (email: {user.email})")
+
+        # Gera o token manualmente
+        refresh = RefreshToken.for_user(user)
+        data = {
+            'refresh': str(refresh),
+            'access': str(refresh.access_token),
+        }
+
+        # Registra o acesso do usuário
+        self._record_user_access(self.context.get('request'), user)
+
+        return data
+
+    def _record_user_access(self, request, user):
+        """
+        Registers the IP, location, etc., for the authenticated user in DashboardData.
+        """
+        public_user_ip = self.get_public_ip()
+        user_location = self.get_location(public_user_ip)
+        user_agent_info = self.get_user_agent_info(request)
+
+        brasilia_tz = pytz.timezone('America/Sao_Paulo')
+        current_date = timezone.now().astimezone(brasilia_tz)
+
+        try:
+            dashModels.DashboardData.objects.create(
+                user=user,
+                last_date_login=current_date,
+                location=(
+                    f"{user_location.get('city')}, "
+                    f"{user_location.get('region')}, "
+                    f"{user_location.get('country_name')}"
+                ),
+                ip=public_user_ip,
+                browser=user_agent_info['browser'],
+                type_device=user_agent_info['device'],
+                latitude=user_location.get('latitude'),
+                longitude=user_location.get('longitude'),
+            )
+            logger.info(f"Access recorded successfully for user {user}")
+        except Exception as e:
+            logger.error(f"Error recording user access: {e}")
 
     def get_public_ip(self):
         """
-        Returns the user's public IP via ipify..
+        Returns the user's public IP via ipify.
         """
         try:
             response = requests.get('https://api.ipify.org', timeout=5)
@@ -267,65 +323,3 @@ class CustomTokenObtainPairSerializer(Public, TokenObtainPairSerializer):
             'device': 'mobile' if user_agent.is_mobile else
                       'tablet' if user_agent.is_tablet else 'PC'
         }
-
-    def validate(self, attrs):
-        """
-            Main validation logic:
-            1. Authenticates the user (username/email) + password.
-            2. If successful, generate the token and record access data.
-            3. In case of failure, it returns a generic error.
-        """
-
-        request = self.context.get('request')
-        username_or_email = attrs.get('username')
-        password = attrs.get('password')
-
-        user = authenticate(
-            username_or_email=username_or_email,
-            password=password
-        )
-
-        if not user:
-            raise serializers.ValidationError(
-                _("Invalid username or password.")
-            )
-
-        # Adjust the 'username' in attrs for SimpleJWT to work
-        attrs['username'] = user.username
-
-        # Generates the token
-        data = super().validate(attrs)
-
-        self._record_user_access(request, user)
-
-        return data
-
-    def _record_user_access(self, request, user):
-        """
-        Registers the IP, location, etc., for the authenticated user in DashboardData.
-        """
-        public_user_ip = self.get_public_ip()
-        user_location = self.get_location(public_user_ip)
-        user_agent_info = self.get_user_agent_info(request)
-
-        brasilia_tz = pytz.timezone('America/Sao_Paulo')
-        current_date = timezone.now().astimezone(brasilia_tz)
-
-        try:
-            dashModels.DashboardData.objects.create(
-                user=user,
-                last_date_login=current_date,
-                location=(
-                    f"{user_location.get('city')}, "
-                    f"{user_location.get('region')}, "
-                    f"{user_location.get('country_name')}"
-                ),
-                ip=public_user_ip,
-                browser=user_agent_info['browser'],
-                type_device=user_agent_info['device'],
-                latitude=user_location.get('latitude'),
-                longitude=user_location.get('longitude'),
-            )
-            logger.info(f"Access recorded successfully for user {user}")
-        except Exception as e:
-            logger.error(f"Error recording user access: {e}")
