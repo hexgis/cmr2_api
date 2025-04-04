@@ -1,3 +1,7 @@
+from django.db import transaction
+from django.contrib.gis.geos.error import GEOSException
+from django.contrib.gis.geos import GEOSGeometry
+from rest_framework.exceptions import ValidationError
 from user import models, serializers
 from rest_framework import generics, status
 from . import models
@@ -124,7 +128,7 @@ class UserUploadFileGeometryDetailView(
 
 
 class UserUploadFileListCreateView(Auth, generics.ListCreateAPIView):
-    """Basemap view creates list and data."""
+    """View para listar e criar arquivos enviados pelo usuário."""
 
     serializer_class = serializers.UserUploadedFileSerializer
     queryset = models.UserUploadedFile.objects.all()
@@ -132,55 +136,77 @@ class UserUploadFileListCreateView(Auth, generics.ListCreateAPIView):
     filterset_class = filters.UserUploadFileFilter
 
     def create(self, request):
-        """Creates `UserUploadedFile` and its `UserUploadedFileGeometry`.
+        """
+        Creates UserUploadedFile and its associated geometries.
+
+        Args:
+            request: HTTP request containing the upload data
 
         Returns:
-            dict: uploaded data with name, created_at, created and updated.
+            Response: Upload data with name, creation date and count of items created/updated
+
+        Raises:
+            ValidationError: If the input data is invalid
+            Http404: If a serious error occurs during processing
         """
+        if not request.data.get('name'):
+            raise ValidationError('O campo "name" é obrigatório')
+
+        if 'geometry' not in request.data or 'features' not in request.data.get('geometry', {}):
+            raise ValidationError('Estrutura de geometria inválida ou ausente')
+
         try:
-            user_upload, _ = models.UserUploadedFile.objects.get_or_create(
-                name=request.data.get('name'),
-                user=request.user,
-                is_active=True
-            )
-        except Exception:
-            raise Http404('Could not create file on database')
-
-        created_data = 0
-        data_exists = 0
-
-        if not 'geometry' in request.data or \
-           not 'features' in request.data['geometry']:
-            raise Http404('Could not create file on database')
-
-        for feature in request.data['geometry']['features']:
-            try:
-                geom = GEOSGeometry(str(feature['geometry']))
-
-                if geom.hasz:
-                    geom = GEOSGeometry(WKBWriter(dim=2).write_hex(geom))
-
-                _, created = models.UserUploadedFileGeometry.objects.get_or_create(
-                    user_uploaded=user_upload,
-                    geom=geom,
-                    properties=feature['properties']
+            with transaction.atomic():
+                user_upload, _ = models.UserUploadedFile.objects.get_or_create(
+                    name=request.data['name'],
+                    user=request.user,
                 )
 
-                if created:
-                    created_data = created_data + 1
-                else:
-                    data_exists = data_exists + 1
-            except Exception:
-                raise Http404('Could not create geometries on database')
+                created_data = 0
+                data_exists = 0
 
-        data = {
-            'name': user_upload.name,
-            'created_at': user_upload.date_created,
-            'created': created_data,
-            'updated': data_exists
-        }
+                for feature in request.data['geometry']['features']:
+                    try:
+                        if 'geometry' not in feature:
+                            continue
+                        geom = GEOSGeometry(str(feature['geometry']))
 
-        return response.Response(data, status=status.HTTP_201_CREATED)
+                        if geom.hasz:
+                            from django.contrib.gis.geos import WKBWriter
+                            geom = GEOSGeometry(
+                                WKBWriter(dim=2).write_hex(geom))
+
+                        _, created = models.UserUploadedFileGeometry.objects.get_or_create(
+                            user_uploaded=user_upload,
+                            geom=geom,
+                            properties=feature.get('properties', {})
+                        )
+
+                        if created:
+                            created_data += 1
+                        else:
+                            data_exists += 1
+
+                    except GEOSException as e:
+                        raise ValidationError(f'Erro na geometria: {str(e)}')
+                    except Exception as e:
+                        raise ValidationError(
+                            f'Erro ao processar feature: {str(e)}')
+
+                response_data = {
+                    'name': user_upload.name,
+                    'created_at': user_upload.date_created,
+                    'created': created_data,
+                    'updated': data_exists
+                }
+
+            return Response(response_data, status=status.HTTP_201_CREATED)
+
+        except Exception as e:
+            import logging
+            logger = logging.getLogger(__name__)
+            logger.error(f'Erro ao criar upload: {str(e)}')
+            raise Http404(f'Erro ao processar o upload: {str(e)}')
 
 
 class UserUploadFileListGeometryView(Auth, generics.ListAPIView):

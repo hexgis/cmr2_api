@@ -7,6 +7,9 @@
       group: 23
       active_on_init: false
       is_public: true
+      fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
+      dt_atualizacao: 2025-04-05
+      database_layer_name: funai.lim_terra_indigena_a     
 - model: layer.layer
   pk: 3
   fields:
@@ -2738,24 +2741,6 @@
     active_on_init: false
     is_public: true
 - model: layer.layer
-  pk: 319
-  fields:
-    name: Antropismo Consolidado
-    order: 1901
-    layer_type: wms
-    group: 19
-    active_on_init: false
-    is_public: true
-- model: layer.layer
-  pk: 320
-  fields:
-    name: Pista de pouso irregulares
-    order: 2804
-    layer_type: wms
-    group: 28
-    active_on_init: false
-    is_public: true
-- model: layer.layer
   pk: 321
   fields:
     name: PRODES (INPE)
@@ -2863,6 +2848,9 @@
     group: 29
     active_on_init: false
     is_public: true
+    fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
+    dt_atualizacao: 2025-04-05
+    database_layer_name: funai.loc_sede_p     
 - model: layer.layer
   pk: 335
   fields:
@@ -3745,6 +3733,9 @@
     group: 23
     active_on_init: false
     is_public: true
+    fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
+    dt_atualizacao: 2025-04-05
+    database_layer_name: funai.vw_lim_terra_indigena_possui_ig     
 - model: layer.layer
   pk: 449
   fields:
@@ -3754,3 +3745,6 @@
     group: 23
     active_on_init: false
     is_public: true
+    fonte: CMR (https://cmr.funai.gov.br/geoserver/web/)
+    dt_atualizacao: 2025-04-05
+    database_layer_name: funai.loc_indigenas     
