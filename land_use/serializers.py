@@ -1,27 +1,27 @@
 from django.db import models
-
 from rest_framework import serializers
-
 from rest_framework_gis import serializers as gis_serializers
-
 from land_use import models
+# Importando do utils
+from utils.format_values import format_area, format_coord, format_date
 
-import locale
+# Lista de campos de área e coordenadas (mantidas iguais)
+AREA_FIELDS = [
+    'nu_area_ag_ha', 'nu_area_cr_ha', 'nu_area_dg_ha', 'nu_area_ma_ha',
+    'nu_area_no_ha', 'nu_area_rv_ha', 'nu_area_sv_ha', 'nu_area_vi_ha',
+    'nu_area_vn_ha', 'nu_area_mi_ha', 'nu_area_ha', 'nu_area_km2',
+]
 
-try:
-    locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-except locale.Error:
-    try:
-        locale.setlocale(locale.LC_ALL, 'pt_BR.utf8')
-    except locale.Error:
-        locale.setlocale(locale.LC_ALL, 'pt_BR')
+COORD_FIELDS = ['nu_latitude', 'nu_longitude']
 
 
 class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
     """Serializer for geographic `models.LandUseClasses` spatial data."""
+    nu_latitude = serializers.SerializerMethodField()
+    nu_longitude = serializers.SerializerMethodField()
 
     class Meta:
-        """Meta calss for geographic data `LandUseSerializer` serializer."""
+        """Meta class for geographic data `LandUseSerializer` serializer."""
         model = models.LandUseClasses
         id_field = False
         geo_field = 'geom'
@@ -32,34 +32,25 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
             'nu_longitude',
         )
 
+    def get_nu_latitude(self, obj):
+        return format_coord(obj.nu_latitude)
 
-AREA_FIELDS = [
-    'nu_area_ag_ha', 'nu_area_cr_ha', 'nu_area_dg_ha', 'nu_area_ma_ha',
-    'nu_area_no_ha', 'nu_area_rv_ha', 'nu_area_sv_ha', 'nu_area_vi_ha',
-    'nu_area_vn_ha', 'nu_area_mi_ha', 'nu_area_ha', 'nu_area_km2',
-]
-
-COORD_FIELDS = ['nu_latitude', 'nu_longitude']
+    def get_nu_longitude(self, obj):
+        return format_coord(obj.nu_longitude)
 
 
-class FormatFieldsMixin:
-    """Mixin for format field."""
+class LandUseTableSerializer(serializers.ModelSerializer):
+    """Serializer for return data from model `LandUsePerTi`."""
 
-    def format_area(self, value):
-        return locale.format_string("%.3f", value, grouping=True) if value is not None else None
-
-    def format_coord(self, value):
-        return locale.format_string("%.6f", value, grouping=True) if value is not None else None
-
-
-class LandUseTableSerializer(serializers.ModelSerializer, FormatFieldsMixin):
-    """ Serializer for return data from model `LandUsePerTi` """
-
+    # Definindo os campos dinamicamente como SerializerMethodField
     for field in AREA_FIELDS:
         locals()[field] = serializers.SerializerMethodField()
 
     for field in COORD_FIELDS:
         locals()[field] = serializers.SerializerMethodField()
+
+    # Adicionando campo de data formatada
+    dt_imagens = serializers.SerializerMethodField()
 
     class Meta:
         """Meta class for `LandUseTableSerializer`."""
@@ -70,16 +61,18 @@ class LandUseTableSerializer(serializers.ModelSerializer, FormatFieldsMixin):
         ] + AREA_FIELDS + COORD_FIELDS
 
     def get_field_value(self, obj, field):
-        """Return formated value based on field type."""
+        """Retorna o valor formatado baseado no tipo do campo."""
         value = getattr(obj, field, None)
         if field in AREA_FIELDS:
-            return self.format_area(value)
+            return format_area(value)
         elif field in COORD_FIELDS:
-            return self.format_coord(value)
+            return format_coord(value)
+        elif field == 'dt_imagens':  # Tratamento específico para data
+            return format_date(value)
         return value
 
     def __getattr__(self, name):
-        if name.startswith('get_') and name[4:] in AREA_FIELDS + COORD_FIELDS:
+        if name.startswith('get_') and name[4:] in AREA_FIELDS + COORD_FIELDS + ['dt_imagens']:
             field = name[4:]
             return lambda obj: self.get_field_value(obj, field)
         raise AttributeError(
@@ -88,6 +81,8 @@ class LandUseTableSerializer(serializers.ModelSerializer, FormatFieldsMixin):
 
 class LandUseDetailSerializer(serializers.ModelSerializer):
     """Serializer for return detailed `models.LandUseClasses` data."""
+    nu_area_ha = serializers.SerializerMethodField()
+    dt_imagens = serializers.SerializerMethodField()
 
     class Meta:
         """Meta class for `LandUseDetailSerializer` serializer."""
@@ -103,8 +98,15 @@ class LandUseDetailSerializer(serializers.ModelSerializer):
             'nu_area_ha',
         )
 
+    def get_nu_area_ha(self, obj):
+        return format_area(obj.nu_area_ha)
+
+    def get_dt_imagens(self, obj):
+        return format_date(obj.dt_imagens)
+
 
 class LandUseSearchSerializer(serializers.ModelSerializer):
+    """Serializer para busca em `LandUseVmRegionalCoordnation`."""
 
     class Meta:
         model = models.LandUseVmRegionalCoordnation
