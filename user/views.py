@@ -1,3 +1,5 @@
+from django.shortcuts import redirect
+from django.contrib.auth.views import LoginView
 from django.db import transaction
 from django.contrib.gis.geos.error import GEOSException
 from django.contrib.gis.geos import GEOSGeometry
@@ -676,3 +678,11 @@ class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
                 {'detail': 'Erro inesperado durante a aprovação.'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+
+
+class CustomLoginView(LoginView):
+    template_name = 'admin/login.html'  # usa o template bonito do Jazzmin
+    redirect_authenticated_user = True
+
+    def get_success_url(self):
+        return '/priority_api/admin_app/'  # redirecionamento fixo
