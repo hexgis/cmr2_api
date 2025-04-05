@@ -17,7 +17,6 @@ except locale.Error:
         locale.setlocale(locale.LC_ALL, 'pt_BR')
 
 
-
 class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
     """Serializer for geographic `models.LandUseClasses` spatial data."""
 
@@ -33,6 +32,7 @@ class LandUseSerializer(gis_serializers.GeoFeatureModelSerializer):
             'nu_longitude',
         )
 
+
 AREA_FIELDS = [
     'nu_area_ag_ha', 'nu_area_cr_ha', 'nu_area_dg_ha', 'nu_area_ma_ha',
     'nu_area_no_ha', 'nu_area_rv_ha', 'nu_area_sv_ha', 'nu_area_vi_ha',
@@ -41,9 +41,10 @@ AREA_FIELDS = [
 
 COORD_FIELDS = ['nu_latitude', 'nu_longitude']
 
+
 class FormatFieldsMixin:
     """Mixin for format field."""
-    
+
     def format_area(self, value):
         return locale.format_string("%.3f", value, grouping=True) if value is not None else None
 
@@ -81,7 +82,8 @@ class LandUseTableSerializer(serializers.ModelSerializer, FormatFieldsMixin):
         if name.startswith('get_') and name[4:] in AREA_FIELDS + COORD_FIELDS:
             field = name[4:]
             return lambda obj: self.get_field_value(obj, field)
-        raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+        raise AttributeError(
+            f"'{self.__class__.__name__}' object has no attribute '{name}'")
 
 
 class LandUseDetailSerializer(serializers.ModelSerializer):
@@ -101,8 +103,15 @@ class LandUseDetailSerializer(serializers.ModelSerializer):
             'nu_area_ha',
         )
 
+
 class LandUseSearchSerializer(serializers.ModelSerializer):
 
     class Meta:
-        model = models.LandUsePerTi
-        fields = ['co_funai','co_cr','nu_ano', 'ds_cr', 'no_ti']
+        model = models.LandUseVmRegionalCoordnation
+        fields = [
+            'co_funai',
+            'co_cr',
+            'nu_ano',
+            'ds_cr',
+            'no_ti'
+        ]

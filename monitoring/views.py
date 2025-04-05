@@ -11,6 +11,11 @@ from rest_framework import (
 from monitoring import filters as monitoring_filters
 from monitoring import models, serializers, groupings
 
+from django.contrib.gis.geos import GEOSGeometry, MultiPolygon
+from django.contrib.gis.geos import Polygon
+from django.db.models import Q
+from rest_framework.response import Response
+
 
 class AuthModelMixIn:
     """Default Authentication for `monitoring` views."""
@@ -252,7 +257,8 @@ class MonitoringConsolidatedTableStatsView(
                 'ti_nu_area_ha',
                 ano=functions.ExtractYear('dt_t_um')
             )
-            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(self, queryset)
+            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(
+                self, queryset)
 
             return queryset.order_by("ano")
 
@@ -264,7 +270,8 @@ class MonitoringConsolidatedTableStatsView(
                 mes=functions.ExtractMonth('dt_t_um'),
                 ano=functions.ExtractYear('dt_t_um')
             )
-            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(self, queryset)
+            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(
+                self, queryset)
 
             return queryset.order_by("mes", "ano")
 
@@ -272,7 +279,8 @@ class MonitoringConsolidatedTableStatsView(
             queryset = models.MonitoringConsolidated.objects.values(
                 ano=functions.ExtractYear('dt_t_um')
             )
-            queryset = groupings.GroupingClassificationOfStages.absolute_number(self, queryset)
+            queryset = groupings.GroupingClassificationOfStages.absolute_number(
+                self, queryset)
 
             return queryset.order_by("ano")
 
@@ -281,7 +289,8 @@ class MonitoringConsolidatedTableStatsView(
                 mes=functions.ExtractMonth('dt_t_um'),
                 ano=functions.ExtractYear('dt_t_um')
             )
-            queryset = groupings.GroupingClassificationOfStages.absolute_number(self, queryset)
+            queryset = groupings.GroupingClassificationOfStages.absolute_number(
+                self, queryset)
 
             return queryset.order_by("mes", "ano")
 
@@ -291,7 +300,8 @@ class MonitoringConsolidatedTableStatsView(
                 'no_ti',
                 'ti_nu_area_ha'
             )
-            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(self, queryset)
+            queryset = groupings.GroupingClassificationOfStages.absolute_number_and_percentage(
+                self, queryset)
 
             return queryset.order_by("no_ti")
 
@@ -302,6 +312,84 @@ class MonitoringConsolidatedTableStatsView(
                 'dt_t_um',
                 'ti_nu_area_ha'
             )
-            queryset = groupings.GroupingClassificationOfStages.absolute_number(self, queryset)
+            queryset = groupings.GroupingClassificationOfStages.absolute_number(
+                self,
+                queryset
+            )
 
             return queryset.order_by("dt_t_um")
+
+
+class BboxFeatureCollectionView(generics.ListAPIView):
+    def post(self, request):
+        # Extrair os dados do POST
+        co_funai_list = request.data.get('co_funai', [])
+        co_cr_list = request.data.get('co_cr', [])
+
+        # Validar os dados
+        if not co_funai_list and not co_cr_list:
+            return Response(
+                {"error": "Pelo menos um dos campos 'co_funai' ou 'co_cr' deve ser fornecido."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Converter co_funai para inteiros (se necessário)
+        try:
+            co_funai_list = [int(co)
+                             for co in co_funai_list] if co_funai_list else []
+        except ValueError:
+            return Response(
+                {"error": "Os valores de 'co_funai' devem ser inteiros."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
+
+        # Criar a query com OR entre co_funai e co_cr
+        query = Q()
+        if co_funai_list:
+            query |= Q(co_funai__in=co_funai_list)
+        if co_cr_list:
+            query |= Q(co_cr__in=co_cr_list)
+
+        # Consultar a tabela
+        try:
+            wkt_array = models.MonitoringConsolidated.objects\
+                .filter(query)\
+                .order_by('co_funai')\
+                .distinct('co_funai')
+
+            if not wkt_array.exists():
+                return Response(
+                    {"error": "Nenhum dado encontrado para os filtros fornecidos."},
+                    status=status.HTTP_404_NOT_FOUND
+                )
+
+            # Extrair as geometrias do campo 'geom' (ajuste o nome do campo conforme necessário)
+            multipolygons = [GEOSGeometry(obj.geom) for obj in wkt_array]
+
+            if not multipolygons:
+                return Response(
+                    {"error": "Nenhuma geometria válida encontrada nos dados."},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+            # Unir todas as geometrias em uma única (union geral)
+            merged_geometry = multipolygons[0]
+            for geom in multipolygons[1:]:
+                merged_geometry = merged_geometry.union(geom)
+
+            # Obter o envelope (bbox)
+            bbox = merged_geometry.extent  # retorna (xmin, ymin, xmax, ymax)
+
+            if not bbox:
+                return Response(
+                    {"error": "Não foi possível calcular o bbox."},
+                    status=status.HTTP_500_INTERNAL_SERVER_ERROR
+                )
+
+            return Response(bbox, status=status.HTTP_200_OK)
+
+        except Exception as e:
+            return Response(
+                {"error": f"Erro ao processar a solicitação: {str(e)}"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
