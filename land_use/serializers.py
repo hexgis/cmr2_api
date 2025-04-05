@@ -109,7 +109,7 @@ class LandUseSearchSerializer(serializers.ModelSerializer):
     """Serializer para busca em `LandUseVmRegionalCoordnation`."""
 
     class Meta:
-        model = models.LandUseVmRegionalCoordnation
+        model = models.LandUsePerTi
         fields = [
             'co_funai',
             'co_cr',
