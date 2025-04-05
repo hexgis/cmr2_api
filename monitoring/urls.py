@@ -34,5 +34,10 @@ urlpatterns = [
         'table-stats/',
         views.MonitoringConsolidatedTableStatsView.as_view(),
         name='monitoring-table-stats'
+    ),
+    path(
+        'bbox/',
+        views.BboxFeatureCollectionView.as_view(),
+        name='monitoring-bbox'
     )
 ]
