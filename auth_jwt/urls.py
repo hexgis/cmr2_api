@@ -32,5 +32,10 @@ urlpatterns = [
         views.LogoutView.as_view(),
         name='logout'
     ),
+    path(
+        'confirmar/',
+        views.PasswordResetConfirmView.as_view(),
+        name='password-reset-confirm'
+    ),
 
 ]

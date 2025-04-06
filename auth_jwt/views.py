@@ -323,3 +323,16 @@ class CustomTokenObtainPairSerializer(serializers.Serializer):
             'device': 'mobile' if user_agent.is_mobile else
                       'tablet' if user_agent.is_tablet else 'PC'
         }
+
+
+class PasswordResetConfirmView(Public, generics.GenericAPIView):
+    serializer_class = user_serializer.PasswordResetConfirmSerializer
+
+    def post(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return response.Response(
+            {"detail": _("Password has been reset.")},
+            status=status.HTTP_200_OK
+        )

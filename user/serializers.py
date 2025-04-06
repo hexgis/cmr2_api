@@ -1,10 +1,11 @@
 from rest_framework_gis import serializers as gis_serializers
 from rest_framework import serializers
 from django.conf import settings
-
+from user.models import PasswordResetCode
 
 from permission import models as permission_models
 from user import models
+from django.utils.translation import gettext_lazy as _
 
 
 class UserSettingsSerializer(serializers.ModelSerializer):
@@ -562,3 +563,40 @@ class AccessRequestDetailSerializer(serializers.ModelSerializer):
         Gets the denied details from AccessRequestStatus.
         """
         return obj.denied_details
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    code = serializers.CharField()
+    new_password = serializers.CharField(write_only=True)
+    confirm_password = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        if data['new_password'] != data['confirm_password']:
+            raise serializers.ValidationError({
+                "confirm_password": _("Passwords do not match.")
+            })
+
+        try:
+            reset_code = PasswordResetCode.objects.get(
+                code=data['code'])
+        except PasswordResetCode.DoesNotExist:
+            raise serializers.ValidationError({
+                "code": _("Invalid or expired reset code.")
+            })
+
+        if reset_code.is_expired():
+            raise serializers.ValidationError({
+                "code": _("Reset code has expired.")
+            })
+
+        # Armazena para uso posterior no método save()
+        self.reset_code = reset_code
+        return data
+
+    def save(self):
+        new_password = self.validated_data['new_password']
+        user = self.reset_code.user
+        user.set_password(new_password)
+        user.save()
+        self.reset_code.delete()
+        return user
