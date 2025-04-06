@@ -130,4 +130,20 @@
     roles: [3]
     user_permissions: []
     institution: 1
+- model: user.user
+  pk: 6
+  fields:
+    password: pbkdf2_sha256$150000$faoDqxQF8jwY$0A1618nZ8Zg6u7JiRy6hG6wRzrg8ucvI7mKcUoB2+vo=
+    last_login: null
+    is_superuser: true
+    username: joao.fonseca
+    first_name: ""
+    last_name: ""
+    email: joao.fonseca@hex360.com.br
+    is_staff: true
+    is_active: true
+    date_joined: 2025-01-14 21:43:16.265931+00:00
+    roles: [3]
+    user_permissions: []
+    institution: 1
   
