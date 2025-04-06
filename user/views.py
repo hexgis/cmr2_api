@@ -181,7 +181,7 @@ class UserUploadFileListCreateView(Auth, generics.ListCreateAPIView):
                         _, created = models.UserUploadedFileGeometry.objects.get_or_create(
                             user_uploaded=user_upload,
                             geom=geom,
-                            properties=feature.get('properties', {})
+                            properties=request.data.get('properties', {})
                         )
 
                         if created:
