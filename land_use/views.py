@@ -8,7 +8,7 @@ from land_use import (
 
 from django_filters import rest_framework
 from rest_framework_gis import filters as gis_filters
-from rest_framework import(
+from rest_framework import (
     generics,
     permissions,
     response,
@@ -51,6 +51,7 @@ class LandUseDetailView(AuthModelMixIn, generics.RetrieveAPIView):
     serializer_class = serializers.LandUseDetailSerializer
     lookup_field = 'id'
 
+
 class LandUseStatsView(AuthModelMixIn, generics.ListAPIView):
     """Retrives `models.LandUseClasses` stats data.
 
@@ -87,7 +88,7 @@ class LandUseStatsView(AuthModelMixIn, generics.ListAPIView):
             total=Count('id')
         )
         return response.Response(data, status=status.HTTP_200_OK)
-    
+
 
 class LandUseTabletView(generics.ListAPIView):
     """
@@ -101,6 +102,7 @@ class LandUseTabletView(generics.ListAPIView):
     )
     filterset_class = land_use_filters.LandUsePerTiFilter
 
+
 class LandUsePerTiSearchListView(generics.ListAPIView):
     """
     ListAPIView for LandUsePerTi with filtering capabilities.
@@ -111,4 +113,4 @@ class LandUsePerTiSearchListView(generics.ListAPIView):
         rest_framework.DjangoFilterBackend,
         gis_filters.InBBoxFilter,
     )
-    filterset_class = land_use_filters.LandUsePerTiFilter  
+    filterset_class = land_use_filters.LandUsePerTiFilter

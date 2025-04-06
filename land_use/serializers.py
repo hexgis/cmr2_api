@@ -2,6 +2,8 @@ from django.db import models
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 from land_use import models
+from django.db.models import Q
+
 # Importando do utils
 from utils.format_values import format_area, format_coord, format_date
 
@@ -106,7 +108,9 @@ class LandUseDetailSerializer(serializers.ModelSerializer):
 
 
 class LandUseSearchSerializer(serializers.ModelSerializer):
-    """Serializer para busca em `LandUseVmRegionalCoordnation`."""
+    """Serializer para busca em LandUseVmRegionalCoordnation."""
+
+    cr_no_regiao = serializers.SerializerMethodField()
 
     class Meta:
         model = models.LandUsePerTi
@@ -115,5 +119,18 @@ class LandUseSearchSerializer(serializers.ModelSerializer):
             'co_cr',
             'nu_ano',
             'ds_cr',
-            'no_ti'
+            'no_ti',
+            'cr_no_regiao',  # Adicionando campo calculado
         ]
+
+    def get_cr_no_regiao(self, obj):
+        from land_use.models import LandUseVmRegionalCoordnation
+
+        regiao = LandUseVmRegionalCoordnation.objects.filter(
+            Q(ti_co_funai=str(obj.co_funai)) | Q(
+                cr_co_cr=str(obj.co_cr))
+        ).first()
+
+        if regiao:
+            return regiao.cr_no_regiao
+        return None
