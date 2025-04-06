@@ -1,8 +1,10 @@
+import re
 from django.db import models
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 from land_use import models
 from django.db.models import Q
+import unicodedata
 
 # Importando do utils
 from utils.format_values import format_area, format_coord, format_date
@@ -111,6 +113,7 @@ class LandUseSearchSerializer(serializers.ModelSerializer):
     """Serializer para busca em LandUseVmRegionalCoordnation."""
 
     cr_no_regiao = serializers.SerializerMethodField()
+    ds_cr = serializers.SerializerMethodField()  # sobrescrevendo o campo
 
     class Meta:
         model = models.LandUsePerTi
@@ -120,17 +123,24 @@ class LandUseSearchSerializer(serializers.ModelSerializer):
             'nu_ano',
             'ds_cr',
             'no_ti',
-            'cr_no_regiao',  # Adicionando campo calculado
+            'cr_no_regiao',
         ]
 
     def get_cr_no_regiao(self, obj):
         from land_use.models import LandUseVmRegionalCoordnation
 
-        regiao = LandUseVmRegionalCoordnation.objects.filter(
-            Q(ti_co_funai=str(obj.co_funai)) | Q(
-                cr_co_cr=str(obj.co_cr))
+        regiao = models.LandUseVmRegionalCoordnation.objects.filter(
+            Q(ti_co_funai=str(obj.co_funai)) | Q(cr_co_cr=str(obj.co_cr))
         ).first()
 
         if regiao:
             return regiao.cr_no_regiao
         return None
+
+    def get_ds_cr(self, obj):
+        texto = obj.ds_cr or ""
+        texto_normalizado = unicodedata.normalize(
+            'NFKD', texto).encode('ASCII', 'ignore').decode('utf-8')
+        texto_limpo = re.sub(r'^COORDENACAO REGIONAL\s*',
+                             '', texto_normalizado, flags=re.IGNORECASE)
+        return texto_limpo.strip().title()
