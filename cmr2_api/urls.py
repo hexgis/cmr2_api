@@ -18,10 +18,12 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls.static import static
 from django.conf import settings
+from user.views import CustomLoginView
 from drf_spectacular.views import SpectacularAPIView, SpectacularSwaggerView
 
 urlpatterns = [
-    path('priority_api/admin_app/', admin.site.urls),
+    path('priority_api/admin_app/',
+         CustomLoginView.as_view(), name='custom_login'),
     path('admin_app/', admin.site.urls),
     path('api/schema/', SpectacularAPIView.as_view(), name='schema'),
     path('api/docs/', SpectacularSwaggerView.as_view(url_name='schema'),

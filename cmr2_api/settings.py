@@ -404,4 +404,4 @@ AUTHENTICATION_BACKENDS = (
 )
 
 
-LOGIN_REDIRECT_URL = '/priority_api/admin_app/'
+LOGIN_URL = '/priority_api/admin_app/'
