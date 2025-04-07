@@ -402,6 +402,3 @@ AUTHENTICATION_BACKENDS = (
     'cmr2_api.auth_backends.MyLDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
-
-
-LOGIN_URL = '/priority_api/admin_app/'
