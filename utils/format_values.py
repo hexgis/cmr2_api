@@ -8,6 +8,12 @@ locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')  # Para formato brasileiro
 # --- Formatação de Números ---
 
 
+def format_percentage(value):
+    if value is None:
+        return None
+    return f"{locale.format_string('%.6f', value, grouping=True)}%"
+
+
 def format_number(value):
     """Formata números no padrão brasileiro: xx.xxx,xx (com 2 casas decimais)."""
     if value is None:
