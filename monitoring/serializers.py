@@ -1,8 +1,8 @@
+from utils.format_values import format_area, format_coord, format_date, format_percentage
 from rest_framework import serializers
 from rest_framework_gis import serializers as gis_serializers
 from monitoring import models
-# Importando do utils
-from utils.format_values import format_area, format_coord, format_date
+# Configura a localidade para o formato brasileiro
 
 
 class MonitoringConsolidatedSerializer(gis_serializers.GeoFeatureModelSerializer):
@@ -222,22 +222,17 @@ class MonitoringConsolidatedByCoFunaiAndYearSerializer(serializers.ModelSerializ
     def get_ti_nu_area_ha(self, obj):
         return format_area(obj.get('ti_nu_area_ha'))
 
-    def format_percentage(self, value):
-        if value is None:
-            return None
-        return f"{locale.format_string('%.6f', value, grouping=True)}%"
-
     def get_cr_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('cr_nu_area_perc'))
+        return format_percentage(obj.get('cr_nu_area_perc'))
 
     def get_dg_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('dg_nu_area_perc'))
+        return format_percentage(obj.get('dg_nu_area_perc'))
 
     def get_dr_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('dr_nu_area_perc'))
+        return format_percentage(obj.get('dr_nu_area_perc'))
 
     def get_ff_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('ff_nu_area_perc'))
+        return format_percentage(obj.get('ff_nu_area_perc'))
 
 
 class MonitoringConsolidatedByCoFunaiAndMonthYearSerializer(serializers.ModelSerializer):
@@ -293,22 +288,17 @@ class MonitoringConsolidatedByCoFunaiAndMonthYearSerializer(serializers.ModelSer
     def get_ti_nu_area_ha(self, obj):
         return format_area(obj.get('ti_nu_area_ha'))
 
-    def format_percentage(self, value):
-        if value is None:
-            return None
-        return f"{locale.format_string('%.6f', value, grouping=True)}%"
-
     def get_cr_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('cr_nu_area_perc'))
+        return format_percentage(obj.get('cr_nu_area_perc'))
 
     def get_dg_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('dg_nu_area_perc'))
+        return format_percentage(obj.get('dg_nu_area_perc'))
 
     def get_dr_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('dr_nu_area_perc'))
+        return format_percentage(obj.get('dr_nu_area_perc'))
 
     def get_ff_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('ff_nu_area_perc'))
+        return format_percentage(obj.get('ff_nu_area_perc'))
 
 
 class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
@@ -360,22 +350,17 @@ class MonitoringConsolidatedByCoFunaiSerializer(serializers.ModelSerializer):
     def get_ti_nu_area_ha(self, obj):
         return format_area(obj.get('ti_nu_area_ha'))
 
-    def format_percentage(self, value):
-        if value is None:
-            return None
-        return f"{locale.format_string('%.6f', value, grouping=True)}%"
-
     def get_cr_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('cr_nu_area_perc'))
+        return format_percentage(obj.get('cr_nu_area_perc'))
 
     def get_dg_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('dg_nu_area_perc'))
+        return format_percentage(obj.get('dg_nu_area_perc'))
 
     def get_dr_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('dr_nu_area_perc'))
+        return format_percentage(obj.get('dr_nu_area_perc'))
 
     def get_ff_nu_area_perc(self, obj):
-        return self.format_percentage(obj.get('ff_nu_area_perc'))
+        return format_percentage(obj.get('ff_nu_area_perc'))
 
 
 class MonitoringConsolidatedByMonthYearSerializer(serializers.ModelSerializer):
