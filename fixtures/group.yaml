@@ -91,7 +91,7 @@
 - model: layer.group
   pk: 23
   fields:
-    name: Temas Indígenas - FUNAI
+    name: Temas Indígenas
     order: 20
     category_groups: 1
 - model: layer.group
