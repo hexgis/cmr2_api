@@ -127,7 +127,6 @@ class LandUseSearchSerializer(serializers.ModelSerializer):
         ]
 
     def get_cr_no_regiao(self, obj):
-        from land_use.models import LandUseVmRegionalCoordnation
 
         regiao = models.LandUseVmRegionalCoordnation.objects.filter(
             Q(ti_co_funai=str(obj.co_funai)) | Q(cr_co_cr=str(obj.co_cr))
