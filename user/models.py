@@ -61,11 +61,6 @@ class Institution(models.Model):
         help_text=_('Institution')
     )
 
-    institution_type = models.CharField(
-        max_length=255,
-        help_text=_('Type of Institution')
-    )
-
     def __str__(self):
         """Model class string.
 
