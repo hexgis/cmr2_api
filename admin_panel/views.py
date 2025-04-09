@@ -4,7 +4,6 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
-from permission.mixins import Auth, Public
 
 from django.utils import timezone
 import os
@@ -48,7 +47,8 @@ class IsOwnerOrReadOnly(permissions.BasePermission):
         return request.user.is_authenticated
 
 
-class TicketListCreateView(Auth, APIView):
+class TicketListCreateView(APIView):
+    permission_classes = [IsAuthenticated]
 
     def get(self, request):
         """
