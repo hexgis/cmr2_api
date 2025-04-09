@@ -35,7 +35,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 5
@@ -48,7 +48,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 7
@@ -100,7 +100,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 11
@@ -113,7 +113,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 12
@@ -126,7 +126,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 13
@@ -139,7 +139,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 14
@@ -152,7 +152,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 15
@@ -165,7 +165,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 16
@@ -178,7 +178,7 @@
       geoserver_layer_namespace: CMR-FUNAI
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 17
@@ -191,7 +191,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 18
@@ -204,7 +204,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 19
@@ -217,7 +217,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 20
@@ -230,7 +230,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 21
@@ -269,7 +269,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 24
@@ -334,7 +334,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 29
@@ -347,7 +347,7 @@
       geoserver_layer_namespace: CMR-PUBLICO
       geoserver_layer_options: null
       queryable: false
-      has_opacity: true
+      has_opacity: false
       default_opacity: null
 - model: layer.wms
   pk: 30
