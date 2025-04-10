@@ -405,7 +405,7 @@ class SendTicketEmailView(APIView):
             html_content = render_to_string(template_path, {
                 'ticket_name': ticket.subject,
                 'requesting': data['requesting'],
-                'link': f"http://localhost:8080/admin/criticas/{data['ticket_id']}/",
+                    'link': f"{settings.FRONT_URL.rstrip('/')}/admin/criticas/{data['ticket_id']}/",
                 'status': data['status'],
                 'comment': data['comment']
             })
