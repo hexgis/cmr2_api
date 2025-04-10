@@ -69,6 +69,7 @@ urlpatterns = [
         ('dashboard.urls', 'dashboard'),
         namespace='dashboard')
     ),
+
 ] + static(
     settings.STATIC_URL, document_root=settings.STATIC_ROOT
 )

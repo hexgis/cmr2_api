@@ -69,6 +69,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.gis',
     'drf_spectacular',
+    'django_filters',
     'rest_framework',
     'django_json_widget',
     'dashboard',
@@ -83,7 +84,7 @@ INSTALLED_APPS = [
     'priority_alerts',
     'funai',
     'land_use',
-    'corsheaders'
+    'corsheaders',
 ]
 
 MIDDLEWARE = [

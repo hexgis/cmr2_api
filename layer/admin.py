@@ -53,7 +53,8 @@ class LayerAdmin(LeafletGeoAdminMixin, import_export):
 
         queryset.update(is_downloadable=True)
         self.message_user(
-            request, f'{queryset.count()} marked as downloadable')
+            request, f'{queryset.count()} marked as downloadable'
+        )
 
     @admin.action(description='Unmark layer as downloadable')
     def remove_downloadable(self, request, queryset):
@@ -66,7 +67,8 @@ class LayerAdmin(LeafletGeoAdminMixin, import_export):
 
         queryset.update(is_downloadable=False)
         self.message_user(
-            request, f'{queryset.count()} unmarked as downloadable')
+            request, f'{queryset.count()} unmarked as downloadable'
+        )
 
     list_display = (
         'id',
@@ -76,7 +78,6 @@ class LayerAdmin(LeafletGeoAdminMixin, import_export):
         'group',
         'is_downloadable',
         'is_public',
-        'is_update_daily',
     )
 
     search_fields = (
@@ -87,7 +88,6 @@ class LayerAdmin(LeafletGeoAdminMixin, import_export):
     list_filter = (
         'group',
         'is_public',
-        'is_update_daily',
     )
 
 
