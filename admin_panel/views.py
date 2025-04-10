@@ -450,8 +450,6 @@ class DownloadDocument(APIView):
     def get(self, request, filename):
         filepath = os.path.join(
             settings.MEDIA_ROOT, 'attachments', 'critcs_and_suggestions', 'answer', filename)
-        import pdb
-        pdb.set_trace()
         try:
             return FileResponse(open(filepath, 'rb'), as_attachment=True, filename=filename)
         except FileNotFoundError:

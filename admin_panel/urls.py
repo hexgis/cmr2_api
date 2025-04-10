@@ -18,6 +18,6 @@ urlpatterns = [
 
     path('tickets/send-email/', SendTicketEmailView.as_view(),
          name='send-email-ticket'),
-    path('tickets/download/<str:filename>/',
+    path('tickets/download/attachments/critcs_and_suggestions/answer/<str:filename>/',
          DownloadDocument.as_view(), name='download_document'),
 ]
