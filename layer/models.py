@@ -303,12 +303,6 @@ class Layer(models.Model):
         blank=True
     )
 
-    is_update_daily = models.BooleanField(
-        _('Atualização diária'),
-        help_text=_('Enable layer update daily'),
-        default=False
-    )
-
     database_layer_name = models.CharField(
         _('Database Layer Name'),
         max_length=255
