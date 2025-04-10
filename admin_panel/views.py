@@ -5,6 +5,13 @@ from rest_framework.views import APIView
 from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
 from permission.mixins import Auth, Public
+from django.conf import settings
+from django.http import FileResponse
+from rest_framework.views import APIView
+from django.http import FileResponse
+from django.conf import settings
+import os
+
 
 from django.utils import timezone
 import os
@@ -57,7 +64,7 @@ class TicketListCreateView(Auth, APIView):
         If the user is a staff member, all tickets are listed.
         Otherwise, only tickets created by the requesting user are listed.
 
-        Args:
+        Args: 
             request: The HTTP request object.
 
         Returns:
@@ -397,7 +404,7 @@ class SendTicketEmailView(APIView):
             data = request.data.copy()
             template_path = os.path.join(
                 settings.EMAIL_TEMPLATES_DIR,
-                'ticket_status_change.html'
+                'approvedUser.html'
             )
 
             ticket = Ticket.objects.get(code=data['ticket_id'])
@@ -405,7 +412,7 @@ class SendTicketEmailView(APIView):
             html_content = render_to_string(template_path, {
                 'ticket_name': ticket.subject,
                 'requesting': data['requesting'],
-                    'link': f"{settings.FRONT_URL.rstrip('/')}/admin/criticas/{data['ticket_id']}/",
+                'link': f"{settings.RESET_PASSWORD_URL.rstrip('/')}/admin/criticas/{data['ticket_id']}/",
                 'status': data['status'],
                 'comment': data['comment']
             })
@@ -437,3 +444,15 @@ class SendTicketEmailView(APIView):
 
         except Exception as e:
             return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class DownloadDocument(APIView):
+    def get(self, request, filename):
+        filepath = os.path.join(
+            settings.MEDIA_ROOT, 'attachments', 'critcs_and_suggestions', 'answer', filename)
+        import pdb
+        pdb.set_trace()
+        try:
+            return FileResponse(open(filepath, 'rb'), as_attachment=True, filename=filename)
+        except FileNotFoundError:
+            return Response({'error': 'Arquivo não encontrado'}, status=404)
