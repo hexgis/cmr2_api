@@ -7,14 +7,10 @@ from rest_framework.permissions import IsAuthenticated
 from permission.mixins import Auth, Public
 from django.conf import settings
 from django.http import FileResponse
-from rest_framework.views import APIView
-from django.http import FileResponse
-from django.conf import settings
 import os
 
 
 from django.utils import timezone
-import os
 import json
 
 
