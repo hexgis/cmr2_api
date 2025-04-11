@@ -400,7 +400,7 @@ class SendTicketEmailView(APIView):
             data = request.data.copy()
             template_path = os.path.join(
                 settings.EMAIL_TEMPLATES_DIR,
-                'approvedUser.html'
+                'requestAnalyzed.html'
             )
 
             ticket = Ticket.objects.get(code=data['ticket_id'])

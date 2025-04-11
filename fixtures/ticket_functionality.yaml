@@ -29,9 +29,44 @@
 },
 {
     "model": "admin_panel.ticketfunctionality",
+    "pk": 5,
+    "fields": {
+        "func_name": "Risco de Fogo e Focos de Calor (INPE)"
+    }
+},
+{
+    "model": "admin_panel.ticketfunctionality",
     "pk": 6,
     "fields": {
         "func_name": "Uso e Ocupação do Solo"
+    }
+},
+{
+    "model": "admin_panel.ticketfunctionality",
+    "pk": 7,
+    "fields": {
+        "func_name": "PRODES (INPE)"
+    }
+},
+{
+    "model": "admin_panel.ticketfunctionality",
+    "pk": 8,
+    "fields": {
+        "func_name": "Documental"
+    }
+},
+{
+    "model": "admin_panel.ticketfunctionality",
+    "pk": 9,
+    "fields": {
+        "func_name": "Meu Acervo de Imagens"
+    }
+},
+{
+    "model": "admin_panel.ticketfunctionality",
+    "pk": 10,
+    "fields": {
+        "func_name": "Deter"
     }
 },
 {
