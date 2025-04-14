@@ -179,7 +179,20 @@ class TicketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Ticket
         fields = [
-            'code', 'solicitation_type',  'solicitation_name', 'complexity_code', 'functionality', 'requesting', 'requesting_email', 'subject', 'description', 'opened_in_formatted',  'attachments', 'ticket_status', 'ticket_analysis_history', 'status_category'
+            'code',
+            'solicitation_type',
+            'solicitation_name',
+            'complexity_code',
+            'functionality',
+            'requesting',
+            'requesting_email',
+            'subject',
+            'description',
+            'opened_in_formatted',
+            'attachments',
+            'ticket_status',
+            'ticket_analysis_history',
+            'status_category'
         ]
         read_only_fields = ['code', 'opened_in']
 

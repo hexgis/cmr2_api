@@ -191,7 +191,7 @@ class TicketStatus(models.Model):
         db_table = 'admin_panel_tickets_status'
 
     def __str__(self):
-        return f"{self.get_status_category_display()} para o Ticket {self.ticket.id}"
+        return f"{self.get_status_category_display()} para o Ticket {self.ticket.code}"
 
 
 def rename_file_ticket_status(instance, filename):
