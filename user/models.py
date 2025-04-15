@@ -56,9 +56,22 @@ class Institution(models.Model):
         * Has one :model:`user.Institution`
     """
 
+    INSTITUTION_TYPES = [
+        ('FUNAI Sede', 'FUNAI Sede'),
+        ('Outros', 'Outros'),
+    ]
+
     name = models.CharField(
         max_length=255,
         help_text=_('Institution')
+    )
+
+    institution_type = models.CharField(
+        max_length=128,
+        help_text=_('Type'),
+        choices=INSTITUTION_TYPES,
+        null=True,
+        blank=True,
     )
 
     def __str__(self):
