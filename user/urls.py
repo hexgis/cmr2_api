@@ -108,4 +108,9 @@ urlpatterns = [
         views.AccessRequestDetailView.as_view(),
         name='access-request-detail'
     ),
+    path(
+        'access-requests/<int:pk>/pending/',
+        views.AccessRequestPendingView.as_view(),
+        name='access-request-pending'
+    ),
 ]
