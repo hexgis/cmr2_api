@@ -3,7 +3,6 @@ from django_filters.rest_framework import DjangoFilterBackend
 from django.db.models import Q, F, Func, Value
 
 from django.db.models.functions import Lower
-from permission.mixins import Auth, Public
 from rest_framework.exceptions import NotFound, ValidationError
 from urllib.parse import urlparse, parse_qs
 from django.conf import settings
@@ -17,13 +16,6 @@ from funai import (
 )
 
 from rest_framework.permissions import AllowAny
-
-
-FIELD_TI_NAME = 'no_ti'
-FIELD_CITY = 'no_municipio'
-FIELD_CR_NAME = 'ds_cr'
-
-SQL_UNACCENT = 'unaccent'
 
 
 class Unaccent(Func):
@@ -119,49 +111,51 @@ class TiByNameView(generics.ListAPIView):
         return response.Response(data)
 
 
-class TiByNameAllInfoView(Auth, generics.ListAPIView):
+class TiByNameAllInfoView(generics.ListAPIView):
     """
     API view to retrieve information about Indigenous Lands (TIs) based on a query parameter.
     Provides a list of TIs filtered and ordered by name.
     """
+
+    permission_classes = [AllowAny]
     serializer_class = serializers.TiPropertiesSerializer
+
+    def get_authenticators(self):
+        """
+        Overrides the default authenticator behavior.
+        Disables JWT authentication if the '_disable_jwt' attribute is set on the request.
+
+        Returns:
+            A list of authenticators if JWT is enabled, or an empty list if disabled.
+        """
+        if hasattr(self.request, '_disable_jwt') and self.request._disable_jwt:
+            return []
+        return super().get_authenticators()
 
     def get_queryset(self):
         """
-            Retrieves the queryset for the Indigenous Lands (TIs).
-            Filters the queryset based on the 'param' query parameter,
-            ignoring accents and performing a case-insensitive match.
+        Retrieves the queryset for the Indigenous Lands (TIs).
+        Filters the queryset based on the 'param' query parameter,
+        ignoring accents and performing a case-insensitive match.
 
-            Returns:
-                QuerySet: A filtered and ordered queryset of `LimiteTerraIndigena` objects.
+        Returns:
+            QuerySet: A filtered and ordered queryset of `LimiteTerraIndigena` objects.
         """
-        param = self.request.GET.get('param')
+        param = self.request.GET.get('param', None)
         queryset = models.LimiteTerraIndigena.objects.all()
 
         if param:
-            search_value = param.strip().lower()
-
-            unaccented_value = Func(Value(search_value), function=SQL_UNACCENT)
+            param = param.lower()
+            unaccented_param = Func(Value(param), function='unaccent')
 
             queryset = queryset.annotate(
-                no_ti_unaccent=Func(
-                    Lower(FIELD_TI_NAME),
-                    function=SQL_UNACCENT
-                ),
-                no_municipio_unaccent=Func(
-                    Lower(FIELD_CITY),
-                    function=SQL_UNACCENT
-                ),
-                co_cr__ds_cr_unaccent=Func(
-                    Lower(FIELD_CR_NAME),
-                    function=SQL_UNACCENT),
+                unaccented_no_ti=Unaccent(Lower('no_ti'))
             ).filter(
-                Q(no_ti_unaccent__icontains=unaccented_value) |
-                Q(no_municipio_unaccent__icontains=unaccented_value) |
-                Q(co_cr__ds_cr_unaccent__icontains=unaccented_value)
+                Q(unaccented_no_ti__icontains=unaccented_param)
             )
+        queryset = queryset.order_by('no_ti')
 
-        return queryset.order_by(FIELD_TI_NAME)
+        return queryset
 
     def list(self, request, *args, **kwargs):
         """
