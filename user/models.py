@@ -307,6 +307,7 @@ class AccessRequest(models.Model):
         PENDENTE = 1, 'Pendente'
         CONCEDIDA = 2, 'Concedida'
         RECUSADA = 3, 'Recusada'
+        PENDENTE_COORD = 4, 'Pendente Coordenador'
 
     name = models.CharField(
         max_length=255,
@@ -353,7 +354,7 @@ class AccessRequest(models.Model):
 
     status = models.IntegerField(
         choices=StatusType.choices,
-        default=StatusType.PENDENTE,
+        default=StatusType.PENDENTE_COORD,
         help_text=_("Current status of the access request")
     )
 

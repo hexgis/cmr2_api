@@ -52,7 +52,7 @@ class UploadedFileGeometriesAdmin(LeafletGeoAdmin):
     def get_queryset(self, request):
         queryset = super(UploadedFileGeometriesAdmin,
                          self).get_queryset(request)
-        return queryset.filter(user_uploaded__is_active=True)
+        return queryset
 
     list_display = (
         'id',

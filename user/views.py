@@ -14,6 +14,7 @@ from smtplib import SMTPException
 from rest_framework import viewsets, status
 from rest_framework.decorators import action
 from rest_framework.response import Response
+from rest_framework.exceptions import APIException
 import os
 import logging
 
@@ -536,8 +537,34 @@ class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     Handles creation of new access requests (Public).
     """
 
-    queryset = models.AccessRequest.objects.all()
+    queryset = models.AccessRequest.objects.exclude(
+        status=models.AccessRequest.StatusType.PENDENTE_COORD)
     serializer_class = AccessRequestDetailSerializer
+
+    def _send_notification_email(self, access_request):
+        subject = 'Usuário pendente de aprovação'
+        recipients = [access_request.coordinator_email,
+                        'valdean.junior@hex360.com.br']
+        template_path = os.path.join(
+            settings.EMAIL_TEMPLATES_DIR,
+            'approvedUser.html'
+        )
+        context = {
+            'name': access_request.name,
+            'id': access_request.id,
+        }
+        email_sent = send_custom_email(
+            subject=subject,
+            recipients=recipients,
+            template_path=template_path,
+            context=context,
+        )
+        if not email_sent:
+            raise Exception('Falha ao enviar o e-mail para o coordenador.')
+
+    def perform_create(self, serializer):
+        instance = serializer.save()
+        self._send_notification_email(instance)
 
 
 class AccessRequestPendingView(Public, generics.ListCreateAPIView):
@@ -667,6 +694,37 @@ class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
             return Response(
                 {
                     "detail": "Acesso negado ao usuário.",
+                    "request_id": access_request.id,
+                    "user_id": request.user.id
+                },
+                status=status.HTTP_200_OK
+            )
+        except Exception as e:
+            logger.error(f"Erro inesperado: {str(e)}")
+            return Response(
+                {'detail': 'Erro inesperado durante a aprovação.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class AccessRequestPendingView(AdminAuth, APIView):
+    """
+    Approves a specific access request by the coordinator,
+    changing its status from PENDING_COORD to PENDING
+    """
+    def post(self, request, pk, *args, **kwargs):
+        try:
+            access_request = get_object_or_404(
+                models.AccessRequest,
+                pk=pk,
+            )
+
+            access_request.status = models.AccessRequest.StatusType.PENDENTE
+            access_request.save()
+
+            return Response(
+                {
+                    "detail": "Acesso aprovado pelo coordenador.",
                     "request_id": access_request.id,
                     "user_id": request.user.id
                 },
