@@ -1,8 +1,150 @@
 - model: user.institution
   pk: 1
   fields:
-    name: hex
-- model: user.institution    
+    name: ABIN
+    institution_type: Outros
+- model: user.institution
   pk: 2
   fields:
-    name: FUNAI
+    name: ANM
+    institution_type: Outros
+- model: user.institution
+  pk: 3
+  fields:
+    name: Casa Civil
+    institution_type: Outros
+- model: user.institution
+  pk: 4
+  fields:
+    name: Censipam
+    institution_type: Outros
+- model: user.institution
+  pk: 5
+  fields:
+    name: CGAF
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 6
+  fields:
+    name: CGETNO
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 7
+  fields:
+    name: CGGAM
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 8
+  fields:
+    name: CGGE
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 9
+  fields:
+    name: CGGEO
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 10
+  fields:
+    name: CGGP
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 11
+  fields:
+    name: CGID
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 12
+  fields:
+    name: CGIIRC
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 13
+  fields:
+    name: CGLIC
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 14
+  fields:
+    name: CGMT
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 15
+  fields:
+    name: CGOF
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 16
+  fields:
+    name: CGPC
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 17
+  fields:
+    name: CGPDS
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 18
+  fields:
+    name: CGRL
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 19
+  fields:
+    name: CGTIC
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 20
+  fields:
+    name: CMR
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 21
+  fields:
+    name: DAGES
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 22
+  fields:
+    name: DPDS
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 23
+  fields:
+    name: DPT
+    institution_type: Funai Sede
+- model: user.institution
+  pk: 24
+  fields:
+    name: Hex360
+    institution_type: Outros
+- model: user.institution
+  pk: 25
+  fields:
+    name: Ibama
+    institution_type: Outros
+- model: user.institution
+  pk: 26
+  fields:
+    name: INPE
+    institution_type: Outros
+- model: user.institution
+  pk: 27
+  fields:
+    name: MPI
+    institution_type: Outros
+- model: user.institution
+  pk: 28
+  fields:
+    name: Museu do Índio
+    institution_type: null
+- model: user.institution
+  pk: 29
+  fields:
+    name: PNUD
+    institution_type: Outros
+- model: user.institution
+  pk: 30
+  fields:
+    name: Polícia Federal
+    institution_type: Outros

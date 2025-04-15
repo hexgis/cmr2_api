@@ -390,7 +390,7 @@ class UserUploadFileUpdatePropertiesPatchView(Auth, generics.UpdateAPIView):
         return response.Response(data, status=status.HTTP_200_OK)
 
 
-class InstitutionListCreateView(Auth, generics.ListCreateAPIView):
+class InstitutionListCreateView(Public, generics.ListCreateAPIView):
     """API para listar e criar instituições."""
 
     queryset = models.Institution.objects.all()
