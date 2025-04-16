@@ -1,3 +1,5 @@
+import base64
+
 from django_filters.rest_framework import DjangoFilterBackend
 from django.db import IntegrityError
 from django.db.models import Q
@@ -107,3 +109,57 @@ class LayerListView(mixins.Public, generics.ListAPIView):
         """Customize the serializer to include specific fields."""
         kwargs['fields'] = ('id', 'name', 'group_name')
         return super().get_serializer(*args, **kwargs)
+
+
+class LayerThumbnailImageBase64View(mixins.PublicLayerAuth, views.APIView):
+    """View to export layer thumbnail blob into base64 image."""
+
+    def get(self, _, id):
+        """Fetches the layer by identifier and returns the thumbnail image.
+
+        Args:
+            request (DRF Request): User request.
+            id (str): Layer identifier.
+
+        Returns:
+            Response: Layer Thumbnail Image.
+        """
+
+        try:
+            layer = models.Wms.objects.get(id=id)
+
+            if not layer.thumbnail_blob:
+                layer.save()
+
+            img = base64.b64encode(layer.thumbnail_blob).decode('UTF-8')
+
+            return response.Response(img, status.HTTP_200_OK)
+        except Exception as exc:
+            return response.Response(f'{exc}', status.HTTP_404_NOT_FOUND)
+
+
+class LayerLegendImageBase64View(mixins.PublicLayerAuth, views.APIView):
+    """View to export layer legend blob into base64 image."""
+
+    def get(self, _, id):
+        """Fetches the layer by identifier and returns the legend image.
+
+        Args:
+            request (DRF Request): User request.
+            id (str): Layer identifier.
+
+        Returns:
+            Response: Layer Legend Image.
+        """
+
+        try:
+            layer = models.Tms.objects.get(id=id)
+
+            if not layer.legend_blob:
+                layer.save()
+
+            img = base64.b64encode(layer.legend_blob).decode('UTF-8')
+
+            return response.Response(img, status.HTTP_200_OK)
+        except Exception as exc:
+            return response.Response(f'{exc}', status.HTTP_404_NOT_FOUND)
