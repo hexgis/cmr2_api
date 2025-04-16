@@ -544,20 +544,25 @@ class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     def _send_notification_email(self, access_request):
         subject = 'Usuário pendente de aprovação'
         recipients = [access_request.coordinator_email,
-                      'valdean.junior@hex360.com.br']
+                      'joao.fonseca@hex360.com.br'
+                      ]
         template_path = os.path.join(
             settings.EMAIL_TEMPLATES_DIR,
-            'approvedUser.html'
+            'solicitacao_de_acesso.html'
         )
         context = {
             'name': access_request.name,
             'id': access_request.id,
         }
-        email_sent = send_custom_email(
+
+        html_message = render_to_string(template_path, context)
+
+        email_sent = send_mail(
             subject=subject,
-            recipients=recipients,
-            template_path=template_path,
-            context=context,
+            message='',
+            from_email="cmr@funai.gov.br",
+            recipient_list=recipients,
+            html_message=html_message
         )
         if not email_sent:
             raise Exception('Falha ao enviar o e-mail para o coordenador.')
