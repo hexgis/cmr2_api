@@ -391,7 +391,7 @@ class UserUploadFileUpdatePropertiesPatchView(Auth, generics.UpdateAPIView):
         return response.Response(data, status=status.HTTP_200_OK)
 
 
-class InstitutionListCreateView(Auth, generics.ListCreateAPIView):
+class InstitutionListCreateView(Public, generics.ListCreateAPIView):
     """API para listar e criar instituições."""
 
     queryset = models.Institution.objects.all()
@@ -544,7 +544,7 @@ class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     def _send_notification_email(self, access_request):
         subject = 'Usuário pendente de aprovação'
         recipients = [access_request.coordinator_email,
-                        'valdean.junior@hex360.com.br']
+                      'valdean.junior@hex360.com.br']
         template_path = os.path.join(
             settings.EMAIL_TEMPLATES_DIR,
             'approvedUser.html'
@@ -712,6 +712,7 @@ class AccessRequestPendingView(AdminAuth, APIView):
     Approves a specific access request by the coordinator,
     changing its status from PENDING_COORD to PENDING
     """
+
     def post(self, request, pk, *args, **kwargs):
         try:
             access_request = get_object_or_404(
