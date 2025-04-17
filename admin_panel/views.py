@@ -450,3 +450,13 @@ class DownloadDocument(APIView):
             return FileResponse(open(filepath, 'rb'), as_attachment=True, filename=filename)
         except FileNotFoundError:
             return Response({'error': 'Arquivo não encontrado'}, status=404)
+
+
+class DownloadManual(APIView):
+    def get(self, request):
+        filepath = os.path.join(
+            settings.DOC_TEMPLATE_DIR, 'Manual_MVP_CMR2_2025.pdf')
+        try:
+            return FileResponse(open(filepath, 'rb'), as_attachment=True, filename='Manual_MVP_CMR2_2025.pdf')
+        except FileNotFoundError:
+            return Response({'error': 'Arquivo não encontrado'}, status=404)

@@ -162,6 +162,7 @@ if DEBUG:
     CORS_ORIGIN_ALLOW_ALL = True
 
 VIDEO_TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates', 'video')
+DOC_TEMPLATE_DIR = os.path.join(BASE_DIR, 'templates', 'doc')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Password validation
