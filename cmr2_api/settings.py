@@ -403,3 +403,7 @@ AUTHENTICATION_BACKENDS = (
     'cmr2_api.auth_backends.MyLDAPBackend',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+DATA_UPLOAD_MAX_NUMBER_FIELDS = int(
+    os.getenv('DATA_UPLOAD_MAX_NUMBER_FIELDS', 10240)
+)
