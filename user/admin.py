@@ -191,6 +191,7 @@ class InstitutionAdmin(import_export):
     list_display = (
         'id',
         'name',
+        'institution_type',
     )
     search_fields = (
         'name',
