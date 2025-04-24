@@ -2,7 +2,6 @@ import logging
 import ldap
 from django.conf import settings
 from django.contrib.auth import get_user_model
-from django.core.exceptions import ObjectDoesNotExist
 
 logger = logging.getLogger(__name__)
 
@@ -13,86 +12,77 @@ class MyLDAPBackend:
     for @funai.gov.br emails and returns the Django user object.
     """
 
-    def authenticate(self, request, username_or_email=None, password=None, **kwargs):
-        UserModel = get_user_model()
+    def __init__(self):
+        self.UserModel = get_user_model()
 
+    def authenticate(self, request, username_or_email=None, password=None, **kwargs):
         if not username_or_email or not password:
-            logger.debug("username_or_email or password is empty.")
+            logger.debug("Username or password is missing.")
             return None
 
-        # Autenticação via LDAP para usuários @funai.gov.br
-        if '@funai.gov.br' in username_or_email:
-            if not self._ldap_bind(username_or_email, password):
-                logger.debug("LDAP bind failed for email: %s",
-                             username_or_email)
-                return None
+        if self._is_funai_email(username_or_email):
+            return self._authenticate_via_ldap(username_or_email, password)
 
-            logger.debug("LDAP bind successful for email: %s",
-                         username_or_email)
+        return self._authenticate_via_django(username_or_email, password)
 
-            try:
-                user = UserModel.objects.get(email=username_or_email)
-                logger.debug(
-                    f"User found: {user.username} (email: {user.email})")
-                return user
-            except UserModel.DoesNotExist:
-                logger.debug(
-                    "User %s not found in Django database.", username_or_email)
-                # Opcional: Criar usuário se não existir
-                user = UserModel.objects.create_user(
-                    username=username_or_email.split(
-                        '@')[0],  # Ajuste conforme necessário
-                    email=username_or_email,
-                    password=None  # Senha vazia, já que é autenticado via AD
-                )
-                user.is_active = True
-                user.save()
-                logger.debug(
-                    f"User created: {user.username} (email: {user.email})")
-                return user
+    def _is_funai_email(self, email):
+        return email.endswith('@funai.gov.br')
 
-        # Fallback para autenticação padrão do Django (se necessário)
+    def _authenticate_via_ldap(self, email, password):
         try:
-            user = UserModel.objects.get(username=username_or_email)
-            if user.check_password(password):
-                logger.debug("User authenticated via Django: %s",
-                             username_or_email)
+            user = self.UserModel.objects.get(email=email)
+        except self.UserModel.DoesNotExist:
+            logger.debug("LDAP user not found in local DB: %s", email)
+            return None
+
+        if not self._ldap_bind(email, password):
+            logger.debug("LDAP bind failed for: %s", email)
+            return None
+
+        if user.is_active:
+            logger.debug("LDAP authentication successful for: %s", email)
+            return user
+
+        logger.debug("LDAP user is not active: %s", email)
+        return None
+
+    def _authenticate_via_django(self, username, password):
+        try:
+            user = self.UserModel.objects.get(username=username)
+        except self.UserModel.DoesNotExist:
+            logger.debug("Django user not found: %s", username)
+            return None
+
+        if user.check_password(password):
+            if user.is_active:
+                logger.debug(
+                    "Django authentication successful for: %s", username)
                 return user
-        except UserModel.DoesNotExist:
-            logger.debug("User %s not found in Django database.",
-                         username_or_email)
+            logger.debug("Django user is not active: %s", username)
 
         return None
 
     def _ldap_bind(self, dn, password):
-        """
-        Attempts to authenticate to the LDAP server with the credentials.
-        Returns True if successful, False otherwise.
-        """
+        connection = None
         try:
             connection = ldap.initialize(settings.AUTH_LDAP_SERVER_URI)
             connection.set_option(ldap.OPT_REFERRALS, 0)
             connection.simple_bind_s(dn, password)
-            connection.unbind_s()
             return True
         except ldap.INVALID_CREDENTIALS:
-            logger.debug("Invalid credentials for DN: %s", dn)
+            logger.debug("Invalid LDAP credentials for: %s", dn)
         except ldap.LDAPError as e:
-            logger.error(
-                "LDAP error occurred during bind for DN %s: %s", dn, e)
+            logger.error("LDAP error for %s: %s", dn, e)
         finally:
-            try:
-                connection.unbind_s()
-            except Exception:
-                pass
+            if connection:
+                try:
+                    connection.unbind_s()
+                except Exception:
+                    pass
         return False
 
     def get_user(self, user_id):
-        """
-        Required method to retrieve a user by ID.
-        """
-        UserModel = get_user_model()
         try:
-            return UserModel.objects.get(pk=user_id)
-        except UserModel.DoesNotExist:
+            return self.UserModel.objects.get(pk=user_id)
+        except self.UserModel.DoesNotExist:
             return None
