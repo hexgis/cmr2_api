@@ -417,14 +417,13 @@ class SendTicketEmailView(APIView):
 
             # Substitua pelos e-mails dos responsáveis
             recipient_list = [
-                'marcos.silva@hex360.com.br',
-                'valdean.junior@hex360.com.br'
+                'joao.fonseca@hex360.com.br',
             ]
 
             email = EmailMultiAlternatives(
                 subject="Atualização de Status do Ticket",
                 body=text_content,
-                from_email="hexgisdev@gmail.com",
+                from_email=data['requesting'],
                 to=recipient_list
             )
             email.attach_alternative(html_content, "text/html")
