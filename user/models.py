@@ -194,6 +194,13 @@ class User(AbstractUser):
         return f"{self.email or self.username}"
 
 
+class UserManager(models.Manager):
+    def get_admins(self):
+        return self.get_queryset().filter(
+            Q(roles__name='admin') | Q(is_superuser=True)
+        ).distinct()
+
+
 class UserUploadedFile(models.Model):
     """Model to store user uploaded files.
 
