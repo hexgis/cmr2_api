@@ -1,53 +1,28 @@
+import os
+import logging
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
+from django.utils.html import strip_tags
+from django.conf import settings
 
-def send_custom_email(
-    subject: str,
-    recipients: list,
-    template_path: str,
-    context: dict,
-    from_email: str = 'hexgisdev@gmail.com',
-    attachments: list = None,
-):
-    """
-    Envia um e-mail customizado usando EmailMultiAlternatives.
+logger = logging.getLogger(__name__)
 
-    Args:
-        subject (str): Assunto do e-mail.
-        recipients (list): Lista de destinatários.
-        template_path (str): Caminho para o template HTML.
-        context (dict): Contexto para renderizar o template.
-        from_email (str): E-mail do remetente.
-        attachments (list): Lista de anexos no formato [(filename, content, mimetype)].
 
-    Returns:
-        bool: True se o e-mail foi enviado com sucesso.
-    """
+def send_html_email(subject, recipient_list, template_path, context, from_email=None):
     try:
-        # Renderiza o conteúdo HTML
         html_content = render_to_string(template_path, context)
+        text_content = strip_tags(html_content)
 
-        # Cria o objeto de e-mail
         email = EmailMultiAlternatives(
             subject=subject,
-            body='Este e-mail contém conteúdo em HTML. Verifique sua compatibilidade.',  # Texto alternativo.
-            from_email=from_email,
-            to=recipients,
+            body=text_content,
+            from_email=from_email or settings.DEFAULT_FROM_EMAIL,
+            to=recipient_list
         )
-
-        # Adiciona a versão HTML
-        email.attach_alternative(html_content, 'text/html')
-
-        # Adiciona anexos, se existirem
-        if attachments:
-            for filename, content, mimetype in attachments:
-                email.attach(filename, content, mimetype)
-
-        # Envia o e-mail
+        email.attach_alternative(html_content, "text/html")
         email.send()
+        logger.info(f"E-mail enviado para: {recipient_list}")
         return True
-
     except Exception as e:
-        # Log ou tratamento de erro
-        print(f"Erro ao enviar e-mail: {e}")
+        logger.warning(f"Falha ao enviar e-mail: {str(e)}")
         return False

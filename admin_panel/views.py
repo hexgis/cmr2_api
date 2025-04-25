@@ -1,8 +1,10 @@
 # Built-in
 import os
 import json
+import logging
 
 # Django
+from django.db.models import Q
 from django.conf import settings
 from django.core.exceptions import ValidationError as DjangoValidationError
 from django.core.mail import send_mail, EmailMultiAlternatives
@@ -10,6 +12,7 @@ from django.http import HttpResponse, FileResponse
 from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.html import strip_tags
+from django.contrib.auth import get_user_model
 
 # Third-party
 from rest_framework import permissions, status
@@ -31,6 +34,9 @@ from .serializers import (
     TicketAttachmentSerializer, TicketStatusChoicesSerializer
 )
 from .validators import validate_ticket_choices
+from utils.send_email import send_html_email
+
+logger = logging.getLogger(__name__)
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -107,8 +113,7 @@ class TicketListCreateView(Auth, APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class TicketDetailView(APIView):
-    permission_classes = [IsAuthenticated]
+class TicketDetailView(Auth, APIView):
 
     def get_object(self, pk, user):
         """
@@ -369,69 +374,86 @@ class GetChoices(APIView):
         return Response(serializer.data)
 
 
-class SendTicketEmailView(APIView):
+class SendTicketEmailView(Auth, APIView):
     """
     APIView for sending email notifications related to ticket status changes.
-
-    Methods:
-        post(request):
-            Handles POST requests to send an email notification.
     """
-    permission_classes = [IsAuthenticated]
 
     def post(self, request):
-        """
-        Sends a notification email about a ticket status update.
-
-        Args:
-            request (Request): Request object containing the following data:
-                - ticket_id (str): The ID of the ticket.
-                - requesting (str): The name of the user requesting the update.
-                - status (str): The new status of the ticket.
-                - comment (str): Any additional comments regarding the update.
-
-        Returns:
-            Response: A response object indicating the success or failure of the email operation.
-        """
         try:
             data = request.data.copy()
-            template_path = os.path.join(
-                settings.EMAIL_TEMPLATES_DIR,
-                'request_analyzed.html'
-            )
-
             ticket = Ticket.objects.get(code=data['ticket_id'])
+            requesting_email = ticket.email if hasattr(
+                ticket, 'email') else data.get('requesting')
 
-            html_content = render_to_string(template_path, {
+            email_context = {
                 'ticket_name': ticket.subject,
+                'ticket_id': data['ticket_id'],
                 'requesting': data['requesting'],
+                'requesting_email': requesting_email,
                 'link': f"{settings.RESET_PASSWORD_URL.rstrip('/')}/admin/criticas/{data['ticket_id']}/",
                 'status': data['status'],
                 'comment': data['comment']
-            })
+            }
 
-            text_content = strip_tags(html_content)
+            # Email to the requesting user
+            user_template = os.path.join(
+                settings.EMAIL_TEMPLATES_DIR, 'request_analyzed.html')
 
-            requesting_email = data['requesting']
-
-            send_mail(
-                subject="Atualização de Status do Ticket",
-                message=text_content,
-                from_email=settings.DEFAULT_FROM_EMAIL,
+            send_html_email(
+                subject="Sua sugestão foi analisada",
+                template_path=user_template,
+                context=email_context,
                 recipient_list=[requesting_email],
-                html_message=html_content,
+                from_email=settings.DEFAULT_FROM_EMAIL
             )
 
-            return Response({'status': 'Email sent successfully!'}, status=status.HTTP_200_OK)
+            # Email to admins/developers
+            admin_emails = list(
+                get_user_model().objects.filter(Q(roles__id=3) | Q(roles__id=4))
+                .values_list('email', flat=True)
+                .distinct()
+            )
+
+            if admin_emails:
+                admin_template = os.path.join(
+                    settings.EMAIL_TEMPLATES_DIR, 'request_analyzed_adm.html')
+                send_html_email(
+                    subject="Nova sugestão analisada",
+                    template_path=admin_template,
+                    context=email_context,
+                    recipient_list=admin_emails,
+                    from_email=settings.DEFAULT_FROM_EMAIL
+                )
+
+            return Response(
+                {'status': 'Emails sent successfully!'},
+                status=status.HTTP_200_OK
+            )
 
         except Ticket.DoesNotExist:
-            return Response({'error': 'Ticket not found.'}, status=status.HTTP_404_NOT_FOUND)
+            logger.warning("Ticket não encontrado: %s", data.get('ticket_id'))
+
+            return Response(
+                {'error': 'Ticket not found.'},
+                status=status.HTTP_404_NOT_FOUND
+            )
 
         except FileNotFoundError:
-            return Response({'error': 'Email template not found.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            logger.warning("Template de e-mail não encontrado.")
+
+            return Response(
+                {'error': 'Email template not found.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
         except Exception as e:
-            return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+            logger.warning("Erro ao enviar e-mails: %s", str(e))
+
+            return Response(
+                {'error': f'An error occurred: {str(e)}'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 
 
 class DownloadDocument(APIView):

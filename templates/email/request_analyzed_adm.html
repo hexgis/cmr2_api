@@ -324,15 +324,19 @@
       </div>
 
       <div class="content">
-        <h1>Sua sugestão foi analisada</h1>
+        <h1>Nova sugestão analisada</h1>
         <p>
-          Prezado(a) usuário(a), Agradecemos por contribuir com sua sugestão ou
-          crítica ao nosso sistema. Informamos que sua solicitação, identificada
-          pelo código
-          <strong> {{ ticket_id }} - "{{ ticket_name }}" </strong>, foi
-          devidamente analisada.<br /><br />Você pode acompanhar o processo pela
-          plataforma .<br /><br />
+          Prezado(a) administrador(a) / desenvolvedor(a),
+          <br /><br />
+          Informamos que uma nova solicitação foi analisada.<br />
+          O(a) usuário(a) <strong>{{requesting_email}}</strong> enviou uma
+          crítica ou sugestão identificada pelo código
+          <strong> {{ ticket_id }} - "{{ ticket_name }}" </strong> que já passou
+          por avaliação.<br /><br />
+          Para mais detalhes e acompanhamento do processo, acesse a
+          plataforma.<br /><br />
         </p>
+
         <p>
           <a
             href="{{ link }}"
