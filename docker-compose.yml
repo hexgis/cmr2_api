@@ -35,7 +35,7 @@ services:
       - "8080:8080"
     # network_mode: "host"
     environment:
-      RESET_PASSWORD_URL: "https://cmrhomolog.funai.gov.br/auth/confirmar/?code={code}"
+      RESET_PASSWORD_URL: "https://cmr.funai.gov.br/"
       SECRET_KEY: OSKS92JlKSJJksio*&2j40(&0130)W082_120KKmas@
       DB_USER: testuser
       DB_NAME: testdatabase

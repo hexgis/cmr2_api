@@ -1,39 +1,36 @@
+# Built-in
+import os
+import json
+
+# Django
+from django.conf import settings
+from django.core.exceptions import ValidationError as DjangoValidationError
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.http import HttpResponse, FileResponse
+from django.template.loader import render_to_string
+from django.utils import timezone
+from django.utils.html import strip_tags
+
+# Third-party
 from rest_framework import permissions, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
+
+# Project-specific
 from permission.mixins import Auth, Public
-from django.conf import settings
-from django.http import FileResponse
-import os
-
-
-from django.utils import timezone
-import json
-
-
-from .models import Ticket, TicketStatus, TicketAnalysisHistory, TicketStatusAttachment, TicketAttachment
+from utils.gen_xslx import generate_excel
+from .models import (
+    Ticket, TicketStatus, TicketAnalysisHistory,
+    TicketStatusAttachment, TicketAttachment
+)
 from .serializers import (
-    TicketStatusSerializer, TicketSerializer, TicketAttachmentSerializer, TicketStatusChoicesSerializer
+    TicketStatusSerializer, TicketSerializer,
+    TicketAttachmentSerializer, TicketStatusChoicesSerializer
 )
 from .validators import validate_ticket_choices
-
-from django.core.exceptions import ValidationError
-from django.utils import timezone
-from django.http import HttpResponse
-
-from django.utils.html import strip_tags
-from django.conf import settings
-import os
-import json
-
-from utils.gen_xslx import generate_excel
-
-from django.core.mail import send_mail, EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -400,7 +397,7 @@ class SendTicketEmailView(APIView):
             data = request.data.copy()
             template_path = os.path.join(
                 settings.EMAIL_TEMPLATES_DIR,
-                'requestAnalyzed.html'
+                'request_analyzed.html'
             )
 
             ticket = Ticket.objects.get(code=data['ticket_id'])
@@ -415,20 +412,16 @@ class SendTicketEmailView(APIView):
 
             text_content = strip_tags(html_content)
 
-            # Substitua pelos e-mails dos responsáveis
-            recipient_list = [
-                'joao.fonseca@hex360.com.br',
-            ]
+            requesting_email = data['requesting']
 
-            email = EmailMultiAlternatives(
+            send_mail(
                 subject="Atualização de Status do Ticket",
-                body=text_content,
-                from_email=data['requesting'],
-                to=recipient_list
+                message=text_content,
+                from_email=settings.DEFAULT_FROM_EMAIL,
+                recipient_list=[requesting_email],
+                html_message=html_content,
             )
-            email.attach_alternative(html_content, "text/html")
 
-            email.send()
             return Response({'status': 'Email sent successfully!'}, status=status.HTTP_200_OK)
 
         except Ticket.DoesNotExist:
