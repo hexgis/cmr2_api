@@ -413,10 +413,10 @@ class SendTicketEmailView(Auth, APIView):
             admin_role, _ = Role.objects.get_or_create(name="Administrador")
             dev_role, _ = Role.objects.get_or_create(name="Desenvolvedor")
 
+            User = get_user_model()
+
             admin_emails = list(
-                get_user_model().objects.filter(
-                    Q(roles=admin_role) | Q(roles=dev_role)
-                )
+                User.objects.filter(Q(roles=admin_role) | Q(roles=dev_role))
                 .values_list('email', flat=True)
                 .distinct()
             )
