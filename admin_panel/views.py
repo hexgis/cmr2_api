@@ -13,6 +13,7 @@ from django.template.loader import render_to_string
 from django.utils import timezone
 from django.utils.html import strip_tags
 from django.contrib.auth import get_user_model
+from user.models import Role
 
 # Third-party
 from rest_framework import permissions, status
@@ -409,8 +410,13 @@ class SendTicketEmailView(Auth, APIView):
             )
 
             # Email to admins/developers
+            admin_role, _ = Role.objects.get_or_create(name="Administrador")
+            dev_role, _ = Role.objects.get_or_create(name="Desenvolvedor")
+
             admin_emails = list(
-                get_user_model().objects.filter(Q(roles__id=3) | Q(roles__id=4))
+                get_user_model().objects.filter(
+                    Q(roles=admin_role) | Q(roles=dev_role)
+                )
                 .values_list('email', flat=True)
                 .distinct()
             )
