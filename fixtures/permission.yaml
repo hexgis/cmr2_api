@@ -132,7 +132,7 @@
 - model: permission.componentpermission
   pk: 3
   fields:
-    name: Administrador/Gestor
+    name: Administrador
     description: Gerenciamento da plataforma e funcionalidades restritas.
     components: '[ "analytics", "admin_panel", "feedback_admin"]'
 - model: permission.componentpermission

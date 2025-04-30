@@ -141,8 +141,7 @@ class ResetPassword(Public, views.APIView):
                 )
 
                 # Monta link de redefinição usando a URL configurada
-                reset_link = settings.RESET_PASSWORD_URL.format(
-                    code=reset_code.code)
+                reset_link = f"{settings.RESET_PASSWORD_URL}/auth/confirmar/?code={reset_code.code}"
 
                 # Prepara conteúdo do e-mail (template + contexto)
                 context = {
@@ -150,6 +149,7 @@ class ResetPassword(Public, views.APIView):
                     'reset_link': reset_link,
                     'reset_code': reset_code.code,
                 }
+
                 template_path = os.path.join(
                     settings.EMAIL_TEMPLATES_DIR, 'password_reset.html')
                 html_message = render_to_string(template_path, context)
