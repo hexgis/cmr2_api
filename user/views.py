@@ -49,7 +49,7 @@ from user import (
 )
 from permission import models as perm_models
 
-from utils.send_email import send_html_email
+from emails.send_email import send_html_email
 from django.contrib.auth import get_user_model
 
 logger = logging.getLogger(__name__)

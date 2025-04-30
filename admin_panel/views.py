@@ -15,6 +15,7 @@ from django.utils.html import strip_tags
 from django.contrib.auth import get_user_model
 from user.models import Role
 
+
 # Third-party
 from rest_framework import permissions, status
 from rest_framework.exceptions import ValidationError
@@ -35,7 +36,8 @@ from .serializers import (
     TicketAttachmentSerializer, TicketStatusChoicesSerializer
 )
 from .validators import validate_ticket_choices
-from utils.send_email import send_html_email
+from emails.ticket_user import send_ticket_email_to_user
+from emails.ticket_admins import send_ticket_email_to_admins
 
 logger = logging.getLogger(__name__)
 
@@ -376,10 +378,6 @@ class GetChoices(APIView):
 
 
 class SendTicketEmailView(Auth, APIView):
-    """
-    APIView for sending email notifications related to ticket status changes.
-    """
-
     def post(self, request):
         try:
             data = request.data.copy()
@@ -397,69 +395,22 @@ class SendTicketEmailView(Auth, APIView):
                 'comment': data['comment']
             }
 
-            # Email to the requesting user
-            user_template = os.path.join(
-                settings.EMAIL_TEMPLATES_DIR, 'request_analyzed.html')
+            send_ticket_email_to_user(email_context, requesting_email)
+            send_ticket_email_to_admins(email_context)
 
-            send_html_email(
-                subject="Sua sugestão foi analisada",
-                template_path=user_template,
-                context=email_context,
-                recipient_list=[requesting_email],
-                from_email=settings.DEFAULT_FROM_EMAIL
-            )
-
-            # Email to admins/developers
-            admin_role, _ = Role.objects.get_or_create(name="Administrador")
-            dev_role, _ = Role.objects.get_or_create(name="Desenvolvedor")
-
-            User = get_user_model()
-
-            admin_emails = list(
-                User.objects.filter(Q(roles=admin_role) | Q(roles=dev_role))
-                .values_list('email', flat=True)
-                .distinct()
-            )
-
-            if admin_emails:
-                admin_template = os.path.join(
-                    settings.EMAIL_TEMPLATES_DIR, 'request_analyzed_adm.html')
-                send_html_email(
-                    subject="Nova sugestão analisada",
-                    template_path=admin_template,
-                    context=email_context,
-                    recipient_list=admin_emails,
-                    from_email=settings.DEFAULT_FROM_EMAIL
-                )
-
-            return Response(
-                {'status': 'Emails sent successfully!'},
-                status=status.HTTP_200_OK
-            )
+            return Response({'status': 'Emails sent successfully!'}, status=status.HTTP_200_OK)
 
         except Ticket.DoesNotExist:
             logger.warning("Ticket não encontrado: %s", data.get('ticket_id'))
-
-            return Response(
-                {'error': 'Ticket not found.'},
-                status=status.HTTP_404_NOT_FOUND
-            )
+            return Response({'error': 'Ticket not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         except FileNotFoundError:
             logger.warning("Template de e-mail não encontrado.")
-
-            return Response(
-                {'error': 'Email template not found.'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+            return Response({'error': 'Email template not found.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         except Exception as e:
             logger.warning("Erro ao enviar e-mails: %s", str(e))
-
-            return Response(
-                {'error': f'An error occurred: {str(e)}'},
-                status=status.HTTP_500_INTERNAL_SERVER_ERROR
-            )
+            return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
 class DownloadDocument(APIView):
