@@ -1,6 +1,6 @@
 import os
 from django.conf import settings
-from send_email import send_html_email
+from emails.send_email import send_html_email
 
 
 def send_ticket_email_to_user(context, recipient_email):

@@ -3,7 +3,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db.models import Q
 from user.models import Role
-from send_email import send_html_email
+from emails.send_email import send_html_email
 
 
 def send_ticket_email_to_admins(context):
