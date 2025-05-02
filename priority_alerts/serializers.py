@@ -38,7 +38,7 @@ class AlertsTableSerializers(serializers.ModelSerializer):
     nu_latitude = serializers.SerializerMethodField()
     nu_longitude = serializers.SerializerMethodField()
     nu_area_ha = serializers.SerializerMethodField()
-    
+
     class Meta:
         """Meta class for `AlertsTableSerializers` serializer."""
         model = models.UrgentAlerts
@@ -70,15 +70,16 @@ class AlertsTableSerializers(serializers.ModelSerializer):
 
     def format_coord(self, value):
         return locale.format_string("%.6f", value, grouping=True)
-    
+
     def get_nu_area_ha(self, obj):
         return self.format_area(obj.nu_area_ha)
-    
+
     def get_nu_latitude(self, obj):
         return self.format_coord(obj.nu_latitude)
-    
+
     def get_nu_longitude(self, obj):
         return self.format_coord(obj.nu_longitude)
+
 
 class AlertsDetailSerializers(serializers.ModelSerializer):
     """Serializer to return detailed `models.UrgentAlerts` data."""
@@ -87,6 +88,7 @@ class AlertsDetailSerializers(serializers.ModelSerializer):
         """Meta class for `AlertsDetailSerializers` serializer."""
         model = models.UrgentAlerts
         fields = (
+            'id',
             'co_funai',
             'no_ti',
             'ds_cr',
