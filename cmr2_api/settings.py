@@ -364,12 +364,23 @@ JAZZMIN_UI_TWEAKS = {
 #                           EMAIL CONFIGURATION                         #
 #########################################################################
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = '10.0.0.22'
-EMAIL_PORT = '25'
+EMAIL_BACKEND = os.getenv(
+    'EMAIL_BACKEND',
+    'django.core.mail.backends.smtp.EmailBackend'
+)
+EMAIL_HOST = os.getenv('EMAIL_HOST', 'localhost')
+EMAIL_PORT = int(os.getenv('EMAIL_PORT', 1025))
+EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS', 'False') == 'True'
+EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER', '')
+EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD', '')
+DEFAULT_FROM_EMAIL = os.getenv('DEFAULT_FROM_EMAIL', 'cmr@funai.gov.br')
 EMAIL_SUBJECT_PREFIX = '[CMR] Centro de Monitoramento Remoto'
-EMAIL_ADMIN_FEEDBACK = "cmr@funai.gov.br"
-DEFAULT_FROM_EMAIL = "cmr@funai.gov.br"
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = '10.0.0.22'
+# EMAIL_PORT = '25'
+# EMAIL_ADMIN_FEEDBACK = ""
+# DEFAULT_FROM_EMAIL = "cmr@funai.gov.br"
 
 ################################################################################
 ####                           LDAP CONFIGURATION                           ####

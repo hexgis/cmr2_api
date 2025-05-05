@@ -18,6 +18,11 @@ services:
       POSTGRES_PASSWORD: asdfsa
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+  mailhog:
+    image: mailhog/mailhog
+    ports:
+      - "1025:1025" # SMTP
+      - "8025:8025" # Web Interface
 
   dev:
     build:
@@ -35,7 +40,7 @@ services:
       - "8080:8080"
     # network_mode: "host"
     environment:
-      RESET_PASSWORD_URL: "https://cmrhomolog.funai.gov.br/auth/confirmar/?code={code}"
+      RESET_PASSWORD_URL: "http://localhost:3000"
       SECRET_KEY: OSKS92JlKSJJksio*&2j40(&0130)W082_120KKmas@
       DB_USER: testuser
       DB_NAME: testdatabase
@@ -48,8 +53,11 @@ services:
       DB_HOST_FOR_READ: 192.168.20.135
       DB_PORT_FOR_READ: 5433
       ALLOWED_HOSTS: '["*"]'
-      EMAIL_HOST: smtp.example.com
-      EMAIL_HOST_USER: host_user@email.com
+      EMAIL_HOST: mailhog
+      EMAIL_PORT: 1025
+      EMAIL_BACKEND: django.core.mail.backends.smtp.EmailBackend
+      DEFAULT_FROM_EMAIL: dev@example.com
+      EMAIL_HOST_USER: cmr@funai.gov.br
       EMAIL_HOST_PASSWORD: password
       ELASTICSEARCH_URL: http://es:9200
       BATCH_BUFFER_SIZE: 10
@@ -70,6 +78,7 @@ services:
     depends_on:
       - db
       - db_for_read
+      - mailhog
 
   test:
     build:

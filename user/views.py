@@ -49,7 +49,10 @@ from user import (
 )
 from permission import models as perm_models
 
-from utils.send_email import send_custom_email
+from emails.send_email import send_html_email
+from django.contrib.auth import get_user_model
+from emails.access_request import send_email_access_request
+
 
 logger = logging.getLogger(__name__)
 
@@ -542,30 +545,7 @@ class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     serializer_class = AccessRequestDetailSerializer
 
     def _send_notification_email(self, access_request):
-        subject = 'Usuário pendente de aprovação'
-        recipients = [access_request.coordinator_email,
-                      'joao.fonseca@hex360.com.br'
-                      ]
-        template_path = os.path.join(
-            settings.EMAIL_TEMPLATES_DIR,
-            'solicitacao_de_acesso.html'
-        )
-        context = {
-            'name': access_request.name,
-            'id': access_request.id,
-        }
-
-        html_message = render_to_string(template_path, context)
-
-        email_sent = send_mail(
-            subject=subject,
-            message='',
-            from_email="cmr@funai.gov.br",
-            recipient_list=recipients,
-            html_message=html_message
-        )
-        if not email_sent:
-            raise Exception('Falha ao enviar o e-mail para o coordenador.')
+        send_email_access_request(access_request)
 
     def perform_create(self, serializer):
         instance = serializer.save()
@@ -604,6 +584,7 @@ class AccessRequestApproveView(AdminAuth, APIView):
             institution = get_object_or_404(
                 models.Institution, pk=institution_id)
             roles = models.Role.objects.filter(pk__in=role_ids)
+
             access_request.status = 2
             access_request.reviewed_at = timezone.now()
             access_request.reviewed_by = admin
@@ -621,29 +602,33 @@ class AccessRequestApproveView(AdminAuth, APIView):
             if created:
                 user.roles.set(roles)
                 user.save()
-                logger.info(f"Usuário criado: {user.email}, acesso aprovado")
+                logger.info(f"Usuário criado: {user.email}, acesso aprovado.")
 
                 subject = 'Pedido de acesso aprovado'
-                recipients = [access_request.email,
-                              'valdean.junior@hex360.com.br']
+                admin_emails = list(
+                    get_user_model().objects.filter(Q(roles__id=3) | Q(roles__id=4))
+                    .values_list('email', flat=True)
+                    .distinct()
+                )
+
                 template_path = os.path.join(
                     settings.EMAIL_TEMPLATES_DIR,
-                    'approvedUser.html'
+                    'approved_user.html'
                 )
                 context = {
                     'user_name': access_request.name
                 }
-                email_sent = send_custom_email(
-                    subject=subject,
-                    recipients=recipients,
-                    template_path=template_path,
-                    context=context,
-                )
-                if email_sent:
-                    return Response({'detail': 'E-mail enviado com sucesso.'}, status=200)
-                else:
-                    return Response({'detail': 'Falha ao enviar o e-mail.'}, status=500)
 
+                success = send_html_email(
+                    subject=subject,
+                    recipients=admin_emails,
+                    template_path=template_path,
+                    context=context
+                )
+
+                if not success:
+                    logger.warning(
+                        f"Falha ao enviar email para {admin_emails}")
             else:
                 logger.info(f"Usuário '{user.email}' já existia na base.")
 

@@ -1,39 +1,45 @@
+# Built-in
+import os
+import json
+import logging
+
+# Django
+from django.db.models import Q
+from django.conf import settings
+from django.core.exceptions import ValidationError as DjangoValidationError
+from django.core.mail import send_mail, EmailMultiAlternatives
+from django.http import HttpResponse, FileResponse
+from django.template.loader import render_to_string
+from django.utils import timezone
+from django.utils.html import strip_tags
+from django.contrib.auth import get_user_model
+from user.models import Role
+
+
+# Third-party
 from rest_framework import permissions, status
+from rest_framework.exceptions import ValidationError
 from rest_framework.parsers import MultiPartParser, FormParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from rest_framework.exceptions import ValidationError
 from rest_framework.permissions import IsAuthenticated
+
+# Project-specific
 from permission.mixins import Auth, Public
-from django.conf import settings
-from django.http import FileResponse
-import os
-
-
-from django.utils import timezone
-import json
-
-
-from .models import Ticket, TicketStatus, TicketAnalysisHistory, TicketStatusAttachment, TicketAttachment
+from utils.gen_xslx import generate_excel
+from .models import (
+    Ticket, TicketStatus, TicketAnalysisHistory,
+    TicketStatusAttachment, TicketAttachment
+)
 from .serializers import (
-    TicketStatusSerializer, TicketSerializer, TicketAttachmentSerializer, TicketStatusChoicesSerializer
+    TicketStatusSerializer, TicketSerializer,
+    TicketAttachmentSerializer, TicketStatusChoicesSerializer
 )
 from .validators import validate_ticket_choices
+from emails.ticket_user import send_email_ticket_to_user
+from emails.ticket_admins import send_email_ticket_to_admins
 
-from django.core.exceptions import ValidationError
-from django.utils import timezone
-from django.http import HttpResponse
-
-from django.utils.html import strip_tags
-from django.conf import settings
-import os
-import json
-
-from utils.gen_xslx import generate_excel
-
-from django.core.mail import send_mail, EmailMultiAlternatives
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
+logger = logging.getLogger(__name__)
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -110,8 +116,7 @@ class TicketListCreateView(Auth, APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class TicketDetailView(APIView):
-    permission_classes = [IsAuthenticated]
+class TicketDetailView(Auth, APIView):
 
     def get_object(self, pk, user):
         """
@@ -372,72 +377,50 @@ class GetChoices(APIView):
         return Response(serializer.data)
 
 
-class SendTicketEmailView(APIView):
-    """
-    APIView for sending email notifications related to ticket status changes.
-
-    Methods:
-        post(request):
-            Handles POST requests to send an email notification.
-    """
-    permission_classes = [IsAuthenticated]
-
+class SendTicketEmailView(Auth, APIView):
     def post(self, request):
-        """
-        Sends a notification email about a ticket status update.
-
-        Args:
-            request (Request): Request object containing the following data:
-                - ticket_id (str): The ID of the ticket.
-                - requesting (str): The name of the user requesting the update.
-                - status (str): The new status of the ticket.
-                - comment (str): Any additional comments regarding the update.
-
-        Returns:
-            Response: A response object indicating the success or failure of the email operation.
-        """
         try:
             data = request.data.copy()
-            template_path = os.path.join(
-                settings.EMAIL_TEMPLATES_DIR,
-                'requestAnalyzed.html'
-            )
-
             ticket = Ticket.objects.get(code=data['ticket_id'])
+            requesting_email = ticket.email if hasattr(
+                ticket, 'email') else data.get('requesting')
 
-            html_content = render_to_string(template_path, {
-                'ticket_name': ticket.subject,
-                'requesting': data['requesting'],
-                'link': f"{settings.RESET_PASSWORD_URL.rstrip('/')}/admin/criticas/{data['ticket_id']}/",
-                'status': data['status'],
-                'comment': data['comment']
-            })
+            admin_role, _ = Role.objects.get_or_create(name="Administrador")
+            dev_role, _ = Role.objects.get_or_create(name="Desenvolvedor")
 
-            text_content = strip_tags(html_content)
+            User = get_user_model()
 
-            # Substitua pelos e-mails dos responsáveis
-            recipient_list = [
-                'joao.fonseca@hex360.com.br',
-            ]
-
-            email = EmailMultiAlternatives(
-                subject="Atualização de Status do Ticket",
-                body=text_content,
-                from_email=data['requesting'],
-                to=recipient_list
+            admin_emails = list(
+                User.objects.filter(Q(roles=admin_role) | Q(roles=dev_role))
+                .values_list('email', flat=True)
+                .distinct()
             )
-            email.attach_alternative(html_content, "text/html")
 
-            email.send()
-            return Response({'status': 'Email sent successfully!'}, status=status.HTTP_200_OK)
+            send_email_ticket_to_admins(
+                ticket,
+                data,
+                requesting_email,
+                admin_emails
+            )
+
+            send_email_ticket_to_user(
+                ticket,
+                data,
+                admin_emails
+            )
+
+            return Response({'status': 'Emails sent successfully!'}, status=status.HTTP_200_OK)
 
         except Ticket.DoesNotExist:
+            logger.warning("Ticket não encontrado: %s", data.get('ticket_id'))
             return Response({'error': 'Ticket not found.'}, status=status.HTTP_404_NOT_FOUND)
 
         except FileNotFoundError:
+            logger.warning("Template de e-mail não encontrado.")
             return Response({'error': 'Email template not found.'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
         except Exception as e:
+            logger.warning("Erro ao enviar e-mails: %s", str(e))
             return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
