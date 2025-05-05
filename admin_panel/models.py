@@ -124,6 +124,7 @@ class TicketStatus(models.Model):
         # Substatus para 'Concluído'
         CONCLUIDO = "CONCLUIDO", "Concluído"
         EM_TESTE = "EM_TESTE", "Em Teste"
+        DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
 
         # Substatus para 'Recusado'
         INVIAVEL = "INVIAVEL", "Inviável"
