@@ -36,8 +36,8 @@ from .serializers import (
     TicketAttachmentSerializer, TicketStatusChoicesSerializer
 )
 from .validators import validate_ticket_choices
-from emails.ticket_user import send_ticket_email_to_user
-from emails.ticket_admins import send_ticket_email_to_admins
+from emails.ticket_user import send_email_ticket_to_user
+from emails.ticket_admins import send_email_ticket_to_admins
 
 logger = logging.getLogger(__name__)
 
@@ -396,14 +396,14 @@ class SendTicketEmailView(Auth, APIView):
                 .distinct()
             )
 
-            send_ticket_email_to_admins(
+            send_email_ticket_to_admins(
                 ticket,
                 data,
                 requesting_email,
                 admin_emails
             )
 
-            send_ticket_email_to_user(
+            send_email_ticket_to_user(
                 ticket,
                 data,
                 admin_emails

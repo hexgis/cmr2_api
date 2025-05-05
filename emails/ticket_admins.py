@@ -3,7 +3,7 @@ from django.conf import settings
 from emails.send_email import send_html_email
 
 
-def send_ticket_email_to_admins(ticket, data, requesting_email, admin_emails):
+def send_email_ticket_to_admins(ticket, data, requesting_email, admin_emails):
 
     subject = "Nova sugestão analisada"
 

@@ -51,6 +51,8 @@ from permission import models as perm_models
 
 from emails.send_email import send_html_email
 from django.contrib.auth import get_user_model
+from emails.access_request import send_email_access_request
+
 
 logger = logging.getLogger(__name__)
 
@@ -543,30 +545,7 @@ class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     serializer_class = AccessRequestDetailSerializer
 
     def _send_notification_email(self, access_request):
-        subject = 'Usuário pendente de aprovação'
-        recipients = [access_request.coordinator_email,
-                      'joao.fonseca@hex360.com.br'
-                      ]
-        template_path = os.path.join(
-            settings.EMAIL_TEMPLATES_DIR,
-            'solicitacao_de_acesso.html'
-        )
-        context = {
-            'name': access_request.name,
-            'id': access_request.id,
-        }
-
-        html_message = render_to_string(template_path, context)
-
-        email_sent = send_mail(
-            subject=subject,
-            message='',
-            from_email="cmr@funai.gov.br",
-            recipient_list=recipients,
-            html_message=html_message
-        )
-        if not email_sent:
-            raise Exception('Falha ao enviar o e-mail para o coordenador.')
+        send_email_access_request(access_request)
 
     def perform_create(self, serializer):
         instance = serializer.save()

@@ -3,7 +3,7 @@ from django.conf import settings
 from emails.send_email import send_html_email
 
 
-def send_password_email(reset_code,  email):
+def send_email_password(reset_code,  email):
 
     subject = "Solicitação de Recuperação de Senha do CMR"
 
@@ -15,7 +15,6 @@ def send_password_email(reset_code,  email):
                 Para completar o processo, por favor, clique no botão abaixo, 
                 este link é válido por 15 minutos.
             </p>
-           
             <p>
                 Se você não solicitou a alteração de senha, por favor, ignore este e-mail.
             </p>

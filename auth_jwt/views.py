@@ -31,7 +31,7 @@ from dashboard import models as dashModels
 
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework_simplejwt.views import TokenObtainPairView
-from emails.password_reset import send_password_email
+from emails.password_reset import send_email_password
 
 from rest_framework import (
     response,
@@ -143,7 +143,7 @@ class ResetPassword(Public, views.APIView):
                     expires_at=timezone.now() + timedelta(minutes=15)
                 )
 
-                send_password_email(reset_code, email)
+                send_email_password(reset_code, email)
 
         except Exception as e:
             logger.exception("Failed to send password reset email.")
