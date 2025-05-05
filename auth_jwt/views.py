@@ -31,6 +31,7 @@ from dashboard import models as dashModels
 
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework_simplejwt.views import TokenObtainPairView
+from emails.password_reset import send_password_email
 
 from rest_framework import (
     response,
@@ -97,6 +98,7 @@ class ResetPassword(Public, views.APIView):
         """
         Handles POST requests to reset a user's password.
         """
+
         # Validação do payload
         serializer = self.serializer_class(data=request.data)
         serializer.is_valid(raise_exception=True)
@@ -132,7 +134,8 @@ class ResetPassword(Public, views.APIView):
             with transaction.atomic():
                 # Remove códigos de reset anteriores para evitar duplicidade
                 user_models.PasswordResetCode.objects.filter(
-                    user=user).delete()
+                    user=user
+                ).delete()
 
                 # Cria novo código de reset com expiração de 15 minutos
                 reset_code = user_models.PasswordResetCode.objects.create(
@@ -140,42 +143,15 @@ class ResetPassword(Public, views.APIView):
                     expires_at=timezone.now() + timedelta(minutes=15)
                 )
 
-                # Monta link de redefinição usando a URL configurada
-                reset_link = f"{settings.RESET_PASSWORD_URL}/auth/confirmar/?code={reset_code.code}"
-
-                # Prepara conteúdo do e-mail (template + contexto)
-                context = {
-                    'user': user,
-                    'reset_link': reset_link,
-                    'reset_code': reset_code.code,
-                }
-
-                template_path = os.path.join(
-                    settings.EMAIL_TEMPLATES_DIR, 'password_reset.html')
-                html_message = render_to_string(template_path, context)
-
-                subject = 'Solicitação de Recuperação de Senha do CMR'
-                from_email = settings.DEFAULT_FROM_EMAIL
-
-                # Envia o e-mail de recuperação
-                send_mail(
-                    subject=subject,
-                    message='',
-                    from_email=from_email,
-                    recipient_list=[email],
-                    html_message=html_message
-                )
+                send_password_email(reset_code, email)
 
         except Exception as e:
-            # Loga a exceção para monitoramento
             logger.exception("Failed to send password reset email.")
-            # Retorna uma resposta genérica de erro
             return Response(
                 {'error': str(e)},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
-        # Retorna mensagem de sucesso
         return Response(
             {"detail": "Password reset code sent."},
             status=status.HTTP_200_OK
