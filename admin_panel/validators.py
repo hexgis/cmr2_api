@@ -7,6 +7,7 @@ from django.utils.timezone import localtime
 from rest_framework.exceptions import ValidationError
 from datetime import datetime, date
 
+
 def validate_ticket_choices(ticket):
     """
     Validates the ticket's solicitation type against the allowed choices.
@@ -45,13 +46,15 @@ def validate_status_and_substatus(status_category, sub_status, current_status=No
         TicketStatus.SubStatus.INVIAVEL,
     ):
         if status_category != TicketStatus.StatusCategory.NAO_ANALISADO or sub_status != TicketStatus.SubStatus.NAO_ANALISADO:
-            raise ValidationError("Transição não permitida! O status 'RECUSADO' com substatus 'INDEFERIDO' ou 'INVIAVEL' só pode ser alterado para 'NAO_ANALISADO'.")
-        
+            raise ValidationError(
+                "Transição não permitida! O status 'RECUSADO' com substatus 'INDEFERIDO' ou 'INVIAVEL' só pode ser alterado para 'NAO_ANALISADO'.")
+
     # Ensure "Deferido" status is only valid from "Não Analisado"
     if current_status and current_status != TicketStatus.StatusCategory.NAO_ANALISADO:
         if status_category == TicketStatus.StatusCategory.DEFERIDO:
-            raise ValidationError("Não é permitido alterar o status para 'Deferido'.")
-    
+            raise ValidationError(
+                "Não é permitido alterar o status para 'Deferido'.")
+
     # Validate valid substatus for each status category
     valid_substatus = {
         TicketStatus.StatusCategory.DEFERIDO: [
@@ -68,6 +71,7 @@ def validate_status_and_substatus(status_category, sub_status, current_status=No
         TicketStatus.StatusCategory.CONCLUIDO: [
             TicketStatus.SubStatus.CONCLUIDO,
             TicketStatus.SubStatus.EM_TESTE,
+            TicketStatus.SubStatus.DESENVOLVIDO,
         ],
     }
 
@@ -89,7 +93,8 @@ def validate_complexity(complexity_code):
         ValidationError: If the complexity code is invalid.
     """
     if complexity_code not in [choice[0] for choice in Ticket.Complexity.choices]:
-        raise ValidationError(f"O código de complexidade '{complexity_code}' é inválido. Escolhas válidas: {', '.join([str(choice[0]) for choice in Ticket.Complexity.choices])}")
+        raise ValidationError(
+            f"O código de complexidade '{complexity_code}' é inválido. Escolhas válidas: {', '.join([str(choice[0]) for choice in Ticket.Complexity.choices])}")
 
 
 def format_datetime(datetime_obj, fmt='%d/%m/%Y %H:%M:%S'):

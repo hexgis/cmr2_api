@@ -14,6 +14,7 @@
     groups: []
     user_permissions: []
     institution: 1
+    roles: [3]
 - model: user.user
   pk: 2
   fields:
