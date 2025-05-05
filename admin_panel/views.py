@@ -385,18 +385,29 @@ class SendTicketEmailView(Auth, APIView):
             requesting_email = ticket.email if hasattr(
                 ticket, 'email') else data.get('requesting')
 
-            email_context = {
-                'ticket_name': ticket.subject,
-                'ticket_id': data['ticket_id'],
-                'requesting': data['requesting'],
-                'requesting_email': requesting_email,
-                'link': f"{settings.RESET_PASSWORD_URL.rstrip('/')}/admin/criticas/{data['ticket_id']}/",
-                'status': data['status'],
-                'comment': data['comment']
-            }
+            admin_role, _ = Role.objects.get_or_create(name="Administrador")
+            dev_role, _ = Role.objects.get_or_create(name="Desenvolvedor")
 
-            send_ticket_email_to_user(email_context, requesting_email)
-            send_ticket_email_to_admins(email_context)
+            User = get_user_model()
+
+            admin_emails = list(
+                User.objects.filter(Q(roles=admin_role) | Q(roles=dev_role))
+                .values_list('email', flat=True)
+                .distinct()
+            )
+
+            send_ticket_email_to_admins(
+                ticket,
+                data,
+                requesting_email,
+                admin_emails
+            )
+
+            send_ticket_email_to_user(
+                ticket,
+                data,
+                admin_emails
+            )
 
             return Response({'status': 'Emails sent successfully!'}, status=status.HTTP_200_OK)
 

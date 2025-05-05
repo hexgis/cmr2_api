@@ -6,29 +6,56 @@ from user.models import Role
 from emails.send_email import send_html_email
 
 
-def send_ticket_email_to_admins(context):
-
-    admin_template = os.path.join(
-        settings.EMAIL_TEMPLATES_DIR,
-        'request_analyzed_adm.html'
-    )
+def send_ticket_email_to_admins(ticket, data, requesting_email, admin_emails):
 
     subject = "Nova sugestão analisada"
 
-    admin_role, _ = Role.objects.get_or_create(name="Administrador")
-    dev_role, _ = Role.objects.get_or_create(name="Desenvolvedor")
+    main_title = "Nova sugestão analisada"
 
-    User = get_user_model()
-    admin_emails = list(
-        User.objects.filter(Q(roles=admin_role) | Q(roles=dev_role))
-        .values_list('email', flat=True)
-        .distinct()
+    body_content = f"""
+            <p>
+                Prezado(a) administrador(a)/desenvolvedor(a),
+                Informamos que uma nova solicitação foi analisada.
+                <br />
+                O(a) usuário(a) <strong>{requesting_email}</strong> 
+                enviou uma crítica ou sugestão identificada pelo código
+                <strong>{data['ticket_id']} - {ticket.subject}</strong>,
+                passou por avaliação.<br /><br />
+                Para mais detalhes e acompanhamento do processo, acesse a
+                plataforma.<br /><br />
+           </p>
+        """
+
+    button = f"""
+            <a
+                href="{settings.RESET_PASSWORD_URL.rstrip('/')}/admin/criticas/{data['ticket_id']}/"
+                style="
+                background-color: #d92b3f;
+                color: #ffffff;
+                padding: 10px 20px;
+                text-decoration: none;
+                border-radius: 5px;
+                "
+            >
+                Acesso ao sistema
+            </a>
+        """
+
+    email_context = {
+        'main_title': main_title,
+        'body_content': body_content,
+        'ticket_name': ticket.subject,
+        'button': button,
+    }
+
+    admin_template = os.path.join(
+        settings.EMAIL_TEMPLATES_DIR,
+        'default.html'
     )
 
-    if admin_emails:
-        send_html_email(
-            subject=subject,
-            template_path=admin_template,
-            context=context,
-            recipient_list=admin_emails,
-        )
+    send_html_email(
+        subject=subject,
+        template_path=admin_template,
+        context=email_context,
+        recipient_list=admin_emails,
+    )
