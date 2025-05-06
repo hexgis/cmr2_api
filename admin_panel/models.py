@@ -115,6 +115,7 @@ class TicketStatus(models.Model):
         CONCLUIDO = "CONCLUIDO", "Concluído"
         RECUSADO = "RECUSADO", "Recusado"
         DEFERIDO = "DEFERIDO", "Deferido"
+        DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
 
     class SubStatus(models.TextChoices):
         # Substatus para 'Em Andamento'
@@ -124,7 +125,6 @@ class TicketStatus(models.Model):
         # Substatus para 'Concluído'
         CONCLUIDO = "CONCLUIDO", "Concluído"
         EM_TESTE = "EM_TESTE", "Em Teste"
-        DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
 
         # Substatus para 'Recusado'
         INVIAVEL = "INVIAVEL", "Inviável"
@@ -132,6 +132,7 @@ class TicketStatus(models.Model):
 
         # Substatus para 'Deferido'
         DEFERIDO = "DEFERIDO", "Deferido"
+        DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
 
         # Substatos para 'Não Analisado'
         NAO_ANALISADO = "NAO_ANALISADO", "Não Analisado"
