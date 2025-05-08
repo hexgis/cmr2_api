@@ -324,26 +324,9 @@
       </div>
 
       <div class="content">
-        <h1>Sua solicitação foi analisada</h1>
-        <p>
-          Prezado(a) usuário(a),
-          <strong><span id="userName"></span></strong> Informamos que sua
-          solicitação foi recebida e devidamente analisada.<br /><br />Você pode
-          acompanhar o processo pela plataforma .<br /><br />
-        </p>
-        <p>
-          <a
-            href="link-de-acesso"
-            style="
-              background-color: #d92b3f;
-              color: #ffffff;
-              padding: 10px 20px;
-              text-decoration: none;
-              border-radius: 5px;
-            "
-            >Acesso ao sistema</a
-          >
-        </p>
+        <h1>{{ main_title }}</h1>
+        {{ body_content|safe }}
+        <p>{{ button|safe }}</p>
       </div>
       <div class="footer">
         <p>
