@@ -78,6 +78,7 @@ class TicketListCreateView(Auth, APIView):
             tickets = Ticket.objects.filter(requesting=request.user)
 
         serializer = TicketSerializer(tickets, many=True)
+
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def post(self, request):
@@ -217,6 +218,10 @@ class TicketStatusView(APIView):
         try:
             ticket = Ticket.objects.get(code=ticket_id)
             instance = TicketStatus.objects.get(ticket_id=ticket_id)
+
+            send_email_ticket_to_admins(
+                ticket
+            )
 
             data = request.data.copy()
             instance.analyzed_by = request.user
@@ -382,31 +387,10 @@ class SendTicketEmailView(Auth, APIView):
         try:
             data = request.data.copy()
             ticket = Ticket.objects.get(code=data['ticket_id'])
-            requesting_email = ticket.email if hasattr(
-                ticket, 'email') else data.get('requesting')
-
-            admin_role, _ = Role.objects.get_or_create(name="Administrador")
-            dev_role, _ = Role.objects.get_or_create(name="Desenvolvedor")
-
-            User = get_user_model()
-
-            admin_emails = list(
-                User.objects.filter(Q(roles=admin_role) | Q(roles=dev_role))
-                .values_list('email', flat=True)
-                .distinct()
-            )
-
-            send_email_ticket_to_admins(
-                ticket,
-                data,
-                requesting_email,
-                admin_emails
-            )
 
             send_email_ticket_to_user(
                 ticket,
-                data,
-                admin_emails
+                data
             )
 
             return Response({'status': 'Emails sent successfully!'}, status=status.HTTP_200_OK)
