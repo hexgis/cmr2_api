@@ -541,7 +541,9 @@ class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     """
 
     queryset = models.AccessRequest.objects.exclude(
-        status=models.AccessRequest.StatusType.PENDENTE_COORD)
+        status=models.AccessRequest.StatusType.PENDENTE_COORD
+    )
+
     serializer_class = AccessRequestDetailSerializer
 
     def _send_notification_email(self, access_request):
@@ -667,12 +669,14 @@ class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
 
     def patch(self, request, pk, *args, **kwargs):
         try:
+            access_request = models.AccessRequest.objects.get(pk=pk)
+            if access_request.status != models.AccessRequest.StatusType.PENDENTE_COORD:
+                return Response(
+                    {'detail': 'A solicitação não está pendente.'},
+                    status=400
+                )
+
             deined_details = request.data.get('denied_details')
-            access_request = get_object_or_404(
-                models.AccessRequest,
-                pk=pk,
-                status=models.AccessRequest.StatusType.PENDENTE
-            )
 
             access_request.status = 3
             access_request.reviewed_at = timezone.now()
@@ -689,6 +693,7 @@ class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
                 },
                 status=status.HTTP_200_OK
             )
+
         except Exception as e:
             logger.error(f"Erro inesperado: {str(e)}")
             return Response(

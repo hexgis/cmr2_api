@@ -34,7 +34,7 @@ def send_email_access_request(access_request):
                 border-radius: 5px;
                 "
             >
-                Aprovar Usuário
+                Analisar solicitação de acesso
             </a>
         """
 
