@@ -1,9 +1,9 @@
 import os
 from django.conf import settings
-from emails.send_email import send_html_email
+from emails.send_email import send_html_email, get_admin_and_dev_emails
 
 
-def send_email_ticket_to_admins(ticket, data, requesting_email, admin_emails):
+def send_email_ticket_to_admins(ticket):
 
     subject = "Nova sugestão analisada"
 
@@ -11,13 +11,13 @@ def send_email_ticket_to_admins(ticket, data, requesting_email, admin_emails):
 
     body_content = f"""
             <p>
-                Prezado(a) administrador(a)/desenvolvedor(a),
-                Informamos que uma nova solicitação foi analisada.
+                Prezado(a) administrador(a) / Desenvolvedor(a)
+                , informamos que o chamado identificado pelo código
+                <strong>{ticket.code} - {ticket.subject}</strong> 
+                , enviado pelo(a) usuário(a) 
+                <strong>{ticket.requesting.email}</strong>
+                , foi atualizado pela equipe do CMR.
                 <br />
-                O(a) usuário(a) <strong>{requesting_email}</strong> 
-                enviou uma crítica ou sugestão identificada pelo código
-                <strong>{data['ticket_id']} - {ticket.subject}</strong>,
-                passou por avaliação.<br /><br />
                 Para mais detalhes e acompanhamento do processo, acesse a
                 plataforma.<br /><br />
            </p>
@@ -25,7 +25,7 @@ def send_email_ticket_to_admins(ticket, data, requesting_email, admin_emails):
 
     button = f"""
             <a
-                href="{settings.RESET_PASSWORD_URL.rstrip('/')}/admin/criticas/{data['ticket_id']}/"
+                href="{settings.RESET_PASSWORD_URL.rstrip('/')}/admin/criticas/{ticket.code}/"
                 style="
                 background-color: #d92b3f;
                 color: #ffffff;
@@ -49,6 +49,8 @@ def send_email_ticket_to_admins(ticket, data, requesting_email, admin_emails):
         settings.EMAIL_TEMPLATES_DIR,
         'default.html'
     )
+
+    admin_emails = get_admin_and_dev_emails(extra_emails=['cmr@funai.gov.br'])
 
     send_html_email(
         subject=subject,

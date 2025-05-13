@@ -1,9 +1,9 @@
 import os
 from django.conf import settings
-from emails.send_email import send_html_email
+from emails.send_email import send_html_email, get_admin_and_dev_emails
 
 
-def send_email_ticket_to_user(ticket, data, admin_emails):
+def send_email_ticket_to_user(ticket, data):
 
     subject = "Sua sugestão foi analisada"
 
@@ -11,12 +11,15 @@ def send_email_ticket_to_user(ticket, data, admin_emails):
 
     body_content = f"""
             <p>
-            Prezado(a) usuário(a), Agradecemos por contribuir com sua sugestão ou
-            crítica ao nosso sistema. Informamos que sua solicitação, identificada
-            pelo código
-            <strong>{data['ticket_id']} - {ticket.subject}</strong>, foi
-            devidamente analisada.<br /><br />Você pode acompanhar o processo pela
-            plataforma .<br /><br />
+            Prezado(a) usuário(a)
+            , agradecemos por contribuir com sua sugestão ou crítica ao nosso sistema.  
+            Informamos que sua solicitação
+            , identificada pelo código
+            <strong>{data['ticket_id']} - {ticket.subject}</strong>
+            , foi analisada.
+            <br />
+            Para acompanhar detalhes do andamento da demanda, acesse a plataforma.
+            <br /><br />
            </p>
         """
 
@@ -48,6 +51,8 @@ def send_email_ticket_to_user(ticket, data, admin_emails):
     )
 
     subject = "Sua sugestão foi analisada"
+
+    admin_emails = get_admin_and_dev_emails(extra_emails=['cmr@funai.gov.br'])
 
     send_html_email(
         subject=subject,
