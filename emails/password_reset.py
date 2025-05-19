@@ -23,7 +23,7 @@ def send_email_password(reset_code,  email):
            </p>
         """
 
-    reset_link = f"{settings.RESET_PASSWORD_URL}/auth/confirmar/?code={reset_code.code}"
+    reset_link = f"{settings.RESET_PASSWORD_URL.rstrip('/')}/auth/confirmar/?code={reset_code.code}"
 
     button = f"""
            <a 
