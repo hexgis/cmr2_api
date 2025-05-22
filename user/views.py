@@ -57,7 +57,7 @@ from emails.access_request import send_email_access_request
 logger = logging.getLogger(__name__)
 
 
-class UserListView(Auth, generics.ListCreateAPIView):
+class UserListCreateView(Auth, generics.ListCreateAPIView):
     """"API to return all users along with their respective sector ID.
 
     Returns:

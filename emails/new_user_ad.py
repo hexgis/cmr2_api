@@ -3,27 +3,23 @@ from django.conf import settings
 from emails.send_email import send_html_email
 
 
-def send_email_password(reset_code,  email):
+def send_new_user_ad(reset_code,  email):
 
-    subject = "Solicitação de Recuperação de Senha do CMR"
+    subject = "Seu cadastro foi realizado com sucesso!"
 
-    main_title = "Alteração de senha"
+    main_title = "Bem vindo ao CMR!"
 
     body_content = f"""
             <p>
-                Prezado(a) usuário(a), Recebemos uma solicitação para alterar a sua senha. 
-                Para completar o processo, por favor, clique no botão abaixo, 
-                este link é válido por 15 minutos.
+                Prezado(a) usuário(a), seja bem-vindo(a) ao CMR!
+                Seu cadastro foi realizado com sucesso.
             </p>
             <p>
-                Se você não solicitou a alteração de senha, por favor, ignore este e-mail.
+                Para acessar sua conta você deve utilizar o seu email e senha que você utiliza no AD (Active Directory) da sua instituição, clique no botão abaixo acessar o sistema:
             </p>
-            <p>
-                Para iniciar o processo de alteração da senha, clique no botão abaixo:
-           </p>
         """
 
-    reset_link = f"{settings.RESET_PASSWORD_URL.rstrip('/')}/auth/confirmar/?code={reset_code.code}"
+    reset_link = f"{settings.RESET_PASSWORD_URL.rstrip('/')}"
 
     button = f"""
            <a 
@@ -34,7 +30,7 @@ def send_email_password(reset_code,  email):
                 text-decoration: none; 
                 border-radius: 5px;"
             >
-                Alterar Senha
+                Acessar o sistema
             </a>
         """
 
