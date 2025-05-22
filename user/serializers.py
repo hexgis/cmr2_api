@@ -1,7 +1,10 @@
 from rest_framework_gis import serializers as gis_serializers
 from rest_framework import serializers
 from django.conf import settings
-from user.models import PasswordResetCode
+from django.utils import timezone
+from datetime import timedelta
+from emails.new_user import send_new_user
+from emails.new_user_ad import send_new_user_ad
 
 from permission import models as permission_models
 from user import models
@@ -150,6 +153,16 @@ class UserSerializer(serializers.ModelSerializer):
             validated_data.update(data['settings'])
 
         user = models.User.objects.create_user(**validated_data)
+        # Create new reset code with one week expiration
+        reset_code = models.PasswordResetCode.objects.create(
+            user=user,
+            expires_at=timezone.now() + timedelta(days=7)
+        )
+
+        if data['email'].endswith('@funai.gov.br'):
+            send_new_user_ad(reset_code, data['email'])
+        else:
+            send_new_user(reset_code, data['email'])
 
         if 'password' in data:
             user.set_password(data['password'])
@@ -577,9 +590,9 @@ class PasswordResetConfirmSerializer(serializers.Serializer):
             })
 
         try:
-            reset_code = PasswordResetCode.objects.get(
+            reset_code = models.PasswordResetCode.objects.get(
                 code=data['code'])
-        except PasswordResetCode.DoesNotExist:
+        except models.PasswordResetCode.DoesNotExist:
             raise serializers.ValidationError({
                 "code": _("Invalid or expired reset code.")
             })
