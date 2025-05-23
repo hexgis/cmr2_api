@@ -102,7 +102,7 @@ update-hmlg:
   dependencies:
     - push
   only:
-    - main
+    - develop
   when: manual
 
 update-prd:
