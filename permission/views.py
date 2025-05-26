@@ -13,17 +13,15 @@ from layer import serializers as layer_serializer
 
 from permission.mixins import AdminAuth
 from drf_spectacular.utils import extend_schema, OpenApiExample
-from user.models import User, Role, Group
+from user.models import Role, Group
 from user import (
     serializers,
-    models,
-    filters
 )
 
 
 class GroupPermissionListView(AdminAuth, generics.ListAPIView):
     """
-    Retorna a lista de todos os LayerPermission.
+        Returns the list of all LayerPermissions.
     """
 
     queryset = Role.objects.all()
@@ -32,7 +30,7 @@ class GroupPermissionListView(AdminAuth, generics.ListAPIView):
 
 class LayerPermissionListView(AdminAuth, generics.ListAPIView):
     """
-    Retorna a lista de todos os LayerPermission.
+        Returns the list of all LayerPermission.
     """
 
     queryset = LayerPermission.objects.all()
@@ -72,7 +70,7 @@ class LayerPermissionListView(AdminAuth, generics.ListAPIView):
 
 class ComponentPermissionListView(AdminAuth, generics.ListAPIView):
     """
-    Retorna a lista de todos os ComponentPermission.
+        Returns the list of all ComponentPermission.
     """
     queryset = ComponentPermission.objects.all()
     serializer_class = ComponentPermissionSerializer
@@ -80,20 +78,20 @@ class ComponentPermissionListView(AdminAuth, generics.ListAPIView):
 
 class LayerPermissionView(Public, APIView):
     """
-    View to manage layer permissions
+        View to manage layer permissions
 
-    Methods:
-    - GET: Return the layers permissions.
-    - POST: Create a new permission layer.
-    - PATCH: Update partially a layer permission.
+        Methods:
+        - GET: Return the layers permissions.
+        - POST: Create a new permission layer.
+        - PATCH: Update partially a layer permission.
     """
 
     def get(self, request, pk=None):
         """
-        List all permissions layer or return a specific permission.
+            List all permissions layer or return a specific permission.
 
-        Args:
-            pk (int, opcional): ID permission.
+            Args:
+                pk (int, opcional): ID permission.
         """
         if pk:
             try:
@@ -134,7 +132,9 @@ class LayerPermissionView(Public, APIView):
 
 
 class LayerPermissionDiffView(Public, APIView):
-    """ returns the difference between the layers that are not in the permission """
+    """ 
+        Returns the difference between the layers that are not in the permission 
+    """
 
     def get(self, request, pk, *args, **kwargs):
         try:
@@ -161,7 +161,7 @@ class LayerPermissionDiffView(Public, APIView):
 
 class RoleGroupDiffView(Public, APIView):
     """
-    Retorna os grupos que ainda não estão associados a um determinado papel (Role).
+        Returns groups that are not yet associated with a given role.
     """
 
     def get(self, request, pk, *args, **kwargs):
@@ -184,20 +184,20 @@ class RoleGroupDiffView(Public, APIView):
 
 class LayerPermissionView(Public, APIView):
     """
-    View to manage layer permissions
+        View to manage layer permissions
 
-    Methods:
-    - GET: Return the layers permissions.
-    - POST: Create a new permission layer.
-    - PATCH: Update partially a layer permission.
+        Methods:
+        - GET: Return the layers permissions.
+        - POST: Create a new permission layer.
+        - PATCH: Update partially a layer permission.
     """
 
     def get(self, request, pk=None):
         """
-        List all permissions layer or return a specific permission.
+            List all permissions layer or return a specific permission.
 
-        Args:
-            pk (int, opcional): ID permission.
+            Args:
+                pk (int, opcional): ID permission.
         """
         if pk:
             try:
@@ -238,7 +238,9 @@ class LayerPermissionView(Public, APIView):
 
 
 class LayerPermissionDiffView(Public, APIView):
-    """ returns the difference between the layers that are not in the permission """
+    """ 
+        Returns the difference between the layers that are not in the permission 
+    """
 
     def get(self, request, pk, *args, **kwargs):
         try:

@@ -512,7 +512,7 @@ class GroupListCreateView(Public, generics.ListCreateAPIView):
 
 class RoleUserListView(Public, APIView):
     """
-    Lista todos os usuários vinculados a uma role (papel) específica.
+        Lists all users linked to a specific role.
     """
 
     def get(self, request, role_id):
