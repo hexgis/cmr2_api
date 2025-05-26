@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import LayerPermissionListView, ComponentPermissionListView, LayerPermissionView, LayerPermissionDiffView
+from .views import GroupPermissionListView, RoleGroupDiffView, LayerPermissionListView, ComponentPermissionListView, LayerPermissionView, LayerPermissionDiffView
 
 urlpatterns = [
     path(
@@ -13,13 +13,23 @@ urlpatterns = [
         name='layer-permissions'
     ),
     path(
+        'role/',
+        GroupPermissionListView.as_view(),
+        name='layer-permissions'
+    ),
+    path(
         'layer/<int:pk>/',
         LayerPermissionView.as_view(),
         name='layer-permission-detail'
     ),
     path(
-        'layer-diff/<int:pk>/', 
+        'layer-diff/<int:pk>/',
         LayerPermissionDiffView.as_view(),
+        name='layer-permission-diff'
+    ),
+    path(
+        'role-diff/<int:pk>/',
+        RoleGroupDiffView.as_view(),
         name='layer-permission-diff'
     ),
     path(

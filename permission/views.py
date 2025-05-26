@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import LayerPermission, ComponentPermission
-from .serializers import LayerPermissionSerializer, ComponentPermissionSerializer
+from .serializers import RoleWithGroupsSerializer, LayerPermissionSerializer, ComponentPermissionSerializer
 from permission.mixins import AdminAuth, Public
 
 from rest_framework.views import APIView
@@ -13,6 +13,21 @@ from layer import serializers as layer_serializer
 
 from permission.mixins import AdminAuth
 from drf_spectacular.utils import extend_schema, OpenApiExample
+from user.models import User, Role, Group
+from user import (
+    serializers,
+    models,
+    filters
+)
+
+
+class GroupPermissionListView(AdminAuth, generics.ListAPIView):
+    """
+    Retorna a lista de todos os LayerPermission.
+    """
+
+    queryset = Role.objects.all()
+    serializer_class = RoleWithGroupsSerializer
 
 
 class LayerPermissionListView(AdminAuth, generics.ListAPIView):
@@ -140,6 +155,29 @@ class LayerPermissionDiffView(Public, APIView):
         serializer = layer_serializer.LayerSerializer(
             layers, many=True, fields=('id', 'name', 'group_name')
         )
+
+        return Response(serializer.data)
+
+
+class RoleGroupDiffView(Public, APIView):
+    """
+    Retorna os grupos que ainda não estão associados a um determinado papel (Role).
+    """
+
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            role = Role.objects.get(pk=pk)
+        except Role.DoesNotExist:
+            raise NotFound({"detail": "Role não encontrada."})
+
+        associated_group_ids = list(role.groups.values_list('id', flat=True))
+        all_group_ids = list(Group.objects.values_list('id', flat=True))
+
+        diff_ids = [
+            id_ for id_ in all_group_ids if id_ not in associated_group_ids]
+
+        groups = Group.objects.filter(id__in=diff_ids)
+        serializer = serializers.GroupSerializer(groups, many=True)
 
         return Response(serializer.data)
 

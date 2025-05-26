@@ -468,16 +468,19 @@ class RoleDiffView(Public, APIView):
         try:
             role = get_object_or_404(models.Role, id=id)
             unassociated_groups = models.Group.objects.exclude(
-                id__in=role.groups.values_list('id', flat=True))
-            group_serializer = serializers.GroupSerializer(
-                unassociated_groups, many=True)
-
-            return Response(
-                {
-                    "unassociated_groups": group_serializer.data,
-                },
-                status=status.HTTP_200_OK,
+                id__in=role.groups.values_list('id', flat=True)
             )
+            data = {
+                "unassociated_groups": [
+                    {
+                        "id": group.id,
+                        "name": group.name,
+                        "description": getattr(group, "description", "")
+                    }
+                    for group in unassociated_groups
+                ]
+            }
+            return Response(data, status=status.HTTP_200_OK)
 
         except Exception as e:
             return Response(
@@ -505,6 +508,18 @@ class GroupListCreateView(Public, generics.ListCreateAPIView):
 
     serializer_class = serializers.GroupSerializer
     queryset = models.Group.objects.all()
+
+
+class RoleUserListView(Public, APIView):
+    """
+    Lista todos os usuários vinculados a uma role (papel) específica.
+    """
+
+    def get(self, request, role_id):
+        role = get_object_or_404(models.Role, id=role_id)
+        users = models.User.objects.filter(roles=role)
+        serializer = serializers.UserSerializer(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class GroupDiffListView(Public, APIView):
