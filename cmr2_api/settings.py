@@ -142,7 +142,7 @@ DATABASES = {
 }
 
 DATABASE_ROUTERS = [
-    'cmr2_api.database_routers.FunaiRouters.FunaiRouter',
+    # 'cmr2_api.database_routers.FunaiRouters.FunaiRouter',
     'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
     'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
     'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',

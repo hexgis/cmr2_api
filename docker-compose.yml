@@ -77,7 +77,6 @@ services:
       JIRA_API_URL: https://xskylab.atlassian.net/
     depends_on:
       - db
-      - db_for_read
       - mailhog
 
   test:
