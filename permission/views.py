@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import LayerPermission, ComponentPermission
-from .serializers import LayerPermissionSerializer, ComponentPermissionSerializer
+from .serializers import RoleWithGroupsSerializer, LayerPermissionSerializer, ComponentPermissionSerializer
 from permission.mixins import AdminAuth, Public
 
 from rest_framework.views import APIView
@@ -13,11 +13,24 @@ from layer import serializers as layer_serializer
 
 from permission.mixins import AdminAuth
 from drf_spectacular.utils import extend_schema, OpenApiExample
+from user.models import Role, Group
+from user import (
+    serializers,
+)
+
+
+class GroupPermissionListView(AdminAuth, generics.ListAPIView):
+    """
+        Returns the list of all LayerPermissions.
+    """
+
+    queryset = Role.objects.all()
+    serializer_class = RoleWithGroupsSerializer
 
 
 class LayerPermissionListView(AdminAuth, generics.ListAPIView):
     """
-    Retorna a lista de todos os LayerPermission.
+        Returns the list of all LayerPermission.
     """
 
     queryset = LayerPermission.objects.all()
@@ -57,7 +70,7 @@ class LayerPermissionListView(AdminAuth, generics.ListAPIView):
 
 class ComponentPermissionListView(AdminAuth, generics.ListAPIView):
     """
-    Retorna a lista de todos os ComponentPermission.
+        Returns the list of all ComponentPermission.
     """
     queryset = ComponentPermission.objects.all()
     serializer_class = ComponentPermissionSerializer
@@ -65,20 +78,20 @@ class ComponentPermissionListView(AdminAuth, generics.ListAPIView):
 
 class LayerPermissionView(Public, APIView):
     """
-    View to manage layer permissions
+        View to manage layer permissions
 
-    Methods:
-    - GET: Return the layers permissions.
-    - POST: Create a new permission layer.
-    - PATCH: Update partially a layer permission.
+        Methods:
+        - GET: Return the layers permissions.
+        - POST: Create a new permission layer.
+        - PATCH: Update partially a layer permission.
     """
 
     def get(self, request, pk=None):
         """
-        List all permissions layer or return a specific permission.
+            List all permissions layer or return a specific permission.
 
-        Args:
-            pk (int, opcional): ID permission.
+            Args:
+                pk (int, opcional): ID permission.
         """
         if pk:
             try:
@@ -119,7 +132,9 @@ class LayerPermissionView(Public, APIView):
 
 
 class LayerPermissionDiffView(Public, APIView):
-    """ returns the difference between the layers that are not in the permission """
+    """ 
+        Returns the difference between the layers that are not in the permission 
+    """
 
     def get(self, request, pk, *args, **kwargs):
         try:
@@ -144,22 +159,45 @@ class LayerPermissionDiffView(Public, APIView):
         return Response(serializer.data)
 
 
+class RoleGroupDiffView(Public, APIView):
+    """
+        Returns groups that are not yet associated with a given role.
+    """
+
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            role = Role.objects.get(pk=pk)
+        except Role.DoesNotExist:
+            raise NotFound({"detail": "Role não encontrada."})
+
+        associated_group_ids = list(role.groups.values_list('id', flat=True))
+        all_group_ids = list(Group.objects.values_list('id', flat=True))
+
+        diff_ids = [
+            id_ for id_ in all_group_ids if id_ not in associated_group_ids]
+
+        groups = Group.objects.filter(id__in=diff_ids)
+        serializer = serializers.GroupSerializer(groups, many=True)
+
+        return Response(serializer.data)
+
+
 class LayerPermissionView(Public, APIView):
     """
-    View to manage layer permissions
+        View to manage layer permissions
 
-    Methods:
-    - GET: Return the layers permissions.
-    - POST: Create a new permission layer.
-    - PATCH: Update partially a layer permission.
+        Methods:
+        - GET: Return the layers permissions.
+        - POST: Create a new permission layer.
+        - PATCH: Update partially a layer permission.
     """
 
     def get(self, request, pk=None):
         """
-        List all permissions layer or return a specific permission.
+            List all permissions layer or return a specific permission.
 
-        Args:
-            pk (int, opcional): ID permission.
+            Args:
+                pk (int, opcional): ID permission.
         """
         if pk:
             try:
@@ -200,7 +238,9 @@ class LayerPermissionView(Public, APIView):
 
 
 class LayerPermissionDiffView(Public, APIView):
-    """ returns the difference between the layers that are not in the permission """
+    """ 
+        Returns the difference between the layers that are not in the permission 
+    """
 
     def get(self, request, pk, *args, **kwargs):
         try:
