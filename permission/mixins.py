@@ -154,7 +154,7 @@ class Auth:
     )
 
 
-class Public(Auth):
+class Public:
     """Allow any access to view (anyone)."""
 
     permission_classes = (permissions.AllowAny,)
