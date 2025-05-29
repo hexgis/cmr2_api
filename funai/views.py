@@ -4,9 +4,7 @@ from django.db.models import Q, F, Func, Value
 from permission.mixins import Auth, Public
 from django.db.models.functions import Lower
 from rest_framework.exceptions import NotFound, ValidationError
-from urllib.parse import urlparse, parse_qs
 from django.conf import settings
-from permission.mixins import Auth
 import requests
 
 from funai import (
@@ -118,7 +116,7 @@ class TiByNameView(generics.ListAPIView):
         return response.Response(data)
 
 
-class TiByNameAllInfoView(Auth, generics.ListAPIView):
+class TiByNameAllInfoView(Public, generics.ListAPIView):
     """
     API view to retrieve information about Indigenous Lands (TIs) based on a query parameter.
     Provides a list of TIs filtered and ordered by name.
