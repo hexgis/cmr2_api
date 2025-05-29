@@ -94,7 +94,7 @@ class CoordenacaoRegional(models.Model):
         """Metaclass to `funai.CoordenacaoRegional`."""
         app_label = 'funai'
         verbose_name = 'Coordenacao Regional'
-        db_table = 'coordenacao_regional'
+        db_table = 'funai_coordenacao_regional'
         verbose_name_plural = 'Coordenacoes Regionais'
         managed = True
 
@@ -128,22 +128,31 @@ class LimiteTerraIndigena(models.Model):
         _('COD Funai'),
         unique=True,
     )
-    no_grupo_etnico = models.CharField(_("Grupo Étnico"),
-                                       max_length=255,
-                                       blank=True,
-                                       null=True
-                                       )
-    ds_fase_ti = models.CharField(_("Fase TI"), max_length=100,
-                                  blank=True,
-                                  null=True)
-    ds_modalidade = models.CharField(_("Modalidade TI"), max_length=100,
-                                     blank=True,
-                                     null=True)
-    ds_reestudo_ti = models.CharField(_("Reestudo TI"), max_length=80,
-                                      blank=True,
-                                      null=True)
-    ds_cr = models.CharField(max_length=100,         blank=True,
-                             null=True)
+    no_grupo_etnico = models.CharField(
+        _("Grupo Étnico"),
+        max_length=255,
+        blank=True,
+        null=True
+    )
+    ds_fase_ti = models.CharField(
+        _("Fase TI"), max_length=100,
+        blank=True,
+        null=True
+    )
+    ds_modalidade = models.CharField(
+        _("Modalidade TI"), max_length=100,
+        blank=True,
+        null=True
+    )
+    ds_reestudo_ti = models.CharField(
+        _("Reestudo TI"), max_length=80,
+        blank=True,
+        null=True
+    )
+    ds_cr = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True)
     co_cr = models.ForeignKey(
         CoordenacaoRegional,
         to_field='co_cr',
@@ -152,51 +161,91 @@ class LimiteTerraIndigena(models.Model):
         db_column='co_cr',
         db_constraint=False
     )
-    no_municipio = models.TextField(blank=True,
-                                    null=True)
-    sg_uf = models.CharField(max_length=20,
-                             blank=True,
-                             null=True)
-    st_faixa_fronteira = models.CharField(max_length=3,         blank=True,
-                                          null=True)
-    dt_em_estudo = models.DateField(blank=True,
-                                    null=True)
-    ds_portaria_em_estudo = models.TextField(blank=True,
-                                             null=True)
-    dt_delimitada = models.DateField(blank=True,
-                                     null=True)
-    ds_despacho_delimitada = models.TextField(blank=True,
-                                              null=True)
-    dt_declarada = models.DateField(blank=True,
-                                    null=True)
-    ds_portaria_declarada = models.TextField(blank=True,
-                                             null=True)
-    dt_homologada = models.DateField(blank=True,
-                                     null=True)
-    ds_decreto_homologada = models.TextField(blank=True,
-                                             null=True)
-    dt_regularizada = models.DateField(blank=True,
-                                       null=True)
-    ds_matricula_regularizada = models.TextField(blank=True,
-                                                 null=True)
-    ds_doc_resumo_em_estudo = models.TextField(blank=True,
-                                               null=True)
-    ds_doc_resumo_delimitada = models.TextField(blank=True,
-                                                null=True)
-    ds_doc_resumo_declarada = models.TextField(blank=True,
-                                               null=True)
-    ds_doc_resumo_homologada = models.TextField(blank=True,
-                                                null=True)
-    ds_doc_resumo_regularizada = models.TextField(blank=True,
-                                                  null=True)
+    no_municipio = models.TextField(
+        blank=True,
+        null=True
+    )
+    sg_uf = models.CharField(
+        max_length=20,
+        blank=True,
+        null=True
+    )
+    st_faixa_fronteira = models.CharField(
+        max_length=3,         blank=True,
+        null=True
+    )
+    dt_em_estudo = models.DateField(
+        blank=True,
+        null=True
+    )
+    ds_portaria_em_estudo = models.TextField(
+        blank=True,
+        null=True
+    )
+    dt_delimitada = models.DateField(
+        blank=True,
+        null=True
+    )
+    ds_despacho_delimitada = models.TextField(
+        blank=True,
+        null=True
+    )
+    dt_declarada = models.DateField(
+        blank=True,
+        null=True
+    )
+    ds_portaria_declarada = models.TextField(
+        blank=True,
+        null=True
+    )
+    dt_homologada = models.DateField(
+        blank=True,
+        null=True
+    )
+    ds_decreto_homologada = models.TextField(
+        blank=True,
+        null=True
+    )
+    dt_regularizada = models.DateField(
+        blank=True,
+        null=True
+    )
+    ds_matricula_regularizada = models.TextField(
+        blank=True,
+        null=True
+    )
+    ds_doc_resumo_em_estudo = models.TextField(
+        blank=True,
+        null=True
+    )
+    ds_doc_resumo_delimitada = models.TextField(
+        blank=True,
+        null=True
+    )
+    ds_doc_resumo_declarada = models.TextField(
+        blank=True,
+        null=True
+    )
+    ds_doc_resumo_homologada = models.TextField(
+        blank=True,
+        null=True
+    )
+    ds_doc_resumo_regularizada = models.TextField(
+        blank=True,
+        null=True
+    )
 
     # st_amazonia_legal = models.BooleanField(blank=True,
     #                                         null=True)
-    nu_area_ha = models.DecimalField(max_digits=100, decimal_places=2,
-                                     blank=True,
-                                     null=True)
-    dt_cadastro = models.DateTimeField(blank=True,
-                                       null=True)
+    nu_area_ha = models.DecimalField(
+        max_digits=100, decimal_places=2,
+        blank=True,
+        null=True
+    )
+    dt_cadastro = models.DateTimeField(
+        blank=True,
+        null=True
+    )
 
     possui_ig = models.BooleanField(
         default=False
@@ -211,5 +260,5 @@ class LimiteTerraIndigena(models.Model):
         verbose_name = _('Terra Indigena')
         verbose_name_plural = _('Terras Indigenas')
         ordering = ('no_ti', )
-        db_table = 'terra_indigena'
+        db_table = 'funai_terra_indigena'
         managed = True
