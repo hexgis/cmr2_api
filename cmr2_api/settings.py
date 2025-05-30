@@ -24,6 +24,7 @@ env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+ENVIRONMENT = os.getenv('ENVIRONMENT', 'production')
 
 # DB
 DB_NAME = env.str('DB_NAME')

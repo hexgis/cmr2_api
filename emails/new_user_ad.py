@@ -40,6 +40,7 @@ def send_new_user_ad(reset_code,  email):
         'button': button,
         'reset_link': reset_link,
         'reset_code': reset_code.code,
+        'environment': settings.ENVIRONMENT,
     }
 
     template = os.path.join(
