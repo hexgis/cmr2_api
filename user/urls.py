@@ -59,6 +59,11 @@ urlpatterns = [
         name='role-list'
     ),
     path(
+        'role-users/<int:id>/',
+        views.RoleUserListView.as_view(),
+        name='role-user-list'
+    ),
+    path(
         'role/<int:id>/',
         views.RoleRetrieveUpdateDestroyView.as_view(),
         name='role'
