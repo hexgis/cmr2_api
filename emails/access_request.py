@@ -42,6 +42,7 @@ def send_email_access_request(access_request):
         'main_title': main_title,
         'body_content': body_content,
         'button': button,
+        'environment': settings.ENVIRONMENT,
     }
 
     template = os.path.join(
