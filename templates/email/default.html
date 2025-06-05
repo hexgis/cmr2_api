@@ -323,10 +323,10 @@
         <div class="red-bar"></div>
       </div>
 
-      {% if environment == "homolog" %}
-      <div style="color: red; font-weight: bold">
-        [AVISO] Este e-mail foi enviado pelo ambiente de HOMOLOGAÇÃO.
-        Desconsidere se não estiver testando.
+      {% if environment == "homolog" or environment == "develop" %}
+      <div style="color: red; font-weight: bold; text-align: center">
+        [AVISO] Este e-mail foi enviado pelo ambiente de
+        HOMOLOGAÇÃO/DESENVOLVIMENTO. Desconsidere se não estiver testando.
       </div>
       {% endif %}
 
