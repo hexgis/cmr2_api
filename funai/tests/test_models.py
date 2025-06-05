@@ -40,3 +40,19 @@ class TestTerraIndigenaModelData(APITestCase):
     def test_objects_created(self):
         """Test if object LimiteTerraIndigena is created."""
         self.assertTrue(models.LimiteTerraIndigena.objects.exists())
+
+
+class TestManagementInstrument(APITestCase):
+    """ Teste case `models.ManagementInstrument` model. """
+    @classmethod
+    def setUpTestData(cls):
+        """ Class variables using data load from fixtures file. """
+        call_command('loaddata', 'funai/fixtures/terras_indigenas.yaml',
+                     verbosity=0)
+
+        call_command('loaddata', 'funai/fixtures/instrumento_gestao_funai.yaml',
+                     verbosity=0)
+
+    def test_objects_created(self):
+        """ Test if object ManagementInstrument is created. """
+        self.assertTrue(models.ManagementInstrument.objects.exists())
