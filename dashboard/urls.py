@@ -18,4 +18,9 @@ urlpatterns = [
         views.GenCSV.as_view(),
         name='dashboard_data'
     ),
+    path(
+        'get-user-login/',
+        views.FindUserDashboardDataView.as_view(),
+        name='user_dashboard_data'
+    ),
 ]

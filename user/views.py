@@ -17,6 +17,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import APIException
 import os
 import logging
+import json
 
 from django.http import Http404
 from django.contrib.gis.geos import GEOSGeometry, WKBWriter
@@ -40,7 +41,8 @@ from rest_framework import (
     views,
 )
 from django.http import FileResponse, JsonResponse, Http404
-
+from django.contrib.admin.models import LogEntry, CHANGE
+from django.contrib.contenttypes.models import ContentType
 
 from user import (
     serializers,
@@ -84,6 +86,22 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
+
+    def perform_update(self, serializer):
+        instance = serializer.save()
+        user = self.request.user
+
+        changed_fields = list(serializer.validated_data.keys())
+        change_message = json.dumps([{"changed": {"fields": changed_fields}}])
+
+        LogEntry.objects.log_action(
+            user_id=user.pk,
+            content_type_id=ContentType.objects.get_for_model(instance).pk,
+            object_id=instance.pk,
+            object_repr=str(instance),
+            action_flag=CHANGE,
+            change_message=change_message
+        )
 
     def destroy(self, request, *args, **kwargs):
         user = self.get_object()
