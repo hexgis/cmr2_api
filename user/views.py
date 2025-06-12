@@ -90,9 +90,12 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     def perform_update(self, serializer):
         old_instance = self.get_object()
-        instance = serializer.save()
+        old_roles = set(old_instance.roles.all())
 
-        # Save user changes history
+        instance = serializer.save()
+        new_roles = set(instance.roles.all())
+
+        # Registra mudanças nos dados do usuário
         UserChangeHistory.objects.create(
             user=instance,
             changed_by=self.request.user,
@@ -104,20 +107,7 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
             new_institution=instance.institution.name if instance.institution else None
         )
 
-        # Track role changes
-        old_roles = set(old_instance.roles.all())
-        new_roles = set(instance.roles.all())
-
-        # Track added roles
-        for role in new_roles - old_roles:
-            UserRoleChange.objects.create(
-                user=instance,
-                changed_by=self.request.user,
-                action='added',
-                role=role
-            )
-
-        # Track removed roles
+        # Track role changes - first remove old roles then add new ones
         for role in old_roles - new_roles:
             UserRoleChange.objects.create(
                 user=instance,
@@ -126,16 +116,24 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
                 role=role
             )
 
-        changed_fields = list(serializer.validated_data.keys())
-        change_message = json.dumps([{"changed": {"fields": changed_fields}}])
+        for role in new_roles - old_roles:
+            UserRoleChange.objects.create(
+                user=instance,
+                changed_by=self.request.user,
+                action='added',
+                role=role
+            )
 
+        # Create admin log entry
+        changed_fields = list(serializer.validated_data.keys())
         LogEntry.objects.log_action(
             user_id=self.request.user.pk,
             content_type_id=ContentType.objects.get_for_model(instance).pk,
             object_id=instance.pk,
             object_repr=str(instance),
             action_flag=CHANGE,
-            change_message=change_message
+            change_message=json.dumps(
+                [{"changed": {"fields": changed_fields}}])
         )
 
     def destroy(self, request, *args, **kwargs):

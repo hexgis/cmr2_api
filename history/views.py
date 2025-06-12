@@ -35,20 +35,25 @@ class LogEntryViewSet(ReadOnlyModelViewSet):
 
 
 class UserRoleChangeViewSet(viewsets.ReadOnlyModelViewSet):
+    """ViewSet for retrieving user role change history."""
     queryset = UserRoleChange.objects.all()
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
         if user_id:
-            return UserRoleChange.objects.filter(user_id=user_id).order_by('-changed_at')
+            return (UserRoleChange.objects.filter(user_id=user_id)
+                    .select_related('changed_by', 'role', 'user')
+                    .order_by('-changed_at'))
         return UserRoleChange.objects.none()
 
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
         data = [{
+            'id': change.id,
             'changed_by': change.changed_by.username,
-            'changed_at': change.changed_at,
-            'action': change.action,
+            'changed_at': change.changed_at.strftime('%d/%m/%Y %H:%M:%S'),
+            # Fixed the logic here
+            'action': 'Removido' if change.action == 'removed' else 'Adicionado',
             'role': change.role.name,
         } for change in queryset]
         return Response(data)
