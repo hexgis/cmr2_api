@@ -52,7 +52,6 @@ class UserRoleChangeViewSet(viewsets.ReadOnlyModelViewSet):
             'id': change.id,
             'changed_by': change.changed_by.username,
             'changed_at': change.changed_at.strftime('%d/%m/%Y %H:%M:%S'),
-            # Fixed the logic here
             'action': 'Removido' if change.action == 'removed' else 'Adicionado',
             'role': change.role.name,
         } for change in queryset]

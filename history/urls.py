@@ -4,8 +4,10 @@ from .views import LogEntryViewSet, UserRoleChangeViewSet
 
 router = DefaultRouter()
 router.register(r'logs', LogEntryViewSet)
-router.register(r'role-changes', UserRoleChangeViewSet,
-                basename='role-changes')
+router.register(r'role-changes',
+                UserRoleChangeViewSet,
+                basename='role-changes'
+                )
 
 urlpatterns = [
     path('', include(router.urls)),
