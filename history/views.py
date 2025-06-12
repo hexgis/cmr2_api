@@ -1,11 +1,11 @@
 from django.contrib.admin.models import LogEntry
 from rest_framework.viewsets import ReadOnlyModelViewSet
 from .serializers import LogEntrySerializer
-from django.contrib.admin.models import LogEntry, CHANGE
-from django.contrib.contenttypes.models import ContentType
-from .models import UserRoleChange
+from .models import UserRoleChange, UserChangeHistory
 from rest_framework import viewsets
 from rest_framework.response import Response
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class LogEntryViewSet(ReadOnlyModelViewSet):
@@ -14,18 +14,24 @@ class LogEntryViewSet(ReadOnlyModelViewSet):
 
     def get_queryset(self):
         queryset = super().get_queryset()
-
-        # Filtro por usuário
         user_id = self.request.query_params.get('user_id', None)
-        if user_id:
-            queryset = queryset.filter(object_id=user_id)
 
-        # Filtro por data
-        start_date = self.request.query_params.get('start_date', None)
-        if start_date:
-            queryset = queryset.filter(action_time__gte=start_date)
+        if user_id:
+            return UserChangeHistory.objects.filter(user_id=user_id).order_by('-changed_at')
 
         return queryset
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        data = [{
+            'id': change.id,
+            'alterado_por': change.changed_by.username,
+            'action_time': change.changed_at,
+            'username': change.new_username,
+            'email': change.new_email,
+            'institution': change.new_institution
+        } for change in queryset]
+        return Response(data)
 
 
 class UserRoleChangeViewSet(viewsets.ReadOnlyModelViewSet):

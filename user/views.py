@@ -54,7 +54,7 @@ from permission import models as perm_models
 from emails.send_email import send_html_email
 from django.contrib.auth import get_user_model
 from emails.access_request import send_email_access_request
-from history.models import UserRoleChange
+from history.models import UserRoleChange, UserChangeHistory
 
 
 logger = logging.getLogger(__name__)
@@ -89,8 +89,23 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = serializers.UserSerializer
 
     def perform_update(self, serializer):
-        old_roles = set(self.get_object().roles.all())
+        old_instance = self.get_object()
         instance = serializer.save()
+
+        # Save user changes history
+        UserChangeHistory.objects.create(
+            user=instance,
+            changed_by=self.request.user,
+            old_username=old_instance.username,
+            new_username=instance.username,
+            old_email=old_instance.email,
+            new_email=instance.email,
+            old_institution=old_instance.institution.name if old_instance.institution else None,
+            new_institution=instance.institution.name if instance.institution else None
+        )
+
+        # Track role changes
+        old_roles = set(old_instance.roles.all())
         new_roles = set(instance.roles.all())
 
         # Track added roles

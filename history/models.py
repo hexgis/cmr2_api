@@ -22,3 +22,26 @@ class UserRoleChange(models.Model):
 
     class Meta:
         ordering = ['-changed_at']
+
+
+class UserChangeHistory(models.Model):
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='changes_affected'
+    )
+    changed_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='changes_made'
+    )
+    changed_at = models.DateTimeField(auto_now_add=True)
+    old_username = models.CharField(max_length=255, null=True)
+    new_username = models.CharField(max_length=255, null=True)
+    old_email = models.EmailField(null=True)
+    new_email = models.EmailField(null=True)
+    old_institution = models.CharField(max_length=255, null=True)
+    new_institution = models.CharField(max_length=255, null=True)
+
+    class Meta:
+        ordering = ['-changed_at']
