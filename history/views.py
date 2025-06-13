@@ -29,7 +29,8 @@ class LogEntryViewSet(ReadOnlyModelViewSet):
     - This viewset is read-only and does not allow creation, update, or deletion of records.
     """
 
-    queryset = LogEntry.objects.all().order_by('-action_time')  # add back queryset attribute
+    queryset = LogEntry.objects.all().order_by(
+        '-action_time')  # add back queryset attribute
 
     def get_serializer_class(self):
         user_id = self.request.query_params.get('user_id', None)
@@ -71,7 +72,9 @@ class UserRoleChangeViewSet(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id', None)
         if user_id:
-            return (UserRoleChange.objects.filter(user_id=user_id)
-                    .select_related('changed_by', 'role', 'user')
-                    .order_by('-changed_at'))
+            return (
+                UserRoleChange.objects.filter(user_id=user_id)
+                .select_related('changed_by', 'role', 'user')
+                .order_by('-changed_at')
+            )
         return UserRoleChange.objects.none()

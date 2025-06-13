@@ -69,17 +69,47 @@ class LogEntrySerializer(serializers.ModelSerializer):
 
 
 class UserChangeHistorySerializer(serializers.ModelSerializer):
+    """
+    Serializer for the UserChangeHistory model.
+
+    Outputs a simplified representation of user change history, including:
+    - id: Change record identifier.
+    - alterado_por: Username of the user who made the change.
+    - action_time: Date and time when the change occurred (formatted).
+    - username: New username after the change.
+    - email: New email after the change.
+    - institution: New institution after the change.
+    - is_active: New active status after the change.
+    - old_is_active: Previous active status before the change.
+    """
     alterado_por = serializers.CharField(
-        source='changed_by.username', read_only=True)
+        source='changed_by.username',
+        read_only=True
+    )
     action_time = serializers.DateTimeField(
-        source='changed_at', format='%d/%m/%Y %H:%M:%S', read_only=True)
-    username = serializers.CharField(source='new_username', read_only=True)
-    email = serializers.CharField(source='new_email', read_only=True)
+        source='changed_at',
+        format='%d/%m/%Y %H:%M:%S',
+        read_only=True
+    )
+    username = serializers.CharField(
+        source='new_username',
+        read_only=True
+    )
+    email = serializers.CharField(
+        source='new_email',
+        read_only=True
+    )
     institution = serializers.CharField(
-        source='new_institution', read_only=True)
+        source='new_institution',
+        read_only=True
+    )
     is_active = serializers.BooleanField(
-        source='new_is_active', read_only=True)
-    old_is_active = serializers.BooleanField(read_only=True)
+        source='new_is_active',
+        read_only=True
+    )
+    old_is_active = serializers.BooleanField(
+        read_only=True
+    )
 
     class Meta:
         model = UserChangeHistory
@@ -96,12 +126,29 @@ class UserChangeHistorySerializer(serializers.ModelSerializer):
 
 
 class UserRoleChangeSerializer(serializers.ModelSerializer):
+    """
+    Serializer for the UserRoleChange model.
+
+    Outputs a simplified representation of user role change history, including:
+    - id: Change record identifier.
+    - changed_by: Username of the user who made the role change.
+    - changed_at: Date and time when the role change occurred (formatted).
+    - action: Action performed ('Adicionado' or 'Removido').
+    - role: Name of the role affected by the change.
+    """
     changed_by = serializers.CharField(
-        source='changed_by.username', read_only=True)
+        source='changed_by.username',
+        read_only=True
+    )
     changed_at = serializers.DateTimeField(
-        format='%d/%m/%Y %H:%M:%S', read_only=True)
+        format='%d/%m/%Y %H:%M:%S',
+        read_only=True
+    )
     action = serializers.SerializerMethodField()
-    role = serializers.CharField(source='role.name', read_only=True)
+    role = serializers.CharField(
+        source='role.name',
+        read_only=True
+    )
 
     class Meta:
         model = UserRoleChange
