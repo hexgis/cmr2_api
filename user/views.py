@@ -104,7 +104,9 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
             old_email=old_instance.email,
             new_email=instance.email,
             old_institution=old_instance.institution.name if old_instance.institution else None,
-            new_institution=instance.institution.name if instance.institution else None
+            new_institution=instance.institution.name if instance.institution else None,
+            old_is_active=old_instance.is_active,
+            new_is_active=instance.is_active
         )
 
         # Track role changes - first remove old roles then add new ones

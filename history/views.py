@@ -29,7 +29,9 @@ class LogEntryViewSet(ReadOnlyModelViewSet):
             'action_time': change.changed_at,
             'username': change.new_username,
             'email': change.new_email,
-            'institution': change.new_institution
+            'institution': change.new_institution,
+            'is_active': change.new_is_active,
+            'old_is_active': change.old_is_active
         } for change in queryset]
         return Response(data)
 
