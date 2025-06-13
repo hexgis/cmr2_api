@@ -9,6 +9,26 @@ User = get_user_model()
 
 
 class LogEntryViewSet(ReadOnlyModelViewSet):
+    """
+    ViewSet for retrieving system log entries and user change history.
+
+    Behavior:
+    - If a 'user_id' query parameter is provided, returns the change history
+      for that specific user from the UserChangeHistory model.
+    - Otherwise, returns the full list of LogEntry records ordered by action time.
+
+    Responses:
+    - Custom `list` method returns a simplified representation of user changes,
+      including fields such as who made the change, when it occurred,
+      and both old and new values for the user's attributes.
+
+    Query Parameters:
+    - user_id (optional): Filter the logs to show only the change history for a specific user.
+
+    Note:
+    - This viewset is read-only and does not allow creation, update, or deletion of records.
+    """
+
     serializer_class = LogEntrySerializer
     queryset = LogEntry.objects.all().order_by('-action_time')
 
@@ -37,7 +57,25 @@ class LogEntryViewSet(ReadOnlyModelViewSet):
 
 
 class UserRoleChangeViewSet(viewsets.ReadOnlyModelViewSet):
-    """ViewSet for retrieving user role change history."""
+    """
+    ViewSet for retrieving the history of user role changes.
+
+    Behavior:
+    - If a 'user_id' query parameter is provided, returns the role change
+      history for the specified user, ordered by the date of change (descending).
+    - If no 'user_id' is provided, returns an empty queryset.
+
+    Responses:
+    - Custom `list` method returns a simplified list of role change entries,
+      including who made the change, when it occurred, the action performed
+      (Added or Removed), and the role affected.
+
+    Query Parameters:
+    - user_id (optional): Filter the results to changes related to a specific user.
+
+    Note:
+    - This is a read-only endpoint; creation, update, and deletion are not allowed.
+    """
     queryset = UserRoleChange.objects.all()
 
     def get_queryset(self):

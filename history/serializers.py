@@ -4,6 +4,24 @@ from user.models import User
 
 
 class LogEntrySerializer(serializers.ModelSerializer):
+    """
+    Serializer for the LogEntry model, used to represent system activity logs.
+
+    Custom fields:
+    - user: Username associated with the action, if available.
+    - user_institution: Name of the institution linked to the user, if applicable.
+    - user_is_active: Indicates whether the user was active at the time of the action.
+    - action_time: Formatted date and time of the action.
+    - action_flag_display: Human-readable description of the action (Added, Changed, Deleted).
+
+    Model fields:
+    - id: Log entry identifier.
+    - action_flag: Numeric code of the action (1 = added, 2 = changed, 3 = deleted).
+    - change_message: Descriptive message of the change.
+    - content_type: Type of the affected content.
+    - object_id: ID of the affected object.
+    - object_repr: Text representation of the affected object.
+    """
     user = serializers.SerializerMethodField()
     user_institution = serializers.SerializerMethodField()
     user_is_active = serializers.SerializerMethodField()

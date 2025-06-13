@@ -95,7 +95,7 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
         instance = serializer.save()
         new_roles = set(instance.roles.all())
 
-        # Registra mudanças nos dados do usuário
+        # Register changes in user profile
         UserChangeHistory.objects.create(
             user=instance,
             changed_by=self.request.user,

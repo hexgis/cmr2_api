@@ -267,7 +267,7 @@ class GenCSV(generics.GenericAPIView):
 
 class FindUserDashboardDataView(generics.ListAPIView):
     """
-    Retorna os registros de acesso (DashboardData) de um usuário específico.
+    Returns the access records (DashboardData) for a specific user.
     """
     serializer_class = serializers.DashboardDataSerializer
     permission_classes = [IsAuthenticated]
