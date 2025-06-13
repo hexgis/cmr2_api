@@ -8,6 +8,7 @@ from rest_framework.permissions import IsAuthenticated
 from dashboard import models, serializers
 from openpyxl import Workbook
 from openpyxl.styles import Font
+from permission.mixins import Auth
 
 import io
 
@@ -265,12 +266,26 @@ class GenCSV(generics.GenericAPIView):
         return response
 
 
-class FindUserDashboardDataView(generics.ListAPIView):
+class FindUserDashboardDataView(Auth, generics.ListAPIView):
     """
-    Returns the access records (DashboardData) for a specific user.
+    API view for retrieving dashboard access records (DashboardData) for a specific user.
+
+    Behavior:
+    - Requires the 'user_id' query parameter to filter access records related to that user.
+    - If 'user_id' is not provided, returns a 400 Bad Request with an error message.
+    - Returns the records ordered by the most recent login date (`last_date_login` descending).
+
+    Permissions:
+    - Only authenticated users are allowed to access this endpoint.
+
+    Query Parameters:
+    - user_id (required): The ID of the user whose dashboard access data should be returned.
+
+    Response:
+    - 200 OK with a list of serialized DashboardData objects.
+    - 400 Bad Request if the required 'user_id' parameter is missing.
     """
     serializer_class = serializers.DashboardDataSerializer
-    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         user_id = self.request.query_params.get('user_id')
