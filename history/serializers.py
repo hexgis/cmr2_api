@@ -1,6 +1,7 @@
 from django.contrib.admin.models import LogEntry
 from rest_framework import serializers
 from user.models import User
+from .models import UserChangeHistory, UserRoleChange
 
 
 class LogEntrySerializer(serializers.ModelSerializer):
@@ -65,3 +66,52 @@ class LogEntrySerializer(serializers.ModelSerializer):
         elif obj.action_flag == 3:
             return "Excluído"
         return "Desconhecido"
+
+
+class UserChangeHistorySerializer(serializers.ModelSerializer):
+    alterado_por = serializers.CharField(
+        source='changed_by.username', read_only=True)
+    action_time = serializers.DateTimeField(
+        source='changed_at', format='%d/%m/%Y %H:%M:%S', read_only=True)
+    username = serializers.CharField(source='new_username', read_only=True)
+    email = serializers.CharField(source='new_email', read_only=True)
+    institution = serializers.CharField(
+        source='new_institution', read_only=True)
+    is_active = serializers.BooleanField(
+        source='new_is_active', read_only=True)
+    old_is_active = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = UserChangeHistory
+        fields = [
+            'id',
+            'alterado_por',
+            'action_time',
+            'username',
+            'email',
+            'institution',
+            'is_active',
+            'old_is_active'
+        ]
+
+
+class UserRoleChangeSerializer(serializers.ModelSerializer):
+    changed_by = serializers.CharField(
+        source='changed_by.username', read_only=True)
+    changed_at = serializers.DateTimeField(
+        format='%d/%m/%Y %H:%M:%S', read_only=True)
+    action = serializers.SerializerMethodField()
+    role = serializers.CharField(source='role.name', read_only=True)
+
+    class Meta:
+        model = UserRoleChange
+        fields = [
+            'id',
+            'changed_by',
+            'changed_at',
+            'action',
+            'role',
+        ]
+
+    def get_action(self, obj):
+        return 'Removido' if obj.action == 'removed' else 'Adicionado'
