@@ -86,6 +86,7 @@ INSTALLED_APPS = [
     'funai',
     'land_use',
     'corsheaders',
+    'history'
 ]
 
 MIDDLEWARE = [

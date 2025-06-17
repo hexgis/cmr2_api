@@ -17,6 +17,7 @@ from rest_framework.response import Response
 from rest_framework.exceptions import APIException
 import os
 import logging
+import json
 
 from django.http import Http404
 from django.contrib.gis.geos import GEOSGeometry, WKBWriter
@@ -40,7 +41,8 @@ from rest_framework import (
     views,
 )
 from django.http import FileResponse, JsonResponse, Http404
-
+from django.contrib.admin.models import LogEntry, CHANGE
+from django.contrib.contenttypes.models import ContentType
 
 from user import (
     serializers,
@@ -52,6 +54,7 @@ from permission import models as perm_models
 from emails.send_email import send_html_email
 from django.contrib.auth import get_user_model
 from emails.access_request import send_email_access_request
+from history.models import UserRoleChange, UserChangeHistory
 
 
 logger = logging.getLogger(__name__)
@@ -84,6 +87,56 @@ class UserDetailView(generics.RetrieveUpdateDestroyAPIView):
 
     queryset = User.objects.all()
     serializer_class = serializers.UserSerializer
+
+    def perform_update(self, serializer):
+        old_instance = self.get_object()
+        old_roles = set(old_instance.roles.all())
+
+        instance = serializer.save()
+        new_roles = set(instance.roles.all())
+
+        # Register changes in user profile
+        UserChangeHistory.objects.create(
+            user=instance,
+            changed_by=self.request.user,
+            old_username=old_instance.username,
+            new_username=instance.username,
+            old_email=old_instance.email,
+            new_email=instance.email,
+            old_institution=old_instance.institution.name if old_instance.institution else None,
+            new_institution=instance.institution.name if instance.institution else None,
+            old_is_active=old_instance.is_active,
+            new_is_active=instance.is_active
+        )
+
+        # Track role changes - first remove old roles then add new ones
+        for role in old_roles - new_roles:
+            UserRoleChange.objects.create(
+                user=instance,
+                changed_by=self.request.user,
+                action='removed',
+                role=role
+            )
+
+        for role in new_roles - old_roles:
+            UserRoleChange.objects.create(
+                user=instance,
+                changed_by=self.request.user,
+                action='added',
+                role=role
+            )
+
+        # Create admin log entry
+        changed_fields = list(serializer.validated_data.keys())
+        LogEntry.objects.log_action(
+            user_id=self.request.user.pk,
+            content_type_id=ContentType.objects.get_for_model(instance).pk,
+            object_id=instance.pk,
+            object_repr=str(instance),
+            action_flag=CHANGE,
+            change_message=json.dumps(
+                [{"changed": {"fields": changed_fields}}])
+        )
 
     def destroy(self, request, *args, **kwargs):
         user = self.get_object()
