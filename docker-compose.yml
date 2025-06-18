@@ -40,6 +40,7 @@ services:
       - "8080:8080"
     # network_mode: "host"
     environment:
+      ENVIRONMENT: develop
       RESET_PASSWORD_URL: "http://localhost:3000"
       SECRET_KEY: OSKS92JlKSJJksio*&2j40(&0130)W082_120KKmas@
       DB_USER: testuser

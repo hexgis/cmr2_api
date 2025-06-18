@@ -2,6 +2,7 @@ from rest_framework import generics
 from .models import LayerPermission, ComponentPermission
 from .serializers import RoleWithGroupsSerializer, LayerPermissionSerializer, ComponentPermissionSerializer
 from permission.mixins import AdminAuth, Public
+from django.shortcuts import get_object_or_404
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -17,6 +18,8 @@ from user.models import Role, Group
 from user import (
     serializers,
 )
+from django.contrib.auth import get_user_model
+User = get_user_model()
 
 
 class GroupPermissionListView(AdminAuth, generics.ListAPIView):
@@ -182,6 +185,70 @@ class RoleGroupDiffView(Public, APIView):
         return Response(serializer.data)
 
 
+class RoleUserDiffView(Public, APIView):
+    """
+    Returns users that are not yet associated with a given role.
+    """
+
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            role = get_object_or_404(Role, pk=pk)
+
+            # Get users not associated with this role
+            unassociated_users = User.objects.exclude(
+                roles=role
+            ).filter(is_active=True)  # Optional: filter only active users
+
+            serializer = serializers.UserSerializer(
+                unassociated_users, many=True)
+
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+        except Role.DoesNotExist:
+            raise NotFound({"detail": "Role não encontrado."})
+
+
+class RoleUserListView(Public, APIView):
+    """
+    Returns both associated and unassociated users for a specific role.
+    """
+
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            role = get_object_or_404(Role, pk=pk)
+
+            # Get associated users (with this role)
+            associated_users = User.objects.filter(
+                roles=role,
+                is_active=True
+            )
+
+            # Get unassociated users (without this role)
+            unassociated_users = User.objects.exclude(
+                roles=role
+            ).filter(is_active=True)
+
+            # Serialize both lists
+            associated_serializer = serializers.UserSerializer(
+                associated_users,
+                many=True
+            )
+            unassociated_serializer = serializers.UserSerializer(
+                unassociated_users,
+                many=True
+            )
+
+            return Response({
+                'associated_users': associated_serializer.data,
+                'unassociated_users': unassociated_serializer.data,
+                'total_associated': associated_users.count(),
+                'total_unassociated': unassociated_users.count()
+            }, status=status.HTTP_200_OK)
+
+        except Role.DoesNotExist:
+            raise NotFound({"detail": "Role não encontrada."})
+
+
 class LayerPermissionView(Public, APIView):
     """
         View to manage layer permissions
@@ -263,3 +330,42 @@ class LayerPermissionDiffView(Public, APIView):
         )
 
         return Response(serializer.data)
+
+
+class GroupUserListView(Public, APIView):
+    """
+    Returns both associated and unassociated users for a specific group.
+    """
+
+    def get(self, request, pk, *args, **kwargs):
+        try:
+            group = get_object_or_404(Group, pk=pk)
+
+            # Get associated users
+            associated_users = User.objects.filter(
+                groups=group,
+                is_active=True
+            )
+
+            # Get unassociated users
+            unassociated_users = User.objects.exclude(
+                groups=group
+            ).filter(is_active=True)
+
+            # Serialize both lists
+            associated_serializer = serializers.UserSerializer(
+                associated_users,
+                many=True
+            )
+            unassociated_serializer = serializers.UserSerializer(
+                unassociated_users,
+                many=True
+            )
+
+            return Response({
+                'associated_users': associated_serializer.data,
+                'unassociated_users': unassociated_serializer.data
+            }, status=status.HTTP_200_OK)
+
+        except Group.DoesNotExist:
+            raise NotFound({"detail": "Grupo não encontrado."})

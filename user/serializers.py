@@ -308,6 +308,7 @@ class InstitutionSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
+            'institution_type',
         )
 
 
@@ -320,31 +321,49 @@ class RoleSerializer(serializers.ModelSerializer):
         write_only=True,
         required=False
     )
+    associated_users = serializers.PrimaryKeyRelatedField(
+        queryset=models.User.objects.all(),
+        many=True,
+        write_only=True,
+        required=False
+    )
 
     def create(self, validated_data: dict) -> models.Role:
         associated_groups = validated_data.pop('associated_groups', [])
+        associated_users = validated_data.pop('associated_users', [])
+
         obj = models.Role.objects.create(
             name=validated_data['name'],
             description=validated_data['description']
         )
+
         if associated_groups:
             obj.groups.set(associated_groups)
+        if associated_users:
+            obj.users.set(associated_users)
+
         return obj
 
     def update(self, instance, validated_data):
         associated_groups = validated_data.pop('associated_groups', None)
+        associated_users = validated_data.pop('associated_users', None)
+
         instance.name = validated_data.get('name', instance.name)
         instance.description = validated_data.get(
             'description', instance.description)
         instance.save()
+
         if associated_groups is not None:
             instance.groups.set(associated_groups)
+        if associated_users is not None:
+            instance.users.set(associated_users)
+
         return instance
 
     class Meta:
         model = models.Role
-        fields = ['id', 'name', 'description',
-                  'groups', 'users', 'associated_groups']
+        fields = ['id', 'name', 'description', 'groups', 'users',
+                  'associated_groups', 'associated_users']
 
 
 class GroupSerializer(serializers.ModelSerializer):

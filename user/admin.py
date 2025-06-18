@@ -292,7 +292,6 @@ class AccessRequestAdmin(admin.ModelAdmin):
         'coordinator_name',
         'coordinator_email',
     )
-    # Exemplo de campos que podem ser só leitura (se quiser)
     readonly_fields = (
         'created_at',
         'reviewed_at',

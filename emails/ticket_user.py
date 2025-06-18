@@ -43,6 +43,7 @@ def send_email_ticket_to_user(ticket, data):
         'body_content': body_content,
         'ticket_name': ticket.subject,
         'button': button,
+        'environment': settings.ENVIRONMENT,
     }
 
     template = os.path.join(

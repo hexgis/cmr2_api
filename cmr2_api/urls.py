@@ -29,6 +29,10 @@ urlpatterns = [
         ('admin_panel.urls', 'adm-panel'),
         namespace='adm panel'),
     ),
+    path('history/', include(
+        ('history.urls', 'history'),
+        namespace='history')
+    ),
     path('auth/', include(
         ('auth_jwt.urls', 'auth'),
         namespace='auth')
