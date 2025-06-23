@@ -89,6 +89,8 @@ class UserSerializer(serializers.ModelSerializer):
 
     components = serializers.SerializerMethodField()
 
+    is_admin = serializers.SerializerMethodField()
+
     roles = SimpleRoleSerializer(many=True, read_only=True)
 
     institution = serializers.SlugRelatedField(
@@ -136,6 +138,21 @@ class UserSerializer(serializers.ModelSerializer):
             return {component: False for component in components}
 
         return {component: (component in data) for component in components}
+
+    def get_is_admin(self, obj: models.User) -> bool:
+        """Check if user is admin based on is_staff flag or 'Administrador' role.
+
+        Args:
+            obj (User): User instance.
+
+        Returns:
+            bool: True if user is admin (is_staff=True or has 'Administrador' role).
+        """
+        if obj.is_staff:
+            return True
+
+        admin_roles = obj.roles.filter(name='Administrador')
+        return admin_roles.exists()
 
     def create(self, validated_data: dict) -> models.User:
         """Create a new user instance.
@@ -246,6 +263,7 @@ class UserSerializer(serializers.ModelSerializer):
             'is_active',
             'is_superuser',
             'is_staff',
+            'is_admin',
             'components',
         )
 
