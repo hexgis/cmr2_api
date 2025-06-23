@@ -47,8 +47,9 @@ class Ticket(models.Model):
         null=False,
         blank=False
     )
-    description = models.CharField(
-        max_length=500,
+    description = models.TextField(
+        verbose_name="Descrição",
+        help_text="Description of the ticket",
         null=False,
         blank=False
     )
@@ -240,8 +241,9 @@ class TicketAnalysisHistory(models.Model):
         auto_now_add=True,
     )
 
-    comment = models.CharField(
-        max_length=500,
+    comment = models.TextField(
+        verbose_name="Comentário",
+        help_text="Comment about the ticket analysis",
         blank=False,
         null=False
     )
