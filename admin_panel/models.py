@@ -118,25 +118,7 @@ class TicketStatus(models.Model):
         DEFERIDO = "DEFERIDO", "Deferido"
         DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
 
-    class SubStatus(models.TextChoices):
-        # Substatus para 'Em Andamento'
-        AGUARDANDO_GESTOR = "AGUARDANDO_GESTOR", "Aguardando Gestor"
-        EM_DESENVOLVIMENTO = "EM_DESENVOLVIMENTO", "Em Desenvolvimento"
 
-        # Substatus para 'Concluído'
-        CONCLUIDO = "CONCLUIDO", "Concluído"
-        EM_TESTE = "EM_TESTE", "Em Teste"
-
-        # Substatus para 'Recusado'
-        INVIAVEL = "INVIAVEL", "Inviável"
-        INDEFERIDO = "INDEFERIDO", "Indeferido"
-
-        # Substatus para 'Deferido'
-        DEFERIDO = "DEFERIDO", "Deferido"
-        DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
-
-        # Substatos para 'Não Analisado'
-        NAO_ANALISADO = "NAO_ANALISADO", "Não Analisado"
 
     class Priority(models.TextChoices):
         BAIXA = 'BAIXA', 'Baixa',
@@ -146,14 +128,6 @@ class TicketStatus(models.Model):
     status_category = models.CharField(
         max_length=20,
         choices=StatusCategory.choices,
-        default=StatusCategory.NAO_ANALISADO,
-        null=True,
-        blank=True
-    )
-
-    sub_status = models.CharField(
-        max_length=20,
-        choices=SubStatus.choices,
         default=StatusCategory.NAO_ANALISADO,
         null=True,
         blank=True
@@ -251,13 +225,6 @@ class TicketAnalysisHistory(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.DO_NOTHING,
-    )
-
-    sub_status = models.CharField(
-        max_length=20,
-        choices=TicketStatus.SubStatus.choices,
-        null=True,
-        blank=True
     )
     ticket = models.ForeignKey(
         'Ticket',

@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Ticket, TicketStatus, TicketFunctionality, TicketAnalysisHistory, TicketAttachment, TicketStatusAttachment
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-from .validators import validate_status_and_substatus, format_datetime, validate_complexity, format_date
+from .validators import format_datetime, validate_complexity, format_date
 
 
 class TicketFunctionalitySerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class TicketStatusSerializer(serializers.ModelSerializer):
         model = TicketStatus
         fields = [
             'id', 'due_on', 'user_info', 'formated_info',
-            'status_category', 'sub_status', 'priority_code'
+            'status_category', 'priority_code'
         ]
         read_only_fields = ['analyzed_in']
 
@@ -47,23 +47,11 @@ class TicketStatusSerializer(serializers.ModelSerializer):
             "analyzed_in_formatted": format_datetime(obj.analyzed_in) if obj.analyzed_in else None,
             "formated_due_on": format_date(obj.due_on) if obj.due_on else None,
             "status_category_display": obj.get_status_category_display(),
-            "sub_status_display": obj.get_sub_status_display(),
             "priority_display": obj.get_priority_code_display(),
         }
 
     def validate(self, data):
-        cleaned_data = {key: value for key, value in data.items() if value not in [
-            None, 'null', '']}
-
-        status_category = cleaned_data.get(
-            'status_category', self.instance.status_category if self.instance else None)
-        sub_status = cleaned_data.get(
-            'sub_status', self.instance.sub_status if self.instance else None)
-        current_status = self.instance.status_category if self.instance else None
-        current_substatus = self.instance.sub_status if self.instance else None
-
-        validate_status_and_substatus(
-            status_category, sub_status, current_status, current_substatus)
+        # Removemos a validação de sub_status pois não usamos mais este campo
         return data
 
     def update(self, instance, data):
@@ -95,10 +83,9 @@ class TicketStatusSerializer(serializers.ModelSerializer):
         return instance
 
     def to_representation(self, instance):
-        """Oculta os campos `status_category` e `sub_status` no retorno."""
+        """Oculta o campo `status_category` no retorno."""
         representation = super().to_representation(instance)
         representation.pop('status_category', None)
-        representation.pop('sub_status', None)
         representation.pop('priority_code', None)
         return representation
 
@@ -127,13 +114,10 @@ class TicketAnalysisHistorySerializer(serializers.ModelSerializer):
         source='ticket',
     )
 
-    sub_status_name = serializers.CharField(
-        source='get_sub_status_display', read_only=True)
-
     class Meta:
         model = TicketAnalysisHistory
         fields = [
-            'id', 'comment', 'author', 'author_id', 'ticket', 'ticket_id', 'sub_status_name',
+            'id', 'comment', 'author', 'author_id', 'ticket', 'ticket_id',
             'analyzed_update_formatted', 'status_history_attachments'
         ]
 
@@ -229,7 +213,6 @@ class TicketSerializer(serializers.ModelSerializer):
 
 class TicketStatusChoicesSerializer(serializers.Serializer):
     status_category = serializers.SerializerMethodField()
-    sub_status = serializers.SerializerMethodField()
     priority_code = serializers.SerializerMethodField()
     complexity = serializers.SerializerMethodField()
     solicitation_type = serializers.SerializerMethodField()
@@ -241,9 +224,6 @@ class TicketStatusChoicesSerializer(serializers.Serializer):
 
     def get_status_category(self, obj):
         return [{"value": choice[0], "label": choice[1]} for choice in TicketStatus.StatusCategory.choices]
-
-    def get_sub_status(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in TicketStatus.SubStatus.choices]
 
     def get_priority_code(self, obj):
         return [{"value": choice[0], "label": choice[1]} for choice in TicketStatus.Priority.choices]

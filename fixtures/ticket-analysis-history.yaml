@@ -6,7 +6,6 @@
         "analyzed_update": "2024-11-21T20:01:24.936Z",
         "comment": "teste new comment",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 91
     }
 },
@@ -17,7 +16,6 @@
         "analyzed_update": "2024-11-21T20:08:59.177Z",
         "comment": "Teste2",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 91
     }
 },
@@ -28,7 +26,6 @@
         "analyzed_update": "2024-11-21T20:10:17.124Z",
         "comment": "Troquei a prioridade",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 91
     }
 },
@@ -39,7 +36,6 @@
         "analyzed_update": "2024-11-21T20:18:46.799Z",
         "comment": "Alterando os status",
         "author": 1,
-        "sub_status": "CONCLUIDO",
         "ticket": 91
     }
 },
@@ -50,7 +46,6 @@
         "analyzed_update": "2024-11-22T11:35:36.957Z",
         "comment": "Mudei pra Em dev",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 90
     }
 },
@@ -61,7 +56,6 @@
         "analyzed_update": "2024-11-22T11:36:00.089Z",
         "comment": "complex",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 90
     }
 },
@@ -72,7 +66,6 @@
         "analyzed_update": "2024-11-22T11:36:20.601Z",
         "comment": "prioridade",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 90
     }
 },
@@ -83,7 +76,6 @@
         "analyzed_update": "2024-11-22T13:56:31.952Z",
         "comment": "Mudança de status",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 90
     }
 },
@@ -94,7 +86,6 @@
         "analyzed_update": "2024-11-22T13:56:49.906Z",
         "comment": "Inviável no momento",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 90
     }
 },
@@ -105,7 +96,6 @@
         "analyzed_update": "2024-11-22T14:28:32.501Z",
         "comment": ".",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 94
     }
 },
@@ -116,7 +106,6 @@
         "analyzed_update": "2024-11-22T14:45:38.250Z",
         "comment": "teste",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 94
     }
 },
@@ -127,7 +116,6 @@
         "analyzed_update": "2024-11-22T14:52:55.655Z",
         "comment": "gogo",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 94
     }
 },
@@ -138,7 +126,6 @@
         "analyzed_update": "2024-11-22T15:23:08.816Z",
         "comment": "data",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 94
     }
 },
@@ -149,7 +136,6 @@
         "analyzed_update": "2024-11-22T15:24:51.552Z",
         "comment": "Teste ",
         "author": 1,
-        "sub_status": "AGUARDANDO_GESTOR",
         "ticket": 94
     }
 },
@@ -160,7 +146,6 @@
         "analyzed_update": "2024-11-22T15:25:33.552Z",
         "comment": "Info updated",
         "author": 1,
-        "sub_status": "AGUARDANDO_GESTOR",
         "ticket": 94
     }
 },
@@ -171,7 +156,6 @@
         "analyzed_update": "2024-11-22T15:25:57.850Z",
         "comment": "INiváel",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 94
     }
 },
@@ -182,7 +166,6 @@
         "analyzed_update": "2024-11-22T17:35:08.445Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -193,7 +176,6 @@
         "analyzed_update": "2024-11-22T17:35:54.275Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -204,7 +186,6 @@
         "analyzed_update": "2024-11-22T17:36:04.913Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -215,7 +196,6 @@
         "analyzed_update": "2024-11-22T17:36:48.032Z",
         "comment": "Bora",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 89
     }
 },
@@ -226,7 +206,6 @@
         "analyzed_update": "2024-11-22T17:37:08.048Z",
         "comment": "INDEFERIDO",
         "author": 1,
-        "sub_status": "INDEFERIDO",
         "ticket": 89
     }
 },
@@ -237,7 +216,6 @@
         "analyzed_update": "2024-11-22T17:41:03.741Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -248,7 +226,6 @@
         "analyzed_update": "2024-11-22T17:46:58.259Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -259,7 +236,6 @@
         "analyzed_update": "2024-11-22T17:47:09.532Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INDEFERIDO",
         "ticket": 91
     }
 },
@@ -270,7 +246,6 @@
         "analyzed_update": "2024-11-22T17:47:32.032Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INDEFERIDO",
         "ticket": 91
     }
 },
@@ -281,7 +256,6 @@
         "analyzed_update": "2024-11-22T17:47:38.906Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INDEFERIDO",
         "ticket": 91
     }
 },
@@ -292,7 +266,6 @@
         "analyzed_update": "2024-11-22T17:47:47.573Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -303,7 +276,6 @@
         "analyzed_update": "2024-11-22T17:47:50.623Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -314,7 +286,6 @@
         "analyzed_update": "2024-11-22T17:48:49.853Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -325,7 +296,6 @@
         "analyzed_update": "2024-11-22T17:49:13.975Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -336,7 +306,6 @@
         "analyzed_update": "2024-11-22T17:50:17.661Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -347,7 +316,6 @@
         "analyzed_update": "2024-11-22T17:50:49.770Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -358,7 +326,6 @@
         "analyzed_update": "2024-11-22T17:51:33.290Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -369,7 +336,6 @@
         "analyzed_update": "2024-11-22T17:52:52.684Z",
         "comment": "",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 91
     }
 },
@@ -380,7 +346,6 @@
         "analyzed_update": "2024-11-22T17:53:21.190Z",
         "comment": "",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 91
     }
 },
@@ -391,7 +356,6 @@
         "analyzed_update": "2024-11-22T17:55:50.727Z",
         "comment": "A solicitação foi reaberta para nova análise.",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 89
     }
 },
@@ -402,7 +366,6 @@
         "analyzed_update": "2024-11-22T17:56:24.664Z",
         "comment": "A solicitação foi reaberta para nova análise.",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 94
     }
 },
@@ -413,7 +376,6 @@
         "analyzed_update": "2024-11-22T18:13:53.069Z",
         "comment": "Alterando",
         "author": 1,
-        "sub_status": "INVIAVEL",
         "ticket": 89
     }
 },
@@ -424,7 +386,6 @@
         "analyzed_update": "2024-11-22T18:14:00.557Z",
         "comment": "A solicitação foi reaberta para nova análise.",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 89
     }
 },
@@ -435,7 +396,6 @@
         "analyzed_update": "2024-11-22T18:14:19.269Z",
         "comment": "Alterado",
         "author": 1,
-        "sub_status": "INDEFERIDO",
         "ticket": 89
     }
 },
@@ -446,7 +406,6 @@
         "analyzed_update": "2024-11-22T18:53:59.661Z",
         "comment": "A solicitação foi reaberta para nova análise.",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 90
     }
 },
@@ -457,7 +416,6 @@
         "analyzed_update": "2024-11-22T18:54:55.495Z",
         "comment": "Verificação das informações.",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 102
     }
 },
@@ -468,7 +426,6 @@
         "analyzed_update": "2024-11-22T19:39:59.763Z",
         "comment": "dsadsa",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 100
     }
 },
@@ -479,7 +436,6 @@
         "analyzed_update": "2024-11-22T19:41:06.538Z",
         "comment": "aaa",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 100
     }
 },
@@ -490,7 +446,6 @@
         "analyzed_update": "2024-11-22T19:41:28.499Z",
         "comment": "aa",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 100
     }
 },
@@ -501,7 +456,6 @@
         "analyzed_update": "2024-11-22T19:41:36.817Z",
         "comment": "a",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 100
     }
 },
@@ -512,7 +466,6 @@
         "analyzed_update": "2024-11-22T19:43:00.301Z",
         "comment": "sadsdsadsdsa",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 100
     }
 },
@@ -523,7 +476,6 @@
         "analyzed_update": "2024-11-22T19:49:24.629Z",
         "comment": "aaaaaaa",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 95
     }
 },
@@ -534,7 +486,6 @@
         "analyzed_update": "2024-11-22T19:53:45.477Z",
         "comment": "A",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 102
     }
 },
@@ -545,7 +496,6 @@
         "analyzed_update": "2024-11-22T19:54:01.760Z",
         "comment": "a",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 102
     }
 },
@@ -556,7 +506,6 @@
         "analyzed_update": "2024-11-22T19:54:08.527Z",
         "comment": "a",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 102
     }
 },
@@ -567,7 +516,6 @@
         "analyzed_update": "2024-11-22T19:54:23.867Z",
         "comment": "a",
         "author": 1,
-        "sub_status": "AGUARDANDO_GESTOR",
         "ticket": 102
     }
 },
@@ -578,7 +526,6 @@
         "analyzed_update": "2024-12-16T19:24:20.045Z",
         "comment": "Em progresso",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 113
     }
 },
@@ -589,7 +536,6 @@
         "analyzed_update": "2024-12-17T13:39:30.302Z",
         "comment": "teste123132132",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 118
     }
 },
@@ -600,7 +546,6 @@
         "analyzed_update": "2024-12-17T14:15:01.022Z",
         "comment": "muito complexo....",
         "author": 1,
-        "sub_status": "INDEFERIDO",
         "ticket": 128
     }
 },
@@ -611,7 +556,6 @@
         "analyzed_update": "2024-12-17T18:10:12.285Z",
         "comment": "sssssssssssd",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 125
     }
 },
@@ -622,7 +566,6 @@
         "analyzed_update": "2024-12-17T18:36:13.222Z",
         "comment": "A solicitação foi reaberta para nova análise.",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 128
     }
 },
@@ -633,7 +576,6 @@
         "analyzed_update": "2024-12-17T18:36:29.343Z",
         "comment": "sss",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 128
     }
 },
@@ -644,7 +586,6 @@
         "analyzed_update": "2024-12-17T18:36:54.615Z",
         "comment": "sss3333",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 128
     }
 },
@@ -655,7 +596,6 @@
         "analyzed_update": "2024-12-17T18:39:24.827Z",
         "comment": "www",
         "author": 1,
-        "sub_status": "AGUARDANDO_GESTOR",
         "ticket": 128
     }
 },
@@ -666,7 +606,6 @@
         "analyzed_update": "2024-12-17T18:41:04.554Z",
         "comment": "weqwewqewqewqewq",
         "author": 1,
-        "sub_status": "AGUARDANDO_GESTOR",
         "ticket": 128
     }
 },
@@ -677,7 +616,6 @@
         "analyzed_update": "2024-12-17T18:41:24.543Z",
         "comment": "cccccc",
         "author": 1,
-        "sub_status": "CONCLUIDO",
         "ticket": 128
     }
 },
@@ -688,7 +626,6 @@
         "analyzed_update": "2024-12-17T19:27:14.621Z",
         "comment": "A solicitação foi reaberta para nova análise.",
         "author": 1,
-        "sub_status": "NAO_ANALISADO",
         "ticket": 89
     }
 },
@@ -699,7 +636,6 @@
         "analyzed_update": "2024-12-17T19:27:27.955Z",
         "comment": "tetess",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 89
     }
 },
@@ -710,7 +646,6 @@
         "analyzed_update": "2024-12-17T19:28:04.741Z",
         "comment": "este",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 122
     }
 },
@@ -721,7 +656,6 @@
         "analyzed_update": "2024-12-17T19:28:59.133Z",
         "comment": "0000",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 129
     }
 },
@@ -732,7 +666,6 @@
         "analyzed_update": "2024-12-17T19:31:40.478Z",
         "comment": "att status",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 126
     }
 },
@@ -743,7 +676,6 @@
         "analyzed_update": "2024-12-17T19:31:55.946Z",
         "comment": "teste",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 124
     }
 },
@@ -754,7 +686,6 @@
         "analyzed_update": "2024-12-18T14:01:34.525Z",
         "comment": "aaaaaaaa",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 119
     }
 },
@@ -765,7 +696,6 @@
         "analyzed_update": "2024-12-18T14:02:42.206Z",
         "comment": "qwq",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 119
     }
 },
@@ -776,7 +706,6 @@
         "analyzed_update": "2024-12-18T14:03:21.576Z",
         "comment": "a",
         "author": 1,
-        "sub_status": "EM_TESTE",
         "ticket": 120
     }
 },
@@ -787,7 +716,6 @@
         "analyzed_update": "2024-12-18T14:04:03.246Z",
         "comment": "c",
         "author": 1,
-        "sub_status": "CONCLUIDO",
         "ticket": 129
     }
 },
@@ -798,7 +726,6 @@
         "analyzed_update": "2024-12-18T14:22:13.455Z",
         "comment": "a",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 117
     }
 },
@@ -809,7 +736,6 @@
         "analyzed_update": "2024-12-18T14:34:51.394Z",
         "comment": "a",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 117
     }
 },
@@ -820,7 +746,6 @@
         "analyzed_update": "2024-12-18T14:35:42.896Z",
         "comment": "as",
         "author": 1,
-        "sub_status": "EM_DESENVOLVIMENTO",
         "ticket": 117
     }
 },
@@ -831,7 +756,6 @@
         "analyzed_update": "2024-12-23T18:42:37.149Z",
         "comment": "aaaaa",
         "author": 1,
-        "sub_status": "AGUARDANDO_GESTOR",
         "ticket": 123
     }
 }

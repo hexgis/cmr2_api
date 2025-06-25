@@ -27,61 +27,6 @@ def validate_ticket_choices(ticket):
         raise ValidationError(errors)
 
 
-def validate_status_and_substatus(status_category, sub_status, current_status=None, current_substatus=None):
-    """
-    Validates the compatibility between the status category and substatus.
-
-    Args:
-        status_category (str): The received status category.
-        sub_status (str): The received substatus.
-        current_status (str, optional): The current status of the ticket. Default is None.
-        current_substatus (str, optional): The current substatus of the ticket. Default is None.
-
-    Raises:
-        ValidationError: If the combination of status category and substatus is invalid.
-    """
-    # Ensure no transition to "Não Analisado" unless the current status is "Recusado"
-    if current_status == TicketStatus.StatusCategory.RECUSADO and current_substatus in (
-        TicketStatus.SubStatus.INDEFERIDO,
-        TicketStatus.SubStatus.INVIAVEL,
-    ):
-        if status_category != TicketStatus.StatusCategory.NAO_ANALISADO or sub_status != TicketStatus.SubStatus.NAO_ANALISADO:
-            raise ValidationError(
-                "Transição não permitida! O status 'RECUSADO' com substatus 'INDEFERIDO' ou 'INVIAVEL' só pode ser alterado para 'NAO_ANALISADO'.")
-
-    # Ensure "Deferido" status is only valid from "Não Analisado"
-    if current_status and current_status != TicketStatus.StatusCategory.NAO_ANALISADO:
-        if status_category == TicketStatus.StatusCategory.DEFERIDO:
-            raise ValidationError(
-                "Não é permitido alterar o status para 'Deferido'.")
-
-    # Validate valid substatus for each status category
-    valid_substatus = {
-        TicketStatus.StatusCategory.DEFERIDO: [
-            TicketStatus.SubStatus.DEFERIDO
-        ],
-        TicketStatus.StatusCategory.RECUSADO: [
-            TicketStatus.SubStatus.INVIAVEL,
-            TicketStatus.SubStatus.INDEFERIDO,
-        ],
-        TicketStatus.StatusCategory.EM_ANDAMENTO: [
-            TicketStatus.SubStatus.AGUARDANDO_GESTOR,
-            TicketStatus.SubStatus.EM_DESENVOLVIMENTO,
-        ],
-        TicketStatus.StatusCategory.CONCLUIDO: [
-            TicketStatus.SubStatus.CONCLUIDO,
-            TicketStatus.SubStatus.EM_TESTE,
-            TicketStatus.SubStatus.DESENVOLVIDO,
-        ],
-    }
-
-    if status_category in valid_substatus:
-        if sub_status not in valid_substatus[status_category]:
-            raise ValidationError(
-                f"O substatus '{sub_status}' não é válido para a categoria '{status_category}'."
-            )
-
-
 def validate_complexity(complexity_code):
     """
     Validates the ticket's complexity code against the allowed choices.
