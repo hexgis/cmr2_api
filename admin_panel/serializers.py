@@ -48,10 +48,59 @@ class TicketStatusSerializer(serializers.ModelSerializer):
             "formated_due_on": format_date(obj.due_on) if obj.due_on else None,
             "status_category_display": obj.get_status_category_display(),
             "priority_display": obj.get_priority_code_display(),
+            "available_status_transitions": self.get_available_status_transitions(
+                obj.status_category),
         }
 
+    def get_available_status_transitions(self, current_status):
+        """Returns available statuses based on current status"""
+        status_transitions = {
+            TicketStatus.StatusCategory.NAO_ANALISADO: [
+                TicketStatus.StatusCategory.NAO_ANALISADO,
+                TicketStatus.StatusCategory.INDEFERIDO,
+                TicketStatus.StatusCategory.DEFERIDO,
+            ],
+            TicketStatus.StatusCategory.DEFERIDO: [
+                TicketStatus.StatusCategory.RECUSADO,
+                TicketStatus.StatusCategory.EM_DESENVOLVIMENTO,
+                TicketStatus.StatusCategory.AGUARDANDO_GESTOR,
+            ],
+            TicketStatus.StatusCategory.EM_DESENVOLVIMENTO: [
+                TicketStatus.StatusCategory.AGUARDANDO_GESTOR,
+                TicketStatus.StatusCategory.DESENVOLVIDO,
+                TicketStatus.StatusCategory.RECUSADO,
+                TicketStatus.StatusCategory.EM_DESENVOLVIMENTO,
+            ],
+            TicketStatus.StatusCategory.AGUARDANDO_GESTOR: [
+                TicketStatus.StatusCategory.EM_DESENVOLVIMENTO,
+                TicketStatus.StatusCategory.AGUARDANDO_GESTOR,
+                TicketStatus.StatusCategory.RECUSADO,
+            ],
+            TicketStatus.StatusCategory.DESENVOLVIDO: [
+                TicketStatus.StatusCategory.CONCLUIDO,
+                TicketStatus.StatusCategory.EM_DESENVOLVIMENTO,
+            ],
+            TicketStatus.StatusCategory.RECUSADO: [
+                TicketStatus.StatusCategory.RECUSADO,
+            ],
+            TicketStatus.StatusCategory.CONCLUIDO: [
+                TicketStatus.StatusCategory.CONCLUIDO,
+            ],
+        }
+
+        available_statuses = status_transitions.get(
+            current_status, list(TicketStatus.StatusCategory.values))
+
+        return [
+            {
+                "value": status,
+                "label": dict(TicketStatus.StatusCategory.choices).get(
+                    status, status)
+            }
+            for status in available_statuses
+        ]
+
     def validate(self, data):
-        # Removemos a validação de sub_status pois não usamos mais este campo
         return data
 
     def update(self, instance, data):
@@ -61,12 +110,10 @@ class TicketStatusSerializer(serializers.ModelSerializer):
             setattr(instance, key, value)
 
         if instance.solicitation_type_temp not in [None, 'null', '']:
-            # Atualizar o Ticket no banco de dados
             Ticket.objects.filter(code=instance.ticket_code).update(
                 solicitation_type=instance.solicitation_type_temp)
 
         if instance.complexity_code_temp not in [None, 'null', '']:
-            # Atualizar o Ticket no banco de dados
             Ticket.objects.filter(code=instance.ticket_code).update(
                 complexity_code=instance.complexity_code_temp)
 
@@ -76,14 +123,12 @@ class TicketStatusSerializer(serializers.ModelSerializer):
         return super().update(instance, cleaned_data)
 
     def create(self, data):
-        """Método de criação, onde garantimos a limpeza dos dados antes de salvar."""
         cleaned_data = {key: value for key, value in data.items() if value not in [
             None, 'null', '']}
         instance = self.Meta.model.objects.create(**cleaned_data)
         return instance
 
     def to_representation(self, instance):
-        """Oculta o campo `status_category` no retorno."""
         representation = super().to_representation(instance)
         representation.pop('status_category', None)
         representation.pop('priority_code', None)

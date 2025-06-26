@@ -112,14 +112,13 @@ class TicketStatus(models.Model):
 
     class StatusCategory(models.TextChoices):
         NAO_ANALISADO = "NAO_ANALISADO", "Não Analisado"
+        INDEFERIDO = "INDEFERIDO", "Indeferido"
+        DEFERIDO = "DEFERIDO", "Deferido"
         AGUARDANDO_GESTOR = "AGUARDANDO_GESTOR", "Aguardando Gestor"
         EM_DESENVOLVIMENTO = "EM_DESENVOLVIMENTO", "Em Desenvolvimento"
+        DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
         CONCLUIDO = "CONCLUIDO", "Concluído"
         RECUSADO = "RECUSADO", "Recusado"
-        DEFERIDO = "DEFERIDO", "Deferido"
-        DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
-
-
 
     class Priority(models.TextChoices):
         BAIXA = 'BAIXA', 'Baixa',
