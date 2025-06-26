@@ -112,7 +112,8 @@ class TicketStatus(models.Model):
 
     class StatusCategory(models.TextChoices):
         NAO_ANALISADO = "NAO_ANALISADO", "Não Analisado"
-        EM_ANDAMENTO = "EM_ANDAMENTO", "Em Andamento"
+        AGUARDANDO_GESTOR = "AGUARDANDO_GESTOR", "Aguardando Gestor"
+        EM_DESENVOLVIMENTO = "EM_DESENVOLVIMENTO", "Em Desenvolvimento"
         CONCLUIDO = "CONCLUIDO", "Concluído"
         RECUSADO = "RECUSADO", "Recusado"
         DEFERIDO = "DEFERIDO", "Deferido"
@@ -220,6 +221,14 @@ class TicketAnalysisHistory(models.Model):
         help_text="Comment about the ticket analysis",
         blank=False,
         null=False
+    )
+
+    status_category = models.CharField(
+        max_length=20,
+        choices=TicketStatus.StatusCategory.choices,
+        null=True,
+        blank=True,
+        help_text="Status category at the time of analysis"
     )
 
     author = models.ForeignKey(

@@ -96,10 +96,18 @@ class TicketAnalysisHistorySerializer(serializers.ModelSerializer):
     analyzed_update_formatted = serializers.SerializerMethodField()
     status_history_attachments = TicketStatusAttachmentSerializer(
         many=True, read_only=True)
+    status_category_display = serializers.SerializerMethodField()
 
     def get_analyzed_update_formatted(self, obj):
         if obj.analyzed_update:
-            return timezone.localtime(obj.analyzed_update).strftime('%d/%m/%Y %H:%M:%S')
+            return timezone.localtime(obj.analyzed_update).strftime(
+                '%d/%m/%Y %H:%M:%S')
+        return None
+
+    def get_status_category_display(self, obj):
+        if obj.status_category:
+            choices_dict = dict(TicketStatus.StatusCategory.choices)
+            return choices_dict.get(obj.status_category, obj.status_category)
         return None
 
     author = serializers.StringRelatedField(read_only=True)
@@ -118,7 +126,8 @@ class TicketAnalysisHistorySerializer(serializers.ModelSerializer):
         model = TicketAnalysisHistory
         fields = [
             'id', 'comment', 'author', 'author_id', 'ticket', 'ticket_id',
-            'analyzed_update_formatted', 'status_history_attachments'
+            'analyzed_update_formatted', 'status_history_attachments',
+            'status_category', 'status_category_display'
         ]
 
 
@@ -205,7 +214,8 @@ class TicketSerializer(serializers.ModelSerializer):
         analysis_history = TicketAnalysisHistory.objects.filter(
             ticket=obj).order_by('-analyzed_update')
 
-        return TicketAnalysisHistorySerializer(analysis_history, many=True).data
+        return TicketAnalysisHistorySerializer(
+            analysis_history, many=True).data
 
     def get_requesting_email(self, obj):
         return obj.requesting.email if obj.requesting else None
@@ -223,13 +233,17 @@ class TicketStatusChoicesSerializer(serializers.Serializer):
         return TicketFunctionalitySerializer(functionality, many=True).data
 
     def get_status_category(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in TicketStatus.StatusCategory.choices]
+        return [{"value": choice[0], "label": choice[1]}
+                for choice in TicketStatus.StatusCategory.choices]
 
     def get_priority_code(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in TicketStatus.Priority.choices]
+        return [{"value": choice[0], "label": choice[1]}
+                for choice in TicketStatus.Priority.choices]
 
     def get_complexity(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in Ticket.Complexity.choices]
+        return [{"value": choice[0], "label": choice[1]}
+                for choice in Ticket.Complexity.choices]
 
     def get_solicitation_type(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in Ticket.SolicitationType.choices]
+        return [{"value": choice[0], "label": choice[1]}
+                for choice in Ticket.SolicitationType.choices]

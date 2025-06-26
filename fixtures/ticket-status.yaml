@@ -63,7 +63,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 77,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "MEDIA",
         "ticket": 89,
         "analyzed_by": 1,
@@ -183,7 +183,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 87,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "ALTA",
         "ticket": 102,
         "analyzed_by": 1,
@@ -219,7 +219,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 90,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "MEDIA",
         "ticket": 113,
         "analyzed_by": 1,
@@ -267,7 +267,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 94,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "BAIXA",
         "ticket": 117,
         "analyzed_by": 1,
@@ -279,7 +279,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 95,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "MEDIA",
         "ticket": 118,
         "analyzed_by": 1,
@@ -291,7 +291,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 96,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "MEDIA",
         "ticket": 119,
         "analyzed_by": 1,
@@ -327,7 +327,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 99,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "MEDIA",
         "ticket": 122,
         "analyzed_by": 1,
@@ -339,7 +339,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 100,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "MEDIA",
         "ticket": 123,
         "analyzed_by": 1,
@@ -351,7 +351,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 101,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "ALTA",
         "ticket": 124,
         "analyzed_by": 1,
@@ -363,7 +363,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 102,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "MEDIA",
         "ticket": 125,
         "analyzed_by": 1,
@@ -375,7 +375,7 @@
     "model": "admin_panel.ticketstatus",
     "pk": 103,
     "fields": {
-        "status_category": "EM_ANDAMENTO",
+        "status_category": "EM_DESENVOLVIMENTO",
         "priority_code": "ALTA",
         "ticket": 126,
         "analyzed_by": 1,

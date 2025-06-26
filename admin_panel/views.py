@@ -257,10 +257,13 @@ class TicketStatusView(APIView):
 
             # Create history entry
             comment = request.data.get('comment', '')
+            current_status_category = data.get(
+                'status_category', instance.status_category)
             ticket_history = TicketAnalysisHistory.objects.create(
                 ticket=ticket,
                 author=request.user,
-                comment=comment
+                comment=comment,
+                status_category=current_status_category
             )
 
             # Validate and handle attachments
