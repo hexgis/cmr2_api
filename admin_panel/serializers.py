@@ -2,7 +2,7 @@ from rest_framework import serializers
 from .models import Ticket, TicketStatus, TicketFunctionality, TicketAnalysisHistory, TicketAttachment, TicketStatusAttachment
 from django.utils import timezone
 from django.contrib.auth import get_user_model
-from .validators import validate_status_and_substatus, format_datetime, validate_complexity, format_date
+from .validators import format_datetime, validate_complexity, format_date
 
 
 class TicketFunctionalitySerializer(serializers.ModelSerializer):
@@ -31,7 +31,7 @@ class TicketStatusSerializer(serializers.ModelSerializer):
         model = TicketStatus
         fields = [
             'id', 'due_on', 'user_info', 'formated_info',
-            'status_category', 'sub_status', 'priority_code'
+            'status_category', 'priority_code'
         ]
         read_only_fields = ['analyzed_in']
 
@@ -47,23 +47,60 @@ class TicketStatusSerializer(serializers.ModelSerializer):
             "analyzed_in_formatted": format_datetime(obj.analyzed_in) if obj.analyzed_in else None,
             "formated_due_on": format_date(obj.due_on) if obj.due_on else None,
             "status_category_display": obj.get_status_category_display(),
-            "sub_status_display": obj.get_sub_status_display(),
             "priority_display": obj.get_priority_code_display(),
+            "available_status_transitions": self.get_available_status_transitions(
+                obj.status_category),
         }
 
+    def get_available_status_transitions(self, current_status):
+        """Returns available statuses based on current status"""
+        status_transitions = {
+            TicketStatus.StatusCategory.NAO_ANALISADO: [
+                TicketStatus.StatusCategory.NAO_ANALISADO,
+                TicketStatus.StatusCategory.INDEFERIDO,
+                TicketStatus.StatusCategory.DEFERIDO,
+            ],
+            TicketStatus.StatusCategory.DEFERIDO: [
+                TicketStatus.StatusCategory.RECUSADO,
+                TicketStatus.StatusCategory.EM_DESENVOLVIMENTO,
+                TicketStatus.StatusCategory.AGUARDANDO_GESTOR,
+            ],
+            TicketStatus.StatusCategory.EM_DESENVOLVIMENTO: [
+                TicketStatus.StatusCategory.AGUARDANDO_GESTOR,
+                TicketStatus.StatusCategory.DESENVOLVIDO,
+                TicketStatus.StatusCategory.RECUSADO,
+                TicketStatus.StatusCategory.EM_DESENVOLVIMENTO,
+            ],
+            TicketStatus.StatusCategory.AGUARDANDO_GESTOR: [
+                TicketStatus.StatusCategory.EM_DESENVOLVIMENTO,
+                TicketStatus.StatusCategory.AGUARDANDO_GESTOR,
+                TicketStatus.StatusCategory.RECUSADO,
+            ],
+            TicketStatus.StatusCategory.DESENVOLVIDO: [
+                TicketStatus.StatusCategory.CONCLUIDO,
+                TicketStatus.StatusCategory.EM_DESENVOLVIMENTO,
+            ],
+            TicketStatus.StatusCategory.RECUSADO: [
+                TicketStatus.StatusCategory.RECUSADO,
+            ],
+            TicketStatus.StatusCategory.CONCLUIDO: [
+                TicketStatus.StatusCategory.CONCLUIDO,
+            ],
+        }
+
+        available_statuses = status_transitions.get(
+            current_status, list(TicketStatus.StatusCategory.values))
+
+        return [
+            {
+                "value": status,
+                "label": dict(TicketStatus.StatusCategory.choices).get(
+                    status, status)
+            }
+            for status in available_statuses
+        ]
+
     def validate(self, data):
-        cleaned_data = {key: value for key, value in data.items() if value not in [
-            None, 'null', '']}
-
-        status_category = cleaned_data.get(
-            'status_category', self.instance.status_category if self.instance else None)
-        sub_status = cleaned_data.get(
-            'sub_status', self.instance.sub_status if self.instance else None)
-        current_status = self.instance.status_category if self.instance else None
-        current_substatus = self.instance.sub_status if self.instance else None
-
-        validate_status_and_substatus(
-            status_category, sub_status, current_status, current_substatus)
         return data
 
     def update(self, instance, data):
@@ -73,12 +110,10 @@ class TicketStatusSerializer(serializers.ModelSerializer):
             setattr(instance, key, value)
 
         if instance.solicitation_type_temp not in [None, 'null', '']:
-            # Atualizar o Ticket no banco de dados
             Ticket.objects.filter(code=instance.ticket_code).update(
                 solicitation_type=instance.solicitation_type_temp)
 
         if instance.complexity_code_temp not in [None, 'null', '']:
-            # Atualizar o Ticket no banco de dados
             Ticket.objects.filter(code=instance.ticket_code).update(
                 complexity_code=instance.complexity_code_temp)
 
@@ -88,17 +123,14 @@ class TicketStatusSerializer(serializers.ModelSerializer):
         return super().update(instance, cleaned_data)
 
     def create(self, data):
-        """Método de criação, onde garantimos a limpeza dos dados antes de salvar."""
         cleaned_data = {key: value for key, value in data.items() if value not in [
             None, 'null', '']}
         instance = self.Meta.model.objects.create(**cleaned_data)
         return instance
 
     def to_representation(self, instance):
-        """Oculta os campos `status_category` e `sub_status` no retorno."""
         representation = super().to_representation(instance)
         representation.pop('status_category', None)
-        representation.pop('sub_status', None)
         representation.pop('priority_code', None)
         return representation
 
@@ -109,10 +141,18 @@ class TicketAnalysisHistorySerializer(serializers.ModelSerializer):
     analyzed_update_formatted = serializers.SerializerMethodField()
     status_history_attachments = TicketStatusAttachmentSerializer(
         many=True, read_only=True)
+    status_category_display = serializers.SerializerMethodField()
 
     def get_analyzed_update_formatted(self, obj):
         if obj.analyzed_update:
-            return timezone.localtime(obj.analyzed_update).strftime('%d/%m/%Y %H:%M:%S')
+            return timezone.localtime(obj.analyzed_update).strftime(
+                '%d/%m/%Y %H:%M:%S')
+        return None
+
+    def get_status_category_display(self, obj):
+        if obj.status_category:
+            choices_dict = dict(TicketStatus.StatusCategory.choices)
+            return choices_dict.get(obj.status_category, obj.status_category)
         return None
 
     author = serializers.StringRelatedField(read_only=True)
@@ -127,14 +167,12 @@ class TicketAnalysisHistorySerializer(serializers.ModelSerializer):
         source='ticket',
     )
 
-    sub_status_name = serializers.CharField(
-        source='get_sub_status_display', read_only=True)
-
     class Meta:
         model = TicketAnalysisHistory
         fields = [
-            'id', 'comment', 'author', 'author_id', 'ticket', 'ticket_id', 'sub_status_name',
-            'analyzed_update_formatted', 'status_history_attachments'
+            'id', 'comment', 'author', 'author_id', 'ticket', 'ticket_id',
+            'analyzed_update_formatted', 'status_history_attachments',
+            'status_category', 'status_category_display'
         ]
 
 
@@ -221,7 +259,8 @@ class TicketSerializer(serializers.ModelSerializer):
         analysis_history = TicketAnalysisHistory.objects.filter(
             ticket=obj).order_by('-analyzed_update')
 
-        return TicketAnalysisHistorySerializer(analysis_history, many=True).data
+        return TicketAnalysisHistorySerializer(
+            analysis_history, many=True).data
 
     def get_requesting_email(self, obj):
         return obj.requesting.email if obj.requesting else None
@@ -229,7 +268,6 @@ class TicketSerializer(serializers.ModelSerializer):
 
 class TicketStatusChoicesSerializer(serializers.Serializer):
     status_category = serializers.SerializerMethodField()
-    sub_status = serializers.SerializerMethodField()
     priority_code = serializers.SerializerMethodField()
     complexity = serializers.SerializerMethodField()
     solicitation_type = serializers.SerializerMethodField()
@@ -240,16 +278,17 @@ class TicketStatusChoicesSerializer(serializers.Serializer):
         return TicketFunctionalitySerializer(functionality, many=True).data
 
     def get_status_category(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in TicketStatus.StatusCategory.choices]
-
-    def get_sub_status(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in TicketStatus.SubStatus.choices]
+        return [{"value": choice[0], "label": choice[1]}
+                for choice in TicketStatus.StatusCategory.choices]
 
     def get_priority_code(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in TicketStatus.Priority.choices]
+        return [{"value": choice[0], "label": choice[1]}
+                for choice in TicketStatus.Priority.choices]
 
     def get_complexity(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in Ticket.Complexity.choices]
+        return [{"value": choice[0], "label": choice[1]}
+                for choice in Ticket.Complexity.choices]
 
     def get_solicitation_type(self, obj):
-        return [{"value": choice[0], "label": choice[1]} for choice in Ticket.SolicitationType.choices]
+        return [{"value": choice[0], "label": choice[1]}
+                for choice in Ticket.SolicitationType.choices]

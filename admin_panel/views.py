@@ -251,8 +251,6 @@ class TicketStatusView(APIView):
                         data['due_on'] = ticket_status_data.get('due_on')
                         data['status_category'] = formated_info.get(
                             'status_category_display', '')
-                        data['sub_status'] = formated_info.get(
-                            'sub_status_display')
                         data['priority_code'] = formated_info.get(
                             'priority_display')
                 except json.JSONDecodeError:
@@ -271,11 +269,13 @@ class TicketStatusView(APIView):
 
             # Create history entry
             comment = request.data.get('comment', '')
+            current_status_category = data.get(
+                'status_category', instance.status_category)
             ticket_history = TicketAnalysisHistory.objects.create(
                 ticket=ticket,
                 author=request.user,
                 comment=comment,
-                sub_status=instance.sub_status
+                status_category=current_status_category
             )
 
             # Validate and handle attachments

@@ -31,17 +31,17 @@ class TicketStatusAttachmentInline(admin.TabularInline):
 
 @admin.register(TicketStatus)
 class TicketStatusAdmin(admin.ModelAdmin):
-    list_display = ('ticket', 'status_category', 'sub_status',
+    list_display = ('ticket', 'status_category',
                     'priority_code', 'analyzed_by', 'analyzed_in', 'due_on')
-    list_filter = ('status_category', 'sub_status', 'priority_code')
+    list_filter = ('status_category', 'priority_code')
     search_fields = ('ticket__subject', 'analyzed_by__username')
     inlines = [TicketStatusAttachmentInline]
 
 
 @admin.register(TicketAnalysisHistory)
 class TicketAnalysisHistoryAdmin(admin.ModelAdmin):
-    list_display = ('ticket', 'author', 'sub_status', 'analyzed_update')
-    list_filter = ('sub_status', 'analyzed_update')
+    list_display = ('ticket', 'author', 'analyzed_update')
+    list_filter = ('analyzed_update',)
     search_fields = ('ticket__subject', 'author__username', 'comment')
 
 
