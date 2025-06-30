@@ -2,6 +2,7 @@
 import os
 import json
 import logging
+import threading  # <<< [1] IMPORT ADDED
 
 # Django
 from django.db.models import Q
@@ -40,6 +41,23 @@ from emails.ticket_user import send_email_ticket_to_user
 from emails.ticket_admins import send_email_ticket_to_admins
 
 logger = logging.getLogger(__name__)
+
+
+# [--- INÍCIO DA SEÇÃO ADICIONADA ---]
+
+def run_in_background(target, *args, **kwargs):
+    """
+    Helper function to run a target function in a new thread.
+    This prevents the main request from being blocked.
+    """
+    # Create a new Thread object.
+    thread = threading.Thread(target=target, args=args, kwargs=kwargs)
+    # daemon=True allows the main program to exit even if threads are still running.
+    thread.daemon = True
+    # Start the thread's activity.
+    thread.start()
+
+# [--- FIM DA SEÇÃO ADICIONADA ---]
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -219,9 +237,11 @@ class TicketStatusView(APIView):
             ticket = Ticket.objects.get(code=ticket_id)
             instance = TicketStatus.objects.get(ticket_id=ticket_id)
 
-            send_email_ticket_to_admins(
-                ticket
-            )
+            # [--- INÍCIO DA ALTERAÇÃO ---]
+            # Instead of calling the function directly and blocking the request,
+            # we run it in a background thread. The API returns a response immediately.
+            run_in_background(send_email_ticket_to_admins, ticket)
+            # [--- FIM DA ALTERAÇÃO ---]
 
             data = request.data.copy()
             instance.analyzed_by = request.user
