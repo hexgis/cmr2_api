@@ -1,150 +1,415 @@
 - model: user.institution
   pk: 1
   fields:
-    name: ABIN
+    name: Agência Brasileira de Inteligência
+    acronym: ABIN
     institution_type: Outros
 - model: user.institution
   pk: 2
   fields:
-    name: ANM
+    name: Agência Nacional de Mineração
+    acronym: ANM
     institution_type: Outros
 - model: user.institution
   pk: 3
   fields:
     name: Casa Civil
+    acronym: Casa Civil
     institution_type: Outros
 - model: user.institution
   pk: 4
   fields:
-    name: Censipam
+    name: Centro Gestor e Operacional do Sistema de Proteção da Amazônia
+    acronym: Censipam
     institution_type: Outros
 - model: user.institution
   pk: 5
   fields:
-    name: CGAF
+    name: Coordenação Geral de Administração e Finanças
+    acronym: CGAF
     institution_type: Funai Sede
 - model: user.institution
   pk: 6
   fields:
-    name: CGETNO
+    name: Coordenação Geral de Etnodesenvolvimento
+    acronym: CGETNO
     institution_type: Funai Sede
 - model: user.institution
   pk: 7
   fields:
-    name: CGGAM
+    name: Coordenação Geral de Gestão Ambiental
+    acronym: CGGAM
     institution_type: Funai Sede
 - model: user.institution
   pk: 8
   fields:
-    name: CGGE
+    name: Coordenação Geral de Gestão Estratégica
+    acronym: CGGE
     institution_type: Funai Sede
 - model: user.institution
   pk: 9
   fields:
-    name: CGGEO
+    name: Coordenação Geral de Geoprocessamento
+    acronym: CGGEO
     institution_type: Funai Sede
 - model: user.institution
   pk: 10
   fields:
-    name: CGGP
+    name: Coordenação Geral de Gestão de Pessoas
+    acronym: CGGP
     institution_type: Funai Sede
 - model: user.institution
   pk: 11
   fields:
-    name: CGID
+    name: Coordenação Geral de Identificação e Delimitação
+    acronym: CGID
     institution_type: Funai Sede
 - model: user.institution
   pk: 12
   fields:
-    name: CGIIRC
+    name: Coordenação Geral de Índios Isolados e de Recente Contato
+    acronym: CGIIRC
     institution_type: Funai Sede
 - model: user.institution
   pk: 13
   fields:
-    name: CGLIC
+    name: Coordenação Geral de Licenciamento
+    acronym: CGLIC
     institution_type: Funai Sede
 - model: user.institution
   pk: 14
   fields:
-    name: CGMT
+    name: Coordenação Geral de Monitoramento Territorial
+    acronym: CGMT
     institution_type: Funai Sede
 - model: user.institution
   pk: 15
   fields:
-    name: CGOF
+    name: Coordenação Geral de Orçamento e Finanças
+    acronym: CGOF
     institution_type: Funai Sede
 - model: user.institution
   pk: 16
   fields:
-    name: CGPC
+    name: Coordenação Geral de Patrimônio Indígena e Meio Ambiente
+    acronym: CGPC
     institution_type: Funai Sede
 - model: user.institution
   pk: 17
   fields:
-    name: CGPDS
+    name: Coordenação Geral de Promoção ao Desenvolvimento Sustentável
+    acronym: CGPDS
     institution_type: Funai Sede
 - model: user.institution
   pk: 18
   fields:
-    name: CGRL
+    name: Coordenação Geral de Regularização de Territórios
+    acronym: CGRL
     institution_type: Funai Sede
 - model: user.institution
   pk: 19
   fields:
-    name: CGTIC
+    name: Coordenação Geral de Tecnologia da Informação e Comunicação
+    acronym: CGTIC
     institution_type: Funai Sede
 - model: user.institution
   pk: 20
   fields:
-    name: CMR
+    name: Centro de Monitoramento e Regularização
+    acronym: CMR
     institution_type: Funai Sede
 - model: user.institution
   pk: 21
   fields:
-    name: DAGES
+    name: Diretoria de Administração e Gestão
+    acronym: DAGES
     institution_type: Funai Sede
 - model: user.institution
   pk: 22
   fields:
-    name: DPDS
+    name: Diretoria de Proteção Territorial
+    acronym: DPDS
     institution_type: Funai Sede
 - model: user.institution
   pk: 23
   fields:
-    name: DPT
+    name: Diretoria de Promoção ao Desenvolvimento Sustentável
+    acronym: DPT
     institution_type: Funai Sede
 - model: user.institution
   pk: 24
   fields:
     name: Hex360
+    acronym: Hex360
     institution_type: Outros
 - model: user.institution
   pk: 25
   fields:
-    name: Ibama
+    name: Instituto Brasileiro do Meio Ambiente e dos Recursos Naturais Renováveis
+    acronym: Ibama
     institution_type: Outros
 - model: user.institution
   pk: 26
   fields:
-    name: INPE
+    name: Instituto Nacional de Pesquisas Espaciais
+    acronym: INPE
     institution_type: Outros
 - model: user.institution
   pk: 27
   fields:
-    name: MPI
+    name: Ministério dos Povos Indígenas
+    acronym: MPI
     institution_type: Outros
 - model: user.institution
   pk: 28
   fields:
     name: Museu do Índio
+    acronym: Museu do Índio
     institution_type: null
 - model: user.institution
   pk: 29
   fields:
-    name: PNUD
+    name: Programa das Nações Unidas para o Desenvolvimento
+    acronym: PNUD
     institution_type: Outros
 - model: user.institution
   pk: 30
   fields:
     name: Polícia Federal
+    acronym: Polícia Federal
     institution_type: Outros
+# Coordenações Regionais da FUNAI
+- model: user.institution
+  pk: 31
+  fields:
+    name: Coordenação Regional de Cacoal
+    acronym: CR-CAC
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 32
+  fields:
+    name: Coordenação Regional de Guajará Mirim
+    acronym: CR-GJM
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 33
+  fields:
+    name: Coordenação Regional do Juruá
+    acronym: CR-JUR
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 34
+  fields:
+    name: Coordenação Regional Alto Purus
+    acronym: CR-Apur
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 35
+  fields:
+    name: Coordenação Regional Litoral Sudeste
+    acronym: CR-LISE
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 36
+  fields:
+    name: Coordenação Regional do Vale do Javari
+    acronym: CR-VJ
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 37
+  fields:
+    name: Coordenação Regional de Manaus
+    acronym: CR-MAO
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 38
+  fields:
+    name: Coordenação Regional Madeira
+    acronym: CR-MAD
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 39
+  fields:
+    name: Coordenação Regional do Alto Solimões
+    acronym: CR-AS
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 40
+  fields:
+    name: Coordenação Regional Roraima
+    acronym: CR-RR
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 41
+  fields:
+    name: Coordenação Regional Centro-Leste do Pará
+    acronym: CR-CLPA
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 42
+  fields:
+    name: Coordenação Regional do Tapajós
+    acronym: CR-TPJ
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 43
+  fields:
+    name: Coordenação Regional Araguaia Tocantins
+    acronym: CR-ATO
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 44
+  fields:
+    name: Coordenação Regional Maranhão
+    acronym: CR-MA
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 45
+  fields:
+    name: Coordenação Regional Interior Sul
+    acronym: CR-INTS
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 46
+  fields:
+    name: Coordenação Regional do Litoral Sul
+    acronym: CR-LIS
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 47
+  fields:
+    name: Coordenação Regional Nordeste II
+    acronym: CR-NE-II
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 48
+  fields:
+    name: Coordenação Regional Ponta Porã
+    acronym: CR-PP
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 49
+  fields:
+    name: Coordenação Regional Xavante
+    acronym: CR-XAV
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 50
+  fields:
+    name: Coordenação Regional Norte do Mato Grosso
+    acronym: CR-NMT
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 51
+  fields:
+    name: Coordenação Regional de Cuiabá
+    acronym: CR-CGB
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 52
+  fields:
+    name: Coordenação Regional Noroeste do Mato Grosso
+    acronym: CR-NOMT
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 53
+  fields:
+    name: Coordenação Regional Ribeirão Cascalheira
+    acronym: CR-RC
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 54
+  fields:
+    name: Coordenação Regional Baixo São Francisco
+    acronym: CR-BSF
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 55
+  fields:
+    name: Coordenação Regional Sul da Bahia
+    acronym: CR-SBA
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 56
+  fields:
+    name: Coordenação Regional Minas Gerais e Espírito Santo
+    acronym: CR-MGES
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 57
+  fields:
+    name: Coordenação Regional de Guarapuava
+    acronym: CR-GPV
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 58
+  fields:
+    name: Coordenação Regional de Passo Fundo
+    acronym: CR-PFD
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 59
+  fields:
+    name: Coordenação Regional Campo Grande
+    acronym: CR-CGR
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 60
+  fields:
+    name: Coordenação Regional Dourados
+    acronym: CR-DOU
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 61
+  fields:
+    name: Coordenação Regional Xingu
+    acronym: CR-XIN
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 62
+  fields:
+    name: Coordenação Regional de Ji-Paraná
+    acronym: CR-JPR
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 63
+  fields:
+    name: Coordenação Regional Médio Purus
+    acronym: CR-Mpur
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 64
+  fields:
+    name: Coordenação Regional do Rio Negro
+    acronym: CR-RNG
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 65
+  fields:
+    name: Coordenação Regional do Baixo Tocantins
+    acronym: CR-BTO
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 66
+  fields:
+    name: Coordenação Regional Kayapó Sul do Pará
+    acronym: CR-KSPA
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 67
+  fields:
+    name: Coordenação Regional Amapá e Norte do Pará
+    acronym: CR-ANP
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 68
+  fields:
+    name: Coordenação Regional de João Pessoa
+    acronym: CR-JPA
+    institution_type: Coordenação Regional
+- model: user.institution
+  pk: 69
+  fields:
+    name: Coordenação Regional Nordeste I
+    acronym: CR-NE-I
+    institution_type: Coordenação Regional

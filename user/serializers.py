@@ -326,6 +326,7 @@ class InstitutionSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
+            'acronym',
             'institution_type',
         )
 

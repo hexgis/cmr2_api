@@ -58,12 +58,20 @@ class Institution(models.Model):
 
     INSTITUTION_TYPES = [
         ('FUNAI Sede', 'FUNAI Sede'),
+        ('Coordenação Regional', 'Coordenação Regional'),
         ('Outros', 'Outros'),
     ]
 
     name = models.CharField(
         max_length=255,
         help_text=_('Institution')
+    )
+
+    acronym = models.CharField(
+        max_length=20,
+        help_text=_('Acronym'),
+        null=True,
+        blank=True,
     )
 
     institution_type = models.CharField(
