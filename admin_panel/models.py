@@ -3,8 +3,53 @@ from django.contrib.auth import get_user_model
 import os
 from datetime import datetime
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
+
+
+# Validação para tamanho máximo de arquivo (10MB)
+def validate_file_size(value):
+    """
+    Validates that the uploaded file is not larger than 10MB.
+
+    Args:
+        value: The uploaded file
+
+    Raises:
+        ValidationError: If file size exceeds 10MB
+    """
+    file_size = value.size
+    limit_mb = 10
+    if file_size > limit_mb * 1024 * 1024:
+        raise ValidationError(
+            _('File size too large. Maximum size allowed is %(limit)s MB.') % {'limit': limit_mb}
+        )
+
+
+def validate_file_extension(value):
+    """
+    Validates that the uploaded file has an allowed extension.
+
+    Args:
+        value: The uploaded file
+
+    Raises:
+        ValidationError: If file extension is not allowed
+    """
+    ext = os.path.splitext(value.name)[1].lower()
+    valid_extensions = [
+        '.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx',
+        '.txt', '.xls', '.xlsx', '.csv'
+    ]
+    if ext not in valid_extensions:
+        raise ValidationError(
+            _('File extension "%(extension)s" is not allowed. '
+              'Allowed extensions are: %(valid_extensions)s') % {
+                'extension': ext,
+                'valid_extensions': ', '.join(valid_extensions)
+            }
+        )
 
 
 class Ticket(models.Model):
@@ -88,7 +133,8 @@ class TicketAttachment(models.Model):
         on_delete=models.CASCADE
     )
     file_path = models.FileField(
-        upload_to=rename_file_ticket
+        upload_to=rename_file_ticket,
+        validators=[validate_file_size, validate_file_extension]
     )
     name_file = models.CharField(
         max_length=100,
@@ -189,7 +235,8 @@ class TicketStatusAttachment(models.Model):
         on_delete=models.CASCADE
     )
     file_path = models.FileField(
-        upload_to=rename_file_ticket_status
+        upload_to=rename_file_ticket_status,
+        validators=[validate_file_size, validate_file_extension]
     )
     name_file = models.CharField(
         max_length=100,

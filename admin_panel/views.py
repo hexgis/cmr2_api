@@ -184,9 +184,27 @@ class TicketStatusView(APIView):
         Returns:
             str or None: The filename if invalid, else None.
         """
-        valid_extensions = ['.pdf', '.jpg', '.jpeg', '.png']
+        valid_extensions = [
+            '.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx',
+            '.txt', '.xls', '.xlsx', '.csv'
+        ]
         ext = os.path.splitext(attachment.name)[1].lower()
         if ext not in valid_extensions:
+            return attachment.name
+        return None
+
+    def validate_attachment_size(self, attachment):
+        """
+        Validates the file size of a single attachment.
+
+        Args:
+            attachment: The file attachment to check.
+
+        Returns:
+            str or None: The filename if invalid, else None.
+        """
+        max_size = 10 * 1024 * 1024  # 10MB in bytes
+        if attachment.size > max_size:
             return attachment.name
         return None
 
@@ -198,12 +216,27 @@ class TicketStatusView(APIView):
             attachments: List of attachment files.
 
         Raises:
-            ValidationError: If any attachment has an invalid extension.
+            ValidationError: If any attachment has invalid extension or size.
         """
-        invalid_attachments = [
-            attachment.name for attachment in attachments if self.validate_attachment_extensions(attachment)]
-        if invalid_attachments:
-            raise ValidationError({'invalid_files': invalid_attachments})
+        # Check for maximum number of files
+        if len(attachments) > 10:
+            raise ValidationError({
+                'error': 'Maximum 10 files allowed per request'
+            })
+        
+        invalid_extensions = [
+            attachment.name for attachment in attachments
+            if self.validate_attachment_extensions(attachment)
+        ]
+        if invalid_extensions:
+            raise ValidationError({'invalid_files': invalid_extensions})
+        
+        oversized_files = [
+            attachment.name for attachment in attachments
+            if self.validate_attachment_size(attachment)
+        ]
+        if oversized_files:
+            raise ValidationError({'oversized_files': oversized_files})
 
     def handle_attachments(self, instance, attachments, ticket_history):
         """
@@ -281,8 +314,26 @@ class TicketStatusView(APIView):
             # Validate and handle attachments
             attachments = request.FILES.getlist('attachments')
             if attachments:
-                self.validate_attachments(attachments)
-                self.handle_attachments(instance, attachments, ticket_history)
+                try:
+                    self.validate_attachments(attachments)
+                    self.handle_attachments(instance, attachments, ticket_history)
+                except ValidationError as e:
+                    error_messages = []
+                    if 'error' in e.detail:
+                        error_messages.append(e.detail['error'])
+                    if 'invalid_files' in e.detail:
+                        files_str = ', '.join(e.detail['invalid_files'])
+                        error_messages.append(
+                            f"Extensões inválidas: {files_str}"
+                        )
+                    if 'oversized_files' in e.detail:
+                        files_str = ', '.join(e.detail['oversized_files'])
+                        msg = f"Arquivos grandes (máx 10MB): {files_str}"
+                        error_messages.append(msg)
+                    return Response({
+                        'error': 'Erro na validação dos arquivos',
+                        'details': error_messages
+                    }, status=status.HTTP_400_BAD_REQUEST)
 
             return Response({'status': 'ticket analyzed and history updated'}, status=status.HTTP_200_OK)
 
