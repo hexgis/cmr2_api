@@ -551,33 +551,6 @@ class DownloadAttachment(APIView):
         return new_name
 
 
-class DownloadDocument(APIView):
-    """Legacy endpoint for backward compatibility - redirects to new endpoint"""
-
-    def get(self, request, filename):
-        # Try to find the attachment by filename for backward compatibility
-        try:
-            attachment = TicketStatusAttachment.objects.filter(
-                file_path__icontains=filename
-            ).first()
-
-            if attachment:
-                return DownloadAttachment().get(request, attachment.id, 'answer')
-
-            attachment = TicketAttachment.objects.filter(
-                file_path__icontains=filename
-            ).first()
-
-            if attachment:
-                return DownloadAttachment().get(request, attachment.id, 'question')
-
-            return Response({'error': 'Arquivo não encontrado'}, status=404)
-
-        except Exception as e:
-            logger.error(f"Erro no endpoint legacy: {str(e)}")
-            return Response({'error': 'Erro interno do servidor'}, status=500)
-
-
 class DownloadManual(APIView):
     def get(self, request):
         filepath = os.path.join(

@@ -29,8 +29,6 @@ urlpatterns = [
     path('tickets/download/<int:attachment_id>/<str:attachment_type>/',
          DownloadAttachment.as_view(), name='download_attachment'),
 
-    path('tickets/download/attachments/critcs_and_suggestions/answer/<str:filename>/',
-         DownloadDocument.as_view(), name='download_document'),
     path('manual/',
          DownloadManual.as_view(), name='download_manual'),
 ]
