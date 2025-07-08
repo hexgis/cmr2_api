@@ -1,5 +1,9 @@
 from django.urls import path
-from .views import TicketListCreateView, TicketDetailView, TicketStatusView, GenXLSXView, GetChoices, SendTicketEmailView, DownloadDocument, DownloadManual
+from .views import (
+    TicketListCreateView, TicketDetailView, TicketStatusView,
+    GenXLSXView, GetChoices, SendTicketEmailView,
+    DownloadDocument, DownloadManual, DownloadAttachment
+)
 
 urlpatterns = [
     path('tickets/', TicketListCreateView.as_view(), name='ticket-list-create'),
@@ -21,6 +25,10 @@ urlpatterns = [
 
     path('tickets/send-email/', SendTicketEmailView.as_view(),
          name='send-email-ticket'),
+
+    path('tickets/download/<int:attachment_id>/<str:attachment_type>/',
+         DownloadAttachment.as_view(), name='download_attachment'),
+
     path('tickets/download/attachments/critcs_and_suggestions/answer/<str:filename>/',
          DownloadDocument.as_view(), name='download_document'),
     path('manual/',

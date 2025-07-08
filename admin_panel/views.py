@@ -223,14 +223,14 @@ class TicketStatusView(APIView):
             raise ValidationError({
                 'error': 'Maximum 10 files allowed per request'
             })
-        
+
         invalid_extensions = [
             attachment.name for attachment in attachments
             if self.validate_attachment_extensions(attachment)
         ]
         if invalid_extensions:
             raise ValidationError({'invalid_files': invalid_extensions})
-        
+
         oversized_files = [
             attachment.name for attachment in attachments
             if self.validate_attachment_size(attachment)
@@ -316,7 +316,8 @@ class TicketStatusView(APIView):
             if attachments:
                 try:
                     self.validate_attachments(attachments)
-                    self.handle_attachments(instance, attachments, ticket_history)
+                    self.handle_attachments(
+                        instance, attachments, ticket_history)
                 except ValidationError as e:
                     error_messages = []
                     if 'error' in e.detail:
@@ -471,14 +472,110 @@ class SendTicketEmailView(Auth, APIView):
             return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class DownloadDocument(APIView):
-    def get(self, request, filename):
-        filepath = os.path.join(
-            settings.MEDIA_ROOT, 'attachments', 'critcs_and_suggestions', 'answer', filename)
+class DownloadAttachment(APIView):
+    """
+    Unified endpoint to download ticket attachments (both question and answer files).
+    Supports downloading files by attachment ID for better security and flexibility.
+    """
+
+    def get(self, request, attachment_id, attachment_type):
+        """
+        Download attachment by ID and type.
+
+        Args:
+            attachment_id: The ID of the attachment
+            attachment_type: Either 'question' or 'answer'
+        """
         try:
-            return FileResponse(open(filepath, 'rb'), as_attachment=True, filename=filename)
-        except FileNotFoundError:
+            if attachment_type == 'question':
+                # Get ticket attachment (question file)
+                attachment = TicketAttachment.objects.get(id=attachment_id)
+                file_path = attachment.file_path.path
+                display_name = self._generate_display_name(
+                    attachment.name_file, attachment.ticket.code, 'pergunta')
+
+            elif attachment_type == 'answer':
+                # Get ticket status attachment (answer file)
+                attachment = TicketStatusAttachment.objects.get(
+                    id=attachment_id)
+                file_path = attachment.file_path.path
+                display_name = self._generate_display_name(
+                    attachment.name_file, attachment.ticket_status.ticket.code, 'resposta')
+
+            else:
+                return Response({'error': 'Tipo de anexo inválido'}, status=400)
+
+            # Check if file exists
+            if not os.path.exists(file_path):
+                return Response({'error': 'Arquivo não encontrado'}, status=404)
+
+            return FileResponse(
+                open(file_path, 'rb'),
+                as_attachment=True,
+                filename=display_name
+            )
+
+        except (TicketAttachment.DoesNotExist, TicketStatusAttachment.DoesNotExist):
+            return Response({'error': 'Anexo não encontrado'}, status=404)
+        except Exception as e:
+            logger.error(f"Erro ao baixar anexo: {str(e)}")
+            return Response({'error': 'Erro interno do servidor'}, status=500)
+
+    def _generate_display_name(self, original_name, ticket_code, attachment_type):
+        """
+        Generate a more intuitive display name for the downloaded file.
+        Format: ticket_[code]_[type]_[original_name]
+        """
+        # Get file extension
+        name, ext = os.path.splitext(original_name)
+
+        clean_name = original_name
+        if 'ticket_' in clean_name:
+            parts = clean_name.split('_')
+            clean_parts = [part for part in parts if not (
+                part.startswith('ticket') or
+                part.startswith('answer') or
+                len(part) == 10 and '-' in part  # Remove date-like patterns
+            )]
+            if clean_parts:
+                clean_name = '_'.join(clean_parts)
+
+        new_name = f"ticket_{ticket_code}_{attachment_type}_{clean_name}"
+
+        if len(new_name) > 100:
+            max_name_length = 100 - \
+                len(f"ticket_{ticket_code}_{attachment_type}_") - len(ext)
+            clean_name = clean_name[:max_name_length]
+            new_name = f"ticket_{ticket_code}_{attachment_type}_{clean_name}{ext}"
+
+        return new_name
+
+
+class DownloadDocument(APIView):
+    """Legacy endpoint for backward compatibility - redirects to new endpoint"""
+
+    def get(self, request, filename):
+        # Try to find the attachment by filename for backward compatibility
+        try:
+            attachment = TicketStatusAttachment.objects.filter(
+                file_path__icontains=filename
+            ).first()
+
+            if attachment:
+                return DownloadAttachment().get(request, attachment.id, 'answer')
+
+            attachment = TicketAttachment.objects.filter(
+                file_path__icontains=filename
+            ).first()
+
+            if attachment:
+                return DownloadAttachment().get(request, attachment.id, 'question')
+
             return Response({'error': 'Arquivo não encontrado'}, status=404)
+
+        except Exception as e:
+            logger.error(f"Erro no endpoint legacy: {str(e)}")
+            return Response({'error': 'Erro interno do servidor'}, status=500)
 
 
 class DownloadManual(APIView):
