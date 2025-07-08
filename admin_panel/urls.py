@@ -2,7 +2,7 @@ from django.urls import path
 from .views import (
     TicketListCreateView, TicketDetailView, TicketStatusView,
     GenXLSXView, GetChoices, SendTicketEmailView,
-    DownloadDocument, DownloadManual, DownloadAttachment
+    DownloadManual, DownloadAttachment
 )
 
 urlpatterns = [
