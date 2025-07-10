@@ -14,13 +14,13 @@ class TicketFunctionalitySerializer(serializers.ModelSerializer):
 class TicketAttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = TicketAttachment
-        fields = ['file_path', 'name_file']
+        fields = ['id', 'file_path', 'name_file']
 
 
 class TicketStatusAttachmentSerializer(serializers.ModelSerializer):
     class Meta:
         model = TicketStatusAttachment
-        fields = ['file_path', 'name_file']
+        fields = ['id', 'file_path', 'name_file']
 
 
 class TicketStatusSerializer(serializers.ModelSerializer):
