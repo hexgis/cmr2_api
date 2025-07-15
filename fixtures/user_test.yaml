@@ -1,76 +1,7 @@
-# User fixtures for CMR2 API
-# Contains groups, roles, and users for testing
+# Test user fixtures for CMR2 API
+# Users with different roles for testing access control system
 
-# Groups
-- model: user.group
-  pk: 1
-  fields:
-    name: FUNAI
-    description: "Acesso às camadas e ao componente PLANET."
-    layer_permissions: [1]
-    component_permissions: [1]
-
-- model: user.group
-  pk: 2
-  fields:
-    name: Acesso Restrito
-    description: "Acesso aos módulos restritos."
-    layer_permissions: [2]
-    component_permissions: [2]
-
-- model: user.group
-  pk: 3
-  fields:
-    name: Administrador/Gestor
-    description: "Gerenciamento da plataforma e módulos restritos."
-    layer_permissions: [1,2]
-    component_permissions: [1,2,3]
-
-- model: user.group
-  pk: 4
-  fields:
-    name: Desenvolvedor
-    description: "Acessos para Desenvolvedores da plataforma."
-    layer_permissions: [1,2]
-    component_permissions: [1,2,4]
-
-# Roles
-- model: user.role
-  pk: 1
-  fields:
-    name: Colaborador FUNAI
-    description: "Perfil padrão."
-    groups: [1,2]
-
-- model: user.role
-  pk: 2
-  fields:
-    name: Acesso Restrito
-    description: "Usuários autenticados com autorização para acessar módulos restritos."
-    groups: [2]
-
-- model: user.role
-  pk: 3
-  fields:
-    name: Administrador
-    description: "Módulos Restritos aos administradores."
-    groups: [3]
-
-- model: user.role
-  pk: 4
-  fields:
-    name: Desenvolvedor
-    description: "Acessos para Desenvolvedores da plataforma."
-    groups: [4]
-
-- model: user.role
-  pk: 5
-  fields:
-    name: Gestor
-    description: "Gestores de instituições com poder de aprovar solicitações de acesso."
-    groups: [2,3]
-
-# Users
+# Root user - Administrator
 - model: user.user
   pk: 1
   fields:
@@ -83,12 +14,13 @@
     email: root@hexgis.com
     is_staff: true
     is_active: true
-    date_joined: 2019-12-19T21:43:16.265931+00:00
+    date_joined: 2019-12-19 21:43:16.265931+00:00
     groups: []
     user_permissions: []
     institution: 37
     roles: [3]
 
+# Common user - Moreno
 - model: user.user
   pk: 2
   fields:
@@ -101,12 +33,13 @@
     email: blackorwhite@hexgis.com
     is_staff: false
     is_active: true
-    date_joined: 2024-12-19T21:43:16.265931+00:00
+    date_joined: 2024-12-19 21:43:16.265931+00:00
     groups: []
     user_permissions: []
     institution: 37
     roles: [2]
 
+# FUNAI user
 - model: user.user
   pk: 3
   fields:
@@ -119,11 +52,12 @@
     email: hex@funai.gov.br
     is_staff: false
     is_active: true
-    date_joined: 2024-12-19T21:43:16.265931+00:00
+    date_joined: 2024-12-19 21:43:16.265931+00:00
     roles: [1]
     user_permissions: []
     institution: 37
 
+# Restricted access user
 - model: user.user
   pk: 4
   fields:
@@ -136,11 +70,12 @@
     email: acessorestrito@funai.gov.br
     is_staff: false
     is_active: true
-    date_joined: 2024-12-19T21:43:16.265931+00:00
+    date_joined: 2024-12-19 21:43:16.265931+00:00
     roles: [2]
     user_permissions: []
     institution: 37
 
+# Developer user
 - model: user.user
   pk: 5
   fields:
@@ -153,11 +88,12 @@
     email: dev@hex360.com.br
     is_staff: true
     is_active: true
-    date_joined: 2025-01-14T21:43:16.265931+00:00
+    date_joined: 2025-01-14 21:43:16.265931+00:00
     roles: [4]
     user_permissions: []
     institution: 37
 
+# Administrator user - João Fonseca
 - model: user.user
   pk: 6
   fields:
@@ -170,11 +106,12 @@
     email: joao.fonseca@hex360.com.br
     is_staff: true
     is_active: true
-    date_joined: 2025-01-14T21:43:16.265931+00:00
+    date_joined: 2025-01-14 21:43:16.265931+00:00
     roles: [3]
     user_permissions: []
     institution: 37
 
+# Gestor user - Manaus
 - model: user.user
   pk: 7
   fields:
@@ -187,11 +124,12 @@
     email: gestor.manaus@funai.gov.br
     is_staff: false
     is_active: true
-    date_joined: 2025-07-15T21:43:16.265931+00:00
+    date_joined: 2025-01-15 21:43:16.265931+00:00
     roles: [5]
     user_permissions: []
     institution: 37
 
+# Regular user without special roles
 - model: user.user
   pk: 8
   fields:
@@ -204,11 +142,12 @@
     email: usuario.comum@funai.gov.br
     is_staff: false
     is_active: true
-    date_joined: 2025-07-15T21:43:16.265931+00:00
+    date_joined: 2025-01-15 21:43:16.265931+00:00
     roles: []
     user_permissions: []
     institution: 37
 
+# Collaborator user
 - model: user.user
   pk: 9
   fields:
@@ -221,7 +160,7 @@
     email: usuario.colaborador@funai.gov.br
     is_staff: false
     is_active: true
-    date_joined: 2025-07-15T21:43:16.265931+00:00
+    date_joined: 2025-01-15 21:43:16.265931+00:00
     roles: [1]
     user_permissions: []
     institution: 37

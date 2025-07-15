@@ -140,18 +140,21 @@ DATABASES = {
         'PASSWORD': DB_PASSWORD_FOR_READ,
         'HOST': DB_HOST_FOR_READ,
         'PORT': DB_PORT_FOR_READ,
-    },
+    }
 }
 
-DATABASE_ROUTERS = [
-    'cmr2_api.database_routers.FunaiRouters.FunaiRouter',
-    'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
-    'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
-    'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
-    'cmr2_api.database_routers.UserAdminRouters.UserAdminRouter',
-    'cmr2_api.database_routers.PriorityMonitoringRouters.\
-PriorityMonitoringRouter',
-]
+DATABASE_ROUTERS = []
+
+# Only add routers if db_for_read is configured
+if 'db_for_read' in DATABASES:
+    DATABASE_ROUTERS = [
+        'cmr2_api.database_routers.FunaiRouters.FunaiRouter',
+        'cmr2_api.database_routers.LandUseRouters.LandUseRouter',
+        'cmr2_api.database_routers.MonitoringRouters.MonitoringRouter',
+        'cmr2_api.database_routers.PriorityAlertsRouters.PriorityAlertsRouter',
+        'cmr2_api.database_routers.UserAdminRouters.UserAdminRouter',
+        'cmr2_api.database_routers.PriorityMonitoringRouters.PriorityMonitoringRouter',
+    ]
 
 if DEBUG:
     INTERNAL_IPS = ('127.0.0.1',)

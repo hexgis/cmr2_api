@@ -1,0 +1,96 @@
+# Test fixtures for AccessRequest model
+# Status values: 1=Pendente, 2=Aprovado pelo Gestor, 3=Recusada, 4=Concedida
+- model: user.accessrequest
+  pk: 1
+  fields:
+    name: "João Silva"
+    email: "joao.silva@exemplo.com"
+    institution: "Coordenação Regional de Manaus"
+    user_siape_registration: 1234567
+    coordinator_name: "Gestor Manaus"
+    coordinator_email: "gestor.manaus@exemplo.com"
+    coordinator_institution: "Coordenação Regional de Manaus"
+    coordinator_siape_registration: 7654321
+    status: 1  # Pendente
+    created_at: "2025-01-15 10:00:00+00:00"
+    
+- model: user.accessrequest
+  pk: 2
+  fields:
+    name: "Maria Santos"
+    email: "maria.santos@exemplo.com"
+    institution: "Coordenação Regional de Manaus"
+    user_siape_registration: 2345678
+    coordinator_name: "Gestor Manaus"
+    coordinator_email: "gestor.manaus@exemplo.com"
+    coordinator_institution: "Coordenação Regional de Manaus"
+    coordinator_siape_registration: 7654321
+    status: 2  # Aprovado pelo Gestor
+    created_at: "2025-01-14 14:30:00+00:00"
+    reviewed_at: "2025-01-15 09:15:00+00:00"
+    reviewed_by: 7  # gestor.manaus user
+    
+- model: user.accessrequest
+  pk: 3
+  fields:
+    name: "Pedro Oliveira"
+    email: "pedro.oliveira@exemplo.com"
+    institution: "Coordenação Regional de Manaus"
+    user_siape_registration: 3456789
+    coordinator_name: "Gestor Manaus"
+    coordinator_email: "gestor.manaus@exemplo.com"
+    coordinator_institution: "Coordenação Regional de Manaus"
+    coordinator_siape_registration: 7654321
+    status: 2  # Aprovado pelo Gestor
+    created_at: "2025-01-13 16:45:00+00:00"
+    reviewed_at: "2025-01-14 11:20:00+00:00"
+    reviewed_by: 7  # gestor.manaus user
+    
+- model: user.accessrequest
+  pk: 4
+  fields:
+    name: "Ana Costa"
+    email: "ana.costa@exemplo.com"
+    institution: "Coordenação Regional de Belém"
+    user_siape_registration: 4567890
+    coordinator_name: "Gestor Belém"
+    coordinator_email: "gestor.belem@exemplo.com"
+    coordinator_institution: "Coordenação Regional de Belém"
+    coordinator_siape_registration: 9876543
+    status: 2  # Aprovado pelo Gestor
+    created_at: "2025-01-12 08:30:00+00:00"
+    reviewed_at: "2025-01-13 14:45:00+00:00"
+    reviewed_by: 7  # gestor.manaus user (for testing cross-institution admin approval)
+    
+- model: user.accessrequest
+  pk: 5
+  fields:
+    name: "Carlos Ferreira"
+    email: "carlos.ferreira@exemplo.com"
+    institution: "Coordenação Regional de Manaus"
+    user_siape_registration: 5678901
+    coordinator_name: "Gestor Manaus"
+    coordinator_email: "gestor.manaus@exemplo.com"
+    coordinator_institution: "Coordenação Regional de Manaus"
+    coordinator_siape_registration: 7654321
+    status: 4  # Concedida
+    created_at: "2025-01-10 13:20:00+00:00"
+    reviewed_at: "2025-01-12 16:30:00+00:00"
+    reviewed_by: 6  # admin user
+    
+- model: user.accessrequest
+  pk: 6
+  fields:
+    name: "Roberto Nunes"
+    email: "roberto.nunes@exemplo.com"
+    institution: "Coordenação Regional de Manaus"
+    user_siape_registration: 6789012
+    coordinator_name: "Gestor Manaus"
+    coordinator_email: "gestor.manaus@exemplo.com"
+    coordinator_institution: "Coordenação Regional de Manaus"
+    coordinator_siape_registration: 7654321
+    status: 3  # Recusada
+    created_at: "2025-01-11 15:30:00+00:00"
+    reviewed_at: "2025-01-12 10:45:00+00:00"
+    reviewed_by: 7  # gestor.manaus user
+    denied_details: "Documentação incompleta"

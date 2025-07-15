@@ -9,6 +9,7 @@ from rest_framework import generics, status
 from . import models
 from user.models import User, Role
 from django.shortcuts import get_object_or_404
+from django.db.models import Q
 from rest_framework import status
 from smtplib import SMTPException
 from rest_framework import viewsets, status
@@ -608,9 +609,7 @@ class AccessRequestListCreateView(Public, generics.ListCreateAPIView):
     Handles creation of new access requests (Public).
     """
 
-    queryset = models.AccessRequest.objects.exclude(
-        status=models.AccessRequest.StatusType.PENDENTE_COORD
-    )
+    queryset = models.AccessRequest.objects.all()
 
     serializer_class = AccessRequestDetailSerializer
 
@@ -626,7 +625,9 @@ class AccessRequestPendingView(Public, generics.ListCreateAPIView):
     """
     Lists only pending access requests (AdminAuth).
     """
-    queryset = models.AccessRequest.objects.filter(status=1)
+    queryset = models.AccessRequest.objects.filter(
+        status=models.AccessRequest.StatusType.PENDENTE
+    )
     serializer_class = AccessRequestSerializer
 
 
@@ -648,17 +649,18 @@ class AccessRequestApproveView(AdminAuth, APIView):
             access_request = get_object_or_404(
                 models.AccessRequest,
                 pk=pk,
-                status=models.AccessRequest.StatusType.PENDENTE
+                status__in=[
+                    models.AccessRequest.StatusType.APROVADO_PELO_GESTOR,
+                    models.AccessRequest.StatusType.PENDENTE,
+                    models.AccessRequest.StatusType.RECUSADA
+                ]
             )
 
             institution = get_object_or_404(
                 models.Institution, pk=institution_id)
             roles = models.Role.objects.filter(pk__in=role_ids)
 
-            access_request.status = 2
-            access_request.reviewed_at = timezone.now()
-            access_request.reviewed_by = admin
-            access_request.save()
+            access_request.approve(admin)
 
             user, created = User.objects.get_or_create(
                 email=access_request.email,
@@ -738,20 +740,14 @@ class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
     def patch(self, request, pk, *args, **kwargs):
         try:
             access_request = models.AccessRequest.objects.get(pk=pk)
-            if access_request.status != models.AccessRequest.StatusType.PENDENTE_COORD:
+            if access_request.status != models.AccessRequest.StatusType.APROVADO_PELO_GESTOR:
                 return Response(
-                    {'detail': 'A solicitação não está pendente.'},
+                    {'detail': 'A solicitação não pode ser rejeitada neste estado.'},
                     status=400
                 )
 
-            deined_details = request.data.get('denied_details')
-
-            access_request.status = 3
-            access_request.reviewed_at = timezone.now()
-            access_request.reviewed_by = request.user
-            access_request.denied_details = deined_details
-
-            access_request.save()
+            denied_details = request.data.get('denied_details')
+            access_request.reject(request.user, denied_details)
 
             return Response(
                 {
@@ -770,10 +766,10 @@ class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
             )
 
 
-class AccessRequestPendingView(AdminAuth, APIView):
+class AccessRequestCoordinatorApproveView(AdminAuth, APIView):
     """
     Approves a specific access request by the coordinator,
-    changing its status from PENDING_COORD to PENDING
+    changing its status from any state to PENDENTE
     """
 
     def post(self, request, pk, *args, **kwargs):
@@ -796,6 +792,247 @@ class AccessRequestPendingView(AdminAuth, APIView):
             )
         except Exception as e:
             logger.error(f"Erro inesperado: {str(e)}")
+            return Response(
+                {'detail': 'Erro inesperado durante a aprovação.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class AccessRequestByRoleView(Auth, generics.ListAPIView):
+    """
+    Lists access requests based on user role:
+    - Common users: only their own requests
+    - Gestores: requests from same institution with status 'Pendente'
+    - Administrators: all requests from all institutions with status 'Aprovado pelo Gestor'
+    """
+    serializer_class = AccessRequestDetailSerializer
+
+    def get_queryset(self):
+        user = self.request.user
+        
+        # Check if user has no role (common user)
+        if not user.roles.exists():
+            return models.AccessRequest.objects.filter(
+                email=user.email
+            )
+        
+        # Check if user is Gestor
+        if user.roles.filter(name='Gestor').exists() and user.institution:
+            return models.AccessRequest.objects.filter(
+                status=models.AccessRequest.StatusType.PENDENTE,
+                institution=user.institution.name
+            )
+        
+        # Check if user is Administrator - see all requests from all
+        # institutions with all statuses
+        if user.roles.filter(name='Administrador').exists():
+            return models.AccessRequest.objects.all().order_by('-created_at')
+
+        # Default: return empty queryset
+        return models.AccessRequest.objects.none()
+
+
+class AccessRequestGestorApproveView(Auth, APIView):
+    """
+    Allows Gestor to approve access requests from their institution.
+    """
+
+    def post(self, request, pk, *args, **kwargs):
+        user = request.user
+
+        # Check if user is Gestor or Administrator
+        is_gestor = user.roles.filter(name='Gestor').exists()
+        is_admin = user.roles.filter(name='Administrador').exists()
+
+        if not (is_gestor or is_admin):
+            return Response(
+                {
+                    'detail': 'Acesso negado. Apenas gestores e '
+                             'administradores podem aprovar solicitações.'
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        try:
+            # Allow different statuses based on user role
+            if is_admin:
+                # Administrators can approve any status
+                access_request = get_object_or_404(
+                    models.AccessRequest,
+                    pk=pk
+                )
+            else:
+                # Gestores can only approve PENDENTE status
+                access_request = get_object_or_404(
+                    models.AccessRequest,
+                    pk=pk,
+                    status=models.AccessRequest.StatusType.PENDENTE
+                )
+
+            # Check if request is from same institution (for Gestores)
+            if (is_gestor and not is_admin and user.institution and
+                    access_request.institution != user.institution.name):
+                return Response(
+                    {
+                        'detail': 'Você só pode aprovar solicitações da '
+                                 'sua instituição.'
+                    },
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
+            access_request.approve_by_coordinator(user)
+
+            return Response(
+                {
+                    "detail": "Solicitação aprovada pelo gestor.",
+                    "request_id": access_request.id,
+                    "user_id": user.id
+                },
+                status=status.HTTP_200_OK
+            )
+
+        except Exception as e:
+            logger.error(f"Erro ao aprovar solicitação: {str(e)}")
+            return Response(
+                {'detail': 'Erro inesperado durante a aprovação.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class AccessRequestGestorRejectView(Auth, APIView):
+    """
+    Allows Gestor to reject access requests from their institution.
+    """
+
+    def post(self, request, pk, *args, **kwargs):
+        user = request.user
+
+        # Check if user is Gestor
+        if not user.roles.filter(name='Gestor').exists():
+            return Response(
+                {
+                    'detail': 'Acesso negado. Apenas gestores podem rejeitar solicitações.'
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        try:
+            access_request = get_object_or_404(
+                models.AccessRequest,
+                pk=pk,
+                status=models.AccessRequest.StatusType.PENDENTE
+            )
+
+            # Check if request is from same institution
+            if (user.institution and
+                    access_request.institution != user.institution.name):
+                return Response(
+                    {
+                        'detail': 'Você só pode rejeitar solicitações da sua instituição.'
+                    },
+                    status=status.HTTP_403_FORBIDDEN
+                )
+
+            denied_details = request.data.get(
+                'denied_details', 'Rejeitado pelo gestor'
+            )
+            access_request.reject(user, denied_details)
+
+            return Response(
+                {
+                    "detail": "Solicitação rejeitada pelo gestor.",
+                    "request_id": access_request.id,
+                    "user_id": user.id
+                },
+                status=status.HTTP_200_OK
+            )
+
+        except Exception as e:
+            logger.error(f"Erro ao rejeitar solicitação: {str(e)}")
+            return Response(
+                {'detail': 'Erro inesperado durante a rejeição.'},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
+
+
+class AccessRequestAdminApproveView(AdminAuth, APIView):
+    """
+    Allows Administrator to approve access requests from any institution
+    with full permission selection.
+    """
+
+    def post(self, request, pk, *args, **kwargs):
+        user = request.user
+
+        # Check if user is Administrator
+        if not user.roles.filter(name='Administrador').exists():
+            return Response(
+                {
+                    'detail': 'Acesso negado. Apenas administradores podem '
+                             'conceder acesso final.'
+                },
+                status=status.HTTP_403_FORBIDDEN
+            )
+
+        try:
+            # Get permissions data
+            permissions = request.data.get('permissions', {})
+            institution_id = permissions.get('selected_group')
+            role_ids = permissions.get('selected_roles', [])
+
+            # Get access request
+            access_request = get_object_or_404(
+                models.AccessRequest,
+                pk=pk
+            )
+
+            # Check if we have the required data for final approval
+            if not institution_id or not role_ids:
+                return Response(
+                    {
+                        'detail': 'Instituição e papéis são obrigatórios '
+                                 'para aprovação final.'
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            # Get institution and roles
+            institution = get_object_or_404(
+                models.Institution, pk=institution_id
+            )
+            roles = models.Role.objects.filter(pk__in=role_ids)
+
+            # Approve the request
+            access_request.approve(user)
+
+            # Create or update user
+            user_obj, created = User.objects.get_or_create(
+                email=access_request.email,
+                defaults={
+                    'username': access_request.email,
+                    'first_name': access_request.name,
+                    'institution': institution,
+                }
+            )
+
+            if created:
+                user_obj.roles.set(roles)
+                user_obj.save()
+                logger.info(f"Usuário criado: {user_obj.email}")
+            else:
+                logger.info(f"Usuário já existia: {user_obj.email}")
+
+            return Response(
+                {
+                    "detail": "Acesso concedido com sucesso.",
+                    "request_id": access_request.id,
+                    "user_id": user.id
+                },
+                status=status.HTTP_200_OK
+            )
+
+        except Exception as e:
+            logger.error(f"Erro ao conceder acesso: {str(e)}")
             return Response(
                 {'detail': 'Erro inesperado durante a aprovação.'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR

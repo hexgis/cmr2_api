@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   db:
     image: circleci/postgres:12-postgis
@@ -29,15 +27,29 @@ services:
       context: .
       dockerfile: ./Dockerfile-dev
     command: >
-      bash -c " python manage.py collectstatic --no-input
-      && python manage.py makemigrations --no-input 
-      && python manage.py migrate --no-input
+      bash -c "
+      echo 'Waiting for databases to be ready...' &&
+      until python -c 'import socket; s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.settimeout(1); result = s.connect_ex((\"db\", 5432)); s.close(); exit(result)'; do
+        echo 'Primary database not ready, waiting...'
+        sleep 2
+      done &&
+      until python -c 'import socket; s = socket.socket(socket.AF_INET, socket.SOCK_STREAM); s.settimeout(1); result = s.connect_ex((\"db_for_read\", 5432)); s.close(); exit(result)'; do
+        echo 'Read database not ready, waiting...'
+        sleep 2
+      done &&
+      echo 'Both databases are ready!' &&
+      python manage.py collectstatic --no-input
+      && python manage.py makemigrations --no-input
+      && python manage.py migrate --no-input --database=default
       && python manage.py loaddata fixtures/*.yaml
       && python manage.py runserver 0.0.0.0:8080"
     volumes:
       - .:/app/
     ports:
       - "8080:8080"
+    depends_on:
+      - db
+      - db_for_read
     # network_mode: "host"
     environment:
       ENVIRONMENT: develop
@@ -48,11 +60,11 @@ services:
       DB_PASSWORD: testpassword
       DB_HOST: db
       DB_PORT: 5432
-      DB_NAME_FOR_READ: cmr_funai
-      DB_USER_FOR_READ: postgres
-      DB_PASSWORD_FOR_READ: postgres
-      DB_HOST_FOR_READ: 192.168.20.135
-      DB_PORT_FOR_READ: 5433
+      DB_NAME_FOR_READ: database
+      DB_USER_FOR_READ: user
+      DB_PASSWORD_FOR_READ: asdfsa
+      DB_HOST_FOR_READ: db_for_read
+      DB_PORT_FOR_READ: 5432
       ALLOWED_HOSTS: '["*"]'
       EMAIL_HOST: mailhog
       EMAIL_PORT: 1025
@@ -76,10 +88,7 @@ services:
       JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
       JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico
       JIRA_API_URL: https://xskylab.atlassian.net/
-    depends_on:
-      - db
-      - db_for_read
-      - mailhog
+      LDAP_URI: ldap://localhost:389  # Add LDAP_URI for development
 
   test:
     build:
@@ -100,6 +109,12 @@ services:
       DB_NAME: testdatabase
       DB_PASSWORD: testpassword
       DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME_FOR_READ: database
+      DB_USER_FOR_READ: user
+      DB_PASSWORD_FOR_READ: asdfsa
+      DB_HOST_FOR_READ: db_for_read
+      DB_PORT_FOR_READ: 5432
       ALLOWED_HOSTS: '["*"]'
       EMAIL_HOST: smtp.example.com
       EMAIL_HOST_USER: host_user@email.com
@@ -131,8 +146,10 @@ services:
       JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/xskylab_icon.png
     depends_on:
       - db
+      - db_for_read
     links:
       - "db:db"
+      - "db_for_read:db_for_read"
 
   prod:
     image: us.gcr.io/custom-plating-209314/cmr2_api:latest
