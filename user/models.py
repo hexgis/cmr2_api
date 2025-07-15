@@ -164,7 +164,9 @@ class User(AbstractUser):
     avatar_blob = models.BinaryField(blank=True, null=True)
 
     dark_mode_active = models.BooleanField(
-        default=False
+        default=False,
+        null=True,
+        blank=True
     )
 
     password = models.CharField(max_length=128, null=True, blank=True)
