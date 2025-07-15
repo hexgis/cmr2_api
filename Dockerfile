@@ -14,7 +14,7 @@
 
 # Use an official lightweight Python image.
 # https://hub.docker.com/_/python
-FROM python:3.9-buster
+FROM python:3.9-bullseye
 
 ENV APP_HOME /app
 ENV PORT 8080
@@ -24,8 +24,8 @@ WORKDIR $APP_HOME
 ENV PYTHONUNBUFFERED 1
 
 # Install system requirements
-RUN apt update -y
-RUN apt install gdal-bin libgdal-dev python-dev libldap2-dev libsasl2-dev libssl-dev gcc build-essential nano -y
+RUN apt-get update -y
+RUN apt-get install -y gdal-bin libgdal-dev python3-dev libldap2-dev libsasl2-dev libssl-dev gcc build-essential nano
 
 # Install python pip requirements
 RUN python -m pip install --upgrade pip
