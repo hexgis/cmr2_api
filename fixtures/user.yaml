@@ -184,7 +184,7 @@
     username: gestor.manaus
     first_name: "Gestor"
     last_name: "Manaus"
-    email: gestor.manaus@funai.gov.br
+    email: gestor.manaus@hexgis.gov.br
     is_staff: false
     is_active: true
     date_joined: 2025-07-15T21:43:16.265931+00:00
@@ -201,7 +201,7 @@
     username: usuario.comum
     first_name: "Usuário"
     last_name: "Comum"
-    email: usuario.comum@funai.gov.br
+    email: usuario.comum@hexgis.gov.br
     is_staff: false
     is_active: true
     date_joined: 2025-07-15T21:43:16.265931+00:00
@@ -218,7 +218,7 @@
     username: usuario.colaborador
     first_name: "Usuário"
     last_name: "Colaborador"
-    email: usuario.colaborador@funai.gov.br
+    email: usuario.colaborador@hexgis.gov.br
     is_staff: false
     is_active: true
     date_joined: 2025-07-15T21:43:16.265931+00:00
