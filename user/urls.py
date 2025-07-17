@@ -1,3 +1,4 @@
+
 from django.urls import path, include
 
 from user import views
@@ -147,5 +148,10 @@ urlpatterns = [
         'access-requests/<int:pk>/pending/',
         views.AccessRequestPendingView.as_view(),
         name='access-request-pending'
+    ),
+    path(
+        'restricted-access/pending-count/',
+        views.RestrictedAccessPendingCountView.as_view(),
+        name='restricted-access-pending-count'
     ),
 ]

@@ -809,20 +809,20 @@ class AccessRequestByRoleView(Auth, generics.ListAPIView):
 
     def get_queryset(self):
         user = self.request.user
-        
+
         # Check if user has no role (common user)
         if not user.roles.exists():
             return models.AccessRequest.objects.filter(
                 email=user.email
             ).order_by('-created_at')
-        
+
         # Check if user is Gestor
         if user.roles.filter(name='Gestor').exists() and user.institution:
             return models.AccessRequest.objects.filter(
                 status=models.AccessRequest.StatusType.PENDENTE,
                 institution=user.institution.name
             ).order_by('-created_at')
-        
+
         # Check if user is Administrator - see all requests from all
         # institutions with all statuses
         if user.roles.filter(name='Administrador').exists():
@@ -848,7 +848,7 @@ class AccessRequestGestorApproveView(Auth, APIView):
             return Response(
                 {
                     'detail': 'Acesso negado. Apenas gestores e '
-                             'administradores podem aprovar solicitações.'
+                    'administradores podem aprovar solicitações.'
                 },
                 status=status.HTTP_403_FORBIDDEN
             )
@@ -875,7 +875,7 @@ class AccessRequestGestorApproveView(Auth, APIView):
                 return Response(
                     {
                         'detail': 'Você só pode aprovar solicitações da '
-                                 'sua instituição.'
+                        'sua instituição.'
                     },
                     status=status.HTTP_403_FORBIDDEN
                 )
@@ -969,16 +969,21 @@ class AccessRequestAdminApproveView(AdminAuth, APIView):
             return Response(
                 {
                     'detail': 'Acesso negado. Apenas administradores podem '
-                             'conceder acesso final.'
+                              'conceder acesso final.'
                 },
                 status=status.HTTP_403_FORBIDDEN
             )
 
         try:
-            # Get permissions data
+            # Get permissions data from request
             permissions = request.data.get('permissions', {})
             institution_id = permissions.get('selected_group')
             role_ids = permissions.get('selected_roles', [])
+
+            logger.info(
+                "Dados recebidos - Institution ID: %s, Role IDs: %s",
+                institution_id, role_ids
+            )
 
             # Get access request
             access_request = get_object_or_404(
@@ -986,54 +991,157 @@ class AccessRequestAdminApproveView(AdminAuth, APIView):
                 pk=pk
             )
 
+            logger.info(
+                "Access request encontrado - ID: %s, Email: %s, Status: %s",
+                access_request.id, access_request.email, access_request.status
+            )
+
             # Check if we have the required data for final approval
-            if not institution_id or not role_ids:
+            if not institution_id:
                 return Response(
                     {
-                        'detail': 'Instituição e papéis são obrigatórios '
-                                 'para aprovação final.'
+                        'detail': 'Instituição é obrigatória para aprovação '
+                                  'final.'
                     },
                     status=status.HTTP_400_BAD_REQUEST
                 )
 
-            # Get institution and roles
-            institution = get_object_or_404(
-                models.Institution, pk=institution_id
-            )
+            if not role_ids or len(role_ids) == 0:
+                return Response(
+                    {
+                        'detail': 'Pelo menos um papel é obrigatório para '
+                                  'aprovação final.'
+                    },
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            # Get institution
+            try:
+                institution = models.Institution.objects.get(pk=institution_id)
+                logger.info("Instituição encontrada - ID: %s, Nome: %s",
+                            institution.id, institution.name)
+            except models.Institution.DoesNotExist:
+                return Response(
+                    {'detail': 'Instituição não encontrada.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
+
+            # Get roles
             roles = models.Role.objects.filter(pk__in=role_ids)
+            if not roles.exists():
+                return Response(
+                    {'detail': 'Papéis não encontrados.'},
+                    status=status.HTTP_400_BAD_REQUEST
+                )
 
-            # Approve the request
-            access_request.approve(user)
+            logger.info("Papéis encontrados: %s", [
+                        role.name for role in roles])
 
-            # Create or update user
-            user_obj, created = User.objects.get_or_create(
+            # Create or get user
+            user_obj, created = models.User.objects.get_or_create(
                 email=access_request.email,
                 defaults={
                     'username': access_request.email,
                     'first_name': access_request.name,
                     'institution': institution,
+                    'is_active': True,
                 }
             )
 
-            if created:
-                user_obj.roles.set(roles)
-                user_obj.save()
-                logger.info(f"Usuário criado: {user_obj.email}")
-            else:
-                logger.info(f"Usuário já existia: {user_obj.email}")
+            logger.info("Usuário %s - ID: %s, Email: %s",
+                        'criado' if created else 'encontrado', user_obj.id, user_obj.email)
+
+            # Always update institution and roles (even if user already exists)
+            user_obj.institution = institution
+            user_obj.first_name = access_request.name
+            user_obj.is_active = True
+            user_obj.save()
+
+            logger.info("Usuário atualizado - Instituição: %s, Ativo: %s",
+                        user_obj.institution.name if user_obj.institution else None, user_obj.is_active)
+
+            # Clear existing roles and set new ones
+            logger.info("Removendo papéis existentes do usuário...")
+            user_obj.roles.clear()
+
+            logger.info("Atribuindo novos papéis ao usuário...")
+            user_obj.roles.set(roles)
+
+            # Force save to ensure changes are persisted
+            user_obj.save()
+
+            # Refresh from database to ensure we have the latest data
+            user_obj.refresh_from_db()
+
+            # Verify roles were set correctly
+            user_roles_after = user_obj.roles.all()
+            logger.info(
+                "Papéis finalmente atribuídos: %s",
+                [role.name for role in user_roles_after]
+            )
+
+            # Approve the request after user is properly configured
+            access_request.approve(user)
+
+            logger.info("Solicitação aprovada - Status: %s",
+                        access_request.status)
 
             return Response(
                 {
                     "detail": "Acesso concedido com sucesso.",
                     "request_id": access_request.id,
-                    "user_id": user.id
+                    "user_id": user_obj.id,
+                    "user_email": user_obj.email,
+                    "institution": institution.name,
+                    "roles": [role.name for role in roles],
+                    "created": created,
+                    "user_roles_count": user_obj.roles.count(),
+                    "user_is_active": user_obj.is_active,
+                    "user_institution": user_obj.institution.name if user_obj.institution else None
                 },
                 status=status.HTTP_200_OK
             )
 
         except Exception as e:
-            logger.error(f"Erro ao conceder acesso: {str(e)}")
+            logger.error("Erro ao conceder acesso: %s", str(e))
             return Response(
-                {'detail': 'Erro inesperado durante a aprovação.'},
+                {'detail': f'Erro inesperado durante a aprovação: {str(e)}'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
+# Endpoint para contar solicitações pendentes de acesso restrito
+
+
+class RestrictedAccessPendingCountView(APIView):
+    def get(self, request):
+        user = request.user
+        
+        # Se usuário não está autenticado, retorna 0
+        if not user.is_authenticated:
+            return Response({"count": 0})
+        
+        # Se usuário não tem roles, não precisa mostrar badge
+        if not user.roles.exists():
+            return Response({"count": 0})
+        
+        # Verifica se é Administrador
+        if user.roles.filter(name='Administrador').exists():
+            # Administradores veem solicitações PENDENTE e APROVADO_PELO_GESTOR
+            count = models.AccessRequest.objects.filter(
+                status__in=[
+                    models.AccessRequest.StatusType.PENDENTE,
+                    models.AccessRequest.StatusType.APROVADO_PELO_GESTOR
+                ]
+            ).count()
+            return Response({"count": count})
+        
+        # Verifica se é Gestor
+        if user.roles.filter(name='Gestor').exists() and user.institution:
+            # Gestores veem apenas solicitações PENDENTE da sua instituição
+            count = models.AccessRequest.objects.filter(
+                status=models.AccessRequest.StatusType.PENDENTE,
+                institution=user.institution.name
+            ).count()
+            return Response({"count": count})
+        
+        # Para outros usuários (sem papel específico ou sem instituição), não mostra badge
+        return Response({"count": 0})
