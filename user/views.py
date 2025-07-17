@@ -1114,15 +1114,15 @@ class AccessRequestAdminApproveView(AdminAuth, APIView):
 class RestrictedAccessPendingCountView(APIView):
     def get(self, request):
         user = request.user
-        
+
         # Se usuário não está autenticado, retorna 0
         if not user.is_authenticated:
             return Response({"count": 0})
-        
+
         # Se usuário não tem roles, não precisa mostrar badge
         if not user.roles.exists():
             return Response({"count": 0})
-        
+
         # Verifica se é Administrador
         if user.roles.filter(name='Administrador').exists():
             # Administradores veem solicitações PENDENTE e APROVADO_PELO_GESTOR
@@ -1133,7 +1133,7 @@ class RestrictedAccessPendingCountView(APIView):
                 ]
             ).count()
             return Response({"count": count})
-        
+
         # Verifica se é Gestor
         if user.roles.filter(name='Gestor').exists() and user.institution:
             # Gestores veem apenas solicitações PENDENTE da sua instituição
@@ -1142,6 +1142,6 @@ class RestrictedAccessPendingCountView(APIView):
                 institution=user.institution.name
             ).count()
             return Response({"count": count})
-        
+
         # Para outros usuários (sem papel específico ou sem instituição), não mostra badge
         return Response({"count": 0})
