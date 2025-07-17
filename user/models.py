@@ -184,7 +184,7 @@ class User(AbstractUser):
             bool: Returns True if user is admin or False otherwise.
         """
 
-        return self.roles.filter(name='admin').exists() or self.is_superuser
+        return self.roles.filter(name='Administrador').exists() or self.is_superuser
 
     def save(self, *args, **kwargs):
         """Validate and save the file."""
@@ -315,9 +315,9 @@ class AccessRequest(models.Model):
     """
     class StatusType(models.IntegerChoices):
         PENDENTE = 1, 'Pendente'
-        CONCEDIDA = 2, 'Concedida'
+        APROVADO_PELO_GESTOR = 2, 'Aprovado pelo Gestor'
         RECUSADA = 3, 'Recusada'
-        PENDENTE_COORD = 4, 'Pendente Coordenador'
+        CONCEDIDA = 4, 'Concedida'
 
     name = models.CharField(
         max_length=255,
@@ -328,9 +328,9 @@ class AccessRequest(models.Model):
         help_text=_("Email of the requester")
     )
 
-    department = models.CharField(
+    institution = models.CharField(
         max_length=255,
-        help_text=_("Department of the requester")
+        help_text=_("Institution of the requester")
     )
 
     user_siape_registration = models.IntegerField(
@@ -346,9 +346,11 @@ class AccessRequest(models.Model):
         help_text=_("Email of the coordinator")
     )
 
-    coordinator_department = models.CharField(
+    coordinator_institution = models.CharField(
         max_length=255,
-        help_text=_("Department of the coordinator")
+        null=True,
+        blank=True,
+        help_text=_("Institution of the coordinator")
     )
 
     coordinator_siape_registration = models.IntegerField(
@@ -364,7 +366,7 @@ class AccessRequest(models.Model):
 
     status = models.IntegerField(
         choices=StatusType.choices,
-        default=StatusType.PENDENTE_COORD,
+        default=StatusType.PENDENTE,
         help_text=_("Current status of the access request")
     )
 
@@ -408,6 +410,16 @@ class AccessRequest(models.Model):
         Marks this request as CONCEDIDA and sets reviewer fields.
         """
         self.status = self.StatusType.CONCEDIDA
+        self.reviewed_at = timezone.now()
+        self.reviewed_by = reviewer
+        self.denied_details = None
+        self.save()
+
+    def approve_by_coordinator(self, reviewer):
+        """
+        Marks this request as APROVADO_PELO_GESTOR and sets reviewer fields.
+        """
+        self.status = self.StatusType.APROVADO_PELO_GESTOR
         self.reviewed_at = timezone.now()
         self.reviewed_by = reviewer
         self.denied_details = None

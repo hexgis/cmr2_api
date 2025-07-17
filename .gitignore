@@ -4,7 +4,13 @@
 *.env
 static/*
 .vscode
-env
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+.env/
+virtualenv/
 static/*
 !static/admin_files/
 /media

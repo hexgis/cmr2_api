@@ -1,3 +1,4 @@
+
 from django.urls import path, include
 
 from user import views
@@ -104,6 +105,11 @@ urlpatterns = [
         name='access-request-create'
     ),
     path(
+        'access-requests/by-role/',
+        views.AccessRequestByRoleView.as_view(),
+        name='access-request-by-role'
+    ),
+    path(
         'access-requests/pending/',
         views.AccessRequestPendingView.as_view(),
         name='access-request-pending'
@@ -114,9 +120,24 @@ urlpatterns = [
         name='access-request-approve'
     ),
     path(
+        'access-requests/<int:pk>/admin-approve/',
+        views.AccessRequestAdminApproveView.as_view(),
+        name='access-request-admin-approve'
+    ),
+    path(
+        'access-requests/<int:pk>/gestor-approve/',
+        views.AccessRequestGestorApproveView.as_view(),
+        name='access-request-gestor-approve'
+    ),
+    path(
         'access-requests/<int:pk>/reject/',
         views.AccessRequestRejectView.as_view(),
         name='access-request-reject'
+    ),
+    path(
+        'access-requests/<int:pk>/gestor-reject/',
+        views.AccessRequestGestorRejectView.as_view(),
+        name='access-request-gestor-reject'
     ),
     path(
         'access-requests/<int:pk>/',
@@ -127,5 +148,10 @@ urlpatterns = [
         'access-requests/<int:pk>/pending/',
         views.AccessRequestPendingView.as_view(),
         name='access-request-pending'
+    ),
+    path(
+        'restricted-access/pending-count/',
+        views.RestrictedAccessPendingCountView.as_view(),
+        name='restricted-access-pending-count'
     ),
 ]

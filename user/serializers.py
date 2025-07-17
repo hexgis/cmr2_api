@@ -493,11 +493,11 @@ class AccessRequestSerializer(serializers.ModelSerializer):
             'id',
             'name',
             'email',
-            'department',
+            'institution',
             'user_siape_registration',
             'coordinator_name',
             'coordinator_email',
-            'coordinator_department',
+            'coordinator_institution',
             'coordinator_siape_registration',
             'attachment',
             'status',
@@ -510,7 +510,7 @@ class AccessRequestSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         """
-        Overriding create to ensure any new request defaults to status=False.
+        Overriding create to ensure any new request defaults to status=PENDENTE.
         """
         validated_data['status'] = models.AccessRequest.StatusType.PENDENTE
         return super().create(validated_data)
@@ -538,11 +538,11 @@ class AccessRequestDetailSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "email",
-            "department",
+            "institution",
             "user_siape_registration",
             "coordinator_name",
             "coordinator_email",
-            "coordinator_department",
+            "coordinator_institution",
             "coordinator_siape_registration",
             "attachment",
             "created_at_formatted",

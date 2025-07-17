@@ -285,7 +285,7 @@ class AccessRequestAdmin(admin.ModelAdmin):
         'id',
         'name',
         'email',
-        'department',
+        'institution',
         'status',
         'created_at',
         'reviewed_at',
@@ -293,8 +293,8 @@ class AccessRequestAdmin(admin.ModelAdmin):
     )
     list_filter = (
         'status',
-        'department',
-        'coordinator_department',
+        'institution',
+        'coordinator_institution',
         'created_at',
         'reviewed_at',
     )
