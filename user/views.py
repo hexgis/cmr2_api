@@ -1108,24 +1108,38 @@ class AccessRequestAdminApproveView(AdminAuth, APIView):
                 {'detail': f'Erro inesperado durante a aprovação: {str(e)}'},
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR
             )
-# Endpoint para contar solicitações pendentes de acesso restrito
 
 
 class RestrictedAccessPendingCountView(APIView):
+    """
+    API endpoint to count pending restricted access requests.
+
+    This view provides a count of pending access requests based on the user's role:
+    - Administrators: Counts requests with statuses 'Pending' and
+      'Approved by Manager'.
+    - Managers: Counts 'Pending' requests specific to their institution.
+    - Other users: Returns a count of 0 as they do not have access to this
+      information.
+
+    Returns:
+        Response: A JSON object containing the count of pending requests.
+    """
+
     def get(self, request):
         user = request.user
 
-        # Se usuário não está autenticado, retorna 0
+        # If the user is not authenticated, return a count of 0
         if not user.is_authenticated:
             return Response({"count": 0})
 
-        # Se usuário não tem roles, não precisa mostrar badge
+        # If the user has no roles, return a count of 0
         if not user.roles.exists():
             return Response({"count": 0})
 
-        # Verifica se é Administrador
+        # Check if the user is an Administrator
         if user.roles.filter(name='Administrador').exists():
-            # Administradores veem solicitações PENDENTE e APROVADO_PELO_GESTOR
+            # Administrators see requests with statuses 'Pending' and
+            # 'Approved by Manager'
             count = models.AccessRequest.objects.filter(
                 status__in=[
                     models.AccessRequest.StatusType.PENDENTE,
@@ -1134,14 +1148,15 @@ class RestrictedAccessPendingCountView(APIView):
             ).count()
             return Response({"count": count})
 
-        # Verifica se é Gestor
+        # Check if the user is a Manager
         if user.roles.filter(name='Gestor').exists() and user.institution:
-            # Gestores veem apenas solicitações PENDENTE da sua instituição
+            # Managers see only 'Pending' requests from their institution
             count = models.AccessRequest.objects.filter(
                 status=models.AccessRequest.StatusType.PENDENTE,
                 institution=user.institution.name
             ).count()
             return Response({"count": count})
 
-        # Para outros usuários (sem papel específico ou sem instituição), não mostra badge
+        # For other users (without specific roles or institutions),
+        # return a count of 0
         return Response({"count": 0})

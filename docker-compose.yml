@@ -88,7 +88,7 @@ services:
       JAZZMIN_ADMIN_LOGIN_LOGO: /admin_files/img/logo-inteira-antiga-branca.png
       JAZZMIN_ADMIN_SITE_FAVICON: /admin_files/img/favicon.ico
       JIRA_API_URL: https://xskylab.atlassian.net/
-      LDAP_URI: ldap://localhost:389  # Add LDAP_URI for development
+      LDAP_URI: ldap://localhost:389 # LDAP_URI for development
 
   test:
     build:
