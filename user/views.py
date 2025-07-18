@@ -740,12 +740,6 @@ class AccessRequestRejectView(AdminAuth, generics.RetrieveAPIView):
     def patch(self, request, pk, *args, **kwargs):
         try:
             access_request = models.AccessRequest.objects.get(pk=pk)
-            if access_request.status != models.AccessRequest.StatusType.APROVADO_PELO_GESTOR:
-                return Response(
-                    {'detail': 'A solicitação não pode ser rejeitada neste estado.'},
-                    status=400
-                )
-
             denied_details = request.data.get('denied_details')
             access_request.reject(request.user, denied_details)
 
