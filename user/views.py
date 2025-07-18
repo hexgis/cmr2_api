@@ -796,7 +796,7 @@ class AccessRequestByRoleView(Auth, generics.ListAPIView):
     """
     Lists access requests based on user role:
     - Common users: only their own requests
-    - Gestores: requests from same institution with status 'Pendente'
+    - Gestores: requests from same institution 
     - Administrators: all requests from all institutions with all statuses
     """
     serializer_class = AccessRequestDetailSerializer
@@ -804,25 +804,22 @@ class AccessRequestByRoleView(Auth, generics.ListAPIView):
     def get_queryset(self):
         user = self.request.user
 
-        # Check if user has no role (common user)
+        # ccommon user
         if not user.roles.exists():
             return models.AccessRequest.objects.filter(
                 email=user.email
             ).order_by('-created_at')
 
-        # Check if user is Gestor
+        # Gestor
         if user.roles.filter(name='Gestor').exists() and user.institution:
             return models.AccessRequest.objects.filter(
-                status=models.AccessRequest.StatusType.PENDENTE,
                 institution=user.institution.name
             ).order_by('-created_at')
 
-        # Check if user is Administrator - see all requests from all
-        # institutions with all statuses
+        # Administrator
         if user.roles.filter(name='Administrador').exists():
             return models.AccessRequest.objects.all().order_by('-created_at')
 
-        # Default: return empty queryset
         return models.AccessRequest.objects.none()
 
 
