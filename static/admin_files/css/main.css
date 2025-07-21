@@ -1,0 +1,31 @@
+select, input, textarea {
+    background-color: #343a40 !important;
+    color: #c5bfbf !important;
+}
+
+.selector .selector-filter {
+    background: #343a40 !important;
+}
+
+.selector .selector-available h2 {
+    background-color: #00bc8c !important;
+    color: #c5bfbf !important;
+}
+
+.select2-container--default,
+.select2-selection--multiple,
+.select2-selection--single,
+.select2-selection__rendered {
+    background-color: #343a40 !important;
+    color: #c5bfbf !important;
+}
+
+#id_geom-map {
+    width: min(calc(35vw - 30px), 720px) !important;
+    height: 400px !important;
+}
+
+#id_initial_extent-map {
+    width: min(calc(35vw - 30px), 720px) !important;
+    height: 400px !important;
+}
