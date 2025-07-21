@@ -2,6 +2,7 @@
 import os
 import json
 import logging
+import threading  # <<< [1] IMPORT ADDED
 
 # Django
 from django.db.models import Q
@@ -40,6 +41,19 @@ from emails.ticket_user import send_email_ticket_to_user
 from emails.ticket_admins import send_email_ticket_to_admins
 
 logger = logging.getLogger(__name__)
+
+
+def run_in_background(target, *args, **kwargs):
+    """
+    Helper function to run a target function in a new thread.
+    This prevents the main request from being blocked.
+    """
+    # Create a new Thread object.
+    thread = threading.Thread(target=target, args=args, kwargs=kwargs)
+    # daemon=True allows the main program to exit even if threads are still running.
+    thread.daemon = True
+    # Start the thread's activity.
+    thread.start()
 
 
 class IsOwnerOrReadOnly(permissions.BasePermission):
@@ -170,9 +184,27 @@ class TicketStatusView(APIView):
         Returns:
             str or None: The filename if invalid, else None.
         """
-        valid_extensions = ['.pdf', '.jpg', '.jpeg', '.png']
+        valid_extensions = [
+            '.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx',
+            '.txt', '.xls', '.xlsx', '.csv'
+        ]
         ext = os.path.splitext(attachment.name)[1].lower()
         if ext not in valid_extensions:
+            return attachment.name
+        return None
+
+    def validate_attachment_size(self, attachment):
+        """
+        Validates the file size of a single attachment.
+
+        Args:
+            attachment: The file attachment to check.
+
+        Returns:
+            str or None: The filename if invalid, else None.
+        """
+        max_size = 10 * 1024 * 1024  # 10MB in bytes
+        if attachment.size > max_size:
             return attachment.name
         return None
 
@@ -184,12 +216,27 @@ class TicketStatusView(APIView):
             attachments: List of attachment files.
 
         Raises:
-            ValidationError: If any attachment has an invalid extension.
+            ValidationError: If any attachment has invalid extension or size.
         """
-        invalid_attachments = [
-            attachment.name for attachment in attachments if self.validate_attachment_extensions(attachment)]
-        if invalid_attachments:
-            raise ValidationError({'invalid_files': invalid_attachments})
+        # Check for maximum number of files
+        if len(attachments) > 10:
+            raise ValidationError({
+                'error': 'Maximum 10 files allowed per request'
+            })
+
+        invalid_extensions = [
+            attachment.name for attachment in attachments
+            if self.validate_attachment_extensions(attachment)
+        ]
+        if invalid_extensions:
+            raise ValidationError({'invalid_files': invalid_extensions})
+
+        oversized_files = [
+            attachment.name for attachment in attachments
+            if self.validate_attachment_size(attachment)
+        ]
+        if oversized_files:
+            raise ValidationError({'oversized_files': oversized_files})
 
     def handle_attachments(self, instance, attachments, ticket_history):
         """
@@ -219,9 +266,7 @@ class TicketStatusView(APIView):
             ticket = Ticket.objects.get(code=ticket_id)
             instance = TicketStatus.objects.get(ticket_id=ticket_id)
 
-            send_email_ticket_to_admins(
-                ticket
-            )
+            run_in_background(send_email_ticket_to_admins, ticket)
 
             data = request.data.copy()
             instance.analyzed_by = request.user
@@ -239,8 +284,6 @@ class TicketStatusView(APIView):
                         data['due_on'] = ticket_status_data.get('due_on')
                         data['status_category'] = formated_info.get(
                             'status_category_display', '')
-                        data['sub_status'] = formated_info.get(
-                            'sub_status_display')
                         data['priority_code'] = formated_info.get(
                             'priority_display')
                 except json.JSONDecodeError:
@@ -259,18 +302,39 @@ class TicketStatusView(APIView):
 
             # Create history entry
             comment = request.data.get('comment', '')
+            current_status_category = data.get(
+                'status_category', instance.status_category)
             ticket_history = TicketAnalysisHistory.objects.create(
                 ticket=ticket,
                 author=request.user,
                 comment=comment,
-                sub_status=instance.sub_status
+                status_category=current_status_category
             )
 
             # Validate and handle attachments
             attachments = request.FILES.getlist('attachments')
             if attachments:
-                self.validate_attachments(attachments)
-                self.handle_attachments(instance, attachments, ticket_history)
+                try:
+                    self.validate_attachments(attachments)
+                    self.handle_attachments(
+                        instance, attachments, ticket_history)
+                except ValidationError as e:
+                    error_messages = []
+                    if 'error' in e.detail:
+                        error_messages.append(e.detail['error'])
+                    if 'invalid_files' in e.detail:
+                        files_str = ', '.join(e.detail['invalid_files'])
+                        error_messages.append(
+                            f"Extensões inválidas: {files_str}"
+                        )
+                    if 'oversized_files' in e.detail:
+                        files_str = ', '.join(e.detail['oversized_files'])
+                        msg = f"Arquivos grandes (máx 10MB): {files_str}"
+                        error_messages.append(msg)
+                    return Response({
+                        'error': 'Erro na validação dos arquivos',
+                        'details': error_messages
+                    }, status=status.HTTP_400_BAD_REQUEST)
 
             return Response({'status': 'ticket analyzed and history updated'}, status=status.HTTP_200_OK)
 
@@ -408,14 +472,83 @@ class SendTicketEmailView(Auth, APIView):
             return Response({'error': f'An error occurred: {str(e)}'}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-class DownloadDocument(APIView):
-    def get(self, request, filename):
-        filepath = os.path.join(
-            settings.MEDIA_ROOT, 'attachments', 'critcs_and_suggestions', 'answer', filename)
+class DownloadAttachment(APIView):
+    """
+    Unified endpoint to download ticket attachments (both question and answer files).
+    Supports downloading files by attachment ID for better security and flexibility.
+    """
+
+    def get(self, request, attachment_id, attachment_type):
+        """
+        Download attachment by ID and type.
+
+        Args:
+            attachment_id: The ID of the attachment
+            attachment_type: Either 'question' or 'answer'
+        """
         try:
-            return FileResponse(open(filepath, 'rb'), as_attachment=True, filename=filename)
-        except FileNotFoundError:
-            return Response({'error': 'Arquivo não encontrado'}, status=404)
+            if attachment_type == 'question':
+                # Get ticket attachment (question file)
+                attachment = TicketAttachment.objects.get(id=attachment_id)
+                file_path = attachment.file_path.path
+                display_name = self._generate_display_name(
+                    attachment.name_file, attachment.ticket.code, 'pergunta')
+
+            elif attachment_type == 'answer':
+                # Get ticket status attachment (answer file)
+                attachment = TicketStatusAttachment.objects.get(
+                    id=attachment_id)
+                file_path = attachment.file_path.path
+                display_name = self._generate_display_name(
+                    attachment.name_file, attachment.ticket_status.ticket.code, 'resposta')
+
+            else:
+                return Response({'error': 'Tipo de anexo inválido'}, status=400)
+
+            # Check if file exists
+            if not os.path.exists(file_path):
+                return Response({'error': 'Arquivo não encontrado'}, status=404)
+
+            return FileResponse(
+                open(file_path, 'rb'),
+                as_attachment=True,
+                filename=display_name
+            )
+
+        except (TicketAttachment.DoesNotExist, TicketStatusAttachment.DoesNotExist):
+            return Response({'error': 'Anexo não encontrado'}, status=404)
+        except Exception as e:
+            logger.error(f"Erro ao baixar anexo: {str(e)}")
+            return Response({'error': 'Erro interno do servidor'}, status=500)
+
+    def _generate_display_name(self, original_name, ticket_code, attachment_type):
+        """
+        Generate a more intuitive display name for the downloaded file.
+        Format: ticket_[code]_[type]_[original_name]
+        """
+        # Get file extension
+        name, ext = os.path.splitext(original_name)
+
+        clean_name = original_name
+        if 'ticket_' in clean_name:
+            parts = clean_name.split('_')
+            clean_parts = [part for part in parts if not (
+                part.startswith('ticket') or
+                part.startswith('answer') or
+                len(part) == 10 and '-' in part  # Remove date-like patterns
+            )]
+            if clean_parts:
+                clean_name = '_'.join(clean_parts)
+
+        new_name = f"ticket_{ticket_code}_{attachment_type}_{clean_name}"
+
+        if len(new_name) > 100:
+            max_name_length = 100 - \
+                len(f"ticket_{ticket_code}_{attachment_type}_") - len(ext)
+            clean_name = clean_name[:max_name_length]
+            new_name = f"ticket_{ticket_code}_{attachment_type}_{clean_name}{ext}"
+
+        return new_name
 
 
 class DownloadManual(APIView):

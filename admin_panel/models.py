@@ -3,8 +3,53 @@ from django.contrib.auth import get_user_model
 import os
 from datetime import datetime
 from django.utils.translation import gettext_lazy as _
+from django.core.exceptions import ValidationError
 
 User = get_user_model()
+
+
+# Validação para tamanho máximo de arquivo (10MB)
+def validate_file_size(value):
+    """
+    Validates that the uploaded file is not larger than 10MB.
+
+    Args:
+        value: The uploaded file
+
+    Raises:
+        ValidationError: If file size exceeds 10MB
+    """
+    file_size = value.size
+    limit_mb = 10
+    if file_size > limit_mb * 1024 * 1024:
+        raise ValidationError(
+            _('File size too large. Maximum size allowed is %(limit)s MB.') % {'limit': limit_mb}
+        )
+
+
+def validate_file_extension(value):
+    """
+    Validates that the uploaded file has an allowed extension.
+
+    Args:
+        value: The uploaded file
+
+    Raises:
+        ValidationError: If file extension is not allowed
+    """
+    ext = os.path.splitext(value.name)[1].lower()
+    valid_extensions = [
+        '.pdf', '.jpg', '.jpeg', '.png', '.doc', '.docx',
+        '.txt', '.xls', '.xlsx', '.csv'
+    ]
+    if ext not in valid_extensions:
+        raise ValidationError(
+            _('File extension "%(extension)s" is not allowed. '
+              'Allowed extensions are: %(valid_extensions)s') % {
+                'extension': ext,
+                'valid_extensions': ', '.join(valid_extensions)
+            }
+        )
 
 
 class Ticket(models.Model):
@@ -47,8 +92,9 @@ class Ticket(models.Model):
         null=False,
         blank=False
     )
-    description = models.CharField(
-        max_length=500,
+    description = models.TextField(
+        verbose_name="Descrição",
+        help_text="Description of the ticket",
         null=False,
         blank=False
     )
@@ -87,7 +133,8 @@ class TicketAttachment(models.Model):
         on_delete=models.CASCADE
     )
     file_path = models.FileField(
-        upload_to=rename_file_ticket
+        upload_to=rename_file_ticket,
+        validators=[validate_file_size, validate_file_extension]
     )
     name_file = models.CharField(
         max_length=100,
@@ -111,31 +158,13 @@ class TicketStatus(models.Model):
 
     class StatusCategory(models.TextChoices):
         NAO_ANALISADO = "NAO_ANALISADO", "Não Analisado"
-        EM_ANDAMENTO = "EM_ANDAMENTO", "Em Andamento"
-        CONCLUIDO = "CONCLUIDO", "Concluído"
-        RECUSADO = "RECUSADO", "Recusado"
+        INDEFERIDO = "INDEFERIDO", "Indeferido"
         DEFERIDO = "DEFERIDO", "Deferido"
-        DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
-
-    class SubStatus(models.TextChoices):
-        # Substatus para 'Em Andamento'
         AGUARDANDO_GESTOR = "AGUARDANDO_GESTOR", "Aguardando Gestor"
         EM_DESENVOLVIMENTO = "EM_DESENVOLVIMENTO", "Em Desenvolvimento"
-
-        # Substatus para 'Concluído'
-        CONCLUIDO = "CONCLUIDO", "Concluído"
-        EM_TESTE = "EM_TESTE", "Em Teste"
-
-        # Substatus para 'Recusado'
-        INVIAVEL = "INVIAVEL", "Inviável"
-        INDEFERIDO = "INDEFERIDO", "Indeferido"
-
-        # Substatus para 'Deferido'
-        DEFERIDO = "DEFERIDO", "Deferido"
         DESENVOLVIDO = "DESENVOLVIDO", "Desenvolvido"
-
-        # Substatos para 'Não Analisado'
-        NAO_ANALISADO = "NAO_ANALISADO", "Não Analisado"
+        CONCLUIDO = "CONCLUIDO", "Concluído"
+        RECUSADO = "RECUSADO", "Recusado"
 
     class Priority(models.TextChoices):
         BAIXA = 'BAIXA', 'Baixa',
@@ -145,14 +174,6 @@ class TicketStatus(models.Model):
     status_category = models.CharField(
         max_length=20,
         choices=StatusCategory.choices,
-        default=StatusCategory.NAO_ANALISADO,
-        null=True,
-        blank=True
-    )
-
-    sub_status = models.CharField(
-        max_length=20,
-        choices=SubStatus.choices,
         default=StatusCategory.NAO_ANALISADO,
         null=True,
         blank=True
@@ -214,7 +235,8 @@ class TicketStatusAttachment(models.Model):
         on_delete=models.CASCADE
     )
     file_path = models.FileField(
-        upload_to=rename_file_ticket_status
+        upload_to=rename_file_ticket_status,
+        validators=[validate_file_size, validate_file_extension]
     )
     name_file = models.CharField(
         max_length=100,
@@ -240,22 +262,24 @@ class TicketAnalysisHistory(models.Model):
         auto_now_add=True,
     )
 
-    comment = models.CharField(
-        max_length=500,
+    comment = models.TextField(
+        verbose_name="Comentário",
+        help_text="Comment about the ticket analysis",
         blank=False,
         null=False
+    )
+
+    status_category = models.CharField(
+        max_length=20,
+        choices=TicketStatus.StatusCategory.choices,
+        null=True,
+        blank=True,
+        help_text="Status category at the time of analysis"
     )
 
     author = models.ForeignKey(
         User,
         on_delete=models.DO_NOTHING,
-    )
-
-    sub_status = models.CharField(
-        max_length=20,
-        choices=TicketStatus.SubStatus.choices,
-        null=True,
-        blank=True
     )
     ticket = models.ForeignKey(
         'Ticket',

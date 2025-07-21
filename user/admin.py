@@ -8,16 +8,12 @@ from django.contrib.gis import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-from django.utils import timezone
-
 from leaflet.admin import LeafletGeoAdmin
 from django_json_widget.widgets import JSONEditorWidget
 from import_export.admin import ImportExportActionModelAdmin as import_export
 
 from permission import models as permission_models
 from user import models
-
-# 1) Importar o AccessRequest
 from user.models import AccessRequest
 
 
@@ -78,12 +74,25 @@ class UserAdminForm(forms.ModelForm):
     )
     password = ReadOnlyPasswordHashField(
         label=('Password'),
+        required=False,
         help_text=(
-            'Raw passwords are not stored, so there is no way to see this \
-            user’s password, but you can change the password using <a \
-            href=\"../password/\">this form</a>.'
+            'Raw passwords are not stored, so there is no way to see this '
+            'user\'s password, but you can change the password using <a '
+            'href=\"../password/\">this form</a>. '
+            'Selecione esta opção para autenticar os usuários apenas pelo '
+            'Active Directory, sem necessidade de senha local.'
         )
     )
+    dark_mode_active = forms.BooleanField(
+        label='Dark Mode Active',
+        required=False,
+        help_text='Marque esta opção para ativar o modo escuro para este '
+                  'usuário.'
+    )
+
+    class Meta:
+        model = models.User
+        fields = '__all__'
 
 
 class CustomUserAdmin(UserAdmin, LeafletGeoAdmin, import_export):
@@ -92,7 +101,9 @@ class CustomUserAdmin(UserAdmin, LeafletGeoAdmin, import_export):
     def avatar(self, instance: models.User) -> str:
         if instance.avatar_blob:
             img = base64.b64encode(instance.avatar_blob).decode('UTF-8')
-            return format_html(f'<img src=data:image/png;base64,{img} height=40>')
+            return format_html(
+                f'<img src=data:image/png;base64,{img} height=40>'
+            )
         else:
             return None
 
@@ -120,6 +131,7 @@ class CustomUserAdmin(UserAdmin, LeafletGeoAdmin, import_export):
         ('Preferences', {'fields': (
             'avatar',
             'token',
+            'dark_mode_active',
         )}),
     )
 
@@ -273,7 +285,7 @@ class AccessRequestAdmin(admin.ModelAdmin):
         'id',
         'name',
         'email',
-        'department',
+        'institution',
         'status',
         'created_at',
         'reviewed_at',
@@ -281,8 +293,8 @@ class AccessRequestAdmin(admin.ModelAdmin):
     )
     list_filter = (
         'status',
-        'department',
-        'coordinator_department',
+        'institution',
+        'coordinator_institution',
         'created_at',
         'reviewed_at',
     )
@@ -335,3 +347,5 @@ admin.site.register(models.UserUploadedFile, UploadedFileAdmin)
 admin.site.register(models.UserUploadedFileGeometry,
                     UploadedFileGeometriesAdmin)
 admin.site.register(AccessRequest, AccessRequestAdmin)
+
+
