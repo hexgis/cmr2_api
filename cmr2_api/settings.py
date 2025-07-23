@@ -104,7 +104,7 @@ ROOT_URLCONF = 'cmr2_api.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates/')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -116,6 +116,12 @@ TEMPLATES = [
         },
     },
 ]
+
+# Import Export Django
+# https://django-import-export.readthedocs.io/en/latest/installation.html
+
+IMPORT_EXPORT_USE_TRANSACTIONS = True
+IMPORT_EXPORT_CHUNK_SIZE = 300
 
 WSGI_APPLICATION = 'cmr2_api.wsgi.application'
 
