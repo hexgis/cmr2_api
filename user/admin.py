@@ -203,10 +203,12 @@ class InstitutionAdmin(import_export):
     list_display = (
         'id',
         'name',
+        'acronym',
         'institution_type',
     )
     search_fields = (
         'name',
+        'acronym',
     )
 
 
@@ -347,5 +349,3 @@ admin.site.register(models.UserUploadedFile, UploadedFileAdmin)
 admin.site.register(models.UserUploadedFileGeometry,
                     UploadedFileGeometriesAdmin)
 admin.site.register(AccessRequest, AccessRequestAdmin)
-
-
