@@ -93,16 +93,24 @@ class UserSerializer(serializers.ModelSerializer):
 
     roles = SimpleRoleSerializer(many=True, read_only=True)
 
-    institution = serializers.SlugRelatedField(
-        slug_field='name',
-        read_only=True
-    )
+    institution = serializers.SerializerMethodField()
 
     institution_id = serializers.SlugRelatedField(
         source='institution',
         slug_field='id',
         read_only=True
     )
+
+    def get_institution(self, obj):
+        """Get institution with id, name and acronym."""
+        if obj.institution:
+            return {
+                'id': obj.institution.id,
+                'name': obj.institution.name,
+                'acronym': obj.institution.acronym,
+                'institution_type': obj.institution.institution_type,
+            }
+        return None
 
     def get_settings(self, obj: models.User) -> str:
         """Get user settings.
