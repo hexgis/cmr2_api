@@ -23,7 +23,10 @@ class FindAllDashboardDataView(generics.ListAPIView):
         """
         Retrieves the queryset of DashboardData objects, optionally filtering by the provided parameters.
         """
-        queryset = models.DashboardData.objects.all()
+        queryset = models.DashboardData.objects.select_related(
+            'user',
+            'user__institution'
+        ).all()
 
         # Get filter parameters from the request
         start_date_str = self.request.query_params.get('startDate')
